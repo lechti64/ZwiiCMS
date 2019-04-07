@@ -76,7 +76,7 @@
 					'checked' => (bool) $this->getData(['module', $this->getUrl(0), 'config', 'group']) ||
 										!empty($this->getData(['module', $this->getUrl(0), 'config', 'user'])) ||
 										!empty($this->getData(['module', $this->getUrl(0), 'config', 'mail'])),
-					'help' => 'Sélectionnez au moins un groupe, un utilisateur ou saississez un email'
+					'help' => 'Sélectionnez au moins un groupe, un utilisateur ou saississez un email.'
 				]); ?>						
 				<div id="formConfigMailOptions" class="displayNone">
 					<div class="row">
@@ -112,9 +112,8 @@
 					<div class="row">								
 						<div class="col6 offset1">
 							<?php echo template::text('formConfigMail', [
-								'label' => 'Un eMail :',
-								'value' => $this->getData(['module', $this->getUrl(0), 'config', 'mail']),
-								'help' => 'Saisissez une adresse mail individuelle ou de liste'
+								'label' => 'Une adresse email ou une liste de diffusion:',
+								'value' => $this->getData(['module', $this->getUrl(0), 'config', 'mail'])
 							]); ?>
 						</div>
 					</div>

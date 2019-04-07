@@ -66,7 +66,7 @@
 					'selected' => $this->getUser('id')
 				]); ?>
 				<?php echo template::date('blogEditPublishedOn', [
-					'help' => 'L\'article est consultable à partir du moment où la date de publication est passée.',
+					'help' => 'L\'article n\'est visible qu\'après la date de publication prévue.',
 					'label' => 'Date de publication',
 					'value' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'publishedOn'])
 				]); ?>
