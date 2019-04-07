@@ -1,10 +1,12 @@
 # ChangeLog 
 
 
-## Version 9.0.16
+## Version 9.0.17
 - Correction : 
     - Marges pour les petits écrans en mode connecté
-    - Mise à jour simpleLightBox 1.17.0
+- Mise à jour :
+    - simpleLightBox 1.17.0
+    - Harmonisation du contenu des bulles d'aide
 
 ## Version 9.0.16
 - Corrections : 
