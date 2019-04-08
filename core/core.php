@@ -1705,13 +1705,18 @@ class layout extends common {
 
 
 
-	/**
+/**
      * Affiche le copyright
      */
     public function showCopyright() {
         $items = '<div id="footerCopyright">';
-        $items .= '<span id="footerFont">Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">Zwii ' . common::ZWII_VERSION . ' </a>';
-        $items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a></span>';
+		$items .= '<span id="footerFont">Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">Zwii';
+		if ($this->getData(['config','displayVersion']) === TRUE) {
+			$items .= ' ' . common::ZWII_VERSION  ;	
+		}		
+		$items .= '</a>';
+		
+		$items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a></span>';
         if(
             (
                 $this->getData(['theme', 'footer', 'loginLink'])
