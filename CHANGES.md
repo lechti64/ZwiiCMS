@@ -2,13 +2,15 @@
 
 
 ## Version 9.0.17
+- Mises à jour :
+    - simpleLightBox 1.17.0
 - Correction : 
     - Marges pour les petits écrans en mode connecté
     - Ajustement CSS du pied de page
-    - Désactivation Aviary dans Responsive FileManager
-- Mises à jour :
-    - simpleLightBox 1.17.0
-    - Harmonisation du contenu des bulles d'aide
+    - Harmonisation du contenu des bulles d'aide    
+- Modification : 
+    - Ajout du numéro de version dans le pied de page
+    - Désactivation Aviary dans Responsive FileManager    
 
 ## Version 9.0.16
 - Corrections : 
