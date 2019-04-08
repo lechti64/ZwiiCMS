@@ -345,7 +345,7 @@ class install extends common {
 			'footer' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
 				'font' => 'Open+Sans',				
-				'fontSize' => '0.8em',
+				'fontSize' => '.8em',
 				'fontWeight' => 'normal',				
 				'height' => '10px',
 				'loginLink' => true,

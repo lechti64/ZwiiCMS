@@ -752,7 +752,7 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 9008) {
 			$this->setData(['theme', 'footer', 'textTransform','none']);
 			$this->setData(['theme', 'footer', 'fontWeight','normal']);
-			$this->setData(['theme', 'footer', 'fontSize','0.8em']);
+			$this->setData(['theme', 'footer', 'fontSize','.8em']);
 			$this->setData(['theme', 'footer', 'font','Open+Sans']);	
 			$this->setData(['core', 'dataVersion', 9008]);
 			$this->SaveData();
