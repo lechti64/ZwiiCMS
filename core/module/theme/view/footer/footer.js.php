@@ -132,10 +132,9 @@ $("#themeFooterLoginLink").on("change", function() {
 	}
 }).trigger("change");
 
-// NUméro de version
+// Numéro de version
 $("#themefooterDisplayVersion").on("change", function() {
 	if($(this).is(":checked")) {
-		console.log("top");
 		$("#footerDisplayVersion").show();
 	}
 	else {
