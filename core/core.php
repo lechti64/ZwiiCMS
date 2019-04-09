@@ -775,6 +775,12 @@ class common {
 			$this->setData(['core', 'dataVersion', 9011]);
 			$this->SaveData();
 		}
+		// Version 9.0.17
+		if($this->getData(['core', 'dataVersion']) < 9017) {
+			$this->setData(['config','displayVersion', true ]);
+			$this->setData(['core', 'dataVersion', 9017]);
+			$this->SaveData();
+		}
 	}
 }
 
