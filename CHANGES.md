@@ -8,8 +8,8 @@
     - Marges pour les petits écrans en mode connecté
     - Ajustement CSS du pied de page
     - Harmonisation du contenu des bulles d'aide    
-- Modification : 
-    - Ajout du numéro de version dans le pied de page activable dans la configuration
+- Modifications : 
+    - Ajout du numéro de version dans le pied de page activable dans la configuration du thème
     - Désactivation Aviary dans Responsive FileManager    
 
 ## Version 9.0.16
