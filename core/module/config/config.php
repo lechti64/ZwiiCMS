@@ -223,8 +223,7 @@ class config extends common {
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
-					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true),
-					'displayVersion' => $this->getInput('configDisplayVersion', helper::FILTER_BOOLEAN)
+					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true)
 				]
 			]);
 			if(self::$inputNotices === []) {

@@ -176,10 +176,6 @@
 					'label' => 'Fuseau horaire',
 					'selected' => $this->getData(['config', 'timezone'])
 				]); ?>
-				<?php echo template::checkbox('configDisplayVersion', true, 'Afficher le numéro de version', [
-					'checked' => $this->getData(['config', 'displayVersion']),
-					'help' => 'Afficher le numéro de version dans le pied de page.'
-				]); ?>
 				<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
 					'checked' => $this->getData(['config', 'maintenance']),
 					'help' => 'Le site devient inaccessible sauf pour les administrateurs.'

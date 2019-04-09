@@ -132,6 +132,18 @@ $("#themeFooterLoginLink").on("change", function() {
 	}
 }).trigger("change");
 
+// NUméro de version
+$("#themefooterDisplayVersion").on("change", function() {
+	if($(this).is(":checked")) {
+		console.log("top");
+		$("#footerDisplayVersion").show();
+	}
+	else {
+		$("#footerDisplayVersion").hide();
+	}
+}).trigger("change");
+
+
 // Aperçu du texte
 $("#themeFooterText").on("change keydown keyup", function() {
 	$("#footerText").html($(this).val());

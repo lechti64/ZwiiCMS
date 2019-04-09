@@ -777,7 +777,7 @@ class common {
 		}
 		// Version 9.0.17
 		if($this->getData(['core', 'dataVersion']) < 9017) {
-			$this->setData(['config','displayVersion', true ]);
+			$this->setData(['theme','footer','displayVersion', true ]);
 			$this->setData(['core', 'dataVersion', 9017]);
 			$this->SaveData();
 		}
@@ -1717,11 +1717,11 @@ class layout extends common {
     public function showCopyright() {
         $items = '<div id="footerCopyright">';
 		$items .= '<span id="footerFont">Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">Zwii';
-		if ($this->getData(['config','displayVersion']) === TRUE) {
-			$items .= ' ' . common::ZWII_VERSION  ;	
-		}		
-		$items .= '</a>';
-		
+		$items .= ' <span id="footerDisplayVersion" ' .
+			($this->getData(['theme','footer','displayVersion']) === true ? '>': 'class="displayNone" >' ) .
+			common::ZWII_VERSION  . 
+			"</span>" ;	
+		$items .= '</a>';		
 		$items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a></span>';
         if(
             (

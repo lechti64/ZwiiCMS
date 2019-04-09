@@ -289,7 +289,8 @@ class theme extends common {
 				'textTransform' => $this->getInput('themeFooterTextTransform'),						
 				'font' => $this->getInput('themeFooterFont'),
 				'fontSize' => $this->getInput('themeFooterFontSize'),
-				'fontWeight' => $this->getInput('themeFooterFontWeight')
+				'fontWeight' => $this->getInput('themeFooterFontWeight'),
+				'displayVersion' => $this->getInput('themefooterDisplayVersion', helper::FILTER_BOOLEAN)
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
