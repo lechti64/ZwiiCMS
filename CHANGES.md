@@ -1,5 +1,8 @@
 # ChangeLog 
 
+## Version 9.0.18
+- Correction : 
+    - Etat par défaut du numéro de version mal récupéré
 
 ## Version 9.0.17
 - Mises à jour :

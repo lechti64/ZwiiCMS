@@ -110,7 +110,7 @@
 					</div>
 					<div class="col6">
 						<?php echo template::checkbox('themefooterDisplayVersion', true, 'Afficher le numéro de version', [
-							'checked' => $this->getData(['config', 'displayVersion']),
+							'checked' => $this->getData(['theme', 'footer','displayVersion']),
 							'help' => 'Afficher le numéro de version dans le pied de page.'
 						]); ?>
 					<div>
