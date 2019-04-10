@@ -105,13 +105,12 @@
 					<div class="col6">
 						<?php echo template::checkbox('themeFooterLoginLink', true, 'Lien de connexion', [
 							'checked' => $this->getData(['theme', 'footer', 'loginLink']),
-							'help' => 'Visible seulement sur cette page et lorsque vous n\'êtes pas connecté.'
+							'help' => 'Visible seulement lorsque vous n\'êtes pas connecté.'
 						]); ?>
 					</div>
 					<div class="col6">
 						<?php echo template::checkbox('themefooterDisplayVersion', true, 'Afficher le numéro de version', [
-							'checked' => $this->getData(['theme', 'footer','displayVersion']),
-							'help' => 'Afficher le numéro de version dans le pied de page.'
+							'checked' => $this->getData(['theme', 'footer','displayVersion'])
 						]); ?>
 					<div>
 				</div>
