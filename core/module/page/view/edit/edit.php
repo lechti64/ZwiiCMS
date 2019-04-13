@@ -46,20 +46,11 @@
 							<div class="col2 verticalAlignBottom">
 								<?php echo template::button('pageEditModuleConfig', [
 									'disabled' => (bool) $this->getData(['page', $this->getUrl(2), 'moduleId']) === false,
-									'uniqueSubmission' => true,
+									'uniqueSubmission' => true,	
 									'value' => template::ico('gear')
 								]); ?>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col6">			
-					<?php echo template::select('configModulePosition', $module::$modulePosition,[
-							'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
-							'label' => 'Position du module dans la page',
-							'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
-						]); ?>
 					</div>
 				</div>
 				<div class="row">
@@ -70,13 +61,22 @@
 								'selected' => $this->getData(['page', $this->getUrl(2), 'typeMenu'])
 						]); ?>
 					</div>
-					<div class="col6">
+					<div class="col6">			
+					<?php echo template::select('configModulePosition', $module::$modulePosition,[
+							'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
+							'label' => 'Position du module dans la page',
+							'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
+						]); ?>
+					</div>
+				</div>
+				<div class="row">
+				<div class="col6">
 						<?php echo template::file('pageIconUrl', [
 							'label' => 'Icône du menu',
 							'value' => $this->getData(['page', $this->getUrl(2), 'iconUrl'])
 						]); ?>
-					</div>
-				</div>
+					</div>				
+				</div>				
 			</div>
 		</div>
 	</div>
