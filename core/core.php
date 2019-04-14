@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version stable
-	const ZWII_VERSION = '9.0.18';
+	const ZWII_VERSION = '9.0.19';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
