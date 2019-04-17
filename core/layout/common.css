@@ -503,6 +503,9 @@ footer .col4 {
 	}
 }
 
+#footerDisplayVersion {
+	font-size: inherit;
+}
 
 footer #footerSocials span {
 	color: #FFF;

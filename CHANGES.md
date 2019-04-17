@@ -1,6 +1,10 @@
 # ChangeLog 
 
 
+## Version 9.0.20
+- Correction : 
+    - Taille de police du numéro de version
+
 ## Version 9.0.19
 - Correction : 
     - Alignement du menu
