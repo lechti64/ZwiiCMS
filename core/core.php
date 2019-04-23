@@ -553,23 +553,17 @@ class common {
 			$children = [];
 			// Exclure les barres
 			if ($this->getData(['page', $parentId, 'block']) !== 'bar' ) { 
+				$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) ,
+							'value'=> $rewrite.$parentId 
+							];	
 				foreach($childIds as $childId) {
-					$children [] = ['title' => $this->getData(['page', $childId, 'title']) ,
+					$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) . ' / '.  $this->getData(['page', $childId, 'title']) ,
 								'value'=> $rewrite.$childId
-					];				
+						];				
 				}
-				if (empty($childIds)) {						
-					$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) ,
-									'value'=> $rewrite.$parentId 		
-					];	
-				} else {
-					$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) ,
-									'value'=> $rewrite.$parentId ,  
-									'menu' => $children 
-					];							
-				} 											
 			}
 		}
+
 		
 		// 3 tentatives
 		for($i = 0; $i < 3; $i++) {
