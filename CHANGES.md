@@ -1,6 +1,11 @@
 # ChangeLog 
 
 
+## Version 9.0.21
+- Corrections : 
+    - Liens de l'éditeur de page : impossibilité de sélectionner un lien vers une page parente
+    - Export des données du site, problème lors de la création de l'arborescence.
+
 ## Version 9.0.20
 - Correction : 
     - Footer : Taille de la police du numéro de version
