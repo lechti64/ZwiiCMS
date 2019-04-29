@@ -149,7 +149,7 @@ $config = array(
 	|--------------------------------------------------------------------------
 	| The user can delete multiple files, select all files , deselect all files
 	*/
-	'multiple_selection' => false,
+	'multiple_selection' => true,
 	/*
 	|
 	| The user can have a select button that pass a json to external input or pass the first file selected to editor
@@ -230,9 +230,9 @@ $config = array(
 
 
 	//Show or not total size in filemanager (is possible to greatly increase the calculations)
-	'show_total_size'						=> false,
+	'show_total_size'						=> true,
 	//Show or not show folder size in list view feature in filemanager (is possible, if there is a large folder, to greatly increase the calculations)
-	'show_folder_size'						=> false,
+	'show_folder_size'						=> true,
 	//Show or not show sorting feature in filemanager
 	'show_sorting_bar'						=> true,
 	//Show or not show filters button in filemanager
@@ -240,13 +240,13 @@ $config = array(
 	//Show or not language selection feature in filemanager
 	'show_language_selection'				=> true,
 	//active or deactive the transliteration (mean convert all strange characters in A..Za..z0..9 characters)
-	'transliteration'						=> false,
+	'transliteration'						=> true,
 	//convert all spaces on files name and folders name with $replace_with variable
-	'convert_spaces'						=> false,
+	'convert_spaces'						=> true,
 	//convert all spaces on files name and folders name this value
 	'replace_with'							=> "_",
 	//convert to lowercase the files and folders name
-	'lower_case'							=> false,
+	'lower_case'							=> true,
 
 	//Add ?484899493349 (time value) to returned images to prevent cache
 	'add_time_to_img'                       => false,
