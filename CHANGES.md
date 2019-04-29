@@ -6,7 +6,8 @@
     - Code Mirror v5.46
 - Corrections : 
     - Liens de l'éditeur de page : impossibilité de sélectionner un lien vers une page parente
-    - Export des données du site, problème lors de la création de l'arborescence.
+    - Export des données du site, problème lors de la création de l'arborescence
+    - Titre de l'icône Youtube erroné
 
 ## Version 9.0.20
 - Correction : 
