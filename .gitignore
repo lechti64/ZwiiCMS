@@ -6,7 +6,8 @@ site/tmp/*.gz
 site/backup/*
 
 # Fichiers de données
-site/data/*
+site/data/*.json
+site/data/*.css
 
 
 # Fichiers uploadés
@@ -24,4 +25,4 @@ site/file/thumb/*
 .gitignore
 core/vendor/tinymce/link_list.json
 core/vendor/tinymce/link_list.json
-site/tmp/.htaccess
+
