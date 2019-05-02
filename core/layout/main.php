@@ -14,6 +14,8 @@
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>core/layout/common.css">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/theme.css?<?php echo md5_file('site/data/theme.css'); ?>">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/custom.css?<?php echo md5_file('site/data/custom.css'); ?>">
+	<!-- test d'import -->
+	<link rel="import" href="<?php echo helper::baseUrl(false); ?>site/data/header.inc.html?<?php echo md5_file('site/data/header.inc.html'); ?>">
 </head>
 <body>
 <?php $layout->showStyle(); ?>
@@ -320,6 +322,9 @@
 <?php endif; ?>
 <!-- Lien remonter en haut -->
 <div id="backToTop"><?php echo template::ico('up'); ?></div>
-<?php $layout->showScript(); ?>
+<?php $layout->showScript();
+	// Test d'isertion d'un script
+	include ('site/data/script.inc.php');
+?>
 </body>
 </html>
