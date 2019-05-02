@@ -10,6 +10,18 @@
  * @link http://zwiicms.com/
  */
 
+
+// Lien de connexion
+$("#blogEditMailNotification").on("change", function() {
+	if($(this).is(":checked")) {
+		$("#formConfigGroup").show();
+	}
+	else {
+		$("#formConfigGroup").hide();
+	}
+}).trigger("change");
+
+
 /**
  * Soumission du formulaire pour enregistrer en brouillon
  */

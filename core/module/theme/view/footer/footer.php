@@ -73,7 +73,7 @@
 					<div class="col3">
 						<?php echo template::select('themeFooterFontSize', $module::$footerFontSizes, [
 							'label' => 'Taille',
-							'help' => 'Proportionnelle à celle définie dans le site',							
+							'help' => 'Proportionnelle à celle définie dans le site.',							
 							'selected' => $this->getData(['theme', 'footer', 'fontSize'])
 						]); ?>
 					</div>
@@ -101,24 +101,11 @@
 					'label' => 'Contenu (texte ou HTML)',
 					'value' => $this->getData(['theme', 'footer', 'text'])
 				]); ?>
-				<div class="row">
-					<div class="col6">
-						<?php echo template::checkbox('themeFooterLoginLink', true, 'Lien de connexion', [
-							'checked' => $this->getData(['theme', 'footer', 'loginLink']),
-							'help' => 'Visible seulement lorsque vous n\'êtes pas connecté.'
-						]); ?>
-					</div>
-					<div class="col6">
-						<?php echo template::checkbox('themefooterDisplayVersion', true, 'Afficher le numéro de version', [
-							'checked' => $this->getData(['theme', 'footer','displayVersion'])
-						]); ?>
-					<div>
-				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col4">
+		<div class="col6">
 			<div class="block">
 				<h4>Contenu personnalisé</h4>
 					<?php echo template::select('themeFooterTextPosition', $module::$footerblocks, [
@@ -132,7 +119,7 @@
 
 			</div>		
 		</div>	
-		<div class="col4">
+		<div class="col6">
 			<div class="block">
 				<h4>Réseaux sociaux</h4>
 					<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
@@ -145,18 +132,49 @@
 					]); ?>
 			</div>
 		</div>
-		<div class="col4">
-			<div class="block">
-				<h4>Copyright</h4>
-					<?php echo template::select('themeFooterCopyrightPosition', $module::$footerblocks, [
-						'label' => 'Emplacement',
-						'selected' => $this->getData(['theme', 'footer', 'copyrightPosition'])
-					]); ?>	
-					<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
-						'label' => 'Alignement horizontal',
-						'selected' => $this->getData(['theme', 'footer', 'copyrightAlign'])
-					]); ?>								
-			</div>		
-		</div>				
 	</div>
+	<div class="row">					
+		<div class="col12">
+				<div class="block">
+					<h4>Copyright</h4>
+					<div class="row">
+						<div class="col5">
+							<?php echo template::select('themeFooterCopyrightPosition', $module::$footerblocks, [
+								'label' => 'Emplacement',
+								'selected' => $this->getData(['theme', 'footer', 'copyrightPosition'])
+							]); ?>	
+							<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
+								'label' => 'Alignement horizontal',
+								'selected' => $this->getData(['theme', 'footer', 'copyrightAlign'])
+							]); ?>	
+						</div>						
+						<div class="col6 offset1">
+						<p>Afficher les éléments suivants :</p>
+							<div class="row">
+								<?php echo template::checkbox('themefooterDisplayCopyright', true, 'Mention "Motorisé par"', [
+									'checked' => $this->getData(['theme', 'footer','displayCopyright'])
+								]); ?>	
+							</div>							
+							<div class="row">
+								<?php echo template::checkbox('themefooterDisplayVersion', true, 'Numéro de version', [
+									'checked' => $this->getData(['theme', 'footer','displayVersion'])
+								]); ?>
+							</div>
+							<div class="row">
+								<?php echo template::checkbox('themefooterDisplaySiteMap', true, 'Plan du site', [
+									'checked' => $this->getData(['theme', 'footer', 'displaySiteMap']),
+									'help' => 'Un plan du site permet un meilleur référencement.'
+								]); ?>
+							</div>
+							<div class="row">
+								<?php echo template::checkbox('themeFooterLoginLink', true, 'Lien de connexion', [
+										'checked' => $this->getData(['theme', 'footer', 'loginLink'])
+									]); ?>
+							</div>							
+						</div>
+					</div>				
+				</div>		
+			</div>
+		</div>
+	<div>
 <?php echo template::formClose(); ?>

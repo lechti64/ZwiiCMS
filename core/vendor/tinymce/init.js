@@ -34,8 +34,8 @@ tinymce.init({
 	// Target pour lightbox
 	rel_list: [
 		{title: 'None', value: ''},
-		{title: 'Popup Lity', value: 'data-lity'},
-		{title: 'Diaporama SimpleLightbox', value: 'gallery'}
+		{title: 'Popup intégrée (Lity)', value: 'data-lity'},
+		{title: 'Diaporama d\'images (SimpleLightbox)', value: 'gallery'}
 	],	
 	// Titre des image
 	image_title: true,
@@ -155,6 +155,11 @@ tinymce.init({
 			title: "Grille asymétrique : 10 - 2",
 			url: baseUrl + "core/vendor/tinymce/templates/col10-2.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
+		},
+		{
+			title: "Exemple Swiper",
+			url: baseUrl + "core/vendor/tinymce/templates/swiper.html",
+			description: "Exemple Swiper."
 		}
 	]
 });

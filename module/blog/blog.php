@@ -37,7 +37,7 @@ class blog extends common {
 
 	public static $users = [];
 
-	const BLOG_VERSION = '1.4';
+	const BLOG_VERSION = '1.7';
 
 	/**
 	 * Édition
@@ -52,6 +52,8 @@ class blog extends common {
 			// Crée l'article
 			$this->setData(['module', $this->getUrl(0), $articleId, [
 				'closeComment' => $this->getInput('blogAddCloseComment', helper::FILTER_BOOLEAN),
+				'mailNotification'  => $this->getInput('blogEditMailNotification', helper::FILTER_BOOLEAN),
+				'groupNotification' => 	$this->getInput('blogEditGroupNotification', helper::FILTER_INT),		
 				'comment' => [],
 				'content' => $this->getInput('blogAddContent', null),
 				'picture' => $this->getInput('blogAddPicture', helper::FILTER_STRING_SHORT, true),
@@ -258,6 +260,8 @@ class blog extends common {
 				}
 				$this->setData(['module', $this->getUrl(0), $articleId, [
 					'closeComment' => $this->getInput('blogEditCloseComment'),
+					'mailNotification'  => $this->getInput('blogEditMailNotification', helper::FILTER_BOOLEAN),
+					'groupNotification' => $this->getInput('blogEditGroupNotification', helper::FILTER_INT),
 					'comment' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'comment']),
 					'content' => $this->getInput('blogEditContent', null),
 					'picture' => $this->getInput('blogEditPicture', helper::FILTER_STRING_SHORT, true),
@@ -333,12 +337,42 @@ class blog extends common {
 						'createdOn' => time(),
 						'userId' => $this->getInput('blogArticleUserId'),
 					]]);
-					// Valeurs en sortie
-					$this->addOutput([
-						'redirect' => helper::baseUrl() . $this->getUrl() . '#comment',
-						'notification' => 'Commentaire ajouté',
-						'state' => true
-					]);
+					
+					// Envoi d'une notification aux administrateurs
+					// Init tableau
+					$to = [];
+					// Liste des destinataires	
+					foreach($this->getData(['user']) as $userId => $user) {
+						if ($user['group'] >= $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'groupNotification']) ) {
+							$to[] = $user['mail'];
+						}
+					}
+					// Envoi du mail $sent code d'erreur ou de réusssite
+					if ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'mailNotification']) === true) {
+						$sent = $this->sendMail(
+							$to,
+							'Nouveau commentaire',
+							'Bonjour' . ' <strong>' . $user['firstname'] . ' ' . $user['lastname'] . '</strong>,<br><br>' .
+							'Nouveau commentaire déposé sur la page "' . $this->getData(['page', $this->getUrl(0), 'title']) . '" :<br><br>'
+						);
+						// Valeurs en sortie
+						$this->addOutput([
+							'redirect' => helper::baseUrl() . $this->getUrl() . '#comment',
+							//'notification' => 'Commentaire ajouté',
+							//'state' => true
+							'notification' => ($sent === true ? 'Commentaire ajouté et une notification envoyée' : 'Commentaire ajouté, erreur de notification : <br/>' . $sent),
+							'state' => ($sent === true ? true : null)												
+						]);
+
+					} else {
+						// Valeurs en sortie
+						$this->addOutput([
+							'redirect' => helper::baseUrl() . $this->getUrl() . '#comment',
+							'notification' => 'Commentaire ajouté',
+							'state' => true											
+						]);
+					}
+					
 				}
 				// Ids des commentaires par ordre de publication
 				$commentIds = array_keys(helper::arrayCollumn($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'comment']), 'createdOn', 'SORT_DESC'));

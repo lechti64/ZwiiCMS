@@ -41,13 +41,18 @@ class page extends common {
 		'free'   => 'Libre'
 	];
 	public static $pageBlocks = [
-		'12'    => 'Page pleine',
+		'12'    => 'Pleine page',
 		'4-8'   => 'Barre latérale 1/3 - Page 2/3',		
 		'8-4'   => 'Page 2/3    - Barre latérale 1/3',
 		'3-9'   => 'Barre latérale 1/4 - Page 3/4',
 		'9-3'   => 'Page 3/4    - Barre latérale 1/4',
 		'3-6-3' => 'Barre latérale 1/4 - Page 1/2 - Barre latérale 1/4',
 		'bar'	=> 'Barre latérale'
+	];
+	public static $displayMenu = [
+		'none'	=> 'Aucun',
+		'parents' 	=> 'Menu principal',
+		'children'	=> 'Sous-menu de la page parente'
 	];
 	
 	/**
@@ -77,9 +82,15 @@ class page extends common {
 				'title' => $pageTitle,
 				'block' => '12',
 				'barLeft' => '',
-				'barRight' => ''
+				'barRight' => '',
+				'displayMenu' => '0',
+				'hideMenuSide' => false,
+				'hideMenuHead' => false,
+				'hideMenuChildren' => false
 			]
 		]);
+		// Met à jour le site map
+		$this->createSitemap('all');
 		// Valeurs en sortie
 		$this->addOutput([
 			'redirect' => helper::baseUrl() . $pageId,
@@ -133,7 +144,10 @@ class page extends common {
 			]);
 		}
 		// Suppression
-		else {
+		else {		
+			// Met à jour le site map
+			$this->createSitemap('all');
+			// Effacer la page	
 			$this->deleteData(['page', $url[0]]);
 			$this->deleteData(['module', $url[0]]);
 			// Valeurs en sortie
@@ -165,7 +179,7 @@ class page extends common {
 				// un dossier existe du même nom (erreur en cas de redirection)
 				if (file_exists($pageId)) {
 					$pageId = uniqid($pageId . '-');
-				}	
+				}		
 				// Si l'id a changée
 				if ($pageId !== $this->getUrl(2)) {
 					// Incrémente le nouvel id de la page
@@ -213,6 +227,7 @@ class page extends common {
 				if ($this->getinput('pageEditBlock') !== 'bar') {
 					$barLeft = $this->getinput('pageEditBarLeft');
 					$barRight = $this->getinput('pageEditBarRight');
+					$hideTitle = $this->getInput('pageEditHideTitle', helper::FILTER_BOOLEAN);
 
 				} else {
 					// Une barre ne peut pas avoir de barres 
@@ -220,6 +235,7 @@ class page extends common {
 					$barRight = "";
 					// Une barre est masquée
 					$position = 0;
+					$hideTitle = true;
 				}
 				// Modifie la page ou en crée une nouvelle si l'id a changé
 				$this->setData([
@@ -228,9 +244,9 @@ class page extends common {
 					[					
 						'typeMenu' => $this->getinput('pageTypeMenu'),
 						'iconUrl' => $this->getinput('pageIconUrl'),
-						'disable'=> $this->getinput('pageDisable', helper::FILTER_BOOLEAN), 						
+						'disable'=> $this->getinput('pageEditDisable', helper::FILTER_BOOLEAN), 						
 						'content' => (empty($this->getInput('pageEditContent', null)) ? "<p></p>" : $this->getInput('pageEditContent', null)) ,
-						'hideTitle' => $this->getInput('pageEditHideTitle', helper::FILTER_BOOLEAN),
+						'hideTitle' => $hideTitle,
 						'breadCrumb' => $this->getInput('pageEditbreadCrumb', helper::FILTER_BOOLEAN),
 						'metaDescription' => $this->getInput('pageEditMetaDescription', helper::FILTER_STRING_LONG),
 						'metaTitle' => $this->getInput('pageEditMetaTitle'),
@@ -243,9 +259,13 @@ class page extends common {
 						'title' => $this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true),
 						'block' => $this->getinput('pageEditBlock'),
 						'barLeft' => $barLeft,
-						'barRight' => $barRight
+						'barRight' => $barRight,
+						'displayMenu' => $this->getinput('pageEditDisplayMenu'),
+						'hideMenuSide' => $this->getinput('pageEditHideMenuSide', helper::FILTER_BOOLEAN),
+						'hideMenuHead' => $this->getinput('pageEditHideMenuHead', helper::FILTER_BOOLEAN),
+						'hideMenuChildren' => $this->getinput('pageEditHideMenuChildren', helper::FILTER_BOOLEAN),
 					]
-				]);
+				]);				
 				// Barre renommée : changement le nom de la barre dans les pages mères
 				if ($this->getinput('pageEditBlock') === 'bar') {
 					foreach ($this->getHierarchy() as $eachPageId=>$parentId) {
@@ -265,6 +285,8 @@ class page extends common {
 						}
 					}
 				}
+				// Met à jour le site map
+				$this->createSitemap('all');
 				// Redirection vers la configuration
 				if($this->getInput('pageEditModuleRedirect', helper::FILTER_BOOLEAN)) {
 					// Valeurs en sortie
@@ -306,7 +328,7 @@ class page extends common {
 						$this->getData(['page', $parentPageId, 'block']) === 'bar') {
 						self::$pagesBarId[$parentPageId] = $this->getData(['page', $parentPageId, 'title']);
 					}
-			}
+			}			
 			// Valeurs en sortie
 			$this->addOutput([
 				'title' => $this->getData(['page', $this->getUrl(2), 'title']),

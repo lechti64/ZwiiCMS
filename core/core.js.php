@@ -328,8 +328,28 @@ core.start = function() {
 		});
 	}).trigger("resize");
 
+	// Ajouter l'attribut data-lity afin de faire la liaison avec lity
+	//$("a[rel='data-lity']").attr("data-lity","");
+
+	// Ajouter la classe Gallery afin de faire la liaison avec simplelightbox
+	//$("a[rel='gallery']").addClass("gallery","");
+
+
+	// Appel dans init.js
+	// $('.gallery').simpleLightbox();
+
 };
 core.start();
+
+/**
+ * Confirmation de suppression
+ */
+$("#pageDelete").on("click", function() {
+	var _this = $(this);
+	return core.confirm("Êtes-vous sûr de vouloir supprimer cette page ?", function() {
+		$(location).attr("href", _this.attr("href"));
+	});
+});
 
 /**
  * Calcul de la luminance relative d'une couleur

@@ -329,7 +329,7 @@ class form extends common {
 				$to = [];
 				if ($group > 0){
 					foreach($this->getData(['user']) as $userId => $user) {
-						if($user['group'] === $group) {
+						if($user['group'] >= $group) {
 							$to[] = $user['mail'];
 						}
 					}

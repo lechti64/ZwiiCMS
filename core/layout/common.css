@@ -31,10 +31,30 @@ body {
 */ 
 @media (max-width: 768px) {
 	body {
-		margin:2px 2px !important;
+		margin:2px 2px  !important;
 	}
 	#site {
-		margin:2px auto !important;
+		margin:0px auto  !important;
+	}
+	header {
+		margin:0px 0px !important;
+		background-size: cover !important;
+	}
+}
+
+@media (max-width: 992px) {	
+	.siteContainer {
+		display: flex;
+		flex-direction: column;
+	}
+	.siteContainer > #contentLeft {
+		order: 2;
+	}
+	.siteContainer > #contentRight {
+		order: 3;
+	}
+	.siteContainer > #contentSite {
+		order: 1;
 	}
 }
 
@@ -320,13 +340,14 @@ td > .col12 {
 		width: 70% !important;
 	}
 	#bar #barRight {
-		font-size: 1.2em;
+		font-size: 1.2em;		
 	}
 	#bar #barSelectPage {
 		width: 80%;
 		font-size: 120%;
 	}
 }
+
 @media (max-width: 992px) {
 	#bar .zwiico-user {
 		display: none;
@@ -380,6 +401,7 @@ nav #toggle span {
 nav #menu {
 	display: block;
 }
+
 nav ul {
 	padding: 0;
 	margin: 0;
@@ -389,6 +411,7 @@ nav li {
 	display: inline-block;
 	position: relative;
 }
+
 nav li ul {
 	display: block;
 	position: absolute;
@@ -397,13 +420,15 @@ nav li ul {
 	opacity: 0;
 	-webkit-transition: .3s ease-out;
 	transition: .3s ease-out;
+	padding-left: 10px;	
 }
+
 nav li ul li {
 	display: block;
 	text-align: left;
 }
 nav li:hover ul {
-	z-index: 1;
+	z-index: 2;
 	opacity: 1;
 }
 nav a {
@@ -439,6 +464,8 @@ nav a:hover {
 		padding-left: 40px !important;
 	}
 }
+
+
 /* Barre de navigation fixe quand le menu est en-dehors du site */ 
 #navfixedlogout {
 	position: -webkit-sticky; /* Safari */
@@ -457,6 +484,19 @@ nav a:hover {
 /* Taille du menu hamburger */
 nav .zwiico-menu {
 	font-size:1.5em !important;
+}
+
+
+/* Menu vertical */
+
+#menuSide, #menuSideChild {
+	padding-left: 10px;
+	margin: 0px;
+	list-style: none;
+}
+
+ul #menuSideChild, li #menuSideChild {
+	padding-left:10px;
 }
 
 
@@ -487,12 +527,17 @@ body > footer {
 footer {
 	text-align: center;
 	padding: 1px 20px;
-	vertical-align:middle;
-}
-
-footer .col4 {
 	vertical-align: middle;
 }
+
+#footerLoginLink, 
+#footerDisplayCopyright, 
+#footerDisplayVersion,
+#footerDisplaySiteMap {
+	font-size: inherit;
+}
+
+
 /* Conserve le pied de page sur une ligne */
 @media (max-width: 992px) {
 	footer .col4 {
@@ -501,10 +546,6 @@ footer .col4 {
 	#footerCopyright, #footerText, #footerSocials {
 		text-align: center !important;
 	}
-}
-
-#footerDisplayVersion {
-	font-size: inherit;
 }
 
 footer #footerSocials span {
@@ -522,11 +563,11 @@ footer #footerSocials .zwiico-facebook {
 footer #footerSocials .zwiico-facebook:hover {
 	background: #324B80;
 }
-footer #footerSocials .zwiico-googleplus {
-	background: #DD4B39;
+footer #footerSocials .zwiico-linkedin {
+	background: #007BB6;
 }
-footer #footerSocials .zwiico-googleplus:hover {
-	background: #D03724;
+footer #footerSocials .zwiico-linkedin:hover {
+	background: #006881;
 }
 footer #footerSocials .zwiico-instagram {
 	background: #E4405F;

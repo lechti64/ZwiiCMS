@@ -1,3 +1,7 @@
+<?php
+// Mise à jour de la liste des pages pour TinyMCE
+$this->pages2Json();
+?>
 <?php echo template::formOpen('pageEditForm'); ?>
 	<div class="row">
 	<div class="col2">
@@ -56,21 +60,21 @@
 				<div class="row">
 					<div class="col6">							
 						<?php echo template::select('pageTypeMenu', $module::$typeMenu,[
-								'help' => 'Sélectionnez le type de menu.',
-								'label' => 'Type de menu',
+								'help' => 'Choisissez une icône ou une image de petite taille.',
+								'label' => 'Aspect du menu',
 								'selected' => $this->getData(['page', $this->getUrl(2), 'typeMenu'])
 						]); ?>
 					</div>
 					<div class="col6">			
 					<?php echo template::select('configModulePosition', $module::$modulePosition,[
-							'help' => 'En position libre ajoutez manuellement le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
+							'help' => 'En position libre ajoutez le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
 							'label' => 'Position du module dans la page',
 							'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
 						]); ?>
 					</div>
 				</div>
 				<div class="row">
-				<div class="col6">
+>					<div class="col6">
 						<?php echo template::file('pageIconUrl', [
 							'label' => 'Icône du menu',
 							'value' => $this->getData(['page', $this->getUrl(2), 'iconUrl'])
@@ -85,36 +89,6 @@
 		'value' => $this->getData(['page', $this->getUrl(2), 'content'])
 	]); ?>
 	<div class="row">
-		<div class="col6">
-			<div class="block" id="PageEditMenu">
-				<h4>Menu</h4>
-				<?php if($this->getHierarchy($this->getUrl(2), false)): ?>
-					<?php echo template::hidden('pageEditParentPageId', [
-						'value' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
-					]); ?>
-				<?php else: ?>
-					<?php echo template::select('pageEditParentPageId', $module::$pagesNoParentId, [
-						'label' => 'Page parent',
-						'selected' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
-					]); ?>
-				<?php endif; ?>
-				<?php echo template::select('pageEditPosition', [], [
-					'label' => 'Position'
-				]); ?>
-				<div class="row">
-					<div class="col6">
-					<?php echo template::checkbox('pageEditTargetBlank', true, 'Nouvel onglet', [
-						'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
-					]); ?>
-					</div>
-					<div class="col6">
-					<?php echo template::checkbox('pageDisable', true, 'Page inactive', [
-						'checked' => $this->getData(['page', $this->getUrl(2), 'disable'])					
-					]); ?>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div class="col6">
 			<div class="block">
 				<h4>Mise en page</h4>
@@ -144,24 +118,95 @@
 						'selected' => $this->getData(['page', $this->getUrl(2), 'barRight'])
 					]); ?>
 				<?php endif; ?>				
+				<div  class="row"> 					
+						<div class="col12">
+						<?php echo template::select('pageEditDisplayMenu', $module::$displayMenu, [
+							'label' => 'Configuration du menu vertical',
+							'selected' => $this->getData(['page', $this->getUrl(2), 'displayMenu'])
+						]); ?>
+					</div>
+				</div>				
 				<div class="row">
 					<div class="col6">
-						<?php echo template::checkbox('pageEditHideTitle', true, 'Masquer le titre ', [
+						<?php echo template::checkbox('pageEditHideTitle', true, 'Titre masquée', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
 						]); ?>
 					</div>
-					<div class="col6">						
+					<div class="col6">
 						<?php echo template::checkbox('pageEditbreadCrumb', true, 'Fil d\'Ariane', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'breadCrumb'])
 						]); ?>
 					</div>
-				</div>					
+				</div>	
 			</div>		
 		</div>
+		<div class="col6">
+		<div class="block" id="PageEditMenu">
+				<h4>Emplacements</h4>
+				<?php if($this->getHierarchy($this->getUrl(2), false)): ?>
+					<?php echo template::hidden('pageEditParentPageId', [
+						'value' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
+					]); ?>
+				<?php else: ?>
+					<?php echo template::select('pageEditParentPageId', $module::$pagesNoParentId, [
+						'label' => 'Page parent',
+						'selected' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
+					]); ?>
+				<?php endif; ?>
+				<?php echo template::select('pageEditPosition', [], [
+					'label' => 'Position',
+					'help' => 'Une page non affichée n\'apparaît pas dans les menus mais comme \'Page orpheline\' dans la liste des pages.'
+				]); ?>									
+				<div class="row">
+					<div class="col6">
+						<?php echo template::checkbox('pageEditTargetBlank', true, 'Nouvel onglet', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
+						]); ?>
+					</div>					
+					<div class="col6">
+						<?php echo template::checkbox('pageEditDisable', true, 'Désactivée', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'disable']),			
+							'help' => 'Une page désactivée figure dans le menu sans être cliquable.'
+						]); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col12">
+			<div class="block" id="PageEditMenuSpecial">
+			<h4>Options avancées d'emplacements</h4>	
+				<div class="row">
+					<div class="col12">
+					<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Masquer les pages enfants de cette page dans le menu principal', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuChildren']),
+						'help' => 'Utilisez cette option pour afficher uniquement les pages enfants dans un `sous-menu de page parente` placé dans une barre latérale.'
+					]); ?>
+					</div>
+				</div>									
+				<div class="row">
+					<div class="col12">
+					<?php echo template::checkbox('pageEditHideMenuHead', true, 'Masquer cette page dans le menu principal, l\'afficher dans le menu d\'une barre latérale', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuHead']),
+						'help' => 'Pour masquer la page totalement (ex : page en construction), dans `Position`, sélectionnez `Ne pas afficher`.'
+					]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col12">
+					<?php echo template::checkbox('pageEditHideMenuSide', true, 'Masquer cette page dans le menu d`une barre latérale, l\'afficher dans le menu principal', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuSide']),
+						'help' => 'Pour masquer la page totalement (ex : page en construction), dans `Position`, sélectionnez `Ne pas afficher`.'
+					]); ?>
+					</div>
+				</div>	
+			</div>
+		</div>					
 	</div>
 	<div class='row'>
 		<div class="block">
-					<h4>Options avancées</h4>
+					<h4>Autres options</h4>
 					<div class='col6'>
 						<?php echo template::select('pageEditGroup', self::$groupPublics, [
 							'label' => 'Groupe requis pour accéder à la page :',

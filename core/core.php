@@ -27,8 +27,8 @@ class common {
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
 
-	// Numéro de version stable
-	const ZWII_VERSION = '9.0.21';
+	// Numéro de version 
+	const ZWII_VERSION = '9.1.00.dev63';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -55,6 +55,8 @@ class common {
 	public $output = [
 		'access' => true,
 		'content' => '',
+		'contentLeft' => '',
+		'contentRight' => '',
 		'display' => self::DISPLAY_LAYOUT_MAIN,
 		'metaDescription' => '',
 		'metaTitle' => '',
@@ -79,7 +81,8 @@ class common {
 			'tippy',
 			'zwiico',
 			'imagemap',
-			'simplelightbox'
+			'simplelightbox',
+			'swiper'
 		],
 		'view' => ''
 	];
@@ -142,8 +145,6 @@ class common {
 		}
 
 		// Mise à jour des données core
-		// Fonction désactivée en dev
-		// if (stripos(common::ZWII_VERSION, 'dev') === 0 )
 		$this->update();
 	
 		// Utilisateur connecté
@@ -213,9 +214,6 @@ class common {
 				$this->url = $this->getData(['config', 'homePageId']);
 			}
 		}
-
-		// Mise à jour de la liste des pages pour TinyMCE
-		$this->linkList();
 	}
 
 	/**
@@ -519,7 +517,6 @@ class common {
 	 * Enregistre les données dans deux fichiers séparés
 	 */
 	public function saveData() {
-
 		// Save config core page module et user
 		// 5 premières clés principales
 		// Trois tentatives
@@ -543,9 +540,10 @@ class common {
 	}
 
 	/**
-	 * Génére un fichier json avec la liste des
+	 * Génére un fichier json avec la liste des pages
+	 * 
 	*/
-	public function linkList() {
+	public function pages2Json() {
 		// Sauve la liste des pages pour TinyMCE
 		$parents = [];
 		$rewrite = (helper::checkRewrite()) ? '' : '?';
@@ -589,6 +587,89 @@ class common {
 			usleep(10000);
 		}	
 	}
+
+	/**
+	 * Génére un fichier robots.txt à l'installation
+	 * Si le fichier exite déjà les commandes sont ajoutées
+	 */
+
+	 public function createRobots() {
+
+		$robotValue = 
+						PHP_EOL .
+						'# ZWII CONFIG ---------' . PHP_EOL .
+						'User-agent: *' . PHP_EOL .
+						'Disallow: /core/' . PHP_EOL .
+						'Disallow: /module/' .PHP_EOL .
+						'Disallow: /site/data' .PHP_EOL .
+						'Disallow: /site/tmp' .PHP_EOL .
+						'Disallow: /site/backup' .PHP_EOL .
+						'Allow: /site/file/' .PHP_EOL .
+						'Sitemap: ' . helper::baseUrl() . 'sitemap.xml' . PHP_EOL .
+						'Sitemap: ' . helper::baseUrl() . 'sitemap.xml.gz' . PHP_EOL .
+						'# ZWII CONFIG  ---------' . PHP_EOL ;
+
+
+		if (file_exists('robots.txt')) {			
+			return(file_put_contents(
+				'robots.txt',
+				$robotValue,
+				FILE_APPEND
+				));
+		} else  {
+			// Sinon on crée un fichier
+			return(file_put_contents(
+				'robots.txt',
+				 $robotValue
+				));
+		}
+	 }
+
+
+	/**
+	 * Génére un fichier un fchier sitemap.xml
+	 * https://github.com/icamys/php-sitemap-generator
+	 * $command valeurs possible
+	 * all : génére un site map complet 
+	 * Sinon contient id de la page à créer
+	*/
+
+	public function createSitemap($command = "all") {
+
+		require_once "core/vendor/sitemap/SitemapGenerator.php";
+
+		$sitemap = new \Icamys\SitemapGenerator\SitemapGenerator(helper::baseurl());
+
+		// will create also compressed (gzipped) sitemap
+		$sitemap->createGZipFile = true;
+
+		// determine how many urls should be put into one file
+		// according to standard protocol 50000 is maximum value (see http://www.sitemaps.org/protocol.html)
+		$sitemap->maxURLsPerSitemap = 50000;
+
+		// sitemap file name
+		$sitemap->sitemapFileName = "sitemap.xml";
+		
+		$datetime = new DateTime(date('c'));
+		$datetime->format(DateTime::ATOM); // Updated ISO8601
+		// sitemap index file name
+		$sitemap->sitemapIndexFileName = "sitemap-index.xml";
+		foreach($this->getHierarchy(null, false, false) as $parentPageId => $childrenPageIds) {
+			$sitemap->addUrl ($parentPageId,$datetime);
+			foreach($childrenPageIds as $childKey) {
+				$sitemap->addUrl($childKey,$datetime);
+			}
+		}			
+		// generating internally a sitemap
+		$sitemap->createSitemap();
+
+		// writing early generated sitemap to file
+		$sitemap->writeSitemap();
+		
+		return(file_exists('sitemap.xml'));
+
+	}
+	
 
 
 		/**
@@ -788,6 +869,14 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 9017) {
 			$this->setData(['theme','footer','displayVersion', true ]);
 			$this->setData(['core', 'dataVersion', 9017]);
+			$this->SaveData();
+		}
+		// Version 9.1.0
+		if($this->getData(['core', 'dataVersion']) < 9100) {
+			$this->setData(['theme','footer','displayVersion', true ]);
+			$this->setData(['theme','footer','displaySiteMap', true ]);
+			$this->setData(['theme','footer','displayCopyright', true ]);
+			$this->setData(['core', 'dataVersion', 9100]);
 			$this->SaveData();
 		}
 	}
@@ -1025,6 +1114,7 @@ class core extends common {
 		}
 
 		// Breadcrumb
+
 		$title = $this->getData(['page', $this->getUrl(0), 'title']);
 		if (!empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
 				$this->getData(['page', $this->getUrl(0), 'breadCrumb'])) {
@@ -1048,12 +1138,15 @@ class core extends common {
 				'metaTitle' => $this->getData(['page', $this->getUrl(0), 'metaTitle']),
 				'typeMenu' => $this->getData(['page', $this->getUrl(0), 'typeMenu']),
 				'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
-				'disable' => $this->getData(['page', $this->getUrl(0), 'disable'])
+				'disable' => $this->getData(['page', $this->getUrl(0), 'disable']),
+				'contentRight' => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']),
+				'contentLeft'  => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content'])
 			]);
 		}
 		// Importe le module
 		else {
 			// Id du module, et valeurs en sortie de la page si il s'agit d'un module de page
+
 			if($access AND $this->getData(['page', $this->getUrl(0), 'moduleId'])) {
 				$moduleId = $this->getData(['page', $this->getUrl(0), 'moduleId']);
 				$this->addOutput([
@@ -1062,7 +1155,9 @@ class core extends common {
 					'metaTitle' => $this->getData(['page', $this->getUrl(0), 'metaTitle']),
 					'typeMenu' => $this->getData(['page', $this->getUrl(0), 'typeMenu']),
 					'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
-		    		'disable' => $this->getData(['page', $this->getUrl(0), 'disable'])
+					'disable' => $this->getData(['page', $this->getUrl(0), 'disable']),
+					'contentRight' => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']),
+					'contentLeft'  => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content'])
 				]);
 				$pageContent = $this->getData(['page', $this->getUrl(0), 'content']);
 			}
@@ -1460,7 +1555,7 @@ class helper {
 				// Cas où un identifiant est vide
 				if (empty($text)) {
 					$text = uniqid('page-');
-				}				
+				}
 				// Un ID ne peut pas être un entier, pour éviter les conflits avec le système de pagination
 				if(intval($text) !== 0) {
 					$text = 'i' . $text;
@@ -1690,14 +1785,14 @@ class layout extends common {
 	 */
 	public function showAnalytics() {
 		if($code = $this->getData(['config', 'analyticsId'])) {
-			echo '<script>
-				(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
-				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-				})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
-				ga("create", "' . $code . '", "auto");
-				ga("send", "pageview");
-			</script>';
+			echo '<!-- Global site tag (gtag.js) - Google Analytics -->
+				<script async src="https://www.googletagmanager.com/gtag/js?id='. $code .'"></script>
+				<script>
+				  window.dataLayer = window.dataLayer || [];
+				  function gtag(){dataLayer.push(arguments);}
+				  gtag("js", new Date());
+				  gtag("config","'. $code .'");
+				</script>';
 		}
 	}
 
@@ -1716,22 +1811,48 @@ class layout extends common {
 			echo '<h2 id="sectionTitle">' . $this->core->output['title'] . '</h2>';				
 		}
 		echo $this->core->output['content'];
+
 	}
 
 
+	/**
+	 * Affiche le contenu de la barre gauche
+	 * @param page chargée
+	 */
+	public function showBarContentLeft() {
+		echo $this->core->output['contentLeft'];		
+	}
 
-/**
+	/**
+	 * Affiche le contenu de la barre droite
+	 * @param page chargée
+	 */
+	public function showBarContentRight() {
+		echo $this->core->output['contentRight'];
+	}
+
+     /**
      * Affiche le copyright
      */
     public function showCopyright() {
-        $items = '<div id="footerCopyright">';
-		$items .= '<span id="footerFont">Motorisé&nbsp;par&nbsp;<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">Zwii';
-		$items .= ' <span id="footerDisplayVersion" ' .
-			($this->getData(['theme','footer','displayVersion']) === true ? '>': 'class="displayNone" >' ) .
-			common::ZWII_VERSION  . 
-			"</span>" ;	
-		$items .= '</a>';		
-		$items .= '&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a></span>';
+		$items = '<div id="footerCopyright">';
+		$items .= '<span id="footerFont">';
+		$items .= '<span id="footerDisplayCopyright">';
+		if ($this->getData(['theme','footer','displayCopyright']) === true) {
+			$items .= 'Motorisé&nbsp;par&nbsp</span>';
+		}
+		$items .= '<a href="http://zwiicms.com/" onclic="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">ZwiiCMS</a>';
+		//$items .= '</span>';		
+		$items .= '<span id="footerDisplayVersion">';
+		if 	($this->getData(['theme','footer','displayVersion']) === true )	{
+			$items .= '<wbr>&nbsp;'. common::ZWII_VERSION ;			
+		}
+		$items .= '</span>';
+		$items .= '<span id="footerDisplaySiteMap">';
+		if ($this->getData(['theme','footer','displaySiteMap']) ===  true ) {
+			$items .=  '<wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 
+					  'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
+		}
         if(
             (
                 $this->getData(['theme', 'footer', 'loginLink'])
@@ -1741,11 +1862,11 @@ class layout extends common {
         ) {
 			$items .= '<span id="footerLoginLink" ' . 
 			($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . 
-			'>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . 
+			'><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . 
 			strip_tags(str_replace('/', '_', $this->getUrl())) . 
 			'" data-tippy-content="Connexion à l\'administration" >Connexion</a></span>';
         }
-        $items .= '</div>';
+        $items .= '</span></div>';
         echo $items;
     }
 
@@ -1775,9 +1896,13 @@ class layout extends common {
 		$items = '';
 		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
 		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
+			// Passer les entrées masquées
+			if ($this->getData(['page',$parentPageId,'hideMenuHead']) === true ) {
+				continue;
+			}		
 			// Propriétés de l'item
 			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
-			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
+			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';		
 			// Mise en page de l'item
 			$items .= '<li>';
 			
@@ -1788,7 +1913,6 @@ class layout extends common {
 			} else {
 					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
 			}
-
 
 			switch ($this->getData(['page', $parentPageId, 'typeMenu'])) {
 				case '' :
@@ -1813,18 +1937,31 @@ class layout extends common {
 				    }
 					break;
 		       }
-
-
-
-			if($childrenPageIds) {
+			// Cas où les pages enfants enfant sont toutes masquées dans le menu
+			// ne pas afficher de symbole lorsqu'il n'y a rien à afficher
+			$totalChild = 0;
+			$disableChild = 0;
+			foreach($childrenPageIds as $childKey) {
+				$totalChild += 1;
+				if ($this->getData(['page',$childKey,'hideMenuHead']) === true ) {
+					$disableChild += 1;
+				}
+			}	
+			if($childrenPageIds && $disableChild !== $totalChild  &&
+				$this->getdata(['page',$parentPageId,'hideMenuChildren']) === false) {
 				$items .= template::ico('down', 'left');
 			}
+			// ------------------------------------------------	
 			$items .= '</a>';
-
-
-
+			if ($this->getdata(['page',$parentPageId,'hideMenuChildren']) === true) {
+				continue;
+			}
 			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {
+			// Passer les entrées masquées
+			if ($this->getData(['page',$childKey,'hideMenuHead']) === true  ) {
+				continue;
+			}				
 				// Propriétés de l'item
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
@@ -1895,11 +2032,115 @@ class layout extends common {
 	}
 
 	/**
+	 * Générer un menu pour la barre latérale
+	 * Uniquement texte 
+	 * @param onlyChildren n'affiche les sous-pages de la page actuelle
+	 */
+	public function showMenuSide($onlyChildren = null) {
+		// Met en forme les items du menu
+		$items = '';
+		// Nom de la page courante
+		$currentPageId = $this->getData(['page', $this->getUrl(0)]) ? $this->getUrl(0) : $this->getUrl(2);
+		// Nom de la page parente
+		$currentParentPageId = $this->getData(['page',$currentPageId,'parentPageId']);
+		// Détermine si on affiche uniquement le parent et les enfants
+		// Filtre contient le nom de la page parente
+
+		if ($onlyChildren === true) {
+			if (empty($currentParentPageId)) { 
+				$filterCurrentPageId = $currentPageId;
+			} else {
+				$filterCurrentPageId = $currentParentPageId;				
+			}
+			//if ($this->getData(['page',$filterCurrentPageId,'hideTitle']) == false) {
+			//	echo '<h3 id="menuSideTitle"><a href="' . helper::baseUrl()  . $currentPageId . '">' . $this->getData(['page',$filterCurrentPageId,'title']) . '</a></h3>';
+			//}
+		} 
+
+
+		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
+			// Ne pas afficher les entrées masquées
+			if ($this->getData(['page',$parentPageId,'hideMenuSide']) === true  ) {
+				continue;
+			}
+			// Filtre actif et nom de la page parente courante différente, on sort de la boucle
+			if ($onlyChildren === true && $parentPageId !== $filterCurrentPageId) {
+				continue;
+			}
+			// Propriétés de l'item
+			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
+			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
+			// Mise en page de l'item;
+			// Ne pas afficher le parent d'une sous-page quand l'option est sélectionnée.
+			if ($onlyChildren === false) {
+				$items .= '<li id="menuSide">';
+				if ( $this->getData(['page',$parentPageId,'disable']) === true
+					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
+						$items .= '<a href="'.$this->getUrl(1).'">';
+				} else {
+						$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
+				}
+
+				$items .= $this->getData(['page', $parentPageId, 'title']);
+				// Cas où les pages enfants enfant sont toutes masquées dans le menu
+				// ne pas afficher de symbole lorsqu'il n'y a rien à afficher
+				//$totalChild = 0;
+				//$disableChild = 0;
+				//foreach($childrenPageIds as $childKey) {
+				//	$totalChild += 1;
+				//	if ($this->getData(['page',$childKey,'hideMenuSide']) === true  ) {
+				//		$disableChild += 1;
+				//	}
+				//}	
+				//if($childrenPageIds && $disableChild !== $totalChild ) {
+				//	$items .= template::ico('down', 'left');
+				//}
+				// ------------------------------------------------		
+				// A garder mais désactivé avec la suppresion du thème 
+				$items .= '</a>';
+			} else {
+				$items .= '</ul>';
+			}
+
+			$items .= '<ul id="menuSideChild">';
+			foreach($childrenPageIds as $childKey) {
+				// Passer les entrées masquées
+				if ($this->getData(['page',$childKey,'hideMenuSide']) === true ) {
+					continue;
+				}
+				// Propriétés de l'item
+				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
+				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
+				// Mise en page du sous-item
+				$items .= '<li id="menuSideChild">';
+
+				if ( $this->getData(['page',$childKey,'disable']) === true
+					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
+
+						{$items .= '<a href="'.$this->getUrl(1).'">';}
+				else {
+					$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			}
+
+				$items .= $this->getData(['page', $childKey, 'title']);					
+				$items .=  '</a></li>';
+			}
+			$items .= '</ul>';
+			$items .= '</li>';
+		}
+		// Retourne les items du menu
+		echo '<ul id="menuSide">' . $items . '</ul>';
+	}
+
+
+
+	/**
 	 * Affiche le meta titre
 	 */
 	public function showMetaTitle() {
 		echo '<title>' . $this->core->output['metaTitle'] . '</title>';
 		echo '<meta property="og:title" content="' . $this->core->output['metaTitle'] . '" />';
+		$canonical = ($this->getUrl(0) == "accueil") ? "" : "?".$this->getUrl(0) ;
+		echo '<link rel="canonical" href="'. helper::baseUrl(false) . $canonical .'" />';
 	}
 
 	/**
@@ -2014,6 +2255,7 @@ class layout extends common {
 					OR $this->getUrl(0) === ''
 				) {
 					$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/edit/' . $this->getUrl(0) . '" data-tippy-content="Modifier la page">' . template::ico('pencil') . '</a></li>';
+					$leftItems .= '<li><a id="pageDelete" href="' . helper::baseUrl() . 'page/delete/' . $this->getUrl(0) . '&csrf=' . $_SESSION['csrf'] . '" data-tippy-content="Effacer la page">' . template::ico('trash') . '</a></li>';					
 				}
 			}
 			// Items de droite
@@ -2068,6 +2310,10 @@ class layout extends common {
 				case 'facebookId':
 					$socialUrl = 'https://www.facebook.com/';
 					$title = 'Facebook';
+					break;
+					case 'linkedinId':
+					$socialUrl = 'https://fr.linkedin.com/in/';
+					$title = 'Linkedin';
 					break;
 				case 'instagramId':
 					$socialUrl = 'https://www.instagram.com/';

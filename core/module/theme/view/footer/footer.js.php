@@ -131,6 +131,38 @@ $("#themeFooterLoginLink").on("change", function() {
 		$("#footerLoginLink").hide();
 	}
 }).trigger("change");
+	 
+// Numéro de version
+$("#themefooterDisplayVersion").on("change", function() {
+	if($(this).is(":checked")) {
+		$("#footerDisplayVersion").show();
+	}
+	else {
+		$("#footerDisplayVersion").hide();
+	}
+}).trigger("change");
+
+// Numéro de version
+$("#themefooterDisplayCopyright").on("change", function() {
+	if($(this).is(":checked")) {
+		$("#footerDisplayCopyright").show();
+	}
+	else {
+		$("#footerDisplayCopyright").hide();
+	}
+}).trigger("change");
+
+// Site Map
+$("#themefooterDisplaySiteMap").on("change", function() {
+	if($(this).is(":checked")) {
+		$("#footerDisplaySiteMap").show();
+	}
+	else {
+		$("#footerDisplaySiteMap").hide();
+	}
+}).trigger("change");
+
+
 
 // Numéro de version
 $("#themefooterDisplayVersion").on("change", function() {

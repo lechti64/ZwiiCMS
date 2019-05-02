@@ -1,14 +1,30 @@
-# ChangeLog 
+# Changelog
 
+## Version 9.1.0
+- Modifications : 
+    - Amélioration de l'algorithme de gestion des barres
+    - Script Google Analytics
+    - Menu : effet de surimpression pages filles
+    - Réorganisation de l'écran d'édition des pages
+    - Blog : notification hiérarchique lors de la rédaction d'un commentaire 
+    - Form : notification hiérarchique de la récepton d'un message
+- Ajouts :
+    - Menu dans une barre latérale : intégral ou sous-menu de la page parente
+    - Option d'apparition des pages dans le menu latéral ou le menu principal
+    - Option de chargement d'un modèle de site à l'installation
+    - Option de masquage des pages enfants dans le menu principal
+    - Petits écrans, ordre des blocs : Page - Barre Gauche - Barre Droite
+    - Intégration de la classe Swiper http://idangero.us/swiper/
+    - Intégration de l'URL canonical 
+    - Icône de suppression des pages dans la barre d'administration
+    - Gestion du sitemap.xml et du robots.txt
 
 ## Version 9.0.21
 - Mise à jour : 
     - Code Mirror v5.46
 - Corrections : 
     - Liens de l'éditeur de page : impossibilité de sélectionner un lien vers une page parente
-    - Export des données du site, problème lors de la création de l'arborescence
-    - Titre de l'icône Youtube erroné
-    - Translittératon activée et multi-sélection dans le gestionnaire de fichiers
+    - Export des données du site, problème lors de la création de l'arborescence.
 
 ## Version 9.0.20
 - Correction : 
@@ -16,11 +32,11 @@
 
 ## Version 9.0.19
 - Correction : 
-    - Alignement du menu
-
+    - Alignement du menu    
+                 
 ## Version 9.0.18
 - Correction : 
-    - Etat par défaut du numéro de version mal récupéré
+    - Etat par défaut du numéro de version mal récupéré    
 
 ## Version 9.0.17
 - Mises à jour :
@@ -31,10 +47,10 @@
     - Harmonisation du contenu des bulles d'aide    
 - Modifications : 
     - Ajout du numéro de version dans le pied de page activable dans la configuration du thème
-    - Désactivation Aviary dans Responsive FileManager    
+    - Désactivation Aviary dans Responsive FileManager   
 
 ## Version 9.0.16
-- Corrections : 
+- Correction : 
     - Nom de page constitué de caractères filtrés empếchant la création d'un Id valide.
     - Module Gallery : bouton de fermeture sous Edge
 
@@ -46,11 +62,11 @@
     - Masquage de l'icône de gestion du compte 
 
 ## Version 9.0.14
-- Modifications :
-    - Tippy, lity et TinyMCE, simpleLightbox : 
-        - légende et titre, nouveaux paramètres
-        - SimpleLightbox : bug d'affichage sous Edge, autre méthode
-        - Meilleure intégration
+- Corrections : 
+    - Débordement dans le pied de page quand le copyright est à droite
+- Modifications : 
+    - Petits écrans, menu d'administration plus icônes plus grandes
+    - Masquage de l'icône de gestion du compte 
 
 ## Version 9.0.13
 - Modifications :

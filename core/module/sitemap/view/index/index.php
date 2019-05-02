@@ -2,17 +2,17 @@
 	<?php foreach($this->getHierarchy() as $parentId => $childIds): ?>
 		<li>
 			<?php if ($this->getData(['page', $parentId, 'disable']) == false ||
-					  $this->getData(['page', $parentId, 'block']) !== 'bar' ||
-					  $this->getUser('group') >= $module::$actions[$action]) { ?>
+				$this->getData(['page', $parentId, 'block']) == 'bar'  ||
+				$this->getUser('group') >= $module::$actions[$action]) { ?>			
 				<a href="<?php echo helper::baseUrl() . $parentId; ?>"><?php echo $this->getData(['page', $parentId, 'title']); ?></a>
 			<?php } else { ?>
 				<?php echo $this->getData(['page', $parentId, 'title']); }?>
 			<ul>
 				<?php foreach($childIds as $childId): ?>
 					<li>
-						<?php if ($this->getData(['page', $childId, 'disable']) == false ||
-									$this->getData(['page', $childId, 'block']) == 'bar'  ||
-									$this->getUser('group') >= $module::$actions[$action]) { ?>
+					<?php if ($this->getData(['page', $childId, 'disable']) == false ||
+							$this->getData(['page', $childId, 'block']) == 'bar'  ||
+							$this->getUser('group') >= $module::$actions[$action]) { ?>
 							<a href="<?php echo helper::baseUrl() . $childId; ?>"><?php echo $this->getData(['page', $childId, 'title']); ?></a>
 						<?php } else { ?>
 							<?php echo $this->getData(['page', $childId, 'title']); }?>						

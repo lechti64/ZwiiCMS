@@ -96,8 +96,9 @@
 					<div class="row">
 						<div class="col6 offset1">
 							<?php echo template::select('formConfigGroup', $groupMembers, [
-								'label' => 'Un groupe de membres :',
-								'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'group'])
+								'label' => 'Les groupes hiérarchiques à partir du groupe :',
+								'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'group']),
+								'help' => 'Editeurs = éditeurs + administrateurs<br/> Membres = membres + éditeurs + administrateurs'
 							]); ?>
 						</div>
 					</div>

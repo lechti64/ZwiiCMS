@@ -20,7 +20,7 @@
 					<div class="col6">
 						<?php echo template::text('themeMenuBackgroundColor', [
 							'class' => 'colorPicker',
-							'help' => 'Le curseur horizontal règle le niveau de transparence',							
+							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
 							'label' => 'Fond',
 							'value' => $this->getData(['theme', 'menu', 'backgroundColor'])
 						]); ?>
@@ -28,7 +28,7 @@
 					<div class="col6">
 						<?php echo template::text('themeMenuTextColor', [
 							'class' => 'colorPicker',
-							'help' => 'Le curseur horizontal règle le niveau de transparence',							
+							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
 							'label' => 'Texte',
 							'value' => $this->getData(['theme', 'menu', 'textColor'])
 						]); ?>
@@ -40,8 +40,7 @@
 				<div class="block">
 				<h4>Contenu</h4>
 				<?php echo template::checkbox('themeMenuLoginLink', true, 'Lien de connexion', [
-					'checked' => $this->getData(['theme', 'menu', 'loginLink']),
-					'help' => 'Visible seulement sur cette page et lorsque vous n\'êtes pas connecté (non recommandé).'
+					'checked' => $this->getData(['theme', 'menu', 'loginLink'])
 				]); ?>
 			</div>
 	</div>

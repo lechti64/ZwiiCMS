@@ -10,6 +10,7 @@
 	<?php $layout->showMetaImage(); ?>		
 	<?php $layout->showFavicon(); ?>
 	<?php $layout->showVendor(); ?>
+	<?php $layout->showAnalytics(); ?>	
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>core/layout/common.css">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/theme.css?<?php echo md5_file('site/data/theme.css'); ?>">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/custom.css?<?php echo md5_file('site/data/custom.css'); ?>">
@@ -162,15 +163,46 @@
 				$layout->showContent();
 		} else {
 		?>
-		<div class="row">
-			<?php if ($blockleft !== "") :?> <div class="<?php echo $blockleft; ?>" id="contentleft">
-			<?php
-			 echo $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content']);
-			 ?></div> <?php endif; ?>
-			<div class="<?php echo $content; ?>" id="contentsite"><?php $layout->showContent(); ?></div>
-			<?php if ($blockright !== "") :?> <div class="<?php echo $blockright; ?>" id="contentright">
-			<?php echo $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']);
-			?></div> <?php endif; ?>	
+		<div class="row siteContainer"> 
+			<?php 
+				if ($blockleft !== "") :?> 
+				<div class="<?php echo $blockleft; ?>" id="contentLeft">		
+					<?php
+					// Détermine si le bloc a un menu à inclure
+					$layout->showBarContentLeft(); 
+					// Type de menu affiché
+					// 0 : aucun
+					// 1 : menu complet
+					// 2 : sous-menu de la page parente
+					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) !== 'none') {
+						?> <div id="menuSideLeft"><?php						
+						$layout->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'parents' ? false : true);
+						?></div><?php
+					}					
+					?>
+			 	</div> 
+				<?php endif; ?>
+			<div class="<?php echo $content; ?>
+				" id="contentSite"><?php $layout->showContent(); ?>
+			</div>
+			<?php 
+				if ($blockright !== "") :?> 
+				<div class="<?php echo $blockright; ?>" id="contentRight">
+					<?php
+					// Détermine si le bloc a un menu à inclure
+					$layout->showBarContentRight();
+					// Type de menu affiché
+					// 0 : aucun
+					// 1 : menu complet
+					// 2 : sous-menu de la page parente					
+					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) !== 'none') {
+						?> <div id="menuSideRight"><?php
+						$layout->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) === 'parents' ? false : true);
+						?></div><?php						
+					}
+					 ?>
+				</div>
+				<?php endif; ?>	
 		</div>
 		<?php } ?>
 	</section>
@@ -288,7 +320,6 @@
 <?php endif; ?>
 <!-- Lien remonter en haut -->
 <div id="backToTop"><?php echo template::ico('up'); ?></div>
-<?php $layout->showAnalytics(); ?>
 <?php $layout->showScript(); ?>
 </body>
 </html>

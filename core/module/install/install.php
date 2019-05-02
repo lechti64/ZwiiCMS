@@ -17,10 +17,13 @@ class install extends common {
 	public static $actions = [
 		'index' => self::GROUP_VISITOR,
 		'steps' => self::GROUP_ADMIN,
-		'update' => self::GROUP_ADMIN
+		'update' => self::GROUP_ADMIN,
+		'removeAll' => self::GROUP_ADMIN,
 	];
 
+
 	public static $newVersion;
+
 
 	/**
 	 * Installation
@@ -46,6 +49,28 @@ class install extends common {
 				$userLastname = $this->getInput('installLastname', helper::FILTER_STRING_SHORT, true);
 				$userMail = $this->getInput('installMail', helper::FILTER_MAIL, true);
 				$userId = $this->getInput('installId', helper::FILTER_ID, true);
+				// Configure certaines données par défaut
+				if ($this->getInput('installDefaultData',helper::FILTER_BOOLEAN) === FALSE) {					
+					foreach($this->getHierarchy(null, false) as $parentPageId => $childrenPageIds) {
+						if ( $parentPageId !== 'accueil') {
+							$this->deleteData(['page',$parentPageId]);
+						}
+						foreach($childrenPageIds as $childKey) {
+							$this->deleteData(['page', $childKey]);
+						}
+					}
+					// Ajouter ici la liste des pages privées qui ne sont pas vues lors de l'installation.
+					$this->deleteData(['page', 'privee']);
+					// Effacer les fichiers par défaut
+					if (is_dir('site/file/source/galerie')) {
+						$this->removeAll('site/file/source/galerie');
+						$this->removeAll('site/file/thumb/galerie');
+					}
+				} else {
+					$this->setData(['module', 'blog', 'mon-premier-article', 'userId', $userId]);
+					$this->setData(['module', 'blog', 'mon-deuxieme-article', 'userId', $userId]);
+					$this->setData(['module', 'blog', 'mon-troisieme-article', 'userId', $userId]);
+				}
 				$this->setData([
 					'user',
 					$userId,
@@ -57,12 +82,8 @@ class install extends common {
 						'mail' => $userMail,
 						'password' => $this->getInput('installPassword', helper::FILTER_PASSWORD, true)
 					]
-				]);
-				// Configure certaines données par défaut
-				$this->setData(['module', 'blog', 'mon-premier-article', 'userId', $userId]);
-				$this->setData(['module', 'blog', 'mon-deuxieme-article', 'userId', $userId]);
-				$this->setData(['module', 'blog', 'mon-troisieme-article', 'userId', $userId]);
-				// Envoi le mail
+				]);				
+				// Envoie le mail
 				$sent = $this->sendMail(
 					$userMail,
 					'Installation de votre site',
@@ -72,6 +93,10 @@ class install extends common {
 					'<strong>Identifiant du compte :</strong> ' . $this->getInput('installId') . '<br>' .
 					'<strong>Mot de passe du compte :</strong> ' . $this->getInput('installPassword')
 				);
+				// Générer un fichier  robots.txt
+				$this->createRobots();
+				// Créer sitemap
+				$this->createSitemap('all');				
 				// Valeurs en sortie
 				$this->addOutput([
 					'redirect' => helper::baseUrl(false),
@@ -79,6 +104,7 @@ class install extends common {
 					'state' => ($sent === true ? true : null)
 				]);
 			}
+
 			// Valeurs en sortie
 			$this->addOutput([
 				'display' => self::DISPLAY_LAYOUT_LIGHT,
@@ -195,4 +221,17 @@ class install extends common {
 			'view' => 'update'
 		]);
 	}
+
+	/**
+	* Effacer un dossier non vide.
+	*/
+	private function removeAll ( $path ) {
+		foreach ( new DirectoryIterator($path) as $item ):
+			if ( $item->isFile() ) unlink($item->getRealPath());
+			if ( !$item->isDot() && $item->isDir() ) $this->removeAll($item->getRealPath());
+		endforeach;
+	 
+		rmdir($path);
+	}
+
 }

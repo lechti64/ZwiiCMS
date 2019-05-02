@@ -12,11 +12,11 @@
 * Grille du site
 * Barres et page
 */
-#contentleft {
+#contentLeft {
 }
-#contentright {
+#contentRight {
 }
-#contentsite {
+#contentSite {
 }
 
 /* Bannière */
@@ -42,6 +42,18 @@ nav a:hover {
 /* Item courant du menu */
 nav a.active {
 }
+
+/* Menu latéral */
+/* aspect des puces */
+ul #menuSide  {
+} 
+/* Block menu à droite */
+#menuSideRight {
+}
+/* Block menu à gauchle */
+#menuSideLeft {
+}
+
 
 /* Bas de page */
 footer {

@@ -25,12 +25,12 @@
 				<?php echo template::text('configTitle', [
 					'label' => 'Titre du site',
 					'value' => $this->getData(['config', 'title']),
-					'help'  => 'Affiché dans la barre de titre et inclus lors des partages sur les réseaux sociaux'
+					'help'  => 'Il apparaît dans la barre de titre et les partages sur les réseaux sociaux.'
 				]); ?>
 				<?php echo template::textarea('configMetaDescription', [
 					'label' => 'Description du site',
 					'value' => $this->getData(['config', 'metaDescription']),
-					'help'  => 'La description est incluse lors  des partages sur les réseaux sociaux'
+					'help'  => 'Elle apparaît dans les partages sur les réseaux sociaux.'
 				]); ?>
 			</div>
 			<div class="block">
@@ -42,7 +42,7 @@
 					'value' => $this->getData(['config', 'favicon'])
 				]); ?>
 				<?php echo template::text('configAnalyticsId', [
-					'help' => 'Saisissez l\'ID de suivi de votre propriété Google Analytics.',
+					'help' => 'Saisissez l\'ID de suivi.',
 					'label' => 'Google Analytics',
 					'placeholder' => 'UA-XXXXXXXX-X',
 					'value' => $this->getData(['config', 'analyticsId'])
@@ -52,28 +52,29 @@
 				]); ?>					
 				<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
 					'checked' => helper::checkRewrite(),
-					'help' => 'Afin d\'éviter de bloquer votre site pensez à vérifier que le module de réécriture d\'URL est bien actif sur votre serveur avant d\'activer cette fonctionnalité.'
+					'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
 				]); ?>			
 				<?php echo template::select('itemsperPage', $module::$ItemsList, [
-					'label' => 'Pagination Blog et News',
-					'selected' => $this->getData(['config', 'itemsperPage']),
-					'help' => 'Nombre d\'articles de blog ou de news par page'
+					'label' => 'Articles par page ("Blog" et "News")',
+					'selected' => $this->getData(['config', 'itemsperPage'])
 				]); ?>
 			</div>
 			<div class="block">
 				<h4>Copie d'écran OpenGraph</h4>
 				<div class="row">
-					<div class="col6">
+					<div class="col8 offset2">
 						<img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
 					</div>
-					<div class="col6">		
+				</div>
+				<div class="row">				
+					<div class="col10 offset1">		
 						<?php echo template::button('configMetaImage', [
 						'href' => helper::baseUrl() . 'config/configMetaImage',
 						'value' => 'Rafraîchir la capture d\'écran'
 						]); ?>
 					</div>
 				</div>
-				<p>Cette copie d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier screenshot.png est effacé du gestionnaire de fichiers.</p>
+				<p>Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier "screenshot.png" est effacé du gestionnaire de fichiers.</p>
 			</div>								
 		</div>
 		<div class="col6">
@@ -82,14 +83,14 @@
 				<div class="row">
 					<div class="col6">
 						<?php echo template::text('configSocialFacebookId', [
-							'help' => 'Saisissez votre ID Facebook : https://www.facebook.com/[CETTE PARTIE].',
+							'help' => 'Saisissez votre ID : https://www.facebook.com/[ID].',
 							'label' => 'Facebook',
 							'value' => $this->getData(['config', 'social', 'facebookId'])
 						]); ?>
 					</div>
 					<div class="col6">					
 						<?php echo template::text('configSocialInstagramId', [
-							'help' => 'Saisissez votre ID Instagram : https://www.instagram.com/[CETTE PARTIE].',
+							'help' => 'Saisissez votre ID : https://www.instagram.com/[ID].',
 							'label' => 'Instagram',
 							'value' => $this->getData(['config', 'social', 'instagramId'])
 						]); ?>
@@ -99,14 +100,14 @@
 
 					<div class="col6">
 						<?php echo template::text('configSocialYoutubeId', [
-							'help' => 'Saisissez votre ID Youtube : https://www.youtube.com/channel/[CETTE PARTIE].',
+							'help' => 'Saisissez votre ID : https://www.youtube.com/channel/[ID].',
 							'label' => 'Youtube',
 							'value' => $this->getData(['config', 'social', 'youtubeId'])
 						]); ?>
 					</div>
 					<div class="col6">
 						<?php echo template::text('configSocialTwitterId', [
-							'help' => 'Saisissez votre ID Twitter : https://twitter.com/[CETTE PARTIE].',
+							'help' => 'Saisissez votre ID : https://twitter.com/[ID].',
 							'label' => 'Twitter',
 							'value' => $this->getData(['config', 'social', 'twitterId'])
 						]); ?>
@@ -115,11 +116,18 @@
 				<div class="row">
 					<div class="col6">
 						<?php echo template::text('configSocialPinterestId', [
-							'help' => 'Saisissez votre ID Pinterest : https://pinterest.com/[CETTE PARTIE].',
+									'help' => 'Saisissez votre ID : https://pinterest.com/[ID].',
 							'label' => 'Pinterest',
 							'value' => $this->getData(['config', 'social', 'pinterestId'])
 						]); ?>
 					</div>					
+					<div class="col6">
+							<?php echo template::text('configSocialLinkedinId', [
+								'help' => 'Saisissez votre ID Linkedin : https://fr.linkedin.com/in/[CETTE PARTIE].',
+								'label' => 'Linkedin',
+								'value' => $this->getData(['config', 'social', 'linkedinId'])
+							]); ?>
+					</div>						
 				</div>
 			</div>
 			<div class="block">
@@ -127,14 +135,14 @@
 				<div class="row">
 					<div  class="col6">
 						<?php echo template::text('configVersion', [
-						'label' => 'ZwiiCMS Version',
+						'label' => 'ZwiiCMS',
 						'readonly' => true,
 						'value' => common::ZWII_VERSION
 					]); ?>	
 					</div>	
 					<div  class="col6">
 						<?php echo template::text('moduleRedirectionVersion', [
-							'label' => 'Module Redirection version',
+							'label' => 'Module "Redirection"',
 							'readonly' => true,
 							'value' => redirection::REDIRECTION_VERSION
 						]); ?>
@@ -143,14 +151,14 @@
 				<div class="row">
 					<div  class="col6">
 						<?php echo template::text('moduleFormVersion', [
-							'label' => 'Module Form version',
+							'label' => 'Module "Form"',
 							'readonly' => true,
 							'value' => form::FORM_VERSION
 						]); ?>
 					</div>
 					<div  class="col6">
 						<?php echo template::text('moduleGalleryVersion', [
-							'label' => 'Module Gallery version',
+							'label' => 'Module "Gallery"',
 							'readonly' => true,
 							'value' => gallery::GALLERY_VERSION
 						]); ?>
@@ -159,14 +167,14 @@
 				<div class="row">
 					<div  class="col6">
 						<?php echo template::text('moduleNewsVersion', [
-							'label' => 'Module News version',
+							'label' => 'Module "News"',
 							'readonly' => true,
 							'value' => news::NEWS_VERSION
 						]); ?>
 					</div>
 					<div  class="col6">
 						<?php echo template::text('moduleBlogVersion', [
-							'label' => 'Module Blog version',
+							'label' => 'Module "Blog"',
 							'readonly' => true,
 							'value' => blog::BLOG_VERSION
 						]); ?>
@@ -175,23 +183,30 @@
 				<?php echo template::select('configTimezone', $module::$timezones, [
 					'label' => 'Fuseau horaire',
 					'selected' => $this->getData(['config', 'timezone'])
-				]); ?>
+				]); ?>			
 				<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
-					'checked' => $this->getData(['config', 'maintenance']),
-					'help' => 'Le site devient inaccessible sauf pour les administrateurs.'
+					'checked' => $this->getData(['config', 'maintenance'])
 				]); ?>
-				<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique des données', [
+				<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique', [
 					'checked' => $this->getData(['config', 'autoBackup']),
-					'help' => 'Sauvegarde une fois par jour le fichier de données dans le dossier site/backup/. La sauvegarde est conservée 30 jours.'
+					'help' => 'Le fichier de données est copié quotidiennement dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.'
 				]); ?>
 				<div class="row">
-					<div class="col8 offset2">
+					<div class="col10 offset1">
 						<?php echo template::button('configExport', [
 							'href' => helper::baseUrl() . 'config/backup',
 							'value' => 'Exporter une copie du site<br>(données, thème et fichiers)'
 						]); ?>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col10 offset1">
+						<?php echo template::button('configSiteMap', [
+							'href' => helper::baseUrl() . 'config/generateFiles',
+							'value' => 'Générer sitemap.xml et robots.txt'
+						]); ?>
+					</div>
+				</div>				
 			</div>
 		</div>
 	</div>

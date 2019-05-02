@@ -17,6 +17,8 @@ class config extends common {
 	public static $actions = [
 		'backup' => self::GROUP_ADMIN,
 		'configMetaImage' => self::GROUP_ADMIN,
+		'generateFiles' => self::GROUP_ADMIN,
+		'updateRobots' => self::GROUP_ADMIN,
 		'index' => self::GROUP_ADMIN
 	];
 	
@@ -144,6 +146,55 @@ class config extends common {
 	];
 
 
+	public function generateFiles() {
+		// Mettre à jour le site map
+		$successSitemap=$this->createSitemap('all');
+
+		// Creer un fichier robots.txt
+		$successRobots=$this->updateRobots();
+		if ( $successSitemap === true &&
+			 $successRobots >= 100) {
+					$success = true;
+				} else {
+					$success = false;
+		}
+		// Valeurs en sortie
+		$this->addOutput([
+			'notification' => ($successSitemap === true && $successRobots >= 100) ? 'Création réussie' : 'Echec d\'écriture',
+			'redirect' => helper::baseUrl() . 'config',
+			'state' => ($successSitemap === true && $successRobots >=100)  ? true : false
+		]);
+	}
+
+	/**
+	 * Met à jour un fichier robots.txt lors du changement de réécriture 
+	 */
+
+	public function updateRobots() {
+		// Créer le fichier robot si absent
+		if (!file_exists('robots.txt')) {
+			$this->createRobots();
+		}
+		// backup
+		rename ('robots.txt','robots.bak');
+		$fileold = fopen('robots.bak','r');
+		$filenew = fopen('robots.txt','w');
+		while(!feof($fileold))	{			
+			$data = fgets($fileold);
+			if (strpos($data,'sitemap.xml') == 0) {
+				fwrite($filenew, $data);
+			} else {
+				fwrite($filenew, 'Sitemap: ' . helper::baseUrl() . 'sitemap.xml' . PHP_EOL);
+				fwrite($filenew, 'Sitemap: ' . helper::baseUrl() . 'sitemap.xml.gz' . PHP_EOL);
+				fwrite($filenew, '# ZWII CONFIG  ---------' . PHP_EOL);
+				break;
+			}
+		}
+		fclose($fileold);
+		unlink('robots.bak');
+		return(fclose($filenew));
+	}
+
 	/**
 	 * Sauvegarde des données
 	 */
@@ -167,6 +218,7 @@ class config extends common {
 		$this->addOutput([
 			'display' => self::DISPLAY_RAW
 		]);
+		unlink('site/tmp/' . $fileName);
 	}
 
 	/**
@@ -215,7 +267,7 @@ class config extends common {
 					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),
 					'social' => [
 						'facebookId' => $this->getInput('configSocialFacebookId'),
-						'googleplusId' => $this->getInput('configSocialGoogleplusId'),
+						'linkedinId' => $this->getInput('configSocialLinkedinId'),
 						'instagramId' => $this->getInput('configSocialInstagramId'),
 						'pinterestId' => $this->getInput('configSocialPinterestId'),
 						'twitterId' => $this->getInput('configSocialTwitterId'),
@@ -261,6 +313,8 @@ class config extends common {
 					helper::$rewriteStatus = false;
 				}
 			}
+			// Générer robots.txt et sitemap
+			$this->generateFiles();
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . $this->getUrl(),

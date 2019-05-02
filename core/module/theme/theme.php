@@ -85,7 +85,7 @@ class theme extends common {
 		'15px' => 'Très grande'
 	];
 	public static $footerPositions = [
-		'hide' => 'Cachée',
+		'hide' => 'Caché',
 		'site' => 'Dans le site',
 		'body' => 'En dessous du site'
 	];
@@ -105,11 +105,11 @@ class theme extends common {
 		'2.4vmax' => 'Très grande (240%)'
 	];
 	public static $headerHeights = [
-		'100px' => 'Très petite',
-		'150px' => 'Petite',
-		'200px' => 'Moyenne',
-		'300px' => 'Grande',
-		'400px' => 'Très grande'
+		'100px' => 'Très petite (100px) ',
+		'150px' => 'Petite (150px)',
+		'200px' => 'Moyenne (200px)',
+		'300px' => 'Grande (300px)',
+		'400px' => 'Très grande (400px)'
 	];
 	public static $headerPositions = [
 		'body' => 'Au dessus du site',
@@ -290,7 +290,9 @@ class theme extends common {
 				'font' => $this->getInput('themeFooterFont'),
 				'fontSize' => $this->getInput('themeFooterFontSize'),
 				'fontWeight' => $this->getInput('themeFooterFontWeight'),
-				'displayVersion' => $this->getInput('themefooterDisplayVersion', helper::FILTER_BOOLEAN)
+				'displayVersion' => $this->getInput('themefooterDisplayVersion', helper::FILTER_BOOLEAN),
+				'displaySiteMap' => $this->getInput('themefooterDisplaySiteMap', helper::FILTER_BOOLEAN),
+				'displayCopyright' => $this->getInput('themefooterDisplayCopyright', helper::FILTER_BOOLEAN)
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
