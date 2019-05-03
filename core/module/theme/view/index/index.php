@@ -15,8 +15,8 @@
 		</div>
 		<div class="col2">
 			<?php echo template::button('themeManage', [				
+				'ico' => 'upload',
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/manage',
-				'ico' => 'download',
 				'value' => 'Thèmes'
 			]); ?>
 		</div>	
@@ -48,7 +48,7 @@
 		<div class="col2">
 			<?php echo template::button('themeManage', [				
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/manage',
-				'ico' => 'download',
+				'ico' => 'upload',
 				'value' => 'Thèmes'
 			]); ?>
 		</div>
