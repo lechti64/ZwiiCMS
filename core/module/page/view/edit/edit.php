@@ -122,7 +122,8 @@ $this->pages2Json();
 						<div class="col12">
 						<?php echo template::select('pageEditDisplayMenu', $module::$displayMenu, [
 							'label' => 'Configuration du menu vertical',
-							'selected' => $this->getData(['page', $this->getUrl(2), 'displayMenu'])
+							'selected' => $this->getData(['page', $this->getUrl(2), 'displayMenu']),
+							'help' => 'Par défaut le menu est affiché APRES le contenu de la page. Pour le placer à un emplacement précis, y insérez [] (deux crochets).'
 						]); ?>
 					</div>
 				</div>				
