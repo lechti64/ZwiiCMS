@@ -2164,7 +2164,7 @@ class layout extends common {
 	public function showMetaTitle() {
 		echo '<title>' . $this->core->output['metaTitle'] . '</title>';
 		echo '<meta property="og:title" content="' . $this->core->output['metaTitle'] . '" />';
-		echo '<link rel="canonical" href="'. helper::baseUrl(true) .'" />';		
+		echo '<link rel="canonical" href="'. helper::baseUrl(true).$this->getUrl() .'" />';		
 	}
 
 	/**
