@@ -1820,23 +1820,7 @@ class layout extends common {
 	 * @param page chargée
 	 */
 	public function showBarContentLeft() {
-		// Position du marqueur
-
-		if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'none') {
-			// Pas de menu
-			echo $this->core->output['contentLeft'];			
-		} else {
-			// On recherche la position du menu
-			$mark = strpos('[]',$this->core->output['contentLeft']);
-			// pas de marqueur menu après le texte
-			if ($mark === 0 ) {
-				echo $this->core->output['contentLeft'];			
-				echo '<div id="menuSideLeft>' . $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'parents' ? false : true) .'</div>';
-			} else {
-				// Placer le menu autour du texte
-				
-			}
-		}		
+		echo $this->core->output['contentLeft'];		
 	}
 
 	/**
@@ -2282,7 +2266,7 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('cog-alt') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('gear') . '</a></li>';
 				// Mise à jour automatique
 				 if(helper::checkNewVersion() ) {
 				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
@@ -2664,7 +2648,7 @@ class template {
 				%s
 				data-lity
 			>
-				' . self::ico('upload', 'right') . '
+				' . self::ico('download', 'right') . '
 				<span class="inputFileLabel"></span>
 			</a>',
 			$attributes['class'],
