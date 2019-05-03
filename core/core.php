@@ -1838,7 +1838,6 @@ class layout extends common {
 
 	/**
 	 * Affiche le contenu de la barre droite
-	 * @param page chargée
 	 */
 	public function showBarContentRight() {
 		// Détermine si le menu est présent

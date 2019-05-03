@@ -12,10 +12,10 @@
 	<div class="row">
 		<div class="col6">
 			<div class="block">
-			<h4>Importer</h4>
+			<h4>Importer un thème</h4>
 					<?php echo template::file('themeManageImport', [
-							'label' => 'Archive',
-							'type' => 2
+							'label' => 'Archive ZIP',
+							'type' => 2,
 					]); ?>
 					<div class="col5 offset3">
 						<?php echo template::submit('themeImportSubmit', [
@@ -26,12 +26,12 @@
 		</div>
 		<div class="col6">
 			<div class="block">
-			<h4>Exporter</h4>
+			<h4>Exporter un thème</h4>
 			<div class="row">
 				<div class="col5 offset1">
 						<?php echo template::button('themeSave', [
 							'href' => helper::baseUrl() . 'theme/save',
-							'ico' => 'download',
+							'ico' => 'download-cloud',
 							'value' => 'Sauvegarder'
 						]); ?>
 				</div>
