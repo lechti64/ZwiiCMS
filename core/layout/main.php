@@ -297,8 +297,8 @@
 <!-- Lien remonter en haut -->
 <div id="backToTop"><?php echo template::ico('up'); ?></div>
 <?php $layout->showScript();
-	// Test d'insertion d'un script
-	include ('site/data/script.inc.php');
+// Test d'insertion d'un script
+include ('site/data/script.inc.php');
 ?>
 </body>
 </html>
