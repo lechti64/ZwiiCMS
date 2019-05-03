@@ -169,21 +169,10 @@
 			<?php 
 				if ($blockleft !== "") :?> 
 				<div class="<?php echo $blockleft; ?>" id="contentLeft">		
-					<?php
-					// Détermine si le bloc a un menu à inclure
-					$layout->showBarContentLeft(); 
-					// Type de menu affiché
-					// 0 : aucun
-					// 1 : menu complet
-					// 2 : sous-menu de la page parente
-					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) !== 'none') {
-						?> <div id="menuSideLeft"><?php						
-						$layout->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'parents' ? false : true);
-						?></div><?php
-					}					
-					?>
+					<?php	$layout->showBarContentLeft(); 	?>
 			 	</div> 
-				<?php endif; ?>
+				<?php endif; 			die();?>
+
 			<div class="<?php echo $content; ?>
 				" id="contentSite"><?php $layout->showContent(); ?>
 			</div>
@@ -193,10 +182,7 @@
 					<?php
 					// Détermine si le bloc a un menu à inclure
 					$layout->showBarContentRight();
-					// Type de menu affiché
-					// 0 : aucun
-					// 1 : menu complet
-					// 2 : sous-menu de la page parente					
+				
 					if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) !== 'none') {
 						?> <div id="menuSideRight"><?php
 						$layout->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) === 'parents' ? false : true);

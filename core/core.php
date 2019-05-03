@@ -1820,7 +1820,23 @@ class layout extends common {
 	 * @param page chargée
 	 */
 	public function showBarContentLeft() {
-		echo $this->core->output['contentLeft'];		
+		// Position du marqueur
+
+		if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'none') {
+			// Pas de menu
+			echo $this->core->output['contentLeft'];			
+		} else {
+			// On recherche la position du menu
+			$mark = strpos('[]',$this->core->output['contentLeft']);
+			// pas de marqueur menu après le texte
+			if ($mark === 0 ) {
+				echo $this->core->output['contentLeft'];			
+				echo '<div id="menuSideLeft>' . $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'parents' ? false : true) .'</div>';
+			} else {
+				// Placer le menu autour du texte
+				
+			}
+		}		
 	}
 
 	/**
