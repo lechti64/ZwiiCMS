@@ -1817,18 +1817,43 @@ class layout extends common {
 
 	/**
 	 * Affiche le contenu de la barre gauche
-	 * @param page chargée
+	 * 
 	 */
 	public function showBarContentLeft() {
-		echo $this->core->output['contentLeft'];		
+		// Détermine si le menu est présent
+		if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'none') {
+			// Pas de menu
+			echo $this->core->output['contentLeft'];
+		} else {
+			// $mark contient 0 le menu est positionné à la fin du contenu
+			$contentLeft = $this->core->output['contentLeft'];
+			$mark = strrpos($contentLeft,'[]')  !== false ? strrpos($contentLeft,'[]') : strlen($contentLeft);		
+			echo substr($contentLeft,0,$mark);			
+			echo '<div id="menuSideLeft>';
+			echo $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'parents' ? false : true);
+			echo '</div>';
+			echo substr($contentLeft,$mark+2,strlen($contentLeft));			
+		}						
 	}
 
 	/**
 	 * Affiche le contenu de la barre droite
-	 * @param page chargée
 	 */
 	public function showBarContentRight() {
-		echo $this->core->output['contentRight'];
+		// Détermine si le menu est présent
+		if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) === 'none') {
+			// Pas de menu
+			echo $this->core->output['contentRight'];
+		} else {
+			// $mark contient 0 le menu est positionné à la fin du contenu
+			$contentRight = $this->core->output['contentRight'];
+			$mark = strrpos($contentRight,'[]')  !== false ? strrpos($contentRight,'[]') : strlen($contentRight);		
+			echo substr($contentRight,0,$mark);			
+			echo '<div id="menuSideRight>';
+			echo $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) === 'parents' ? false : true);
+			echo '</div>';
+			echo substr($contentRight,$mark+2,strlen($contentRight));			
+		}	
 	}
 
      /**
