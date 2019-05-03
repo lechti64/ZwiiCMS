@@ -124,7 +124,9 @@ $( document ).ready(function() {
 			$("#pageEditDisplayMenuWrapper").addClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideDown();
 			$("#pageEditGroupWrapper").removeClass("disabled");
-			$("#pageEditGroupWrapper").slideUp();						
+			$("#pageEditGroupWrapper").slideUp();			
+			$("#PageEditMenuSpecial").removeClass("disabled");
+			$("#PageEditMenuSpecial").slideUp();
 	} else {
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideUp();	
@@ -352,7 +354,7 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditDisplayMenuWrapper").addClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideDown();
 			$("#pageEditGroupWrapper").removeClass("disabled");
-			$("#pageEditGroupWrapper").slideUp();																							
+			$("#pageEditGroupWrapper").slideUp();																					
 	} else {
 			$("#PageEditMenu").addClass("disabled");
 			$("#PageEditMenu").slideDown();	
