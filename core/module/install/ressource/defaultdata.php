@@ -425,7 +425,7 @@ class install extends common {
 				'imageSize' => 'auto'
 			],
 			'button' => [
-				'backgroundColor' => 'rgba(74, 105, 189, 1)'
+				'backgroundColor' => 'rgba(32, 59, 82, 1)'
 			],
 			'footer' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
@@ -456,23 +456,23 @@ class install extends common {
 				'fontSize' => '2em',
 				'fontWeight' => 'normal',
 				'height' => '150px',
-				'image' => '',
+				'image' => 'banniere\/zwii_banniere.png',
 				'imagePosition' => 'center center',
 				'imageRepeat' => 'no-repeat',
 				'margin' => false,
 				'position' => 'site',
 				'textAlign' => 'center',
 				'textColor' => 'rgba(33, 34, 35, 1)',
-				'textHide' => false,
+				'textHide' => true,
 				'textTransform' => 'none',
-				'linkHome' => 'false',
+				'linkHome' => true,
 				'imageContainer' => 'auto'
 			],
 			'link' => [
 				'textColor' => 'rgba(74, 105, 189, 1)'
 			],
 			'menu' => [
-				'backgroundColor' => 'rgba(74, 105, 189, 1)',
+				'backgroundColor' => 'rgba(32, 59, 82, 1)',
 				'font' => 'Open+Sans',				
 				'fontSize' => '1em',
 				'fontWeight' => 'normal',

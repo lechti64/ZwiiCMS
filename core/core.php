@@ -781,7 +781,7 @@ class common {
 		}
 		// Version 8.2.6
 		if($this->getData(['core', 'dataVersion']) < 826) {
-			$this->setData(['theme','header','linkHome',false]);
+			$this->setData(['theme','header','linkHome',true]);
 			$this->setData(['core', 'dataVersion', 826]);
 			$this->SaveData();
 		}
