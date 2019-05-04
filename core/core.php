@@ -1899,8 +1899,13 @@ class layout extends common {
 	 * Affiche le favicon
 	 */
 	public function showFavicon() {
-		if($favicon = $this->getData(['config', 'favicon'])) {
+		$favicon = $this->getData(['config', 'favicon']);
+		if($favicon &&
+			file_exists('site/file/source/' . $favicon)
+			) {
 			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . 'site/file/source/' . $favicon . '">';
+		} else {
+			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . 'core/vendor/zwiico/ico/favicon.ico">';
 		}
 	}
 
