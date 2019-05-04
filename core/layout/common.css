@@ -503,6 +503,7 @@ ul #menuSideChild, li #menuSideChild {
 /* Corps */
 section {
 	padding: 20px;
+	min-height: 450px;
 }
 section #sectionTitle {
 	margin-top: 0;
