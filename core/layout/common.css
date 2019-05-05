@@ -508,6 +508,10 @@ section {
 section #sectionTitle {
 	margin-top: 0;
 }
+.userLogin {
+	min-height: 0px;
+}
+
 section:after {
 	content: " ";
 	display: table;
