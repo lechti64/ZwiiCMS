@@ -133,6 +133,11 @@
 		// Gabarit :
 		// Récupérer la config de la page courante
 		$blocks = explode('-',$this->getData(['page',$this->getUrl(0),'block']));
+		// recherche si la seconde URL fait référence à un article pour appliquer les barres
+		$blogItem = false;
+		if (is_array ($this->getdata(['module',$this->getData(['page', $this->getUrl(0), 'moduleId'])]))) {
+			$blogItem = array_key_exists($this->getUrl(1),$this->getdata(['module',$this->getData(['page', $this->getUrl(0), 'moduleId'])]));
+		}
 		// Initialiser
 		$blockleft=$blockright="";
 		switch (sizeof($blocks)) {
@@ -153,13 +158,11 @@
 					$content    = 'col' . $blocks[1];
 					$blockright = 'col' . $blocks[2];	
 		}
-		// Page pleine pour la configuration des modules et l'édition des pages
-		//	($this->getData(['page', $this->getUrl(2), 'moduleId']) == '' &&
-		//	$this->getUrl(1) == 'config' ||  // Configuration d'un module en page pleine
-		//	$this->getUrl(1) == 'data'   ||  // données de formulaire en page pleine
-		//	$this->getUrl(1) == 'comment'    // données des commentaires en page pleine		
-		if (sizeof($blocks) === 1 ||
-		    !empty($this->getUrl(1)) ) { // Pleine page en mode configuration
+		// Page pleine pour la configuration des modules et l'édition des pages sauf l'affichae d'un article de blog
+		if ((sizeof($blocks) === 1 ||
+			!empty($this->getUrl(1))) &&
+			$blogItem === false
+			) { // Pleine page en mode configuration
 				$layout->showContent();
 		} else {
 		?>
@@ -172,6 +175,7 @@
 				<?php endif; ?>
 			<div class="<?php echo $content; ?>
 				" id="contentSite"><?php $layout->showContent(); ?>
+
 			</div>
 			<?php 
 				if ($blockright !== "") :?> 
