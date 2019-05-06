@@ -158,6 +158,8 @@ $("#formConfigPageIdToggle").on("change", function() {
 	else {
 		$("#formConfigPageIdWrapper").slideUp(function() {
 			$("#formConfigPageId").val("");
+			console.log($("#formConfigPageId").val());
 		});
 	}
 }).trigger("change");
+
