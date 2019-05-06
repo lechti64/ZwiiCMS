@@ -8,6 +8,7 @@
     - Réorganisation de l'écran d'édition des pages
     - Blog : notification hiérarchique lors de la rédaction d'un commentaire 
     - Form : notification hiérarchique de la récepton d'un message
+    - Thème header : hauteur proportionnelle de la bannière (responsive)
 - Ajouts :
     - Menu dans une barre latérale : intégral ou sous-menu de la page parente
     - Option d'apparition des pages dans le menu latéral ou le menu principal
@@ -18,6 +19,8 @@
     - Intégration de l'URL canonical 
     - Icône de suppression des pages dans la barre d'administration
     - Gestion du sitemap.xml et du robots.txt
+- Correction :
+    - Form : option de redirection 
 
 ## Version 9.0.21
 - Mise à jour : 
