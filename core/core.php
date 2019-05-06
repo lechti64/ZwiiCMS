@@ -987,7 +987,30 @@ class core extends common {
 				}
 			}
 			$css .= 'header{background-size:' . $this->getData(['theme','header','imageContainer']).'}';
-			$css .= 'header{background-color:' . $colors['normal'] . ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
+			$css .= 'header{background-color:' . $colors['normal'];
+
+
+			if ($this->getData(['theme', 'header', 'height']) === 'none') {
+				// Controle de l'existence du fichier
+				if (file_exists('site/file/source/' . $this->getData(['theme','header','image'])) &&
+					$this->getData(['theme', 'header', 'image'])	 ) {					
+					// On établie la hauteur du div en proportion de l'image
+					// (hauteur / largeur) . 100 
+					$sizes = getimagesize('site/file/source/'.$this->getData(['theme','header','image']));
+					//var_dump($sizes);
+					$css .= ';height: 0;  padding-top:';
+					$css .= ( $sizes[1] / $sizes[0] )* 100;
+					$css .= '%';
+				} else {
+					// Le fichier n'existe plus
+					// largeur par défaut
+					$css .= ';height: 150px;';	
+				}
+			} else {
+				// Valeur de hauteur traditionnelle
+				$css .= ';height:' . $this->getData(['theme', 'header', 'height']);
+			}
+			$css .=  ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
 			}
@@ -1889,7 +1912,7 @@ class layout extends common {
 			($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . 
 			'><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . 
 			strip_tags(str_replace('/', '_', $this->getUrl())) . 
-			'" data-tippy-content="Connexion à l\'administration" >Connexion</a></span>';
+			'" data-tippy-content="Connexion à l\'administration" rel="noindex, nofollow">Connexion</a></span>';
         }
         $items .= '</span></div>';
         echo $items;

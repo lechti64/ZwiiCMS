@@ -81,6 +81,48 @@
 	<div class="row">
 		<div class="col12">
 			<div class="block">
+				<h4>Configuration</h4>
+				<div class="row">
+					<div class="col4">
+						<?php echo template::select('themeHeaderPosition', $module::$headerPositions, [
+							'label' => 'Position',
+							'selected' => $this->getData(['theme', 'header', 'position'])
+						]); ?>
+					</div>
+					<div class="col4">
+						<?php echo template::select('themeHeaderHeight', $module::$headerHeights, [
+							'label' => 'Hauteur',
+							'selected' => $this->getData(['theme', 'header', 'height']),
+							'help' => 'Pour une bannière image responsive, sélectionnez automatique,
+									dans ce cas la hauteur est proportionnelle à la largeur de l\'image.
+									Le titre du site est indisponible en mode responsive.' 
+						]); ?>
+					</div>
+					<div class="col4">
+						<?php echo template::select('themeHeaderTextAlign', $module::$aligns, [
+							'label' => 'Alignement du contenu',
+							'selected' => $this->getData(['theme', 'header', 'textAlign'])
+						]); ?>
+					</div>
+					
+				</div>
+				<div id="themeHeaderShow" class="displayNone">				
+					<?php echo template::checkbox('themeHeaderlinkHome', true, 'Bannière cliquable', [
+								'checked' => $this->getData(['theme', 'header', 'linkHome'])
+							]); ?>
+				</div>
+				<div id="themeHeaderPositionOptions" class="displayNone">
+					<?php echo template::checkbox('themeHeaderMargin', true, 'Aligner la bannière avec le contenu', [
+						'checked' => $this->getData(['theme', 'header', 'margin'])
+					]); ?>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col12">
+			<div class="block">
 				<h4>Mise en forme du texte</h4>
 				<div class="row">
 				<div class="col3">
@@ -109,48 +151,6 @@
 						]); ?>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col12">
-			<div class="block">
-				<h4>Configuration</h4>
-				<div class="row">
-					<div class="col4">
-						<?php echo template::select('themeHeaderPosition', $module::$headerPositions, [
-							'label' => 'Position',
-							'selected' => $this->getData(['theme', 'header', 'position'])
-						]); ?>
-					</div>
-					<div class="col4">
-						<?php echo template::select('themeHeaderHeight', $module::$headerHeights, [
-							'label' => 'Hauteur',
-							'selected' => $this->getData(['theme', 'header', 'height'])
-						]); ?>
-					</div>
-					<div class="col4">
-						<?php echo template::select('themeHeaderTextAlign', $module::$aligns, [
-							'label' => 'Alignement du contenu',
-							'selected' => $this->getData(['theme', 'header', 'textAlign'])
-						]); ?>
-					</div>
-					
-				</div>
-				<!-- menu image -->
-				<div id="themeHeaderShow" class="displayNone">				
-					<?php echo template::checkbox('themeHeaderlinkHome', true, 'Bannière cliquable', [
-								'checked' => $this->getData(['theme', 'header', 'linkHome'])
-							]); ?>
-				</div>
-				<!-- menu image -->	
-
-				<div id="themeHeaderPositionOptions" class="displayNone">
-					<?php echo template::checkbox('themeHeaderMargin', true, 'Aligner la bannière avec le contenu', [
-						'checked' => $this->getData(['theme', 'header', 'margin'])
-					]); ?>
-				</div>
-
 			</div>
 		</div>
 	</div>

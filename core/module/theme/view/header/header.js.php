@@ -91,6 +91,14 @@ $("input, select").on("change", function() {
 		.appendTo("head");
 });
 
+$("#themeHeaderHeight").on("change", function() {
+	if($(this).val() === 'none') {
+		$("#themeHeaderTextHide").prop("disabled", true);
+		$("#themeHeaderTextHide").prop("checked", true).trigger("change");	
+	} else {
+		$("#themeHeaderTextHide").prop("disabled", false);
+	}
+}).trigger("change");
 
 // Affiche / Cache les options de l'image du fond
 $("#themeHeaderImage").on("change", function() {
