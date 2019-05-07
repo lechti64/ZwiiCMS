@@ -32,7 +32,7 @@ class form extends common {
 	
 	public static $pagination;
 	
-	const FORM_VERSION = '1.7'; 
+	const FORM_VERSION = '1.8'; 
 
 	const TYPE_MAIL = 'mail';
 	const TYPE_SELECT = 'select';
