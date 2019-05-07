@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.1.00';
+	const ZWII_VERSION = '9.1.01';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -655,6 +655,11 @@ class common {
 		// sitemap index file name
 		$sitemap->sitemapIndexFileName = "sitemap-index.xml";
 		foreach($this->getHierarchy(null, false, false) as $parentPageId => $childrenPageIds) {
+			// Exclure les barres et les pages non publiques
+			if ($this->getData(['page',$parentPageId,'group']) !== 0 ||
+			$this->getData(['page',$parentPageId,'block']) === 'bar')  {
+				continue;
+			}
 			$sitemap->addUrl ($parentPageId,$datetime);
 			foreach($childrenPageIds as $childKey) {
 				$sitemap->addUrl($childKey,$datetime);
