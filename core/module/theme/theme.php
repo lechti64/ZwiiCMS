@@ -186,7 +186,7 @@ class theme extends common {
 		'16px' => '16 pixels'
 	];
 	public static $sizes = [
-		'cover' => 'Responsive',
+	//		'cover' => 'Responsive',
 	//	'contain' => 'Responsive (contain)',	
 		'auto auto' => 'Automatique',	
 		'100% 100%' => 'Image étirée'	
