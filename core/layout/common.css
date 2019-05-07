@@ -507,7 +507,7 @@ section {
 section #sectionTitle {
 	margin-top: 0;
 }
-.userLogin {
+.userLogin, .updateForm {
 	min-height: 0px;
 }
 
