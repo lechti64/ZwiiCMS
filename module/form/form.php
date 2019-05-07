@@ -70,7 +70,7 @@ class form extends common {
 			// Configuration
 			// Option sélectionnée sans page choisie	
 			$pageId = '';		
-			if ($this->getInput('formConfigPageId', helper::FILTER_ID) !== null) { 
+			if ($this->getInput('formConfigPageId') !== "") { 
 				// Option désactivée, réinitialiser l'id de la page sélectionnée.
 				$pageId = $this->getInput('formConfigPageIdToggle', helper::FILTER_BOOLEAN) === true ? $this->getInput('formConfigPageId', helper::FILTER_ID) : '';
 			} 
