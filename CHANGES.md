@@ -1,6 +1,7 @@
 # Changelog
 
-## Version 9.1.0
+
+## Version 9.1.01
 - Modifications : 
     - Amélioration de l'algorithme de gestion des barres
     - Script Google Analytics
@@ -19,8 +20,8 @@
     - Intégration de l'URL canonical 
     - Icône de suppression des pages dans la barre d'administration
     - Gestion du sitemap.xml et du robots.txt
-- Correction :
-    - Form : option de redirection 
+- Corrections :
+    - Form : option de redirection
 
 ## Version 9.0.21
 - Mise à jour : 
