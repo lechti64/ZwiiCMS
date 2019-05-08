@@ -1,5 +1,8 @@
 # Changelog
 
+### Version 9.1.02
+- Correction :
+    - Suppression Include
 
 ## Version 9.1.01
 - Modifications : 

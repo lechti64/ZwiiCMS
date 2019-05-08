@@ -300,11 +300,6 @@
 <?php endif; ?>
 <!-- Lien remonter en haut -->
 <div id="backToTop"><?php echo template::ico('up'); ?></div>
-<?php $layout->showScript();
-// Test d'insertion d'un script
-if (file_exits('site/data/script.inc.php')) {
-	include ('site/data/script.inc.php');
-}
-?>
+<?php $layout->showScript();?>
 </body>
 </html>
