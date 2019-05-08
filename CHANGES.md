@@ -5,6 +5,7 @@
 - Corrections :
     - Edition de page : modification de libellés, masquage d'options petites corrections
     - Installation par défaut : chemin vers la bannière
+    - Image dans le fond du site option automatique
 
 ## Version 9.1.02
 - Correction :
