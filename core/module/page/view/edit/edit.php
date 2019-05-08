@@ -123,7 +123,7 @@ $this->pages2Json();
 						<?php echo template::select('pageEditDisplayMenu', $module::$displayMenu, [
 							'label' => 'Configuration du menu vertical',
 							'selected' => $this->getData(['page', $this->getUrl(2), 'displayMenu']),
-							'help' => 'Par défaut le menu est affiché APRES le contenu de la page. Pour le placer à un emplacement précis, y insérez [] (deux crochets).'
+							'help' => 'Par défaut le menu est affiché APRES le contenu de la page. Pour le positionner à un emplacement précis, insérez deux crochets [] dans le contenu de la page.'
 						]); ?>
 					</div>
 				</div>				
@@ -156,7 +156,7 @@ $this->pages2Json();
 				<?php endif; ?>
 				<?php echo template::select('pageEditPosition', [], [
 					'label' => 'Position',
-					'help' => 'Une page non affichée n\'apparaît pas dans les menus mais comme \'Page orpheline\' dans la liste des pages.'
+					'help' => 'Une page non affichée dans les menus est classée comme \'Page orpheline\' dans la liste des pages.'
 				]); ?>									
 				<div class="row">
 					<div class="col6">
@@ -167,7 +167,7 @@ $this->pages2Json();
 					<div class="col6">
 						<?php echo template::checkbox('pageEditDisable', true, 'Désactivée', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'disable']),			
-							'help' => 'Une page désactivée figure dans le menu sans être cliquable.'
+							'help' => 'Une page désactivée figure dans le menu sans être cliquable, par exemple comme page parente sans contenu.'
 						]); ?>
 					</div>
 				</div>
@@ -180,15 +180,15 @@ $this->pages2Json();
 			<h4>Options avancées d'emplacements</h4>	
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Masquer les pages enfants de cette page dans le menu principal', [
+					<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Masquer les pages enfants de cette page dans le menu horizontal', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuChildren']),
-						'help' => 'Utilisez cette option pour afficher uniquement les pages enfants dans un `sous-menu de page parente` placé dans une barre latérale.'
+						'help' => 'Afficher uniquement les pages enfants dans un `sous-menu de page parente` dans une barre latérale.'
 					]); ?>
 					</div>
 				</div>									
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEditHideMenuHead', true, 'Masquer cette page dans le menu principal, l\'afficher dans le menu d\'une barre latérale', [
+					<?php echo template::checkbox('pageEditHideMenuHead', true, 'Masquer cette page dans le menu horizontal, l\'afficher dans le menu vertical en barre latérale', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuHead']),
 						'help' => 'Pour masquer la page totalement (ex : page en construction), dans `Position`, sélectionnez `Ne pas afficher`.'
 					]); ?>
@@ -196,7 +196,7 @@ $this->pages2Json();
 				</div>
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEditHideMenuSide', true, 'Masquer cette page dans le menu d`une barre latérale, l\'afficher dans le menu principal', [
+					<?php echo template::checkbox('pageEditHideMenuSide', true, 'Masquer cette page dans le menu vertical en barre latérale, l\'afficher dans le menu horizontal', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuSide']),
 						'help' => 'Pour masquer la page totalement (ex : page en construction), dans `Position`, sélectionnez `Ne pas afficher`.'
 					]); ?>

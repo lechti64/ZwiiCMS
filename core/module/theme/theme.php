@@ -186,9 +186,7 @@ class theme extends common {
 		'16px' => '16 pixels'
 	];
 	public static $sizes = [
-	//		'cover' => 'Responsive',
-	//	'contain' => 'Responsive (contain)',	
-		'auto auto' => 'Automatique',	
+		'auto' => 'Automatique',	
 		'100% 100%' => 'Image étirée'	
 	];
 	public static $textTransforms = [
@@ -204,8 +202,8 @@ class theme extends common {
 		'100%' => 'Fluide (100%)'
 	];
 	public static $headerWide = [	
-		'cover' => 'Responsive',
-	// 'contain' => 'Responsive (contain)',
+		'cover' => 'Responsive (cover',
+		'contain' => 'Responsive (contain)',
 		'auto auto' => 'Automatique',	
 		'100% 100%' => 'Image étirée'
 	];

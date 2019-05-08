@@ -1,6 +1,12 @@
 # Changelog
 
-### Version 9.1.02
+
+## Version 9.1.03
+- Corrections :
+    - Edition de page : modification de libellés, masquage d'options petites corrections
+    - Installation par défaut : chemin vers la bannière
+
+## Version 9.1.02
 - Correction :
     - Suppression Include
 
