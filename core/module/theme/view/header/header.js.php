@@ -10,18 +10,31 @@
  * @link http://zwiicms.com/
  */
 
+
+
+
 /**
  * Aperçu en direct
  */
 $("input, select").on("change", function() {
+
 	// Import des polices de caractères
 	var headerFont = $("#themeHeaderFont").val();
 	var css = "@import url('https://fonts.googleapis.com/css?family=" + headerFont + "');";
-	// Adaptation aux média
-	css += "@media (max-width: 767px) {header{height:" + $("#themeHeaderHeight").val() + "/2;line-height:" + $("#themeHeaderHeight").val() + "/2;}}";
+
 	// Couleurs, image, alignement et hauteur de la bannière
-	css += "header{background-color:" + $("#themeHeaderBackgroundColor").val() + ";text-align:" + $("#themeHeaderTextAlign").val() + ";height:" + $("#themeHeaderHeight").val() + ";line-height:" + $("#themeHeaderHeight").val() + "}";
-		
+	css += "header{background-color:" + $("#themeHeaderBackgroundColor").val() + ";text-align:" + $("#themeHeaderTextAlign").val() + ";line-height:" + $("#themeHeaderHeight").val();
+
+	// Hauteur proportionnelle
+	var themeHeaderHeight = $("#themeHeaderHeight").val();
+	var widthSize =  $("#themeHeaderImageWidth").val();
+	var heightSize	= $("#themeHeaderImageHeight").val(); 
+	if (themeHeaderHeight === "none" ) {
+			css += ";height: 0;  padding-top:" + (heightSize / widthSize ) * 100 + "%;}";		
+		} else {
+			css += ";height:" + themeHeaderHeight + ";}";
+	}	
+
 	var themeHeaderImage = $("#themeHeaderImage").val();
 	if(themeHeaderImage) {
 		css += "header{background-image:url('<?php echo helper::baseUrl(false); ?>site/file/source/" + themeHeaderImage + "');background-repeat:" + $("#themeHeaderImageRepeat").val() + ";background-position:" + $("#themeHeaderImagePosition").val() + "}";
@@ -29,8 +42,14 @@ $("input, select").on("change", function() {
 	else {
 		css += "header{background-image:none}";
 	}
+
 	// Adaptation de la bannière
 	css += "header{background-size:" + $("#themeHeaderImageContainer").val() + "}";
+
+
+console.log(css);
+
+
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
 	css += "header span{color:" + $("#themeHeaderTextColor").val() + ";font-family:'" + headerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeHeaderFontWeight").val() + ";font-size:" + $("#themeHeaderFontSize").val() + ";text-transform:" + $("#themeHeaderTextTransform").val() + "}";
 	// Cache le titre de la bannière
@@ -89,7 +108,7 @@ $("input, select").on("change", function() {
 		.attr("id", "themePreview")
 		.text(css)
 		.appendTo("head");
-});
+}).trigger("change");
 
 $("#themeHeaderHeight").on("change", function() {
 	if($(this).val() === 'none') {
@@ -99,6 +118,21 @@ $("#themeHeaderHeight").on("change", function() {
 		$("#themeHeaderTextHide").prop("disabled", false);
 	}
 }).trigger("change");
+
+// Récupérer les dimensions de l'image et les place dans des champs cachés
+$("#themeHeaderImage").on("change", function() {
+	if($(this).val() !== '') {
+		var tmpImg = new Image();
+		var url = "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
+		tmpImg.src= url;
+		$(tmpImg).on('load',function(){
+			$("#themeHeaderImageWidth").val(tmpImg.width);
+			$("#themeHeaderImageHeight").val(tmpImg.height);
+		});
+	}
+}).trigger("change");
+
+
 
 // Affiche / Cache les options de l'image du fond
 $("#themeHeaderImage").on("change", function() {
