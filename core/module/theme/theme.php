@@ -202,7 +202,7 @@ class theme extends common {
 		'100%' => 'Fluide (100%)'
 	];
 	public static $headerWide = [	
-		'cover' => 'Responsive (cover',
+		'cover' => 'Responsive (cover)',
 		'contain' => 'Responsive (contain)',
 		'auto auto' => 'Automatique',	
 		'100% 100%' => 'Image étirée'
