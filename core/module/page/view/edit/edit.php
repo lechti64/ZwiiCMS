@@ -141,7 +141,7 @@ $this->pages2Json();
 				</div>	
 			</div>		
 		</div>
-		<div class="col6">
+	<div class="col6">
 		<div class="block" id="PageEditMenu">
 				<h4>Emplacements</h4>
 				<?php if($this->getHierarchy($this->getUrl(2), false)): ?>
@@ -206,25 +206,27 @@ $this->pages2Json();
 		</div>					
 	</div>
 	<div class='row'>
-		<div class="block">
-					<h4>Autres options</h4>
-					<div class='col6'>
-						<?php echo template::select('pageEditGroup', self::$groupPublics, [
-							'label' => 'Groupe requis pour accéder à la page :',
-							'selected' => $this->getData(['page', $this->getUrl(2), 'group'])
-						]); ?>
-					</div>
-					<div class='col12'>
-						<?php echo template::text('pageEditMetaTitle', [
-							'label' => 'Méta-titre',
-							'value' => $this->getData(['page', $this->getUrl(2), 'metaTitle'])
-						]); ?>
-						<?php echo template::textarea('pageEditMetaDescription', [
-							'label' => 'Méta-description',
-							'maxlength' => '500',
-							'value' => $this->getData(['page', $this->getUrl(2), 'metaDescription'])
-						]); ?>
-					</div>						
+		<div class="col12">
+			<div class="block">
+				<h4>Autres options</h4>
+				<div class='col6'>
+					<?php echo template::select('pageEditGroup', self::$groupPublics, [
+						'label' => 'Groupe requis pour accéder à la page :',
+						'selected' => $this->getData(['page', $this->getUrl(2), 'group'])
+					]); ?>
+				</div>
+				<div class='col12'>
+					<?php echo template::text('pageEditMetaTitle', [
+						'label' => 'Méta-titre',
+						'value' => $this->getData(['page', $this->getUrl(2), 'metaTitle'])
+					]); ?>
+					<?php echo template::textarea('pageEditMetaDescription', [
+						'label' => 'Méta-description',
+						'maxlength' => '500',
+						'value' => $this->getData(['page', $this->getUrl(2), 'metaDescription'])
+					]); ?>
+				</div>		
+			</div>
 		</div>
 	</div>
 <?php echo template::formClose(); ?>
