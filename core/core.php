@@ -1888,24 +1888,27 @@ class layout extends common {
      * Affiche le copyright
      */
     public function showCopyright() {
+		// Bloc copyright
 		$items = '<div id="footerCopyright">';
 		$items .= '<span id="footerFont">';
-		$items .= '<span id="footerDisplayCopyright">';
-		if ($this->getData(['theme','footer','displayCopyright']) === true) {
-			$items .= 'Motorisé&nbsp;par&nbsp</span>';
-		}
-		$items .= '<a href="http://zwiicms.com/" onclic="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">ZwiiCMS</a>';
-		//$items .= '</span>';		
-		$items .= '<span id="footerDisplayVersion">';
-		if 	($this->getData(['theme','footer','displayVersion']) === true )	{
-			$items .= '<wbr>&nbsp;'. common::ZWII_VERSION ;			
-		}
+		// Affichage de motorisé par 
+		$items .= '<span id="footerDisplayCopyright" ';
+		$items .= $this->getData(['theme','footer','displayCopyright']) === false ? 'class="displayNone"' : '';
+		$items .= '>Motorisé&nbsp;par&nbsp</span>';
+		// Toujours affiche le nom du CMS
+		$items .= '<span id="footerZwiiCMS">';
+		$items .= '<a href="http://zwiicms.com/" onclic="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">ZwiiCMS</a>';		
 		$items .= '</span>';
-		$items .= '<span id="footerDisplaySiteMap">';
-		if ($this->getData(['theme','footer','displaySiteMap']) ===  true ) {
-			$items .=  '<wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 
-					  'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
-		}
+		// Affichage du numéro de version
+		$items .= '<span id="footerDisplayVersion"';
+		$items .= $this->getData(['theme','footer','displayVersion']) === false ? 'class="displayNone"' : '';
+		$items .= '><wbr>&nbsp;'. common::ZWII_VERSION ;			
+		$items .= '</span>';
+		// Afifchage du lien de connexion 
+		$items .= '<span id="footerDisplaySiteMap"';
+		$items .= $this->getData(['theme','footer','displaySiteMap']) ===  false? 'class="displayNone"' : '';
+		$items .=  '><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() .  'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
+		$items .= '</span>';
         if(
             (
                 $this->getData(['theme', 'footer', 'loginLink'])
@@ -1918,7 +1921,8 @@ class layout extends common {
 			'><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . 
 			strip_tags(str_replace('/', '_', $this->getUrl())) . 
 			'" data-tippy-content="Connexion à l\'administration" rel="noindex, nofollow">Connexion</a></span>';
-        }
+		}
+		// Fermeture du bloc copyright
         $items .= '</span></div>';
         echo $items;
     }
