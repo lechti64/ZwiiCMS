@@ -41,11 +41,11 @@
 				<h4>Image</h4>
 				<?php 
 				$sizes = getimagesize('site/file/source/'.$this->getData(['theme','header','image']));
-				echo template::hidden('themeHeaderImageWidth', [
+				echo template::text('themeHeaderImageWidth', [
 					'value' => $sizes [0],
 					'noDirty' => true
 				]);
-				echo template::hidden('themeHeaderImageHeight', [
+				echo template::text('themeHeaderImageHeight', [
 					'value' => $sizes [1],
 					'noDirty' => true
 				]);
