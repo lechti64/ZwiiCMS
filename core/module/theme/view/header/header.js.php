@@ -23,16 +23,16 @@ $("input, select").on("change", function() {
 	var css = "@import url('https://fonts.googleapis.com/css?family=" + headerFont + "');";
 
 	// Couleurs, image, alignement et hauteur de la bannière
-	css += "header{background-color:" + $("#themeHeaderBackgroundColor").val() + ";text-align:" + $("#themeHeaderTextAlign").val() + ";line-height:" + $("#themeHeaderHeight").val();
+	css += "header{background-color:" + $("#themeHeaderBackgroundColor").val() + ";text-align:" + $("#themeHeaderTextAlign").val() + ";";
 
 	// Hauteur proportionnelle
 	var themeHeaderHeight = $("#themeHeaderHeight").val();
 	var widthSize =  $("#themeHeaderImageWidth").val();
 	var heightSize	= $("#themeHeaderImageHeight").val(); 
 	if (themeHeaderHeight === "none" ) {
-			css += ";height: 0;  padding-top:" + (heightSize / widthSize ) * 100 + "%;}";		
+			css += "height: 0;  padding-top:" + (heightSize / widthSize ) * 100 + "%}";		
 		} else {
-			css += ";height:" + themeHeaderHeight + ";}";
+			css += ";line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + "}";
 	}	
 
 	var themeHeaderImage = $("#themeHeaderImage").val();
@@ -47,7 +47,7 @@ $("input, select").on("change", function() {
 	css += "header{background-size:" + $("#themeHeaderImageContainer").val() + "}";
 
 
-console.log(css);
+console.log(widthSize + "-" + heightSize + ' ' + themeHeaderImage );
 
 
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
@@ -145,6 +145,7 @@ $("#themeHeaderImage").on("change", function() {
 		});
 	}
 }).trigger("change");
+
 // Affiche / Cache les options de la position
 $("#themeHeaderPosition").on("change", function() {
 	if($(this).val() === 'site') {

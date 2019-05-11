@@ -1006,16 +1006,16 @@ class core extends common {
 					$css .= ';height: 0;  padding-top:';
 					$css .= ( $sizes[1] / $sizes[0] )* 100;
 					$css .= '%';
-				} else {
+				//} else {
 					// Le fichier n'existe plus
 					// largeur par défaut
-					$css .= ';height: 150px;';	
+				//	$css .= ';height: 150px; line-height: 150px;';	
 				}
 			} else {
 				// Valeur de hauteur traditionnelle
-				$css .= ';height:' . $this->getData(['theme', 'header', 'height']);
+				$css .= ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) ;
 			}
-			$css .=  ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
+			$css .=  ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
 			}
