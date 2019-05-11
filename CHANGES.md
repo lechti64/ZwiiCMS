@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 9.1.04
+- Corrections : 
+    - Edition de page : problème d'affichage
+    - Thème pied de page : problème d'affichage
+- Modifications : 
+    - Aperçu de la bannière en mode responsive
 
 ## Version 9.1.03
 - Corrections :
