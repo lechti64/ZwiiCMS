@@ -41,18 +41,6 @@
 				<h4>Image</h4>
 				<?php 
 				$imageFile = file_exists('site/file/source/'.$this->getData(['theme', 'header', 'image'])) ? $this->getData(['theme', 'header', 'image']) : "";
-				if ($this->getData(['theme', 'header', 'image']) && 
-				    $imageFile !== '') {
-					$sizes = getimagesize('site/file/source/'.$this->getData(['theme','header','image']));	
-				}			
-				echo template::hidden('themeHeaderImageWidth', [
-					'value' => $sizes [0],
-					'noDirty' => true
-				]);
-				echo template::hidden('themeHeaderImageHeight', [
-					'value' => $sizes [1],
-					'noDirty' => true
-				]);
 				echo template::file('themeHeaderImage', [
 					'label' => 'Fond',
 					'type' => 1,

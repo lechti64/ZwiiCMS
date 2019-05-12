@@ -12,22 +12,7 @@
 
 
 
-// Récupérer les dimensions de l'image et les place dans des champs cachés
-$("#themeHeaderImage").on("change", function() {
-	if($(this).val() !== '') {
-		var tmpImg = new Image();
-		var url = "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
-		tmpImg.src= url;
-		$(tmpImg).on('load',function(){
-			$("#themeHeaderImageWidth").val(tmpImg.width);
-			$("#themeHeaderImageHeight").val(tmpImg.height);
-		});	
-	} else {
-		$("#themeHeaderImageWidth").val(0);
-		$("#themeHeaderImageHeight").val(0);
-	}
-	console.log ("imagesize");
-}).trigger("change");
+
 
 
 /**
@@ -35,11 +20,13 @@ $("#themeHeaderImage").on("change", function() {
  */
 $("input, select").on("change", function() {
 
-	var themeHeaderHeight = $("#themeHeaderHeight").val();
-	var widthSize =  $("#themeHeaderImageWidth").val();
-	var heightSize	= $("#themeHeaderImageHeight").val(); 
-	var themeHeaderImage = $("#themeHeaderImage").val();
 
+	var tmpImg = new Image();
+	var url = "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
+	tmpImg.src= url;
+
+	var themeHeaderHeight = $("#themeHeaderHeight").val();
+	var themeHeaderImage = $("#themeHeaderImage").val();
 
 	// Import des polices de caractères
 	var headerFont = $("#themeHeaderFont").val();
@@ -48,13 +35,11 @@ $("input, select").on("change", function() {
 	// Couleurs, image, alignement et hauteur de la bannière
 	css += "header{background-color:" + $("#themeHeaderBackgroundColor").val() + ";text-align:" + $("#themeHeaderTextAlign").val() + ";";
 
-	// Hauteur proportionnelle
-
-	
+	// Hauteur proportionnelle	
 	// Une imge est sélectionnée
 	if(themeHeaderImage) {
 
-		
+		console.log ((tmpImg.height / tmpImg.width ) * 100 + "%;");
 		css += "background-image:url('<?php echo helper::baseUrl(false); ?>site/file/source/" + themeHeaderImage + "');background-repeat:" + $("#themeHeaderImageRepeat").val() + ";background-position:" + $("#themeHeaderImagePosition").val() + ";";
 		// Adaptation de la bannière
 		css += "background-size:" + $("#themeHeaderImageContainer").val() + ";";
@@ -62,9 +47,8 @@ $("input, select").on("change", function() {
 		// Position responsive
 		if (themeHeaderHeight === "none" ) {
 
-			css += "height: 0;  padding-top:" + (heightSize / widthSize ) * 100 + "%;";	
+			css += "height: 0;  padding-top:" + (tmpImg.height / tmpImg.width ) * 100 + "%;";	
 
-			console.log(widthSize + "-" + heightSize + ' ' + themeHeaderImage );
 			//console.log(css);	
 		} else {
 			css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + ";";
@@ -74,7 +58,9 @@ $("input, select").on("change", function() {
 		
 		css += "background-image:none;";
 		// Forcer la sélection 150px
-		$("#themeHeaderHeight option:eq(2)").prop("selected", true);
+		// $("#themeHeaderHeight option:eq(2)").prop("selected", true);
+		// Forcer le titre dans le header
+		$("header .container").show();		
 	
 	} 
 	css += "}";
