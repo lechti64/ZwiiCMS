@@ -1006,16 +1006,16 @@ class core extends common {
 					$css .= ';height: 0;  padding-top:';
 					$css .= ( $sizes[1] / $sizes[0] )* 100;
 					$css .= '%';
-				} else {
+				//} else {
 					// Le fichier n'existe plus
 					// largeur par défaut
-					$css .= ';height: 150px;';	
+				//	$css .= ';height: 150px; line-height: 150px;';	
 				}
 			} else {
 				// Valeur de hauteur traditionnelle
-				$css .= ';height:' . $this->getData(['theme', 'header', 'height']);
+				$css .= ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) ;
 			}
-			$css .=  ';line-height:' . $this->getData(['theme', 'header', 'height']) . ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
+			$css .=  ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
 			}
@@ -1888,14 +1888,14 @@ class layout extends common {
      * Affiche le copyright
      */
     public function showCopyright() {
-		// Bloc copyright
+		// Ouverture Bloc copyright
 		$items = '<div id="footerCopyright">';
 		$items .= '<span id="footerFont">';
 		// Affichage de motorisé par 
 		$items .= '<span id="footerDisplayCopyright" ';
 		$items .= $this->getData(['theme','footer','displayCopyright']) === false ? 'class="displayNone"' : '';
 		$items .= '>Motorisé&nbsp;par&nbsp</span>';
-		// Toujours affiche le nom du CMS
+		// Toujours afficher le nom du CMS
 		$items .= '<span id="footerZwiiCMS">';
 		$items .= '<a href="http://zwiicms.com/" onclic="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">ZwiiCMS</a>';		
 		$items .= '</span>';
@@ -1904,7 +1904,7 @@ class layout extends common {
 		$items .= $this->getData(['theme','footer','displayVersion']) === false ? 'class="displayNone"' : '';
 		$items .= '><wbr>&nbsp;'. common::ZWII_VERSION ;			
 		$items .= '</span>';
-		// Afifchage du lien de connexion 
+		// Affichage du lien de connexion 
 		$items .= '<span id="footerDisplaySiteMap"';
 		$items .= $this->getData(['theme','footer','displaySiteMap']) ===  false? 'class="displayNone"' : '';
 		$items .=  '><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() .  'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';

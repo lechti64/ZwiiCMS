@@ -40,16 +40,19 @@
 			<div class="block">
 				<h4>Image</h4>
 				<?php 
-				$sizes = getimagesize('site/file/source/'.$this->getData(['theme','header','image']));
-				echo template::text('themeHeaderImageWidth', [
+				$imageFile = file_exists('site/file/source/'.$this->getData(['theme', 'header', 'image'])) ? $this->getData(['theme', 'header', 'image']) : "";
+				if ($this->getData(['theme', 'header', 'image']) && 
+				    $imageFile !== '') {
+					$sizes = getimagesize('site/file/source/'.$this->getData(['theme','header','image']));	
+				}			
+				echo template::hidden('themeHeaderImageWidth', [
 					'value' => $sizes [0],
 					'noDirty' => true
 				]);
-				echo template::text('themeHeaderImageHeight', [
+				echo template::hidden('themeHeaderImageHeight', [
 					'value' => $sizes [1],
 					'noDirty' => true
 				]);
-				$imageFile = file_exists('site/file/source/'.$this->getData(['theme', 'header', 'image'])) ? $this->getData(['theme', 'header', 'image']) : "";
 				echo template::file('themeHeaderImage', [
 					'label' => 'Fond',
 					'type' => 1,
