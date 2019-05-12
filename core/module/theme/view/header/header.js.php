@@ -12,11 +12,34 @@
 
 
 
+// Récupérer les dimensions de l'image et les place dans des champs cachés
+$("#themeHeaderImage").on("change", function() {
+	if($(this).val() !== '') {
+		var tmpImg = new Image();
+		var url = "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
+		tmpImg.src= url;
+		$(tmpImg).on('load',function(){
+			$("#themeHeaderImageWidth").val(tmpImg.width);
+			$("#themeHeaderImageHeight").val(tmpImg.height);
+		});	
+	} else {
+		$("#themeHeaderImageWidth").val(0);
+		$("#themeHeaderImageHeight").val(0);
+	}
+	console.log ("imagesize");
+}).trigger("change");
+
 
 /**
  * Aperçu en direct
  */
 $("input, select").on("change", function() {
+
+	var themeHeaderHeight = $("#themeHeaderHeight").val();
+	var widthSize =  $("#themeHeaderImageWidth").val();
+	var heightSize	= $("#themeHeaderImageHeight").val(); 
+	var themeHeaderImage = $("#themeHeaderImage").val();
+
 
 	// Import des polices de caractères
 	var headerFont = $("#themeHeaderFont").val();
@@ -26,28 +49,36 @@ $("input, select").on("change", function() {
 	css += "header{background-color:" + $("#themeHeaderBackgroundColor").val() + ";text-align:" + $("#themeHeaderTextAlign").val() + ";";
 
 	// Hauteur proportionnelle
-	var themeHeaderHeight = $("#themeHeaderHeight").val();
-	var widthSize =  $("#themeHeaderImageWidth").val();
-	var heightSize	= $("#themeHeaderImageHeight").val(); 
-	if (themeHeaderHeight === "none" ) {
-			css += "height: 0;  padding-top:" + (heightSize / widthSize ) * 100 + "%}";		
-		} else {
-			css += ";line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + "}";
-	}	
 
-	var themeHeaderImage = $("#themeHeaderImage").val();
+	
+	// Une imge est sélectionnée
 	if(themeHeaderImage) {
-		css += "header{background-image:url('<?php echo helper::baseUrl(false); ?>site/file/source/" + themeHeaderImage + "');background-repeat:" + $("#themeHeaderImageRepeat").val() + ";background-position:" + $("#themeHeaderImagePosition").val() + "}";
-	}
-	else {
-		css += "header{background-image:none}";
-	}
 
-	// Adaptation de la bannière
-	css += "header{background-size:" + $("#themeHeaderImageContainer").val() + "}";
+		
+		css += "background-image:url('<?php echo helper::baseUrl(false); ?>site/file/source/" + themeHeaderImage + "');background-repeat:" + $("#themeHeaderImageRepeat").val() + ";background-position:" + $("#themeHeaderImagePosition").val() + ";";
+		// Adaptation de la bannière
+		css += "background-size:" + $("#themeHeaderImageContainer").val() + ";";
 
+		// Position responsive
+		if (themeHeaderHeight === "none" ) {
 
-console.log(widthSize + "-" + heightSize + ' ' + themeHeaderImage );
+			css += "height: 0;  padding-top:" + (heightSize / widthSize ) * 100 + "%;";	
+
+			console.log(widthSize + "-" + heightSize + ' ' + themeHeaderImage );
+			//console.log(css);	
+		} else {
+			css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + ";";
+		}
+
+	}else {
+		
+		css += "background-image:none;";
+		// Forcer la sélection 150px
+		$("#themeHeaderHeight option:eq(2)").prop("selected", true);
+	
+	} 
+	css += "}";
+
 
 
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
@@ -118,20 +149,6 @@ $("#themeHeaderHeight").on("change", function() {
 		$("#themeHeaderTextHide").prop("disabled", false);
 	}
 }).trigger("change");
-
-// Récupérer les dimensions de l'image et les place dans des champs cachés
-$("#themeHeaderImage").on("change", function() {
-	if($(this).val() !== '') {
-		var tmpImg = new Image();
-		var url = "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
-		tmpImg.src= url;
-		$(tmpImg).on('load',function(){
-			$("#themeHeaderImageWidth").val(tmpImg.width);
-			$("#themeHeaderImageHeight").val(tmpImg.height);
-		});
-	}
-}).trigger("change");
-
 
 
 // Affiche / Cache les options de l'image du fond
