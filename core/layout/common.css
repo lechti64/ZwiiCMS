@@ -537,7 +537,8 @@ footer {
 #footerLoginLink, 
 #footerDisplayCopyright, 
 #footerDisplayVersion,
-#footerDisplaySiteMap {
+#footerDisplaySiteMap,
+#footerZwiiCMS {
 	font-size: inherit;
 }
 
