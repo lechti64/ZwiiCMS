@@ -46,7 +46,7 @@
 			</div>
 		<?php endif; ?>
 		<div class="row">
-			<div class="col2 offset10">
+			<div class="col3 offset9">
 				<?php echo template::submit('formSubmit', [
 					'value' => $this->getData(['module', $this->getUrl(0), 'config', 'button']) ? $this->getData(['module', $this->getUrl(0), 'config', 'button']) : 'Envoyer',
 					'ico' => ''
