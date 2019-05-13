@@ -27,6 +27,11 @@ $("input, select").on("change", function() {
 	css += ".button:hover,button[type='submit']:hover,.pagination a:hover,input[type='checkbox']:not(:active):checked:hover + label:before,input[type='checkbox']:active + label:before{background-color:" + colors.darken + "}";
 	css += ".helpButton span:hover{color:" + colors.darken + "}";
 	css += ".button:active,button[type='submit']:active,.pagination a:active{background-color:" + colors.veryDarken + "}";
+	if ($("#themeSiteWidth").val() === "750px") {
+		css += ".button, button{font-size:0.8em;}";
+	} else {
+		css += ".button, button{font-size:1em;}";
+	}
 	// Couleurs des liens
 	colors = core.colorVariants($("#themeLinkTextColor").val());
 	css += "a{color:" + colors.normal + "}";
