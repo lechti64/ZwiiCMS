@@ -105,7 +105,7 @@
 </div>
 <?php  if($this->getUser('group') >= self::GROUP_ADMIN): ?>
 <div class="row">
-    <div class="col2">
+    <div class="col3">
 		<?php echo template::button('blogBack', [
 					'class' => 'buttonGrey',
 					'href' => helper::baseUrl() . $this->getUrl(0),
@@ -113,7 +113,7 @@
 					'value' => 'Retour'
 		]); ?>
     </div>
-    <div class="col2 offset8">
+    <div class="col3 offset6">
  		<?php echo template::button('blogEdit', [
 					'class' => 'buttonBlue',
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $this->getUrl(1) . '/' . $_SESSION['csrf'],
