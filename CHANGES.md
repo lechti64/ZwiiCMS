@@ -2,10 +2,11 @@
 
 ## Version 9.1.04
 - Corrections : 
-    - Edition de page : problème d'affichage
-    - Thème pied de page : problème d'affichage
-    - Largeur des boutons en 750px et boutons tronqué par une barre latérale : la taille des boutons fixée à 0.8em
-- Modifications : 
+    - Edition de page : problème msie en page
+    - Module Form (v1.9) : position et largeur des boutons
+    - Thème Pied de page : problème d'affichage
+    - Thème Site : boutons tronqués en 750px : 750px = 0.8em
+- Modification : 
     - Aperçu de la bannière en mode responsive
 
 ## Version 9.1.03
