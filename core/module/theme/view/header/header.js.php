@@ -48,14 +48,17 @@ $("input, select").on("change", function() {
 	// Pas d'image sélectionnée
 	} else {
 		// Désactiver l'option responsive
-			if (themeHeaderHeight === "none") {
-				$("#themeHeaderHeight option:eq(2)").prop("selected", true);
-			}
-			css += "background-image:none;";
+		css += "background-image:none;";
+		$("header .container").show();
+		$("themeHeaderTextHide").prop("false");
+		if (themeHeaderHeight === "none") {
+			$("#themeHeaderHeight option:eq(2)").prop("selected", true);
+			css += "line-height: 150px;height: 150px}";
+		} else {
 			css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + "}";
-			$("header .container").show();
+		}
 	}
-	
+
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
 	css += "header span{color:" + $("#themeHeaderTextColor").val() + ";font-family:'" + headerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeHeaderFontWeight").val() + ";font-size:" + $("#themeHeaderFontSize").val() + ";text-transform:" + $("#themeHeaderTextTransform").val() + "}";
 	// Cache le titre de la bannière
