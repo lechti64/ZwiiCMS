@@ -7,11 +7,10 @@
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
+ * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  * @link http://zwiicms.com/
  */
-
-
-
 
 
 
@@ -20,7 +19,7 @@
  */
 $("input, select").on("change", function() {
 
-
+	// Récupérer la taille de l'image
 	var tmpImg = new Image();
 	var url = "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
 	tmpImg.src= url;
@@ -35,38 +34,26 @@ $("input, select").on("change", function() {
 	// Couleurs, image, alignement et hauteur de la bannière
 	css += "header{background-color:" + $("#themeHeaderBackgroundColor").val() + ";text-align:" + $("#themeHeaderTextAlign").val() + ";";
 
-	// Hauteur proportionnelle	
-	// Une imge est sélectionnée
-	if(themeHeaderImage) {
-
-		console.log ((tmpImg.height / tmpImg.width ) * 100 + "%;");
+	if (themeHeaderImage) {
+		// Une image est sélectionnée
 		css += "background-image:url('<?php echo helper::baseUrl(false); ?>site/file/source/" + themeHeaderImage + "');background-repeat:" + $("#themeHeaderImageRepeat").val() + ";background-position:" + $("#themeHeaderImagePosition").val() + ";";
-		// Adaptation de la bannière
 		css += "background-size:" + $("#themeHeaderImageContainer").val() + ";";
-
-		// Position responsive
-		if (themeHeaderHeight === "none" ) {
-
-			css += "height: 0;  padding-top:" + (tmpImg.height / tmpImg.width ) * 100 + "%;";	
-
-			//console.log(css);	
-		} else {
-			css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + ";";
+		if (themeHeaderHeight === "none") {
+				// Position responsive
+				css += "height: 0;  padding-top:" + (tmpImg.height / tmpImg.width ) * 100 + "%}";	
+			} else {
+				// Positions standards
+				css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + "}";
 		}
-
-	}else {
-		
-		css += "background-image:none;";
-		// Forcer la sélection 150px
-		// $("#themeHeaderHeight option:eq(2)").prop("selected", true);
-		// Forcer le titre dans le header
-		$("header .container").show();		
+	// Pas d'image sélectionnée
+	} else {
+		// Désactiver l'option responsive
+			$("#themeHeaderHeight option:eq(2)").prop("selected", true);
+			css += "background-image:none;";
+			css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + "}";
+			$("header .container").show();
+	}
 	
-	} 
-	css += "}";
-
-
-
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
 	css += "header span{color:" + $("#themeHeaderTextColor").val() + ";font-family:'" + headerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeHeaderFontWeight").val() + ";font-size:" + $("#themeHeaderFontSize").val() + ";text-transform:" + $("#themeHeaderTextTransform").val() + "}";
 	// Cache le titre de la bannière
