@@ -970,6 +970,7 @@ class core extends common {
 			$css .= 'body,.row > div{font-size:' . $this->getData(['theme', 'text', 'fontSize']) . '}';
 			$css .= 'body,.block h4,input[type=\'email\'],input[type=\'text\'],input[type=\'password\'],.inputFile,select,textarea,.inputFile,.button.buttonGrey,.button.buttonGrey:hover{color:' . $this->getData(['theme', 'text', 'textColor']) . '}';
 			$css .= '.container{max-width:' . $this->getData(['theme', 'site', 'width']) . '}';
+			$css .= $this->getData(['theme', 'site', 'width']) === '750px' ? '.button, button{font-size:0.8em;}' : '';
 			$css .= '#site{background-color:' . $this->getData(['theme', 'site', 'backgroundColor']) . ';border-radius:' . $this->getData(['theme', 'site', 'radius']) . ';box-shadow:' . $this->getData(['theme', 'site', 'shadow']) . ' #212223}';
 			$colors = helper::colorVariants($this->getData(['theme', 'button', 'backgroundColor']));
 			$css .= '.speechBubble,.button,.button:hover,button[type=\'submit\'],.pagination a,.pagination a:hover,input[type=\'checkbox\']:checked + label:before,input[type=\'radio\']:checked + label:before,.helpContent{background-color:' . $colors['normal'] . ';color:' . $colors['text'] . '}';
@@ -1002,14 +1003,9 @@ class core extends common {
 					// On établie la hauteur du div en proportion de l'image
 					// (hauteur / largeur) . 100 
 					$sizes = getimagesize('site/file/source/'.$this->getData(['theme','header','image']));
-					//var_dump($sizes);
 					$css .= ';height: 0;  padding-top:';
 					$css .= ( $sizes[1] / $sizes[0] )* 100;
 					$css .= '%';
-				//} else {
-					// Le fichier n'existe plus
-					// largeur par défaut
-				//	$css .= ';height: 150px; line-height: 150px;';	
 				}
 			} else {
 				// Valeur de hauteur traditionnelle
