@@ -48,7 +48,9 @@ $("input, select").on("change", function() {
 	// Pas d'image sélectionnée
 	} else {
 		// Désactiver l'option responsive
-			$("#themeHeaderHeight option:eq(2)").prop("selected", true);
+			if (themeHeaderHeight === "none") {
+				$("#themeHeaderHeight option:eq(2)").prop("selected", true);
+			}
 			css += "background-image:none;";
 			css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + "}";
 			$("header .container").show();
