@@ -4,6 +4,7 @@
 - Corrections : 
     - Edition de page : problème d'affichage
     - Thème pied de page : problème d'affichage
+    - Largeur des boutons en 750px et boutons tronqué par une barre latérale : la taille des boutons fixée à 0.8em
 - Modifications : 
     - Aperçu de la bannière en mode responsive
 
