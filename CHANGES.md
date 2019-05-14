@@ -2,7 +2,7 @@
 
 ## Version 9.1.04
 - Corrections : 
-    - Edition de page : problème msie en page
+    - Edition de page : problème mise en page
     - Module Form (v1.9) : position et largeur des boutons
     - Thème Pied de page : problème d'affichage
     - Thème Site : boutons tronqués en 750px : 750px = 0.8em
