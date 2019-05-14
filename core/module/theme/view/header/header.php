@@ -70,7 +70,11 @@
 						<div class="col6">
 							<?php echo template::select('themeHeaderImageContainer', $module::$headerWide, [
 								'label' => 'Adaptation',
-								'selected' => $this->getData(['theme', 'header', 'imageContainer'])
+								'selected' => $this->getData(['theme', 'header', 'imageContainer']),
+								'help' => 'Responsive (cover) : rogne une image trop grande sans la déformer -
+									Responsive (contain) : agrandit une image trop petite sans la déformer.
+									<br><br>Pour une bannière full responsive, sélectionnez aussi Hauteur -> Responsive.
+									<br>Dans ce cas le titre est indisponible.'
 							]); ?>
 						</div>
 					</div>
@@ -92,10 +96,7 @@
 					<div class="col4">
 						<?php echo template::select('themeHeaderHeight', $module::$headerHeights, [
 							'label' => 'Hauteur',
-							'selected' => $this->getData(['theme', 'header', 'height']),
-							'help' => 'Pour une bannière image responsive, sélectionnez automatique,
-									dans ce cas la hauteur est proportionnelle à la largeur de l\'image.
-									Le titre du site est indisponible en mode responsive.' 
+							'selected' => $this->getData(['theme', 'header', 'height'])
 						]); ?>
 					</div>
 					<div class="col4">
