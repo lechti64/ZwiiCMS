@@ -89,8 +89,40 @@ $this->pages2Json();
 		'value' => $this->getData(['page', $this->getUrl(2), 'content'])
 	]); ?>
 	<div class="row">
-		<div class="col6">
+		<div class="col6"  id="pageEditMenu">
 			<div class="block">
+				<h4>Emplacements</h4>
+				<?php if($this->getHierarchy($this->getUrl(2), false)): ?>
+					<?php echo template::hidden('pageEditParentPageId', [
+						'value' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
+					]); ?>
+				<?php else: ?>
+					<?php echo template::select('pageEditParentPageId', $module::$pagesNoParentId, [
+						'label' => 'Page parent',
+						'selected' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
+					]); ?>
+				<?php endif; ?>
+				<?php echo template::select('pageEditPosition', [], [
+					'label' => 'Position',
+					'help' => 'Une page non affichée dans les menus est classée comme \'Page orpheline\' dans la liste des pages.'
+				]); ?>									
+				<div class="row">
+					<div class="col6">
+						<?php echo template::checkbox('pageEditTargetBlank', true, 'Nouvel onglet', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
+						]); ?>
+					</div>					
+					<div class="col6">
+						<?php echo template::checkbox('pageEditDisable', true, 'Désactivée', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'disable']),			
+							'help' => 'Une page désactivée figure dans le menu sans être cliquable, par exemple comme page parente sans contenu.'
+						]); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col6" id="pageEditBlockLayout">
+			<div class="block" >
 				<h4>Mise en page</h4>
 				<?php echo template::select('pageEditBlock', $module::$pageBlocks, [
 						'label' => 'Gabarits de page / Barre latérale',
@@ -141,42 +173,10 @@ $this->pages2Json();
 				</div>	
 			</div>		
 		</div>
-	<div class="col6">
-		<div class="block" id="PageEditMenu">
-				<h4>Emplacements</h4>
-				<?php if($this->getHierarchy($this->getUrl(2), false)): ?>
-					<?php echo template::hidden('pageEditParentPageId', [
-						'value' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
-					]); ?>
-				<?php else: ?>
-					<?php echo template::select('pageEditParentPageId', $module::$pagesNoParentId, [
-						'label' => 'Page parent',
-						'selected' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
-					]); ?>
-				<?php endif; ?>
-				<?php echo template::select('pageEditPosition', [], [
-					'label' => 'Position',
-					'help' => 'Une page non affichée dans les menus est classée comme \'Page orpheline\' dans la liste des pages.'
-				]); ?>									
-				<div class="row">
-					<div class="col6">
-						<?php echo template::checkbox('pageEditTargetBlank', true, 'Nouvel onglet', [
-							'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
-						]); ?>
-					</div>					
-					<div class="col6">
-						<?php echo template::checkbox('pageEditDisable', true, 'Désactivée', [
-							'checked' => $this->getData(['page', $this->getUrl(2), 'disable']),			
-							'help' => 'Une page désactivée figure dans le menu sans être cliquable, par exemple comme page parente sans contenu.'
-						]); ?>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 	<div class="row">
-		<div class="col12">
-			<div class="block" id="PageEditMenuSpecial">
+		<div class="col12" id="pageEditMenuSpecial">
+			<div class="block">
 			<h4>Options avancées d'emplacements</h4>	
 				<div class="row">
 					<div class="col12">
