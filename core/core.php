@@ -28,7 +28,7 @@ class common {
 	const GROUP_ADMIN = 3;
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.1.05';
+	const ZWII_VERSION = '9.1.06';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1893,7 +1893,7 @@ class layout extends common {
 		$items .= '>Motorisé&nbsp;par&nbsp</span>';
 		// Toujours afficher le nom du CMS
 		$items .= '<span id="footerZwiiCMS">';
-		$items .= '<a href="http://zwiicms.com/" target="_blank" data-tippy-content="Zwii CMS sans base de données, très léger et performant">ZwiiCMS</a>';		
+		$items .= '<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">ZwiiCMS</a>';		
 		$items .= '</span>';
 		// Affichage du numéro de version
 		$items .= '<span id="footerDisplayVersion"';
