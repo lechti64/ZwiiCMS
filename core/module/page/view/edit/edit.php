@@ -91,7 +91,7 @@ $this->pages2Json();
 	<div class="row">
 		<div class="col6"  id="pageEditMenu">
 			<div class="block">
-				<h4>Emplacements</h4>
+				<h4>Emplacement</h4>
 				<?php if($this->getHierarchy($this->getUrl(2), false)): ?>
 					<?php echo template::hidden('pageEditParentPageId', [
 						'value' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
@@ -177,12 +177,12 @@ $this->pages2Json();
 	<div class="row">
 		<div class="col12" id="pageEditMenuSpecial">
 			<div class="block">
-			<h4>Options avancées d'emplacements</h4>	
+			<h4>Options avancées d'emplacement</h4>	
 				<div class="row">
 					<div class="col12">
 					<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Masquer les pages enfants de cette page dans le menu horizontal', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuChildren']),
-						'help' => 'Afficher uniquement les pages enfants dans un `sous-menu de page parente` dans une barre latérale.'
+						'help' => 'Afficher uniquement les pages enfants dans le \'sous-menu de page parente\' d\'une barre latérale.'
 					]); ?>
 					</div>
 				</div>									
@@ -190,7 +190,7 @@ $this->pages2Json();
 					<div class="col12">
 					<?php echo template::checkbox('pageEditHideMenuHead', true, 'Masquer cette page dans le menu horizontal, l\'afficher dans le menu vertical en barre latérale', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuHead']),
-						'help' => 'Pour masquer la page totalement (ex : page en construction), dans `Position`, sélectionnez `Ne pas afficher`.'
+						'help' => 'Pour masquer la page dans les deux menus, dans \'Position\' sélectionnez \'Ne pas afficher\'.'
 					]); ?>
 					</div>
 				</div>
@@ -198,7 +198,7 @@ $this->pages2Json();
 					<div class="col12">
 					<?php echo template::checkbox('pageEditHideMenuSide', true, 'Masquer cette page dans le menu vertical en barre latérale, l\'afficher dans le menu horizontal', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuSide']),
-						'help' => 'Pour masquer la page totalement (ex : page en construction), dans `Position`, sélectionnez `Ne pas afficher`.'
+						'help' => 'Pour masquer la page dans les deux menus, dans \'Position\' sélectionnez \'Ne pas afficher\'.'
 					]); ?>
 					</div>
 				</div>	
