@@ -69,14 +69,14 @@ $( document ).ready(function() {
     $("#pageEditModuleId").val() === "code") {
 		$("#pageEditHideTitleWrapper").removeClass("disabled");
 		$("#pageEditHideTitleWrapper").hide();
-		$("#pageEditBlockWrapper").removeClass("disabled");
-		$("#pageEditBlockWrapper").hide();			
+		$("#pageEditBlockLayout").removeClass("disabled");
+		$("#pageEditBlockLayout").hide();			
 		
 	} else {	
 		$("#pageEditHideTitleWrapper").addClass("disabled");
 		$("#pageEditHideTitleWrapper").show();
-		$("#pageEditBlockWrapper").addClass("disabled");
-		$("#pageEditBlockWrapper").show();		
+		$("#pageEditBlockLayout").addClass("disabled");
+		$("#pageEditBlockLayout").show();		
 	}
 	/**
 	* Masquer et démasquer la sélection des barres 
@@ -111,8 +111,8 @@ $( document ).ready(function() {
 			break;
 	};
 	if ($("#pageEditBlock").val() === "bar") {		
-			$("#PageEditMenu").removeClass("disabled");
-			$("#PageEditMenu").slideUp();
+			$("#pageEditMenu").removeClass("disabled");
+			$("#pageEditMenu").slideUp();
 			$("#pageEditHideTitleWrapper").removeClass("disabled");
 			$("#pageEditHideTitleWrapper").slideUp();
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
@@ -125,8 +125,8 @@ $( document ).ready(function() {
 			$("#pageEditDisplayMenuWrapper").slideDown();
 			$("#pageEditGroupWrapper").removeClass("disabled");
 			$("#pageEditGroupWrapper").slideUp();			
-			$("#PageEditMenuSpecial").removeClass("disabled");
-			$("#PageEditMenuSpecial").slideUp();
+			$("#pageEditMenuSpecial").removeClass("disabled");
+			$("#pageEditMenuSpecial").slideUp();
 	} else {
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideUp();	
@@ -292,14 +292,14 @@ pageEditModuleIdDOM.on("change", function() {
 	   $(this).val() === "code") {
 		$("#pageEditHideTitleWrapper").removeClass("disabled");
 		$("#pageEditHideTitleWrapper").slideUp();	
-		$("#pageEditBlockWrapper").removeClass("disabled");
-		$("#pageEditBlockWrapper").slideUp();		
+		$("#pageEditBlockLayout").removeClass("disabled");
+		$("#pageEditBlockLayout").slideUp();
 	}
 	else {	
 		$("#pageEditHideTitleWrapper").addClass("disabled");
 		$("#pageEditHideTitleWrapper").slideDown();
-		$("#pageEditBlockWrapper").addClass("disabled");
-		$("#pageEditBlockWrapper").slideDown();			
+		$("#pageEditBlockLayout").addClass("disabled");
+		$("#pageEditBlockLayout").slideDown();				
 	}
 });
 
@@ -339,10 +339,10 @@ pageEditBlockDOM.on("change", function() {
 			break;	
 	}
 	if ($(this).val() === "bar") {
-			$("#PageEditMenu").removeClass("disabled");
-			$("#PageEditMenu").slideUp();
-			$("#PageEditMenuSpecial").removeClass("disabled");
-			$("#PageEditMenuSpecial").slideUp();
+			$("#pageEditMenu").removeClass("disabled");
+			$("#pageEditMenu").slideUp();
+			$("#pageEditMenuSpecial").removeClass("disabled");
+			$("#pageEditMenuSpecial").slideUp();
 			$("#pageEditHideTitleWrapper").removeClass("disabled");
 			$("#pageEditHideTitleWrapper").slideUp();
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
@@ -356,10 +356,10 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditGroupWrapper").removeClass("disabled");
 			$("#pageEditGroupWrapper").slideUp();																					
 	} else {
-			$("#PageEditMenu").addClass("disabled");
-			$("#PageEditMenu").slideDown();	
-			$("#PageEditMenuSpecial").addClass("disabled");
-			$("#PageEditMenuSpecial").slideDown();				
+			$("#pageEditMenu").addClass("disabled");
+			$("#pageEditMenu").slideDown();	
+			$("#pageEditMenuSpecial").addClass("disabled");
+			$("#pageEditMenuSpecial").slideDown();				
 			$("#pageEditHideTitleWrapper").addClass("disabled");
 			$("#pageEditHideTitleWrapper").slideDown();	
 			$("#pageEditModuleIdWrapper").addClass("disabled");
