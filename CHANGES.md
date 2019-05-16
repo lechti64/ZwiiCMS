@@ -1,6 +1,8 @@
 # Changelog
 
 ## Version 9.1.05
+- Correction : 
+    - Site par défaut  lien Zwii masqué du menu horizontal
 - Modifications : 
     - Présentation de l'édition des pages
     - Largeur dynamique du bouton envoyer dans le formulaire 
