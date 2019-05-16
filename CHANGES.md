@@ -5,6 +5,7 @@
     - Présentation de l'édition des pages
     - Largeur dynamique du bouton envoyer dans le formulaire 
     - Lien dans le footer vers le site Zwii
+    - Redirection, écran de confirmation
 
 ## Version 9.1.04
 - Corrections : 
