@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 9.1.05
+- Modifications : 
+    - Présentation de l'édition des pages
+    - Largeur dynamique du bouton envoyer dans le formulaire 
+    - Lien dans le footer vers le site Zwii
+
 ## Version 9.1.04
 - Corrections : 
     - Edition de page : problème mise en page
