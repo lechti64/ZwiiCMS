@@ -233,7 +233,7 @@ class install extends common {
 			'barRight' => '',
 			'displayMenu' => 'none',
 			'hideMenuSide' => false,
-			'hideMenuHead' => true,
+			'hideMenuHead' => false,
 			'hideMenuChildren' =>false							
 		],
 			'contact' => [
