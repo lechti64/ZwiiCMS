@@ -104,7 +104,7 @@ $this->pages2Json();
 				<?php endif; ?>
 				<?php echo template::select('pageEditPosition', [], [
 					'label' => 'Position',
-					'help' => 'Une page non affichée dans les menus est classée comme \'Page orpheline\' dans la liste des pages.'
+					'help' => '\'Ne pas afficher\' crée une page orpheline non accessible par le biais des menus.'
 				]); ?>									
 				<div class="row">
 					<div class="col6">
@@ -115,7 +115,7 @@ $this->pages2Json();
 					<div class="col6">
 						<?php echo template::checkbox('pageEditDisable', true, 'Désactivée', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'disable']),			
-							'help' => 'Une page désactivée figure dans le menu sans être cliquable, par exemple comme page parente sans contenu.'
+							'help' => 'Une page désactivée figure dans le menu sans être cliquable, ex : une page parente sans contenu.'
 						]); ?>
 					</div>
 				</div>
@@ -177,7 +177,7 @@ $this->pages2Json();
 	<div class="row">
 		<div class="col12" id="pageEditMenuSpecial">
 			<div class="block">
-			<h4>Options avancées d'emplacement</h4>	
+			<h4>Options d'emplacement avancées </h4>	
 				<div class="row">
 					<div class="col12">
 					<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Masquer les pages enfants de cette page dans le menu horizontal', [

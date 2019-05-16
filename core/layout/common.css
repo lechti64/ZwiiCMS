@@ -39,7 +39,12 @@ body {
 	header {
 		margin:0px 0px !important;
 	}
+	.tippy-tooltip {
+		font-size:.8rem !important;
+	}
 }
+
+
 
 @media (max-width: 992px) {	
 	.siteContainer {
