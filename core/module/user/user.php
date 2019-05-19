@@ -38,8 +38,10 @@ class user extends common {
 				self::$inputNotices['userAddId'] = 'Identifiant déjà utilisé';
 			}
 			// Double vérification pour le mot de passe
+			$mail = true;
 			if($this->getInput('userAddPassword', helper::FILTER_STRING_SHORT, true) !== $this->getInput('userAddConfirmPassword', helper::FILTER_STRING_SHORT, true)) {
 				self::$inputNotices['userAddConfirmPassword'] = 'Incorrect';
+				$mail = false;
 			}		
 			// Crée l'utilisateur
 			$userFirstname = $this->getInput('userAddFirstname', helper::FILTER_STRING_SHORT, true);
@@ -73,8 +75,8 @@ class user extends common {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
-				'notification' => ($sent === true ? 'Utilisateur créé' : $sent),
-				'state' => ($sent === true ? true : null)
+				'notification' => (($sent === true) && ($mail === true) ? 'Utilisateur créé' : $sent),
+				'state' => (($sent === true) && ($mail === true) ? true : null)
 			]);
 		}
 		// Valeurs en sortie
