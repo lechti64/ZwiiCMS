@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 9.1.06
+- Corrections : 
+    - Ajout d'un utilisateur : pas d'envoi du mail de confirmation si les mots de passe ne sont pas identiques.
+    - Mise à jour automatique : effacement des archives téléchargées
+
 ## Version 9.1.05
 - Correction : 
     - Site par défaut  lien Zwii masqué du menu horizontal

@@ -169,6 +169,13 @@ class install extends common {
 				} catch (Exception $e) {
 					$success = $e->getMessage();
 				}
+				// Netooyage du dossier
+				if(file_exists('site/tmp/update.tar.gz')) {
+					unlink('site/tmp/update.tar.gz');
+				}
+				if(file_exists('site/tmp/update.tar')) {
+					unlink('site/tmp/update.tar');
+				}
 				// Valeurs en sortie
 				$this->addOutput([
 					'display' => self::DISPLAY_JSON,
