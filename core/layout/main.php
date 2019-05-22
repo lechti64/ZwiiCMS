@@ -301,5 +301,11 @@
 <!-- Lien remonter en haut -->
 <div id="backToTop"><?php echo template::ico('up'); ?></div>
 <?php $layout->showScript();?>
+<?php 
+// Fichier include
+if (file_exists('site/data/script.inc.php')) {
+	include ('site/data/script.inc.php');
+}
+?>
 </body>
 </html>

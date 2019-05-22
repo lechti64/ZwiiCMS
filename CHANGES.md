@@ -4,6 +4,10 @@
 - Corrections : 
     - Ajout d'un utilisateur : pas d'envoi du mail de confirmation si les mots de passe ne sont pas identiques.
     - Mise à jour automatique : effacement des archives téléchargées
+    - Z-index des sous-menus augmentés à 8  ; problème d'affichage avec codemirror
+- Modification : 
+    - Ajout d'un appel vers script.inc.php dans main.php
+    
 
 ## Version 9.1.05
 - Correction : 
