@@ -411,6 +411,7 @@ nav ul {
 	margin: 0;
 	list-style: none;
 }
+
 nav li {
 	display: inline-block;
 	position: relative;
@@ -432,7 +433,7 @@ nav li ul li {
 	text-align: left;
 }
 nav li:hover ul {
-	z-index: 2;
+	z-index: 8;
 	opacity: 1;
 }
 nav a {
