@@ -2219,7 +2219,7 @@ class layout extends common {
 	 * Affiche la meta image (site screenshot)
 	 */
 	public function showMetaImage() {
-		echo '<meta property="og:image" content="' . helper::baseUrl() .'/site/file/source/screenshot.png" />';
+		echo '<meta property="og:image" content="' . helper::baseUrl() .'site/file/source/screenshot.png" />';
 	}
 
 
