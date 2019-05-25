@@ -61,7 +61,7 @@ class user extends common {
 			]);
 			// Envoi le mail
 			$sent = true;
-			if($this->getInput('userAddSendMail', helper::FILTER_BOOLEAN)) {
+			if($this->getInput('userAddSendMail', helper::FILTER_BOOLEAN) && $mail === true) {
 				$sent = $this->sendMail(
 					$userMail,
 					'Compte créé sur ' . $this->getData(['config', 'title']),
@@ -75,8 +75,8 @@ class user extends common {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'user',
-				'notification' => (($sent === true) && ($mail === true) ? 'Utilisateur créé' : $sent),
-				'state' => (($sent === true) && ($mail === true) ? true : null)
+				'notification' => $sent === true ? 'Utilisateur créé' : $sent,
+				'state' => $sent === true ? true : null
 			]);
 		}
 		// Valeurs en sortie
