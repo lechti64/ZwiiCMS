@@ -6,8 +6,7 @@
     - Mise à jour automatique : effacement des archives téléchargées
     - Z-index des sous-menus augmentés à 8  ; problème d'affichage avec codemirror
 - Modification : 
-    - Ajout d'un appel vers script.inc.php dans main.php
-    
+    - Include de script.inc.php et head.inc.html dans main.php
 
 ## Version 9.1.05
 - Correction : 
