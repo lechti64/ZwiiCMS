@@ -32,36 +32,44 @@ class user extends common {
 	public function add() {
 		// Soumission du formulaire
 		if($this->isPost()) {
+			$check=true;
 			// L'identifiant d'utilisateur est indisponible
 			$userId = $this->getInput('userAddId', helper::FILTER_ID, true);
 			if($this->getData(['user', $userId])) {
 				self::$inputNotices['userAddId'] = 'Identifiant déjà utilisé';
+				$check=false;
 			}
 			// Double vérification pour le mot de passe
-			$mail = true;
 			if($this->getInput('userAddPassword', helper::FILTER_STRING_SHORT, true) !== $this->getInput('userAddConfirmPassword', helper::FILTER_STRING_SHORT, true)) {
 				self::$inputNotices['userAddConfirmPassword'] = 'Incorrect';
-				$mail = false;
+				$check = false;
 			}		
 			// Crée l'utilisateur
 			$userFirstname = $this->getInput('userAddFirstname', helper::FILTER_STRING_SHORT, true);
 			$userLastname = $this->getInput('userAddLastname', helper::FILTER_STRING_SHORT, true);
 			$userMail = $this->getInput('userAddMail', helper::FILTER_MAIL, true);
-			$this->setData([
-				'user',
-				$userId,
-				[
-					'firstname' => $userFirstname,
-					'forgot' => 0,
-					'group' => $this->getInput('userAddGroup', helper::FILTER_INT, true),
-					'lastname' => $userLastname,
-					'mail' => $userMail,
-					'password' => $this->getInput('userAddPassword', helper::FILTER_PASSWORD, true)
-				]
-			]);
-			// Envoi le mail
+			// Pas de nom saisi
+			if (empty($userFirstname) || empty($userLastname)) {
+				$check=false;
+			}
+			// Si tout est ok création effective
+			if ($check === true) {
+				$this->setData([
+					'user',
+					$userId,
+					[
+						'firstname' => $userFirstname,
+						'forgot' => 0,
+						'group' => $this->getInput('userAddGroup', helper::FILTER_INT, true),
+						'lastname' => $userLastname,
+						'mail' => $userMail,
+						'password' => $this->getInput('userAddPassword', helper::FILTER_PASSWORD, true)
+					]
+				]);
+			}
+			// Envoie le mail
 			$sent = true;
-			if($this->getInput('userAddSendMail', helper::FILTER_BOOLEAN) && $mail === true) {
+			if($this->getInput('userAddSendMail', helper::FILTER_BOOLEAN) && $check === true) {
 				$sent = $this->sendMail(
 					$userMail,
 					'Compte créé sur ' . $this->getData(['config', 'title']),
