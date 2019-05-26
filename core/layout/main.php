@@ -14,7 +14,6 @@
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>core/layout/common.css">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/theme.css?<?php echo md5_file('site/data/theme.css'); ?>">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/custom.css?<?php echo md5_file('site/data/custom.css'); ?>">
-	<link rel="import" href="<?php echo helper::baseUrl(false); ?>site/data/head.inc.html">
 </head>
 <body>
 <?php $layout->showStyle(); ?>
@@ -302,11 +301,5 @@
 <!-- Lien remonter en haut -->
 <div id="backToTop"><?php echo template::ico('up'); ?></div>
 <?php $layout->showScript();?>
-<?php 
-// Fichier include
-if (file_exists('site/data/script.inc.php')) {
-	include ('site/data/script.inc.php');
-}
-?>
 </body>
 </html>
