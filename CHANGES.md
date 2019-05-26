@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 9.1.07
+- Correction : 
+    - Ajout d'un utilisateur : autres contrôles avant envoi d'un mail de confirmation
+- Suppression :
+    - Include de script.inc.php et head.inc.html dans main.php
+
 ## Version 9.1.06
 - Corrections : 
     - Ajout d'un utilisateur : pas d'envoi du mail de confirmation si les mots de passe ne sont pas identiques.
