@@ -3,6 +3,7 @@
 ## Version 9.1.08
 - Modification : 
     - Thème 100%  fluide sans marge
+    
 ## Version 9.1.07
 - Correction : 
     - Ajout d'un utilisateur : autres contrôles avant envoi d'un mail de confirmation
