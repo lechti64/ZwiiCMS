@@ -63,7 +63,7 @@
 				<h4>Copie d'écran OpenGraph</h4>
 				<div class="row">
 					<div class="col8 offset2">
-						<img src='<?php echo helper::baseUrl(false) . 'site/file/source/screenshot.png';?>' />
+						<img src='<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>' />
 					</div>
 				</div>
 				<div class="row">				

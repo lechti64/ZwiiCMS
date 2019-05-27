@@ -216,7 +216,7 @@ class theme extends common {
 		// Soumission du formulaire
 		if($this->isPost()) {
 			// Enregistre le CSS
-			file_put_contents('site/data/custom.css', $this->getInput('themeAdvancedCss', null));
+			file_put_contents(self::DATA_DIR.'custom.css', $this->getInput('themeAdvancedCss', null));
 			// Valeurs en sortie
 			$this->addOutput([
 				'notification' => 'Modifications enregistrées',
@@ -432,7 +432,7 @@ class theme extends common {
 	 */
 	public function reset() {
 		// Supprime le fichier de personnalisation avancée
-		unlink('site/data/custom.css');
+		unlink(self::DATA_DIR.'custom.css');
 		// Valeurs en sortie
 		$this->addOutput([
 			'notification' => 'Personnalisation avancée réinitialisée',
@@ -492,7 +492,7 @@ class theme extends common {
 			$zipFilename =	$this->getInput('themeManageImport', helper::FILTER_STRING_SHORT, true);
 
 			$zip = new ZipArchive();
-			if ($zip->open('site/file/source/'.$zipFilename) === TRUE) {
+			if ($zip->open(self::FILE_DIR.'source/'.$zipFilename) === TRUE) {
 				$zip->extractTo('.');
 				$zip->close();
 			// Valeurs en sortie
@@ -527,10 +527,10 @@ class theme extends common {
 			header('Content-Type: application/octet-stream');
 			header('Content-Transfer-Encoding: binary');
 			header('Content-Disposition: attachment; filename="' . $zipFilename . '"');
-			header('Content-Length: ' . filesize('site/tmp/' . $zipFilename));
-			readfile('site/tmp/' . $zipFilename);
+			header('Content-Length: ' . filesize(self::TEMP_DIR . $zipFilename));
+			readfile(self::TEMP_DIR . $zipFilename);
 			// Nettoyage du dossier
-			unlink ('site/tmp/' . $zipFilename);
+			unlink (self::TEMP_DIR . $zipFilename);
 			die();
 	}
 
@@ -541,10 +541,10 @@ class theme extends common {
 		// Make zip
 		$zipFilename = $this->makezip();
 		// Téléchargement du ZIP
-		mkdir('site/file/source/theme');
-		copy ('site/tmp/' . $zipFilename , 'site/file/source/theme/' . $zipFilename);
+		mkdir(self::FILE_DIR.'source/theme');
+		copy (self::TEMP_DIR . $zipFilename , self::FILE_DIR.'source/theme/' . $zipFilename);
 		// Nettoyage du dossier
-		unlink ('site/tmp/' . $zipFilename);
+		unlink (self::TEMP_DIR . $zipFilename);
 		// Valeurs en sortie
 		$this->addOutput([
 			'notification' => 'Archive <b>'.$zipFilename.'</b> sauvegardée dans fichiers',
@@ -561,18 +561,18 @@ class theme extends common {
 		// $zipFilename  =  'theme-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.zip';
 		$zipFilename  =  'theme  '.date('d m Y').'  '.date('H i s ').'.zip';
 		$zip = new ZipArchive();
-		if ($zip->open('site/tmp/' . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
-			$zip->addFile('site/data/theme.json','site/data/theme.json');
-			$zip->addFile('site/data/theme.json','site/data/theme.css');
-			$zip->addFile('site/data/theme.json','site/data/custom.css');			
+		if ($zip->open(self::TEMP_DIR . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
+			$zip->addFile(self::DATA_DIR.'theme.json',self::DATA_DIR.'theme.json');
+			$zip->addFile(self::DATA_DIR.'theme.json',self::DATA_DIR.'theme.css');
+			$zip->addFile(self::DATA_DIR.'theme.json',self::DATA_DIR.'custom.css');			
 			if ($this->getData(['theme','body','image']) !== '' ) {
-			$zip->addFile('site/file/source/'.$this->getData(['theme','body','image']),
-						'site/file/source/'.$this->getData(['theme','body','image'])
+			$zip->addFile(self::FILE_DIR.'source/'.$this->getData(['theme','body','image']),
+						self::FILE_DIR.'source/'.$this->getData(['theme','body','image'])
 						);
 			}
 			if ($this->getData(['theme','header','image']) !== '' ) {			
-			$zip->addFile('site/file/source/'.$this->getData(['theme','header','image']),
-						  'site/file/source/'.$this->getData(['theme','header','image'])
+			$zip->addFile(self::FILE_DIR.'source/'.$this->getData(['theme','header','image']),
+						  self::FILE_DIR.'source/'.$this->getData(['theme','header','image'])
 						);
 			}
 			$ret = $zip->close();
