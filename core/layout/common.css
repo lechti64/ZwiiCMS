@@ -341,22 +341,20 @@ td > .col12 {
 		height: auto;
 	}
 	#bar #barSelectPage {
-		width: 70% !important;
+		width: 55% !important;
+		font-size: 0.8em !important;			
+	}
+	#bar #barLeft {
+		font-size: 2em;		
 	}
 	#bar #barRight {
-		font-size: 1.2em;		
-	}
-	#bar #barSelectPage {
-		width: 80%;
-		font-size: 120%;
-	}
-}
-
-@media (max-width: 992px) {
-	#bar .zwiico-user {
+		font-size: 2.5em;		
+	}	
+	#bar #displayUsername {
 		display: none;
 	}
 }
+
 
 /* Site */
 #site {
