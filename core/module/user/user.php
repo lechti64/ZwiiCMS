@@ -49,7 +49,10 @@ class user extends common {
 			$userLastname = $this->getInput('userAddLastname', helper::FILTER_STRING_SHORT, true);
 			$userMail = $this->getInput('userAddMail', helper::FILTER_MAIL, true);
 			// Pas de nom saisi
-			if (empty($userFirstname) || empty($userLastname)) {
+			if (empty($userFirstname) || 
+				empty($userLastname)  || 
+				empty($this->getInput('userAddPassword', helper::FILTER_STRING_SHORT, true)) ||
+				empty($this->getInput('userAddConfirmPassword', helper::FILTER_STRING_SHORT, true))) {
 				$check=false;
 			}
 			// Si tout est ok création effective
