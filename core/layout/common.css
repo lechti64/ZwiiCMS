@@ -42,6 +42,9 @@ body {
 	.tippy-tooltip {
 		font-size:.8rem !important;
 	}
+	section {
+		padding: 5px !important;
+	}
 }
 
 
