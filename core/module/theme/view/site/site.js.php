@@ -48,6 +48,9 @@ $("input, select").on("change", function() {
 	css += ".container{max-width:" + $("#themeSiteWidth").val() + "}";
 	if ($("#themeSiteWidth").val() === "100%") {
 		css += "#site{margin:0 auto;} body{margin:0 auto;}  #bar{margin:0 auto;}";
+	} else {
+		css += "#site{margin:20px auto;} body{margin:0px 10px;}  #bar{margin: 0 -10px;}";
+		
 	}
 	// Couleur du site, arrondi sur les coins du site et ombre sur les bords du site
 	css += "#site{background-color:" + $("#themeSiteBackgroundColor").val() + ";border-radius:" + $("#themeSiteRadius").val() + ";box-shadow:" + $("#themeSiteShadow").val() + " #212223}";
