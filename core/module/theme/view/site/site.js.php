@@ -47,9 +47,9 @@ $("input, select").on("change", function() {
 	// Largeur du site
 	css += ".container{max-width:" + $("#themeSiteWidth").val() + "}";
 	if ($("#themeSiteWidth").val() === "100%") {
-		css += "#site{margin:0 auto;} body{margin:0 auto;}  #bar{margin:0 auto;}";
+		css += "#site{margin:0 auto;} body{margin:0 auto;}  #bar{margin:0 auto;} body > header{margin:0 auto;} body > nav {margin: 0 auto;} body > footer {margin:0 auto;}";
 	} else {
-		css += "#site{margin:20px auto;} body{margin:0px 10px;}  #bar{margin: 0 -10px;}";
+		css += "#site{margin:20px auto !important;} body{margin:0px 10px;}  #bar{margin: 0 -10px;} body > header{margin: 0 -10px;} body > nav {margin: 0 -10px;} body > footer {margin: 0 -10px;} ";
 		
 	}
 	// Couleur du site, arrondi sur les coins du site et ombre sur les bords du site
