@@ -1,8 +1,8 @@
 <?php
 // Mise à jour de la liste des pages pour TinyMCE
 $this->pages2Json();
-?>
-<?php echo template::formOpen('pageEditForm'); ?>
+// Début du formulaire
+echo template::formOpen('pageEditForm'); ?>
 	<div class="row">
 	<div class="col2">
 			<?php $href = helper::baseUrl() . $this->getUrl(2); ?>
@@ -177,7 +177,7 @@ $this->pages2Json();
 	<div class="row">
 		<div class="col12" id="pageEditMenuSpecial">
 			<div class="block">
-			<h4>Options d'emplacement avancées </h4>	
+			<h4>Options d'emplacement avancées</h4>	
 				<div class="row">
 					<div class="col12">
 					<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Masquer les pages enfants de cette page dans le menu horizontal', [
