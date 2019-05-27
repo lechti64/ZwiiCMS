@@ -46,6 +46,9 @@ $("input, select").on("change", function() {
 	css += "body,.block h4,input[type='email'],input[type='text'],input[type='password'],.inputFile,select,textarea,.inputFile,.button.buttonGrey,.button.buttonGrey:hover{color:" + $("#themeTextTextColor").val() + "}";
 	// Largeur du site
 	css += ".container{max-width:" + $("#themeSiteWidth").val() + "}";
+	if ($("#themeSiteWidth").val() === "100%") {
+		css += "#site{margin:0 auto;} body{margin:0 auto;}";
+	}
 	// Couleur du site, arrondi sur les coins du site et ombre sur les bords du site
 	css += "#site{background-color:" + $("#themeSiteBackgroundColor").val() + ";border-radius:" + $("#themeSiteRadius").val() + ";box-shadow:" + $("#themeSiteShadow").val() + " #212223}";
 	// Ajout du css au DOM
