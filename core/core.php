@@ -26,6 +26,10 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
+	const BACKUP_DIR = 'site/backup/';
+	const DATA_DIR = 'site/data/';
+	const FILE_DIR = 'site/file/';
+	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
 	const ZWII_VERSION = '9.1.08';
@@ -130,13 +134,13 @@ class common {
 		$this->importData();
 
 		// Génère le fichier de données lorque les deux fichiers sont absents ou seulement le thème est - installation fraîche par défaut
-		if(file_exists('site/data/core.json')   === false OR 
-		   file_exists('site/data/theme.json')  === false) {
+		if(file_exists(self::DATA_DIR.'core.json')   === false OR 
+		   file_exists(self::DATA_DIR.'theme.json')  === false) {
 			include_once('core/module/install/ressource/defaultdata.php');   
 			$this->setData([install::$defaultData]);
 			$this->saveData();
-			chmod('site/data/core.json', 0755);
-			chmod('site/data/theme.json', 0755);
+			chmod(self::DATA_DIR.'core.json', 0755);
+			chmod(self::DATA_DIR.'theme.json', 0755);
 		} 
 
 		// Import des données d'un fichier data.json déjà présent
@@ -223,7 +227,7 @@ class common {
 	public function readData() {
 		// Trois tentatives
 		for($i = 0; $i < 3; $i++) {
-			$this->setData([json_decode(file_get_contents('site/data/core.json'), true) + json_decode(file_get_contents('site/data/theme.json'), true)]);
+			$this->setData([json_decode(file_get_contents(self::DATA_DIR.'core.json'), true) + json_decode(file_get_contents(self::DATA_DIR.'theme.json'), true)]);
 			if($this->data) {
 				break;
 			}
@@ -240,26 +244,26 @@ class common {
 	 * Converti un fichier de données data.json puis le renomme
 	 */
 	public function importData() {
-		if(file_exists('site/data/data.json')) {
+		if(file_exists(self::DATA_DIR.'data.json')) {
 			// Trois tentatives
 			for($i = 0; $i < 3; $i++) {
-				$tempData = [json_decode(file_get_contents('site/data/data.json'), true)];			
+				$tempData = [json_decode(file_get_contents(self::DATA_DIR.'data.json'), true)];			
 				if($tempData) {
 					for($i = 0; $i < 3; $i++) {
-						if(file_put_contents('site/data/core.json', json_encode(array_slice($tempData[0],0,5)), LOCK_EX) !== false) {
+						if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($tempData[0],0,5)), LOCK_EX) !== false) {
 							break;
 						}
 						// Pause de 10 millisecondes
 						usleep(10000);
 					}
 					for($i = 0; $i < 3; $i++) {
-						if(file_put_contents('site/data/theme.json', json_encode(array_slice($tempData[0],5)), LOCK_EX) !== false) {
+						if(file_put_contents(self::DATA_DIR.'theme.json', json_encode(array_slice($tempData[0],5)), LOCK_EX) !== false) {
 							break;
 						}
 						// Pause de 10 millisecondes
 						usleep(10000);
 					}					
-					rename ('site/data/data.json','site/data/imported_data.json');
+					rename (self::DATA_DIR.'data.json',self::DATA_DIR.'imported_data.json');
 					break;
 				}
 				elseif($i === 2) {
@@ -342,7 +346,7 @@ class common {
 	 * En local, copie du site décran de ZwiiCMS
 	 */	
 	public function makeImageTag () {
-		if (!file_exists('site/file/source/screenshot.png'))
+		if (!file_exists(self::FILE_DIR.'source/screenshot.png'))
 		{ 			
 			if ( strpos(helper::baseUrl(false),'localhost') == 0 AND strpos(helper::baseUrl(false),'127.0.0.1') == 0)	{							
 				$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. helper::baseUrl(false) .'&screenshot=true');	
@@ -351,7 +355,7 @@ class common {
 				$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
 				$data = 'data:image/jpeg;base64,'.$screenshot;
 				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
-				file_put_contents( 'site/file/source/screenshot.png',$data);
+				file_put_contents( self::FILE_DIR.'source/screenshot.png',$data);
 			}
 		}
 	}
@@ -521,7 +525,7 @@ class common {
 		// 5 premières clés principales
 		// Trois tentatives
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents('site/data/core.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
+			if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
@@ -531,7 +535,7 @@ class common {
 		// dernière clé principale
 		// Trois tentatives
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents('site/data/theme.json', json_encode(array_slice($this->getData(),5)), LOCK_EX) !== false) {
+			if(file_put_contents(self::DATA_DIR.'theme.json', json_encode(array_slice($this->getData(),5)), LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
@@ -904,7 +908,7 @@ class core extends common {
 		// Supprime les fichiers temporaires
 		$lastClearTmp = mktime(0, 0, 0);
 		if($lastClearTmp > $this->getData(['core', 'lastClearTmp']) + 86400) {
-			$iterator = new DirectoryIterator('site/tmp/');
+			$iterator = new DirectoryIterator(self::TEMP_DIR);
 			foreach($iterator as $fileInfos) {
 				if($fileInfos->isFile() AND $fileInfos->getBasename() !== '.gitkeep') {
 					@unlink($fileInfos->getPathname());
@@ -923,13 +927,13 @@ class core extends common {
 			AND $this->getData(['user']) // Pas de backup pendant l'installation
 		) {
 			// Copie du fichier de données
-			copy('site/data/core.json', 'site/backup/' . date('Y-m-d', $lastBackup) . '.json');
+			copy(self::DATA_DIR.'core.json', self::BACKUP_DIR . date('Y-m-d', $lastBackup) . '.json');
 			// Date du dernier backup
 			$this->setData(['core', 'lastBackup', $lastBackup]);
 			// Enregistre les données
 			$this->saveData();
 			// Supprime les backups de plus de 30 jours
-			$iterator = new DirectoryIterator('site/backup/');
+			$iterator = new DirectoryIterator(self::BACKUP_DIR);
 			foreach($iterator as $fileInfos) {
 				if(
 					$fileInfos->isFile()
@@ -941,17 +945,17 @@ class core extends common {
 			}
 		}
 		// Crée le fichier de personnalisation avancée
-		if(file_exists('site/data/custom.css') === false) {
-			file_put_contents('site/data/custom.css', file_get_contents('core/module/theme/resource/custom.css'));
-			chmod('site/data/custom.css', 0755);
+		if(file_exists(self::DATA_DIR.'custom.css') === false) {
+			file_put_contents(self::DATA_DIR.'custom.css', file_get_contents('core/module/theme/resource/custom.css'));
+			chmod(self::DATA_DIR.'custom.css', 0755);
 		}
 		// Crée le fichier de personnalisation
-		if(file_exists('site/data/theme.css') === false) {
-			file_put_contents('site/data/theme.css', '');
-			chmod('site/data/theme.css', 0755);
+		if(file_exists(self::DATA_DIR.'theme.css') === false) {
+			file_put_contents(self::DATA_DIR.'theme.css', '');
+			chmod(self::DATA_DIR.'theme.css', 0755);
 		}
 		// Check la version
-		$cssVersion = preg_split('/\*+/', file_get_contents('site/data/theme.css'));
+		$cssVersion = preg_split('/\*+/', file_get_contents(self::DATA_DIR.'theme.css'));
 		if(empty($cssVersion[1]) OR $cssVersion[1] !== md5(json_encode($this->getData(['theme'])))) {
 			// Version
 			$css = '/*' . md5(json_encode($this->getData(['theme']))) . '*/';
@@ -999,11 +1003,11 @@ class core extends common {
 
 			if ($this->getData(['theme', 'header', 'height']) === 'none') {
 				// Controle de l'existence du fichier
-				if (file_exists('site/file/source/' . $this->getData(['theme','header','image'])) &&
+				if (file_exists(self::FILE_DIR.'source/' . $this->getData(['theme','header','image'])) &&
 					$this->getData(['theme', 'header', 'image'])	 ) {					
 					// On établie la hauteur du div en proportion de l'image
 					// (hauteur / largeur) . 100 
-					$sizes = getimagesize('site/file/source/'.$this->getData(['theme','header','image']));
+					$sizes = getimagesize(self::FILE_DIR.'source/'.$this->getData(['theme','header','image']));
 					$css .= ';height: 0;  padding-top:';
 					$css .= ( $sizes[1] / $sizes[0] )* 100;
 					$css .= '%';
@@ -1051,7 +1055,7 @@ class core extends common {
 			$css .= '#footerText{text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';
 			// Enregistre la personnalisation
-			file_put_contents('site/data/theme.css', $css);
+			file_put_contents(self::DATA_DIR.'theme.css', $css);
 		}
 	}
 	/**
@@ -1930,9 +1934,9 @@ class layout extends common {
 	public function showFavicon() {
 		$favicon = $this->getData(['config', 'favicon']);
 		if($favicon &&
-			file_exists('site/file/source/' . $favicon)
+			file_exists(self::FILE_DIR.'source/' . $favicon)
 			) {
-			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . 'site/file/source/' . $favicon . '">';
+			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . self::FILE_DIR.'source/' . $favicon . '">';
 		} else {
 			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . 'core/vendor/zwiico/ico/favicon.ico">';
 		}
@@ -1982,14 +1986,14 @@ class layout extends common {
 				    break;
 				case 'icon' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
+				    $items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" />';
 				    } else {
 				    $items .= $this->getData(['page', $parentPageId, 'title']);
 				    }
 				    break;
 				case 'icontitle' :
 				    if ($this->getData(['page', $parentPageId, 'iconUrl']) != "") {
-				    	$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" data-tippy-content="';
+				    	$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $parentPageId, 'iconUrl']).'" data-tippy-content="';
 				   	 	$items .= $this->getData(['page', $parentPageId, 'title']).'"/>';
 				    } else {
 				  	 	$items .= $this->getData(['page', $parentPageId, 'title']);
@@ -2042,14 +2046,14 @@ class layout extends common {
 						break;
 					case 'icon' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
 						} else {
 						$items .= $this->getData(['page', $parentPageId, 'title']);
 						}
 						break;
 					case 'icontitle' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" data-tippy-content="';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" data-tippy-content="';
 						$items .= $this->getData(['page', $childKey, 'title']).'"/>';
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
@@ -2057,7 +2061,7 @@ class layout extends common {
 						break;
 					case 'icontext' :
 						if ($this->getData(['page', $childKey, 'iconUrl']) != "") {
-						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .'site/file/source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
+						$items .= '<img alt="'.$this->getData(['page', $parentPageId, 'title']).'" src="'. helper::baseUrl(false) .self::FILE_DIR.'source/'.$this->getData(['page', $childKey, 'iconUrl']).'" />';
 						$items .= $this->getData(['page', $childKey, 'title']);
 						} else {
 						$items .= $this->getData(['page', $childKey, 'title']);
@@ -2220,7 +2224,7 @@ class layout extends common {
 	 * Affiche la meta image (site screenshot)
 	 */
 	public function showMetaImage() {
-		echo '<meta property="og:image" content="' . helper::baseUrl() .'site/file/source/screenshot.png" />';
+		echo '<meta property="og:image" content="' . helper::baseUrl() .self::FILE_DIR.'source/screenshot.png" />';
 	}
 
 
@@ -2320,7 +2324,7 @@ class layout extends common {
 			$rightItems = '';
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 
-				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file('site/data/core.json') .'" data-tippy-content="Gérer les fichiers" data-lity>' . template::ico('folder') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file(self::DATA_DIR.'core.json') .'" data-tippy-content="Gérer les fichiers" data-lity>' . template::ico('folder') . '</a></li>';
 			}
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
@@ -2412,7 +2416,7 @@ class layout extends common {
 			$this->getUser('password') === $this->getInput('ZWII_USER_PASSWORD')
 			AND $this->getUser('group') >= self::GROUP_MODERATOR
 		) {
-			$vars .= 'var privateKey = ' . json_encode(md5_file('site/data/core.json')) . ';';
+			$vars .= 'var privateKey = ' . json_encode(md5_file(self::DATA_DIR.'core.json')) . ';';
 		}
 		echo '<script>' . helper::minifyJs($vars) . '</script>';
 		// Librairies
@@ -2700,7 +2704,8 @@ class template {
 					'?relative_url=1' .
 					'&field_id=' . $attributes['id'] .
 					'&type=' . $attributes['type'] .
-					'&akey=' . md5_file('site/data/core.json') .
+					//'&akey=' . md5_file('site/data/'.'core.json') .
+					'&akey=' . md5_file(core::DATA_DIR.'core.json') .
 					($attributes['extensions'] ? '&extensions=' . $attributes['extensions'] : '')
 				. '"
 				class="inputFile %s %s"

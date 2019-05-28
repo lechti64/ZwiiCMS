@@ -178,10 +178,10 @@ class form extends common {
 			$data = $this->getData(['module', $this->getUrl(0), 'data']);
 			if ($data !== []) {
 				$csvfilename = 'data-'.date('dmY').'-'.date('hm').'-'.rand(10,99).'.csv';
-				if (!file_exists('site/file/source/data')) {
-					mkdir('site/file/source/data');
+				if (!file_exists(self::FILE_DIR.'source/data')) {
+					mkdir(self::FILE_DIR.'source/data');
 				}
-				$fp = fopen('site/file/source/data/'.$csvfilename, 'w');
+				$fp = fopen(self::FILE_DIR.'source/data/'.$csvfilename, 'w');
 				fputcsv($fp, array_keys($data[1]), ';','"');
 				foreach ($data as $fields) {
 					fputcsv($fp, $fields, ';','"');

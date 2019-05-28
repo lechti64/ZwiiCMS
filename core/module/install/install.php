@@ -62,9 +62,9 @@ class install extends common {
 					// Ajouter ici la liste des pages privées qui ne sont pas vues lors de l'installation.
 					$this->deleteData(['page', 'privee']);
 					// Effacer les fichiers par défaut
-					if (is_dir('site/file/source/galerie')) {
-						$this->removeAll('site/file/source/galerie');
-						$this->removeAll('site/file/thumb/galerie');
+					if (is_dir(self::FILE_DIR.'source/galerie')) {
+						$this->removeAll(self::FILE_DIR.'source/galerie');
+						$this->removeAll(self::FILE_DIR.'thumb/galerie');
 					}
 				} else {
 					$this->setData(['module', 'blog', 'mon-premier-article', 'userId', $userId]);
@@ -123,14 +123,14 @@ class install extends common {
 			case 1:
 				$success = true;
 				// Copie du fichier de données
-				copy('site/data/core.json', 'site/backup/' . date('Y-m-d', time()) . '-core-update.json');
-				copy('site/data/theme.json', 'site/backup/' . date('Y-m-d', time()) . '-theme-update.json');
+				copy(self::DATA_DIR.'core.json', self::BACKUP_DIR . date('Y-m-d', time()) . '-core-update.json');
+				copy(self::DATA_DIR.'theme.json', self::BACKUP_DIR . date('Y-m-d', time()) . '-theme-update.json');
 				// Nettoyage des fichiers temporaires
-				if(file_exists('site/tmp/update.tar.gz')) {
-					$success = unlink('site/tmp/update.tar.gz');
+				if(file_exists(self::TEMP_DIR.'update.tar.gz')) {
+					$success = unlink(self::TEMP_DIR.'update.tar.gz');
 				}
-				if(file_exists('site/tmp/update.tar')) {
-					$success = unlink('site/tmp/update.tar');
+				if(file_exists(self::TEMP_DIR.'update.tar')) {
+					$success = unlink(self::TEMP_DIR.'update.tar');
 				}
 				// Valeurs en sortie
 				$this->addOutput([
@@ -144,7 +144,7 @@ class install extends common {
 			// Téléchargement
 			case 2:
 				// Téléchargement depuis le serveur de Zwii
-				$success = (file_put_contents('site/tmp/update.tar.gz', file_get_contents('https://zwiicms.com/update/update.tar.gz')) !== false);
+				$success = (file_put_contents(self::TEMP_DIR.'update.tar.gz', file_get_contents('https://zwiicms.com/update/update.tar.gz')) !== false);
 				// Valeurs en sortie
 				$this->addOutput([
 					'display' => self::DISPLAY_JSON,
@@ -162,7 +162,7 @@ class install extends common {
 				// Décompression et installation
 				try {
 					// Décompression dans le dossier de fichier temporaires
-					$pharData = new PharData('site/tmp/update.tar.gz');
+					$pharData = new PharData(self::TEMP_DIR.'update.tar.gz');
 					$pharData->decompress();
 					// Installation
 					$pharData->extractTo(__DIR__ . '/../../../', null, true);
@@ -170,11 +170,11 @@ class install extends common {
 					$success = $e->getMessage();
 				}
 				// Netooyage du dossier
-				if(file_exists('site/tmp/update.tar.gz')) {
-					unlink('site/tmp/update.tar.gz');
+				if(file_exists(self::TEMP_DIR.'update.tar.gz')) {
+					unlink(self::TEMP_DIR.'update.tar.gz');
 				}
-				if(file_exists('site/tmp/update.tar')) {
-					unlink('site/tmp/update.tar');
+				if(file_exists(self::TEMP_DIR.'update.tar')) {
+					unlink(self::TEMP_DIR.'update.tar');
 				}
 				// Valeurs en sortie
 				$this->addOutput([

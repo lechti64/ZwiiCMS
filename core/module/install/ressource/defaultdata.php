@@ -356,7 +356,7 @@ class install extends common {
 				'beaux-paysages' => [
 					'config' => [
 						'name' => 'Beaux paysages',
-						'directory' => 'site/file/source/galerie/landscape'
+						'directory' => self::FILE_DIR.'source/galerie/landscape'
 					],
 					'legend' => [
 						'desert.jpg' => 'Un désert',
@@ -367,7 +367,7 @@ class install extends common {
 				'espace' => [
 					'config' => [
 						'name' => 'Espace',
-						'directory' => 'site/file/source/galerie/space'
+						'directory' => self::FILE_DIR.'source/galerie/space'
 					],
 					'legend' => [
 						'earth.jpg' => 'La Terre et la Lune',

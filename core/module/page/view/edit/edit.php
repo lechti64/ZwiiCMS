@@ -176,7 +176,7 @@ echo template::formOpen('pageEditForm'); ?>
 	<div class="row">
 		<div class="col12" id="pageEditMenuSpecial">
 			<div class="block">
-			<h4>Options d'emplacement avancées </h4>	
+			<h4>Options d'emplacement avancées</h4>	
 				<div class="row">
 					<div class="col12">
 					<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Masquer les pages enfants de cette page dans le menu horizontal', [

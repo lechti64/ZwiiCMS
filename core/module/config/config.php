@@ -203,7 +203,7 @@ class config extends common {
 		// Creation du ZIP
 		$fileName = date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
-		if($zip->open('site/tmp/' . $fileName, ZipArchive::CREATE) === TRUE){
+		if($zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE) === TRUE){
 			foreach(configHelper::scanDir('site/') as $file) {
 				$zip->addFile($file);
 			}
@@ -212,13 +212,13 @@ class config extends common {
 		// Téléchargement du ZIP
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Disposition: attachment; filename="' . $fileName . '"');
-		header('Content-Length: ' . filesize('site/tmp/' . $fileName));
-		readfile('site/tmp/' . $fileName);
+		header('Content-Length: ' . filesize(self::TEMP_DIR . $fileName));
+		readfile(self::TEMP_DIR . $fileName);
 		// Valeurs en sortie
 		$this->addOutput([
 			'display' => self::DISPLAY_RAW
 		]);
-		unlink('site/tmp/' . $fileName);
+		unlink(self::TEMP_DIR . $fileName);
 	}
 
 	/**
@@ -237,7 +237,7 @@ class config extends common {
 		$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
 		$data = 'data:image/jpeg;base64,'.$screenshot;
 		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
-		file_put_contents( 'site/file/source/screenshot.png',$data);
+		file_put_contents( self::FILE_DIR.'source/screenshot.png',$data);
 
 		// Valeurs en sortie
 		$this->addOutput([
@@ -323,7 +323,7 @@ class config extends common {
 			]);
 		}
 		// Initialisation du screen 
-		if (!file_exists('site/file/source/screenshot.png')) {
+		if (!file_exists(self::FILE_DIR.'source/screenshot.png')) {
 			$this->configMetaImage();
 		}
 		// Valeurs en sortie
