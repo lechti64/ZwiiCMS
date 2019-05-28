@@ -1,7 +1,6 @@
 <?php
 // Mise à jour de la liste des pages pour TinyMCE
 $this->pages2Json();
-// Début du formulaire
 echo template::formOpen('pageEditForm'); ?>
 	<div class="row">
 	<div class="col2">
