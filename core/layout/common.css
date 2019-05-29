@@ -15,6 +15,8 @@
 */
  @import url(https://use.fontawesome.com/releases/v5.7.2/css/all.css);
 
+
+
 /**
  * Éléments génériques
  */
@@ -26,48 +28,53 @@ body {
 }
 
 
+@media (min-width: 769px) {
+	body {
+		margin:0px 10px;
+	}
+}
+
+
+
 /**
 * Petits écrans inférieurs à 768px de largeur, on supprime les marges
 */ 
 @media (max-width: 768px) {
 	body {
-		margin:2px 2px  !important;
+		margin:2px 2px;
 	}
 	#site {
-		margin:0px auto  !important;
+		margin:0px auto;
 	}
-	header {
-		margin:0px 0px !important;
+	body > header {
+		margin:0px 0px;
 	}
 	.tippy-tooltip {
 		font-size:.8rem !important;
 	}
 	section {
-		padding: 5px !important;
+		padding: 5px;
 	}
 }
 
 
 
-@media (max-width: 992px) {	
+@media (max-width: 768px) {	
 	.siteContainer {
 		display: flex;
 		flex-direction: column;
 	}
 	.siteContainer > #contentLeft {
-		order: 2;
+		order: 1;
 	}
 	.siteContainer > #contentRight {
 		order: 3;
 	}
 	.siteContainer > #contentSite {
-		order: 1;
+		order: 2;
 	}
 }
 
-body {
-	margin:0px 10px;
-}
 
 
 /**
@@ -175,7 +182,7 @@ Signature dans les articles blog et news
 }
 .table th {
 	font-weight: normal;
-	padding: 15px 10px !important;
+	padding: 15px 10px;
 }
 /* Supprime le padding des cols dans les cellules des tableaux */
 td > .col1,
@@ -305,16 +312,11 @@ td > .col12 {
 	height: 45px;
 	line-height: 45px;
 }
-#bar #barLeft {
-	float: left;
-}
-#bar #barRight {
-	float: right;
-	font-size: .8em;
-}
+
 #bar li {
 	display: inline;
 }
+
 #bar a {
 	display: inline-block;
 	padding: 0 12px;
@@ -333,6 +335,17 @@ td > .col12 {
 	width: 250px;
 	border: 0;
 }
+
+@media (min-width: 769px) {
+	#bar #barLeft {
+		float: left;
+	}	
+	#bar #barRight {
+		float: right;
+		font-size: .8em;
+	}
+}
+
 @media (max-width: 768px) {
 	#bar {
 		text-align: center;
@@ -340,15 +353,15 @@ td > .col12 {
 		margin: 0;
 	}
 	#bar ul {
-		float: none !important;
 		height: auto;
 	}
 	#bar #barSelectPage {
-		width: 50% !important;
-		font-size: 0.6em !important;			
+		width: 50% ;
+		font-size: 0.6em;			
 	}
 	#bar #barLeft {
-		font-size: 1.6em;		
+		font-size: 1.6em;	
+		float : none;	
 	}
 	#bar #barRight {
 		font-size: 1.6em;		
@@ -361,17 +374,28 @@ td > .col12 {
 
 /* Site */
 #site {
-	margin: 20px auto;
 	overflow: hidden;
 }
 
-/* Bannière */
-body > header {
-	margin: 0 -10px;
+@media (min-width:769px) {
+	#site {	
+		margin: 20px auto;
+	}
 }
+
+/* Bannière */
+
+@media (min-width:769px) {
+	body > header {
+		margin: 0 -10px;
+	}
+	header {
+		margin:0;
+	}	
+}
+
 header {
 	position: relative;
-	margin:0;
 	padding:0;
 }
 header span {
@@ -401,9 +425,6 @@ nav #toggle {
 	font-weight: bold;
 }
 nav #toggle span {
-	display: block;
-}
-nav #menu {
 	display: block;
 }
 
@@ -437,21 +458,30 @@ nav li:hover ul {
 	z-index: 8;
 	opacity: 1;
 }
+
 nav a {
 	display: inherit;
 	-webkit-transition: background .3s ease-out;
 	transition: background .3s ease-out;
 }
+
 nav a:hover {
 	text-decoration: none;
 }
+@media (min-width: 769px) {
+	nav #menu {
+		display: block;
+	}
+
+}
+
 @media (max-width: 768px) {
 	nav #toggle {
 		display: block;
-	}
+	}	
 	nav #menu {
 		display: none;
-		text-align: left !important;
+		text-align: left;
 	}
 	nav li {
 		display: block;
@@ -463,12 +493,10 @@ nav a:hover {
 		min-width: inherit;
 		width: auto;
 	}
-	nav a {
-		padding: 10px !important;
-	}
-	nav li ul a {
-		padding-left: 40px !important;
-	}
+	/* Taille du menu hamburger */
+	nav .zwiico-menu {
+		font-size:1.5em;
+	}	
 }
 
 
@@ -487,10 +515,7 @@ nav a:hover {
 	position: sticky;
 }
 
-/* Taille du menu hamburger */
-nav .zwiico-menu {
-	font-size:1.5em !important;
-}
+
 
 
 /* Menu vertical */
@@ -507,8 +532,13 @@ ul #menuSideChild, li #menuSideChild {
 
 
 /* Corps */
+@media (min-width:769px) {
+	section {
+		padding: 20px;
+	}
+}
+
 section {
-	padding: 20px;
 	min-height: 450px;
 }
 section #sectionTitle {
@@ -536,7 +566,6 @@ body > footer {
 	margin: 0 -10px;
 }
 footer {
-	text-align: center;
 	padding: 1px 20px;
 	vertical-align: middle;
 }
@@ -550,13 +579,15 @@ footer {
 }
 
 
+
 /* Conserve le pied de page sur une ligne */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
 	footer .col4 {
 		width:100%;
 	}
 	#footerCopyright, #footerText, #footerSocials {
-		text-align: center !important;
+		display: flex;
+		justify-content: center;
 	}
 }
 
@@ -1002,7 +1033,7 @@ input[type='checkbox']:disabled + label:before{
 	min-height: 1px;
 	display: inline-block;
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
 	.col1 {
 		width: 8.33333333%;
 	}

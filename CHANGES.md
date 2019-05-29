@@ -5,6 +5,8 @@
     - Thème 100%  fluide sans marge
     - Ecran de smartphone (ex: iPhone 6), adaptation de la barre d'administration : le username est masqué et la taille des icônes est augmentée
     - Chemins vers les données dans des constantes
+    - Modèles de bannières de plusieurs dimensions
+    - Nettoyage de common.css
     
 ## Version 9.1.07
 - Correction : 
