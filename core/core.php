@@ -1858,7 +1858,7 @@ class layout extends common {
 			$contentLeft = $this->core->output['contentLeft'];
 			$mark = strrpos($contentLeft,'[]')  !== false ? strrpos($contentLeft,'[]') : strlen($contentLeft);		
 			echo substr($contentLeft,0,$mark);			
-			echo '<div id="menuSideLeft>';
+			echo '<div id="menuSideLeft">';
 			echo $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'parents' ? false : true);
 			echo '</div>';
 			echo substr($contentLeft,$mark+2,strlen($contentLeft));			
@@ -1878,7 +1878,7 @@ class layout extends common {
 			$contentRight = $this->core->output['contentRight'];
 			$mark = strrpos($contentRight,'[]')  !== false ? strrpos($contentRight,'[]') : strlen($contentRight);		
 			echo substr($contentRight,0,$mark);			
-			echo '<div id="menuSideRight>';
+			echo '<div id="menuSideRight">';
 			echo $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) === 'parents' ? false : true);
 			echo '</div>';
 			echo substr($contentRight,$mark+2,strlen($contentRight));			
@@ -1891,11 +1891,11 @@ class layout extends common {
     public function showCopyright() {
 		// Ouverture Bloc copyright
 		$items = '<div id="footerCopyright">';
-		$items .= '<span id="footerFont">';
+		$items .= '<span id="footerFontCopyright">';
 		// Affichage de motorisé par 
 		$items .= '<span id="footerDisplayCopyright" ';
 		$items .= $this->getData(['theme','footer','displayCopyright']) === false ? 'class="displayNone"' : '';
-		$items .= '>Motorisé&nbsp;par&nbsp</span>';
+		$items .= '>Motorisé&nbsp;par&nbsp;</span>';
 		// Toujours afficher le nom du CMS
 		$items .= '<span id="footerZwiiCMS">';
 		$items .= '<a href="http://zwiicms.com/" onclick="window.open(this.href);return false" data-tippy-content="Zwii CMS sans base de données, très léger et performant">ZwiiCMS</a>';		
@@ -1921,7 +1921,7 @@ class layout extends common {
 			($this->getUrl(0) === 'theme' ? 'class="displayNone"' : '') . 
 			'><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . 'user/login/' . 
 			strip_tags(str_replace('/', '_', $this->getUrl())) . 
-			'" data-tippy-content="Connexion à l\'administration" rel="noindex, nofollow">Connexion</a></span>';
+			'" data-tippy-content="Connexion à l\'administration" rel="nofollow">Connexion</a></span>';
 		}
 		// Fermeture du bloc copyright
         $items .= '</span></div>';
@@ -1947,7 +1947,7 @@ class layout extends common {
 	 */
 	public function showFooterText() {
 		if($footerText = $this->getData(['theme', 'footer', 'text']) OR $this->getUrl(0) === 'theme') {
-			echo '<div id="footerText"><span id="footerFont">' . nl2br($footerText) . '</span></div>';
+			echo '<div id="footerText"><span id="footerFontText">' . nl2br($footerText) . '</span></div>';
 		}
 	}
 
@@ -2016,7 +2016,8 @@ class layout extends common {
 			}
 			// ------------------------------------------------	
 			$items .= '</a>';
-			if ($this->getdata(['page',$parentPageId,'hideMenuChildren']) === true) {
+			if ($this->getdata(['page',$parentPageId,'hideMenuChildren']) === true ||
+				empty($childrenPageIds)) {
 				continue;
 			}
 			$items .= '<ul>';
@@ -2033,9 +2034,9 @@ class layout extends common {
 				if ( $this->getData(['page',$childKey,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
 
-						{$items .= '<a href="'.$this->getUrl(1).'">';}
+						{$items .= '<li><a href="'.$this->getUrl(1).'">';}
 				else {
-					$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			}
+					$items .= '<li><a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			}
 
 				switch ($this->getData(['page', $childKey, 'typeMenu'])) {
 					case '' :
@@ -2069,11 +2070,9 @@ class layout extends common {
 						break;
 				}
 				$items .=  '</a></li>';
-				// Menu Image
-
-			}
+			}			
 			$items .= '</ul>';
-			$items .= '</li>';
+
 
 		}
 		// Lien de connexion
@@ -2123,7 +2122,8 @@ class layout extends common {
 
 		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
 			// Ne pas afficher les entrées masquées
-			if ($this->getData(['page',$parentPageId,'hideMenuSide']) === true  ) {
+			if ($this->getData(['page',$parentPageId,'hideMenuSide']) === true  ||
+				empty($childrenPageIds) ) {
 				continue;
 			}
 			// Filtre actif et nom de la page parente courante différente, on sort de la boucle
@@ -2136,7 +2136,7 @@ class layout extends common {
 			// Mise en page de l'item;
 			// Ne pas afficher le parent d'une sous-page quand l'option est sélectionnée.
 			if ($onlyChildren === false) {
-				$items .= '<li id="menuSide">';
+				$items .= '<li>';
 				if ( $this->getData(['page',$parentPageId,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
 						$items .= '<a href="'.$this->getUrl(1).'">';
@@ -2160,22 +2160,22 @@ class layout extends common {
 				//}
 				// ------------------------------------------------		
 				// A garder mais désactivé avec la suppresion du thème 
-				$items .= '</a>';
-			} else {
-				$items .= '</ul>';
+				$items .= '</a></il>';
+			} 
+			if ($onlyChildren === false) {
+				$items .= '<ul id="menuSideChild">';
 			}
-
-			$items .= '<ul id="menuSideChild">';
 			foreach($childrenPageIds as $childKey) {
 				// Passer les entrées masquées
 				if ($this->getData(['page',$childKey,'hideMenuSide']) === true ) {
 					continue;
 				}
+				
 				// Propriétés de l'item
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
 				// Mise en page du sous-item
-				$items .= '<li id="menuSideChild">';
+				$items .= '<li>';
 
 				if ( $this->getData(['page',$childKey,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
@@ -2187,8 +2187,9 @@ class layout extends common {
 				$items .= $this->getData(['page', $childKey, 'title']);					
 				$items .=  '</a></li>';
 			}
-			$items .= '</ul>';
-			$items .= '</li>';
+			if ($onlyChildren === false) {			
+				$items .= '</ul>';
+			}
 		}
 		// Retourne les items du menu
 		echo '<ul id="menuSide">' . $items . '</ul>';
@@ -2253,7 +2254,7 @@ class layout extends common {
 			unset($_SESSION['ZWII_NOTIFICATION_OTHER']);
 		}
 		if(isset($notification) AND isset($notificationClass)) {
-			echo '<div id="notification" class="' . $notificationClass . '">' . $notification . '<span id="notificationClose">' . template::ico('cancel') . '</span><div id="notificationProgress"></div></div>';
+			echo '<div id="notification" class="' . $notificationClass . '">' . $notification . '<span id="notificationClose">' . template::ico('cancel') . '<!----></span><div id="notificationProgress"></div></div>';
 		}
 	}
 
@@ -2762,7 +2763,7 @@ class template {
 	 * @return string
 	 */
 	public static function help($text) {
-		return '<span class="helpButton" data-tippy-content="' . $text . '">' . self::ico('help') . '</span>';
+		return '<span class="helpButton" data-tippy-content="' . $text . '">' . self::ico('help') . '<!----></span>';
 	}
 
 	/**
@@ -2801,7 +2802,7 @@ class template {
 	 * @return string
 	 */
 	public static function ico($ico, $margin = '', $animate = false, $fontSize = '1em') {
-		return '<span class="zwiico-' . $ico . ($margin ? ' zwiico-margin-' . $margin : '') . ($animate ? ' animate-spin' : '') . '" style="font-size:' . $fontSize . '"></span>';
+		return '<span class="zwiico-' . $ico . ($margin ? ' zwiico-margin-' . $margin : '') . ($animate ? ' animate-spin' : '') . '" style="font-size:' . $fontSize . '"><!----></span>';
 	}
 
 	/**
