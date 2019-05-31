@@ -221,7 +221,7 @@ echo template::formOpen('pageEditForm'); ?>
 					]); ?>
 					<?php echo template::textarea('pageEditMetaDescription', [
 						'label' => 'Méta-description',
-						'maxlength' => '500',
+						//'maxlength' => '500',
 						'value' => $this->getData(['page', $this->getUrl(2), 'metaDescription'])
 					]); ?>
 				</div>		

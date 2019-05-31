@@ -59,8 +59,8 @@
 				</div>
 			<?php endif; ?>
 			<?php echo template::textarea('blogArticleContent', [
-				'label' => 'Commentaire',
-				'maxlength' => '500'
+				'label' => 'Commentaire'
+				//'maxlength' => '500'
 			]); ?>
 			<?php if($this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')): ?>
 				<div class="row">
