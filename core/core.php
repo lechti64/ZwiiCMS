@@ -2665,7 +2665,7 @@ class template {
 			'help' => '',
 			'id' => $nameId,
 			'label' => '',
-			//'maxlength' => '500',
+			'maxlength' => '500',
 			'name' => $nameId,
 			'type' => 2,
 			'value' => ''
@@ -2693,7 +2693,7 @@ class template {
 		$html .= self::hidden($attributes['id'], [
 			'class' => 'inputFileHidden',
 			'disabled' => $attributes['disabled'],
-			//'maxlength' => $attributes['maxlength'],
+			'maxlength' => $attributes['maxlength'],
 			'value' => $attributes['value']
 		]);
 		// Champ d'upload
@@ -2718,8 +2718,7 @@ class template {
 			</a>',
 			$attributes['class'],
 			$attributes['disabled'] ? 'disabled' : '',
-			helper::sprintAttributes($attributes, ['class', 'extensions', 'type'])
-			//helper::sprintAttributes($attributes, ['class', 'extensions', 'type', 'maxlength'])
+			helper::sprintAttributes($attributes, ['class', 'extensions', 'type', 'maxlength'])
 
 		);
 		$html .= self::button($attributes['id'] . 'Delete', [
