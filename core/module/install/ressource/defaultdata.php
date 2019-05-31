@@ -456,7 +456,7 @@ class install extends common {
 				'fontSize' => '2em',
 				'fontWeight' => 'normal',
 				'height' => '150px',
-				'image' => 'banniere/zwii_banniere.png',
+				'image' => 'banniere/zwii_banniere-960px.jpg',
 				'imagePosition' => 'center center',
 				'imageRepeat' => 'no-repeat',
 				'margin' => false,
