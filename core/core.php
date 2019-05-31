@@ -2030,13 +2030,13 @@ class layout extends common {
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
 				// Mise en page du sous-item
-
+				$items .= '<li>';
 				if ( $this->getData(['page',$childKey,'disable']) === true
-					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
-
-						{$items .= '<li><a href="'.$this->getUrl(1).'">';}
-				else {
-					$items .= '<li><a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			}
+					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
+						$items .= '<a href="'.$this->getUrl(1).'">';
+				} else {
+					$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			
+				}
 
 				switch ($this->getData(['page', $childKey, 'typeMenu'])) {
 					case '' :
@@ -2069,11 +2069,9 @@ class layout extends common {
 						}
 						break;
 				}
-				$items .=  '</a></li>';
-			}			
+				$items .= '</a></li>';
+			}
 			$items .= '</ul>';
-
-
 		}
 		// Lien de connexion
 		if(
@@ -2114,16 +2112,13 @@ class layout extends common {
 			} else {
 				$filterCurrentPageId = $currentParentPageId;				
 			}
-			//if ($this->getData(['page',$filterCurrentPageId,'hideTitle']) == false) {
-			//	echo '<h3 id="menuSideTitle"><a href="' . helper::baseUrl()  . $currentPageId . '">' . $this->getData(['page',$filterCurrentPageId,'title']) . '</a></h3>';
-			//}
-		} 
-
+		} else {
+			$items .= '<ul class="menuSide">';
+		}
 
 		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
 			// Ne pas afficher les entrées masquées
-			if ($this->getData(['page',$parentPageId,'hideMenuSide']) === true  ||
-				empty($childrenPageIds) ) {
+			if ($this->getData(['page',$parentPageId,'hideMenuSide']) === true ) {
 				continue;
 			}
 			// Filtre actif et nom de la page parente courante différente, on sort de la boucle
@@ -2136,35 +2131,17 @@ class layout extends common {
 			// Mise en page de l'item;
 			// Ne pas afficher le parent d'une sous-page quand l'option est sélectionnée.
 			if ($onlyChildren === false) {
-				$items .= '<li>';
+				$items .= '<li class="menuSideChild">';
 				if ( $this->getData(['page',$parentPageId,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
 						$items .= '<a href="'.$this->getUrl(1).'">';
 				} else {
 						$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
 				}
-
 				$items .= $this->getData(['page', $parentPageId, 'title']);
-				// Cas où les pages enfants enfant sont toutes masquées dans le menu
-				// ne pas afficher de symbole lorsqu'il n'y a rien à afficher
-				//$totalChild = 0;
-				//$disableChild = 0;
-				//foreach($childrenPageIds as $childKey) {
-				//	$totalChild += 1;
-				//	if ($this->getData(['page',$childKey,'hideMenuSide']) === true  ) {
-				//		$disableChild += 1;
-				//	}
-				//}	
-				//if($childrenPageIds && $disableChild !== $totalChild ) {
-				//	$items .= template::ico('down', 'left');
-				//}
-				// ------------------------------------------------		
-				// A garder mais désactivé avec la suppresion du thème 
-				$items .= '</a></il>';
-			} 
-			if ($onlyChildren === false) {
-				$items .= '<ul id="menuSideChild">';
+				$items .= '</a></li>';
 			}
+			$itemsChildren = '';
 			foreach($childrenPageIds as $childKey) {
 				// Passer les entrées masquées
 				if ($this->getData(['page',$childKey,'hideMenuSide']) === true ) {
@@ -2175,24 +2152,30 @@ class layout extends common {
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
 				// Mise en page du sous-item
-				$items .= '<li>';
+				$itemsChildren .= '<li class="menuSideChild">';
 
 				if ( $this->getData(['page',$childKey,'disable']) === true
-					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	)
+					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
+						$itemsChildren .= '<a href="'.$this->getUrl(1).'">';
+				} else {
+					$itemsChildren .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';
+				}
 
-						{$items .= '<a href="'.$this->getUrl(1).'">';}
-				else {
-					$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			}
-
-				$items .= $this->getData(['page', $childKey, 'title']);					
-				$items .=  '</a></li>';
+				$itemsChildren .= $this->getData(['page', $childKey, 'title']);					
+				$itemsChildren .= '</a></li>';
 			}
-			if ($onlyChildren === false) {			
+			// Concaténe les items enfants
+			if (!empty($itemsChildren)) {
+				$items .= '<ul class="menuSideChild">';
+				$items .= $itemsChildren;
 				$items .= '</ul>';
 			}
 		}
+		if ($onlyChildren === false) {
+			$items .= '</ul>';
+		}
 		// Retourne les items du menu
-		echo '<ul id="menuSide">' . $items . '</ul>';
+		echo  $items;
 	}
 
 
@@ -2299,6 +2282,7 @@ class layout extends common {
 						}
 					}
 				}
+				$leftItems .= '</optgroup'>
 				// Afficher les barres
 				$leftItems .= '<optgroup label="Barres latérales">';
 				foreach($this->getHierarchy(null, false,true) as $parentPageId => $childrenPageIds) {
@@ -2306,7 +2290,8 @@ class layout extends common {
 					foreach($childrenPageIds as $childKey) {
 						$leftItems .= '<option value="' . helper::baseUrl() . $childKey . '"' . ($childKey === $currentPageId ? ' selected' : false) . '>&nbsp;&nbsp;&nbsp;&nbsp;' . $this->getData(['page', $childKey, 'title']) . '</option>';
 					}
-				}				
+				}	
+				$leftItems .= '</optgroup>';			
 				$leftItems .= '</select></li>';
 				$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/add" data-tippy-content="Créer une page ou<br>une barre latérale">' . template::ico('plus') . '</a></li>';
 				if(
@@ -2324,7 +2309,6 @@ class layout extends common {
 			// Items de droite
 			$rightItems = '';
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
-
 				$rightItems .= '<li><a href="' . helper::baseUrl(false) . 'core/vendor/filemanager/dialog.php?type=0&akey=' . md5_file(self::DATA_DIR.'core.json') .'" data-tippy-content="Gérer les fichiers" data-lity>' . template::ico('folder') . '</a></li>';
 			}
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
@@ -2359,7 +2343,7 @@ class layout extends common {
 	 */
 	public function showStyle() {
 		if($this->core->output['style']) {
-			echo '<style>' . helper::minifyCss($this->core->output['style']) . '</style>';
+			echo '<style >' . helper::minifyCss($this->core->output['style']) . '</style>';
 		}
 	}
 
@@ -3027,12 +3011,12 @@ class template {
 			'ico' => 'check',
 			'id' => $nameId,
 			'name' => $nameId,
-			'uniqueSubmission' => true,
+			'uniqueSubmission' => false, //true avant 9.1.08
 			'value' => 'Enregistrer'
 		], $attributes);
 		// Retourne le html
 		return sprintf(
-			'<button type="submit" class="%s %s" %s>%s</button>',
+			'<button type="submit" class="%s%s" %s>%s</button>',
 			$attributes['class'],
 			$attributes['uniqueSubmission'] ? 'uniqueSubmission' : '',
 			helper::sprintAttributes($attributes, ['class', 'ico', 'value']),

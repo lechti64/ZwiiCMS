@@ -5,7 +5,7 @@
 				<div class="row">
 					<div class="col3">
 						<a href="<?php echo helper::baseUrl() . $this->getUrl(0) . '/' . $articleId; ?>" class="blogPicture">
-							<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'thumb/' . $article['picture']; ?>">
+							<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'thumb/' . $article['picture']; ?>" alt="<?php echo $article['picture']; ?>">
 						</a>
 					</div>
 					<div class="col9">

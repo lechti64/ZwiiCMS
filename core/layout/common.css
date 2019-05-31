@@ -520,13 +520,13 @@ nav a:hover {
 
 /* Menu vertical */
 
-#menuSide, #menuSideChild {
+.menuSide, .menuSideChild {
 	padding-left: 10px;
 	margin: 0px;
 	list-style: none;
 }
 
-ul #menuSideChild, li #menuSideChild {
+ul .menuSideChild, li .menuSideChild {
 	padding-left:10px;
 }
 
