@@ -41,7 +41,7 @@ body {
 */ 
 @media (max-width: 768px) {
 	body {
-		margin:2px 2px;
+		margin:0px;
 	}
 	#site {
 		margin:0px auto;
