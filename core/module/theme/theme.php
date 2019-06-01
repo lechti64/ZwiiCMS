@@ -157,7 +157,7 @@ class theme extends common {
 		'hide' => 'Caché'
 	];	
 	public static $radius = [
-		'0' => 'Aucun',
+		'0px' => 'Aucun',
 		'5px' => 'Très léger',
 		'10px' => 'Léger',
 		'15px' => 'Moyen',
@@ -171,7 +171,7 @@ class theme extends common {
 		'repeat' => 'Sur les deux axes'
 	];
 	public static $shadows = [
-		'0' => 'Aucune',
+		'0px' => 'Aucune',
 		'1px 1px 5px' => 'Très légère',
 		'1px 1px 10px' => 'Légère',
 		'1px 1px 15px' => 'Moyenne',

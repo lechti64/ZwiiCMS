@@ -2139,7 +2139,7 @@ class layout extends common {
 						$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
 				}
 				$items .= $this->getData(['page', $parentPageId, 'title']);
-				$items .= '</a></li>';
+				$items .= '</a>';
 			}
 			$itemsChildren = '';
 			foreach($childrenPageIds as $childKey) {
@@ -2169,7 +2169,10 @@ class layout extends common {
 				$items .= '<ul class="menuSideChild">';
 				$items .= $itemsChildren;
 				$items .= '</ul>';
+			} else {
+				$items .= '</li>';
 			}
+
 		}
 		if ($onlyChildren === false) {
 			$items .= '</ul>';
@@ -2456,13 +2459,13 @@ class template {
 			'href' => 'javascript:void(0);',
 			'ico' => '',
 			'id' => $nameId,
-			'name' => $nameId,
+			//'name' => $nameId,
 			'target' => '',
 			'uniqueSubmission' => false,
 			'value' => 'Bouton'
 		], $attributes);
 		// Retourne le html
-		return sprintf(
+		return  sprintf(
 			'<a %s class="button %s %s %s">%s</a>',
 			helper::sprintAttributes($attributes, ['class', 'disabled', 'ico', 'value']),
 			$attributes['disabled'] ? 'disabled' : '',
@@ -3015,7 +3018,7 @@ class template {
 			'value' => 'Enregistrer'
 		], $attributes);
 		// Retourne le html
-		return sprintf(
+		return  sprintf(
 			'<button type="submit" class="%s%s" %s>%s</button>',
 			$attributes['class'],
 			$attributes['uniqueSubmission'] ? 'uniqueSubmission' : '',

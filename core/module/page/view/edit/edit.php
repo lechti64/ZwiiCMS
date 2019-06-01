@@ -160,7 +160,7 @@ echo template::formOpen('pageEditForm'); ?>
 				</div>				
 				<div class="row">
 					<div class="col6">
-						<?php echo template::checkbox('pageEditHideTitle', true, 'Titre masquée', [
+						<?php echo template::checkbox('pageEditHideTitle', true, 'Titre masqué', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'hideTitle'])
 						]); ?>
 					</div>
