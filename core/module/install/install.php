@@ -189,10 +189,11 @@ class install extends common {
 			case 4:
 				$success = true;
 				// Réécriture d'URL
-				if($this->getInput('data', helper::FILTER_BOOLEAN)) {
+				if ($this->getInput('data', helper::FILTER_BOOLEAN) === 1) {
 					$success = (file_put_contents(
 						'.htaccess',
 						PHP_EOL .
+						'#' . $rewrite . '#' . PHP_EOL .
 						'<ifModule mod_rewrite.c>' . PHP_EOL .
 						"\tRewriteEngine on" . PHP_EOL .
 						"\tRewriteBase " . helper::baseUrl(false, false) . PHP_EOL .
