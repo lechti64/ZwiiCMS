@@ -493,7 +493,7 @@ class install extends common {
 			],
 			'text' => [
 				'font' => 'Open+Sans',
-				'fontSize' => '14px',
+				'fontSize' => '13px',
 				'textColor' => 'rgba(33, 34, 35, 1)'
 			],
 			'title' => [
