@@ -193,7 +193,6 @@ class install extends common {
 					$success = (file_put_contents(
 						'.htaccess',
 						PHP_EOL .
-						'#' . $rewrite . '#' . PHP_EOL .
 						'<ifModule mod_rewrite.c>' . PHP_EOL .
 						"\tRewriteEngine on" . PHP_EOL .
 						"\tRewriteBase " . helper::baseUrl(false, false) . PHP_EOL .
