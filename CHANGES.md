@@ -10,6 +10,12 @@
     - Chemins vers les données dans des constantes
     - Modèles de bannières de plusieurs dimensions
     - Hauteur de police par défaut 13px
+- Mises à jour : 
+    - TinyMCE 4.9.4
+    - PHPMailer 6.07
+    - Jquery 3.4.1
+
+
 
 ## Version 9.1.07
 - Correction : 
