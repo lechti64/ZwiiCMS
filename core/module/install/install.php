@@ -189,7 +189,7 @@ class install extends common {
 			case 4:
 				$success = true;
 				// Réécriture d'URL
-				if ($this->getInput('data', helper::FILTER_BOOLEAN) === 1) {
+				if ($this->getInput('data') === 1) {
 					$success = (file_put_contents(
 						'.htaccess',
 						PHP_EOL .
