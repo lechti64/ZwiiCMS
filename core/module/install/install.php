@@ -188,8 +188,9 @@ class install extends common {
 			// Configuration
 			case 4:
 				$success = true;
+				$rewrite = $this->getInput('data');
 				// Réécriture d'URL
-				if ($this->getInput('data') === 1) {
+				if ($rewrite === "true") {
 					$success = (file_put_contents(
 						'.htaccess',
 						PHP_EOL .
