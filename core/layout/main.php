@@ -15,6 +15,11 @@
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/theme.css?<?php echo md5_file(self::DATA_DIR.'theme.css'); ?>">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/custom.css?<?php echo md5_file(self::DATA_DIR.'custom.css'); ?>">
 	<?php $layout->showStyle(); ?>
+	<?php
+	if (file_exists('site/data/head.inc.html')) {
+		 include('site/data/head.inc.html'); 
+	}
+	 ?>
 </head>
 <body>
 <?php $layout->showBar(); ?>
