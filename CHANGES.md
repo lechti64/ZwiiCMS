@@ -3,6 +3,7 @@
 ## Version 9.1.09
 - Améliorations :
     - Mise en page petits écrans, modification des marges
+    - Appel de scripts dans header et body
 
 ## Version 9.1.08
 - Corrections : 
