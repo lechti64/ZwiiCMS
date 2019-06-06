@@ -2,7 +2,7 @@
 
 ## Version 9.1.09
 - Améliorations :
-    - Mise en page petits écrans 
+    - Mise en page petits écrans, modification des marges
 
 ## Version 9.1.08
 - Corrections : 
