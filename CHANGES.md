@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 9.1.09
+- Améliorations :
+    - Mise en page petits écrans 
+
 ## Version 9.1.08
 - Corrections : 
     - Validation du code html et du CSS commun
@@ -14,8 +18,6 @@
     - TinyMCE 4.9.4
     - PHPMailer 6.07
     - Jquery 3.4.1
-
-
 
 ## Version 9.1.07
 - Correction : 

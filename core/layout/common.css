@@ -476,6 +476,9 @@ nav a:hover {
 }
 
 @media (max-width: 768px) {
+	body > nav {
+		margin:0;
+	}
 	nav #toggle {
 		display: block;
 	}	
@@ -582,6 +585,9 @@ footer {
 
 /* Conserve le pied de page sur une ligne */
 @media (max-width: 768px) {
+	body > footer {
+		margin:0;
+	}
 	footer .col4 {
 		width:100%;
 	}
