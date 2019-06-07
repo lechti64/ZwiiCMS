@@ -279,6 +279,9 @@ class config extends common {
 				]
 			]);
 			if(self::$inputNotices === []) {
+				// Ecrire les fichiers de script
+				file_put_contents(self::DATA_DIR . 'head.inc.html',$this->getInput('configScriptHead',null));
+				file_put_contents(self::DATA_DIR . 'body.inc.html',$this->getInput('configScriptBody',null));				
 				// Active la réécriture d'URL
 				$rewrite = $this->getInput('rewrite', helper::FILTER_BOOLEAN);
 				if(

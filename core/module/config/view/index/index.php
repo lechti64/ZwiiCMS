@@ -13,15 +13,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col6">
+		<div class="col12">
 			<div class="block">
 				<h4>Informations générales</h4>
-
 				<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
 					'label' => 'Page d\'accueil',
 					'selected' => $this->getData(['config', 'homePageId'])
 				]); ?>
-
 				<?php echo template::text('configTitle', [
 					'label' => 'Titre du site',
 					'value' => $this->getData(['config', 'title']),
@@ -33,49 +31,42 @@
 					'help'  => 'Elle apparaît dans les partages sur les réseaux sociaux.'
 				]); ?>
 			</div>
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col6">
 			<div class="block">
 				<h4>Options avancées</h4>
-				<?php echo template::file('configFavicon', [
-					'type' => 1,
-					'help' => 'Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
-					'label' => 'Favicon',
-					'value' => $this->getData(['config', 'favicon'])
-				]); ?>
-				<?php echo template::text('configAnalyticsId', [
-					'help' => 'Saisissez l\'ID de suivi.',
-					'label' => 'Google Analytics',
-					'placeholder' => 'UA-XXXXXXXX-X',
-					'value' => $this->getData(['config', 'analyticsId'])
-				]); ?>
-				<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement pour l\'utilisation des cookies', [
-					'checked' => $this->getData(['config', 'cookieConsent'])
-				]); ?>					
-				<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
-					'checked' => helper::checkRewrite(),
-					'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
-				]); ?>			
-				<?php echo template::select('itemsperPage', $module::$ItemsList, [
-					'label' => 'Articles par page ("Blog" et "News")',
-					'selected' => $this->getData(['config', 'itemsperPage'])
-				]); ?>
-			</div>
-			<div class="block">
-				<h4>Copie d'écran OpenGraph</h4>
-				<div class="row">
-					<div class="col8 offset2">
-						<img src='<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>' />
+					<div class="row">
+						<div class="col6">
+							<?php echo template::file('configFavicon', [
+								'type' => 1,
+								'help' => 'Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
+								'label' => 'Favicon',
+								'value' => $this->getData(['config', 'favicon'])
+							]); ?>
+						</div>
+						<div class="col6">
+							<?php echo template::text('configAnalyticsId', [
+								'help' => 'Saisissez l\'ID de suivi.',
+								'label' => 'Google Analytics',
+								'placeholder' => 'UA-XXXXXXXX-X',
+								'value' => $this->getData(['config', 'analyticsId'])
+							]); ?>
+						</div>
 					</div>
-				</div>
-				<div class="row">				
-					<div class="col10 offset1">		
-						<?php echo template::button('configMetaImage', [
-						'href' => helper::baseUrl() . 'config/configMetaImage',
-						'value' => 'Rafraîchir la capture d\'écran'
-						]); ?>
-					</div>
-				</div>
-				<p>Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier "screenshot.png" est effacé du gestionnaire de fichiers.</p>
-			</div>								
+					<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement pour l\'utilisation des cookies', [
+						'checked' => $this->getData(['config', 'cookieConsent'])
+					]); ?>					
+					<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
+						'checked' => helper::checkRewrite(),
+						'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
+					]); ?>			
+					<?php echo template::select('itemsperPage', $module::$ItemsList, [
+						'label' => 'Articles par page ("Blog" et "News")',
+						'selected' => $this->getData(['config', 'itemsperPage'])
+					]); ?>
+			</div>							
 		</div>
 		<div class="col6">
 			<div class="block">
@@ -97,7 +88,6 @@
 					</div>
 				</div>
 				<div class="row">
-
 					<div class="col6">
 						<?php echo template::text('configSocialYoutubeId', [
 							'help' => 'Saisissez votre ID : https://www.youtube.com/channel/[ID].',
@@ -130,56 +120,12 @@
 					</div>						
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col6">
 			<div class="block">
-				<h4>Système</h4>
-				<div class="row">
-					<div  class="col6">
-						<?php echo template::text('configVersion', [
-						'label' => 'ZwiiCMS',
-						'readonly' => true,
-						'value' => common::ZWII_VERSION
-					]); ?>	
-					</div>	
-					<div  class="col6">
-						<?php echo template::text('moduleRedirectionVersion', [
-							'label' => 'Module "Redirection"',
-							'readonly' => true,
-							'value' => redirection::REDIRECTION_VERSION
-						]); ?>
-					</div>										
-				</div>							
-				<div class="row">
-					<div  class="col6">
-						<?php echo template::text('moduleFormVersion', [
-							'label' => 'Module "Form"',
-							'readonly' => true,
-							'value' => form::FORM_VERSION
-						]); ?>
-					</div>
-					<div  class="col6">
-						<?php echo template::text('moduleGalleryVersion', [
-							'label' => 'Module "Gallery"',
-							'readonly' => true,
-							'value' => gallery::GALLERY_VERSION
-						]); ?>
-					</div>										
-				</div>
-				<div class="row">
-					<div  class="col6">
-						<?php echo template::text('moduleNewsVersion', [
-							'label' => 'Module "News"',
-							'readonly' => true,
-							'value' => news::NEWS_VERSION
-						]); ?>
-					</div>
-					<div  class="col6">
-						<?php echo template::text('moduleBlogVersion', [
-							'label' => 'Module "Blog"',
-							'readonly' => true,
-							'value' => blog::BLOG_VERSION
-						]); ?>
-					</div>										
-				</div>					
+				<h4>Système</h4>			
 				<?php echo template::select('configTimezone', $module::$timezones, [
 					'label' => 'Fuseau horaire',
 					'selected' => $this->getData(['config', 'timezone'])
@@ -206,7 +152,108 @@
 							'value' => 'Générer sitemap.xml et robots.txt'
 						]); ?>
 					</div>
-				</div>				
+				</div>
+			</div>				
+		</div>
+		<div class="col6">
+			<div class="block">
+				<h4>Copie d'écran OpenGraph</h4>
+				<div class="row">
+					<div class="col8 offset2">
+						<img src='<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>' />
+				</div>
+				<div class="row">				
+					<div class="col10 offset1">		
+						<?php echo template::button('configMetaImage', [
+						'href' => helper::baseUrl() . 'config/configMetaImage',
+						'value' => 'Rafraîchir la capture d\'écran'
+						]); ?>
+					</div>
+				</div>
+				<p>Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier "screenshot.png" est effacé du gestionnaire de fichiers.</p>
+			</div>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col12">
+			<?php 
+			// Lire le contenu du fichier script sinon le créer
+			if (file_exists( self::DATA_DIR . 'head.inc.html')) {
+				$headerFile = file_get_contents (self::DATA_DIR . 'head.inc.html');
+			} else {
+				$headerFile = "";
+				touch (self::DATA_DIR . 'head.inc.html');
+			}
+			if (file_exists( self::DATA_DIR . 'body.inc.html')) {
+				$bodyFile = file_get_contents (self::DATA_DIR . 'body.inc.html');
+			} else {
+				$bodyFile = "";
+				touch (self::DATA_DIR . 'body.inc.html');
+			}			
+			?>
+			<div class="block">
+				<h4>Scripts HTML à insérer dans la page</h4>			
+				<?php echo template::textarea('configScriptHead', [
+					'label' => 'Head',
+					'value' => $headerFile
+				]); ?>
+				<?php echo template::textarea('configScriptBody', [
+					'label' => 'Body',
+					'value' => $bodyFile
+				]); ?>
+			</div>
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col12">
+			<div class="block">
+				<h4>Information sur les versions</h4>
+				<div class="row">
+					<div  class="col4">
+						<?php echo template::text('configVersion', [
+						'label' => 'ZwiiCMS',
+						'readonly' => true,
+						'value' => common::ZWII_VERSION
+					]); ?>	
+					</div>	
+					<div  class="col4">
+						<?php echo template::text('moduleRedirectionVersion', [
+							'label' => 'Module "Redirection"',
+							'readonly' => true,
+							'value' => redirection::REDIRECTION_VERSION
+						]); ?>
+					</div>
+					<div  class="col4">
+						<?php echo template::text('moduleFormVersion', [
+							'label' => 'Module "Form"',
+							'readonly' => true,
+							'value' => form::FORM_VERSION
+						]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div  class="col4">
+						<?php echo template::text('moduleGalleryVersion', [
+							'label' => 'Module "Gallery"',
+							'readonly' => true,
+							'value' => gallery::GALLERY_VERSION
+						]); ?>
+					</div>
+					<div  class="col4">
+						<?php echo template::text('moduleNewsVersion', [
+							'label' => 'Module "News"',
+							'readonly' => true,
+							'value' => news::NEWS_VERSION
+						]); ?>
+					</div>
+					<div  class="col4">
+						<?php echo template::text('moduleBlogVersion', [
+							'label' => 'Module "Blog"',
+							'readonly' => true,
+							'value' => blog::BLOG_VERSION
+						]); ?>
+					</div>										
+				</div>	
 			</div>
 		</div>
 	</div>
