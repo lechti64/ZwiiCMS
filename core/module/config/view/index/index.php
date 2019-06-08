@@ -151,6 +151,23 @@
 						]); ?>
 					</div>
 				</div>
+			</div>				
+		</div>
+		<div class="col6">
+			<div class="block">
+				<h4>Référencement</h4>
+				<div class="row">				
+					<div class="col5">	
+							<br /><br />
+							<?php echo template::button('configMetaImage', [
+							'href' => helper::baseUrl() . 'config/configMetaImage',
+							'value' => 'Rafraîchir la capture d\'écran',
+							'help' => 'bb'
+							]); ?>
+					</div>
+					<div class="col7">
+						<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
+					</div>					
 				<div class="row">
 					<div class="col10 offset1">
 						<?php echo template::button('configSiteMap', [
@@ -158,24 +175,6 @@
 							'value' => 'Générer sitemap.xml et robots.txt'
 						]); ?>
 					</div>
-				</div>
-			</div>				
-		</div>
-		<div class="col6">
-			<div class="block">
-				<h4>Aide au référencement</h4>
-				<div class="row">				
-					<div class="col10 offset1">		
-						<?php echo template::button('configMetaImage', [
-						'href' => helper::baseUrl() . 'config/configMetaImage',
-						'value' => 'Rafraîchir la capture d\'écran'
-						]); ?>
-					</div>
-				</div>	
-				<p>Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier "screenshot.png" est effacé du gestionnaire de fichiers.</p>
-				<div class="row">
-					<div class="col8 offset2">
-						<img src='<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>' />
 				</div>
 			</div>	
 		</div>
