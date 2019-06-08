@@ -195,7 +195,7 @@
 			<div class="block">
 				<h4>Options avancées</h4>
 				<div class="row">
-					<div class="col2">
+					<div class="col3">
 						<?php echo template::text('configAnalyticsId', [
 							'help' => 'Saisissez l\'ID de suivi.',
 							'label' => 'Google Analytics',
