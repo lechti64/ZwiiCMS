@@ -12,13 +12,38 @@
 			<ul>
 				<?php foreach($childIds as $childId): ?>
 					<li>
+					<!-- Sous-page -->
 					<?php if ($this->getData(['page', $childId, 'disable']) === false && $this->getUser('group') >= $this->getData(['page', $parentId, 'group'])) 
 					{ ?>	
 						<a href="<?php echo helper::baseUrl() . $childId; ?>"><?php echo $this->getData(['page', $childId, 'title']); ?></a>
 					<?php } else { ?>
-							<?php echo $this->getData(['page', $childId, 'title']); }?>						
+							<?php echo $this->getData(['page', $childId, 'title']); }?>	
+							
+						<!-- articles d'une sous-page blog-->
+						<ul>
+						<?php if ($this->getData(['page', $childId, 'moduleId']) === 'blog') { ?>
+							
+							<?php
+								foreach($this->getData(['module',$childId]) as $articleId => $article): ?>
+								<li>
+									<a href="<?php echo helper::baseUrl() .	$article['title'];?>"><?php echo $article['title']; ?></a>
+								</li>
+								<?php endforeach;
+							} ?>
+						</ul>					
+						<!-- -->
 					</li>
 				<?php endforeach; ?>
+				<!-- ou articles d'un blog-->
+
+				<?php if ($this->getData(['page', $parentId, 'moduleId']) === 'blog') { ?>
+				<?php
+					foreach($this->getData(['module',$parentId]) as $articleId => $article): ?>
+					<li>
+						<a href="<?php echo helper::baseUrl() .	$article['title'];?>"><?php echo $article['title']; ?></a>
+					</li>
+					<?php endforeach;
+				} ?>
 			</ul>
 		</li>
 	<?php endforeach; ?>
