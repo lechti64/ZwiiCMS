@@ -1907,7 +1907,7 @@ class layout extends common {
 		$items .= '</span>';
 		// Affichage du lien de connexion 
 		$items .= '<span id="footerDisplaySiteMap"';
-		$items .= $this->getData(['theme','footer','displaySiteMap']) ===  false? 'class="displayNone"' : '';
+		$items .= $this->getData(['theme','footer','displaySiteMap']) ===  false? ' class="displayNone"' : '';
 		$items .=  '><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() .  'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
 		$items .= '</span>';
         if(

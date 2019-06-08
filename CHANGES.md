@@ -4,6 +4,9 @@
 - Améliorations :
     - Mise en page petits écrans, modification des marges
     - Configuration du site : scripts dans header et body
+    - Nouvel écran de configuration
+- Corrections : 
+    - Déclaration de localisation manquante dans mail.php
 
 ## Version 9.1.08
 - Corrections : 
