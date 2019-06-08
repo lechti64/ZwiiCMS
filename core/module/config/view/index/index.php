@@ -40,7 +40,7 @@
 		</div>		
 	</div>
 	<div class="row">
-		<div class="col5">
+		<div class="col6">
 			<div class="block">
 				<h4>Options</h4>
 					<div class="row">
@@ -70,7 +70,7 @@
 
 			</div>							
 		</div>
-		<div class="col7">
+		<div class="col6">
 			<div class="block">
 				<h4>Réseaux sociaux</h4>
 				<div class="row">
@@ -125,7 +125,7 @@
 	<div class="row">
 		<div class="col6">
 			<div class="block">
-				<h4>Système et sauvegardes</h4>							
+				<h4>Système et sauvegarde</h4>							
 				<div class="col12">
 					<div class="row">
 						<?php echo template::select('configTimezone', $module::$timezones, [
@@ -195,7 +195,7 @@
 			<div class="block">
 				<h4>Options avancées</h4>
 				<div class="row">
-					<div class="col6">
+					<div class="col2">
 						<?php echo template::text('configAnalyticsId', [
 							'help' => 'Saisissez l\'ID de suivi.',
 							'label' => 'Google Analytics',
