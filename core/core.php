@@ -658,14 +658,16 @@ class common {
 		$datetime->format(DateTime::ATOM); // Updated ISO8601
 		// sitemap index file name
 		$sitemap->sitemapIndexFileName = "sitemap-index.xml";
-		foreach($this->getHierarchy(null, false, false) as $parentPageId => $childrenPageIds) {
-			// Exclure les barres et les pages non publiques
-			if ($this->getData(['page',$parentPageId,'group']) !== 0 ||
-			$this->getData(['page',$parentPageId,'block']) === 'bar')  {
+		foreach($this->getHierarchy(null, true, null) as $parentPageId => $childrenPageIds) {
+			// Exclure les barres et les pages non publiques et les pages masquées
+			if ($this->getData(['page',$parentPageId,'group']) !== 0  || $this->getData(['page', $parentPageId, 'disable']) === true)  {
 				continue;
 			}
 			$sitemap->addUrl ($parentPageId,$datetime);
 			foreach($childrenPageIds as $childKey) {
+				if ($this->getData(['page',$childKey,'group']) !== 0 || $this->getData(['page', $childKey, 'disable']) === true)  {
+					continue;
+				}
 				$sitemap->addUrl($childKey,$datetime);
 			}
 		}			
