@@ -26,7 +26,7 @@
 							<?php
 								foreach($this->getData(['module',$childId]) as $articleId => $article): ?>
 								<li>
-									<a href="<?php echo helper::baseUrl() .	$article['title'];?>"><?php echo $article['title']; ?></a>
+									<a href="<?php echo helper::baseUrl() . $childId . '/' . $articleId;?>"><?php echo $article['title']; ?></a>
 								</li>
 								<?php endforeach;
 							} ?>
@@ -40,7 +40,7 @@
 				<?php
 					foreach($this->getData(['module',$parentId]) as $articleId => $article): ?>
 					<li>
-						<a href="<?php echo helper::baseUrl() .	$article['title'];?>"><?php echo $article['title']; ?></a>
+						<a href="<?php echo helper::baseUrl() .	$parentId . '/' . $articleId;?>"><?php echo $article['title']; ?></a>
 					</li>
 					<?php endforeach;
 				} ?>
