@@ -52,13 +52,17 @@ class install extends common {
 				// Configure certaines données par défaut
 				if ($this->getInput('installDefaultData',helper::FILTER_BOOLEAN) === FALSE) {					
 					foreach($this->getHierarchy(null, false) as $parentPageId => $childrenPageIds) {
-						if ( $parentPageId !== 'accueil') {
-							$this->deleteData(['page',$parentPageId]);
+						if ( $parentPageId !== 'accueil') {														
+							if ($this->getdata(['page',$parentPageId,'moduleId'])) {
+								$this->deleteData(['page',$parentPageId]);
+							}							
 						}
 						foreach($childrenPageIds as $childKey) {
 							$this->deleteData(['page', $childKey]);
 						}
 					}
+					// Effacer les modules 
+					$this->deleteData(['module']);
 					// Ajouter ici la liste des pages privées qui ne sont pas vues lors de l'installation.
 					$this->deleteData(['page', 'privee']);
 					// Effacer les fichiers par défaut
