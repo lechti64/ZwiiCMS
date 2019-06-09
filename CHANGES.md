@@ -9,8 +9,7 @@
 - Corrections : 
     - Déclaration de localisation manquante dans mail.php
     - Bug avec le formulaire
-    - Désactivation direct upload dans RFM
-    
+    - Désactivation direct upload dans RFM    
 
 ## Version 9.1.08
 - Corrections : 
