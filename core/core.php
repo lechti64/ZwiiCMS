@@ -672,7 +672,11 @@ class common {
 				$sitemap->addUrl($childKey,$datetime);
 
 				// La sous-page est un blog
-				
+				if ($this->getData(['page', $childKey, 'moduleId']) === 'blog') {
+					foreach($this->getData(['module',$childKey]) as $articleId => $article) {			
+						$sitemap->addUrl( $childKey . '/' . $articleId ) ;
+					}
+				}							
 			}
 			// Articles du blog
 			if ($this->getData(['page', $parentPageId, 'moduleId']) === 'blog') {
