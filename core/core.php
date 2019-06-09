@@ -663,12 +663,22 @@ class common {
 			if ($this->getData(['page',$parentPageId,'group']) !== 0  || $this->getData(['page', $parentPageId, 'disable']) === true)  {
 				continue;
 			}
+			// Sous-pages
 			$sitemap->addUrl ($parentPageId,$datetime);
 			foreach($childrenPageIds as $childKey) {
 				if ($this->getData(['page',$childKey,'group']) !== 0 || $this->getData(['page', $childKey, 'disable']) === true)  {
 					continue;
 				}
 				$sitemap->addUrl($childKey,$datetime);
+
+				// La sous-page est un blog
+				
+			}
+			// Articles du blog
+			if ($this->getData(['page', $parentPageId, 'moduleId']) === 'blog') {
+				foreach($this->getData(['module',$parentPageId]) as $articleId => $article) {			
+					$sitemap->addUrl( $parentPageId . '/' . $articleId ) ;
+				}
 			}
 		}			
 		// generating internally a sitemap
@@ -2461,7 +2471,7 @@ class template {
 			'href' => 'javascript:void(0);',
 			'ico' => '',
 			'id' => $nameId,
-			//'name' => $nameId,
+			'name' => $nameId,
 			'target' => '',
 			'uniqueSubmission' => false,
 			'value' => 'Bouton'
