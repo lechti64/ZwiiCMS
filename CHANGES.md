@@ -5,7 +5,11 @@
     - Mise en page petits écrans, modification des marges
     - Configuration du site : scripts dans header et body
     - Nouvel écran de configuration
-    - Ajoute de la compression gzip et deflate dans htaccess
+    - Ajoute la compression gzip et deflate dans htaccess
+    - Sitemap (page et sitemap.xml) revu et corrigé :
+        - Prends en compte les articles de blog
+        - Affiche les pages désactivées sans lien
+        - Prends en compte les droits de l'utilisateur
 - Corrections : 
     - Déclaration de localisation manquante dans mail.php
     - Bug avec le formulaire
