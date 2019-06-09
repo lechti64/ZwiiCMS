@@ -7,6 +7,7 @@
 				<a href="<?php echo helper::baseUrl() . $parentId; ?>"><?php echo $this->getData(['page', $parentId, 'title']); ?></a>
 				<?php 
 			} else { 
+				// page désactivée
 				echo $this->getData(['page', $parentId, 'title']); 
 			} ?>
 			<ul>
@@ -17,6 +18,7 @@
 					{ ?>	
 						<a href="<?php echo helper::baseUrl() . $childId; ?>"><?php echo $this->getData(['page', $childId, 'title']); ?></a>
 					<?php } else { ?>
+							<!-- page désactivée -->
 							<?php echo $this->getData(['page', $childId, 'title']); }?>	
 							
 						<!-- articles d'une sous-page blog-->
@@ -31,7 +33,6 @@
 								<?php endforeach;
 							} ?>
 						</ul>					
-						<!-- -->
 					</li>
 				<?php endforeach; ?>
 				<!-- ou articles d'un blog-->
@@ -40,7 +41,7 @@
 				<?php
 					foreach($this->getData(['module',$parentId]) as $articleId => $article): ?>
 					<li>
-						<a href="<?php echo helper::baseUrl() .	$parentId . '/' . $articleId;?>"><?php echo $article['title']; ?></a>
+						<a href="<?php echo helper::baseUrl() .	$parentId. '/' . $articleId;?>"><?php echo $article['title']; ?></a>
 					</li>
 					<?php endforeach;
 				} ?>

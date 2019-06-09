@@ -5,8 +5,12 @@
     - Mise en page petits écrans, modification des marges
     - Configuration du site : scripts dans header et body
     - Nouvel écran de configuration
+    - Ajoute de la compression gzip et deflate dans htaccess
 - Corrections : 
     - Déclaration de localisation manquante dans mail.php
+    - Bug avec le formulaire
+    - Désactivation direct upload dans RFM
+    
 
 ## Version 9.1.08
 - Corrections : 
