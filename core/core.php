@@ -32,7 +32,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.1.09';
+	const ZWII_VERSION = '9.1.10';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -658,7 +658,7 @@ class common {
 		$datetime->format(DateTime::ATOM); // Updated ISO8601
 		// sitemap index file name
 		$sitemap->sitemapIndexFileName = "sitemap-index.xml";
-		foreach($this->getHierarchy(null, true, null) as $parentPageId => $childrenPageIds) {
+		foreach($this->getHierarchy(null, null, null) as $parentPageId => $childrenPageIds) {
 			// Exclure les barres et les pages non publiques et les pages masquées
 			if ($this->getData(['page',$parentPageId,'group']) !== 0  || $this->getData(['page', $parentPageId, 'disable']) === true)  {
 				continue;

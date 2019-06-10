@@ -27,9 +27,11 @@
 							
 							<?php
 								foreach($this->getData(['module',$childId]) as $articleId => $article): ?>
-								<li>
-									<a href="<?php echo helper::baseUrl() . $childId . '/' . $articleId;?>"><?php echo $article['title']; ?></a>
-								</li>
+								<?php if($this->getData(['module',$childId,$articleId,'state']) === true) {?>								
+									<li>
+										<a href="<?php echo helper::baseUrl() . $childId . '/' . $articleId;?>"><?php echo $article['title']; ?></a>
+									</li>
+								<?php } ?>								
 								<?php endforeach;
 							} ?>
 						</ul>					
@@ -37,12 +39,14 @@
 				<?php endforeach; ?>
 				<!-- ou articles d'un blog-->
 
-				<?php if ($this->getData(['page', $parentId, 'moduleId']) === 'blog') { ?>
+				<?php if ($this->getData(['page', $parentId, 'moduleId']) === 'blog' ) { ?>
 				<?php
 					foreach($this->getData(['module',$parentId]) as $articleId => $article): ?>
-					<li>
-						<a href="<?php echo helper::baseUrl() .	$parentId. '/' . $articleId;?>"><?php echo $article['title']; ?></a>
-					</li>
+					<?php if($this->getData(['module',$parentId,$articleId,'state']) === true) {?>
+						<li>
+							<a href="<?php echo helper::baseUrl() .	$parentId. '/' . $articleId;?>"><?php echo $article['title']; ?></a>
+						</li>
+					<?php } ?>
 					<?php endforeach;
 				} ?>
 			</ul>
