@@ -673,15 +673,19 @@ class common {
 
 				// La sous-page est un blog
 				if ($this->getData(['page', $childKey, 'moduleId']) === 'blog') {
-					foreach($this->getData(['module',$childKey]) as $articleId => $article) {			
-						$sitemap->addUrl( $childKey . '/' . $articleId ) ;
+					foreach($this->getData(['module',$childKey]) as $articleId => $article) {
+						if($this->getData(['module',$childKey,$articleId,'state']) === true) {
+							$sitemap->addUrl( $childKey . '/' . $articleId ) ;
+						}			
 					}
 				}							
 			}
 			// Articles du blog
 			if ($this->getData(['page', $parentPageId, 'moduleId']) === 'blog') {
-				foreach($this->getData(['module',$parentPageId]) as $articleId => $article) {			
-					$sitemap->addUrl( $parentPageId . '/' . $articleId ) ;
+				foreach($this->getData(['module',$parentPageId]) as $articleId => $article) {
+					if($this->getData(['module',$parentPageId,$articleId,'state']) === true) {			
+						$sitemap->addUrl( $parentPageId . '/' . $articleId ) ;
+					}
 				}
 			}
 		}			
