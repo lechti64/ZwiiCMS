@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 9.1.10
+- Améliorations : 
+    -  Sitemap : les articles de blog avec le statut brouillon sont masqués.
+
 ## Version 9.1.09
 - Améliorations :
     - Mise en page petits écrans, modification des marges
