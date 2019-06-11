@@ -189,7 +189,11 @@
 				</div>
 				<?php endif; ?>	
 		</div>
-		<?php } ?>
+		<?php }
+		if (file_exists('site/data/body.inc.html')) {
+			include('site/data/body.inc.html'); 
+		}
+		?>
 	</section>
 	<!-- footer -->
 	<?php if(
@@ -306,10 +310,5 @@
 <!-- Lien remonter en haut -->
 <div id="backToTop"><?php echo template::ico('up'); ?></div>
 <?php $layout->showScript();?>
-<?php
-	if (file_exists('site/data/body.inc.html')) {
-		 include('site/data/body.inc.html'); 
-	}
-	 ?>
 </body>
 </html>
