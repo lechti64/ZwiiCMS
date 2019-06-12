@@ -42,7 +42,7 @@
 	<div class="row">
 		<div class="col6">
 			<div class="block">
-				<h4>Options</h4>
+				<h4>Réglages</h4>
 					<div class="row">
 						<div class="col6">
 							<?php echo template::file('configFavicon', [
@@ -60,14 +60,19 @@
 							]); ?>
 						</div>
 					</div>
-					<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement pour l\'utilisation des cookies', [
+					<div class="col12">
+						<?php echo template::select('configTimezone', $module::$timezones, [
+							'label' => 'Fuseau horaire',
+							'selected' => $this->getData(['config', 'timezone'])
+						]); ?>	
+					</div>					
+					<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
 						'checked' => $this->getData(['config', 'cookieConsent'])
-					]); ?>					
+					]); ?>						
 					<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
 						'checked' => helper::checkRewrite(),
 						'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
-					]); ?>			
-
+					]); ?>
 			</div>							
 		</div>
 		<div class="col6">
@@ -106,16 +111,25 @@
 					</div>
 					<div class="col4">
 						<?php echo template::text('configSocialPinterestId', [
-									'help' => 'Saisissez votre ID : https://pinterest.com/[ID].',
+							'help' => 'Saisissez votre ID : https://pinterest.com/[ID].',
 							'label' => 'Pinterest',
 							'value' => $this->getData(['config', 'social', 'pinterestId'])
 						]); ?>
 					</div>					
 					<div class="col4">
-							<?php echo template::text('configSocialLinkedinId', [
-								'help' => 'Saisissez votre ID Linkedin : https://fr.linkedin.com/in/[CETTE PARTIE].',
-								'label' => 'Linkedin',
-								'value' => $this->getData(['config', 'social', 'linkedinId'])
+						<?php echo template::text('configSocialLinkedinId', [
+							'help' => 'Saisissez votre ID Linkedin : https://fr.linkedin.com/in/[ID].',
+							'label' => 'Linkedin',
+							'value' => $this->getData(['config', 'social', 'linkedinId'])
+						]); ?>
+					</div>											
+				</div>
+				<div class="row">			
+					<div class="col4 offset4">
+							<?php echo template::text('configSocialGithubId', [
+								'help' => 'Saisissez votre ID Github : https://github.com/[ID].',
+								'label' => 'Github',
+								'value' => $this->getData(['config', 'social', 'githubId'])
 							]); ?>
 					</div>						
 				</div>
@@ -125,14 +139,9 @@
 	<div class="row">
 		<div class="col6">
 			<div class="block">
-				<h4>Système et sauvegarde</h4>							
+				<h4>Gestion et sauvegarde</h4>							
 				<div class="col12">
-					<div class="row">
-						<?php echo template::select('configTimezone', $module::$timezones, [
-							'label' => 'Fuseau horaire',
-							'selected' => $this->getData(['config', 'timezone'])
-						]); ?>	
-					</div>
+
 					<div class="row">
 						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
 							'checked' => $this->getData(['config', 'maintenance'])
@@ -156,18 +165,19 @@
 		<div class="col6">
 			<div class="block">
 				<h4>Référencement</h4>
-				<div class="row">				
-					<div class="col5">	
-							<br /><br />
+				<div class="row">
+					<div class="col5 ">	
 							<?php echo template::button('configMetaImage', [
 							'href' => helper::baseUrl() . 'config/configMetaImage',
-							'value' => 'Rafraîchir la capture d\'écran',
+							'value' => 'Rafraîchir la capture d\'écran Open Graph',
 							'help' => 'bb'
 							]); ?>
 					</div>
 					<div class="col7">
 						<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
-					</div>					
+					</div>	
+
+				
 				<div class="row">
 					<div class="col10 offset1">
 						<?php echo template::button('configSiteMap', [
@@ -207,13 +217,13 @@
 				<div class="row">
 					<div class="col6">
 						<?php echo template::textarea('configScriptHead', [
-							'label' => 'Script dans Head',
+							'label' => 'Insérer un script dans "Head"',
 							'value' => $headerFile
 						]); ?>
 					</div>
 					<div class="col6">
 						<?php echo template::textarea('configScriptBody', [
-							'label' => 'Script dans Body',
+							'label' => 'Insérer un script dans "Body"',
 							'value' => $bodyFile
 						]); ?>
 					</div>
@@ -224,7 +234,7 @@
 	<div class="row">
 		<div class="col12">
 			<div class="block">
-				<h4>Numéros de version</h4>
+				<h4>Versions système</h4>
 				<div class="row">
 					<div  class="col2">
 						<?php echo template::text('configVersion', [
@@ -232,12 +242,12 @@
 						'readonly' => true,
 						'value' => common::ZWII_VERSION
 					]); ?>	
-					</div>	
+					</div>
 					<div  class="col2">
-						<?php echo template::text('moduleRedirectionVersion', [
-							'label' => 'Redirection',
+						<?php echo template::text('moduleBlogVersion', [
+							'label' => 'Blog',
 							'readonly' => true,
-							'value' => redirection::REDIRECTION_VERSION
+							'value' => blog::BLOG_VERSION
 						]); ?>
 					</div>
 					<div  class="col2">
@@ -262,12 +272,12 @@
 						]); ?>
 					</div>
 					<div  class="col2">
-						<?php echo template::text('moduleBlogVersion', [
-							'label' => 'Blog',
+						<?php echo template::text('moduleRedirectionVersion', [
+							'label' => 'Redirection',
 							'readonly' => true,
-							'value' => blog::BLOG_VERSION
+							'value' => redirection::REDIRECTION_VERSION
 						]); ?>
-					</div>										
+					</div>								
 				</div>	
 			</div>
 		</div>

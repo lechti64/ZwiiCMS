@@ -642,6 +642,12 @@ footer #footerSocials .zwiico-youtube {
 footer #footerSocials .zwiico-youtube:hover {
 	background: #AF1B1B;
 }
+footer #footerSocials .zwiico-github {
+	background: #000;
+}
+footer #footerSocials .zwiico-github:hover {
+	background: #000;
+}
 
 /* Bulle de dialogue */
 .speech {

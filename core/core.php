@@ -2381,7 +2381,7 @@ class layout extends common {
 					$socialUrl = 'https://www.facebook.com/';
 					$title = 'Facebook';
 					break;
-					case 'linkedinId':
+				case 'linkedinId':
 					$socialUrl = 'https://fr.linkedin.com/in/';
 					$title = 'Linkedin';
 					break;
@@ -2400,6 +2400,10 @@ class layout extends common {
 				case 'youtubeId':
 					$socialUrl = 'https://www.youtube.com/channel/';
 					$title = 'YouTube';
+					break;
+				case 'githubId':
+					$socialUrl = 'https://www.github.com/';
+					$title = 'Github';
 					break;
 				default:
 					$socialUrl = '';
