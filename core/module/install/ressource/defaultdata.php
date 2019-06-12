@@ -11,11 +11,12 @@ class install extends common {
 			'maintenance' => false,
 			'metaDescription' => 'Zwii est un CMS sans base de données qui permet de créer et gérer facilement un site web sans aucune connaissance en programmation.',
 			'social' => [
-				'facebookId' => 'ZwiiCMS',
+				'facebookId' => '.',
 				'instagramId' => '',
 				'pinterestId' => '',
 				'twitterId' => '',
-				'youtubeId' => ''
+				'youtubeId' => '',
+				'github' => ''
 			],
 			'timezone' => 'Europe/Paris',
 			'title' => 'Zwii, votre site en quelques clics !',
@@ -34,7 +35,7 @@ class install extends common {
 			'content' => '<h3>Bienvenue sur votre nouveau site Zwii !</h3>
 							  <p><strong>Un email contenant le récapitulatif de votre installation vient de vous être envoyé.</strong></p>
 							  <p>Connectez-vous dès maintenant à votre espace membre afin de créer un site à votre image ! Vous pourrez personnaliser le thème, créer des pages, ajouter des utilisateurs et bien plus encore !</p>
-							  <p>Si vous avez besoin d\'aide ou si vous cherchez des informations sur Zwii, n\'hésitez pas à jeter un œil à notre <a title="Forum" href="http://forum.zwiicms.com/">forum</a>.</p>',
+							  <p>Si vous avez besoin d\'aide ou si vous cherchez des informations sur Zwii, n\'hésitez pas à jeter un œil à notre <a title="Forum" href="https://forum.zwiicms.com/">forum</a>.</p>',
 			'hideTitle' => false,
 			'breadCrumb' => false,
 			'metaDescription' => '',
@@ -377,7 +378,7 @@ class install extends common {
 				]
 			],
 			'site-de-zwii' => [
-				'url' => 'http://zwiicms.com/',
+				'url' => 'https://zwiicms.com/',
 				'count' => 0
 			],
 			'contact' => [
