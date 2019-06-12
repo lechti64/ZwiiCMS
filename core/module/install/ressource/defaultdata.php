@@ -16,7 +16,7 @@ class install extends common {
 				'pinterestId' => '',
 				'twitterId' => '',
 				'youtubeId' => '',
-				'github' => ''
+				'githubId' => ''
 			],
 			'timezone' => 'Europe/Paris',
 			'title' => 'Zwii, votre site en quelques clics !',
