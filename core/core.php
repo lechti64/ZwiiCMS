@@ -642,6 +642,8 @@ class common {
 
 		require_once "core/vendor/sitemap/SitemapGenerator.php";
 
+		$timezone = $this->getData(['config','timezone']);
+
 		$sitemap = new \Icamys\SitemapGenerator\SitemapGenerator(helper::baseurl());
 
 		// will create also compressed (gzipped) sitemap
@@ -660,7 +662,9 @@ class common {
 		$sitemap->sitemapIndexFileName = "sitemap-index.xml";
 		foreach($this->getHierarchy(null, null, null) as $parentPageId => $childrenPageIds) {
 			// Exclure les barres et les pages non publiques et les pages masquées
-			if ($this->getData(['page',$parentPageId,'group']) !== 0  || $this->getData(['page', $parentPageId, 'disable']) === true)  {
+			if ($this->getData(['page',$parentPageId,'group']) !== 0  || 
+				$this->getData(['page', $parentPageId, 'disable']) === true ||
+				$this->getData(['page', $parentPageId, 'block']) === 'bar' )  {
 				continue;
 			}
 			// Sous-pages
@@ -675,7 +679,8 @@ class common {
 				if ($this->getData(['page', $childKey, 'moduleId']) === 'blog') {
 					foreach($this->getData(['module',$childKey]) as $articleId => $article) {
 						if($this->getData(['module',$childKey,$articleId,'state']) === true) {
-							$sitemap->addUrl( $childKey . '/' . $articleId ) ;
+							$date = $this->getData(['module',$childKey,$articleId,'publishedOn']);
+							$sitemap->addUrl( $childKey . '/' . $articleId , new DateTime("@{$date}"),new DateTimeZone($timezone)) ;
 						}			
 					}
 				}							
@@ -683,12 +688,14 @@ class common {
 			// Articles du blog
 			if ($this->getData(['page', $parentPageId, 'moduleId']) === 'blog') {
 				foreach($this->getData(['module',$parentPageId]) as $articleId => $article) {
-					if($this->getData(['module',$parentPageId,$articleId,'state']) === true) {			
-						$sitemap->addUrl( $parentPageId . '/' . $articleId ) ;
+					if($this->getData(['module',$parentPageId,$articleId,'state']) === true) {		
+						$date = $this->getData(['module',$parentPageId,$articleId,'publishedOn']);
+						$sitemap->addUrl( $parentPageId . '/' . $articleId , new DateTime("@{$date}",new DateTimeZone($timezone)));
 					}
 				}
 			}
-		}			
+		}		
+		
 		// generating internally a sitemap
 		$sitemap->createSitemap();
 

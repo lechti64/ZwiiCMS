@@ -3,7 +3,8 @@
 ## Version 9.1.10
 - Améliorations : 
     - Page sitemap et sitemap.xml : les articles de blog avec le statut brouillon sont masqués.
-    - Réseau social : Github
+    - Réseau social : Github.
+    - Sitemap : ajout de la date de publication des articles.
 
 ## Version 9.1.09
 - Améliorations :
