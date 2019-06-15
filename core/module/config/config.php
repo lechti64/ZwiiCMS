@@ -184,8 +184,8 @@ class config extends common {
 			if (strpos($data,'sitemap.xml') == 0) {
 				fwrite($filenew, $data);
 			} else {
-				fwrite($filenew, 'Sitemap: ' . helper::baseUrl() . 'sitemap.xml' . PHP_EOL);
-				fwrite($filenew, 'Sitemap: ' . helper::baseUrl() . 'sitemap.xml.gz' . PHP_EOL);
+				fwrite($filenew, 'Sitemap: ' . helper::baseUrl(false) . 'sitemap.xml' . PHP_EOL);
+				fwrite($filenew, 'Sitemap: ' . helper::baseUrl(false) . 'sitemap.xml.gz' . PHP_EOL);
 				fwrite($filenew, '# ZWII CONFIG  ---------' . PHP_EOL);
 				break;
 			}

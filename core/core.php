@@ -609,8 +609,8 @@ class common {
 						'Disallow: /site/tmp' .PHP_EOL .
 						'Disallow: /site/backup' .PHP_EOL .
 						'Allow: /site/file/' .PHP_EOL .
-						'Sitemap: ' . helper::baseUrl() . 'sitemap.xml' . PHP_EOL .
-						'Sitemap: ' . helper::baseUrl() . 'sitemap.xml.gz' . PHP_EOL .
+						'Sitemap: ' . helper::baseUrl(false) . 'sitemap.xml' . PHP_EOL .
+						'Sitemap: ' . helper::baseUrl(false) . 'sitemap.xml.gz' . PHP_EOL .
 						'# ZWII CONFIG  ---------' . PHP_EOL ;
 
 
