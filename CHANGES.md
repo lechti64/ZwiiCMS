@@ -2,7 +2,7 @@
 
 ## Version 9.1.11
 - Correction : 
-    - Générateur de site, correction de syntaxe.
+    - Générateur de sitemap.xml, correction de syntaxe.
 
 ## Version 9.1.10
 - Améliorations : 
