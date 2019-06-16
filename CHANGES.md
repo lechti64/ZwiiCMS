@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 9.1.11
+- Correction : 
+    - Générateur de site, correction de syntaxe.
+
 ## Version 9.1.10
 - Améliorations : 
     - Page sitemap et sitemap.xml : les articles de blog avec le statut brouillon sont masqués.
