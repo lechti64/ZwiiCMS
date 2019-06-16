@@ -32,7 +32,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.1.10';
+	const ZWII_VERSION = '9.1.11';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -680,7 +680,7 @@ class common {
 					foreach($this->getData(['module',$childKey]) as $articleId => $article) {
 						if($this->getData(['module',$childKey,$articleId,'state']) === true) {
 							$date = $this->getData(['module',$childKey,$articleId,'publishedOn']);
-							$sitemap->addUrl( $childKey . '/' . $articleId , new DateTime("@{$date}"),new DateTimeZone($timezone)) ;
+							$sitemap->addUrl( $childKey . '/' . $articleId , new DateTime("@{$date}",new DateTimeZone($timezone)));
 						}			
 					}
 				}							
