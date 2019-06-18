@@ -32,7 +32,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.1.12';
+	const ZWII_VERSION = '9.1.13';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -919,6 +919,12 @@ class common {
 			$this->setData(['core', 'dataVersion', 9100]);
 			$this->SaveData();
 		}
+		// Version 9.1.13
+		if($this->getData(['core', 'dataVersion']) < 9113) {
+			$this->setData(['theme','footer','template', 3 ]);
+			$this->setData(['core', 'dataVersion', 9113]);
+			$this->SaveData();
+		}		
 	}
 }
 

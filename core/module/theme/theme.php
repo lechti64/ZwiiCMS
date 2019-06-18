@@ -207,7 +207,11 @@ class theme extends common {
 		'auto auto' => 'Automatique',	
 		'100% 100%' => 'Image étirée'
 	];
-
+	public static $footerTemplate = [	
+		'1' => 'Pleine page (100%)',
+		'2' => 'Deux colonnes ( 1/2 - 1/2)',
+		'3' => 'Trois colonnes (1/3 - 1/3 - 1/3)'
+	];
 
 	/**
 	 * Mode avancé
@@ -304,7 +308,8 @@ class theme extends common {
 		$this->addOutput([
 			'title' => 'Personnalisation du pied de page',
 			'vendor' => [
-				'tinycolorpicker'
+				'tinycolorpicker',
+				'tinymce'
 			],
 			'view' => 'footer'
 		]);

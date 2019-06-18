@@ -67,18 +67,18 @@ $("input, select").on("change", function() {
 // Bloc texte personnalisé
 $("#themeFooterForm").on("change",function() {
 	switch($("#themeFooterTextPosition").val()) {
-			case 'hide':
+			case "hide":
 				$("#footerText").hide();
 				break;
-			case 'left':
+			case "left":
 				$("#footerText").show().appendTo("#footerbodyLeft");
 				$("#footerText").show().appendTo("#footersiteLeft");
 				break;
-			case 'center':			
+			case "center":			
 				$("#footerText").show().appendTo("#footerbodyCenter");
 				$("#footerText").show().appendTo("#footersiteCenter");
 				break;
-			case 'right':			
+			case "right":			
 				$("#footerText").show().appendTo("#footerbodyRight");
 				$("#footerText").show().appendTo("#footersiteRight");				
 				break;
@@ -119,6 +119,61 @@ $("#themeFooterForm").on("change",function() {
 	}
 }).trigger("change");
 // Fin Position dans les blocs
+
+// Liste de position dans les blocs
+
+//3 colonnes
+var newOptions = {
+	3:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'center': 'Bloc Central',	'right': 'Bloc Droite'} ,
+	2:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'right': 'Bloc Droite'} ,
+	1:  {'hide': 'Masqué', 'center': 'Affiché'} 
+};
+
+
+// Modification de la mise en page 
+$("#themeFooterTemplate").on("change",function() {
+	// Nettoyage des sélecteurs des contenus
+	
+	var $el = $(".themeFooterPosition");
+	$el.empty(); 
+	// Eléments des position de contenus
+	$.each(newOptions[$("#themeFooterTemplate").val()], function(key,value) {
+		$el.append($("<option></option>")
+			.attr("value", key).text(value));
+		});
+	switch($("#themeFooterTemplate").val()) {
+		case "1":
+			$("#footersiteLeft").css("display", "none");
+			$("#footersiteCenter").css("display", "");
+			$("#footersiteRight").css("display", "none");
+			// Dimension du bloc
+			$("#footersiteCenter").removeAttr('class');;
+			$("#footersiteCenter").addClass("col12");
+			break;			
+		case "2":
+			$("#footersiteLeft").css("display", "");
+			$("#footersiteCenter").css("display", "none");
+			$("#footersiteRight").css("display", "");
+			// Dimension de blocs
+			$("#footersiteLeft").removeAttr('class');
+			$("#footersiteRight").removeAttr('class');
+			$("#footersiteLeft").addClass('col6');			
+			$("#footersiteRight").addClass('col6');
+			break;
+		case "3":			
+			$("#footersiteLeft").css("display", "");
+			$("#footersiteCenter").css("display", "");
+			$("#footersiteRight").css("display", "");
+			// Dimensions des blocs
+			$("#footersiteLeft").removeAttr('class');			
+			$("#footersiteRight").removeAttr('class');
+			$("#footersitecenter").removeAttr('class');			
+			$("#footersiteLeft").addClass('col4');
+			$("#footersiteCenter").addClass('col4');							
+			$("#footersiteRight").addClass('col4');
+			break;
+	} 
+});
 
 
 

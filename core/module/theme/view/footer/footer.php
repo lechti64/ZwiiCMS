@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col6">
 			<div class="block">
-				<h4>Couleur</h4>
+				<h4>Couleurs</h4>
 				<div class="row">
 					<div class="col6">
 						<?php echo template::text('themeFooterBackgroundColor', [
@@ -96,10 +96,23 @@
 	<div class="row">
 		<div class="col12">
 			<div class="block">
+				<h4>Mise en page</h4>
+				<?php echo template::select('themeFooterTemplate', $module::$footerTemplate, [
+						'label' => 'Nombre de colonnes',
+						'selected' => $this->getData(['theme', 'footer', 'template']),
+						'help' => 'Le changement de la mise en page entraîne la réinitalisation de la position des contenus.'
+					]); ?>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col12">
+			<div class="block">
 				<h4>Contenu personnalisé</h4>
 				<?php echo template::textarea('themeFooterText', [
-					'label' => 'Contenu (texte ou HTML)',
-					'value' => $this->getData(['theme', 'footer', 'text'])
+					//'label' => 'Contenu (texte ou HTML)',
+					'value' => $this->getData(['theme', 'footer', 'text']),
+					'class' => 'editorWysiwyg'
 				]); ?>
 			</div>
 		</div>
@@ -110,7 +123,8 @@
 				<h4>Contenu personnalisé</h4>
 					<?php echo template::select('themeFooterTextPosition', $module::$footerblocks, [
 						'label' => 'Emplacement',
-						'selected' => $this->getData(['theme', 'footer', 'textPosition'])
+						'selected' => $this->getData(['theme', 'footer', 'textPosition']),
+						'class' => 'themeFooterPosition'
 					]); ?>
 					<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
 						'label' => 'Alignement horizontal',
@@ -121,10 +135,11 @@
 		</div>	
 		<div class="col6">
 			<div class="block">
-				<h4>Réseaux sociaux</h4>
+				<h4>Contenu réseaux sociaux</h4>
 					<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
 						'label' => 'Emplacement',
-						'selected' => $this->getData(['theme', 'footer', 'socialsPosition'])
+						'selected' => $this->getData(['theme', 'footer', 'socialsPosition']),
+						'class' => 'themeFooterPosition'
 					]); ?>
 					<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
 						'label' => 'Alignement horizontal',
@@ -136,12 +151,13 @@
 	<div class="row">					
 		<div class="col12">
 				<div class="block">
-					<h4>Copyright</h4>
+					<h4>Contenu copyright</h4>
 					<div class="row">
 						<div class="col5">
 							<?php echo template::select('themeFooterCopyrightPosition', $module::$footerblocks, [
 								'label' => 'Emplacement',
-								'selected' => $this->getData(['theme', 'footer', 'copyrightPosition'])
+								'selected' => $this->getData(['theme', 'footer', 'copyrightPosition']),
+								'class' => 'themeFooterPosition'
 							]); ?>	
 							<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
 								'label' => 'Alignement horizontal',
@@ -149,7 +165,7 @@
 							]); ?>	
 						</div>						
 						<div class="col6 offset1">
-						<p>Afficher les éléments suivants :</p>
+						<p>Insérer les éléments suivants :</p>
 							<div class="row">
 								<?php echo template::checkbox('themefooterDisplayCopyright', true, 'Mention "Motorisé par"', [
 									'checked' => $this->getData(['theme', 'footer','displayCopyright'])
