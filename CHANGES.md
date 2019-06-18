@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 9.1.12
+- Amélioration : 
+    - Contrôle d'erreur dans la gestion de l'imagette OpenGraph
+- Correction:     
+    - Sitemap.xml : prendre en compte les sous-pages d'une page parente masquée
+
 ## Version 9.1.11
 - Correction : 
     - Générateur de sitemap.xml, correction de syntaxe.

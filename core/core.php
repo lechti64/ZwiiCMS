@@ -665,12 +665,14 @@ class common {
 		foreach($this->getHierarchy(null, null, null) as $parentPageId => $childrenPageIds) {
 			// Exclure les barres et les pages non publiques et les pages masquées
 			if ($this->getData(['page',$parentPageId,'group']) !== 0  || 
-				$this->getData(['page', $parentPageId, 'disable']) === true ||
 				$this->getData(['page', $parentPageId, 'block']) === 'bar' )  {
 				continue;
 			}
+			// Page désactivée, traiter les sous-pages sans prendre en compte la page parente.
+			if ($this->getData(['page', $parentPageId, 'disable']) !== true ) {
+				$sitemap->addUrl ($parentPageId,$datetime);
+			}
 			// Sous-pages
-			$sitemap->addUrl ($parentPageId,$datetime);
 			foreach($childrenPageIds as $childKey) {
 				if ($this->getData(['page',$childKey,'group']) !== 0 || $this->getData(['page', $childKey, 'disable']) === true)  {
 					continue;
