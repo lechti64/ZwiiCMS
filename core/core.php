@@ -32,7 +32,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.1.11';
+	const ZWII_VERSION = '9.1.12';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -349,13 +349,15 @@ class common {
 		if (!file_exists(self::FILE_DIR.'source/screenshot.png'))
 		{ 			
 			if ( strpos(helper::baseUrl(false),'localhost') == 0 AND strpos(helper::baseUrl(false),'127.0.0.1') == 0)	{							
-				$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. helper::baseUrl(false) .'&screenshot=true');	
-				$googlePagespeedData = json_decode($googlePagespeedData, true);
-				$screenshot = $googlePagespeedData['screenshot']['data'];
-				$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
-				$data = 'data:image/jpeg;base64,'.$screenshot;
-				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
-				file_put_contents( self::FILE_DIR.'source/screenshot.png',$data);
+				$googlePagespeedData = @file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. helper::baseUrl(false) .'&screenshot=true');	
+				if ($googlePagespeedData  !== false) {
+					$googlePagespeedData = json_decode($googlePagespeedData, true);
+					$screenshot = $googlePagespeedData['screenshot']['data'];
+					$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
+					$data = 'data:image/jpeg;base64,'.$screenshot;
+					$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
+					file_put_contents( self::FILE_DIR.'source/screenshot.png',$data);
+				}
 			}
 		}
 	}

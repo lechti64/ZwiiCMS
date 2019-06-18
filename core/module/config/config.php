@@ -230,20 +230,26 @@ class config extends common {
 		if ( strpos(helper::baseUrl(false),'localhost') > 0 OR strpos(helper::baseUrl(false),'127.0.0.1') > 0)	{				
 			$site = 'https://zwiicms.com/'; } else {
 			$site = helper::baseUrl(false);	}
-
-		$googlePagespeedData = file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. $site .'&screenshot=true');
-		$googlePagespeedData = json_decode($googlePagespeedData, true);
-		$screenshot = $googlePagespeedData['screenshot']['data'];
-		$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
-		$data = 'data:image/jpeg;base64,'.$screenshot;
-		$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
-		file_put_contents( self::FILE_DIR.'source/screenshot.png',$data);
+		
+		$success= false;
+		$googlePagespeedData = @file_get_contents('https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='. $site .'&screenshot=true');
+		if ($googlePagespeedData  !== false) {
+			$googlePagespeedData = json_decode($googlePagespeedData, true);
+			$screenshot = $googlePagespeedData['screenshot']['data'];
+			$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
+			$data = 'data:image/jpeg;base64,'.$screenshot;
+			$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
+			// Effacer la miniature
+			unlink (self::FILE_DIR.'thumb/screenshot.png');
+			file_put_contents( self::FILE_DIR.'source/screenshot.png',$data);
+			$success =true;
+		}
 
 		// Valeurs en sortie
 		$this->addOutput([
-			'notification' => 'Image tag réinitialisée',
+			'notification' => $success === true ? 'Image tag réinitialisée' : "Erreur : image tag non créée",
 			'redirect' => helper::baseUrl() . 'config',
-			'state' => true
+			'state' => $success
 		]);
 	}	
 
