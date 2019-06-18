@@ -565,13 +565,16 @@ section:after {
 }
 
 /* Pied de page */
+footer {
+	padding: 1px 20px;
+}
 body > footer {
 	margin: 0 -10px;
 }
-footer {
-	padding: 1px 20px;
+#footersiteLeft, #footersiteCenter, #footersiteRight {
 	vertical-align: middle;
 }
+
 
 #footerLoginLink, 
 #footerDisplayCopyright, 

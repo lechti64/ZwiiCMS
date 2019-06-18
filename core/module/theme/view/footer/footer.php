@@ -64,7 +64,7 @@
 			<div class="block">
 				<h4>Mise en forme du texte</h4>
 				<div class="row">
-				<div class="col3">
+					<div class="col3">
 						<?php echo template::select('themeFooterFont', $module::$fonts, [
 							'label' => 'Police',
 							'selected' => $this->getData(['theme', 'footer', 'font'])
@@ -97,100 +97,104 @@
 		<div class="col12">
 			<div class="block">
 				<h4>Mise en page</h4>
-				<?php echo template::select('themeFooterTemplate', $module::$footerTemplate, [
-						'label' => 'Nombre de colonnes',
-						'selected' => $this->getData(['theme', 'footer', 'template']),
-						'help' => 'Le changement de la mise en page entraîne la réinitalisation de la position des contenus.'
-					]); ?>
+				<div class="row">
+					<div class="col4">
+					<?php echo template::select('themeFooterTemplate', $module::$footerTemplate, [
+							'label' => 'Nombre de colonnes',
+							'selected' => $this->getData(['theme', 'footer', 'template']),
+							'help' => 'Le changement de la mise en page entraîne la réinitalisation de la position des contenus.'
+						]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col4">
+					<p><strong>Contenu personnalisé texte ou HTML :</strong></p>
+						<?php echo template::select('themeFooterTextPosition', $module::$footerblocks, [
+							'label' => 'Emplacement',
+							'selected' => $this->getData(['theme', 'footer', 'textPosition']),
+							'class' => 'themeFooterPosition'
+						]); ?>
+						<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
+							'label' => 'Alignement',
+							'selected' => $this->getData(['theme', 'footer', 'textAlign'])
+						]); ?>
+					</div>
+					<div class="col4">
+					<p><strong>Réseaux sociaux :</strong></p>
+						<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
+							'label' => 'Emplacement',
+							'selected' => $this->getData(['theme', 'footer', 'socialsPosition']),
+							'class' => 'themeFooterPosition'
+						]); ?>
+						<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
+							'label' => 'Alignement',
+							'selected' => $this->getData(['theme', 'footer', 'socialsAlign'])
+						]); ?>
+					</div>
+					<div class="col4">
+					<p><strong>Info et copyright :</strong></p>
+						<?php echo template::select('themeFooterCopyrightPosition', $module::$footerblocks, [
+							'label' => 'Emplacement',
+							'selected' => $this->getData(['theme', 'footer', 'copyrightPosition']),
+							'class' => 'themeFooterPosition'
+						]); ?>	
+						<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
+							'label' => 'Alignement',
+							'selected' => $this->getData(['theme', 'footer', 'copyrightAlign'])
+						]); ?>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col12">
+		<div class="col12">		
 			<div class="block">
-				<h4>Contenu personnalisé</h4>
+				<h4>Contenu des blocs</h4>
 				<?php echo template::textarea('themeFooterText', [
-					//'label' => 'Contenu (texte ou HTML)',
+					'label' => '<strong>Texte ou HTML personnalisé :</strong>',
 					'value' => $this->getData(['theme', 'footer', 'text']),
 					'class' => 'editorWysiwyg'
 				]); ?>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col6">
-			<div class="block">
-				<h4>Contenu personnalisé</h4>
-					<?php echo template::select('themeFooterTextPosition', $module::$footerblocks, [
-						'label' => 'Emplacement',
-						'selected' => $this->getData(['theme', 'footer', 'textPosition']),
-						'class' => 'themeFooterPosition'
-					]); ?>
-					<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
-						'label' => 'Alignement horizontal',
-						'selected' => $this->getData(['theme', 'footer', 'textAlign'])
-					]); ?>
-
-			</div>		
-		</div>	
-		<div class="col6">
-			<div class="block">
-				<h4>Contenu réseaux sociaux</h4>
-					<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
-						'label' => 'Emplacement',
-						'selected' => $this->getData(['theme', 'footer', 'socialsPosition']),
-						'class' => 'themeFooterPosition'
-					]); ?>
-					<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
-						'label' => 'Alignement horizontal',
-						'selected' => $this->getData(['theme', 'footer', 'socialsAlign'])
-					]); ?>
-			</div>
-		</div>
-	</div>
-	<div class="row">					
-		<div class="col12">
-				<div class="block">
-					<h4>Contenu copyright</h4>
-					<div class="row">
-						<div class="col5">
-							<?php echo template::select('themeFooterCopyrightPosition', $module::$footerblocks, [
-								'label' => 'Emplacement',
-								'selected' => $this->getData(['theme', 'footer', 'copyrightPosition']),
-								'class' => 'themeFooterPosition'
-							]); ?>	
-							<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
-								'label' => 'Alignement horizontal',
-								'selected' => $this->getData(['theme', 'footer', 'copyrightAlign'])
-							]); ?>	
-						</div>						
-						<div class="col6 offset1">
-						<p>Insérer les éléments suivants :</p>
+				<div class="row">
+					<div class="col12">
+						<div class="block">
+							<h4>Contenu du bloc "Info et copyright" :</h4>
 							<div class="row">
-								<?php echo template::checkbox('themefooterDisplayCopyright', true, 'Mention "Motorisé par"', [
-									'checked' => $this->getData(['theme', 'footer','displayCopyright'])
-								]); ?>	
-							</div>							
-							<div class="row">
-								<?php echo template::checkbox('themefooterDisplayVersion', true, 'Numéro de version', [
-									'checked' => $this->getData(['theme', 'footer','displayVersion'])
-								]); ?>
+								<div class="col6">
+									<div class="row">
+										<?php echo template::checkbox('themefooterDisplayCopyright', true, 'Mention "Motorisé par"', [
+											'checked' => $this->getData(['theme', 'footer','displayCopyright'])
+										]); ?>	
+									</div>							
+									<div class="row">
+										<?php echo template::checkbox('themefooterDisplayVersion', true, 'Numéro de version', [
+											'checked' => $this->getData(['theme', 'footer','displayVersion'])
+										]); ?>
+									</div>
+								</div>
+								<div class="col6">
+									<div class="row">
+										<?php echo template::checkbox('themefooterDisplaySiteMap', true, 'Plan du site', [
+											'checked' => $this->getData(['theme', 'footer', 'displaySiteMap']),
+											'help' => 'Un plan du site permet un meilleur référencement.'
+										]); ?>
+									</div>
+									<div class="row">
+										<?php echo template::checkbox('themeFooterLoginLink', true, 'Lien de connexion', [
+												'checked' => $this->getData(['theme', 'footer', 'loginLink'])
+											]); ?>
+									</div>
+								</div>
 							</div>
 							<div class="row">
-								<?php echo template::checkbox('themefooterDisplaySiteMap', true, 'Plan du site', [
-									'checked' => $this->getData(['theme', 'footer', 'displaySiteMap']),
-									'help' => 'Un plan du site permet un meilleur référencement.'
-								]); ?>
+								<div class="col12">
+								<p><em>La personnalisation des réseaux sociaux s'effectue dans la configuration du site.</em></p>
+								</div>
 							</div>
-							<div class="row">
-								<?php echo template::checkbox('themeFooterLoginLink', true, 'Lien de connexion', [
-										'checked' => $this->getData(['theme', 'footer', 'loginLink'])
-									]); ?>
-							</div>							
 						</div>
-					</div>				
-				</div>		
-			</div>
+					</div>
+			</div>						
 		</div>
-	<div>
+	</div>
 <?php echo template::formClose(); ?>

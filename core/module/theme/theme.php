@@ -295,7 +295,8 @@ class theme extends common {
 				'fontWeight' => $this->getInput('themeFooterFontWeight'),
 				'displayVersion' => $this->getInput('themefooterDisplayVersion', helper::FILTER_BOOLEAN),
 				'displaySiteMap' => $this->getInput('themefooterDisplaySiteMap', helper::FILTER_BOOLEAN),
-				'displayCopyright' => $this->getInput('themefooterDisplayCopyright', helper::FILTER_BOOLEAN)
+				'displayCopyright' => $this->getInput('themefooterDisplayCopyright', helper::FILTER_BOOLEAN),
+				'template' => $this->getInput('themeFooterTemplate',helper::FILTER_INT)
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
