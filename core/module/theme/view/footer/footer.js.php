@@ -169,6 +169,53 @@ $("#themeFooterTemplate").on("change",function() {
 });
 
 
+// Désactivation des sélections multiples
+$("#themeFooterSocialsPosition").on("change", function() {
+	if ($(this).prop('selectedIndex') >= 1 ) {			
+		if ( $("#themeFooterTextPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {
+            $("#themeFooterTextPosition").prop('selectedIndex',0);
+			$("#footerText").hide();			
+		}
+		if ( $("#themeFooterCopyrightPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {				
+			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
+			$("#footerCopyright").hide();
+		}
+	}
+}).trigger("change");
+
+$("#themeFooterTextPosition").on("change", function() {
+
+	if ($(this).prop('selectedIndex') >= 1 ) {
+		if ( $("#themeFooterSocialsPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {
+			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
+			$("#footerSocials").hide();
+		}
+		if ( $("#themeFooterCopyrightPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {				
+			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
+			$("#footerCopyright").hide();
+		}
+	}
+
+}).trigger("change");
+
+$("#themeFooterCopyrightPosition").on("change", function() {
+
+		if ($(this).prop('selectedIndex') >= 1 ) {
+			if ( $("#themeFooterTextPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {
+				$("#themeFooterTextPosition").prop('selectedIndex',0);
+				$("#footerText").hide();
+			}
+			if ( $("#themeFooterSocialsPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {				
+				$("#themeFooterSocialsPosition").prop('selectedIndex',0);
+				$("#footerSocials").hide();				
+			}
+		}
+
+}).trigger("change");
+
+
+
+
 // Lien de connexion
 $("#themeFooterLoginLink").on("change", function() {
 	if($(this).is(":checked")) {
