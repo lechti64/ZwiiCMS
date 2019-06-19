@@ -68,11 +68,23 @@ class theme extends common {
 		'Vollkorn' => 'Vollkorn'
 	];
 	public static $footerblocks = [
-		'hide' => 'Masqué',
-		'left' => 'Bloc Gauche',
-		'center' => 'Bloc Central',
-		'right' => 'Bloc Droite'
+		1 => [
+			'hide' => 'Masqué',
+			'center' => 'Affiché'
+		]  , 2 => [
+			'hide' => 'Masqué',
+			'left' => 'Bloc Gauche',
+			'right' => 'Bloc Droite'
+		] ,	3 => [
+			'hide' => 'Masqué',
+			'left' => 'Bloc Gauche',
+			'center' => 'Bloc Central',
+			'right' => 'Bloc Droite'
+		]
+		
 	];
+
+
 	public static $fontWeights = [
 		'normal' => 'Maigre',
 		'bold' => 'Gras'
@@ -296,7 +308,7 @@ class theme extends common {
 				'displayVersion' => $this->getInput('themefooterDisplayVersion', helper::FILTER_BOOLEAN),
 				'displaySiteMap' => $this->getInput('themefooterDisplaySiteMap', helper::FILTER_BOOLEAN),
 				'displayCopyright' => $this->getInput('themefooterDisplayCopyright', helper::FILTER_BOOLEAN),
-				'template' => $this->getInput('themeFooterTemplate',helper::FILTER_INT)
+				'template' => $this->getInput('themeFooterTemplate')
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

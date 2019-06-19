@@ -118,22 +118,17 @@ $("#themeFooterForm").on("change",function() {
 				break;
 	}
 }).trigger("change");
-// Fin Position dans les blocs
 
-// Liste de position dans les blocs
-
-//3 colonnes
-var newOptions = {
-	3:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'center': 'Bloc Central',	'right': 'Bloc Droite'} ,
-	2:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'right': 'Bloc Droite'} ,
-	1:  {'hide': 'Masqué', 'center': 'Affiché'} 
-};
 
 
 // Modification de la mise en page 
 $("#themeFooterTemplate").on("change",function() {
 	// Nettoyage des sélecteurs des contenus
-	
+	var newOptions = {
+		3:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'center': 'Bloc Central',	'right': 'Bloc Droite'} ,
+		2:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'right': 'Bloc Droite'} ,
+		1:  {'hide': 'Masqué', 'center': 'Affiché'} 
+	};	
 	var $el = $(".themeFooterPosition");
 	$el.empty(); 
 	// Eléments des position de contenus
@@ -143,6 +138,7 @@ $("#themeFooterTemplate").on("change",function() {
 		});
 	switch($("#themeFooterTemplate").val()) {
 		case "1":
+		console.log("1");
 			$("#footersiteLeft").css("display", "none");
 			$("#footersiteCenter").css("display", "");
 			$("#footersiteRight").css("display", "none");
@@ -151,6 +147,7 @@ $("#themeFooterTemplate").on("change",function() {
 			$("#footersiteCenter").addClass("col12");
 			break;			
 		case "2":
+		console.log("2");		
 			$("#footersiteLeft").css("display", "");
 			$("#footersiteCenter").css("display", "none");
 			$("#footersiteRight").css("display", "");
@@ -160,7 +157,8 @@ $("#themeFooterTemplate").on("change",function() {
 			$("#footersiteLeft").addClass('col6');			
 			$("#footersiteRight").addClass('col6');
 			break;
-		case "3":			
+		case "3":	
+		console.log("3");		
 			$("#footersiteLeft").css("display", "");
 			$("#footersiteCenter").css("display", "");
 			$("#footersiteRight").css("display", "");
@@ -175,6 +173,50 @@ $("#themeFooterTemplate").on("change",function() {
 	} 
 });
 
+// Affichage des options possibles
+//	$('#baba').prop('selectedIndex',0);
+$("#themeFooterSocialsPosition").on("change", function() {
+	if ($("#themeFooterTemplate").val() === "1") {
+		if ($(this).prop('selectedIndex') === 1) {
+			$("#themeFooterTextPosition").prop('selectedIndex',0);
+			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
+		}
+	}
+	if ($("#themeFooterTemplate").val() === "2") {
+		if ($(this).prop('selectedIndex') === $(this)) {
+			$("#themeFooterTextPosition").prop('selectedIndex',0);
+			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
+		}
+	}
+});
+$("#themeFooterTextPosition").on("change", function() {
+	if ($("#themeFooterTemplate").val() === "1") {
+		if ($(this).prop('selectedIndex') === 1) {
+			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
+			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
+		}
+	}
+	if ($("#themeFooterTemplate").val() === "2") {
+		if ($(this).prop('selectedIndex') === $(this)) {
+			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
+			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
+		}
+	}	
+});
+$("#themeFooterCopyrightPosition").on("change", function() {
+	if ($("#themeFooterTemplate").val() === "1") {
+		if ($(this).prop('selectedIndex') === 1) {
+			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
+			$("#themeFooterTextPosition").prop('selectedIndex',0);
+		}
+	}
+	if ($("#themeFooterTemplate").val() === "2") {
+		if ($(this).prop('selectedIndex') === $(this)) {
+			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
+			$("#themeFooterTextPosition").prop('selectedIndex',0);
+		}
+	}	
+});
 
 
 

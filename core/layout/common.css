@@ -570,13 +570,11 @@ body > footer {
 }
 footer {
 	padding: 1px 20px;
-	position: relative;
 }
 
-footer  > .container {
-	align-items: center;
+#footersiteRight, #footersiteLeft, #footersiteCenter {
+	vertical-align: middle;
 }
-
 
 #footerLoginLink, 
 #footerDisplayCopyright, 

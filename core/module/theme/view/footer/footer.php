@@ -100,6 +100,9 @@
 				<h4>Mise en page</h4>
 				<div class="row">
 					<div class="col4">
+					<?php
+					$footerBlockPosition = $module::$footerblocks [$this->getData(['theme', 'footer', 'template'])];
+					?>
 					<?php echo template::select('themeFooterTemplate', $module::$footerTemplate, [
 							'label' => 'Nombre de colonnes',
 							'selected' => $this->getData(['theme', 'footer', 'template']),
@@ -109,10 +112,12 @@
 				</div>
 				<div class="row">
 					<div class="col4">
+
 					<p><strong>Contenu personnalisé texte ou HTML :</strong></p>
-						<?php echo template::select('themeFooterTextPosition', $module::$footerblocks, [
+						<?php echo template::select('themeFooterTextPosition', $footerBlockPosition, [
 							'label' => 'Emplacement',
-							'selected' => $this->getData(['theme', 'footer', 'textPosition'])
+							'selected' => $this->getData(['theme', 'footer', 'textPosition']),
+							'class' => 'themeFooterPosition'
 						]); ?>
 						<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
 							'label' => 'Alignement',
@@ -121,9 +126,10 @@
 					</div>
 					<div class="col4">
 					<p><strong>Réseaux sociaux :</strong></p>
-						<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
+						<?php echo template::select('themeFooterSocialsPosition', $footerBlockPosition, [
 							'label' => 'Emplacement',
-							'selected' => $this->getData(['theme', 'footer', 'socialsPosition'])
+							'selected' => $this->getData(['theme', 'footer', 'socialsPosition']),
+							'class' => 'themeFooterPosition'
 						]); ?>
 						<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
 							'label' => 'Alignement',
@@ -132,9 +138,10 @@
 					</div>
 					<div class="col4">
 					<p><strong>Info et copyright :</strong></p>
-						<?php echo template::select('themeFooterCopyrightPosition', $module::$footerblocks, [
+						<?php echo template::select('themeFooterCopyrightPosition', $footerBlockPosition, [
 							'label' => 'Emplacement',
-							'selected' => $this->getData(['theme', 'footer', 'copyrightPosition'])
+							'selected' => $this->getData(['theme', 'footer', 'copyrightPosition']),
+							'class' => 'themeFooterPosition'
 						]); ?>	
 						<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
 							'label' => 'Alignement',

@@ -450,7 +450,7 @@ class install extends common {
 				'displayVersion' => true,
 				'displaySiteMap' => true,
 				'displayCopyright' => true,
-				'template' => 3
+				'template' => '3'
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
