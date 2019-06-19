@@ -112,12 +112,11 @@
 				</div>
 				<div class="row">
 					<div class="col4">
-
 					<p><strong>Contenu personnalisé texte ou HTML :</strong></p>
 						<?php echo template::select('themeFooterTextPosition', $footerBlockPosition, [
 							'label' => 'Emplacement',
 							'selected' => $this->getData(['theme', 'footer', 'textPosition']),
-							'class' => 'themeFooterPosition'
+							'class' => 'themeFooterContent'
 						]); ?>
 						<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
 							'label' => 'Alignement',
@@ -129,7 +128,7 @@
 						<?php echo template::select('themeFooterSocialsPosition', $footerBlockPosition, [
 							'label' => 'Emplacement',
 							'selected' => $this->getData(['theme', 'footer', 'socialsPosition']),
-							'class' => 'themeFooterPosition'
+							'class' => 'themeFooterContent'
 						]); ?>
 						<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
 							'label' => 'Alignement',
@@ -141,7 +140,7 @@
 						<?php echo template::select('themeFooterCopyrightPosition', $footerBlockPosition, [
 							'label' => 'Emplacement',
 							'selected' => $this->getData(['theme', 'footer', 'copyrightPosition']),
-							'class' => 'themeFooterPosition'
+							'class' => 'themeFooterContent'
 						]); ?>	
 						<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
 							'label' => 'Alignement',

@@ -25,9 +25,9 @@ $("input, select").on("change", function() {
 	var css = "footer{background-color:" + colors.normal + ";color:" + textColor + "}";
 	css += "footer a{color:" + textColor + "}";
 	// Hauteur du pied de page
-	css += "footer .container > #footersiteLeft, #footersiteCenter, #footersiteRight {padding:" + $("#themeFooterHeight").val() + " 0}";
+	css += "footer .container > div{margin:" + $("#themeFooterHeight").val() + " 0}";
 	//css += "footer .container > div{padding:0}";	
-	css += "footer .container-large > #footersiteLeft, #footersiteCenter, #footersiteRight {padding:" + $("#themeFooterHeight").val() + " 0}";
+	css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
 	//css += "footer .container-large > div{padding:0}";		
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
@@ -63,24 +63,24 @@ $("input, select").on("change", function() {
 	}
 });
 
+
+
 // Position dans les blocs
 // Bloc texte personnalisé
-$("#themeFooterForm").on("change",function() {
+$(".themeFooterContent").on("change",function() {
+	var position = $(".themeFooterContent").val();
 	switch($("#themeFooterTextPosition").val()) {
 			case "hide":
 				$("#footerText").hide();
 				break;
 			case "left":
-				$("#footerText").show().appendTo("#footerbodyLeft");
-				$("#footerText").show().appendTo("#footersiteLeft");
+				$("#footerText").show().appendTo("#footer" + position + "Left");
 				break;
 			case "center":			
-				$("#footerText").show().appendTo("#footerbodyCenter");
-				$("#footerText").show().appendTo("#footersiteCenter");
+				$("#footerText").show().appendTo("#footer" + position + "Center");
 				break;
 			case "right":			
-				$("#footerText").show().appendTo("#footerbodyRight");
-				$("#footerText").show().appendTo("#footersiteRight");				
+				$("#footerText").show().appendTo("#footer" + position + "Right");			
 				break;
 	}
 	switch($("#themeFooterSocialsPosition").val()) {
@@ -88,16 +88,13 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerSocials").hide();
 				break;		
 			case 'left':
-				$("#footerSocials").show().appendTo("#footerbodyLeft");	
-				$("#footerSocials").show().appendTo("#footersiteLeft");
+				$("#footerSocials").show().appendTo("#footer" + position + "Left");	
 				break;
 			case 'center':
-				$("#footerSocials").show().appendTo("#footerbodyCenter");
-				$("#footerSocials").show().appendTo("#footersiteCenter");
+				$("#footerSocials").show().appendTo("#footer" + position + "Center");
 				break;
 			case 'right':
-				$("#footerSocials").show().appendTo("#footerbodyRight");
-				$("#footerSocials").show().appendTo("#footersiteRight");				
+				$("#footerSocials").show().appendTo("#footer" + position + "Right");			
 				break;
 	}
 		switch($("#themeFooterCopyrightPosition").val()) {
@@ -105,23 +102,19 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerCopyright").hide();
 				break;		
 			case 'left':
-				$("#footerCopyright").show().appendTo("#footerbodyLeft");			
-				$("#footerCopyright").show().appendTo("#footersiteLeft");
+				$("#footerCopyright").show().appendTo("#footer" + position + "Left");			
 				break;
 			case 'center':
-				$("#footerCopyright").show().appendTo("#footerbodyCenter");
-				$("#footerCopyright").show().appendTo("#footersiteCenter");
+				$("#footerCopyright").show().appendTo("#footer" + position + "Center");
 				break;
 			case 'right':
-				$("#footerCopyright").show().appendTo("#footerbodyRight");
-				$("#footerCopyright").show().appendTo("#footersiteRight");				
+                $("#footerCopyright").show().appendTo("#footer" + position + "Right");                			
 				break;
 	}
 }).trigger("change");
+// Fin Position dans les blocs
 
-
-
-// Modification de la mise en page 
+// Modification dynamique de la mise en page 
 $("#themeFooterTemplate").on("change",function() {
 	// Nettoyage des sélecteurs des contenus
 	var newOptions = {
@@ -129,95 +122,52 @@ $("#themeFooterTemplate").on("change",function() {
 		2:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'right': 'Bloc Droite'} ,
 		1:  {'hide': 'Masqué', 'center': 'Affiché'} 
 	};	
-	var $el = $(".themeFooterPosition");
+	var $el = $(".themeFooterContent");
 	$el.empty(); 
 	// Eléments des position de contenus
 	$.each(newOptions[$("#themeFooterTemplate").val()], function(key,value) {
 		$el.append($("<option></option>")
 			.attr("value", key).text(value));
 		});
+	var position = $("#themeFooterPosition").val();
+	// Masquer le contenus 
+	$("#footerCopyright").hide();
+	$("#footerText").hide();
+	$("#footerSocials").hide();
+	console.log(position);
 	switch($("#themeFooterTemplate").val()) {
 		case "1":
-		console.log("1");
-			$("#footersiteLeft").css("display", "none");
-			$("#footersiteCenter").css("display", "");
-			$("#footersiteRight").css("display", "none");
+			$("#footer" + position + "Left").css("display","none");
+			$("#footer" + position + "Center").css("display","");
+			$("#footer" + position + "Right").css("display","none");
 			// Dimension du bloc
-			$("#footersiteCenter").removeAttr('class');;
-			$("#footersiteCenter").addClass("col12");
+			$("#footer" + position + "Center").removeAttr('class');
+			$("#footer" + position + "Center").addClass("col12");
 			break;			
-		case "2":
-		console.log("2");		
-			$("#footersiteLeft").css("display", "");
-			$("#footersiteCenter").css("display", "none");
-			$("#footersiteRight").css("display", "");
+		case "2":	
+			$("#footer" + position + "Left").css("display","");
+			$("#footer" + position + "Center").css("display","none");
+			$("#footer" + position + "Right").css("display","");
 			// Dimension de blocs
-			$("#footersiteLeft").removeAttr('class');
-			$("#footersiteRight").removeAttr('class');
-			$("#footersiteLeft").addClass('col6');			
-			$("#footersiteRight").addClass('col6');
+			$("#footer" + position + "Left").removeAttr('class');
+			$("#footer" + position + "Right").removeAttr('class');
+			$("#footer" + position + "Left").addClass('col6');			
+			$("#footer" + position + "Right").addClass('col6');
 			break;
-		case "3":	
-		console.log("3");		
-			$("#footersiteLeft").css("display", "");
-			$("#footersiteCenter").css("display", "");
-			$("#footersiteRight").css("display", "");
-			// Dimensions des blocs
-			$("#footersiteLeft").removeAttr('class');			
-			$("#footersiteRight").removeAttr('class');
-			$("#footersitecenter").removeAttr('class');			
-			$("#footersiteLeft").addClass('col4');
-			$("#footersiteCenter").addClass('col4');							
-			$("#footersiteRight").addClass('col4');
+		case "3":			
+			$("#footer" + position + "Left").css("display","");
+			$("#footer" + position + "Center").css("display","");
+			$("#footer" + position + "Right").css("display","");
+			// Dimension de blocs			
+			$("#footer" + position + "Left").removeAttr('class');			
+			$("#footer" + position + "Right").removeAttr('class');
+			$("#footer" + position + "center").removeAttr('class');			
+			$("#footer" + position + "Left").addClass('col4');
+			$("#footer" + position + "Center").addClass('col4');							
+			$("#footer" + position + "Right").addClass('col4');
 			break;
 	} 
 });
-
-// Affichage des options possibles
-//	$('#baba').prop('selectedIndex',0);
-$("#themeFooterSocialsPosition").on("change", function() {
-	if ($("#themeFooterTemplate").val() === "1") {
-		if ($(this).prop('selectedIndex') === 1) {
-			$("#themeFooterTextPosition").prop('selectedIndex',0);
-			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
-		}
-	}
-	if ($("#themeFooterTemplate").val() === "2") {
-		if ($(this).prop('selectedIndex') === $(this)) {
-			$("#themeFooterTextPosition").prop('selectedIndex',0);
-			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
-		}
-	}
-});
-$("#themeFooterTextPosition").on("change", function() {
-	if ($("#themeFooterTemplate").val() === "1") {
-		if ($(this).prop('selectedIndex') === 1) {
-			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
-			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
-		}
-	}
-	if ($("#themeFooterTemplate").val() === "2") {
-		if ($(this).prop('selectedIndex') === $(this)) {
-			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
-			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
-		}
-	}	
-});
-$("#themeFooterCopyrightPosition").on("change", function() {
-	if ($("#themeFooterTemplate").val() === "1") {
-		if ($(this).prop('selectedIndex') === 1) {
-			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
-			$("#themeFooterTextPosition").prop('selectedIndex',0);
-		}
-	}
-	if ($("#themeFooterTemplate").val() === "2") {
-		if ($(this).prop('selectedIndex') === $(this)) {
-			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
-			$("#themeFooterTextPosition").prop('selectedIndex',0);
-		}
-	}	
-});
-
 
 
 // Lien de connexion
