@@ -68,7 +68,7 @@ $("input, select").on("change", function() {
 // Position dans les blocs
 // Bloc texte personnalisé
 $(".themeFooterContent").on("change",function() {
-	var position = $(".themeFooterContent").val();
+	var position = $("#themeFooterPosition").val();	
 	switch($("#themeFooterTextPosition").val()) {
 			case "hide":
 				$("#footerText").hide();
@@ -134,7 +134,6 @@ $("#themeFooterTemplate").on("change",function() {
 	$("#footerCopyright").hide();
 	$("#footerText").hide();
 	$("#footerSocials").hide();
-	console.log(position);
 	switch($("#themeFooterTemplate").val()) {
 		case "1":
 			$("#footer" + position + "Left").css("display","none");
