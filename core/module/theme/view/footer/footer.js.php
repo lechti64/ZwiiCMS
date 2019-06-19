@@ -25,9 +25,9 @@ $("input, select").on("change", function() {
 	var css = "footer{background-color:" + colors.normal + ";color:" + textColor + "}";
 	css += "footer a{color:" + textColor + "}";
 	// Hauteur du pied de page
-	css += "footer .container > div{margin:" + $("#themeFooterHeight").val() + " 0}";
+	css += "footer .container > #footersiteLeft, #footersiteCenter, #footersiteRight {padding:" + $("#themeFooterHeight").val() + " 0}";
 	//css += "footer .container > div{padding:0}";	
-	css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
+	css += "footer .container-large > #footersiteLeft, #footersiteCenter, #footersiteRight {padding:" + $("#themeFooterHeight").val() + " 0}";
 	//css += "footer .container-large > div{padding:0}";		
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";

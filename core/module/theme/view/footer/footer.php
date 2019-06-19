@@ -46,8 +46,9 @@
 					</div>
 					<div class="col6">
 						<?php echo template::select('themeFooterHeight', $module::$footerHeights, [
-							'label' => 'Hauteur',
-							'selected' => $this->getData(['theme', 'footer', 'height'])
+							'label' => 'Marges verticales',
+							'selected' => $this->getData(['theme', 'footer', 'height']),
+							'help' => 'La hauteur du pied de page est dynmamique selon le contenu.Ces marges sont ajoutées au-dessus et en-dessous.'
 						]); ?>
 					</div>
 				</div>
@@ -111,8 +112,7 @@
 					<p><strong>Contenu personnalisé texte ou HTML :</strong></p>
 						<?php echo template::select('themeFooterTextPosition', $module::$footerblocks, [
 							'label' => 'Emplacement',
-							'selected' => $this->getData(['theme', 'footer', 'textPosition']),
-							'class' => 'themeFooterPosition'
+							'selected' => $this->getData(['theme', 'footer', 'textPosition'])
 						]); ?>
 						<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
 							'label' => 'Alignement',
@@ -123,8 +123,7 @@
 					<p><strong>Réseaux sociaux :</strong></p>
 						<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
 							'label' => 'Emplacement',
-							'selected' => $this->getData(['theme', 'footer', 'socialsPosition']),
-							'class' => 'themeFooterPosition'
+							'selected' => $this->getData(['theme', 'footer', 'socialsPosition'])
 						]); ?>
 						<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
 							'label' => 'Alignement',
@@ -135,8 +134,7 @@
 					<p><strong>Info et copyright :</strong></p>
 						<?php echo template::select('themeFooterCopyrightPosition', $module::$footerblocks, [
 							'label' => 'Emplacement',
-							'selected' => $this->getData(['theme', 'footer', 'copyrightPosition']),
-							'class' => 'themeFooterPosition'
+							'selected' => $this->getData(['theme', 'footer', 'copyrightPosition'])
 						]); ?>	
 						<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
 							'label' => 'Alignement',

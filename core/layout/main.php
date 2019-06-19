@@ -238,20 +238,20 @@
 				$class['right']  = "col4";					
 				break;
 		}?>
-		<div class="row" id="footer<?php echo $position; ?>">
-			<div class="<?php echo $class['left'];?>" id="footer<?php echo $position; ?>Left"> <!-- bloc gauche -->						
+		<div class="row" id="footersite">
+			<div class="<?php echo $class['left'];?>" id="footer<?php echo $position;?>Left">				
 				<?php if($this->getData(['theme', 'footer', 'textPosition']) === 'left') { $layout->showFooterText(); }
 						if($this->getData(['theme', 'footer', 'socialsPosition']) === 'left') {	$layout->showSocials(); } 
 						if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'left') {$layout->showCopyright(); } 
 				?>	
 			</div>
-			<div class="<?php echo $class['center'];?>" id="footer<?php echo $position; ?>Center"> <!-- bloc central -->						
+			<div class="<?php echo $class['center'];?>" id="footer<?php echo $position;?>Center">					
 				<?php if($this->getData(['theme', 'footer', 'textPosition']) === 'center') { $layout->showFooterText(); } 
 						if($this->getData(['theme', 'footer', 'socialsPosition']) === 'center') { $layout->showSocials(); } 
 						if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'center') { $layout->showCopyright(); } 
 				?>	
 			</div>				
-			<div class="<?php echo $class['right'];?>" id="footer<?php echo $position; ?>Right"> <!-- bloc droite -->						
+			<div class="<?php echo $class['right'];?>" id="footer<?php echo $position;?>Right"> 				
 				<?php if($this->getData(['theme', 'footer', 'textPosition']) === 'right') { $layout->showFooterText(); } 
 						if($this->getData(['theme', 'footer', 'socialsPosition']) === 'right') { $layout->showSocials(); } 
 						if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'right') { $layout->showCopyright(); } 

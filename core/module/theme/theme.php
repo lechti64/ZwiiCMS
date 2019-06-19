@@ -78,11 +78,11 @@ class theme extends common {
 		'bold' => 'Gras'
 	];
 	public static $footerHeights = [
-		'-5px' => 'Réduite',
-		'0px' => 'Très petite',
-		'5px' => 'Petite',
-		'10px' => 'Grande',
-		'15px' => 'Très grande'
+		'0' => 'Nulles',
+		'10px' => 'Très petites',
+		'15px' => 'Petites',
+		'20px' => 'Grandes',
+		'30px' => 'Très grandes'
 	];
 	public static $footerPositions = [
 		'hide' => 'Caché',

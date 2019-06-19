@@ -433,7 +433,7 @@ class install extends common {
 				'font' => 'Open+Sans',				
 				'fontSize' => '.8em',
 				'fontWeight' => 'normal',				
-				'height' => '10px',
+				'height' => '0',
 				'loginLink' => true,
 				'margin' => false,
 				'position' => 'site',
@@ -449,7 +449,8 @@ class install extends common {
 				'displayVersion' => true,
 				'displayVersion' => true,
 				'displaySiteMap' => true,
-				'displayCopyright' => true
+				'displayCopyright' => true,
+				'template' => 3
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
