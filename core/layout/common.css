@@ -576,6 +576,10 @@ footer {
 	vertical-align: middle;
 }
 
+#footersite {
+	margin: 0;
+}
+
 #footerLoginLink, 
 #footerDisplayCopyright, 
 #footerDisplayVersion,

@@ -80,19 +80,16 @@ class theme extends common {
 			'left' => 'Bloc Gauche',
 			'center' => 'Bloc Central',
 			'right' => 'Bloc Droite'
-		]
-		
+		]		
 	];
-
 
 	public static $fontWeights = [
 		'normal' => 'Maigre',
 		'bold' => 'Gras'
 	];
 	public static $footerHeights = [
-		'0' => 'Nulles',
-		'10px' => 'Très petites',
-		'15px' => 'Petites',
+		'0' => 'Très petites',
+		'10px' => 'Petites',
 		'20px' => 'Grandes',
 		'30px' => 'Très grandes'
 	];

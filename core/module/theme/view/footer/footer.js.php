@@ -37,10 +37,10 @@ $("input, select").on("change", function() {
 	css += "footer span{color:" + $("#themeFooterTextColor").val() + ";font-family:'" + footerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeFooterFontWeight").val() + ";font-size:" + $("#themeFooterFontSize").val() + ";text-transform:" + $("#themeFooterTextTransform").val() + "}";
 	// Marge
 	if($("#themeFooterMargin").is(":checked")) {
-		css += 'footer{margin:0 20px 20px}';
+		css += 'footer{margin:0 20px 20px;padding: 1px 20px;}';
 	}
 	else {
-		css += 'footer{margin:0}';
+		css += 'footer{margin:0;padding:0}';
 	}
 	// Ajout du css au DOM
 	$("#themePreview").remove();
