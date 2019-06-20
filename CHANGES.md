@@ -2,8 +2,8 @@
 
 ## Version 9.1.13
 - Corrections : 
-    - Erreur du sitemap.xml lorsqu'un blog ne contient pas d'articles
-    - OpenGraph : erreur lors de la suppression de l'imagette si absente
+    - Erreur du sitemap.xml lorsqu'un blog ne contient pas d'article.
+    - OpenGraph : erreur lors de la suppression de l'imagette si absente.
 
 ## Version 9.1.12
 
