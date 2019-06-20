@@ -240,7 +240,9 @@ class config extends common {
 			$data = 'data:image/jpeg;base64,'.$screenshot;
 			$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
 			// Effacer la miniature
-			unlink (self::FILE_DIR.'thumb/screenshot.png');
+			if (file_exists(self::FILE_DIR.'thumb/screenshot.png')) {
+				unlink (self::FILE_DIR.'thumb/screenshot.png');
+			}
 			file_put_contents( self::FILE_DIR.'source/screenshot.png',$data);
 			$success =true;
 		}
