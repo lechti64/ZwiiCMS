@@ -1,6 +1,9 @@
 # Changelog
 
 ## Version 9.1.12
+- Correction :
+    - OpenGraph : pb lors de la suppression de l'imagette
+
 - Amélioration : 
     - Contrôle d'erreur dans la gestion de l'imagette OpenGraph
 - Correction:     
