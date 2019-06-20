@@ -680,7 +680,8 @@ class common {
 				$sitemap->addUrl($childKey,$datetime);
 
 				// La sous-page est un blog
-				if ($this->getData(['page', $childKey, 'moduleId']) === 'blog') {
+				if ($this->getData(['page', $childKey, 'moduleId']) === 'blog' &&
+				   !empty($this->getData(['module',$childKey])) ) {
 					foreach($this->getData(['module',$childKey]) as $articleId => $article) {
 						if($this->getData(['module',$childKey,$articleId,'state']) === true) {
 							$date = $this->getData(['module',$childKey,$articleId,'publishedOn']);
@@ -690,7 +691,8 @@ class common {
 				}							
 			}
 			// Articles du blog
-			if ($this->getData(['page', $parentPageId, 'moduleId']) === 'blog') {
+			if ($this->getData(['page', $parentPageId, 'moduleId']) === 'blog' &&
+				!empty($this->getData(['module',$parentPageId])) ) {				
 				foreach($this->getData(['module',$parentPageId]) as $articleId => $article) {
 					if($this->getData(['module',$parentPageId,$articleId,'state']) === true) {		
 						$date = $this->getData(['module',$parentPageId,$articleId,'publishedOn']);
