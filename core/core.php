@@ -42,8 +42,7 @@ class common {
 		'page',
 		'sitemap',
 		'theme',
-		'user',
-		'search'
+		'user'
 	];
 	private $data = [];
 	private $hierarchy = [
