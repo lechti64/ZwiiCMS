@@ -6,7 +6,6 @@
     - OpenGraph : erreur lors de la suppression de l'imagette si absente.
 
 ## Version 9.1.12
-
 - Amélioration : 
     - Contrôle d'erreur dans la gestion de l'imagette OpenGraph
 - Correction:     
