@@ -48,7 +48,7 @@ class search extends common {
 											// Recherche et affichage des occurrences
 											do 	{
 												$occu = stristr($value3,$motclef);
-												if ($occu !== '') 	{
+												if ($occu != '') 	{
 													if ($key2!=$dejavu) {
 														$result .= '<p><br/>Mot clef trouv&eacute; dans la page : <a href="./?'.$key2.'" target="_blank" rel="noopener">'.$key2.'</a><br/></p>';
 													}
