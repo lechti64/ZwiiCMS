@@ -1955,12 +1955,20 @@ class layout extends common {
 		$items .= $this->getData(['theme','footer','displayVersion']) === false ? 'class="displayNone"' : '';
 		$items .= '><wbr>&nbsp;'. common::ZWII_VERSION ;			
 		$items .= '</span>';
-		// Affichage du lien de connexion 
+		// Affichage du sitemap
 		$items .= '<span id="footerDisplaySiteMap"';
 		$items .= $this->getData(['theme','footer','displaySiteMap']) ===  false? ' class="displayNone"' : '';
 		$items .=  '><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() .  'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
 		$items .= '</span>';
-        if(
+		// Affichage des mentions légales
+		$items .= '<span id="footerDisplayLegal"';
+		$items .= $this->getData(['theme','footer','legalPageId']) ===  '' ? ' class="displayNone" >' : '>';
+		if ($this->getData(['theme','footer','legalPageId']) !== '') {
+			$items .=  '<wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . $this->getData(['theme','footer','legalPageId']) . '" data-tippy-content="Mentions Légales">Mentions légales</a>';
+		}
+		$items .= '</span>';		
+		// Affichage du lien de connexion 
+		if(
             (
                 $this->getData(['theme', 'footer', 'loginLink'])
                 AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')
