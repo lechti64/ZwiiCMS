@@ -435,7 +435,7 @@ class install extends common {
 				'fontWeight' => 'normal',				
 				'height' => '0',
 				'loginLink' => true,
-				'margin' => false,
+				'margin' => true,
 				'position' => 'site',
 				'textColor' => 'rgba(33, 34, 35, 1)',
 				'copyrightPosition' => 'right',
@@ -450,7 +450,8 @@ class install extends common {
 				'displayVersion' => true,
 				'displaySiteMap' => true,
 				'displayCopyright' => true,
-				'template' => '3'
+				'template' => '3',
+				'legalPageId' => ''
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
