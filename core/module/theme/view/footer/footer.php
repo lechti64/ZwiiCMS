@@ -104,7 +104,7 @@
 					$footerBlockPosition = $module::$footerblocks [$this->getData(['theme', 'footer', 'template'])];
 					?>
 					<?php echo template::select('themeFooterTemplate', $module::$footerTemplate, [
-							'label' => 'Nombre de colonnes',
+							'label' => 'Gabarits de mise en page',
 							'selected' => $this->getData(['theme', 'footer', 'template']),
 							'help' => 'Le changement de la mise en page entraîne la réinitalisation de la position des contenus.'
 						]); ?>

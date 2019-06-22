@@ -70,17 +70,21 @@ class theme extends common {
 	public static $footerblocks = [
 		1 => [
 			'hide' => 'Masqué',
-			'center' => 'Affiché'
-		]  , 2 => [
+			'center' => 'Affiché' ], 
+		2 => [
 			'hide' => 'Masqué',
 			'left' => 'Bloc Gauche',
-			'right' => 'Bloc Droite'
-		] ,	3 => [
+			'right' => 'Bloc Droite' ],	
+		3 => [
 			'hide' => 'Masqué',
 			'left' => 'Bloc Gauche',
 			'center' => 'Bloc Central',
-			'right' => 'Bloc Droite'
-		]		
+			'right' => 'Bloc Droite' ],
+		4 => [
+			'hide' => 'Masqué',
+			'top' => 'Bloc haut',
+			'middle' => 'Bloc au milieu',
+			'bottom' => 'Bloc inférieur' ]
 	];
 
 	public static $fontWeights = [
@@ -217,9 +221,10 @@ class theme extends common {
 		'100% 100%' => 'Image étirée'
 	];
 	public static $footerTemplate = [	
-		'1' => 'Pleine page (100%)',
-		'2' => 'Deux colonnes ( 1/2 - 1/2)',
-		'3' => 'Trois colonnes (1/3 - 1/3 - 1/3)'
+		'1' => 'Colonne unique',
+		'2' => 'Colonnes, 2 bloc 50% - 50%',
+		'3' => 'Colonnes, 3 blocs  33% - 33% - 33%',
+		'4' => 'Trois lignes en pleine largeur'
 	];
 
 	/**
