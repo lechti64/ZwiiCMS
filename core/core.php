@@ -32,7 +32,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.1.13';
+	const ZWII_VERSION = '9.1.14.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1083,15 +1083,15 @@ class core extends common {
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
 			if($this->getData(['theme', 'footer', 'margin'])) {
-				$css .= 'footer{margin:0 20px 20px;padding: 1px 20px;}';
+				$css .= 'footer{margin:0 10px 10px;padding: 1px 10px;}';
 			} else {
 				$css .= 'footer{margin:0;padding:0}';
 			}
 			$css .= 'footer span{color:' . $this->getData(['theme', 'footer', 'textColor']) . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'footer', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'footer', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'footer', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'footer', 'textTransform']) . '}';
 			$css .= 'footer{background-color:' . $colors['normal'] . ';color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
 			$css .= 'footer a{color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
-			$css .= 'footer .container > #footersiteLeft, #footersiteCenter, #footersiteRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
-			$css .= 'footer .container-large > #footersiteLeft, #footersiteCenter, #footersiteRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
+			//$css .= 'footer .container > div {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
+			$css .= '#footersiteLeft, #footersiteCenter, #footersiteRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
 			$css .= '#footerSocials{text-align:' . $this->getData(['theme', 'footer', 'socialsAlign']) . '}';
 			$css .= '#footerText{text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';

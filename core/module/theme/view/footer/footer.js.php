@@ -25,9 +25,9 @@ $("input, select").on("change", function() {
 	var css = "footer{background-color:" + colors.normal + ";color:" + textColor + "}";
 	css += "footer a{color:" + textColor + "}";
 	// Hauteur du pied de page
-	css += "footer .container > div{margin:" + $("#themeFooterHeight").val() + " 0}";
+	css += "#footersiteLeft, #footersiteCenter, #footersiteRight {margin:" + $("#themeFooterHeight").val() + " 0}";
 	//css += "footer .container > div{padding:0}";	
-	css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
+	//css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
 	//css += "footer .container-large > div{padding:0}";		
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
@@ -37,7 +37,7 @@ $("input, select").on("change", function() {
 	css += "footer span{color:" + $("#themeFooterTextColor").val() + ";font-family:'" + footerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeFooterFontWeight").val() + ";font-size:" + $("#themeFooterFontSize").val() + ";text-transform:" + $("#themeFooterTextTransform").val() + "}";
 	// Marge
 	if($("#themeFooterMargin").is(":checked")) {
-		css += 'footer{margin:0 20px 20px;padding: 1px 20px;}';
+		css += 'footer{margin:0 10px 10px;padding: 1px 10px;}';
 	}
 	else {
 		css += 'footer{margin:0;padding:0}';
@@ -97,7 +97,7 @@ $(".themeFooterContent").on("change",function() {
 				$("#footerSocials").show().appendTo("#footer" + position + "Right");			
 				break;
 	}
-		switch($("#themeFooterCopyrightPosition").val()) {
+	switch($("#themeFooterCopyrightPosition").val()) {
 			case 'hide':
 				$("#footerCopyright").hide();
 				break;		
@@ -112,6 +112,7 @@ $(".themeFooterContent").on("change",function() {
 				break;
 	}
 }).trigger("change");
+
 // Fin Position dans les blocs
 
 // Modification dynamique de la mise en page 
@@ -130,7 +131,7 @@ $("#themeFooterTemplate").on("change",function() {
 			.attr("value", key).text(value));
 		});
 	var position = $("#themeFooterPosition").val();
-	// Masquer le contenus 
+	// Masquer les contenus 
 	$("#footerCopyright").hide();
 	$("#footerText").hide();
 	$("#footerSocials").hide();
@@ -184,7 +185,6 @@ $("#themeFooterSocialsPosition").on("change", function() {
 }).trigger("change");
 
 $("#themeFooterTextPosition").on("change", function() {
-
 	if ($(this).prop('selectedIndex') >= 1 ) {
 		if ( $("#themeFooterSocialsPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {
 			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
