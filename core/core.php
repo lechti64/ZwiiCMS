@@ -1935,7 +1935,7 @@ class layout extends common {
 		$items .= '</span>';
 		// Affichage du numéro de version
 		$items .= '<span id="footerDisplayVersion"';
-		$items .= $this->getData(['theme','footer','displayVersion']) === false ? 'class="displayNone"' : '';
+		$items .= $this->getData(['theme','footer','displayVersion']) === false ? ' class="displayNone"' : '';
 		$items .= '><wbr>&nbsp;'. common::ZWII_VERSION ;			
 		$items .= '</span>';
 		// Affichage du lien de connexion 
