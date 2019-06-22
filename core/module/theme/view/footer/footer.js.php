@@ -214,7 +214,14 @@ $("#themeFooterCopyrightPosition").on("change", function() {
 }).trigger("change");
 
 
-
+// Mention Légales activation de la liste de choix
+$("#themeFooterLegalCheck").on("change",function() {
+	if($(this).is(":checked")) {
+		$("#themeFooterLegalPageId").show();
+	} else {
+		$("#themeFooterLegalPageId").hide();
+	}
+});
 
 // Lien de connexion
 $("#themeFooterLoginLink").on("change", function() {
@@ -229,10 +236,10 @@ $("#themeFooterLoginLink").on("change", function() {
 // Numéro de version
 $("#themefooterDisplayVersion").on("change", function() {
 	if($(this).is(":checked")) {
-		$("#footerDisplayVersion").show();
+		$("#footerDisplayVersion").slideDown();
 	}
 	else {
-		$("#footerDisplayVersion").hide();
+		$("#footerDisplayVersion").slideUp();
 	}
 }).trigger("change");
 

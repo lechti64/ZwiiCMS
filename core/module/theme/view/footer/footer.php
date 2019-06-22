@@ -190,14 +190,26 @@
 											]); ?>
 									</div>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col12">
-								<p><em>La personnalisation des réseaux sociaux s'effectue dans la configuration du site.</em></p>
+								<div class="col3">
+									<div class="row">
+										<?php echo template::checkbox('themeFooterLegalCheck', true, 'Pages des mentions légales', [
+											'checked' => $this->getData(['theme', 'footer', 'legalPageId']) === '' ? false : true
+										]); ?>
+										<p></p>
+									</div>
+								</div>
+								<div class="col3">									
+									<div class="row">
+									<?php echo template::select('themeFooterLegalPageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
+										'class' => $this->getData(['theme', 'footer', 'legalPageId']) === '' ? 'displayNone' : '',
+										'selected' => $this->getData(['theme', 'footer', 'legalPageId'])
+									]); ?>									
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div>
 			</div>						
 		</div>
 	</div>
