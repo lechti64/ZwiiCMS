@@ -25,9 +25,9 @@ $("input, select").on("change", function() {
 	var css = "footer{background-color:" + colors.normal + ";color:" + textColor + "}";
 	css += "footer a{color:" + textColor + "}";
 	// Hauteur du pied de page
-	css += "footer .container > div{margin:" + $("#themeFooterHeight").val() + " 0}";
+	css += "#footersiteLeft, #footersiteCenter, #footersiteRight {margin:" + $("#themeFooterHeight").val() + " 0}";
 	//css += "footer .container > div{padding:0}";	
-	css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
+	//css += "footer .container-large > div{margin:" + $("#themeFooterHeight").val() + " 0}";
 	//css += "footer .container-large > div{padding:0}";		
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
@@ -37,10 +37,10 @@ $("input, select").on("change", function() {
 	css += "footer span{color:" + $("#themeFooterTextColor").val() + ";font-family:'" + footerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeFooterFontWeight").val() + ";font-size:" + $("#themeFooterFontSize").val() + ";text-transform:" + $("#themeFooterTextTransform").val() + "}";
 	// Marge
 	if($("#themeFooterMargin").is(":checked")) {
-		css += 'footer{margin:0 20px 20px}';
+		css += 'footer{margin:0 10px 10px;padding: 1px 10px;}';
 	}
 	else {
-		css += 'footer{margin:0}';
+		css += 'footer{margin:0;padding:0}';
 	}
 	// Ajout du css au DOM
 	$("#themePreview").remove();
@@ -63,24 +63,24 @@ $("input, select").on("change", function() {
 	}
 });
 
+
+
 // Position dans les blocs
 // Bloc texte personnalisé
-$("#themeFooterForm").on("change",function() {
+$(".themeFooterContent").on("change",function() {
+	var position = $("#themeFooterPosition").val();	
 	switch($("#themeFooterTextPosition").val()) {
-			case 'hide':
+			case "hide":
 				$("#footerText").hide();
 				break;
-			case 'left':
-				$("#footerText").show().appendTo("#footerbodyLeft");
-				$("#footerText").show().appendTo("#footersiteLeft");
+			case "left":
+				$("#footerText").show().appendTo("#footer" + position + "Left");
 				break;
-			case 'center':			
-				$("#footerText").show().appendTo("#footerbodyCenter");
-				$("#footerText").show().appendTo("#footersiteCenter");
+			case "center":			
+				$("#footerText").show().appendTo("#footer" + position + "Center");
 				break;
-			case 'right':			
-				$("#footerText").show().appendTo("#footerbodyRight");
-				$("#footerText").show().appendTo("#footersiteRight");				
+			case "right":			
+				$("#footerText").show().appendTo("#footer" + position + "Right");			
 				break;
 	}
 	switch($("#themeFooterSocialsPosition").val()) {
@@ -88,40 +88,156 @@ $("#themeFooterForm").on("change",function() {
 				$("#footerSocials").hide();
 				break;		
 			case 'left':
-				$("#footerSocials").show().appendTo("#footerbodyLeft");	
-				$("#footerSocials").show().appendTo("#footersiteLeft");
+				$("#footerSocials").show().appendTo("#footer" + position + "Left");	
 				break;
 			case 'center':
-				$("#footerSocials").show().appendTo("#footerbodyCenter");
-				$("#footerSocials").show().appendTo("#footersiteCenter");
+				$("#footerSocials").show().appendTo("#footer" + position + "Center");
 				break;
 			case 'right':
-				$("#footerSocials").show().appendTo("#footerbodyRight");
-				$("#footerSocials").show().appendTo("#footersiteRight");				
+				$("#footerSocials").show().appendTo("#footer" + position + "Right");			
 				break;
 	}
-		switch($("#themeFooterCopyrightPosition").val()) {
+	switch($("#themeFooterCopyrightPosition").val()) {
 			case 'hide':
 				$("#footerCopyright").hide();
 				break;		
 			case 'left':
-				$("#footerCopyright").show().appendTo("#footerbodyLeft");			
-				$("#footerCopyright").show().appendTo("#footersiteLeft");
+				$("#footerCopyright").show().appendTo("#footer" + position + "Left");			
 				break;
 			case 'center':
-				$("#footerCopyright").show().appendTo("#footerbodyCenter");
-				$("#footerCopyright").show().appendTo("#footersiteCenter");
+				$("#footerCopyright").show().appendTo("#footer" + position + "Center");
 				break;
 			case 'right':
-				$("#footerCopyright").show().appendTo("#footerbodyRight");
-				$("#footerCopyright").show().appendTo("#footersiteRight");				
+                $("#footerCopyright").show().appendTo("#footer" + position + "Right");                			
 				break;
 	}
 }).trigger("change");
+
 // Fin Position dans les blocs
 
+// Modification dynamique de la mise en page 
+$("#themeFooterTemplate").on("change",function() {
+	// Nettoyage des sélecteurs des contenus
+	var newOptions = {
+		4:  {'hide' : 'Masqué', 'top' : 'Bloc en haut', 'middle' : 'Bloc au milieu', 'bottom' : 'Bloc inférieur'} , 
+		3:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'center': 'Bloc Central',	'right': 'Bloc Droite'} ,
+		2:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'right': 'Bloc Droite'} ,
+		1:  {'hide': 'Masqué', 'center': 'Affiché'} 
+	};	
+	var $el = $(".themeFooterContent");
+	$el.empty(); 
+	// Eléments des position de contenus
+	$.each(newOptions[$("#themeFooterTemplate").val()], function(key,value) {
+		$el.append($("<option></option>")
+			.attr("value", key).text(value));
+		});
+	var position = $("#themeFooterPosition").val();
+	// Masquer les contenus 
+	$("#footerCopyright").hide();
+	$("#footerText").hide();
+	$("#footerSocials").hide();
+	switch($("#themeFooterTemplate").val()) {
+		case "1":
+			$("#footer" + position + "Left").css("display","none");
+			$("#footer" + position + "Center").css("display","");
+			$("#footer" + position + "Right").css("display","none");
+			// Dimension du bloc
+			$("#footer" + position + "Center").removeAttr('class');
+			$("#footer" + position + "Center").addClass("col12");
+			break;			
+		case "2":	
+			$("#footer" + position + "Left").css("display","");
+			$("#footer" + position + "Center").css("display","none");
+			$("#footer" + position + "Right").css("display","");
+			// Dimension de blocs
+			$("#footer" + position + "Left").removeAttr('class');
+			$("#footer" + position + "Right").removeAttr('class');
+			$("#footer" + position + "Left").addClass('col6');			
+			$("#footer" + position + "Right").addClass('col6');
+			break;
+		case "3":			
+			$("#footer" + position + "Left").css("display","");
+			$("#footer" + position + "Center").css("display","");
+			$("#footer" + position + "Right").css("display","");
+			// Dimension de blocs			
+			$("#footer" + position + "Left").removeAttr('class');			
+			$("#footer" + position + "Right").removeAttr('class');
+			$("#footer" + position + "center").removeAttr('class');			
+			$("#footer" + position + "Left").addClass('col4');
+			$("#footer" + position + "Center").addClass('col4');							
+			$("#footer" + position + "Right").addClass('col4');
+			break;
+		case "4":
+			$("#footer" + position + "Left").css("display","");
+			$("#footer" + position + "Left").removeAttr('class');	
+			$("#footer" + position + "Left").addClass('col12');
+			//$("#footer" + position + "Left").css("footersite > " + "#footer" + position + "Left","order: " + $("#footer" + position + "Left").val() );
+
+			$("#footer" + position + "Center").css("display","");
+			$("#footer" + position + "center").removeAttr('class');		
+			$("#footer" + position + "Center").addClass('col12');							
+			//$("#footer" + position + "Center").css("footersite > " + "#footer" + position + "Center","order: " + $("#footer" + position + "Left").val() );
+
+			$("#footer" + position + "Right").css("display","");
+			$("#footer" + position + "Right").removeAttr('class');	
+			$("#footer" + position + "Right").addClass('col12');										
+			//$("#footer" + position + "Right").css("footersite > "+ "#footer" + position + "Right","order: " + $("#footer" + position + "Left").val() );			
+			break;
+
+	} 
+});
 
 
+// Désactivation des sélections multiples
+$("#themeFooterSocialsPosition").on("change", function() {
+	if ($(this).prop('selectedIndex') >= 1 ) {			
+		if ( $("#themeFooterTextPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {
+            $("#themeFooterTextPosition").prop('selectedIndex',0);
+			$("#footerText").hide();			
+		}
+		if ( $("#themeFooterCopyrightPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {				
+			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
+			$("#footerCopyright").hide();
+		}
+	}
+}).trigger("change");
+$("#themeFooterTextPosition").on("change", function() {
+	if ($(this).prop('selectedIndex') >= 1 ) {
+		if ( $("#themeFooterSocialsPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {
+			$("#themeFooterSocialsPosition").prop('selectedIndex',0);
+			$("#footerSocials").hide();
+		}
+		if ( $("#themeFooterCopyrightPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {				
+			$("#themeFooterCopyrightPosition").prop('selectedIndex',0);
+			$("#footerCopyright").hide();
+		}
+	}
+}).trigger("change");
+
+$("#themeFooterCopyrightPosition").on("change", function() {
+		if ($(this).prop('selectedIndex') >= 1 ) {
+			if ( $("#themeFooterTextPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {
+				$("#themeFooterTextPosition").prop('selectedIndex',0);
+				$("#footerText").hide();
+			}
+			if ( $("#themeFooterSocialsPosition").prop('selectedIndex') === $(this).prop('selectedIndex') ) {				
+				$("#themeFooterSocialsPosition").prop('selectedIndex',0);
+				$("#footerSocials").hide();				
+			}
+		}
+}).trigger("change");
+
+
+// Mention Légales activation de la liste de choix
+$("#themeFooterLegalCheck").on("change",function() {
+	if($(this).is(":checked")) {
+		$("#themeFooterLegalPageId").show();
+		$("#footerDisplayLegal").show();
+	} else {
+		$("#themeFooterLegalPageId").hide();
+		$("#footerDisplayLegal").hide();
+	}
+});
 
 // Lien de connexion
 $("#themeFooterLoginLink").on("change", function() {
@@ -164,16 +280,6 @@ $("#themefooterDisplaySiteMap").on("change", function() {
 }).trigger("change");
 
 
-
-// Numéro de version
-$("#themefooterDisplayVersion").on("change", function() {
-	if($(this).is(":checked")) {
-		$("#footerDisplayVersion").show();
-	}
-	else {
-		$("#footerDisplayVersion").hide();
-	}
-}).trigger("change");
 
 
 // Aperçu du texte

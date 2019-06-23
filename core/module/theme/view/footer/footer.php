@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col6">
 			<div class="block">
-				<h4>Couleur</h4>
+				<h4>Couleurs</h4>
 				<div class="row">
 					<div class="col6">
 						<?php echo template::text('themeFooterBackgroundColor', [
@@ -46,8 +46,9 @@
 					</div>
 					<div class="col6">
 						<?php echo template::select('themeFooterHeight', $module::$footerHeights, [
-							'label' => 'Hauteur',
-							'selected' => $this->getData(['theme', 'footer', 'height'])
+							'label' => 'Marges verticales',
+							'selected' => $this->getData(['theme', 'footer', 'height']),
+							'help' => 'La hauteur du pied de page est dynmamique selon le contenu.Ces marges sont ajoutées au-dessus et en-dessous.'
 						]); ?>
 					</div>
 				</div>
@@ -64,7 +65,7 @@
 			<div class="block">
 				<h4>Mise en forme du texte</h4>
 				<div class="row">
-				<div class="col3">
+					<div class="col3">
 						<?php echo template::select('themeFooterFont', $module::$fonts, [
 							'label' => 'Police',
 							'selected' => $this->getData(['theme', 'footer', 'font'])
@@ -96,85 +97,120 @@
 	<div class="row">
 		<div class="col12">
 			<div class="block">
-				<h4>Contenu personnalisé</h4>
-				<?php echo template::textarea('themeFooterText', [
-					'label' => 'Contenu (texte ou HTML)',
-					'value' => $this->getData(['theme', 'footer', 'text'])
-				]); ?>
+				<h4>Mise en page</h4>
+				<div class="row">
+					<div class="col4">
+					<?php
+					$footerBlockPosition = $module::$footerblocks [$this->getData(['theme', 'footer', 'template'])];
+					?>
+					<?php echo template::select('themeFooterTemplate', $module::$footerTemplate, [
+							'label' => 'Gabarits de mise en page',
+							'selected' => $this->getData(['theme', 'footer', 'template']),
+							'help' => 'Le changement de la mise en page entraîne la réinitalisation de la position des contenus.'
+						]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col4">
+					<p><strong>Contenu personnalisé texte ou HTML :</strong></p>
+						<?php echo template::select('themeFooterTextPosition', $footerBlockPosition, [
+							'label' => 'Emplacement',
+							'selected' => $this->getData(['theme', 'footer', 'textPosition']),
+							'class' => 'themeFooterContent'
+						]); ?>
+						<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
+							'label' => 'Alignement',
+							'selected' => $this->getData(['theme', 'footer', 'textAlign'])
+						]); ?>
+					</div>
+					<div class="col4">
+					<p><strong>Réseaux sociaux :</strong></p>
+						<?php echo template::select('themeFooterSocialsPosition', $footerBlockPosition, [
+							'label' => 'Emplacement',
+							'selected' => $this->getData(['theme', 'footer', 'socialsPosition']),
+							'class' => 'themeFooterContent'
+						]); ?>
+						<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
+							'label' => 'Alignement',
+							'selected' => $this->getData(['theme', 'footer', 'socialsAlign'])
+						]); ?>
+					</div>
+					<div class="col4">
+					<p><strong>Info et copyright :</strong></p>
+						<?php echo template::select('themeFooterCopyrightPosition', $footerBlockPosition, [
+							'label' => 'Emplacement',
+							'selected' => $this->getData(['theme', 'footer', 'copyrightPosition']),
+							'class' => 'themeFooterContent'
+						]); ?>	
+						<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
+							'label' => 'Alignement',
+							'selected' => $this->getData(['theme', 'footer', 'copyrightAlign'])
+						]); ?>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col6">
+		<div class="col12">		
 			<div class="block">
-				<h4>Contenu personnalisé</h4>
-					<?php echo template::select('themeFooterTextPosition', $module::$footerblocks, [
-						'label' => 'Emplacement',
-						'selected' => $this->getData(['theme', 'footer', 'textPosition'])
-					]); ?>
-					<?php echo template::select('themeFooterTextAlign', $module::$aligns, [
-						'label' => 'Alignement horizontal',
-						'selected' => $this->getData(['theme', 'footer', 'textAlign'])
-					]); ?>
-
-			</div>		
-		</div>	
-		<div class="col6">
-			<div class="block">
-				<h4>Réseaux sociaux</h4>
-					<?php echo template::select('themeFooterSocialsPosition', $module::$footerblocks, [
-						'label' => 'Emplacement',
-						'selected' => $this->getData(['theme', 'footer', 'socialsPosition'])
-					]); ?>
-					<?php echo template::select('themeFooterSocialsAlign', $module::$aligns, [
-						'label' => 'Alignement horizontal',
-						'selected' => $this->getData(['theme', 'footer', 'socialsAlign'])
-					]); ?>
-			</div>
+				<h4>Contenu des blocs</h4>
+				<?php echo template::textarea('themeFooterText', [
+					'label' => '<strong>Texte ou HTML personnalisé :</strong>',
+					'value' => $this->getData(['theme', 'footer', 'text']),
+					'class' => 'editorWysiwyg'
+				]); ?>
+				<div class="row">
+					<div class="col12">
+						<div class="block">
+							<h4>Contenu du bloc "Info et copyright" :</h4>
+							<div class="row">
+								<div class="col6">
+									<div class="row">
+										<?php echo template::checkbox('themefooterDisplayCopyright', true, 'Mention "Motorisé par"', [
+											'checked' => $this->getData(['theme', 'footer','displayCopyright'])
+										]); ?>	
+									</div>							
+									<div class="row">
+										<?php echo template::checkbox('themefooterDisplayVersion', true, 'Numéro de version', [
+											'checked' => $this->getData(['theme', 'footer','displayVersion'])
+										]); ?>
+									</div>
+								</div>
+								<div class="col6">
+									<div class="row">
+										<?php echo template::checkbox('themefooterDisplaySiteMap', true, 'Plan du site', [
+											'checked' => $this->getData(['theme', 'footer', 'displaySiteMap']),
+											'help' => 'Un plan du site permet un meilleur référencement.'
+										]); ?>
+									</div>
+									<div class="row">
+										<?php echo template::checkbox('themeFooterLoginLink', true, 'Lien de connexion', [
+												'checked' => $this->getData(['theme', 'footer', 'loginLink'])
+											]); ?>
+									</div>
+								</div>
+								<div class="col3">
+									<div class="row">
+										<?php echo template::checkbox('themeFooterLegalCheck', true, 'Pages des mentions légales', [
+											'checked' => $this->getData(['theme', 'footer', 'legalPageId']) === '' ? false : true
+										]); ?>
+										<p></p>
+									</div>
+								</div>
+								<div class="col3">									
+									<div class="row">
+									<?php echo template::select('themeFooterLegalPageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
+										'class' => $this->getData(['theme', 'footer', 'legalPageId']) === '' ? 'displayNone' : '',
+										'selected' => $this->getData(['theme', 'footer', 'legalPageId'])
+									]); ?>									
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>						
 		</div>
 	</div>
-	<div class="row">					
-		<div class="col12">
-				<div class="block">
-					<h4>Copyright</h4>
-					<div class="row">
-						<div class="col5">
-							<?php echo template::select('themeFooterCopyrightPosition', $module::$footerblocks, [
-								'label' => 'Emplacement',
-								'selected' => $this->getData(['theme', 'footer', 'copyrightPosition'])
-							]); ?>	
-							<?php echo template::select('themeFooterCopyrightAlign', $module::$aligns, [
-								'label' => 'Alignement horizontal',
-								'selected' => $this->getData(['theme', 'footer', 'copyrightAlign'])
-							]); ?>	
-						</div>						
-						<div class="col6 offset1">
-						<p>Afficher les éléments suivants :</p>
-							<div class="row">
-								<?php echo template::checkbox('themefooterDisplayCopyright', true, 'Mention "Motorisé par"', [
-									'checked' => $this->getData(['theme', 'footer','displayCopyright'])
-								]); ?>	
-							</div>							
-							<div class="row">
-								<?php echo template::checkbox('themefooterDisplayVersion', true, 'Numéro de version', [
-									'checked' => $this->getData(['theme', 'footer','displayVersion'])
-								]); ?>
-							</div>
-							<div class="row">
-								<?php echo template::checkbox('themefooterDisplaySiteMap', true, 'Plan du site', [
-									'checked' => $this->getData(['theme', 'footer', 'displaySiteMap']),
-									'help' => 'Un plan du site permet un meilleur référencement.'
-								]); ?>
-							</div>
-							<div class="row">
-								<?php echo template::checkbox('themeFooterLoginLink', true, 'Lien de connexion', [
-										'checked' => $this->getData(['theme', 'footer', 'loginLink'])
-									]); ?>
-							</div>							
-						</div>
-					</div>				
-				</div>		
-			</div>
-		</div>
-	<div>
 <?php echo template::formClose(); ?>

@@ -570,13 +570,21 @@ body > footer {
 }
 footer {
 	padding: 1px 20px;
+}
+
+#footersiteRight, #footersiteLeft, #footersiteCenter {
 	vertical-align: middle;
+}
+
+#footersite {
+	margin: 0;
 }
 
 #footerLoginLink, 
 #footerDisplayCopyright, 
 #footerDisplayVersion,
 #footerDisplaySiteMap,
+#footerDisplayLegal,
 #footerZwiiCMS {
 	font-size: inherit;
 }

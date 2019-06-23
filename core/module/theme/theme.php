@@ -68,21 +68,34 @@ class theme extends common {
 		'Vollkorn' => 'Vollkorn'
 	];
 	public static $footerblocks = [
-		'hide' => 'Masqué',
-		'left' => 'Bloc Gauche',
-		'center' => 'Bloc Central',
-		'right' => 'Bloc Droite'
+		1 => [
+			'hide' => 'Masqué',
+			'center' => 'Affiché' ], 
+		2 => [
+			'hide' => 'Masqué',
+			'left' => 'Bloc Gauche',
+			'right' => 'Bloc Droite' ],	
+		3 => [
+			'hide' => 'Masqué',
+			'left' => 'Bloc Gauche',
+			'center' => 'Bloc Central',
+			'right' => 'Bloc Droite' ],
+		4 => [
+			'hide' => 'Masqué',
+			'top' => 'Bloc haut',
+			'middle' => 'Bloc au milieu',
+			'bottom' => 'Bloc inférieur' ]
 	];
+
 	public static $fontWeights = [
 		'normal' => 'Maigre',
 		'bold' => 'Gras'
 	];
 	public static $footerHeights = [
-		'-5px' => 'Réduite',
-		'0px' => 'Très petite',
-		'5px' => 'Petite',
-		'10px' => 'Grande',
-		'15px' => 'Très grande'
+		'0' => 'Très petites',
+		'10px' => 'Petites',
+		'20px' => 'Grandes',
+		'30px' => 'Très grandes'
 	];
 	public static $footerPositions = [
 		'hide' => 'Caché',
@@ -207,7 +220,12 @@ class theme extends common {
 		'auto auto' => 'Automatique',	
 		'100% 100%' => 'Image étirée'
 	];
-
+	public static $footerTemplate = [	
+		'1' => 'Colonne unique',
+		'2' => 'Colonnes, 2 bloc 50% - 50%',
+		'3' => 'Colonnes, 3 blocs  33% - 33% - 33%',
+		'4' => 'Trois lignes en pleine largeur'
+	];
 
 	/**
 	 * Mode avancé
@@ -271,40 +289,59 @@ class theme extends common {
 	public function footer() {
 		// Soumission du formulaire
 		if($this->isPost()) {
-			$this->setData(['theme', 'footer', [
-				'backgroundColor' => $this->getInput('themeFooterBackgroundColor'),
-				'copyrightAlign' => $this->getInput('themeFooterCopyrightAlign'),
-				'height' => $this->getInput('themeFooterHeight'),
-				'loginLink' => $this->getInput('themeFooterLoginLink'),
-				'margin' => $this->getInput('themeFooterMargin', helper::FILTER_BOOLEAN),
-				'position' => $this->getInput('themeFooterPosition'),
-				'socialsAlign' => $this->getInput('themeFooterSocialsAlign'),
-				'text' => $this->getInput('themeFooterText', null),
-				'textAlign' => $this->getInput('themeFooterTextAlign'),
-				'textColor' => $this->getInput('themeFooterTextColor'),
-				'copyrightPosition' => $this->getInput('themeFooterCopyrightPosition'),
-				'textPosition' => $this->getInput('themeFooterTextPosition'),
-				'socialsPosition' => $this->getInput('themeFooterSocialsPosition'),
-				'textTransform' => $this->getInput('themeFooterTextTransform'),						
-				'font' => $this->getInput('themeFooterFont'),
-				'fontSize' => $this->getInput('themeFooterFontSize'),
-				'fontWeight' => $this->getInput('themeFooterFontWeight'),
-				'displayVersion' => $this->getInput('themefooterDisplayVersion', helper::FILTER_BOOLEAN),
-				'displaySiteMap' => $this->getInput('themefooterDisplaySiteMap', helper::FILTER_BOOLEAN),
-				'displayCopyright' => $this->getInput('themefooterDisplayCopyright', helper::FILTER_BOOLEAN)
-			]]);
-			// Valeurs en sortie
-			$this->addOutput([
-				'notification' => 'Modifications enregistrées',
-				'redirect' => helper::baseUrl() . 'theme',
-				'state' => true
-			]);
+			if ( $this->getInput('themeFooterCopyrightPosition') === 'hide' && 
+				 $this->getInput('themeFooterSocialsPosition') === 'hide' &&
+				 $this->getInput('themeFooterTextPosition') === 'hide' 	) {
+				// Valeurs en sortie
+				$this->addOutput([
+					'notification' => 'Sélectionnez au moment un contenu à afficher',
+					'redirect' => helper::baseUrl() . 'theme/footer',
+					'state' => false
+				]);
+			} else {
+				if ($this->getInput('themeFooterLegalCheck', helper::FILTER_BOOLEAN) === true ) {
+					$legalPageId = $this->getInput('themeFooterLegalPageId', helper::FILTER_ID);
+				} else {
+					$legalPageId = '';
+				}
+				$this->setData(['theme', 'footer', [
+					'backgroundColor' => $this->getInput('themeFooterBackgroundColor'),
+					'copyrightAlign' => $this->getInput('themeFooterCopyrightAlign'),
+					'height' => $this->getInput('themeFooterHeight'),
+					'loginLink' => $this->getInput('themeFooterLoginLink'),
+					'margin' => $this->getInput('themeFooterMargin', helper::FILTER_BOOLEAN),
+					'position' => $this->getInput('themeFooterPosition'),
+					'socialsAlign' => $this->getInput('themeFooterSocialsAlign'),
+					'text' => $this->getInput('themeFooterText', null),
+					'textAlign' => $this->getInput('themeFooterTextAlign'),
+					'textColor' => $this->getInput('themeFooterTextColor'),
+					'copyrightPosition' => $this->getInput('themeFooterCopyrightPosition'),
+					'textPosition' => $this->getInput('themeFooterTextPosition'),
+					'socialsPosition' => $this->getInput('themeFooterSocialsPosition'),
+					'textTransform' => $this->getInput('themeFooterTextTransform'),						
+					'font' => $this->getInput('themeFooterFont'),
+					'fontSize' => $this->getInput('themeFooterFontSize'),
+					'fontWeight' => $this->getInput('themeFooterFontWeight'),
+					'displayVersion' => $this->getInput('themefooterDisplayVersion', helper::FILTER_BOOLEAN),
+					'displaySiteMap' => $this->getInput('themefooterDisplaySiteMap', helper::FILTER_BOOLEAN),
+					'displayCopyright' => $this->getInput('themefooterDisplayCopyright', helper::FILTER_BOOLEAN),
+					'template' => $this->getInput('themeFooterTemplate'),
+					'legalPageId' => $legalPageId
+				]]);
+				// Valeurs en sortie
+				$this->addOutput([
+					'notification' => 'Modifications enregistrées',
+					'redirect' => helper::baseUrl() . 'theme',
+					'state' => true
+				]);
+			}
 		}
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Personnalisation du pied de page',
 			'vendor' => [
-				'tinycolorpicker'
+				'tinycolorpicker',
+				'tinymce'
 			],
 			'view' => 'footer'
 		]);

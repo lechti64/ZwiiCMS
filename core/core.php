@@ -32,7 +32,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.1.13';
+	const ZWII_VERSION = '9.1.14.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -921,6 +921,12 @@ class common {
 			$this->setData(['core', 'dataVersion', 9100]);
 			$this->SaveData();
 		}
+		// Version 9.1.13
+		if($this->getData(['core', 'dataVersion']) < 9113) {
+			$this->setData(['theme','footer','template', 3 ]);
+			$this->setData(['core', 'dataVersion', 9113]);
+			$this->SaveData();
+		}		
 	}
 }
 
@@ -1077,13 +1083,15 @@ class core extends common {
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
 			if($this->getData(['theme', 'footer', 'margin'])) {
-				$css .= 'footer{margin:0 20px 20px}';
+				$css .= 'footer{margin:0 10px 10px;padding: 1px 10px;}';
+			} else {
+				$css .= 'footer{margin:0;padding:0}';
 			}
 			$css .= 'footer span{color:' . $this->getData(['theme', 'footer', 'textColor']) . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'footer', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'footer', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'footer', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'footer', 'textTransform']) . '}';
 			$css .= 'footer{background-color:' . $colors['normal'] . ';color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
 			$css .= 'footer a{color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
-			$css .= 'footer .container > div{margin:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
-			$css .= 'footer .container-large > div{margin:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
+			//$css .= 'footer .container > div {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
+			$css .= '#footersiteLeft, #footersiteCenter, #footersiteRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
 			$css .= '#footerSocials{text-align:' . $this->getData(['theme', 'footer', 'socialsAlign']) . '}';
 			$css .= '#footerText{text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';
@@ -1918,6 +1926,15 @@ class layout extends common {
 		}	
 	}
 
+	/**
+	 * Affiche le texte du footer
+	 */
+	public function showFooterText() {
+		if($footerText = $this->getData(['theme', 'footer', 'text']) OR $this->getUrl(0) === 'theme') {
+			echo '<div id="footerText"><span id="footerFontText">' . nl2br($footerText) . '</span></div>';
+		}
+	}
+
      /**
      * Affiche le copyright
      */
@@ -1938,12 +1955,20 @@ class layout extends common {
 		$items .= $this->getData(['theme','footer','displayVersion']) === false ? ' class="displayNone"' : '';
 		$items .= '><wbr>&nbsp;'. common::ZWII_VERSION ;			
 		$items .= '</span>';
-		// Affichage du lien de connexion 
+		// Affichage du sitemap
 		$items .= '<span id="footerDisplaySiteMap"';
 		$items .= $this->getData(['theme','footer','displaySiteMap']) ===  false? ' class="displayNone"' : '';
 		$items .=  '><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() .  'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
 		$items .= '</span>';
-        if(
+		// Affichage des mentions légales
+		$items .= '<span id="footerDisplayLegal"';
+		$items .= $this->getData(['theme','footer','legalPageId']) ===  '' ? ' class="displayNone" >' : '>';
+		if ($this->getData(['theme','footer','legalPageId']) !== '') {
+			$items .=  '<wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . $this->getData(['theme','footer','legalPageId']) . '" data-tippy-content="Mentions Légales">Mentions légales</a>';
+		}
+		$items .= '</span>';		
+		// Affichage du lien de connexion 
+		if(
             (
                 $this->getData(['theme', 'footer', 'loginLink'])
                 AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')
@@ -1959,7 +1984,57 @@ class layout extends common {
 		// Fermeture du bloc copyright
         $items .= '</span></div>';
         echo $items;
-    }
+	}
+	
+	
+	/**
+	 * Affiche les réseaux sociaux
+	 */
+	public function showSocials() {
+		$socials = '';
+		foreach($this->getData(['config', 'social']) as $socialName => $socialId) {
+			switch($socialName) {
+				case 'facebookId':
+					$socialUrl = 'https://www.facebook.com/';
+					$title = 'Facebook';
+					break;
+				case 'linkedinId':
+					$socialUrl = 'https://fr.linkedin.com/in/';
+					$title = 'Linkedin';
+					break;
+				case 'instagramId':
+					$socialUrl = 'https://www.instagram.com/';
+					$title = 'Instagram';
+					break;
+				case 'pinterestId':
+					$socialUrl = 'https://pinterest.com/';
+					$title = 'Pinterest';
+					break;
+				case 'twitterId':
+					$socialUrl = 'https://twitter.com/';
+					$title = 'Twitter';
+					break;
+				case 'youtubeId':
+					$socialUrl = 'https://www.youtube.com/channel/';
+					$title = 'YouTube';
+					break;
+				case 'githubId':
+					$socialUrl = 'https://www.github.com/';
+					$title = 'Github';
+					break;
+				default:
+					$socialUrl = '';
+			}
+			if($socialId !== '') {
+				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" data-tippy-content="' . $title . '">' . template::ico(substr($socialName, 0, -2)) . '</a>';
+			}
+		}
+		if($socials !== '') {
+			echo '<div id="footerSocials">' . $socials . '</div>';
+		}
+	}
+
+
 
 	/**
 	 * Affiche le favicon
@@ -1975,14 +2050,6 @@ class layout extends common {
 		}
 	}
 
-	/**
-	 * Affiche le texte du footer
-	 */
-	public function showFooterText() {
-		if($footerText = $this->getData(['theme', 'footer', 'text']) OR $this->getUrl(0) === 'theme') {
-			echo '<div id="footerText"><span id="footerFontText">' . nl2br($footerText) . '</span></div>';
-		}
-	}
 
 	/**
 	 * Affiche le menu
@@ -2380,53 +2447,6 @@ class layout extends common {
 	public function showStyle() {
 		if($this->core->output['style']) {
 			echo '<style >' . helper::minifyCss($this->core->output['style']) . '</style>';
-		}
-	}
-
-	/**
-	 * Affiche les réseaux sociaux
-	 */
-	public function showSocials() {
-		$socials = '';
-		foreach($this->getData(['config', 'social']) as $socialName => $socialId) {
-			switch($socialName) {
-				case 'facebookId':
-					$socialUrl = 'https://www.facebook.com/';
-					$title = 'Facebook';
-					break;
-				case 'linkedinId':
-					$socialUrl = 'https://fr.linkedin.com/in/';
-					$title = 'Linkedin';
-					break;
-				case 'instagramId':
-					$socialUrl = 'https://www.instagram.com/';
-					$title = 'Instagram';
-					break;
-				case 'pinterestId':
-					$socialUrl = 'https://pinterest.com/';
-					$title = 'Pinterest';
-					break;
-				case 'twitterId':
-					$socialUrl = 'https://twitter.com/';
-					$title = 'Twitter';
-					break;
-				case 'youtubeId':
-					$socialUrl = 'https://www.youtube.com/channel/';
-					$title = 'YouTube';
-					break;
-				case 'githubId':
-					$socialUrl = 'https://www.github.com/';
-					$title = 'Github';
-					break;
-				default:
-					$socialUrl = '';
-			}
-			if($socialId !== '') {
-				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" data-tippy-content="' . $title . '">' . template::ico(substr($socialName, 0, -2)) . '</a>';
-			}
-		}
-		if($socials !== '') {
-			echo '<div id="footerSocials">' . $socials . '</div>';
 		}
 	}
 
