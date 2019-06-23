@@ -924,6 +924,7 @@ class common {
 		// Version 9.1.13
 		if($this->getData(['core', 'dataVersion']) < 9113) {
 			$this->setData(['theme','footer','template', 3 ]);
+			$this->setData(['theme','footer','margin', true ]);
 			$this->setData(['core', 'dataVersion', 9113]);
 			$this->SaveData();
 		}		

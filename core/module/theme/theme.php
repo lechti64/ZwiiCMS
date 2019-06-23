@@ -82,9 +82,9 @@ class theme extends common {
 			'right' => 'Bloc Droite' ],
 		4 => [
 			'hide' => 'Masqué',
-			'top' => 'Bloc haut',
-			'middle' => 'Bloc au milieu',
-			'bottom' => 'Bloc inférieur' ]
+			'left' => 'En haut',
+			'center' => 'Au milieu',
+			'right' => 'En bas' ]
 	];
 
 	public static $fontWeights = [

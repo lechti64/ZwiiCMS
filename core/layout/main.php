@@ -237,6 +237,11 @@
 				$class['center'] = "col4";
 				$class['right']  = "col4";					
 				break;
+			case '4' :
+				$class['left'] 	 = "col12";
+				$class['center'] = "col12";
+				$class['right']  = "col12";					
+				break;			
 		}?>
 		<div class="row" id="footersite">
 			<div class="<?php echo $class['left'];?>" id="footer<?php echo $position;?>Left">				

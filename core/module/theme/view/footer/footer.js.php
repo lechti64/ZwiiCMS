@@ -75,24 +75,24 @@ $(".themeFooterContent").on("change",function() {
 				break;
 			case "left":
 				$("#footerText").show().appendTo("#footer" + position + "Left");
-				break;
-			case "center":			
+				break;				
+			case "center":		
 				$("#footerText").show().appendTo("#footer" + position + "Center");
-				break;
-			case "right":			
+				break;				
+			case "right":		
 				$("#footerText").show().appendTo("#footer" + position + "Right");			
 				break;
 	}
 	switch($("#themeFooterSocialsPosition").val()) {
 			case 'hide':
 				$("#footerSocials").hide();
-				break;		
+				break;					
 			case 'left':
 				$("#footerSocials").show().appendTo("#footer" + position + "Left");	
-				break;
+				break;			
 			case 'center':
 				$("#footerSocials").show().appendTo("#footer" + position + "Center");
-				break;
+				break;			
 			case 'right':
 				$("#footerSocials").show().appendTo("#footer" + position + "Right");			
 				break;
@@ -100,13 +100,13 @@ $(".themeFooterContent").on("change",function() {
 	switch($("#themeFooterCopyrightPosition").val()) {
 			case 'hide':
 				$("#footerCopyright").hide();
-				break;		
+				break;					
 			case 'left':
 				$("#footerCopyright").show().appendTo("#footer" + position + "Left");			
-				break;
+				break;				
 			case 'center':
 				$("#footerCopyright").show().appendTo("#footer" + position + "Center");
-				break;
+				break;				
 			case 'right':
                 $("#footerCopyright").show().appendTo("#footer" + position + "Right");                			
 				break;
@@ -151,7 +151,9 @@ $("#themeFooterTemplate").on("change",function() {
 			$("#footer" + position + "Right").css("display","");
 			// Dimension de blocs
 			$("#footer" + position + "Left").removeAttr('class');
+			$("#footer" + position + "Center").removeAttr('class');
 			$("#footer" + position + "Right").removeAttr('class');
+
 			$("#footer" + position + "Left").addClass('col6');			
 			$("#footer" + position + "Right").addClass('col6');
 			break;
@@ -171,17 +173,20 @@ $("#themeFooterTemplate").on("change",function() {
 			$("#footer" + position + "Left").css("display","");
 			$("#footer" + position + "Left").removeAttr('class');	
 			$("#footer" + position + "Left").addClass('col12');
-			//$("#footer" + position + "Left").css("footersite > " + "#footer" + position + "Left","order: " + $("#footer" + position + "Left").val() );
 
 			$("#footer" + position + "Center").css("display","");
-			$("#footer" + position + "center").removeAttr('class');		
-			$("#footer" + position + "Center").addClass('col12');							
-			//$("#footer" + position + "Center").css("footersite > " + "#footer" + position + "Center","order: " + $("#footer" + position + "Left").val() );
+			$("#footer" + position + "Center").removeAttr('class');		
+			$("#footer" + position + "Center").addClass('col12');	
 
 			$("#footer" + position + "Right").css("display","");
 			$("#footer" + position + "Right").removeAttr('class');	
-			$("#footer" + position + "Right").addClass('col12');										
+			$("#footer" + position + "Right").addClass('col12');
+			
+			// Ordre des blocs du haut vers le bas:
+			// $("#footer" + position + "Left").css("footersite > " + "#footer" + position + "Left","order: " + $("#footer" + position + "Left").val() );
+			// $("#footer" + position + "Center").css("footersite > " + "#footer" + position + "Center","order: " + $("#footer" + position + "Left").val() );
 			//$("#footer" + position + "Right").css("footersite > "+ "#footer" + position + "Right","order: " + $("#footer" + position + "Left").val() );			
+			
 			break;
 
 	} 
