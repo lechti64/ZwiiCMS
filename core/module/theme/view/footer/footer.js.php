@@ -77,10 +77,10 @@ $(".themeFooterContent").on("change",function() {
 				$("#footerText").show().appendTo("#footer" + position + "Left");
 				break;				
 			case "center":		
-				$("#footerText").show().appendTo("#footer" + position + "Center");
+				$("#footerText").show().appendTo("#footer" + position + "Center");			
 				break;				
 			case "right":		
-				$("#footerText").show().appendTo("#footer" + position + "Right");			
+				$("#footerText").show().appendTo("#footer" + position + "Right");							
 				break;
 	}
 	switch($("#themeFooterSocialsPosition").val()) {
@@ -119,9 +119,9 @@ $(".themeFooterContent").on("change",function() {
 $("#themeFooterTemplate").on("change",function() {
 	// Nettoyage des sélecteurs des contenus
 	var newOptions = {
-		4:  {'hide' : 'Masqué', 'top' : 'Bloc en haut', 'middle' : 'Bloc au milieu', 'bottom' : 'Bloc inférieur'} , 
-		3:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'center': 'Bloc Central',	'right': 'Bloc Droite'} ,
-		2:  {'hide': 'Masqué', 'left':  'Bloc Gauche',	'right': 'Bloc Droite'} ,
+		4:  {'hide' : 'Masqué', 'left' : 'En haut', 'center' : 'Au milieu', 'right' : 'En bas'} , 
+		3:  {'hide': 'Masqué', 'left':  'A Gauche',	'center': 'Au Central',	'right': 'A Droite'} ,
+		2:  {'hide': 'Masqué', 'left':  'A Gauche',	'right': 'A Droite'} ,
 		1:  {'hide': 'Masqué', 'center': 'Affiché'} 
 	};	
 	var $el = $(".themeFooterContent");
@@ -136,57 +136,27 @@ $("#themeFooterTemplate").on("change",function() {
 	$("#footerCopyright").hide();
 	$("#footerText").hide();
 	$("#footerSocials").hide();
+	// Dimension des blocks
 	switch($("#themeFooterTemplate").val()) {
 		case "1":
 			$("#footer" + position + "Left").css("display","none");
-			$("#footer" + position + "Center").css("display","");
+			$("#footer" + position + "Center").removeAttr('class').addClass("col12").css("display","");
 			$("#footer" + position + "Right").css("display","none");
-			// Dimension du bloc
-			$("#footer" + position + "Center").removeAttr('class');
-			$("#footer" + position + "Center").addClass("col12");
 			break;			
 		case "2":	
-			$("#footer" + position + "Left").css("display","");
-			$("#footer" + position + "Center").css("display","none");
-			$("#footer" + position + "Right").css("display","");
-			// Dimension de blocs
-			$("#footer" + position + "Left").removeAttr('class');
-			$("#footer" + position + "Center").removeAttr('class');
-			$("#footer" + position + "Right").removeAttr('class');
-
-			$("#footer" + position + "Left").addClass('col6');			
-			$("#footer" + position + "Right").addClass('col6');
+			$("#footer" + position + "Left").removeAttr('class').addClass('col6').css("display","");
+			$("#footer" + position + "Center").css("display","none").removeAttr('class');
+			$("#footer" + position + "Right").removeAttr('class').addClass('col6').css("display","");
 			break;
 		case "3":			
-			$("#footer" + position + "Left").css("display","");
-			$("#footer" + position + "Center").css("display","");
-			$("#footer" + position + "Right").css("display","");
-			// Dimension de blocs			
-			$("#footer" + position + "Left").removeAttr('class');			
-			$("#footer" + position + "Right").removeAttr('class');
-			$("#footer" + position + "center").removeAttr('class');			
-			$("#footer" + position + "Left").addClass('col4');
-			$("#footer" + position + "Center").addClass('col4');							
-			$("#footer" + position + "Right").addClass('col4');
+			$("#footer" + position + "Left").removeAttr('class').addClass('col4').css("display","");
+			$("#footer" + position + "Center").removeAttr('class').addClass('col4').css("display","");
+			$("#footer" + position + "Right").removeAttr('class').addClass('col4').css("display","");
 			break;
 		case "4":
-			$("#footer" + position + "Left").css("display","");
-			$("#footer" + position + "Left").removeAttr('class');	
-			$("#footer" + position + "Left").addClass('col12');
-
-			$("#footer" + position + "Center").css("display","");
-			$("#footer" + position + "Center").removeAttr('class');		
-			$("#footer" + position + "Center").addClass('col12');	
-
-			$("#footer" + position + "Right").css("display","");
-			$("#footer" + position + "Right").removeAttr('class');	
-			$("#footer" + position + "Right").addClass('col12');
-			
-			// Ordre des blocs du haut vers le bas:
-			// $("#footer" + position + "Left").css("footersite > " + "#footer" + position + "Left","order: " + $("#footer" + position + "Left").val() );
-			// $("#footer" + position + "Center").css("footersite > " + "#footer" + position + "Center","order: " + $("#footer" + position + "Left").val() );
-			//$("#footer" + position + "Right").css("footersite > "+ "#footer" + position + "Right","order: " + $("#footer" + position + "Left").val() );			
-			
+			$("#footer" + position + "Left").removeAttr('class').addClass('col12').css("display","");
+			$("#footer" + position + "Center").removeAttr('class').addClass('col12').css("display","");
+			$("#footer" + position + "Right").removeAttr('class').addClass('col12').css("display","");
 			break;
 
 	} 
