@@ -1,3 +1,5 @@
+![master](https://img.shields.io/badge/master-9.1.14-success.svg)
+
 # Zwii 9.1
 
 Zwii est un CMS sans base de données (Flat-File) qui permet à ses utilisateurs de créer et gérer facilement un site web sans aucune connaissance en programmation.
