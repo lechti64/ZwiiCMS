@@ -192,18 +192,10 @@
 								</div>
 								<div class="col3">
 									<div class="row">
-										<?php echo template::checkbox('themeFooterLegalCheck', true, 'Pages des mentions légales', [
-											'checked' => $this->getData(['theme', 'footer', 'legalPageId']) === '' ? false : true
+										<?php echo template::checkbox('themeFooterDisplayLegal', true, 'Pages des mentions légales', [
+											'checked' => $this->getData(['theme', 'footer', 'displayLegal'])
 										]); ?>
 										<p></p>
-									</div>
-								</div>
-								<div class="col3">									
-									<div class="row">
-									<?php echo template::select('themeFooterLegalPageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
-										'class' => $this->getData(['theme', 'footer', 'legalPageId']) === '' ? 'displayNone' : '',
-										'selected' => $this->getData(['theme', 'footer', 'legalPageId'])
-									]); ?>									
 									</div>
 								</div>
 							</div>

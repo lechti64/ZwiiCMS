@@ -263,6 +263,11 @@ class config extends common {
 	public function index() {
 		// Soumission du formulaire
 		if($this->isPost()) {
+			if ($this->getInput('configLegalCheck', helper::FILTER_BOOLEAN) === true ) {
+				$legalPageId = $this->getInput('configLegalPageId', helper::FILTER_ID);
+			} else {
+				$legalPageId = '';
+			}
 			$this->setData([
 				'config',
 				[
@@ -284,7 +289,8 @@ class config extends common {
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
-					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true)
+					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true),
+					'legalPageId' => $this->getInput('configLegalPageId')
 				]
 			]);
 			if(self::$inputNotices === []) {

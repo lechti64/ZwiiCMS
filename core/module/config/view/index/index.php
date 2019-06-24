@@ -43,36 +43,51 @@
 		<div class="col6">
 			<div class="block">
 				<h4>Réglages</h4>
-					<div class="row">
-						<div class="col6">
-							<?php echo template::file('configFavicon', [
-								'type' => 1,
-								'help' => 'Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
-								'label' => 'Favicon',
-								'value' => $this->getData(['config', 'favicon'])
-							]); ?>
-						</div>
-						<div class="col6">
-							<?php echo template::select('itemsperPage', $module::$ItemsList, [
-							'label' => 'Articles par page',
-							'selected' => $this->getData(['config', 'itemsperPage']),
-							'help' => 'Modules Blog et News'
-							]); ?>
-						</div>
+				<div class="row">
+					<div class="col6">
+						<?php echo template::file('configFavicon', [
+							'type' => 1,
+							'help' => 'Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
+							'label' => 'Favicon',
+							'value' => $this->getData(['config', 'favicon'])
+						]); ?>
 					</div>
-					<div class="col12">
+					<div class="col6">
+						<?php echo template::select('itemsperPage', $module::$ItemsList, [
+						'label' => 'Articles par page',
+						'selected' => $this->getData(['config', 'itemsperPage']),
+						'help' => 'Modules Blog et News'
+						]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col6">
 						<?php echo template::select('configTimezone', $module::$timezones, [
 							'label' => 'Fuseau horaire',
 							'selected' => $this->getData(['config', 'timezone'])
 						]); ?>	
-					</div>					
+					</div>
+					<div class="col6">
+						<?php  $listePageId =  array_merge(['' => 'Sélectionner'] , helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC') ); 
+						?>
+						<?php echo template::select('configLegalPageId', $listePageId , [
+							'label' => 'Page des mentions légales',
+							'class' => $this->getData(['config', 'legalPageId']) === '' ? 'displayNone' : '',
+							'selected' => $this->getData(['config', 'legalPageId'])
+						]); ?>
+					</div>	
+				</div>				
+				<div class="col12">
 					<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
 						'checked' => $this->getData(['config', 'cookieConsent'])
-					]); ?>						
+					]); ?>
+				</div>	
+				<div class="col6">					
 					<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
 						'checked' => helper::checkRewrite(),
 						'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
 					]); ?>
+				</div>							
 			</div>							
 		</div>
 		<div class="col6">

@@ -299,11 +299,6 @@ class theme extends common {
 					'state' => false
 				]);
 			} else {
-				if ($this->getInput('themeFooterLegalCheck', helper::FILTER_BOOLEAN) === true ) {
-					$legalPageId = $this->getInput('themeFooterLegalPageId', helper::FILTER_ID);
-				} else {
-					$legalPageId = '';
-				}
 				$this->setData(['theme', 'footer', [
 					'backgroundColor' => $this->getInput('themeFooterBackgroundColor'),
 					'copyrightAlign' => $this->getInput('themeFooterCopyrightAlign'),
@@ -325,8 +320,8 @@ class theme extends common {
 					'displayVersion' => $this->getInput('themefooterDisplayVersion', helper::FILTER_BOOLEAN),
 					'displaySiteMap' => $this->getInput('themefooterDisplaySiteMap', helper::FILTER_BOOLEAN),
 					'displayCopyright' => $this->getInput('themefooterDisplayCopyright', helper::FILTER_BOOLEAN),
-					'template' => $this->getInput('themeFooterTemplate'),
-					'legalPageId' => $legalPageId
+					'displayLegal' =>  $this->getInput('themeFooterDisplayLegal', helper::FILTER_BOOLEAN),
+					'template' => $this->getInput('themeFooterTemplate')
 				]]);
 				// Valeurs en sortie
 				$this->addOutput([

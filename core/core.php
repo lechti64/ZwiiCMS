@@ -1963,9 +1963,9 @@ class layout extends common {
 		$items .= '</span>';
 		// Affichage des mentions légales
 		$items .= '<span id="footerDisplayLegal"';
-		$items .= $this->getData(['theme','footer','legalPageId']) ===  '' ? ' class="displayNone" >' : '>';
-		if ($this->getData(['theme','footer','legalPageId']) !== '') {
-			$items .=  '<wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . $this->getData(['theme','footer','legalPageId']) . '" data-tippy-content="Mentions Légales">Mentions légales</a>';
+		$items .= $this->getData(['theme','footer','displayLegal']) ===  false ? ' class="displayNone" >' : '>';
+		if ($this->getData(['config','legalPageId']) !== '') {
+			$items .=  '<wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() . $this->getData(['config','legalPageId']) . '" data-tippy-content="Mentions Légales">Mentions légales</a>';
 		}
 		$items .= '</span>';		
 		// Affichage du lien de connexion 

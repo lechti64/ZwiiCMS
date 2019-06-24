@@ -203,17 +203,6 @@ $("#themeFooterCopyrightPosition").on("change", function() {
 }).trigger("change");
 
 
-// Mention Légales activation de la liste de choix
-$("#themeFooterLegalCheck").on("change",function() {
-	if($(this).is(":checked")) {
-		$("#themeFooterLegalPageId").show();
-		$("#footerDisplayLegal").show();
-	} else {
-		$("#themeFooterLegalPageId").hide();
-		$("#footerDisplayLegal").hide();
-	}
-});
-
 // Lien de connexion
 $("#themeFooterLoginLink").on("change", function() {
 	if($(this).is(":checked")) {
