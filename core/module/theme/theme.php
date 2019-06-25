@@ -222,8 +222,8 @@ class theme extends common {
 	];
 	public static $footerTemplate = [	
 		'1' => 'Colonne unique',
-		'2' => 'Colonnes, 2 bloc 50% - 50%',
-		'3' => 'Colonnes, 3 blocs  33% - 33% - 33%',
+		'2' => 'Colonnes, 2 bloc 1/2 - 1/2',
+		'3' => 'Colonnes, 3 blocs  1/3 - 1/3 - 1/3',
 		'4' => 'Trois lignes en pleine largeur'
 	];
 
