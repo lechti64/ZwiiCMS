@@ -43,10 +43,10 @@ class page extends common {
 	public static $pageBlocks = [
 		'12'    => 'Pleine page',
 		'4-8'   => 'Barre 1/3 - Page 2/3',		
-		'8-4'   => 'Page 2/3    - Barre 1/3',
+		'8-4'   => 'Page 2/3 - Barre 1/3',
 		'3-9'   => 'Barre 1/4 - Page 3/4',
-		'9-3'   => 'Page 3/4    - Barre 1/4',
-		'3-6-3' => 'Barre  1/4 - Page 1/2 - Barre latérale 1/4',
+		'9-3'   => 'Page 3/4 - Barre 1/4',
+		'3-6-3' => 'Barre 1/4 - Page 1/2 - Barre latérale 1/4',
 		'2-7-3' => 'Barre 2/12 - Page 7/12 - Barre 3/12 ',
 		'3-7-2' => 'Barre 3/12 - Page 7/12 - Barre 2/12 ',
 		'bar'	=> 'Barre latérale'
