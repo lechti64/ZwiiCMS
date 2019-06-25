@@ -100,9 +100,7 @@
 				<h4>Mise en page</h4>
 				<div class="row">
 					<div class="col4">
-					<?php
-					$footerBlockPosition = $module::$footerblocks [$this->getData(['theme', 'footer', 'template'])];
-					?>
+					<?php 	$footerBlockPosition = $module::$footerblocks [$this->getData(['theme', 'footer', 'template'])]; ?>
 					<?php echo template::select('themeFooterTemplate', $module::$footerTemplate, [
 							'label' => 'Gabarits de mise en page',
 							'selected' => $this->getData(['theme', 'footer', 'template']),
@@ -192,8 +190,10 @@
 								</div>
 								<div class="col3">
 									<div class="row">
-										<?php echo template::checkbox('themeFooterDisplayLegal', true, 'Pages des mentions légales', [
-											'checked' => $this->getData(['theme', 'footer', 'displayLegal'])
+										<?php 
+										 echo template::checkbox('themeFooterDisplayLegal', true, 'Mentions légales', [
+											'checked' =>  $this->getData(['config', 'legalPageId']) === '' ? false : $this->getData(['theme', 'footer', 'displayLegal']),
+											'help' => 'Sélectionner une page dans la configuration du site'
 										]); ?>
 										<p></p>
 									</div>

@@ -72,7 +72,6 @@
 						?>
 						<?php echo template::select('configLegalPageId', $listePageId , [
 							'label' => 'Page des mentions légales',
-							'class' => $this->getData(['config', 'legalPageId']) === '' ? 'displayNone' : '',
 							'selected' => $this->getData(['config', 'legalPageId'])
 						]); ?>
 					</div>	
