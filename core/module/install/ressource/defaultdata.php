@@ -52,7 +52,6 @@ class install extends common {
 			'barRight' => '',
 			'displayMenu' => 'none',
 			'hideMenuSide' => false,
-			'hideMenuHead' => false,
 			'hideMenuChildren' =>false
 			],
 		'enfant' => [
@@ -81,7 +80,6 @@ class install extends common {
 			'barRight' => '',
 			'displayMenu' =>  'none',
 			'hideMenuSide' => false,
-			'hideMenuHead' => false,
 			'hideMenuChildren' =>false	
 		],
 		'privee' => [
@@ -109,7 +107,6 @@ class install extends common {
 			'barRight' => '',
 			'displayMenu' =>  'none',
 			'hideMenuSide' => false,
-			'hideMenuHead' => false,
 			'hideMenuChildren' =>false
 		],
 		'mise-en-page' => [
@@ -136,7 +133,6 @@ class install extends common {
 			'barRight' => '',
 			'displayMenu' =>  'none',
 			'hideMenuSide' => false,
-			'hideMenuHead' => false,
 			'hideMenuChildren' =>false
 		],
 		'menu-lateral' => [
@@ -162,7 +158,6 @@ class install extends common {
 			'barRight' => 'barrelateraleavecmenu',
 			'displayMenu' =>  'none',
 			'hideMenuSide' => false,
-			'hideMenuHead' => false,
 			'hideMenuChildren' =>false
 			],				
 		'blog' => [
@@ -186,7 +181,6 @@ class install extends common {
 			'barRight' => '',
 			'displayMenu' =>  'none',
 			'hideMenuSide' => false,
-			'hideMenuHead' => false,
 			'hideMenuChildren' =>false							
 		],
 		'galeries' => [
@@ -210,7 +204,6 @@ class install extends common {
 			'barRight' => '',
 			'displayMenu' =>  'none',
 			'hideMenuSide' => false,
-			'hideMenuHead' => false,
 			'hideMenuChildren' =>false			
 		],
 			'site-de-zwii' => [
@@ -234,7 +227,6 @@ class install extends common {
 			'barRight' => '',
 			'displayMenu' => 'none',
 			'hideMenuSide' => false,
-			'hideMenuHead' => false,
 			'hideMenuChildren' =>false							
 		],
 			'contact' => [
@@ -258,7 +250,6 @@ class install extends common {
 				'barRight' => '',
 				'displayMenu' => 'none',
 				'hideMenuSide' => false,
-				'hideMenuHead' => false,
 				'hideMenuChildren' =>false						
 			],
 				'barre' => [
@@ -282,7 +273,6 @@ class install extends common {
 				'barRight' => '',
 				'displayMenu' => "none",
 				'hideMenuSide' => false,
-				'hideMenuHead' => false,
 				'hideMenuChildren' =>false	
 			],
 				'barrelateraleavecmenu' => [
@@ -306,7 +296,6 @@ class install extends common {
 				'barRight' => '',
 				'displayMenu' => "parents",
 				'hideMenuSide' => false,
-				'hideMenuHead' => false,
 				'hideMenuChildren' =>false			
 			],
 		],
