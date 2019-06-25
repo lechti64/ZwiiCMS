@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 9.2.0
+Nouveautés :
+    - Gabarit du pied de page peut se paramétrer en colonnes et en lignes, de un à trois blocs.
+    - Gabarit de page, présentation asymétrique des barres latérales : 33% - 50% - 16% et inversement
+Amélioration :
+    - Gestion des sous-menus : suppression de l'option de masquage des pages dans le menu horizontal
+
+## Version 9.1.14    
+Correction :
+    - Validation w3C : espace maquant
+
 ## Version 9.1.13
 - Corrections : 
     - Erreur du sitemap.xml lorsqu'un blog ne contient pas d'article.
