@@ -149,7 +149,13 @@ echo template::formOpen('pageEditForm'); ?>
 				<h4>Emplacement</h4>
 				<div class="row">
 					<div class="col6">
-						<?php if($this->getHierarchy($this->getUrl(2), false)): ?>
+						<?php echo template::select('pageEditPosition', [], [
+							'label' => 'Position',
+							'help' => '\'Ne pas afficher\' crée une page orpheline non accessible par le biais des menus.'
+						]); ?>	
+					</div>				
+					<div class="col6">
+						<?php	if($this->getHierarchy($this->getUrl(2), false)): ?>
 							<?php echo template::hidden('pageEditParentPageId', [
 								'value' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
 							]); ?>
@@ -159,12 +165,6 @@ echo template::formOpen('pageEditForm'); ?>
 								'selected' => $this->getData(['page', $this->getUrl(2), 'parentPageId'])
 							]); ?>
 						<?php endif; ?>
-					</div>
-					<div class="col6">
-						<?php echo template::select('pageEditPosition', [], [
-							'label' => 'Position',
-							'help' => '\'Ne pas afficher\' crée une page orpheline non accessible par le biais des menus.'
-						]); ?>	
 					</div>
 				</div>								
 				<div class="row">
