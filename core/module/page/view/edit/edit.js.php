@@ -164,13 +164,9 @@ $( document ).ready(function() {
 	* Cache les options de masquage dans les menus quand la page n'est pas affichée.
 	*/
 	if ($("#pageEditPosition").val() === "0" ) {
-			$("#pageEditHideMenuHeadWrapper").removeClass("disabled");
-			$("#pageEditHideMenuHeadWrapper").slideUp();	
 			$("#pageEditHideMenuSideWrapper").removeClass("disabled");
 			$("#pageEditHideMenuSideWrapper").slideUp();				
 	} else {
-			$("#pageEditHideMenuHeadWrapper").addClass("disabled");
-			$("#pageEditHideMenuHeadWrapper").slideDown();
 			$("#pageEditHideMenuSideWrapper").addClass("disabled");
 			$("#pageEditHideMenuSideWrapper").slideDown();								
 	}
@@ -189,23 +185,6 @@ $( document ).ready(function() {
 });
 
 
-/**
-* Une seule option de masquage dans les menus est autorisée
-*/
-var pageEditHideMenuHeadDOM = $("#pageEditHideMenuHead");
-pageEditHideMenuHeadDOM.on("change", function() {
-	if ($('input[name=pageEditHideMenuSide]').is(':checked')) {
-		$("#pageEditHideMenuSide").prop("checked",false);	
-	}
-});
-
-var pageEditHideMenuSideDOM = $("#pageEditHideMenuSide");
-pageEditHideMenuSideDOM.on("change", function() {
-	if ($('input[name=pageEditHideMenuHead]').is(':checked')) {
-		$("#pageEditHideMenuHead").prop("checked",false);	
-	}
-});
-
 
 /**	
 * Cache les options de masquage dans les menus quand la page n'est pas affichée.
@@ -213,15 +192,9 @@ pageEditHideMenuSideDOM.on("change", function() {
 var pageEditPositionDOM = $("#pageEditPosition");
 pageEditPositionDOM.on("change", function() {
 	if ($(this).val()  === "0" ) {
-		$("#pageEditHideMenuHeadWrapper").removeClass("disabled");
-		$("#pageEditHideMenuHeadWrapper").slideUp();	
 		$("#pageEditHideMenuSideWrapper").removeClass("disabled");
 		$("#pageEditHideMenuSideWrapper").slideUp();			
-		$("#pageEditHideMenuSide").prop("checked",false);
-		$("#pageEditHideMenuHead").prop("checked",false);
 	} else {
-		$("#pageEditHideMenuHeadWrapper").addClass("disabled");
-		$("#pageEditHideMenuHeadWrapper").slideDown();
 		$("#pageEditHideMenuSideWrapper").addClass("disabled");
 		$("#pageEditHideMenuSideWrapper").slideDown();								
 	}

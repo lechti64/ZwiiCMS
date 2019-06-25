@@ -179,7 +179,7 @@ echo template::formOpen('pageEditForm'); ?>
 			<h4>Options d'emplacement avancées</h4>	
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Masquer les pages enfants de cette page dans le menu horizontal', [
+					<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Ne pas afficher les sous-pages dans le menu horizontal', [
 						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuChildren']),
 						'help' => 'Afficher uniquement les pages enfants dans le \'sous-menu de page parente\' d\'une barre latérale.'
 					]); ?>
@@ -187,17 +187,8 @@ echo template::formOpen('pageEditForm'); ?>
 				</div>									
 				<div class="row">
 					<div class="col12">
-					<?php echo template::checkbox('pageEditHideMenuHead', true, 'Masquer cette page dans le menu horizontal, l\'afficher dans le menu vertical en barre latérale', [
-						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuHead']),
-						'help' => 'Pour masquer la page dans les deux menus, dans \'Position\' sélectionnez \'Ne pas afficher\'.'
-					]); ?>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col12">
-					<?php echo template::checkbox('pageEditHideMenuSide', true, 'Masquer cette page dans le menu vertical en barre latérale, l\'afficher dans le menu horizontal', [
-						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuSide']),
-						'help' => 'Pour masquer la page dans les deux menus, dans \'Position\' sélectionnez \'Ne pas afficher\'.'
+					<?php echo template::checkbox('pageEditHideMenuSide', true, 'Ne pas afficher dans les menus verticaux', [
+						'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuSide'])
 					]); ?>
 					</div>
 				</div>	
