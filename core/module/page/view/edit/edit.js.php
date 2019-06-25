@@ -104,6 +104,8 @@ $( document ).ready(function() {
 			$("#pageEditBarRightWrapper").slideDown();				
 			break;
 		case "3-6-3":
+		case "2-7-3":
+		case "3-7-2":			
 			$("#pageEditBarLeftWrapper").addClass("disabled");
 			$("#pageEditBarLeftWrapper").slideDown();
 			$("#pageEditBarRightWrapper").addClass("disabled");
@@ -112,7 +114,7 @@ $( document ).ready(function() {
 	};
 	if ($("#pageEditBlock").val() === "bar") {		
 			$("#pageEditMenu").removeClass("disabled");
-			$("#pageEditMenu").slideUp();
+			$("#pageEditMenu").hide();
 			$("#pageEditHideTitleWrapper").removeClass("disabled");
 			$("#pageEditHideTitleWrapper").slideUp();
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
@@ -125,8 +127,6 @@ $( document ).ready(function() {
 			$("#pageEditDisplayMenuWrapper").slideDown();
 			$("#pageEditGroupWrapper").removeClass("disabled");
 			$("#pageEditGroupWrapper").slideUp();			
-			$("#pageEditMenuSpecial").removeClass("disabled");
-			$("#pageEditMenuSpecial").slideUp();
 	} else {
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideUp();	
@@ -305,6 +305,8 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditBarRightWrapper").slideDown();				
 			break;
 		case "3-6-3":
+		case "2-7-3":
+		case "3-7-2":		
 			$("#pageEditBarLeftWrapper").addClass("disabled");
 			$("#pageEditBarLeftWrapper").slideDown();
 			$("#pageEditBarRightWrapper").addClass("disabled");
@@ -313,9 +315,7 @@ pageEditBlockDOM.on("change", function() {
 	}
 	if ($(this).val() === "bar") {
 			$("#pageEditMenu").removeClass("disabled");
-			$("#pageEditMenu").slideUp();
-			$("#pageEditMenuSpecial").removeClass("disabled");
-			$("#pageEditMenuSpecial").slideUp();
+			$("#pageEditMenu").hide();
 			$("#pageEditHideTitleWrapper").removeClass("disabled");
 			$("#pageEditHideTitleWrapper").slideUp();
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
@@ -330,9 +330,7 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditGroupWrapper").slideUp();																					
 	} else {
 			$("#pageEditMenu").addClass("disabled");
-			$("#pageEditMenu").slideDown();	
-			$("#pageEditMenuSpecial").addClass("disabled");
-			$("#pageEditMenuSpecial").slideDown();				
+			$("#pageEditMenu").show();					
 			$("#pageEditHideTitleWrapper").addClass("disabled");
 			$("#pageEditHideTitleWrapper").slideDown();	
 			$("#pageEditModuleIdWrapper").addClass("disabled");
