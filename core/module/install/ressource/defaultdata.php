@@ -21,6 +21,7 @@ class install extends common {
 			'timezone' => 'Europe/Paris',
 			'title' => 'Zwii, votre site en quelques clics !',
 			'itemsperPage' => 10,
+			'legalPageId' => ''
 		],
 		'core' => [
 			'dataVersion' => 0,
@@ -439,8 +440,8 @@ class install extends common {
 				'displayVersion' => true,
 				'displaySiteMap' => true,
 				'displayCopyright' => true,
-				'template' => '3',
-				'legalPageId' => ''
+				'displayLegal' => false,				
+				'template' => '3'
 			],
 			'header' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',

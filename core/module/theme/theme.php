@@ -221,10 +221,10 @@ class theme extends common {
 		'100% 100%' => 'Image étirée'
 	];
 	public static $footerTemplate = [	
-		'1' => 'Colonne unique',
-		'2' => 'Colonnes, 2 bloc 1/2 - 1/2',
-		'3' => 'Colonnes, 3 blocs  1/3 - 1/3 - 1/3',
-		'4' => 'Trois lignes en pleine largeur'
+		'1' => 'Une seule colonne',
+		'2' => 'Deux colonnes : 1/2 - 1/2',
+		'3' => 'Trois colonnes : 1/3 - 1/3 - 1/3',
+		'4' => 'Trois lignes superposées'
 	];
 
 	/**
