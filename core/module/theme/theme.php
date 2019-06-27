@@ -294,7 +294,7 @@ class theme extends common {
 				 $this->getInput('themeFooterTextPosition') === 'hide' 	) {
 				// Valeurs en sortie
 				$this->addOutput([
-					'notification' => 'Sélectionnez au moment un contenu à afficher',
+					'notification' => 'Sélectionnez au moins un contenu à afficher',
 					'redirect' => helper::baseUrl() . 'theme/footer',
 					'state' => false
 				]);
