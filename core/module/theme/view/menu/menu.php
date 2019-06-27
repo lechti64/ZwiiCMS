@@ -13,7 +13,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col6">
+		<div class="col8">
 			<div class="block">
 				<h4>Couleur</h4>
 				<div class="row">
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col6">
+		<div class="col4">
 				<div class="block">
 				<h4>Contenu</h4>
 				<?php echo template::checkbox('themeMenuLoginLink', true, 'Lien de connexion', [

@@ -120,8 +120,8 @@ $("#themeFooterTemplate").on("change",function() {
 	// Nettoyage des sélecteurs des contenus
 	var newOptions = {
 		4:  {'hide' : 'Masqué', 'left' : 'En haut', 'center' : 'Au milieu', 'right' : 'En bas'} , 
-		3:  {'hide': 'Masqué', 'left':  'A Gauche',	'center': 'Au Central',	'right': 'A Droite'} ,
-		2:  {'hide': 'Masqué', 'left':  'A Gauche',	'right': 'A Droite'} ,
+		3:  {'hide': 'Masqué', 'left':  'A gauche',	'center': 'Au centre',	'right': 'A droite'} ,
+		2:  {'hide': 'Masqué', 'left':  'A gauche',	'right': 'A droite'} ,
 		1:  {'hide': 'Masqué', 'center': 'Affiché'} 
 	};	
 	var $el = $(".themeFooterContent");
