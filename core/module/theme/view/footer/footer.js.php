@@ -56,11 +56,18 @@ $("input, select").on("change", function() {
 			break;
 		case 'site':
 			$("footer").show().appendTo("#site");
+            $("footer > div:first-child").removeAttr("class");
+            $("footer > div:first-child").addClass("container");
 			break;
 		case 'body':
 			$("footer").show().appendTo("body");
+            $("footer > div:first-child").removeAttr("class");
+            $("footer > div:first-child").addClass("container-large");
 			break;
 	}
+    // Réduire la marge du paragraphe de la zone de texte enrichie
+    $("#footerFontText > p").css("margin-top","0");
+    $("#footerFontText > p").css("margin-bottom","0");
 });
 
 
