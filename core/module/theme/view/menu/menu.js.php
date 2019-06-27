@@ -33,10 +33,10 @@ $("input, select").on("change", function() {
 			<?php echo json_encode($this->getData(['theme', 'menu', 'position']) === 'site-first'); ?>
 			|| <?php echo json_encode($this->getData(['theme', 'header', 'position']) === 'body'); ?>
 		) {
-			css += 'nav{margin:20px 20px 0 20px}';
+			css += 'nav{padding:20px 20px 0 20px}';
 		}
 		else {
-			css += 'nav{margin:0 20px}';
+			css += 'nav{padding:0 20px}';
 		}
 	}
 	else {
