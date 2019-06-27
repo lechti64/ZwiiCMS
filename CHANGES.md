@@ -6,9 +6,9 @@
     - Gabarit de page, présentation asymétrique des barres latérales : 33% - 50% - 16% et inversement
 - Amélioration :
     - Gestion des sous-menus : suppression de l'option de masquage des pages dans le menu horizontal
+    - Remise à plat et homogénisation des masques édition des pages, footer et header
 - Corrections :
-    - Alignement avec le contenu de menu, couleur de l'arrière plan.
-    - Masques édition des pages.
+    - Menu : alignement avec le contenu, couleur de l'arrière plan
 
 ## Version 9.1.14    
 Correction :
