@@ -1,11 +1,14 @@
 # Changelog
 
 ## Version 9.2.0
-Nouveautés :
+- Nouveautés :
     - Gabarit du pied de page peut se paramétrer en colonnes et en lignes, de un à trois blocs.
     - Gabarit de page, présentation asymétrique des barres latérales : 33% - 50% - 16% et inversement
-Amélioration :
+- Amélioration :
     - Gestion des sous-menus : suppression de l'option de masquage des pages dans le menu horizontal
+- Corrections :
+    - Alignement avec le contenu de menu, couleur de l'arrière plan.
+    - Masques édition des pages.
 
 ## Version 9.1.14    
 Correction :
