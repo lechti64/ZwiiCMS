@@ -30,13 +30,13 @@ echo template::formOpen('pageEditForm'); ?>
 			<div class="block">
 				<h4>Informations générales</h4>
 				<div class="row">
-					<div class="col6">
+					<div class="col8">
 						<?php echo template::text('pageEditTitle', [
 							'label' => 'Titre',
 							'value' => $this->getData(['page', $this->getUrl(2), 'title'])
 						]); ?>
 					</div>
-					<div class="col6">
+					<div class="col4">
 						<div class="row">
 							<div class="col10">
 								<?php echo template::hidden('pageEditModuleRedirect'); ?>
@@ -57,29 +57,27 @@ echo template::formOpen('pageEditForm'); ?>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col6">							
+					<div class="col4">
 						<?php echo template::select('pageTypeMenu', $module::$typeMenu,[
 								'help' => 'Choisissez une icône ou une image de petite taille.',
 								'label' => 'Aspect du menu',
 								'selected' => $this->getData(['page', $this->getUrl(2), 'typeMenu'])
 						]); ?>
 					</div>
-					<div class="col6">			
+					<div class="col4">
+                        <?php echo template::file('pageIconUrl', [
+                            'label' => 'Icône du menu',
+                            'value' => $this->getData(['page', $this->getUrl(2), 'iconUrl'])
+                        ]); ?>
+                    </div>
+					<div class="col4">
 					<?php echo template::select('configModulePosition', $module::$modulePosition,[
 							'help' => 'En position libre ajoutez le module en plaçant deux crochets [] à l\'endroit voulu dans votre page.',
 							'label' => 'Position du module dans la page',
 							'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
 						]); ?>
 					</div>
-				</div>
-				<div class="row">
->					<div class="col6">
-						<?php echo template::file('pageIconUrl', [
-							'label' => 'Icône du menu',
-							'value' => $this->getData(['page', $this->getUrl(2), 'iconUrl'])
-						]); ?>
-					</div>				
-				</div>				
+                </div>
 			</div>
 		</div>
 	</div>
