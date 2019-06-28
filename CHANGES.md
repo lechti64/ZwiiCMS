@@ -2,7 +2,7 @@
 
 ## Version 9.1.14
 - Correction :
-    - Validaton w3c : espace en surnuméraire
+    - Validation w3c : espace en surnuméraire
 
 ## Version 9.1.13
 - Corrections : 
