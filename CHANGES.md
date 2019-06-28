@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 9.1.14
+- Correcton :
+    - Validaton w3c : espace en surnuméraire
+
 ## Version 9.1.13
 - Corrections : 
     - Erreur du sitemap.xml lorsqu'un blog ne contient pas d'article.
