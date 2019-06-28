@@ -1,7 +1,7 @@
 # Changelog
 
 ## Version 9.1.14
-- Correcton :
+- Correction :
     - Validaton w3c : espace en surnuméraire
 
 ## Version 9.1.13
