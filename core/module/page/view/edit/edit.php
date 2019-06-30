@@ -38,7 +38,7 @@ echo template::formOpen('pageEditForm'); ?>
 					</div>
 					<div class="col4">
 						<div class="row">
-							<div class="col10">
+							<div class="col9">
 								<?php echo template::hidden('pageEditModuleRedirect'); ?>
 								<?php echo template::select('pageEditModuleId', $module::$moduleIds, [
 									'help' => 'En cas de changement de module, les données du module précédent seront supprimées.',
@@ -46,7 +46,7 @@ echo template::formOpen('pageEditForm'); ?>
 									'selected' => $this->getData(['page', $this->getUrl(2), 'moduleId'])
 								]); ?>
 							</div>
-							<div class="col2 verticalAlignBottom">
+							<div class="col3 verticalAlignBottom">
 								<?php echo template::button('pageEditModuleConfig', [
 									'disabled' => (bool) $this->getData(['page', $this->getUrl(2), 'moduleId']) === false,
 									'uniqueSubmission' => true,	
