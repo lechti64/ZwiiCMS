@@ -1963,6 +1963,11 @@ class layout extends common {
 		$items .= $this->getData(['theme','footer','displaySiteMap']) ===  false? ' class="displayNone"' : '';
 		$items .=  '><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() .  'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
 		$items .= '</span>';
+        // Affichage du module de recherche
+ 		$items .= '<span id="footerDisplaySearch"';
+		$items .= $this->getData(['theme','footer','displaySearch']) ===  false? ' class="displayNone"' : '';
+		$items .=  '><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() .  'search" data-tippy-content="Rechercher dans le site" >Rechercher</a>';
+		$items .= '</span>';
 		// Affichage des mentions légales
 		$items .= '<span id="footerDisplayLegal"';
 		$items .= $this->getData(['theme','footer','displayLegal']) ===  false ? ' class="displayNone" >' : '>';

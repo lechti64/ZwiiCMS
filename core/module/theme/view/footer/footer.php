@@ -49,6 +49,11 @@
                                 'checked' => $this->getData(['theme', 'footer','displayVersion'])
                             ]); ?>
                     </div>
+                    <div class="row">
+                        <?php echo template::checkbox('themeFooterDisplayLegal', true, 'Mentions légales', [
+                                'checked' =>  $this->getData(['config', 'legalPageId']) === '' ? false : $this->getData(['theme', 'footer', 'displayLegal']),
+                            ]); ?>
+                    </div>
                 </div>
                 <div class="col6">
                     <div class="row">
@@ -62,17 +67,14 @@
                                     'checked' => $this->getData(['theme', 'footer', 'loginLink'])
                                 ]); ?>
                     </div>
-                </div>
-                <div class="col12">
                     <div class="row">
-                        <?php
-                             echo template::checkbox('themeFooterDisplayLegal', true, 'Mentions légales', [
-                                'checked' =>  $this->getData(['config', 'legalPageId']) === '' ? false : $this->getData(['theme', 'footer', 'displayLegal']),
+                       <?php echo template::checkbox('themeFooterDisplaySearch', true, 'Rechercher', [
+                                'checked' =>  $this->getData(['theme', 'footer', 'displaySearch']),
                             ]); ?>
                     </div>
-                    <div class="col12">
-                        <em>Le paramétrage des mentions légales s'effectue dans la configuration du site.</em>
-                    </div>
+                </div>
+                <div class="col12">
+                    <em>Le paramétrage des mentions légales s'effectue dans la configuration du site.</em>
                 </div>
             </div>
         </div>
