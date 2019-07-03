@@ -2,6 +2,7 @@
 
 ## Version 9.2.0
 - Nouveautés :
+    - Module de recherche dans le pied de page
     - Gabarit du pied de page peut se paramétrer en colonnes et en lignes, de un à trois blocs.
     - Gabarit de page, présentation asymétrique des barres latérales : 33% - 50% - 16% et inversement
 - Amélioration :
