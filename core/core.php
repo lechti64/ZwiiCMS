@@ -549,11 +549,19 @@ class common {
 	/**
 	 * Génére un fichier json avec la liste des pages
 	 * 
-	*/
-	public function pages2Json() {
-		// Sauve la liste des pages pour TinyMCE
+*/
+    public function pages2Json() {
+    // Sauve la liste des pages pour TinyMCE
 		$parents = [];
-		$rewrite = (helper::checkRewrite()) ? '' : '?';
+        $rewrite = (helper::checkRewrite()) ? '' : '?';
+        // Sitemap et Search
+        $parents [] = ['title'=>'Rechercher dans le site',
+           'value'=>$rewrite.'search'
+          ];
+        $parents [] = ['title'=>'Plan du site',
+           'value'=>$rewrite.'sitemap'
+          ];
+        // Boucle de recherche des pages actives
 		foreach($this->getHierarchy(null,false,false) as $parentId => $childIds) {
 			$children = [];
 			// Exclure les barres
@@ -583,6 +591,7 @@ class common {
 				} 											
 			}
 		}
+
 
 		
 		// 3 tentatives
