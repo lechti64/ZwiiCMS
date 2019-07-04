@@ -42,9 +42,10 @@ class search extends common {
 			//Pour affichage de l'entête du résultat
 			$result = '<h1>Recherche avec le mot clef : '.$motclef.'<br/></h1>';
 			if ($motclef !== "" && strlen($motclef) > 2) {
-				foreach($this->getHierarchy(null,true,null) as $parentId => $childIds) {
+				foreach($this->getHierarchy(null,false,null) as $parentId => $childIds) {
 					if ($this->getData(['page', $parentId, 'disable']) === false  &&
-                        $this->getUser('group') >= $this->getData(['page', $parentId, 'group'])) 	{
+                        $this->getUser('group') >= $this->getData(['page', $parentId, 'group']) &&
+                        $this->getData(['page', $parentId, 'block']) !== 'bar') 	{
 						$url = $parentId;
 						$titre = $this->getData(['page', $parentId, 'title']);
 						$contenu =  $this->getData(['page', $parentId, 'content']);
@@ -55,7 +56,8 @@ class search extends common {
 					foreach($childIds as $childId) {
 							// Sous page
 							if ($this->getData(['page', $childId, 'disable']) === false &&
-                                $this->getUser('group') >= $this->getData(['page', $parentId, 'group'])) {
+                                $this->getUser('group') >= $this->getData(['page', $parentId, 'group']) &&
+                                $this->getData(['page', $parentId, 'block']) !== 'bar') 	{
                                     $url = $childId;
                                     $titre = $this->getData(['page', $childId, 'title']);
                                     $contenu = $this->getData(['page', $childId, 'content']);
