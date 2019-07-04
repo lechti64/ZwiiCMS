@@ -79,15 +79,19 @@
 					</div>	
 				</div>				
 				<div class="col12">
-					<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
-						'checked' => $this->getData(['config', 'cookieConsent'])
-					]); ?>
+                    <div class="row">
+                            <?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
+                                'checked' => $this->getData(['config', 'cookieConsent'])
+                            ]); ?>
+                    </div>
 				</div>	
 				<div class="col12">
-					<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
-						'checked' => helper::checkRewrite(),
-						'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
-					]); ?>
+                    <div class="row">
+                        <?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
+                            'checked' => helper::checkRewrite(),
+                            'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
+                        ]); ?>
+                    </div>
 				</div>							
 			</div>							
 		</div>
