@@ -40,10 +40,10 @@ class common {
 		'install',
 		'maintenance',
 		'page',
+        'search',
 		'sitemap',
 		'theme',
-		'user',
-        'search'
+		'user'
 	];
 	private $data = [];
 	private $hierarchy = [

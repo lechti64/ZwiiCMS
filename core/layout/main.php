@@ -220,51 +220,51 @@
 		<?php else: ?>
 			<div class="container-large">
 		<?php endif?>
-		<!-- Mise en page -->
-		<?php switch($this->getData(['theme', 'footer', 'template'])) {
-			case '1' :
-				$class['left'] 	 = "displayNone";
-				$class['center'] = "col12";
-				$class['right']  = "displayNone";		
-				break;
-			case '2' :
-				$class['left'] 	 = "col6";
-				$class['center'] = "displayNone";
-				$class['right']  = "col6";		
-				break;
-			case '3' :
-				$class['left'] 	 = "col4";
-				$class['center'] = "col4";
-				$class['right']  = "col4";					
-				break;
-			case '4' :
-				$class['left'] 	 = "col12";
-				$class['center'] = "col12";
-				$class['right']  = "col12";					
-				break;			
-		}?>
-		<div class="row" id="footersite">
-			<div class="<?php echo $class['left'];?>" id="footer<?php echo $position;?>Left">				
-				<?php if($this->getData(['theme', 'footer', 'textPosition']) === 'left') { $layout->showFooterText(); }
-						if($this->getData(['theme', 'footer', 'socialsPosition']) === 'left') {	$layout->showSocials(); } 
-						if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'left') {$layout->showCopyright(); } 
-				?>	
-			</div>
-			<div class="<?php echo $class['center'];?>" id="footer<?php echo $position;?>Center">					
-				<?php if($this->getData(['theme', 'footer', 'textPosition']) === 'center') { $layout->showFooterText(); } 
-						if($this->getData(['theme', 'footer', 'socialsPosition']) === 'center') { $layout->showSocials(); } 
-						if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'center') { $layout->showCopyright(); } 
-				?>	
-			</div>				
-			<div class="<?php echo $class['right'];?>" id="footer<?php echo $position;?>Right"> 				
-				<?php if($this->getData(['theme', 'footer', 'textPosition']) === 'right') { $layout->showFooterText(); } 
-						if($this->getData(['theme', 'footer', 'socialsPosition']) === 'right') { $layout->showSocials(); } 
-						if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'right') { $layout->showCopyright(); } 
-				?>	
-			</div>			
-		</div>
-	</footer>
-</div>
+            <!-- Mise en page -->
+            <?php switch($this->getData(['theme', 'footer', 'template'])) {
+                case '1' :
+                    $class['left'] 	 = "displayNone";
+                    $class['center'] = "col12";
+                    $class['right']  = "displayNone";
+                    break;
+                case '2' :
+                    $class['left'] 	 = "col6";
+                    $class['center'] = "displayNone";
+                    $class['right']  = "col6";
+                    break;
+                case '3' :
+                    $class['left'] 	 = "col4";
+                    $class['center'] = "col4";
+                    $class['right']  = "col4";
+                    break;
+                case '4' :
+                    $class['left'] 	 = "col12";
+                    $class['center'] = "col12";
+                    $class['right']  = "col12";
+                    break;
+            }?>
+            <div class="row" id="footersite">
+                <div class="<?php echo $class['left'];?>" id="footer<?php echo $position;?>Left">
+                    <?php if($this->getData(['theme', 'footer', 'textPosition']) === 'left') { $layout->showFooterText(); }
+                            if($this->getData(['theme', 'footer', 'socialsPosition']) === 'left') {	$layout->showSocials(); }
+                            if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'left') {$layout->showCopyright(); }
+                    ?>
+                </div>
+                <div class="<?php echo $class['center'];?>" id="footer<?php echo $position;?>Center">
+                    <?php if($this->getData(['theme', 'footer', 'textPosition']) === 'center') { $layout->showFooterText(); }
+                            if($this->getData(['theme', 'footer', 'socialsPosition']) === 'center') { $layout->showSocials(); }
+                            if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'center') { $layout->showCopyright(); }
+                    ?>
+                </div>
+                <div class="<?php echo $class['right'];?>" id="footer<?php echo $position;?>Right">
+                    <?php if($this->getData(['theme', 'footer', 'textPosition']) === 'right') { $layout->showFooterText(); }
+                            if($this->getData(['theme', 'footer', 'socialsPosition']) === 'right') { $layout->showSocials(); }
+                            if($this->getData(['theme', 'footer', 'copyrightPosition']) === 'right') { $layout->showCopyright(); }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </footer>
 <!-- Lien remonter en haut -->
 <div id="backToTop"><?php echo template::ico('up'); ?></div>
 <?php $layout->showScript();?>

@@ -40,7 +40,7 @@
             <div class="row">
                 <div class="col6">
                     <div class="row">
-                        <?php echo template::checkbox('themefooterDisplayCopyright', true, 'Mention "Motorisé par"', [
+                        <?php echo template::checkbox('themefooterDisplayCopyright', true, '"Motorisé par..."', [
                                 'checked' => $this->getData(['theme', 'footer','displayCopyright'])
                             ]); ?>
                     </div>
@@ -148,7 +148,7 @@
                     <?php echo template::select('themeFooterHeight', $module::$footerHeights, [
                             'label' => 'Marges verticales',
                             'selected' => $this->getData(['theme', 'footer', 'height']),
-                            'help' => 'La hauteur du pied de page est dynmamique selon le contenu.Ces marges sont ajoutées au-dessus et en-dessous.'
+                            'help' => 'La hauteur du pied de page est dynmamique selon le contenu. Ces marges sont ajoutées<br />au-dessus et en-dessous.'
                         ]); ?>
                 </div>
             </div>
