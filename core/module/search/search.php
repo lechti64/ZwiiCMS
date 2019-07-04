@@ -10,6 +10,9 @@
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
+ *
+ * Module search
+ * Produit par la communauté à partit d'un développement de Sylvain Lelièvre
  */
 
 // Module de recherche d'un mot ou d'une phrase clef
@@ -95,17 +98,17 @@ class search extends common {
                 }
 				// Message de synthèse de la recherche
 				if ($this->getData(['search',$total])===0) 	{
-					$notification = 'Mot clef non trouv&eacute;, avez-vous pens&eacute; aux accents ?';
-					$result .='Mot clef non trouv&eacute;, avez-vous pens&eacute; aux accents ?';
+					$notification = 'Mot clef non trouv&eacute;. Avez-vous pens&eacute; aux accents ?';
+					$result .='Mot clef non trouv&eacute;. Avez-vous pens&eacute; aux accents ?';
 					$success = false;
 				} else  {
-					$result .= 'Nombre total d\'occurrences : '.$this->getData(['search',$total]);
-					$notification = 'Nombre total d\'occurrences : '.$this->getData(['search',$total]);
+					$result .= 'Nombre d\'occurrences : '.$this->getData(['search',$total]);
+					$notification = 'Nombre d\'occurrences : '.$this->getData(['search',$total]);
 					$success = true;
 				}
 			} else {
-				$notification = 'Trop court ! minimum 3 caract&egrave;res';
-				$result = 'Trop court ! minimum 3 caract&egrave;res';
+				$notification = 'Trop court ! Minimum 3 caract&egrave;res';
+				$result = 'Trop court ! Minimum 3 caract&egrave;res';
 				$success = false;
 			}
 
@@ -142,23 +145,16 @@ class search extends common {
 		$total = '';
 		$resultat= '';
 		// Recherche des occurrences
-		do
-		{
+		do {
 			$occu = stristr($contenu,$motclef);
-			if ($occu !== false)
-			{
-				if ($motentier === true)
-				{
+			if ($occu !== false) {
+				if ($motentier === true) {
 					$controle_entier=$this->test_motentier($contenu,$motclef);
-				}
-				else
-				{
+				} else {
 					$controle_entier=true;
 				}
-				if ($controle_entier)
-				{
-					if ($titre !== $dejavu)
-					{
+				if ($controle_entier) {
+					if ($titre !== $dejavu) {
 						$resultat = '<p><br/>Mot clef trouv&eacute; dans la page : <a href="./?'.$url.'" target="_blank" rel="noopener">'.$titre.'</a><br/></p>';
 					}
 					$dejavu = $titre;
@@ -181,11 +177,9 @@ class search extends common {
 	// Retourne $contenu nettoyée, le résultat est sensiblement différent de celui obtenu avec la fonction strip_tags()
 	private function nettoyer_html($contenu)
 	{
-		do
-		{
+		do {
 			$pos1=strpos($contenu,chr(60));
-			if($pos1!==false)
-			{
+			if($pos1!==false) {
 				$pos2=strpos($contenu,chr(62));
 				if($pos2!==false) $contenu=substr_replace($contenu," ",$pos1,($pos2 - $pos1 + 1));
 			}
@@ -204,10 +198,12 @@ class search extends common {
 		$avant=ord(substr($chaine,$pos1-1, 1));
 		$apres=ord(substr($chaine,$pos1+strlen($clef),1));
 		// Traitement pour le caractère qui précède et celui qui suit
-		if (($avant>=65 && $avant<=90) || ($avant>=97 && $avant<=122) || ($apres>=65 && $apres<=90) || ($apres>=97 && $apres<=122) )
-		{
-			$resultat=false;
+		if (($avant>=65 && $avant<=90) ||
+            ($avant>=97 && $avant<=122) ||
+            ($apres>=65 && $apres<=90) ||
+            ($apres>=97 && $apres<=122) ) {
+        		$resultat=false;
 		}
-		return $resultat;
+		  return $resultat;
 	}
 }

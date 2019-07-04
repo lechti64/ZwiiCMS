@@ -7,7 +7,7 @@
                     <div class="col10 verticalAlignBottom">
                         <?php echo template::text('searchMotphraseclef', [
                             'label' => 'Mot ou phrase clef',
-                            'value' => $_POST['searchMotphraseclef'],
+                            'value' => isset($_POST['searchMotphraseclef']) === true ? $_POST['searchMotphraseclef'] : '',
                             'help'  => 'Saisir un mot ou une phrase complète sans guillemets, n\'oubliez pas les accents.'
                         ]); ?>
                     </div>
@@ -19,16 +19,19 @@
                 </div>
                 <div class="row">
                     <?php echo template::checkbox('searchMotentier', true, 'Mot entier uniquement', [
-                        'value' =>'1',
-                        'help'	=> 'Cette option permet de faire une recherche sur un mot entier plutôt que sur une portion de mot.'
+                        'checked' => isset($_POST['searchMotentier']) === true ? $_POST['searchMotentier'] : ''
                     ]); ?>
                 </div>
 			</div>
 		</div>
         <div class="col12">
 			<div class="block">
-				<h4>Résulats</h4>
-				<?php echo $_POST['result']; ?>
+				<h4>Résultat(s)</h4>
+				<?php if (isset($_POST['result'])) {
+                    echo $_POST['result'];
+                } else {
+                    echo "Rien à afficher";
+                } ?>
 			</div>
 		</div>
 	</div>

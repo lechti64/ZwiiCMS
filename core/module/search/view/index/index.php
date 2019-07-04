@@ -19,8 +19,7 @@
                 </div>
                 <div class="row">
                     <?php echo template::checkbox('searchMotentier', true, 'Mot entier uniquement', [
-                        'value' =>'1',
-                        'help'	=> 'Cette option permet de faire une recherche sur un mot entier plutôt que sur une portion de mot.'
+                        'checked' => false
                     ]); ?>
                 </div>
 			</div>
