@@ -64,15 +64,17 @@
 					<div class="col6">
 						<?php echo template::select('configTimezone', $module::$timezones, [
 							'label' => 'Fuseau horaire',
-							'selected' => $this->getData(['config', 'timezone'])
+							'selected' => $this->getData(['config', 'timezone']),
+                            'help' => 'Le fuseau horaire est utile au bon référencement'
 						]); ?>	
 					</div>
 					<div class="col6">
 						<?php  $listePageId =  array_merge(['' => 'Sélectionner'] , helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC') ); 
 						?>
 						<?php echo template::select('configLegalPageId', $listePageId , [
-							'label' => 'Page des mentions légales',
-							'selected' => $this->getData(['config', 'legalPageId'])
+							'label' => 'Mentions légales',
+							'selected' => $this->getData(['config', 'legalPageId']),
+                            'help' => 'Les mentions légales sont obligatoires en France'
 						]); ?>
 					</div>	
 				</div>				
@@ -81,7 +83,7 @@
 						'checked' => $this->getData(['config', 'cookieConsent'])
 					]); ?>
 				</div>	
-				<div class="col6">					
+				<div class="col12">
 					<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
 						'checked' => helper::checkRewrite(),
 						'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
@@ -155,7 +157,6 @@
 			<div class="block">
 				<h4>Gestion et sauvegarde</h4>							
 				<div class="col12">
-
 					<div class="row">
 						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
 							'checked' => $this->getData(['config', 'maintenance'])
