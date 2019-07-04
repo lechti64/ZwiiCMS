@@ -554,13 +554,6 @@ class common {
     // Sauve la liste des pages pour TinyMCE
 		$parents = [];
         $rewrite = (helper::checkRewrite()) ? '' : '?';
-        // Sitemap et Search
-        $parents [] = ['title'=>'Rechercher dans le site',
-           'value'=>$rewrite.'search'
-          ];
-        $parents [] = ['title'=>'Plan du site',
-           'value'=>$rewrite.'sitemap'
-          ];
         // Boucle de recherche des pages actives
 		foreach($this->getHierarchy(null,false,false) as $parentId => $childIds) {
 			$children = [];
@@ -591,10 +584,20 @@ class common {
 				} 											
 			}
 		}
-
-
+        // Sitemap et Search
+        $children = [];
+        $children [] = ['title'=>'Rechercher dans le site',
+           'value'=>$rewrite.'search'
+          ];
+        $children [] = ['title'=>'Plan du site',
+           'value'=>$rewrite.'sitemap'
+          ];
+        $parents [] = ['title' => 'Pages spéciales',
+                      'value' => '#',
+                      'menu' => $children
+                      ];
 		
-		// 3 tentatives
+		// Enregistrement : 3 tentatives
 		for($i = 0; $i < 3; $i++) {
 			if (file_put_contents ('core/vendor/tinymce/link_list.json', json_encode($parents), LOCK_EX) !== false) {
 				break;
