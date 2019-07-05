@@ -178,8 +178,7 @@
 					<?php 	$layout->showBarContentLeft(); 	?>
 			 	</div> 
 				<?php endif; ?>
-			<div class="<?php echo $content; ?>
-				" id="contentSite"><?php $layout->showContent(); ?>
+			<div class="<?php echo $content; ?>" id="contentSite"><?php $layout->showContent(); ?>
 
 			</div>
 			<?php 
