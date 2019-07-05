@@ -8,11 +8,12 @@
 - Amélioration :
     - Gestion des sous-menus : suppression de l'option de masquage des pages dans le menu horizontal
     - Remise à plat et homogénisation des masques édition des pages, footer et header
+    - TinyMCE la fenêtre lien propose le sitemap et le module de recherche
 - Corrections :
     - Menu : alignement avec le contenu, couleur de l'arrière plan
 
-## Version 9.1.14    
-Correction :
+## Version 9.1.14   
+- Correction :
     - Validation w3C : espace maquant
 
 ## Version 9.1.13
