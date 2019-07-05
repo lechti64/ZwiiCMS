@@ -930,7 +930,8 @@ label {
 	padding: 10px 0;
 	background: #F5F5F5;
 	text-align: center;
-	/*float: right;*/	
+	float: right;
+    min-height :100%;
 }
 .inputFile:hover {
 	text-decoration: none;
