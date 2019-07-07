@@ -36,11 +36,11 @@
     </div>
     <div class="col6">
         <div class="block">
-            <h4>Contenu Copyright</h4>
+            <h4>Informations</h4>
             <div class="row">
                 <div class="col6">
                     <div class="row">
-                        <?php echo template::checkbox('themefooterDisplayCopyright', true, '"Motorisé par..."', [
+                        <?php echo template::checkbox('themefooterDisplayCopyright', true, 'Motorisé par', [
                                 'checked' => $this->getData(['theme', 'footer','displayCopyright'])
                             ]); ?>
                     </div>
@@ -85,7 +85,7 @@
         <div class="block">
             <h4>Contenu personnalisé</h4>
             <?php echo template::textarea('themeFooterText', [
-					'label' => '<strong>Texte ou HTML personnalisé :</strong>',
+					'label' => '<strong>Texte ou HTML</strong>',
 					'value' => $this->getData(['theme', 'footer', 'text']),
 					'class' => 'editorWysiwyg'
 				]); ?>
@@ -134,7 +134,7 @@
                 <div class="col4">
                     <?php 	$footerBlockPosition = $module::$footerblocks [$this->getData(['theme', 'footer', 'template'])]; ?>
                     <?php echo template::select('themeFooterTemplate', $module::$footerTemplate, [
-                            'label' => 'Gabarits de mise en page',
+                            'label' => 'Disposition',
                             'selected' => $this->getData(['theme', 'footer', 'template'])
                         ]); ?>
                 </div>
@@ -147,8 +147,7 @@
                 <div class="col4">
                     <?php echo template::select('themeFooterHeight', $module::$footerHeights, [
                             'label' => 'Marges verticales',
-                            'selected' => $this->getData(['theme', 'footer', 'height']),
-                            'help' => 'La hauteur du pied de page est dynmamique selon le contenu. Ces marges sont ajoutées<br />au-dessus et en-dessous.'
+                            'selected' => $this->getData(['theme', 'footer', 'height'])
                         ]); ?>
                 </div>
             </div>
@@ -178,7 +177,7 @@
                         ]); ?>
                 </div>
                 <div class="col4">
-                    <p><strong>Info et copyright</strong></p>
+                    <p><strong>Informations</strong></p>
                     <?php echo template::select('themeFooterCopyrightPosition', $footerBlockPosition, [
                             'label' => 'Emplacement',
                             'selected' => $this->getData(['theme', 'footer', 'copyrightPosition']),
