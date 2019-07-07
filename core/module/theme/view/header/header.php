@@ -13,11 +13,11 @@
     </div>
 </div>
 <div class="row">
-    <div class="col12">
+    <div class="col4">
         <div class="block">
             <h4>Couleurs</h4>
             <div class="row">
-                <div class="col4">
+                <div class="col12">
                     <?php echo template::text('themeHeaderBackgroundColor', [
 							'class' => 'colorPicker',
 							'help' => 'Le curseur horizontal règle le niveau de transparence.',					
@@ -25,7 +25,9 @@
 							'value' => $this->getData(['theme', 'header', 'backgroundColor'])
 						]); ?>
                 </div>
-                <div class="col4">
+            </div>
+            <div class="row">
+                <div class="col12">
                     <?php echo template::text('themeHeaderTextColor', [
 							'class' => 'colorPicker',
 							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
@@ -36,13 +38,11 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col12   ">
+    <div class="col8">
         <div class="block">
             <h4>Image</h4>
             <div class="row">
-                <div class="col8">
+                <div class="col12">
                     <?php
                         $imageFile = file_exists(self::FILE_DIR.'source/'.$this->getData(['theme', 'header', 'image'])) ?
                                 $this->getData(['theme', 'header', 'image']) : "";
