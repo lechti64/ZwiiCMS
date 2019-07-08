@@ -1,4 +1,4 @@
-# Active la compression GZIP
+# Active la compression GZIP - option Apache
 <IfModule mod_gzip.c>
     mod_gzip_on Yes
     mod_gzip_dechunk Yes
@@ -10,7 +10,7 @@
     mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
 </IfModule>
 
-# Active la compression DEFLATE
+# Active la compression DEFLATE - option Apache
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
