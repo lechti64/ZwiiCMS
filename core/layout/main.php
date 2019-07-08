@@ -169,6 +169,9 @@
 			$blogItem === false
 			) { // Pleine page en mode configuration
 				$layout->showContent();
+                    if (file_exists('site/data/body.inc.html')) {
+                        include('site/data/body.inc.html'); 
+                    }
 		} else {
 		?>
 		<div class="row siteContainer"> 
@@ -178,8 +181,11 @@
 					<?php 	$layout->showBarContentLeft(); 	?>
 			 	</div> 
 				<?php endif; ?>
-			<div class="<?php echo $content; ?>" id="contentSite"><?php $layout->showContent(); ?>
-
+			<div class="<?php echo $content; ?>" id="contentSite"><?php $layout->showContent();
+                if (file_exists('site/data/body.inc.html')) {
+                     include('site/data/body.inc.html'); 
+                 }
+             ?>
 			</div>
 			<?php 
 				if ($blockright !== "") :?> 
@@ -189,9 +195,6 @@
 				<?php endif; ?>	
 		</div>
 		<?php }
-		if (file_exists('site/data/body.inc.html')) {
-			include('site/data/body.inc.html'); 
-		}
 		?>
 	</section>
 	<!-- footer -->
