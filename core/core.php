@@ -934,13 +934,16 @@ class common {
 			$this->setData(['core', 'dataVersion', 9100]);
 			$this->SaveData();
 		}
-		// Version 9.1.13
-		if($this->getData(['core', 'dataVersion']) < 9113) {
+		// Version 9.2.00
+		if($this->getData(['core', 'dataVersion']) < 9200) {
 			$this->setData(['theme','footer','template', 3 ]);
 			$this->setData(['theme','footer','margin', true ]);
-			$this->setData(['core', 'dataVersion', 9113]);
+			$this->setData(['theme','footer','displayLegal', false ]);
+			$this->setData(['theme','footer','displaySearch', false ]);
+			$this->setData(['config','social','githubId', '' ]);
+			$this->setData(['core', 'dataVersion', 9200]);
 			$this->SaveData();
-		}		
+		}
 	}
 }
 
@@ -1972,12 +1975,12 @@ class layout extends common {
 		$items .= '</span>';
 		// Affichage du sitemap
 		$items .= '<span id="footerDisplaySiteMap"';
-		$items .= $this->getData(['theme','footer','displaySiteMap']) ===  false? ' class="displayNone"' : '';
+		$items .= $this->getData(['theme','footer','displaySiteMap']) ===  false ? ' class="displayNone"' : '';
 		$items .=  '><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() .  'sitemap" data-tippy-content="Plan du site" >Plan&nbsp;du&nbsp;site</a>';
 		$items .= '</span>';
         // Affichage du module de recherche
  		$items .= '<span id="footerDisplaySearch"';
-		$items .= $this->getData(['theme','footer','displaySearch']) ===  false? ' class="displayNone"' : '';
+		$items .= $this->getData(['theme','footer','displaySearch']) ===  false ? ' class="displayNone"' : '';
 		$items .=  '><wbr>&nbsp;|&nbsp;<a href="' . helper::baseUrl() .  'search" data-tippy-content="Rechercher dans le site" >Rechercher</a>';
 		$items .= '</span>';
 		// Affichage des mentions légales

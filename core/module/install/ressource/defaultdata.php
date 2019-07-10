@@ -440,7 +440,8 @@ class install extends common {
 				'displayVersion' => true,
 				'displaySiteMap' => true,
 				'displayCopyright' => true,
-				'displayLegal' => false,				
+				'displayLegal' => false,
+				'displaySearch' => false,
 				'template' => '3'
 			],
 			'header' => [
