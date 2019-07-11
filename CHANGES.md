@@ -9,7 +9,7 @@
     - Gabarit de page, présentation asymétrique des barres latérales : 33% - 50% - 16% et inversement
 - Amélioration :
     - Gestion des sous-menus : suppression de l'option de masquage des pages dans le menu horizontal
-    - Remise à plat et homogénisation des masques édition des pages, footer et header
+    - Remise à plat et homogénéisation des masques édition des pages, footer et header
     - TinyMCE la fenêtre lien propose le sitemap et le module de recherche
 - Corrections :
     - Menu : alignement avec le contenu, couleur de l'arrière plan
