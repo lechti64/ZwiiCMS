@@ -3,6 +3,8 @@
 ## Version 9.2.0
 - Nouveautés :
     - Module de recherche dans le pied de page
+    - Mentions légales dans le pied de page
+    - Les pages recherche et plan du site peuvent être appelés à partir de TinyMCE dans le menu lien.
     - Gabarit du pied de page peut se paramétrer en colonnes et en lignes, de un à trois blocs.
     - Gabarit de page, présentation asymétrique des barres latérales : 33% - 50% - 16% et inversement
 - Amélioration :
