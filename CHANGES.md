@@ -5,7 +5,7 @@
     - Module de recherche dans le pied de page
     - Mentions légales dans le pied de page
     - Les pages "Recherche" et "Plan du site" peuvent être appelées à partir de TinyMCE dans le menu lien.
-    - le gabarit du pied de page peut se paramétrer en colonnes et en lignes, de 1 à 3 blocs.
+    - Le gabarit du pied de page peut se paramétrer en colonnes et en lignes, de 1 à 3 blocs.
     - Gabarit de page, présentation asymétrique des barres latérales : 33% - 50% - 16% et inversement
 - Améliorations :
     - Gestion des sous-menus : suppression de l'option de masquage des pages dans le menu horizontal
