@@ -7,11 +7,11 @@
     - Les pages "Recherche" et "Plan du site" peuvent être appelées à partir de TinyMCE dans le menu lien.
     - le gabarit du pied de page peut se paramétrer en colonnes et en lignes, de 1 à 3 blocs.
     - Gabarit de page, présentation asymétrique des barres latérales : 33% - 50% - 16% et inversement
-- Amélioration :
+- Améliorations :
     - Gestion des sous-menus : suppression de l'option de masquage des pages dans le menu horizontal
     - Remise à plat et homogénéisation des masques d'édition des pages, footer et header
     - TinyMCE la fenêtre lien propose le sitemap et le module de recherche
-- Corrections :
+- Correction :
     - Menu : alignement avec le contenu, couleur de l'arrière-plan
 
 ## Version 9.1.14   
