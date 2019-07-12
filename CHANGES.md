@@ -4,19 +4,19 @@
 - Nouveautés :
     - Module de recherche dans le pied de page
     - Mentions légales dans le pied de page
-    - Les pages recherche et plan du site peuvent être appelés à partir de TinyMCE dans le menu lien.
-    - Gabarit du pied de page peut se paramétrer en colonnes et en lignes, de un à trois blocs.
+    - Les pages "Recherche" et "Plan du site" peuvent être appelées à partir de TinyMCE dans le menu lien.
+    - le gabarit du pied de page peut se paramétrer en colonnes et en lignes, de 1 à 3 blocs.
     - Gabarit de page, présentation asymétrique des barres latérales : 33% - 50% - 16% et inversement
 - Amélioration :
     - Gestion des sous-menus : suppression de l'option de masquage des pages dans le menu horizontal
-    - Remise à plat et homogénéisation des masques édition des pages, footer et header
+    - Remise à plat et homogénéisation des masques d'édition des pages, footer et header
     - TinyMCE la fenêtre lien propose le sitemap et le module de recherche
 - Corrections :
-    - Menu : alignement avec le contenu, couleur de l'arrière plan
+    - Menu : alignement avec le contenu, couleur de l'arrière-plan
 
 ## Version 9.1.14   
 - Correction :
-    - Validation w3C : espace maquant
+    - Validation w3C : espace manquant
 
 ## Version 9.1.13
 - Corrections : 
@@ -26,7 +26,7 @@
 ## Version 9.1.12
 - Amélioration : 
     - Contrôle d'erreur dans la gestion de l'imagette OpenGraph
-- Correction:     
+- Correction :     
     - Sitemap.xml : prendre en compte les sous-pages d'une page parente masquée
 
 ## Version 9.1.11
@@ -62,7 +62,7 @@
     - Réécriture activée après chaque mise à jour auto.
 - Modifications : 
     - Thème 100%  fluide sans marge
-    - Ecran de smartphone (ex: iPhone 6), adaptation de la barre d'administration : le username est masqué et la taille des icônes est augmentée
+    - Ecran de smartphone (ex : iPhone 6) : adaptation de la barre d'administration : le username est masqué et la taille des icônes est augmentée
     - Chemins vers les données dans des constantes
     - Modèles de bannières de plusieurs dimensions
     - Hauteur de police par défaut 13px
@@ -81,13 +81,13 @@
 - Corrections : 
     - Ajout d'un utilisateur : pas d'envoi du mail de confirmation si les mots de passe ne sont pas identiques.
     - Mise à jour automatique : effacement des archives téléchargées
-    - Z-index des sous-menus augmentés à 8  ; problème d'affichage avec codemirror
+    - Z-index des sous-menus augmentés à 8 ; problème d'affichage avec codemirror
 - Modification : 
     - Include de script.inc.php et head.inc.html dans main.php
 
 ## Version 9.1.05
 - Correction : 
-    - Site par défaut  lien Zwii masqué du menu horizontal
+    - Site par défaut : lien Zwii masqué du menu horizontal
 - Modifications : 
     - Présentation de l'édition des pages
     - Largeur dynamique du bouton envoyer dans le formulaire 
@@ -120,7 +120,7 @@
     - Menu : effet de surimpression pages filles
     - Réorganisation de l'écran d'édition des pages
     - Blog : notification hiérarchique lors de la rédaction d'un commentaire 
-    - Form : notification hiérarchique de la récepton d'un message
+    - Form : notification hiérarchique de la réception d'un message
     - Thème header : hauteur proportionnelle de la bannière (responsive)
 - Ajouts :
     - Menu dans une barre latérale : intégral ou sous-menu de la page parente
@@ -167,7 +167,7 @@
 
 ## Version 9.0.16
 - Correction : 
-    - Nom de page constitué de caractères filtrés empếchant la création d'un Id valide.
+    - Nom de page constitué de caractères filtrés empchant la création d'un Id valide.
     - Module Gallery : bouton de fermeture sous Edge
 
 ## Version 9.0.15
@@ -213,7 +213,7 @@
     - Core : les données par défaut ne sont chargées qu'à installation afin d'alléger l'empreinte mémoire du noyau
     - Prise en compte de la taille des petits écrans, suppression des marges
     - Backup theme.json avant une mise à jour automatique
-    - Réorganisation des écrans de paramètrage du thème, ordre de saisie, bulles d'aide et nouveaux libellés
+    - Réorganisation des écrans de paramétrage du thème, ordre de saisie, bulles d'aide et nouveaux libellés
     - SimpleLightBox : miniatures cliquables permettant de parcourir toutes les images d'une page (comme dans la galerie)
     - Barre d'administration : pages inactives en orange.
 - Ajouts :
@@ -253,7 +253,7 @@
     - Module form 1.6 : 
         - erreur lors de la non sélection d'un groupe
         - captcha inefficace
-    - Pour les testeurs : la mise à jour automatique n'est plus proposée lors d'une régression,version en ligne inférieure à la version installée.
+    - Pour les testeurs : la mise à jour automatique n'est plus proposée lors d'une régression, lorsque le numéro de version en ligne est inférieur à celui de la version installée.
 - Ajout :
     - Redimensionnement des images map : permet d'obtenir des images map fonctionnelles lorsque les dimensions de l'image sont réduites par le thème ou la taille de l'écran.
         - La carte peut être générée par https://www.image-map.net/
@@ -287,9 +287,9 @@
 - Modification :
     - Stockage distinct du thème et des autres données (core, config, page, module et users ) avec import des données d'une version 8
     - Les thèmes :
-        - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  Fichiers.
+        - Exporter un thème (avec les images) sous forme d'une archive ZIP à télécharger ou stocker dans  le gestionnaire de fichiers.
         - Importer un thème à partir des fichiers
-        - Désactivation de la couleur d'arrière plan du header lors de l'insertion d'une image
+        - Désactivation de la couleur d'arrière-plan du header lors de l'insertion d'une image
         - Nouvelle option de position fixe du menu type Facebook lorsque le menu et en haut de page et hors du site
         - Nettoyage des images effacées
     - Gabarits de pages : deux barres latérales, une à droite ou à gauche contenant des informations fixes.
@@ -357,7 +357,7 @@ Mise à jour :
             - \#footersiteRight, \#footerbodyRight   
 
 
-## Verison 8.5.2
+## Version 8.5.2
 * Correction : 
     - Thème menu : aperçu quand le menu est au-dessus et en-dehors du site
     
@@ -422,7 +422,7 @@ Mise à jour :
 ## Version 8.4.0
 * Modifications :
 	- Footer dans 3 blocs contenant dans l'ordre : Texte, Réseaux sociaux, Copyright
-	- Pagination variable du nombres d'articles par page (news, blog et form)
+	- Pagination variable du nombre d'articles par page (news, blog et form)
 	- Position des modules Galerie et Form dans une page ; haut ; bas ou libre avec les doubles crochets insérés dans l'article []
     - Prise en compte des balises OpenGraph obligatoires title , description, type et images
     - Modification de la position des boutons retour et éditer lors de l'affichage d'un article si connecté
@@ -526,7 +526,7 @@ Mise à jour :
 * Correction : affichage cassé lors de l'ajout d'une image en fin d'article ou news
 * Correction : incohérence dans la petite largeur du site
 * Correction : erreur dans le script de mise à jour 8.2.0
-* Correction : vidéos reponsives non fonctionnelles
+* Correction : vidéos responsives non fonctionnelles
 * Correction : légendes des photos de la galerie invisibles
 * Mise à jour : Simplelightbox version 1.11.1
 
@@ -538,7 +538,7 @@ Mise à jour :
 * Ajout : barre de progression dans les notifications
 * Ajout : flèche pour les items du menu avec sous-menus
 * Ajout : personnalisation avancée
-* Ajout : nouveaux options de personnalisation
+* Ajout : nouvelles options de personnalisation
 * Ajout : nouvelles tooltips
 * Ajout : vidéos et iframes responsives
 * Ajout : plugin template afin de créer des colonnes adaptatives dans TinyMCE
