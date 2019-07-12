@@ -250,7 +250,15 @@ $("#themefooterDisplaySiteMap").on("change", function() {
 	}
 }).trigger("change");
 
-
+// Rechercher
+$("#themeFooterDisplaySearch").on("change", function() {
+	if($(this).is(":checked")) {
+		$("#footerDisplaySearch").show();
+	}
+	else {
+		$("#footerDisplaySearch").hide();
+	}
+}).trigger("change");
 
 
 // Aperçu du texte
