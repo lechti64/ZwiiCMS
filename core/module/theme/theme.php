@@ -92,10 +92,10 @@ class theme extends common {
 		'bold' => 'Gras'
 	];
 	public static $footerHeights = [
-		'0' => 'Très petites',
-		'10px' => 'Petites',
-		'20px' => 'Grandes',
-		'30px' => 'Très grandes'
+		'0px' => 'Nulles',
+		'5px' => 'Petites',
+		'10px' => 'Moyennes',
+		'20px' => 'Grandes'
 	];
 	public static $footerPositions = [
 		'hide' => 'Caché',

@@ -37,7 +37,7 @@ $("input, select").on("change", function() {
 	css += "footer span{color:" + $("#themeFooterTextColor").val() + ";font-family:'" + footerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeFooterFontWeight").val() + ";font-size:" + $("#themeFooterFontSize").val() + ";text-transform:" + $("#themeFooterTextTransform").val() + "}";
 	// Marge
 	if($("#themeFooterMargin").is(":checked")) {
-		css += 'footer{margin:0 10px 10px;padding: 1px 10px;}';
+		css += 'footer{margin:0 10px 10px;padding: 0px 10px;}';
 	}
 	else {
 		css += 'footer{margin:0;padding:0}';
@@ -76,6 +76,10 @@ $("input, select").on("change", function() {
 // Bloc texte personnalisé
 $(".themeFooterContent").on("change",function() {
 	var position = $("#themeFooterPosition").val();	
+
+	//console.log("text     : "+ $("#themeFooterTextPosition").val());
+	//console.log("socials  : " +  $("#themeFooterSocialsPosition").val());
+	//console.log("copyright: " +  $("#themeFooterCopyrightPosition").val());
 	switch($("#themeFooterTextPosition").val()) {
 			case "hide":
 				$("#footerText").hide();
@@ -143,7 +147,7 @@ $("#themeFooterTemplate").on("change",function() {
 	$("#footerCopyright").hide();
 	$("#footerText").hide();
 	$("#footerSocials").hide();
-	// Dimension des blocks
+	// Dimension des blocs
 	switch($("#themeFooterTemplate").val()) {
 		case "1":
 			$("#footer" + position + "Left").css("display","none");

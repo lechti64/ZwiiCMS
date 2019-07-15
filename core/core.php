@@ -1100,7 +1100,7 @@ class core extends common {
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
 			if($this->getData(['theme', 'footer', 'margin'])) {
-				$css .= 'footer{margin:0 10px 10px;padding: 1px 10px;}';
+				$css .= 'footer{margin:0 10px 10px;padding: 0px 10px;}';
 			} else {
 				$css .= 'footer{margin:0;padding:0}';
 			}

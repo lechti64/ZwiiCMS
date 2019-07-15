@@ -568,16 +568,21 @@ section:after {
 body > footer {
 	margin: 0 -10px;
 }
+
+/*
 footer {
 	padding: 1px 20px;
 }
+*/
 
-#footersiteRight, #footersiteLeft, #footersiteCenter {
-	vertical-align: middle;
+#footerbody, #footersite {
+	margin: 0;
 }
 
-#footersite {
-	margin: 0;
+#footersiteRight, #footersiteLeft, #footersiteCenter,
+#footerbodyRight, #footerbodyLeft, #footerbodyCenter {
+	vertical-align: middle;
+	padding: 0;
 }
 
 #footerLoginLink, 
@@ -589,8 +594,6 @@ footer {
 #footerZwiiCMS {
 	font-size: inherit;
 }
-
-
 
 /* Conserve le pied de page sur une ligne */
 @media (max-width: 768px) {

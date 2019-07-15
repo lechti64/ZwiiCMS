@@ -219,8 +219,10 @@
 		<?php
 		if ($position === 'site'): ?>
 			<div class="container">
+				<div class="row" id="footersite">
 		<?php else: ?>
 			<div class="container-large">
+				<div class="row" id="footerbody">
 		<?php endif?>
             <!-- Mise en page -->
             <?php switch($this->getData(['theme', 'footer', 'template'])) {
@@ -245,7 +247,6 @@
                     $class['right']  = "col12";
                     break;
             }?>
-            <div class="row" id="footersite">
                 <div class="<?php echo $class['left'];?>" id="footer<?php echo $position;?>Left">
                     <?php if($this->getData(['theme', 'footer', 'textPosition']) === 'left') { $layout->showFooterText(); }
                             if($this->getData(['theme', 'footer', 'socialsPosition']) === 'left') {	$layout->showSocials(); }
