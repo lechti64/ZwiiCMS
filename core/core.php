@@ -1107,9 +1107,13 @@ class core extends common {
 			$css .= 'footer span{color:' . $this->getData(['theme', 'footer', 'textColor']) . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'footer', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'footer', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'footer', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'footer', 'textTransform']) . '}';
 			$css .= 'footer{background-color:' . $colors['normal'] . ';color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
 			$css .= 'footer a{color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
-			//$css .= 'footer .container > div {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
+			$css .= 'footer #footersite > div {margin:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
+			$css .= 'footer #footerbody > div {margin:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
+			$css .= "footer #footersite > div {padding:0}";
+			$css .= "footer #footerbody > div {padding:0}";
             $css .= '#footerFontText > p {margin-top: 0; margin-bottom: 0;}';
-			$css .= '#footersiteLeft, #footersiteCenter, #footersiteRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
+			//$css .= '#footersiteLeft, #footersiteCenter, #footersiteRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
+			//$css .= '#footerbodyLeft, #footerbodyCenter, #footerbodyRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
 			$css .= '#footerSocials{text-align:' . $this->getData(['theme', 'footer', 'socialsAlign']) . '}';
 			$css .= '#footerText{text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';
