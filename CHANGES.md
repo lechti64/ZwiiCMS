@@ -1,11 +1,11 @@
 # Changelog
 
-
 ## Version 9.2.1
 - Corrections : 
-    - Thème : prise en compte du fichier custom.css
+    - Sauvegarde du thème : prise en compte du fichier custom.css
     - Edition de page : libellés
-    - Marges du pied de page placé hors du site
+    - Thème ; footer : marges du pied de page placé hors du site
+    - Thème ; footer : aperçu du texte personnalisé
 
 ## Version 9.2.0
 - Nouveautés :
