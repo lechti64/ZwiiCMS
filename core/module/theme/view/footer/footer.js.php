@@ -76,53 +76,49 @@ $("input, select").on("change", function() {
 // Position dans les blocs
 // Bloc texte personnalisé
 $(".themeFooterContent").on("change",function() {
-	var position = $("#themeFooterPosition").val();	
-
-	//console.log("text     : "+ $("#themeFooterTextPosition").val());
-	//console.log("socials  : " +  $("#themeFooterSocialsPosition").val());
-	//console.log("copyright: " +  $("#themeFooterCopyrightPosition").val());
+	// Position site ou body
+	var footerPosition = $("#themeFooterPosition").val();		
 	switch($("#themeFooterTextPosition").val()) {
 			case "hide":
 				$("#footerText").hide();
 				break;
-			case "left":
-				$("#footerText").show().appendTo("#footer" + position + "Left");
-				break;				
-			case "center":		
-				$("#footerText").show().appendTo("#footer" + position + "Center");			
-				break;				
-			case "right":		
-				$("#footerText").show().appendTo("#footer" + position + "Right");							
-				break;
+			default:
+				// Choix de la position du bloc
+				textPosition = $("#themeFooterTextPosition").val();
+				textPosition = textPosition.substr(0,1).toUpperCase()+textPosition.substr(1);
+				$("#footerText").show().appendTo("#footer" + footerPosition + textPosition);
+				//console.log("text");
+				//console.log("#footer" + footerPosition + textPosition);
+				break;			
 	}
 	switch($("#themeFooterSocialsPosition").val()) {
 			case 'hide':
 				$("#footerSocials").hide();
 				break;					
-			case 'left':
-				$("#footerSocials").show().appendTo("#footer" + position + "Left");	
-				break;			
-			case 'center':
-				$("#footerSocials").show().appendTo("#footer" + position + "Center");
-				break;			
-			case 'right':
-				$("#footerSocials").show().appendTo("#footer" + position + "Right");			
+			default:
+				// Choix de la position du bloc
+				socialsPosition = $("#themeFooterSocialsPosition").val();
+				socialsPosition = socialsPosition.substr(0,1).toUpperCase()+socialsPosition.substr(1);
+				$("#footerSocials").show().appendTo("#footer" + footerPosition + socialsPosition);
+				//console.log("socials");
+				//console.log("#footer" + footerPosition + socialsPosition);
 				break;
 	}
 	switch($("#themeFooterCopyrightPosition").val()) {
 			case 'hide':
 				$("#footerCopyright").hide();
-				break;					
-			case 'left':
-				$("#footerCopyright").show().appendTo("#footer" + position + "Left");			
-				break;				
-			case 'center':
-				$("#footerCopyright").show().appendTo("#footer" + position + "Center");
-				break;				
-			case 'right':
-                $("#footerCopyright").show().appendTo("#footer" + position + "Right");                			
-				break;
+				break;	
+			default:
+				// Choix de la position du bloc
+				copyrightPosition = $("#themeFooterCopyrightPosition").val();
+				copyrightPosition = copyrightPosition.substr(0,1).toUpperCase()+copyrightPosition.substr(1);
+				$("#footerCopyright").show().appendTo("#footer" + footerPosition + copyrightPosition);
+				//console.log("copyright");
+				//console.log("#footer" + footerPosition + copyrightPosition);
+				break;							
 	}
+
+	
 }).trigger("change");
 
 // Fin Position dans les blocs
@@ -264,12 +260,6 @@ $("#themeFooterDisplaySearch").on("change", function() {
 		$("#footerDisplaySearch").hide();
 	}
 }).trigger("change");
-
-
-// Aperçu du texte
-$("#themeFooterText").on("change keydown keyup", function() {
-	$("#footerText").html($(this).val());
-});
 
 // Affiche / Cache les options de la position
 $("#themeFooterPosition").on("change", function() {
