@@ -596,8 +596,8 @@ class theme extends common {
 		$zip = new ZipArchive();
 		if ($zip->open(self::TEMP_DIR . $zipFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE ) === TRUE) {
 			$zip->addFile(self::DATA_DIR.'theme.json',self::DATA_DIR.'theme.json');
-			$zip->addFile(self::DATA_DIR.'theme.json',self::DATA_DIR.'theme.css');
-			$zip->addFile(self::DATA_DIR.'theme.json',self::DATA_DIR.'custom.css');			
+			$zip->addFile(self::DATA_DIR.'theme.css',self::DATA_DIR.'theme.css');
+			$zip->addFile(self::DATA_DIR.'custom.css',self::DATA_DIR.'custom.css');	
 			if ($this->getData(['theme','body','image']) !== '' ) {
 			$zip->addFile(self::FILE_DIR.'source/'.$this->getData(['theme','body','image']),
 						self::FILE_DIR.'source/'.$this->getData(['theme','body','image'])
