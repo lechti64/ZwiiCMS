@@ -133,7 +133,7 @@ class install extends common {
 				if(file_exists(self::TEMP_DIR.'update.tar.gz')) {
 					$success = unlink(self::TEMP_DIR.'update.tar.gz');
 				}
-				if(file_exists(self::TEMP_DIR.'update.tar')) {
+				if(file_exists(self::TEMP_DIR.'update.tar') && $success === true) {
 					$success = unlink(self::TEMP_DIR.'update.tar');
 				}
 				// Valeurs en sortie
