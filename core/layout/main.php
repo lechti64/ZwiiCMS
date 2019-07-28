@@ -40,11 +40,8 @@
 	?>
 	>
 		<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
-		<div id="menu" class="
-		<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}
-		?>">
-
-			<?php $layout->showMenu(); ?>
+		<div id="menu" class="<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}
+		?>"><?php $layout->showMenu(); ?>
 		</div>
 	</nav>
 <?php endif; ?>
@@ -54,7 +51,7 @@
 		<?php	
 		if ($this->getData(['theme','header','linkHome'])){
 		echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
-		<?php if(
+		<?php if (
 			$this->getData(['theme', 'header', 'textHide']) === false
 			// Affiche toujours le titre de la bannière pour l'édition du thème
 			OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
