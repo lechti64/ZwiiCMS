@@ -454,7 +454,6 @@ nav li ul li {
 	display: block;
 	text-align: left;
 }
-
 nav li:hover ul {
 	z-index: 8;
 	opacity: 1;
@@ -473,6 +472,7 @@ nav a:hover {
 	nav #menu {
 		display: block;
 	}
+
 }
 
 @media (max-width: 768px) {
@@ -518,10 +518,8 @@ nav a:hover {
 	position: sticky;
 }
 
-#navfixedconnected .navLevel2,
-#navfixedlogout .navLevel2 {
-	pointer-events: none;
-}
+
+
 
 /* Menu vertical */
 
@@ -935,8 +933,8 @@ label {
 	padding: 10px 0;
 	background: #F5F5F5;
 	text-align: center;
-	/*float: right;*/
-  min-height :100%;
+	float: right;
+    min-height :100%;
 }
 .inputFile:hover {
 	text-decoration: none;

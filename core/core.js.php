@@ -216,7 +216,6 @@ core.start = function() {
 			menuDOM.css("display", "");
 		}
 	});
-
 	/**
 	 * Message sur l'utilisation des cookies
 	 */
@@ -329,6 +328,16 @@ core.start = function() {
 		});
 	}).trigger("resize");
 
+	// Ajouter l'attribut data-lity afin de faire la liaison avec lity
+	//$("a[rel='data-lity']").attr("data-lity","");
+
+	// Ajouter la classe Gallery afin de faire la liaison avec simplelightbox
+	//$("a[rel='gallery']").addClass("gallery","");
+
+
+	// Appel dans init.js
+	// $('.gallery').simpleLightbox();
+
 };
 core.start();
 
@@ -360,19 +369,3 @@ core.relativeLuminanceW3C = function(rgba) {
 	var B = (BsRGBA <= .03928) ? BsRGBA / 12.92 : Math.pow((BsRGBA + .055) / 1.055, 2.4);
 	return .2126 * R + .7152 * G + .0722 * B;
 };
-
-
-
-$(document).ready(function(){
-	/**
-	 * Affiche le sous-menu quand il est sticky 
-	 */
-	$("nav").mouseenter(function(){
-		$("#navfixedlogout .navLevel2").css({ 'pointer-events' : 'auto' });
-		$("#navfixedconnected .navLevel2").css({ 'pointer-events' : 'auto' });
-	});
-	$("nav").mouseleave(function(){
-		$("#navfixedlogout .navLevel2").css({ 'pointer-events' : 'none' });
-		$("#navfixedconnected .navLevel2").css({ 'pointer-events' : 'none' });
-	});
-});

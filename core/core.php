@@ -32,7 +32,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.2.03';
+	const ZWII_VERSION = '9.2.02';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2141,7 +2141,7 @@ class layout extends common {
 				empty($childrenPageIds)) {
 				continue;
 			}
-			$items .= '<ul class="navLevel2">';
+			$items .= '<ul>';
 			foreach($childrenPageIds as $childKey) {			
 				// Propriétés de l'item
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
@@ -2205,7 +2205,7 @@ class layout extends common {
 			'">Connexion</a></li>';
 		}
 		// Retourne les items du menu
-		echo '<ul class="navLevel1">' . $items . '</ul>';
+		echo '<ul>' . $items . '</ul>';
 	}
 
 	/**
