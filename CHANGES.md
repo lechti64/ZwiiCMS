@@ -3,7 +3,8 @@
 ## Version 9.2.03
 - Corrections :
     - Menu fixe en dehors du site : impossibilité de sélectionner un élément sous un sous-menu.
-    - Modification de structure du fichier main.php
+    - Module News : pagination en-dehors des barres latérales.
+    - Syntaxe du fichier main.php
 
 ## Version 9.2.02
 - Correction :
