@@ -40,11 +40,8 @@
 	?>
 	>
 		<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
-		<div id="menu" class="
-		<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}
-		?>">
-
-			<?php $layout->showMenu(); ?>
+		<div id="menu" class="<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}
+		?>"><?php $layout->showMenu(); ?>
 		</div>
 	</nav>
 <?php endif; ?>
@@ -54,7 +51,7 @@
 		<?php	
 		if ($this->getData(['theme','header','linkHome'])){
 		echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
-		<?php if(
+		<?php if (
 			$this->getData(['theme', 'header', 'textHide']) === false
 			// Affiche toujours le titre de la bannière pour l'édition du thème
 			OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
@@ -140,10 +137,8 @@
 		$blocks = explode('-',$this->getData(['page',$this->getUrl(0),'block']));
 		// recherche si la seconde URL fait référence à un article pour appliquer les barres
 		$blogItem = false;
-		$newsItem = false;
 		if (is_array ($this->getdata(['module',$this->getData(['page', $this->getUrl(0), 'moduleId'])]))) {
 			$blogItem = array_key_exists($this->getUrl(1),$this->getdata(['module',$this->getData(['page', $this->getUrl(0), 'moduleId'])]));
-			$newsItem = is_numeric($this->getUrl(1)) ; 			
 		}
 		// Initialiser
 		$blockleft=$blockright="";
@@ -168,9 +163,12 @@
 		// Page pleine pour la configuration des modules et l'édition des pages sauf l'affichae d'un article de blog
 		if ((sizeof($blocks) === 1 ||
 			!empty($this->getUrl(1))) &&
-			$blogItem === false  && $newsItem === false
+			$blogItem === false
 			) { // Pleine page en mode configuration
 				$layout->showContent();
+                    if (file_exists('site/data/body.inc.html')) {
+                        include('site/data/body.inc.html'); 
+                    }
 		} else {
 		?>
 		<div class="row siteContainer"> 

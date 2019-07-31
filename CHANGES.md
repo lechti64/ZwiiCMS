@@ -1,13 +1,22 @@
 # Changelog
 
-## Version 9.2.1
+## Version 9.2.03
+- Corrections :
+    - Menu fixe en dehors du site : impossibilité de sélectionner un élément sous un sous-menu.
+    - Modification de structure du fichier main.php
+
+## Version 9.2.02
+- Correction :
+    - Gestion d'erreur lors de l'installation automatisé d'une mise à jour
+
+## Version 9.2.01
 - Corrections : 
     - Sauvegarde du thème : prise en compte du fichier custom.css
     - Edition de page : libellés
     - Thème ; footer : marges du pied de page placé hors du site
     - Thème ; footer : aperçu du texte personnalisé
 
-## Version 9.2.0
+## Version 9.2.00
 - Nouveautés :
     - Module de recherche dans le pied de page
     - Mentions légales dans le pied de page
