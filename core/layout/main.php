@@ -171,6 +171,9 @@
 			$blogItem === false  && $newsItem === false
 			) { // Pleine page en mode configuration
 				$layout->showContent();
+                if (file_exists('site/data/body.inc.html')) {
+					include('site/data/body.inc.html'); 
+				}				
 		} else {
 		?>
 		<div class="row siteContainer"> 
