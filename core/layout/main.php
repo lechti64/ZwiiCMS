@@ -138,13 +138,6 @@
 		// Gabarit :
 		// Récupérer la config de la page courante
 		$blocks = explode('-',$this->getData(['page',$this->getUrl(0),'block']));
-		// recherche si la seconde URL fait référence à un article pour appliquer les barres
-		$blogItem = false;
-		$newsItem = false;
-		if (is_array ($this->getdata(['module',$this->getData(['page', $this->getUrl(0), 'moduleId'])]))) {
-			$blogItem = array_key_exists($this->getUrl(1),$this->getdata(['module',$this->getData(['page', $this->getUrl(0), 'moduleId'])]));
-			$newsItem = is_numeric($this->getUrl(1)) ; 			
-		}
 		// Initialiser
 		$blockleft=$blockright="";
 		switch (sizeof($blocks)) {
@@ -166,9 +159,9 @@
 					$blockright = 'col' . $blocks[2];	
 		}
 		// Page pleine pour la configuration des modules et l'édition des pages sauf l'affichae d'un article de blog
-		if ((sizeof($blocks) === 1 ||
-			!empty($this->getUrl(1))) &&
-			$blogItem === false  && $newsItem === false
+		$pattern = ['config','edit','add','comment','data'];
+		if ((sizeof($blocks) === 1 || 
+			in_array($this->getUrl(1),$pattern)  )
 			) { // Pleine page en mode configuration
 				$layout->showContent();
                 if (file_exists('site/data/body.inc.html')) {
