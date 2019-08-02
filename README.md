@@ -1,4 +1,4 @@
-/github/last-commit/:user/:repo/:branch 
+https://img.shields.io/github/last-commit/fredtempez/ZwiiCMS/master
 
 
 # ZwiiCMS 9.2
