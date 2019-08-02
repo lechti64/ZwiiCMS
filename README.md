@@ -1,4 +1,4 @@
-![](https://img.shields.io/github/last-commit/fredtempez/ZwiiCMS/master) ![](https://img.shields.io/github/last-commit/fredtempez/ZwiiCMS/master)
+![](https://img.shields.io/github/last-commit/fredtempez/ZwiiCMS/master) ![](https://img.shields.io/github/release-date/fredtempez/ZwiiCMS)
 
 
 # ZwiiCMS 9.2
