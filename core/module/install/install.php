@@ -92,7 +92,7 @@ class install extends common {
 					$userMail,
 					'Installation de votre site',
 					'Bonjour' . ' <strong>' . $userFirstname . ' ' . $userLastname . '</strong>,<br><br>' .
-					'Vous trouverez ci-dessous les détails de votre installation.<br><br>' .
+					'Voici les détails de votre installation.<br><br>' .
 					'<strong>URL du site :</strong> <a href="' . helper::baseUrl(false) . '" target="_blank">' . helper::baseUrl(false) . '</a><br>' .
 					'<strong>Identifiant du compte :</strong> ' . $this->getInput('installId') . '<br>' .
 					'<strong>Mot de passe du compte :</strong> ' . $this->getInput('installPassword')

@@ -1,4 +1,4 @@
-<p>Veuillez saisir les champs ci-dessous afin de terminer l'installation.</p>
+<p>Renseignez les champs ci-dessous pour finaliser l'installation.</p>
 <?php echo template::formOpen('installForm'); ?>
 	<?php echo template::text('installId', [
 		'autocomplete' => 'off',

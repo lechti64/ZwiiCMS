@@ -8,7 +8,7 @@
 
 ## Version 9.2.02
 - Correction :
-    - Gestion d'erreur lors de l'installation automatisé d'une mise à jour
+    - Gestion d'erreur lors de l'installation automatisée d'une mise à jour
 
 ## Version 9.2.01
 - Corrections : 
