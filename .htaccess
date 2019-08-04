@@ -35,12 +35,5 @@ Options -Indexes
     Options -MultiViews
 </IfModule>
 
-# Corrige lien Facebook en direction de la racine du site
-<IfModule mod_rewrite.c>
-RewriteEngine on
-RewriteCond %{QUERY_STRING} ^(.*)&?fbclid=[^&]+&?(.*)$ [NC]
-RewriteRule ^/?(.*)$ /$1?%1%2 [R=301,L]
-<IfModule mod_rewrite.c> 
-
 # Attention, surtout ne rien modifier ci-dessous !
 # URL rewriting
