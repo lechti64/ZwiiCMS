@@ -14,8 +14,8 @@
  * @link http://zwiicms.com/
  */
 
-class common {
 
+class common {
 	const DISPLAY_RAW = 0;
 	const DISPLAY_JSON = 1;
 	const DISPLAY_LAYOUT_BLANK = 2;
@@ -528,7 +528,22 @@ class common {
 		// 5 premières clés principales
 		// Trois tentatives
 
-	
+		$users = new Flintstone\Flintstone('users', ['dir' => self::DATA_DIR]);
+
+		// Set a key
+$users->set('bob', ['email' => 'bob@site.com', 'password' => '123456']);
+
+// Get a key
+$user = $users->get('bob');
+echo 'Bob, your email is ' . $user['email'];
+
+// Retrieve all key names
+$keys = $users->getKeys(); // returns array('bob')
+
+// Retrieve all data
+$data = $users->getAll(); // returns array('bob' => array('email' => 'bob@site.com', 'password' => '123456'));
+
+
 		for($i = 0; $i < 3; $i++) {
 			if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
 				break;
@@ -657,7 +672,7 @@ class common {
 
 	public function createSitemap($command = "all") {
 
-		require_once "core/vendor/sitemap/SitemapGenerator.php";
+		//require_once "core/vendor/sitemap/SitemapGenerator.php";
 
 		$timezone = $this->getData(['config','timezone']);
 
@@ -738,8 +753,8 @@ class common {
 	 */
 	public function sendMail($to, $subject, $content) {
 		// Utilisation de PHPMailer version 6.0.6
-		require "core/vendor/phpmailer/phpmailer.php";
-		require "core/vendor/phpmailer/exception.php";
+		 require "core/vendor/phpmailer/phpmailer.php";
+		 require "core/vendor/phpmailer/exception.php";
 
 		// Layout
 		ob_start();
@@ -1141,6 +1156,12 @@ class core extends common {
 		elseif(is_readable('core/vendor/' . $classPath)) {
 			require 'core/vendor/' . $classPath;
 		}
+		// Classes personnalisées
+		if (!class_exists('flintstone')) {
+			require 'core/vendor/flintstone/flintstone.php'; }
+
+		if  (!class_exists('sitemapgenerator')) {	
+			require_once "core/vendor/sitemap/SitemapGenerator.php"; }
 	}
 
 	/**
