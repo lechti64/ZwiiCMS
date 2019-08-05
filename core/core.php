@@ -528,12 +528,7 @@ class common {
 		// 5 premières clés principales
 		// Trois tentatives
 
-		require_once "core/vendor/flintstone/Flintstone.php";
 	
-
-		$options = ['dir' => self::DATA_DIR];
-		$users = new Flintstone\Flintstone('users', $options);
-
 		for($i = 0; $i < 3; $i++) {
 			if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
 				break;
