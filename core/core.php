@@ -14,6 +14,12 @@
  * @link http://zwiicms.com/
  */
 
+ // Chargement de classes personnalisées
+require "core/vendor/sitemap/SitemapGenerator.php";
+require "core/vendor/flintstone/autoload.php";
+require "core/vendor/phpmailer/phpmailer.php";
+require "core/vendor/phpmailer/exception.php";
+
 
 class common {
 	const DISPLAY_RAW = 0;
@@ -44,6 +50,14 @@ class common {
 		'sitemap',
 		'theme',
 		'user'
+	];
+	public static $dataStage = [
+		'config',
+		'core',
+		'page',
+		'module',
+		'user',
+		'theme'
 	];
 	private $data = [];
 	private $hierarchy = [
@@ -123,6 +137,7 @@ class common {
 	 * Constructeur commun
 	 */
 	public function __construct() {
+
 		// Extraction des données http
 		if(isset($_POST)) {
 			$this->input['_POST'] = $_POST;
@@ -132,11 +147,15 @@ class common {
 		}
 
 		// Import des données d'une version 8		
-		$this->importData();
+		$this->importDataV8();
+		$this->importDataV9();
 
 		// Génère le fichier de données lorque les deux fichiers sont absents ou seulement le thème est - installation fraîche par défaut
-		if(file_exists(self::DATA_DIR.'core.json')   === false OR 
-		   file_exists(self::DATA_DIR.'theme.json')  === false) {
+		if(
+			file_exists(self::DATA_DIR.'config.json')  === false ||
+		    file_exists(self::DATA_DIR.'core.json')   === false || 
+		    file_exists(self::DATA_DIR.'theme.json')  === false ||
+		    file_exists(self::DATA_DIR.'user.json')  === false ) {
 			include_once('core/module/install/ressource/defaultdata.php');   
 			$this->setData([install::$defaultData]);
 			$this->saveData();
@@ -155,7 +174,8 @@ class common {
 		// Utilisateur connecté
 		if($this->user === []) {
 			$this->user = $this->getData(['user', $this->getInput('ZWII_USER_ID')]);
-		}
+		} 
+	
 		// Construit la liste des pages parents/enfants
 		if($this->hierarchy['all'] === []) {
 			$pages = helper::arrayCollumn($this->getData(['page']), 'position', 'SORT_ASC');
@@ -221,61 +241,6 @@ class common {
 		}
 	}
 
-	/**
-	 * Lecture des fichiers de données
-	 * 
-	 */
-	public function readData() {
-		// Trois tentatives
-		for($i = 0; $i < 3; $i++) {
-			$this->setData([json_decode(file_get_contents(self::DATA_DIR.'core.json'), true) + json_decode(file_get_contents(self::DATA_DIR.'theme.json'), true)]);
-			if($this->data) {
-				break;
-			}
-			elseif($i === 2) {
-				exit('Unable to read data file.');
-			}
-			// Pause de 10 millisecondes
-			usleep(10000);
-		}
-	}
-
-	/**
-	 * Import des données de la version 8
-	 * Converti un fichier de données data.json puis le renomme
-	 */
-	public function importData() {
-		if(file_exists(self::DATA_DIR.'data.json')) {
-			// Trois tentatives
-			for($i = 0; $i < 3; $i++) {
-				$tempData = [json_decode(file_get_contents(self::DATA_DIR.'data.json'), true)];			
-				if($tempData) {
-					for($i = 0; $i < 3; $i++) {
-						if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($tempData[0],0,5)), LOCK_EX) !== false) {
-							break;
-						}
-						// Pause de 10 millisecondes
-						usleep(10000);
-					}
-					for($i = 0; $i < 3; $i++) {
-						if(file_put_contents(self::DATA_DIR.'theme.json', json_encode(array_slice($tempData[0],5)), LOCK_EX) !== false) {
-							break;
-						}
-						// Pause de 10 millisecondes
-						usleep(10000);
-					}					
-					rename (self::DATA_DIR.'data.json',self::DATA_DIR.'imported_data.json');
-					break;
-				}
-				elseif($i === 2) {
-					exit('Unable to read data file.');
-				}
-				// Pause de 10 millisecondes
-				usleep(10000);
-			}
-		
-		}
-	}
 
 	/**
 	 * Ajoute les valeurs en sortie
@@ -524,49 +489,140 @@ class common {
 	 * Enregistre les données dans deux fichiers séparés
 	 */
 	public function saveData() {
-		// Save config core page module et user
-		// 5 premières clés principales
-		// Trois tentatives
 
-		$users = new Flintstone\Flintstone('users', ['dir' => self::DATA_DIR]);
-
-		// Set a key
-$users->set('bob', ['email' => 'bob@site.com', 'password' => '123456']);
-
-// Get a key
-$user = $users->get('bob');
-echo 'Bob, your email is ' . $user['email'];
-
-// Retrieve all key names
-$keys = $users->getKeys(); // returns array('bob')
-
-// Retrieve all data
-$data = $users->getAll(); // returns array('bob' => array('email' => 'bob@site.com', 'password' => '123456'));
-
-
-		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
-				break;
+		// Langue du frontend en cours d'édition
+		// $lang = $this->readI18nData('frontend');
+		$lang = 'fr';
+		// Sauvegarde par niveau
+		foreach (self::$dataStage as $stageId) {
+			// Stockage dans un sous-dossier localisé
+			// Le dossier de langue existe t-il ?
+			if (!file_exists(self::DATA_DIR . '/' . $lang)) {
+				mkdir (self::DATA_DIR . '/' . $lang);
 			}
-			// Pause de 10 millisecondes
-			usleep(10000);
+			// Sous-dossier localisé
+			if ($stageId === 'page' ||
+				$stageId === 'module') {
+					$folder = self::DATA_DIR . $lang . '/';
+			} else {
+				$folder = self::DATA_DIR;
+			}
+			$store[$stageId] = new Flintstone\Flintstone($stageId, [
+					'dir' => $folder,
+					'ext' => 'json',
+					'formatter' => new Flintstone\Formatter\JsonFormatter()
+				]);
+			
+			$store[$stageId]->set($stageId,$this->getData([$stageId]));
 		}
-		// Save theme
-		// dernière clé principale
-		// Trois tentatives
-		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents(self::DATA_DIR.'theme.json', json_encode(array_slice($this->getData(),5)), LOCK_EX) !== false) {
-				break;
+	}
+
+	
+	/**
+	 * Lecture des fichiers de données
+	 * 
+	 */
+	public function readData() {
+
+		// reset du tableau
+		$lang = 'fr';
+		$data = [];	
+
+		// Boucle des modules
+		foreach (self::$dataStage as $stageId) {		
+			// Sauf pour les pages et les modules
+			if ($stageId === 'page' ||
+				$stageId === 'module') {
+					$folder = self::DATA_DIR . $lang . '/';
+			} else {
+				$folder = self::DATA_DIR;
 			}
-			// Pause de 10 millisecondes
-			usleep(10000);
+			$store[$stageId] = new Flintstone\Flintstone($stageId, [
+				'dir' => $folder,
+				'ext' => 'json',
+				'formatter' => new Flintstone\Formatter\JsonFormatter()
+			]);
+			$tempData = $store[$stageId]->get($stageId);
+			if ($tempData) {
+				$data [$stageId] = $tempData;
+			} else {
+				$data [$stageId] = [];
+			}
+		}
+		$this->data = $data;			
+	}
+
+	/**
+	 * Import des données de la version 8
+	 * Converti un fichier de données data.json puis le renomme
+	 */
+	public function importDataV8() {
+		if(file_exists(self::DATA_DIR.'data.json')) {
+			// Trois tentatives
+			for($i = 0; $i < 3; $i++) {
+				$tempData = [json_decode(file_get_contents(self::DATA_DIR.'data.json'), true)];			
+				if($tempData) {
+					for($i = 0; $i < 3; $i++) {
+						if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($tempData[0],0,5)), LOCK_EX) !== false) {
+							break;
+						}
+						// Pause de 10 millisecondes
+						usleep(10000);
+					}
+					for($i = 0; $i < 3; $i++) {
+						if(file_put_contents(self::DATA_DIR.'theme.json', json_encode(array_slice($tempData[0],5)), LOCK_EX) !== false) {
+							break;
+						}
+						// Pause de 10 millisecondes
+						usleep(10000);
+					}					
+					rename (self::DATA_DIR.'data.json',self::DATA_DIR.'imported_data.json');
+					break;
+				}
+				elseif($i === 2) {
+					exit('Unable to read data file.');
+				}
+				// Pause de 10 millisecondes
+				usleep(10000);
+			}
+			$this->saveData();
+		}
+	}
+
+	/**
+	 * Import des données de la version 9
+	 * Converti un fichier de données data.json puis le renomme
+	 */
+	public function importDataV9() {
+		
+		// Détecter les fichiers d'une V9
+		if (file_exists(self::DATA_DIR . 'core.php') &&
+			file_exists(self::DATA_DIR . 'theme.php') &&
+			!file_exists(self::DATA_DIR . 'config.php') &&
+			!file_exists(self::DATA_DIR . 'user.php') ) {
+
+			// Trois tentatives
+			for($i = 0; $i < 3; $i++) {
+				$this->setData([json_decode(file_get_contents(self::DATA_DIR.'core.json'), true) + json_decode(file_get_contents(self::DATA_DIR.'theme.json'), true)]);
+				if($this->data) {
+					break;
+				}
+				elseif($i === 2) {
+					exit('Unable to import data file.');
+				}
+				// Pause de 10 millisecondes
+				usleep(10000);
+			}
+			rename (self::DATA_DIR.'data.json',self::DATA_DIR.'imported_data.json');
+			rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
+			$this->saveData();
 		}
 	}
 
 	/**
 	 * Génére un fichier json avec la liste des pages
 	 * 
-*/
+	*/
     public function pages2Json() {
     // Sauve la liste des pages pour TinyMCE
 		$parents = [];
@@ -753,8 +809,6 @@ $data = $users->getAll(); // returns array('bob' => array('email' => 'bob@site.c
 	 */
 	public function sendMail($to, $subject, $content) {
 		// Utilisation de PHPMailer version 6.0.6
-		 require "core/vendor/phpmailer/phpmailer.php";
-		 require "core/vendor/phpmailer/exception.php";
 
 		// Layout
 		ob_start();
@@ -1157,11 +1211,12 @@ class core extends common {
 			require 'core/vendor/' . $classPath;
 		}
 		// Classes personnalisées
-		if (!class_exists('flintstone')) {
-			require 'core/vendor/flintstone/flintstone.php'; }
+		elseif(is_readable('core/vendor/flinstone/' . $classPath)) {
+			require 'core/vendor/flintstone/' . $className . '.php';
+			require 'core/vendor/flintstone/Formatter/' . $className . '.php';
+		}
 
-		if  (!class_exists('sitemapgenerator')) {	
-			require_once "core/vendor/sitemap/SitemapGenerator.php"; }
+		
 	}
 
 	/**
