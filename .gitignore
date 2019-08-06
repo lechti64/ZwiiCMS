@@ -9,7 +9,6 @@ site/backup/*
 site/data/*.json
 site/data/*.css
 site/data/fr/*.json
-site/*.html
 site/tmp/*.*
 
 
@@ -29,3 +28,7 @@ site/file/thumb/*
 core/vendor/tinymce/link_list.json
 site/tmp/.htaccess
 .vscode/*
+site/data/body.inc.html
+site/data/head.inc.html
+sitemap.xml.gz
+sitemap.xml
