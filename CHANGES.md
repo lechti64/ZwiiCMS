@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 9.2.04
+- Correction : 
+    - Conserver htaccess dans le dossier temp lors du nettoyage
+
 ## Version 9.2.03
 - Corrections :
     - Menu fixe en dehors du site : 

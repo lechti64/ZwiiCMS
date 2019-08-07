@@ -32,7 +32,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.2.03';
+	const ZWII_VERSION = '9.2.04';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -966,7 +966,10 @@ class core extends common {
 		if($lastClearTmp > $this->getData(['core', 'lastClearTmp']) + 86400) {
 			$iterator = new DirectoryIterator(self::TEMP_DIR);
 			foreach($iterator as $fileInfos) {
-				if($fileInfos->isFile() AND $fileInfos->getBasename() !== '.gitkeep') {
+				if( $fileInfos->isFile() && 
+					$fileInfos->getBasename() !== '.htaccess' &&
+					$fileInfos->getBasename() !== '.gitkeep'
+				) {
 					@unlink($fileInfos->getPathname());
 				}
 			}
