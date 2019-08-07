@@ -38,7 +38,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.2.03';
+	const ZWII_VERSION = '9.3.00.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -562,21 +562,7 @@ class common {
 			for($i = 0; $i < 3; $i++) {
 				$tempData = [json_decode(file_get_contents(self::DATA_DIR.'data.json'), true)];			
 				if($tempData) {
-					for($i = 0; $i < 3; $i++) {
-						if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($tempData[0],0,5)), LOCK_EX) !== false) {
-							break;
-						}
-						// Pause de 10 millisecondes
-						usleep(10000);
-					}
-					for($i = 0; $i < 3; $i++) {
-						if(file_put_contents(self::DATA_DIR.'theme.json', json_encode(array_slice($tempData[0],5)), LOCK_EX) !== false) {
-							break;
-						}
-						// Pause de 10 millisecondes
-						usleep(10000);
-					}					
-					rename (self::DATA_DIR.'data.json',self::DATA_DIR.'imported_data.json');
+					$this->saveData();
 					break;
 				}
 				elseif($i === 2) {
@@ -585,7 +571,6 @@ class common {
 				// Pause de 10 millisecondes
 				usleep(10000);
 			}
-			$this->saveData();
 		}
 	}
 
@@ -596,10 +581,10 @@ class common {
 	public function importDataV9() {
 		
 		// Détecter les fichiers d'une V9
-		if (file_exists(self::DATA_DIR . 'core.php') &&
-			file_exists(self::DATA_DIR . 'theme.php') &&
-			!file_exists(self::DATA_DIR . 'config.php') &&
-			!file_exists(self::DATA_DIR . 'user.php') ) {
+		if (file_exists(self::DATA_DIR . 'core.json') &&
+			file_exists(self::DATA_DIR . 'theme.json') &&
+			!file_exists(self::DATA_DIR . 'config.json') &&
+			!file_exists(self::DATA_DIR . 'user.json') ) {
 
 			// Trois tentatives
 			for($i = 0; $i < 3; $i++) {
@@ -613,7 +598,7 @@ class common {
 				// Pause de 10 millisecondes
 				usleep(10000);
 			}
-			rename (self::DATA_DIR.'data.json',self::DATA_DIR.'imported_data.json');
+			rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_data.json');
 			rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
 			$this->saveData();
 		}
