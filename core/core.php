@@ -1022,7 +1022,10 @@ class core extends common {
 		if($lastClearTmp > $this->getData(['core', 'lastClearTmp']) + 86400) {
 			$iterator = new DirectoryIterator(self::TEMP_DIR);
 			foreach($iterator as $fileInfos) {
-				if($fileInfos->isFile() AND $fileInfos->getBasename() !== '.gitkeep') {
+				if( $fileInfos->isFile() && 
+					$fileInfos->getBasename() !== '.htaccess' &&
+					$fileInfos->getBasename() !== '.gitkeep'
+				) {
 					@unlink($fileInfos->getPathname());
 				}
 			}
@@ -1032,30 +1035,41 @@ class core extends common {
 			$this->saveData();
 		}
 		// Backup automatique des données
-		$lastBackup = mktime(0, 0, 0);
-		if(
-			$this->getData(['config', 'autoBackup'])
-			AND $lastBackup > $this->getData(['core', 'lastBackup']) + 86400
-			AND $this->getData(['user']) // Pas de backup pendant l'installation
-		) {
-			// Copie du fichier de données
-			copy(self::DATA_DIR.'core.json', self::BACKUP_DIR . date('Y-m-d', $lastBackup) . '.json');
-			// Date du dernier backup
-			$this->setData(['core', 'lastBackup', $lastBackup]);
-			// Enregistre les données
-			$this->saveData();
-			// Supprime les backups de plus de 30 jours
-			$iterator = new DirectoryIterator(self::BACKUP_DIR);
-			foreach($iterator as $fileInfos) {
-				if(
-					$fileInfos->isFile()
-					AND $fileInfos->getBasename() !== '.htaccess'
-					AND $fileInfos->getMTime() + (86400 * 30) < time()
-				) {
-					@unlink($fileInfos->getPathname());
+			$lastBackup = mktime(0, 0, 0);
+			if(
+				$this->getData(['config', 'autoBackup'])
+				AND $lastBackup > $this->getData(['core', 'lastBackup']) + 86400
+				AND $this->getData(['user']) // Pas de backup pendant l'installation
+			) {
+				// Copie du fichier de données
+						// Creation du ZIP
+				$fileName = date('Y-m-d-h-i-s', time()) . '.zip';
+				$zip = new ZipArchive();
+				if($zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE) === TRUE){
+					foreach(core::scanDir('site/') as $file) {
+						$zip->addFile($file);
+					}
+				}
+			
+				$zip->close();
+				copy(self::TEMP_DIR . $fileName, self::BACKUP_DIR . $fileName );
+				unlink (self::TEMP_DIR . $fileName);		
+				// Date du dernier backup
+				$this->setData(['core', 'lastBackup', $lastBackup]);
+				// Enregistre les données
+				$this->saveData();
+				// Supprime les backups de plus de 30 jours
+				$iterator = new DirectoryIterator(self::BACKUP_DIR);
+				foreach($iterator as $fileInfos) {
+					if(
+						$fileInfos->isFile()
+						AND $fileInfos->getBasename() !== '.htaccess'
+						AND $fileInfos->getMTime() + (86400 * 30) < time()
+					) {
+						@unlink($fileInfos->getPathname());
+					}
 				}
 			}
-		}
 		// Crée le fichier de personnalisation avancée
 		if(file_exists(self::DATA_DIR.'custom.css') === false) {
 			file_put_contents(self::DATA_DIR.'custom.css', file_get_contents('core/module/theme/resource/custom.css'));
@@ -1535,6 +1549,30 @@ class core extends common {
 				break;
 		}
 	}
+
+		
+	/**
+	 * Scan le contenu d'un dossier et de ses sous-dossiers
+	 * @param string $dir Dossier à scanner
+	 * @return array
+	 */
+	public static function scanDir($dir) {
+		$dirContent = [];
+		$iterator = new DirectoryIterator($dir);
+		foreach($iterator as $fileInfos) {
+			if(in_array($fileInfos->getFilename(), ['.', '..', 'backup'])) {
+				continue;
+			}
+			elseif($fileInfos->isDir()) {
+				$dirContent = array_merge($dirContent, self::scanDir($fileInfos->getPathname()));
+			}
+			else {
+				$dirContent[] = $fileInfos->getPathname();
+			}
+		}
+		return $dirContent;
+	}
+
 
 }
 
