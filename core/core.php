@@ -1046,7 +1046,7 @@ class core extends common {
 				$fileName = date('Y-m-d-h-i-s', time()) . '.zip';
 				$zip = new ZipArchive();
 				if($zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE) === TRUE){
-					foreach(core::scanDir('site/') as $file) {
+					foreach(core::scanDir(self::DATA_DIR) as $file) {
 						$zip->addFile($file);
 					}
 				}
