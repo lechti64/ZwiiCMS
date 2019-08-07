@@ -15,8 +15,8 @@
 /**
  * Vérification de la version de PHP
  */
-if(version_compare(PHP_VERSION, '5.6.0', '<')) {
-	exit('PHP 5.6+ required.');
+if(version_compare(PHP_VERSION, '7.0.0', '<')) {
+	exit('PHP 7.0+ required.');
 }
 
 /* Set locale to French */
