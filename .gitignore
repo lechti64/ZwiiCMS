@@ -8,6 +8,7 @@ site/backup/*
 # Fichiers de données
 site/data/*.json
 site/data/*.css
+site/data/fr/*.json
 
 
 # Fichiers uploadés
@@ -26,3 +27,5 @@ site/file/thumb/*
 core/vendor/tinymce/link_list.json
 site/tmp/.htaccess
 .vscode/*
+
+
