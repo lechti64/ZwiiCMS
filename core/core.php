@@ -14,13 +14,10 @@
  * @link http://zwiicms.com/
  */
 
- // Chargement de classes personnalisées
-require "core/vendor/sitemap/SitemapGenerator.php";
-require "core/vendor/flintstone/autoload.php";
-require "core/vendor/phpmailer/phpmailer.php";
-require "core/vendor/phpmailer/exception.php";
+ // Classes personnalisées
+require "core/vendor/autoload.php";
 
-
+// Classe internes
 class common {
 	const DISPLAY_RAW = 0;
 	const DISPLAY_JSON = 1;
@@ -507,13 +504,20 @@ class common {
 			} else {
 				$folder = self::DATA_DIR;
 			}
-			$store[$stageId] = new Flintstone\Flintstone($stageId, [
-					'dir' => $folder,
-					'ext' => 'json',
-					'formatter' => new Flintstone\Formatter\JsonFormatter()
-				]);
+			//$store[$stageId] = new Flintstone\Flintstone($stageId, [
+			//		'dir' => $folder,
+			//		'ext' => 'json',
+			//		'formatter' => new Flintstone\Formatter\JsonFormatter()
+			//	]);
 			
-			$store[$stageId]->set($stageId,$this->getData([$stageId]));
+			//$store[$stageId]->set($stageId,$this->getData([$stageId]));
+
+			$db[$stageId] = new \Prowebcraft\JsonDb([
+				'name' => $stageId . '.json',
+				'dir' => $folder
+			  ]);
+			$db[$stageId]->set($stageId,$this->getData([$stageId]));
+			$db[$stageId]->save;
 		}
 	}
 
@@ -537,12 +541,18 @@ class common {
 			} else {
 				$folder = self::DATA_DIR;
 			}
-			$store[$stageId] = new Flintstone\Flintstone($stageId, [
-				'dir' => $folder,
-				'ext' => 'json',
-				'formatter' => new Flintstone\Formatter\JsonFormatter()
-			]);
-			$tempData = $store[$stageId]->get($stageId);
+			//$store[$stageId] = new Flintstone\Flintstone($stageId, [
+			//	'dir' => $folder,
+			//	'ext' => 'json',
+			//	'formatter' => new Flintstone\Formatter\JsonFormatter()
+			//]);
+			$db[$stageId] = new \Prowebcraft\JsonDb([
+				'name' => $stageId . '.json',
+				'dir' => $folder
+			  ]);
+			
+			//$tempData = $store[$stageId]->get($stageId);
+			$tempData = $db[$stageId]->get($stageId);
 			if ($tempData) {
 				$data [$stageId] = $tempData;
 			} else {
@@ -1209,13 +1219,6 @@ class core extends common {
 		elseif(is_readable('core/vendor/' . $classPath)) {
 			require 'core/vendor/' . $classPath;
 		}
-		// Classes personnalisées
-		elseif(is_readable('core/vendor/flinstone/' . $classPath)) {
-			require 'core/vendor/flintstone/' . $className . '.php';
-			require 'core/vendor/flintstone/Formatter/' . $className . '.php';
-		}
-
-		
 	}
 
 	/**

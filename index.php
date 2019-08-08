@@ -8,6 +8,8 @@
  *
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
@@ -15,8 +17,8 @@
 /**
  * Vérification de la version de PHP
  */
-if(version_compare(PHP_VERSION, '7.0.0', '<')) {
-	exit('PHP 7.0+ required.');
+if(version_compare(PHP_VERSION, '5.6.0', '<')) {
+	exit('PHP 5.6+ required.');
 }
 
 /* Set locale to French */
