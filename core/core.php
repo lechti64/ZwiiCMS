@@ -15,7 +15,7 @@
  */
 
  // Classes personnalisées
-require "core/vendor/autoload.php";
+require_once "core/vendor/autoload.php";
 
 // Classe internes
 class common {

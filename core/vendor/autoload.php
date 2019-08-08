@@ -1,7 +1,7 @@
 <?php
 // JsonDB
 require "core/vendor/jsondb/Dot.php";
-require "core/vendor/jsondb/JsonDB.php";
+require "core/vendor/jsondb/JsonDb.php";
 // phpMailer
 require "core/vendor/phpmailer/phpmailer.php";
 require "core/vendor/phpmailer/exception.php";
