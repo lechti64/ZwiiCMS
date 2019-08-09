@@ -160,7 +160,7 @@ class common {
 			chmod(self::DATA_DIR.'theme.json', 0755);
 		} 
 
-		// Import des données d'un fichier data.json déjà présent
+		// Lecture des données déjà présentes
 		if($this->data === [])  {
 			$this->readData();
 		}
@@ -521,13 +521,12 @@ class common {
 		}
 	}
 
-	
+
 	/**
 	 * Lecture des fichiers de données
 	 * 
 	 */
 	public function readData() {
-
 		// reset du tableau
 		$lang = 'fr';
 		$data = [];	
@@ -548,7 +547,8 @@ class common {
 			//]);
 			$db[$stageId] = new \Prowebcraft\JsonDb([
 				'name' => $stageId . '.json',
-				'dir' => $folder
+				'dir' => $folder,
+				'template' => self::TEMP_DIR . 'data.template.json'
 			  ]);
 			
 			//$tempData = $store[$stageId]->get($stageId);
@@ -1044,6 +1044,7 @@ class core extends common {
 			// Enregistre les données
 			$this->saveData();
 		}
+
 		// Backup automatique des données
 			$lastBackup = mktime(0, 0, 0);
 			if(
