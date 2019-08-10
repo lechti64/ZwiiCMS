@@ -484,45 +484,87 @@ class common {
 
 	/**
 	 * Enregistre les données dans deux fichiers séparés
+	 * @keys array vide ou avec le tableau complet -> sauvegarde la totalité des données
+	 * 				nombre de clés supérieur à 1 : écriture clé à clé.
 	 */
-	public function saveData() {
+	public function saveData($keys = []) {
 
 		// Langue du frontend en cours d'édition
 		// $lang = $this->readI18nData('frontend');
 		$lang = 'fr';
-		// Sauvegarde par niveau
-		foreach (self::$dataStage as $stageId) {
-			// Stockage dans un sous-dossier localisé
-			// Le dossier de langue existe t-il ?
-			if (!file_exists(self::DATA_DIR . '/' . $lang)) {
-				mkdir (self::DATA_DIR . '/' . $lang);
-			}
-			// Sous-dossier localisé
-			if ($stageId === 'page' ||
-				$stageId === 'module') {
-					$folder = self::DATA_DIR . $lang . '/';
-			} else {
-				$folder = self::DATA_DIR;
-			}
-			//$store[$stageId] = new Flintstone\Flintstone($stageId, [
-			//		'dir' => $folder,
-			//		'ext' => 'json',
-			//		'formatter' => new Flintstone\Formatter\JsonFormatter()
-			//	]);
-			
-			//$store[$stageId]->set($stageId,$this->getData([$stageId]));
-
-			$db[$stageId] = new \Prowebcraft\JsonDb([
-				'name' => $stageId . '.json',
-				'dir' => $folder
-			  ]);
-			$db[$stageId]->set($stageId,$this->getData([$stageId]));
-			$db[$stageId]->save;
+		// Fonction appelée sans paramètre ou avec la totalité du tableau
+		switch(count($keys)) {
+			case 0: 
+			case 1:
+				foreach (self::$dataStage as $stageId) {
+					// Stockage dans un sous-dossier localisé
+					// Le dossier de langue existe t-il ?
+					if (!file_exists(self::DATA_DIR . '/' . $lang)) {
+						mkdir (self::DATA_DIR . '/' . $lang);
+					}
+					// Sous-dossier localisé
+					if ($stageId === 'page' ||
+						$stageId === 'module') {
+							$folder = self::DATA_DIR . $lang . '/';
+					} else {
+						$folder = self::DATA_DIR;
+					}
+					$db[$stageId] = new \Prowebcraft\JsonDb([
+						'name' => $stageId . '.json',
+						'dir' => $folder,
+						'template' => self::TEMP_DIR . 'data.template.json'
+					]);
+					$db[$stageId]->set($stageId,$this->getData([$stageId]));
+					$db[$stageId]->save;
+				}
+				break;
+			// Appel avec des paramètres, initialisation de la classe
+			case 2: case 3: case 4: case 5: case 6: case 7:
+				// Sous-dossier localisé
+				if ($keys[0] === 'page' ||
+					$keys[0] === 'module') {
+						$folder = self::DATA_DIR . $lang . '/';
+				} else {
+					$folder = self::DATA_DIR;
+				}
+				$db = new \Prowebcraft\JsonDb([
+					'name' => $keys[0] . '.json',
+					'dir' => $folder,
+					'template' => self::TEMP_DIR . 'data.template.json'
+				]);
+			// Appel avec paramètres, écriture des valeurs individuelles
+			case 2:
+				$db->set($keys[0],$keys[1]);
+				$db->save;
+				break;
+			case 3:
+				$db->set($keys[0] . '.' . $keys[1],$keys[2]);
+				$db->save;
+				break;
+			case 4:
+				$db->set($keys[0] . '.' . $keys[1] . '.' . $keys[2],$keys[3]);
+				$db->save;
+				break;
+			case 5:
+				$db->set($keys[0] . '.' . $keys[1] . '.' . $keys[2] . '.' . $keys[3] , $keys[4]);
+				$db->save;
+				break;
+			case 6:
+				$db->set($keys[0] . '.' . $keys[1] . '.' . $keys[2] . '.' . $keys[3] . '.' . $keys[4], $keys[5]);
+				$db->save;
+				break;
+			case 7:
+				$db->set($keys[0] . '.' . $keys[1] . '.' . $keys[2] . '.' . $keys[3] . '.' . $keys[4] . '.' . $keys[5], $keys[6]);
+				$db->save;				
+				break;
 		}
 	}
 
 
+
+
 	/**
+	 * 
 	 * Lecture des fichiers de données
 	 * 
 	 */
@@ -588,8 +630,7 @@ class common {
 	 * Import des données de la version 9
 	 * Converti un fichier de données data.json puis le renomme
 	 */
-	public function importDataV9() {
-		
+	public function importDataV9() {		
 		// Détecter les fichiers d'une V9
 		if (file_exists(self::DATA_DIR . 'core.json') &&
 			file_exists(self::DATA_DIR . 'theme.json') &&
@@ -1387,7 +1428,7 @@ class core extends common {
 							// Enregistrement des données
 							if($output['state'] !== false) {
 								$this->setData([$module->getData()]);
-								$this->saveData();
+								$this->saveData([$module->getData()]);
 							}
 							// Notification
 							if($output['notification']) {
