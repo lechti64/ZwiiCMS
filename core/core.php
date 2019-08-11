@@ -503,12 +503,8 @@ class common {
 						mkdir (self::DATA_DIR . '/' . $lang);
 					}
 					// Sous-dossier localisé
-					if ($stageId === 'page' ||
-						$stageId === 'module') {
-							$folder = self::DATA_DIR . $lang . '/';
-					} else {
-						$folder = self::DATA_DIR;
-					}
+					$folder = $this->dirData ($stageId,$lang);
+					// COnstructeur
 					$db[$stageId] = new \Prowebcraft\JsonDb([
 						'name' => $stageId . '.json',
 						'dir' => $folder,
@@ -575,25 +571,14 @@ class common {
 
 		// Boucle des modules
 		foreach (self::$dataStage as $stageId) {		
-			// Sauf pour les pages et les modules
-			if ($stageId === 'page' ||
-				$stageId === 'module') {
-					$folder = self::DATA_DIR . $lang . '/';
-			} else {
-				$folder = self::DATA_DIR;
-			}
-			//$store[$stageId] = new Flintstone\Flintstone($stageId, [
-			//	'dir' => $folder,
-			//	'ext' => 'json',
-			//	'formatter' => new Flintstone\Formatter\JsonFormatter()
-			//]);
+			// Dossier localisé
+			$folder = $this->dirData($stageId,$lang);
+			// Constructeur de la bdd
 			$db[$stageId] = new \Prowebcraft\JsonDb([
 				'name' => $stageId . '.json',
 				'dir' => $folder,
 				'template' => self::TEMP_DIR . 'data.template.json'
-			  ]);
-			
-			//$tempData = $store[$stageId]->get($stageId);
+			  ]);			
 			$tempData = $db[$stageId]->get($stageId);
 			if ($tempData) {
 				$data [$stageId] = $tempData;
@@ -628,7 +613,7 @@ class common {
 
 	/**
 	 * Import des données de la version 9
-	 * Converti un fichier de données data.json puis le renomme
+	 * Convertit un fichier de données data.json puis le renomme
 	 */
 	public function importDataV9() {		
 		// Détecter les fichiers d'une V9
@@ -717,10 +702,26 @@ class common {
 	}
 
 	/**
+	 * Retourne une chemin localisé pour l'enregistrement des données
+	 * @param $stageId nom du module
+	 * @param $lang langue des pages
+	 * @return string du dossier à créer
+	 */
+	public function dirData ($stageId, $lang) {
+			// Sauf pour les pages et les modules
+			if ($stageId === 'page' ||
+				$stageId === 'module') {
+					$folder = self::DATA_DIR . $lang . '/';
+			} else {
+				$folder = self::DATA_DIR;
+			}
+			return ($folder);
+	}
+
+	/**
 	 * Génére un fichier robots.txt à l'installation
 	 * Si le fichier exite déjà les commandes sont ajoutées
 	 */
-
 	 public function createRobots() {
 
 		$robotValue = 
@@ -736,7 +737,6 @@ class common {
 						'Sitemap: ' . helper::baseUrl(false) . 'sitemap.xml' . PHP_EOL .
 						'Sitemap: ' . helper::baseUrl(false) . 'sitemap.xml.gz' . PHP_EOL .
 						'# ZWII CONFIG  ---------' . PHP_EOL ;
-
 
 		if (file_exists('robots.txt')) {			
 			return(file_put_contents(
