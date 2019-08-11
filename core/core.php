@@ -154,10 +154,8 @@ class common {
 		    file_exists(self::DATA_DIR.'theme.json')  === false ||
 		    file_exists(self::DATA_DIR.'user.json')  === false ) {
 			include_once('core/module/install/ressource/defaultdata.php');   
-			$this->setData([install::$defaultData]);
+			$this->setData([install::$defaultData]);			
 			$this->saveData();
-			chmod(self::DATA_DIR.'core.json', 0755);
-			chmod(self::DATA_DIR.'theme.json', 0755);
 		} 
 
 		// Lecture des données déjà présentes
@@ -844,7 +842,6 @@ class common {
 	 */
 	public function sendMail($to, $subject, $content) {
 		// Utilisation de PHPMailer version 6.0.6
-
 		// Layout
 		ob_start();
 		include 'core/layout/mail.php';
