@@ -317,9 +317,9 @@ class common {
 					$googlePagespeedData = json_decode($googlePagespeedData, true);
 					$screenshot = $googlePagespeedData['screenshot']['data'];
 					$screenshot = str_replace(array('_','-'),array('/','+'),$screenshot);
-					$data = 'data:image/jpeg;base64,'.$screenshot;
-					$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));			
-					file_put_contents( self::FILE_DIR.'source/screenshot.png',$data);
+					$tempData = 'data:image/jpeg;base64,'.$screenshot;
+					$tempData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $tempData));			
+					file_put_contents( self::FILE_DIR.'source/screenshot.png',$tempData);
 				}
 			}
 		}
@@ -337,20 +337,20 @@ class common {
 		if($keys === null) {
 			return $this->data;
 		}
-		// Décent dans les niveaux de la variable $data
-		$data = $this->data;
+		// Descend dans les niveaux de la variable data
+		$tempData = $this->data;
 		foreach($keys as $key) {
 			// Si aucune donnée n'existe retourne null
-			if(isset($data[$key]) === false) {
+			if(isset($tempData[$key]) === false) {
 				return null;
 			}
 			// Sinon décent dans les niveaux
 			else {
-				$data = $data[$key];
+				$tempData = $tempData[$key];
 			}
 		}
 		// Retourne les données
-		return $data;
+		return $tempData;
 	}
 
 	/**
@@ -488,7 +488,6 @@ class common {
 	 * 				nombre de clés supérieur à 1 : écriture clé à clé.
 	 */
 	public function saveData($keys = []) {
-
 		// Langue du frontend en cours d'édition
 		// $lang = $this->readI18nData('frontend');
 		$lang = 'fr';
@@ -567,7 +566,7 @@ class common {
 	public function readData() {
 		// reset du tableau
 		$lang = 'fr';
-		$data = [];	
+		$tempData = [];	
 
 		// Boucle des modules
 		foreach (self::$dataStage as $stageId) {		
@@ -579,14 +578,14 @@ class common {
 				'dir' => $folder,
 				'template' => self::TEMP_DIR . 'data.template.json'
 			  ]);			
-			$tempData = $db[$stageId]->get($stageId);
-			if ($tempData) {
-				$data [$stageId] = $tempData;
+			$dbData = $db[$stageId]->get($stageId);
+			if ($dbData) {
+				$tempData [$stageId] = $dbData;
 			} else {
-				$data [$stageId] = [];
+				$tempData [$stageId] = [];
 			}
 		}
-		$this->data = $data;			
+		$this->data = $tempData;			
 	}
 
 	/**
