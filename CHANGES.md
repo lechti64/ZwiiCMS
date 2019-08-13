@@ -3,6 +3,8 @@
 ## Version 9.2.04
 - Correction : 
     - Conserver htaccess dans le dossier temp lors du nettoyage
+- Suppression : 
+    - Swipper
 
 ## Version 9.2.03
 - Corrections :
