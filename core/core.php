@@ -97,8 +97,7 @@ class common {
 			'tippy',
 			'zwiico',
 			'imagemap',
-			'simplelightbox',
-			'swiper'
+			'simplelightbox'
 		],
 		'view' => ''
 	];

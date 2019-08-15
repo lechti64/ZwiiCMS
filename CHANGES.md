@@ -1,8 +1,16 @@
 # Changelog
 
+## Version 9.2.04
+- Correction : 
+    - Conserver htaccess dans le dossier temp lors du nettoyage
+- Suppression : 
+    - Swiper
+
 ## Version 9.2.03
 - Corrections :
-    - Menu fixe en dehors du site : impossibilité de sélectionner un élément sous un sous-menu.
+    - Menu fixe en dehors du site : 
+        - overlay du sous-menu activé au-dessus de la page
+        - impossibilité de sélectionner un élément sous un sous-menu
     - Modules : les modes de gestion s'affichent en pleine page - réécriture du code.
     - Syntaxe du fichier main.php
 
