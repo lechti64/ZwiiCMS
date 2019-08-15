@@ -4,7 +4,7 @@
 - Correction : 
     - Conserver htaccess dans le dossier temp lors du nettoyage
 - Suppression : 
-    - Swipper
+    - Swiper
 
 ## Version 9.2.03
 - Corrections :
