@@ -26,6 +26,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
+	// Dossier de travail
 	const BACKUP_DIR = 'site/backup/';
 	const DATA_DIR = 'site/data/';
 	const FILE_DIR = 'site/file/';
