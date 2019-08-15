@@ -161,11 +161,6 @@ tinymce.init({
 			title: "Grille asymétrique : 10 - 2",
 			url: baseUrl + "core/vendor/tinymce/templates/col10-2.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
-		},
-		{
-			title: "Exemple Swiper",
-			url: baseUrl + "core/vendor/tinymce/templates/swiper.html",
-			description: "Exemple Swiper."
 		}
 	]
 });
