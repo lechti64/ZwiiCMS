@@ -33,7 +33,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.2.04';
+	const ZWII_VERSION = '9.2.05';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -942,6 +942,23 @@ class common {
 			$this->setData(['theme','footer','displaySearch', false ]);
 			$this->setData(['config','social','githubId', '' ]);
 			$this->setData(['core', 'dataVersion', 9200]);
+			$this->SaveData();
+		}
+		// Version 9.2.05
+		if($this->getData(['core', 'dataVersion']) < 9205) {
+			// Nettoyage Swiper
+			if (file_exists('core/vendor/tinymce/templates/swiper.html')) {
+				unlink ('core/vendor/tinymce/templates/swiper.html');
+			}
+			if (is_dir('core/vendor/swiper')) {
+				$dir = getcwd();
+				chdir('core/vendor/swiper');
+				$files = glob('*');
+				foreach($files as $file) unlink($file);
+				chdir($dir);
+				rmdir ('core/vendor/swiper/');
+			}
+			$this->setData(['core', 'dataVersion', 9205]);
 			$this->SaveData();
 		}
 	}
