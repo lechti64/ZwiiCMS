@@ -29,6 +29,7 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
+	// Dossier de travail
 	const BACKUP_DIR = 'site/backup/';
 	const DATA_DIR = 'site/data/';
 	const FILE_DIR = 'site/file/';
@@ -940,44 +941,44 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 826) {
 			$this->setData(['theme','header','linkHome',true]);
 			$this->setData(['core', 'dataVersion', 826]);
-			$this->SaveData();
+			$this->saveData();
 		}
 		// Version 8.3.1
 		if($this->getData(['core', 'dataVersion']) < 831) {
 			$this->setData(['theme','header','imageContainer','auto']);
 			$this->setData(['core', 'dataVersion', 831]);
-			$this->SaveData();
+			$this->saveData();
 		}
 
 		// Version 8.4.0
 		if($this->getData(['core', 'dataVersion']) < 840) {
 			$this->setData(['config','itemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 840]);
-			$this->SaveData();
+			$this->saveData();
 		}
 		// Version 8.4.4
 		if($this->getData(['core', 'dataVersion']) < 844) {			
 			$this->setData(['core', 'dataVersion', 844]);
-			$this->SaveData();
+			$this->saveData();
 		}			
 		// Version 8.4.6
 		if($this->getData(['core', 'dataVersion']) < 846) {		
 			$this->setData(['config','itemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 846]);
-			$this->SaveData();
+			$this->saveData();
 		}		
 		// Version 8.5.0
 		if($this->getData(['core', 'dataVersion']) < 850) {
 			$this->setData(['theme','menu','font','Open+Sans']);
 			$this->setData(['core', 'dataVersion', 850]);
-			$this->SaveData();
+			$this->saveData();
 		}	
 		// Version 8.5.1
 		if($this->getData(['core', 'dataVersion']) < 851) {
 			$this->setData(['config','itemsperPage',10]);
 			$this->deleteData(['config','ItemsperPage']);
 			$this->setData(['core', 'dataVersion', 851]);
-			$this->SaveData();
+			$this->saveData();
 		}	
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 9000) {
@@ -987,13 +988,13 @@ class common {
 			}
 			$this->setData(['theme', 'menu','fixed',false]);						
 			$this->setData(['core', 'dataVersion', 9000]);
-			$this->SaveData();
+			$this->saveData();
 		}	
 		// Version 9.0.01
 		if($this->getData(['core', 'dataVersion']) < 9001) {
 			$this->deleteData(['config', 'social', 'googleplusId']);
 			$this->setData(['core', 'dataVersion', 9001]);
-			$this->SaveData();
+			$this->saveData();
 		}
 		// Version 9.0.08
 		if($this->getData(['core', 'dataVersion']) < 9008) {
@@ -1002,7 +1003,7 @@ class common {
 			$this->setData(['theme', 'footer', 'fontSize','.8em']);
 			$this->setData(['theme', 'footer', 'font','Open+Sans']);	
 			$this->setData(['core', 'dataVersion', 9008]);
-			$this->SaveData();
+			$this->saveData();
 		}
 		// Version 9.0.09
 		if($this->getData(['core', 'dataVersion']) < 9009) {
@@ -1013,20 +1014,20 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 9010) {
 			$this->deleteData(['config', 'social', 'googleplusId']);			
 			$this->setData(['core', 'dataVersion', 9010]);
-			$this->SaveData();
+			$this->saveData();
 		}
 		// Version 9.0.11
 		if($this->getData(['core', 'dataVersion']) < 9011) {
 			if ($this->getData(['theme','menu','position']) === 'body')
 				$this->setData(['theme','menu','position','site']);
 			$this->setData(['core', 'dataVersion', 9011]);
-			$this->SaveData();
+			$this->saveData();
 		}
 		// Version 9.0.17
 		if($this->getData(['core', 'dataVersion']) < 9017) {
 			$this->setData(['theme','footer','displayVersion', true ]);
 			$this->setData(['core', 'dataVersion', 9017]);
-			$this->SaveData();
+			$this->saveData();
 		}
 		// Version 9.1.0
 		if($this->getData(['core', 'dataVersion']) < 9100) {
@@ -1034,7 +1035,7 @@ class common {
 			$this->setData(['theme','footer','displaySiteMap', true ]);
 			$this->setData(['theme','footer','displayCopyright', true ]);
 			$this->setData(['core', 'dataVersion', 9100]);
-			$this->SaveData();
+			$this->saveData();
 		}
 		// Version 9.2.00
 		if($this->getData(['core', 'dataVersion']) < 9200) {
@@ -1044,7 +1045,24 @@ class common {
 			$this->setData(['theme','footer','displaySearch', false ]);
 			$this->setData(['config','social','githubId', '' ]);
 			$this->setData(['core', 'dataVersion', 9200]);
-			$this->SaveData();
+			$this->saveData();
+		}
+		// Version 9.2.05
+		if($this->getData(['core', 'dataVersion']) < 9205) {
+			// Nettoyage Swiper
+			if (file_exists('core/vendor/tinymce/templates/swiper.html')) {
+				unlink ('core/vendor/tinymce/templates/swiper.html');
+			}
+			if (is_dir('core/vendor/swiper')) {
+				$dir = getcwd();
+				chdir('core/vendor/swiper');
+				$files = glob('*');
+				foreach($files as $file) unlink($file);
+				chdir($dir);
+				rmdir ('core/vendor/swiper/');
+			}
+			$this->setData(['core', 'dataVersion', 9205]);
+			$this->saveData();
 		}
 	}
 }

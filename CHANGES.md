@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 9.2.05
+- Correction :
+    - Suppression totale de Swiper (dossier source et template Tinymce)
+
 ## Version 9.2.04
 - Correction : 
     - Conserver htaccess dans le dossier temp lors du nettoyage
