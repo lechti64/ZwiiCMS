@@ -143,8 +143,7 @@ class common {
 		}
 
 		// Import des données d'une version 8 et 9
-		//$this->importDataV8();
-		//$this->importDataV9();
+		$this->importDataV9();
 
 		// Génère le fichier de données lorque les deux fichiers sont absents ou seulement le thème est - installation fraîche par défaut
 		if(
@@ -157,10 +156,6 @@ class common {
 			//$this->saveData();
 		} 
 
-		// Lecture des données déjà présentes
-		//if($this->data === [])  {
-		//	$this->readData();
-		//}
 
 		// Mise à jour des données core
 		$this->update();
@@ -498,28 +493,6 @@ class common {
 
 
 	/**
-	 * Import des données de la version 8
-	 * Converti un fichier de données data.json puis le renomme
-	 */
-	public function importDataV8() {
-		if(file_exists(self::DATA_DIR.'data.json')) {
-			// Trois tentatives
-			for($i = 0; $i < 3; $i++) {
-				$tempData = [json_decode(file_get_contents(self::DATA_DIR.'data.json'), true)];			
-				if($tempData) {
-					//$this->saveData($tempData);
-					break;
-				}
-				elseif($i === 2) {
-					exit('Unable to read data file.');
-				}
-				// Pause de 10 millisecondes
-				usleep(10000);
-			}
-		}
-	}
-
-	/**
 	 * Import des données de la version 9
 	 * Convertit un fichier de données data.json puis le renomme
 	 */
@@ -530,10 +503,11 @@ class common {
 			!file_exists(self::DATA_DIR . 'config.json') &&
 			!file_exists(self::DATA_DIR . 'user.json') ) {
 
-			// Trois tentatives
+			// Trois tentatives de lecture
 			for($i = 0; $i < 3; $i++) {
-				$this->setData([json_decode(file_get_contents(self::DATA_DIR.'core.json'), true) + json_decode(file_get_contents(self::DATA_DIR.'theme.json'), true)]);
-				if($this->data) {
+				$tempData=json_decode(file_get_contents(self::DATA_DIR.'core.json'), true);
+				$tempTheme=json_decode(file_get_contents(self::DATA_DIR.'theme.json'), true);
+				if($tempData) {
 					break;
 				}
 				elseif($i === 2) {
@@ -544,7 +518,12 @@ class common {
 			}
 			rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_data.json');
 			rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
-			//$this->saveData();
+			$this->setData(['config',$tempData['config']]);
+			$this->setData(['core',$tempData['core']]);			
+			$this->setData(['user',$tempData['user']]);			
+			$this->setData(['page',$tempData['page']]);
+			$this->setData(['module',$tempData['module']]);
+			$this->setData(['theme',$tempTheme]);
 		}
 	}
 
@@ -799,7 +778,7 @@ class common {
 		$lang='fr';		
 		//Retourne une chaine contenant le dossier à créer
 		$folder = $this->dirData ($keys[0],$lang);
-		// Constructeur du module de sauvegarde
+		// Constructeur 
 		$db = new \Prowebcraft\JsonDb([
 			'name' => $keys[0] . '.json',
 			'dir' => $folder,
@@ -837,7 +816,7 @@ class common {
 	 * Initialisation des données
 	 * @param array $keys Clé(s) des données
 	 */
-	public function iniData($keys = NULL) {
+	public function iniData() {
 
 		// Initialisation des 5 zones de stockage
 		require_once('core/module/install/ressource/defaultdata.php'); 
