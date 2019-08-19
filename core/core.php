@@ -29,7 +29,6 @@ class common {
 	const GROUP_MEMBER = 1;
 	const GROUP_MODERATOR = 2;
 	const GROUP_ADMIN = 3;
-	// Dossier de travail
 	const BACKUP_DIR = 'site/backup/';
 	const DATA_DIR = 'site/data/';
 	const FILE_DIR = 'site/file/';
@@ -143,25 +142,25 @@ class common {
 			$this->input['_COOKIE'] = $_COOKIE;
 		}
 
-		// Import des données d'une version 8		
-		$this->importDataV8();
-		$this->importDataV9();
+		// Import des données d'une version 8 et 9
+		//$this->importDataV8();
+		//$this->importDataV9();
 
 		// Génère le fichier de données lorque les deux fichiers sont absents ou seulement le thème est - installation fraîche par défaut
 		if(
 			file_exists(self::DATA_DIR.'config.json')  === false ||
 		    file_exists(self::DATA_DIR.'core.json')   === false || 
 		    file_exists(self::DATA_DIR.'theme.json')  === false ||
-		    file_exists(self::DATA_DIR.'user.json')  === false ) {
-			include_once('core/module/install/ressource/defaultdata.php');   
-			$this->setData([install::$defaultData]);			
-			$this->saveData();
+		    file_exists(self::DATA_DIR.'user.json')  === false ) {  
+			// Initialisation
+			$this->iniData();			
+			//$this->saveData();
 		} 
 
 		// Lecture des données déjà présentes
-		if($this->data === [])  {
-			$this->readData();
-		}
+		//if($this->data === [])  {
+		//	$this->readData();
+		//}
 
 		// Mise à jour des données core
 		$this->update();
@@ -331,24 +330,41 @@ class common {
 	 * @return mixed
 	 */
 	public function getData($keys = null) {
-		// Retourne l'ensemble des données
-		if($keys === null) {
-			return $this->data;
-		}
-		// Descend dans les niveaux de la variable data
-		$tempData = $this->data;
-		foreach($keys as $key) {
-			// Si aucune donnée n'existe retourne null
-			if(isset($tempData[$key]) === false) {
-				return null;
+		$lang = 'fr';
+		if (count($keys) >= 1) {
+			//Retourne une chaine contenant le dossier à créer
+			$folder = $this->dirData ($keys[0],$lang);
+			// Constructeur du module de sauvegarde
+			$db = new \Prowebcraft\JsonDb([
+				'name' => $keys[0] . '.json',
+				'dir' => $folder,
+				'template' => self::TEMP_DIR . 'data.template.json'
+			]);
+			switch(count($keys)) {
+				case 1:
+					$tempData = $db->get($keys[0]);
+					break;				
+				case 2:
+					$tempData = $db->get($keys[0].'.'.$keys[1]);
+					break;
+				case 3:
+					$tempData = $db->get($keys[0].'.'.$keys[1].'.'.$keys[2]);
+					break;
+				case 4:
+					$tempData = $db->get($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3]);
+					break;
+				case 5:
+					$tempData = $db->get($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3].'.'.$keys[4]);
+					break;
+				case 6:
+					$tempData = $db->get($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3].'.'.$keys[4].'.'.$keys[5]);
+					break;
+				case 7:
+					$tempData = $db->get($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3].'.'.$keys[4].'.'.$keys[5].'.'.$keys[6]);
+					break;
 			}
-			// Sinon décent dans les niveaux
-			else {
-				$tempData = $tempData[$key];
-			}
+			return $tempData;
 		}
-		// Retourne les données
-		return $tempData;
 	}
 
 	/**
@@ -480,111 +496,6 @@ class common {
 		return ($this->checkCSRF() AND $this->input['_POST'] !== []);
 	}
 
-	/**
-	 * Enregistre les données dans deux fichiers séparés
-	 * @keys array vide ou avec le tableau complet -> sauvegarde la totalité des données
-	 * 				nombre de clés supérieur à 1 : écriture clé à clé.
-	 */
-	public function saveData($keys = []) {
-		// Langue du frontend en cours d'édition
-		// $lang = $this->readI18nData('frontend');
-		$lang = 'fr';
-		// Fonction appelée sans paramètre ou avec la totalité du tableau
-		switch(count($keys)) {
-			case 0: 
-			case 1:
-				foreach (self::$dataStage as $stageId) {
-					// Stockage dans un sous-dossier localisé
-					// Le dossier de langue existe t-il ?
-					if (!file_exists(self::DATA_DIR . '/' . $lang)) {
-						mkdir (self::DATA_DIR . '/' . $lang);
-					}
-					// Sous-dossier localisé
-					$folder = $this->dirData ($stageId,$lang);
-					// COnstructeur
-					$db[$stageId] = new \Prowebcraft\JsonDb([
-						'name' => $stageId . '.json',
-						'dir' => $folder,
-						'template' => self::TEMP_DIR . 'data.template.json'
-					]);
-					$db[$stageId]->set($stageId,$this->getData([$stageId]));
-					$db[$stageId]->save;
-				}
-				break;
-			// Appel avec des paramètres, initialisation de la classe
-			case 2: case 3: case 4: case 5: case 6: case 7:
-				// Sous-dossier localisé
-				if ($keys[0] === 'page' ||
-					$keys[0] === 'module') {
-						$folder = self::DATA_DIR . $lang . '/';
-				} else {
-					$folder = self::DATA_DIR;
-				}
-				$db = new \Prowebcraft\JsonDb([
-					'name' => $keys[0] . '.json',
-					'dir' => $folder,
-					'template' => self::TEMP_DIR . 'data.template.json'
-				]);
-			// Appel avec paramètres, écriture des valeurs individuelles
-			case 2:
-				$db->set($keys[0],$keys[1]);
-				$db->save;
-				break;
-			case 3:
-				$db->set($keys[0] . '.' . $keys[1],$keys[2]);
-				$db->save;
-				break;
-			case 4:
-				$db->set($keys[0] . '.' . $keys[1] . '.' . $keys[2],$keys[3]);
-				$db->save;
-				break;
-			case 5:
-				$db->set($keys[0] . '.' . $keys[1] . '.' . $keys[2] . '.' . $keys[3] , $keys[4]);
-				$db->save;
-				break;
-			case 6:
-				$db->set($keys[0] . '.' . $keys[1] . '.' . $keys[2] . '.' . $keys[3] . '.' . $keys[4], $keys[5]);
-				$db->save;
-				break;
-			case 7:
-				$db->set($keys[0] . '.' . $keys[1] . '.' . $keys[2] . '.' . $keys[3] . '.' . $keys[4] . '.' . $keys[5], $keys[6]);
-				$db->save;				
-				break;
-		}
-	}
-
-
-
-
-	/**
-	 * 
-	 * Lecture des fichiers de données
-	 * 
-	 */
-	public function readData() {
-		// reset du tableau
-		$lang = 'fr';
-		$tempData = [];	
-
-		// Boucle des modules
-		foreach (self::$dataStage as $stageId) {		
-			// Dossier localisé
-			$folder = $this->dirData($stageId,$lang);
-			// Constructeur de la bdd
-			$db[$stageId] = new \Prowebcraft\JsonDb([
-				'name' => $stageId . '.json',
-				'dir' => $folder,
-				'template' => self::TEMP_DIR . 'data.template.json'
-			  ]);			
-			$dbData = $db[$stageId]->get($stageId);
-			if ($dbData) {
-				$tempData [$stageId] = $dbData;
-			} else {
-				$tempData [$stageId] = [];
-			}
-		}
-		$this->data = $tempData;			
-	}
 
 	/**
 	 * Import des données de la version 8
@@ -596,7 +507,7 @@ class common {
 			for($i = 0; $i < 3; $i++) {
 				$tempData = [json_decode(file_get_contents(self::DATA_DIR.'data.json'), true)];			
 				if($tempData) {
-					$this->saveData();
+					//$this->saveData($tempData);
 					break;
 				}
 				elseif($i === 2) {
@@ -633,7 +544,7 @@ class common {
 			}
 			rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_data.json');
 			rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
-			$this->saveData();
+			//$this->saveData();
 		}
 	}
 
@@ -882,31 +793,76 @@ class common {
 	 * Insert des données
 	 * @param array $keys Clé(s) des données
 	 */
-	public function setData($keys) {
-		switch(count($keys)) {
-			case 1:
-				$this->data = $keys[0];
-				break;
+	public function setData($keys = NULL) {
+
+		// Langue et chemin pour page et module
+		$lang='fr';		
+		//Retourne une chaine contenant le dossier à créer
+		$folder = $this->dirData ($keys[0],$lang);
+		// Constructeur du module de sauvegarde
+		$db = new \Prowebcraft\JsonDb([
+			'name' => $keys[0] . '.json',
+			'dir' => $folder,
+			'template' => self::TEMP_DIR . 'data.template.json'
+		]);
+		switch(count($keys)) {			
 			case 2:
-				$this->data[$keys[0]] = $keys[1];
+				$db->set($keys[0],$keys[1]);
+				$db->save();
 				break;
 			case 3:
-				$this->data[$keys[0]][$keys[1]] = $keys[2];
+				$db->set($keys[0].'.'.$keys[1],$keys[2]);
+				$db->save();				
 				break;
 			case 4:
-				$this->data[$keys[0]][$keys[1]][$keys[2]] = $keys[3];
+				$db->set($keys[0].'.'.$keys[1].'.'.$keys[2],$keys[3]);
+				$db->save();
 				break;
 			case 5:
-				$this->data[$keys[0]][$keys[1]][$keys[2]][$keys[3]] = $keys[4];
+				$db->set($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3],$keys[4]);
+				$db->save();
 				break;
 			case 6:
-				$this->data[$keys[0]][$keys[1]][$keys[2]][$keys[3]][$keys[4]] = $keys[5];
+				$db->set($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3].'.'.$keys[4],$keys[5]);
+				$db->save();
 				break;
 			case 7:
-				$this->data[$keys[0]][$keys[1]][$keys[2]][$keys[3]][$keys[4]][$keys[5]] = $keys[6];
+				$db->set($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3].'.'.$keys[4].'.'.$keys[5],$keys[6]);
+				$db->save();
 				break;
 		}
 	}
+
+	/**
+	 * Initialisation des données
+	 * @param array $keys Clé(s) des données
+	 */
+	public function iniData($keys = NULL) {
+
+		// Initialisation des 5 zones de stockage
+		require_once('core/module/install/ressource/defaultdata.php'); 
+
+		// Langue et chemin pour page et module
+		$lang='fr';		
+
+		foreach (self::$dataStage as $stageId) {
+			// Stockage dans un sous-dossier localisé
+			// Le dossier de langue existe t-il ?
+			if (!file_exists(self::DATA_DIR . '/' . $lang)) {
+				mkdir (self::DATA_DIR . '/' . $lang);
+			}
+			$folder = $this->dirData ($stageId,$lang);
+			// Constructeur
+			$db[$stageId] = new \Prowebcraft\JsonDb([
+				'name' => $stageId . '.json',
+				'dir' => $folder,
+				'template' => self::TEMP_DIR . 'data.template.json'
+			]);
+			$db[$stageId]->set($stageId,initdata::$defaultData[$stageId]);
+			$db[$stageId]->save;
+		}
+	}
+
 
 	/**
 	 * Mises à jour
@@ -916,7 +872,7 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 810) {
 			$this->setData(['config', 'timezone', 'Europe/Paris']);
 			$this->setData(['core', 'dataVersion', 810]);
-			$this->saveData();
+			//$this->saveData();
 		}
 		// Version 8.2.0
 		if($this->getData(['core', 'dataVersion']) < 820) {
@@ -929,56 +885,56 @@ class common {
 			$this->setData(['theme', 'header', 'fontSize', '2em']);
 			$this->setData(['theme', 'footer', 'textColor', 'rgba(33, 34, 35, 1)']);
 			$this->setData(['core', 'dataVersion', 820]);
-			$this->saveData();
+			//$this->saveData();
 		}
 		// Version 8.2.2
 		if($this->getData(['core', 'dataVersion']) < 822) {
 			$this->setData(['config', 'maintenance', false]);
 			$this->setData(['core', 'dataVersion', 822]);
-			$this->saveData();
+			//$this->saveData();
 		}
 		// Version 8.2.6
 		if($this->getData(['core', 'dataVersion']) < 826) {
 			$this->setData(['theme','header','linkHome',true]);
 			$this->setData(['core', 'dataVersion', 826]);
-			$this->saveData();
+			//$this->SaveData();
 		}
 		// Version 8.3.1
 		if($this->getData(['core', 'dataVersion']) < 831) {
 			$this->setData(['theme','header','imageContainer','auto']);
 			$this->setData(['core', 'dataVersion', 831]);
-			$this->saveData();
+			//$this->SaveData();
 		}
 
 		// Version 8.4.0
 		if($this->getData(['core', 'dataVersion']) < 840) {
 			$this->setData(['config','itemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 840]);
-			$this->saveData();
+			//$this->SaveData();
 		}
 		// Version 8.4.4
 		if($this->getData(['core', 'dataVersion']) < 844) {			
 			$this->setData(['core', 'dataVersion', 844]);
-			$this->saveData();
+			//$this->SaveData();
 		}			
 		// Version 8.4.6
 		if($this->getData(['core', 'dataVersion']) < 846) {		
 			$this->setData(['config','itemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 846]);
-			$this->saveData();
+			//$this->saveData();
 		}		
 		// Version 8.5.0
 		if($this->getData(['core', 'dataVersion']) < 850) {
 			$this->setData(['theme','menu','font','Open+Sans']);
 			$this->setData(['core', 'dataVersion', 850]);
-			$this->saveData();
+			//$this->saveData();
 		}	
 		// Version 8.5.1
 		if($this->getData(['core', 'dataVersion']) < 851) {
 			$this->setData(['config','itemsperPage',10]);
 			$this->deleteData(['config','ItemsperPage']);
 			$this->setData(['core', 'dataVersion', 851]);
-			$this->saveData();
+			//$this->saveData();
 		}	
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 9000) {
@@ -988,13 +944,13 @@ class common {
 			}
 			$this->setData(['theme', 'menu','fixed',false]);						
 			$this->setData(['core', 'dataVersion', 9000]);
-			$this->saveData();
+			//$this->saveData();
 		}	
 		// Version 9.0.01
 		if($this->getData(['core', 'dataVersion']) < 9001) {
 			$this->deleteData(['config', 'social', 'googleplusId']);
 			$this->setData(['core', 'dataVersion', 9001]);
-			$this->saveData();
+			//$this->saveData();
 		}
 		// Version 9.0.08
 		if($this->getData(['core', 'dataVersion']) < 9008) {
@@ -1003,31 +959,31 @@ class common {
 			$this->setData(['theme', 'footer', 'fontSize','.8em']);
 			$this->setData(['theme', 'footer', 'font','Open+Sans']);	
 			$this->setData(['core', 'dataVersion', 9008]);
-			$this->saveData();
+			//$this->saveData();
 		}
 		// Version 9.0.09
 		if($this->getData(['core', 'dataVersion']) < 9009) {
 			$this->setData(['core', 'dataVersion', 9009]);
-			$this->SaveData();
+			//$this->saveData();
 		}
 		// Version 9.0.10
 		if($this->getData(['core', 'dataVersion']) < 9010) {
 			$this->deleteData(['config', 'social', 'googleplusId']);			
 			$this->setData(['core', 'dataVersion', 9010]);
-			$this->saveData();
+			//$this->saveData();
 		}
 		// Version 9.0.11
 		if($this->getData(['core', 'dataVersion']) < 9011) {
 			if ($this->getData(['theme','menu','position']) === 'body')
 				$this->setData(['theme','menu','position','site']);
 			$this->setData(['core', 'dataVersion', 9011]);
-			$this->saveData();
+			//$this->saveData();
 		}
 		// Version 9.0.17
 		if($this->getData(['core', 'dataVersion']) < 9017) {
 			$this->setData(['theme','footer','displayVersion', true ]);
 			$this->setData(['core', 'dataVersion', 9017]);
-			$this->saveData();
+			//$this->saveData();
 		}
 		// Version 9.1.0
 		if($this->getData(['core', 'dataVersion']) < 9100) {
@@ -1035,7 +991,7 @@ class common {
 			$this->setData(['theme','footer','displaySiteMap', true ]);
 			$this->setData(['theme','footer','displayCopyright', true ]);
 			$this->setData(['core', 'dataVersion', 9100]);
-			$this->saveData();
+			//$this->saveData();
 		}
 		// Version 9.2.00
 		if($this->getData(['core', 'dataVersion']) < 9200) {
@@ -1045,7 +1001,7 @@ class common {
 			$this->setData(['theme','footer','displaySearch', false ]);
 			$this->setData(['config','social','githubId', '' ]);
 			$this->setData(['core', 'dataVersion', 9200]);
-			$this->saveData();
+			//$this->saveData();
 		}
 		// Version 9.2.05
 		if($this->getData(['core', 'dataVersion']) < 9205) {
@@ -1062,7 +1018,7 @@ class common {
 				rmdir ('core/vendor/swiper/');
 			}
 			$this->setData(['core', 'dataVersion', 9205]);
-			$this->saveData();
+			//$this->saveData();
 		}
 	}
 }
@@ -1096,7 +1052,8 @@ class core extends common {
 			// Date de la dernière suppression
 			$this->setData(['core', 'lastClearTmp', $lastClearTmp]);
 			// Enregistre les données
-			$this->saveData();
+			//$this->saveData();
+			//$this->saveData(['core', 'lastClearTmp', $lastClearTmp]);
 		}
 
 		// Backup automatique des données
@@ -1122,7 +1079,8 @@ class core extends common {
 				// Date du dernier backup
 				$this->setData(['core', 'lastBackup', $lastBackup]);
 				// Enregistre les données
-				$this->saveData();
+				//$this->saveData();
+				//$this->saveData(['core', 'lastBackup', $lastBackup]);
 				// Supprime les backups de plus de 30 jours
 				$iterator = new DirectoryIterator(self::BACKUP_DIR);
 				foreach($iterator as $fileInfos) {
@@ -1439,10 +1397,12 @@ class core extends common {
 						// Sinon traitement des données de sortie qui requiert qu'aucune notice ne soit présente
 						else {
 							// Enregistrement des données
+							/*
 							if($output['state'] !== false) {
 								$this->setData([$module->getData()]);
-								$this->saveData([$module->getData()]);
+								//$this->saveData();
 							}
+							*/
 							// Notification
 							if($output['notification']) {
 								if($output['state'] === true) {

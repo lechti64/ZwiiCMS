@@ -1,5 +1,5 @@
 <?php
-class install extends common {
+class initdata extends common {
 
     public static $defaultData = [
 		'config' => [
