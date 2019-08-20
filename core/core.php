@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.03.dev';
+	const ZWII_VERSION = '10.0.04.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -68,6 +68,8 @@ class common {
 	];
 	public static $inputBefore = [];
 	public static $inputNotices = [];
+	public static $importNotices = [];
+	public static $coreNotices = [];
 	public $output = [
 		'access' => true,
 		'content' => '',
@@ -145,7 +147,8 @@ class common {
 		// Import version 9 
 		if (file_exists(self::DATA_DIR . 'core.json') === true && 
 			$this->getData(['core','dataVersion']) < 10000) {
-				$this->importData();	
+				$this->importData();
+				common::$importNotices [] = "Importation réalisée avec succès" ;	
 			}
 			
 		// Installation fraîche, initialisation des modules manquants
@@ -153,6 +156,7 @@ class common {
 			$folder = $this->dirData ($stageId, 'fr');
 			if (file_exists($folder . $stageId .'.json') === false) {
 				$this->iniData($stageId);
+				common::$coreNotices [] = $stageId ;
 			    // Prévoir une notification ici
 			}
 		}
@@ -515,6 +519,7 @@ class common {
 	 * Convertit un fichier de données data.json puis le renomme
 	 */
 	public function importData() {	
+			$lang = 'fr';
 			// Trois tentatives de lecture
 			for($i = 0; $i < 3; $i++) {
 				$tempData=json_decode(file_get_contents(self::DATA_DIR.'core.json'), true);
@@ -529,8 +534,12 @@ class common {
 				usleep(10000);
 			}
 			// Backup
-			rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_data.json');
+			rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_core.json');
 			rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
+			// Dossier de langues
+			if (!file_exists(self::DATA_DIR . '/' . $lang)) {
+				mkdir (self::DATA_DIR . '/' . $lang);
+			}
 			// Ecriture des données
 			$this->setData(['config',$tempData['config']]);
 			$this->setData(['core',$tempData['core']]);			
@@ -2453,6 +2462,15 @@ class layout extends common {
 	 * Affiche la notification
 	 */
 	public function showNotification() {
+		if (common::$importNotices) {
+			$notification = common::$importNotices [0];
+			$notificationClass = 'notificationSuccess';
+		}
+		if (common::$coreNotices) {
+			$notification = 'Données absentes, restauration de <p> | ';
+			foreach (common::$coreNotices as $item) $notification .= $item . ' | ';
+			$notificationClass = 'notificationError';
+		}
 		if(common::$inputNotices) {
 			$notification = 'Impossible de soumettre le formulaire, car il contient des erreurs';
 			$notificationClass = 'notificationError';
