@@ -142,17 +142,21 @@ class common {
 			$this->input['_COOKIE'] = $_COOKIE;
 		}
 
-		// Import version 9 ou initialisation 
-	//	if (file_exists(self::DATA_DIR . 'config.json') === true && 
-	//		$this->getData(['config','dataVersion']) < 10000) {
-	//			$this->importData();	
-	//		}
-		if (file_exists(self::DATA_DIR . 'config.json') === false ||
-			file_exists(self::DATA_DIR . 'core.json') === false ||
-			file_exists(self::DATA_DIR . 'theme.json') === false ||
-			file_exists(self::DATA_DIR . 'user.json') === false 	) {
-			$this->iniData();
+		// Import version 9 
+		if (file_exists(self::DATA_DIR . 'core.json') === true && 
+			$this->getData(['core','dataVersion']) < 10000) {
+				$this->importData();	
 			}
+			
+		// Installation fraîche, initialisation des modules manquants
+		foreach (self::$dataStage as $stageId) {
+			$folder = $this->dirData ($stageId, 'fr');
+			if (file_exists($folder . $stageId .'.json') === false) {
+				$this->iniData($stageId);
+			    // Prévoir une notification ici
+			}
+		}
+		
 
 		// Mise à jour des données core
 		$this->update();
@@ -533,7 +537,7 @@ class common {
 			$this->setData(['user',$tempData['user']]);			
 			$this->setData(['page',$tempData['page']]);
 			$this->setData(['module',$tempData['module']]);
-			$this->setData(['theme',$tempTheme]);
+			$this->setData(['theme',$tempTheme['theme']]);
 	}
 
 	/**
@@ -607,7 +611,7 @@ class common {
 			// Sauf pour les pages et les modules
 			if ($stageId === 'page' ||
 				$stageId === 'module') {
-					$folder = self::DATA_DIR . $lang . DIRECTORY_SEPARATOR ;
+					$folder = self::DATA_DIR . $lang . '/' ;
 			} else {
 				$folder = self::DATA_DIR;
 			}
@@ -823,32 +827,31 @@ class common {
 
 	/**
 	 * Initialisation des données
-	 * @param array $keys Clé(s) des données
-	 */
-	public function iniData() {
-
-		// Initialisation des 5 zones de stockage
+	 * @param array $module : nom du module à générer 
+	 * choix valides :  core config user theme page module
+	 */ 
+	public function iniData($module) {
+		
+		// Tableau avec les données vierges
 		require_once('core/module/install/ressource/defaultdata.php'); 
 
-		// Langue et chemin pour page et module
-		$lang='fr';		
+		// Langue 
+		$lang='fr';	
 
-		foreach (self::$dataStage as $stageId) {
-			// Stockage dans un sous-dossier localisé
-			// Le dossier de langue existe t-il ?
-			if (!file_exists(self::DATA_DIR . '/' . $lang)) {
-				mkdir (self::DATA_DIR . '/' . $lang);
-			}
-			$folder = $this->dirData ($stageId,$lang);
-			// Constructeur
-			$db[$stageId] = new \Prowebcraft\JsonDb([
-				'name' => $stageId . '.json',
-				'dir' => $folder,
-				'template' => self::TEMP_DIR . 'data.template.json'
-			]);
-			$db[$stageId]->set($stageId,initdata::$defaultData[$stageId]);
-			$db[$stageId]->save;
+		// Stockage dans un sous-dossier localisé
+		// Le dossier de langue existe t-il ?
+		if (!file_exists(self::DATA_DIR . '/' . $lang)) {
+			mkdir (self::DATA_DIR . '/' . $lang);
 		}
+		$folder = $this->dirData ($module,$lang);
+		// Constructeur
+		$db = new \Prowebcraft\JsonDb([
+			'name' => $module . '.json',
+			'dir' => $folder,
+			'template' => self::TEMP_DIR . 'data.template.json'
+		]);
+		$db->set($module,initdata::$defaultData[$module]);
+		$db->save;
 	}
 
 
