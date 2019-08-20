@@ -1,5 +1,21 @@
 # Changelog
 
+## Version 10.0.00
+- Améliorations : 
+    - Architecture de stockage des données.
+        - Les données sont désormais stockées par zone dans des fichiers distincts (core, config, theme, user, page et module).
+        - Les données relatives aux pages et aux modules sont stockées dans un dossier localisé fr par défaut, afin d'anticiper les fonctionnalités multi-langues.
+    - Procédures internes de gestion des données. 
+        - Les données du site sont chargées à la demande au lieu d'être lues dans leur intégralité.
+        - Les mises à jour et effacement sont appliquées en direct sur le disque. 
+- Modifications : 
+    - Procédure d'installation : 
+        - Les données manquantes sont installées  au cas par cas, les données présentes ne sont plus écrasées par l'installation. Par exemple, la suppression de core.json n'entraêne pas la réinstallation totale des données du site.
+        - Une notification est affichée quand un fichier  de données manquant a été réinstallé.
+    - Procédure d'importation : 
+        - L'importation des données est possible uniquement à partir d'une version 9. 
+        - Une notification est affichée après l'importation.
+
 ## Version 9.2.05
 - Correction :
     - Suppression totale de Swiper (dossier source et template Tinymce)
