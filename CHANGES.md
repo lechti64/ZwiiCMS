@@ -10,7 +10,7 @@
         - Les mises à jour et effacement sont appliquées en direct sur le disque. 
 - Modifications : 
     - Procédure d'installation : 
-        - Les données manquantes sont installées  au cas par cas, les données présentes ne sont plus écrasées par l'installation. Par exemple, la suppression de core.json n'entraêne pas la réinstallation totale des données du site.
+        - Les données manquantes sont installées  au cas par cas, les données présentes ne sont plus écrasées par l'installation. Par exemple, la suppression de core.json n'entraîne pas la réinstallation totale des données du site.
         - Une notification est affichée quand un fichier  de données manquant a été réinstallé.
     - Procédure d'importation : 
         - L'importation des données est possible uniquement à partir d'une version 9. 
