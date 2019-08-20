@@ -143,7 +143,7 @@ class common {
 		}
 
 		// Import des données d'une version 8 et 9
-		$this->importDataV9();
+		$this->importData();
 
 		// Génère le fichier de données lorque les deux fichiers sont absents ou seulement le thème est - installation fraîche par défaut
 		if(
@@ -496,12 +496,9 @@ class common {
 	 * Import des données de la version 9
 	 * Convertit un fichier de données data.json puis le renomme
 	 */
-	public function importDataV9() {		
+	public function importData() {		
 		// Détecter les fichiers d'une V9
-		if (file_exists(self::DATA_DIR . 'core.json') &&
-			file_exists(self::DATA_DIR . 'theme.json') &&
-			!file_exists(self::DATA_DIR . 'config.json') &&
-			!file_exists(self::DATA_DIR . 'user.json') ) {
+		if ($this->getData(['config','dataVersion'] < 10000)) {
 
 			// Trois tentatives de lecture
 			for($i = 0; $i < 3; $i++) {
@@ -524,6 +521,7 @@ class common {
 			$this->setData(['page',$tempData['page']]);
 			$this->setData(['module',$tempData['module']]);
 			$this->setData(['theme',$tempTheme]);
+			die();
 		}
 	}
 
@@ -598,7 +596,7 @@ class common {
 			// Sauf pour les pages et les modules
 			if ($stageId === 'page' ||
 				$stageId === 'module') {
-					$folder = self::DATA_DIR . $lang . '/';
+					$folder = self::DATA_DIR . $lang . DIRECTORY_SEPARATOR ;
 			} else {
 				$folder = self::DATA_DIR;
 			}
