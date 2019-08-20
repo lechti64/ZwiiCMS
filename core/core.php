@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.3.00.dev';
+	const ZWII_VERSION = '10.0.02.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -142,24 +142,21 @@ class common {
 			$this->input['_COOKIE'] = $_COOKIE;
 		}
 
-		// Import des données d'une version 8 et 9
-		$this->importData();
-
-		// Génère le fichier de données lorque les deux fichiers sont absents ou seulement le thème est - installation fraîche par défaut
-		if(
-			file_exists(self::DATA_DIR.'config.json')  === false ||
-		    file_exists(self::DATA_DIR.'core.json')   === false || 
-		    file_exists(self::DATA_DIR.'theme.json')  === false ||
-		    file_exists(self::DATA_DIR.'user.json')  === false ) {  
-			// Initialisation
-			$this->iniData();			
-			//$this->saveData();
-		} 
-
+		// Import version 9 ou initialisation 
+	//	if (file_exists(self::DATA_DIR . 'config.json') === true && 
+	//		$this->getData(['config','dataVersion']) < 10000) {
+	//			$this->importData();	
+	//		}
+		if (file_exists(self::DATA_DIR . 'config.json') === false ||
+			file_exists(self::DATA_DIR . 'core.json') === false ||
+			file_exists(self::DATA_DIR . 'theme.json') === false ||
+			file_exists(self::DATA_DIR . 'user.json') === false 	) {
+			$this->iniData();
+			}
 
 		// Mise à jour des données core
 		$this->update();
-	
+
 		// Utilisateur connecté
 		if($this->user === []) {
 			$this->user = $this->getData(['user', $this->getInput('ZWII_USER_ID')]);
@@ -270,27 +267,44 @@ class common {
 	 * @param array $keys Clé(s) des données
 	 */
 	public function deleteData($keys) {
+		// Langue et chemin pour page et module
+		$lang='fr';		
+		//Retourne une chaine contenant le dossier à créer
+		$folder = $this->dirData ($keys[0],$lang);
+		// Constructeur 
+		$db = new \Prowebcraft\JsonDb([
+			'name' => $keys[0] . '.json',
+			'dir' => $folder,
+			'template' => self::TEMP_DIR . 'data.template.json'
+		]);
 		switch(count($keys)) {
-			case 1 :
-				unset($this->data[$keys[0]]);
+			case 1:
+				$db->delete($keys[0]);
+				$db->save();
 				break;
 			case 2:
-				unset($this->data[$keys[0]][$keys[1]]);
+				$db->delete($keys[0].'.'.$keys[1]);
+				$db->save();
 				break;
 			case 3:
-				unset($this->data[$keys[0]][$keys[1]][$keys[2]]);
+				$db->delete($keys[0].'.'.$keys[1].'.'.$keys[2]);
+				$db->save();				
 				break;
 			case 4:
-				unset($this->data[$keys[0]][$keys[1]][$keys[2]][$keys[3]]);
+				$db->deleteet($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3]);
+				$db->save();
 				break;
 			case 5:
-				unset($this->data[$keys[0]][$keys[1]][$keys[2]][$keys[3]][$keys[4]]);
+				$db->delete($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3].'.'.$keys[4]);
+				$db->save();
 				break;
 			case 6:
-				unset($this->data[$keys[0]][$keys[1]][$keys[2]][$keys[3]][$keys[4]][$keys[5]]);
+				$db->delete($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3].'.'.$keys[4].'.'.$keys[5]);
+				$db->save();
 				break;
 			case 7:
-				unset($this->data[$keys[0]][$keys[1]][$keys[2]][$keys[3]][$keys[4]][$keys[5]][$keys[6]]);
+				$db->delete($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3].'.'.$keys[4].'.'.$keys[5].'.'.$keys[6]);
+				$db->save();
 				break;
 		}
 	}
@@ -496,10 +510,7 @@ class common {
 	 * Import des données de la version 9
 	 * Convertit un fichier de données data.json puis le renomme
 	 */
-	public function importData() {		
-		// Détecter les fichiers d'une V9
-		if ($this->getData(['config','dataVersion'] < 10000)) {
-
+	public function importData() {	
 			// Trois tentatives de lecture
 			for($i = 0; $i < 3; $i++) {
 				$tempData=json_decode(file_get_contents(self::DATA_DIR.'core.json'), true);
@@ -513,16 +524,16 @@ class common {
 				// Pause de 10 millisecondes
 				usleep(10000);
 			}
+			// Backup
 			rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_data.json');
 			rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
+			// Ecriture des données
 			$this->setData(['config',$tempData['config']]);
 			$this->setData(['core',$tempData['core']]);			
 			$this->setData(['user',$tempData['user']]);			
 			$this->setData(['page',$tempData['page']]);
 			$this->setData(['module',$tempData['module']]);
 			$this->setData(['theme',$tempTheme]);
-			die();
-		}
 	}
 
 	/**
@@ -997,6 +1008,12 @@ class common {
 			$this->setData(['core', 'dataVersion', 9205]);
 			//$this->saveData();
 		}
+		// Version 10.0.00
+		if($this->getData(['core', 'dataVersion']) < 10000) {
+			$this->setData(['core', 'dataVersion', 10000]);
+			//$this->saveData();
+		}
+
 	}
 }
 
