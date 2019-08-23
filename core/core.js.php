@@ -383,7 +383,7 @@ $(document).ready(function(){
  */
 
 $(document).ready(function(){
-	$("#barSelectLanguage").change(function(){
-	  this.form.submit();
+	$("#barSelectLanguage").click(function(){
+		$("#barFormSelectLanguage").submit();	  
 	});
   });

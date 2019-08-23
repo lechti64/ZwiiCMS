@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.06.dev';
+	const ZWII_VERSION = '10.0.07.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -64,7 +64,7 @@ class common {
 		'pt'	=> 'Portugais (pt)',
 		'sv'	=> 'Suédois (sv)',
 		'ro'	=> 'Roumain (ro)',
-		'cz'	=> 	'Tchèque (cz)'
+		'cz'	=> 'Tchèque (cz)'
 	];
 	public static $dataStage = [
 		'config',
@@ -146,8 +146,6 @@ class common {
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $timezone;
-	public static $i18nBackEnd = 'fr';
-	public static $i18nFrontEnd = 'fr';
 	private $url = '';
 	private $user = [];
 
@@ -183,8 +181,9 @@ class common {
 			}
 		}
 		
-
-		// 1 Langue sélectionnée par l'utilisateur  prioritaire
+		// Déterminer la langue du visiteur 
+		// --------------------------------
+		// 1 Langue sélectionnée par l'utilisateur prioritaire
 		if (isset($_COOKIE['ZWII_USER_I18N'])) {
 			$i18nPOST = $_COOKIE['ZWII_USER_I18N'];
 		} else {
@@ -192,21 +191,19 @@ class common {
 		}
 		// 2 Langue du navigateur
 		$i18nHTTP = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);	
-		// 3 Langue du backend
-		//$i18nBackEnd  = $this->getData('config','i18n');
-		$i18nBackEnd = 'fr';
-		// Détermine la langue
-		common::$i18nFrontEnd = $i18nPOST === '' ? $i18nHTTP : $i18nPOST;
-		// !! Vérifier si l'anglais est bien installée sinon fr
-		if ($this->geti18n() !== 'fr') {
-			common::$i18nFrontEnd = key_exists(common::$i18nFrontEnd, self::$i18nList) ? common::$i18nFrontEnd : 'en';
-		}
+
+		// !! La langue du navigateur est elle disponible sinon fr
+		$i18nHTTP = key_exists($i18nHTTP, self::$i18nList) ? $i18nHTTP : 'fr';
+
+		// Détermine la langue selon la priorité
+		$i18nFrontEnd = $i18nPOST === '' ? $i18nHTTP : $i18nPOST;
+
 		// Sauvegarder la sélection
-		//setcookie('ZWII_USER_I18N',common::$i18nFrontEnd,strtotime("+1 year"), helper::baseUrl(false, false));
-		$this->seti18N(common::$i18nFrontEnd);
+		$this->seti18N($i18nFrontEnd);
 				
 		// Mise à jour des données core
 		$this->update();
+
 
 		// Utilisateur connecté
 		if($this->user === []) {
@@ -358,15 +355,35 @@ class common {
 		}
 	}
 
+	/**
+	 * Récupère la langue sélectionnée
+	 * @param aucun
+	 * @return string code iso de la langue
+	 */	
 	public function geti18n() {
-		// Choix de la langue		 
-		return (common::$i18nFrontEnd);
+		// Vérifier l'existence du fichier de langue
+		if (isset ($_COOKIE["ZWII_USER_I18N"]) && 
+				key_exists($_COOKIE["ZWII_USER_I18N"], $this->i18nInstalled())) {
+			return ($_COOKIE["ZWII_USER_I18N"]);
+		} else {
+			// La valeur du cookie n'est pas une version installée, remettre à fr
+			if (isset ($_COOKIE["ZWII_USER_I18N"])) {
+				helper::deleteCookie("ZWII_USER_I18N");
+				$this->seti18n();
+			}
+			return ('fr');
+		}		
 
 	}
 
+	/**
+	 * Stocke la langue sélectionnée
+	 * @param @string langue sosu forem iso
+	 * @return @bool réussite ou échec
+	 */	
 	public function seti18n($lan = 'fr') {	 
 	 	// Sauvegarder la sélection
-		setcookie('ZWII_USER_I18N',$lan,strtotime("+1 year"), helper::baseUrl(false, false));
+		return (setcookie('ZWII_USER_I18N',$lan,strtotime("+1 year"), helper::baseUrl(false, false)));
 	}
 
 
@@ -804,7 +821,7 @@ class common {
 	* @return array liste des pages installées sous la forme "fr" -> "Français"
 	* La fonction vérifie l'existence du dossier et des deux fichiers de configuration
 	*/
-	public function i18nList ($emptyLine = false) {		
+	public function i18nInstalled ($emptyLine = false) {		
 		$listLanguages = $emptyLine === true ? [''=>'Sélectionner'] : [];
 		$tempData = array_diff(scandir(self::DATA_DIR), array('..', '.'));
 		foreach ($tempData as $item) {
@@ -2580,10 +2597,10 @@ class layout extends common {
 				// ne pas afficher la barre de langue pour une seule
 				// Sélection des langues installées	
 				echo $this->geti18n();
-				if (sizeof($this->i18nList()) > 1) {
+				if (sizeof($this->i18nInstalled()) > 1) {
 					$leftItems .= '<li><form method="POST" action="' . helper::baseUrl(true) . 'i18n" id="barFormSelectLanguage">';
 					$leftItems .= '<select id="barSelectLanguage" name="i18nSelect" >';
-					foreach ($this->i18nList() as $itemKey => $item) {
+					foreach ($this->i18nInstalled() as $itemKey => $item) {
 						$leftItems .= '<option ';
 						$leftItems .= 'value="' . $itemKey .'"';
 						if ($this->geti18n() === $itemKey) {

@@ -19,7 +19,7 @@
 			<h4>Ajouter une localisation</h4>
 			<div class="row">			
 				<div class="col5">
-					<?php echo template::select('i18nLanguageCopyFrom', $this->i18nList(true), [
+					<?php echo template::select('i18nLanguageCopyFrom', $this->i18nInstalled(true), [
 						'label' => 'Copier à partir ',
 						'help' => 'Pour démarrer sans copie des pages te des modules d\'une langue existante, ne rien sélectionner',
 						'selected' => -1 					
@@ -43,7 +43,7 @@
 		<div class="block">
 			<h4>Supprimer une localisation</h4>
 			<div class="row">
-				<?php echo template::select('i18nLanguageRemove', $this->i18nList(true), [
+				<?php echo template::select('i18nLanguageRemove', $this->i18nInstalled(true), [
 					'label' => 'Localisations installées',
 					'help' => 'La suppression d\'une langue entraîne l\'effacement des pages et des modules',
 					'selected' => -1 					
