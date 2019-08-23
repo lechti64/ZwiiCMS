@@ -376,3 +376,14 @@ $(document).ready(function(){
 		$("#navfixedconnected .navLevel2").css({ 'pointer-events' : 'none' });
 	});
 });
+
+
+/**
+ * Traitement du changement de langue
+ */
+
+$(document).ready(function(){
+	$("#barSelectLanguage").change(function(){
+	  this.form.submit();
+	});
+  });

@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.04.dev';
+	const ZWII_VERSION = '10.0.06.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -46,13 +46,31 @@ class common {
         'search',
 		'sitemap',
 		'theme',
-		'user'
+		'user',
+		'i18n'
+	];
+	public static $i18nList = [
+		'de' 	=> 'Allemand (de)'	,
+		'en'	=> 'Anglais (en)',
+		'bg'	=> 'Bulgare (bg)',
+		'da'	=> 'Danois (da)',
+		'es'	=> 'Espagnol (es)',
+		'fi'	=> 'Finois (fi)',
+		'fr'	=> 'Français (fr)',
+		'is' 	=> 'Islandais (is)',
+		'it'	=> 'Italien (it)',
+		'nl' 	=> 'Néerlandais (nl)',
+		'no'	=> 'Norvégien (no)' ,
+		'pt'	=> 'Portugais (pt)',
+		'sv'	=> 'Suédois (sv)',
+		'ro'	=> 'Roumain (ro)',
+		'cz'	=> 	'Tchèque (cz)'
 	];
 	public static $dataStage = [
 		'config',
 		'core',
+		'module',			
 		'page',
-		'module',
 		'user',
 		'theme'
 	];
@@ -128,8 +146,12 @@ class common {
 		self::GROUP_ADMIN => 'Administrateur'
 	];
 	public static $timezone;
+	public static $i18nBackEnd = 'fr';
+	public static $i18nFrontEnd = 'fr';
 	private $url = '';
 	private $user = [];
+
+
 
 	/**
 	 * Constructeur commun
@@ -152,16 +174,37 @@ class common {
 			}
 			
 		// Installation fraîche, initialisation des modules manquants
+		// La langue d'installation par défaut est fr
 		foreach (self::$dataStage as $stageId) {
 			$folder = $this->dirData ($stageId, 'fr');
 			if (file_exists($folder . $stageId .'.json') === false) {
-				$this->iniData($stageId);
+				$this->iniData($stageId,'fr');
 				common::$coreNotices [] = $stageId ;
-			    // Prévoir une notification ici
 			}
 		}
 		
 
+		// 1 Langue sélectionnée par l'utilisateur  prioritaire
+		if (isset($_COOKIE['ZWII_USER_I18N'])) {
+			$i18nPOST = $_COOKIE['ZWII_USER_I18N'];
+		} else {
+			$i18nPOST = '';
+		}
+		// 2 Langue du navigateur
+		$i18nHTTP = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);	
+		// 3 Langue du backend
+		//$i18nBackEnd  = $this->getData('config','i18n');
+		$i18nBackEnd = 'fr';
+		// Détermine la langue
+		common::$i18nFrontEnd = $i18nPOST === '' ? $i18nHTTP : $i18nPOST;
+		// !! Vérifier si l'anglais est bien installée sinon fr
+		if ($this->geti18n() !== 'fr') {
+			common::$i18nFrontEnd = key_exists(common::$i18nFrontEnd, self::$i18nList) ? common::$i18nFrontEnd : 'en';
+		}
+		// Sauvegarder la sélection
+		//setcookie('ZWII_USER_I18N',common::$i18nFrontEnd,strtotime("+1 year"), helper::baseUrl(false, false));
+		$this->seti18N(common::$i18nFrontEnd);
+				
 		// Mise à jour des données core
 		$this->update();
 
@@ -274,11 +317,9 @@ class common {
 	 * Supprime des données
 	 * @param array $keys Clé(s) des données
 	 */
-	public function deleteData($keys) {
-		// Langue et chemin pour page et module
-		$lang='fr';		
+	public function deleteData($keys) {		
 		//Retourne une chaine contenant le dossier à créer
-		$folder = $this->dirData ($keys[0],$lang);
+		$folder = $this->dirData ($keys[0],$this->geti18n());
 		// Constructeur 
 		$db = new \Prowebcraft\JsonDb([
 			'name' => $keys[0] . '.json',
@@ -317,6 +358,18 @@ class common {
 		}
 	}
 
+	public function geti18n() {
+		// Choix de la langue		 
+		return (common::$i18nFrontEnd);
+
+	}
+
+	public function seti18n($lan = 'fr') {	 
+	 	// Sauvegarder la sélection
+		setcookie('ZWII_USER_I18N',$lan,strtotime("+1 year"), helper::baseUrl(false, false));
+	}
+
+
 
 	/**
 	 * Récupérer une copie d'écran du site Web pour le tag image si le fichier n'existe pas
@@ -347,10 +400,10 @@ class common {
 	 * @return mixed
 	 */
 	public function getData($keys = null) {
-		$lang = 'fr';
+
 		if (count($keys) >= 1) {
 			//Retourne une chaine contenant le dossier à créer
-			$folder = $this->dirData ($keys[0],$lang);
+			$folder = $this->dirData ($keys[0],$this->geti18n());
 			// Constructeur du module de sauvegarde
 			$db = new \Prowebcraft\JsonDb([
 				'name' => $keys[0] . '.json',
@@ -519,7 +572,7 @@ class common {
 	 * Convertit un fichier de données data.json puis le renomme
 	 */
 	public function importData() {	
-			$lang = 'fr';
+
 			// Trois tentatives de lecture
 			for($i = 0; $i < 3; $i++) {
 				$tempData=json_decode(file_get_contents(self::DATA_DIR.'core.json'), true);
@@ -537,8 +590,8 @@ class common {
 			rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_core.json');
 			rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
 			// Dossier de langues
-			if (!file_exists(self::DATA_DIR . '/' . $lang)) {
-				mkdir (self::DATA_DIR . '/' . $lang);
+			if (!file_exists(self::DATA_DIR . '/' . $this->geti18n())) {
+				mkdir (self::DATA_DIR . '/' . $this->geti18n());
 			}
 			// Ecriture des données
 			$this->setData(['config',$tempData['config']]);
@@ -744,6 +797,28 @@ class common {
 	}
 	
 
+	/**
+	* Retourne la liste les langues installées
+	* @return array liste de dossiers
+	* @param bool true la première contient une indication de sélection - false la liste est neutre
+	* @return array liste des pages installées sous la forme "fr" -> "Français"
+	* La fonction vérifie l'existence du dossier et des deux fichiers de configuration
+	*/
+	public function i18nList ($emptyLine = false) {		
+		$listLanguages = $emptyLine === true ? [''=>'Sélectionner'] : [];
+		$tempData = array_diff(scandir(self::DATA_DIR), array('..', '.'));
+		foreach ($tempData as $item) {
+			if (is_dir(self::DATA_DIR . $item) === true) {
+				if (is_file(self::DATA_DIR . $item . '/' . 'page.json') === true  && 
+					is_file(self::DATA_DIR . $item . '/' . 'module.json') === true ) {
+					$listLanguages [$item] = self::$i18nList [$item];
+				}
+			}
+		}		
+		return $listLanguages;
+	}
+
+
 
 		/**
 	 * Envoi un mail
@@ -795,11 +870,9 @@ class common {
 	 * @param array $keys Clé(s) des données
 	 */
 	public function setData($keys = NULL) {
-
-		// Langue et chemin pour page et module
-		$lang='fr';		
+	
 		//Retourne une chaine contenant le dossier à créer
-		$folder = $this->dirData ($keys[0],$lang);
+		$folder = $this->dirData ($keys[0],$this->geti18n());
 		// Constructeur 
 		$db = new \Prowebcraft\JsonDb([
 			'name' => $keys[0] . '.json',
@@ -839,13 +912,10 @@ class common {
 	 * @param array $module : nom du module à générer 
 	 * choix valides :  core config user theme page module
 	 */ 
-	public function iniData($module) {
+	public function iniData($module, $lang = 'fr') {
 		
 		// Tableau avec les données vierges
 		require_once('core/module/install/ressource/defaultdata.php'); 
-
-		// Langue 
-		$lang='fr';	
 
 		// Stockage dans un sous-dossier localisé
 		// Le dossier de langue existe t-il ?
@@ -1022,6 +1092,7 @@ class common {
 		}
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
+			$this->setData(['config','i18n','fr']);
 			$this->setData(['core', 'dataVersion', 10000]);
 			//$this->saveData();
 		}
@@ -2086,6 +2157,7 @@ class layout extends common {
      * Affiche le copyright
      */
     public function showCopyright() {
+		
 		// Ouverture Bloc copyright
 		$items = '<div id="footerCopyright">';
 		$items .= '<span id="footerFontCopyright">';
@@ -2133,8 +2205,10 @@ class layout extends common {
 			strip_tags(str_replace('/', '_', $this->getUrl())) . 
 			'" data-tippy-content="Connexion à l\'administration" rel="nofollow">Connexion</a></span>';
 		}
+
 		// Fermeture du bloc copyright
-        $items .= '</span></div>';
+		$items .= '</span></div>';
+		$items .=  $this->geti18n();
         echo $items;
 	}
 	
@@ -2503,6 +2577,23 @@ class layout extends common {
 			// Items de gauche
 			$leftItems = '';
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
+				// ne pas afficher la barre de langue pour une seule
+				// Sélection des langues installées	
+				echo $this->geti18n();
+				if (sizeof($this->i18nList()) > 1) {
+					$leftItems .= '<li><form method="POST" action="' . helper::baseUrl(true) . 'i18n" id="barFormSelectLanguage">';
+					$leftItems .= '<select id="barSelectLanguage" name="i18nSelect" >';
+					foreach ($this->i18nList() as $itemKey => $item) {
+						$leftItems .= '<option ';
+						$leftItems .= 'value="' . $itemKey .'"';
+						if ($this->geti18n() === $itemKey) {
+							$leftItems .= ' selected ';
+						}
+						$leftItems .= ' >' . $item . '</option>';
+					}
+				}			
+				$leftItems .= '</select></form></li>';
+				$leftItems .= '&nbsp;';
 				$leftItems .= '<li><select id="barSelectPage">';
 				$leftItems .= '<option value="">Choisissez une page</option>';
 				$leftItems .= '<optgroup label="Pages orphelines">';
@@ -2568,6 +2659,7 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'i18n" data-tippy-content="Internationalisation">' . template::ico('flag') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('cog-alt') . '</a></li>';
 				// Mise à jour automatique
 				 if(helper::checkNewVersion() ) {

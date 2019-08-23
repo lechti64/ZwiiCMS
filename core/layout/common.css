@@ -313,7 +313,7 @@ td > .col12 {
 	line-height: 45px;
 }
 
-#bar li {
+#bar li, form {
 	display: inline;
 }
 
@@ -331,11 +331,15 @@ td > .col12 {
 #bar a:active {
 	background: #111112;
 }
-#bar select {
-	width: 250px;
+#bar select{
 	border: 0;
 }
-
+#bar #barSelectPage {
+	width: 200px;
+}
+#bar #barSelectLanguage {
+	width: 170px;
+}
 @media (min-width: 769px) {
 	#bar #barLeft {
 		float: left;

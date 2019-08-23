@@ -21,7 +21,8 @@ class initdata extends common {
 			'timezone' => 'Europe/Paris',
 			'title' => 'Zwii, votre site en quelques clics !',
 			'itemsperPage' => 10,
-			'legalPageId' => ''
+			'legalPageId' => '',
+			'i18n' => 'fr'
 		],
 		'core' => [
 			'dataVersion' => 0,
