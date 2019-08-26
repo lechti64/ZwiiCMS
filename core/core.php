@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.07.dev';
+	const ZWII_VERSION = '10.0.08.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -53,7 +53,7 @@ class common {
 		'de' 	=> 'Allemand (de)'	,
 		'en'	=> 'Anglais (en)',
 		'bg'	=> 'Bulgare (bg)',
-		'da'	=> 'Danois (da)',
+		'dk'	=> 'Danois (dk)',
 		'es'	=> 'Espagnol (es)',
 		'fi'	=> 'Finois (fi)',
 		'fr'	=> 'Français (fr)',
@@ -2406,6 +2406,21 @@ class layout extends common {
 			}
 			$items .= '</ul>';
 		}
+
+		// Menu de langue 
+		if (sizeof($this->i18nInstalled()) > 1) {
+			$items .= '<li><form method="POST" action="' . helper::baseUrl(true) . 'i18n/lan" id="barFormSelectLanguage">';
+			$items .= '<select id="barSelectLanguage" name="i18nSelect" >';
+			foreach ($this->i18nInstalled() as $itemKey => $item) {
+				$items .= '<option ';
+				$items .= 'value="' . $itemKey .'"';
+				if ($this->geti18n() === $itemKey) {
+					$items .= ' selected';
+				}
+				$items .= ' ><img src=core/vendor/icon-flags/svg/"' . $itemKey . '.svg>' . $item . '</option>';
+			}
+			$items .= '</select></form></li>';
+		}			
 		// Lien de connexion
 		if(
 			(
@@ -2608,9 +2623,8 @@ class layout extends common {
 						}
 						$leftItems .= ' >' . $item . '</option>';
 					}
+					$leftItems .= '</select></form></li>';
 				}			
-				$leftItems .= '</select></form></li>';
-				$leftItems .= '&nbsp;';
 				$leftItems .= '<li><select id="barSelectPage">';
 				$leftItems .= '<option value="">Choisissez une page</option>';
 				$leftItems .= '<optgroup label="Pages orphelines">';

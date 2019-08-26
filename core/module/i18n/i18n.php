@@ -15,10 +15,24 @@
 class i18n extends common {
 
 	public static $actions = [
-		'index' => self::GROUP_MODERATOR
+		'index' => self::GROUP_MODERATOR,
+		'lan' => self::GROUP_VISITOR
 	];
 
+
 	
+	public function lan () {
+		// Traitement du changement de langue
+		if (isset($_POST['i18nSelect'])) {
+			$this->seti18n($_POST['i18nSelect']);
+			// Valeurs en sortie sans post			
+			$this->addOutput([
+				'redirect' 		=> 	helper::baseUrl(false),
+				'notification'	=> 'Langue modifiée',
+				'state'			=> true
+			]);	
+		}
+	}
 
     /**
 	 * Configuration
