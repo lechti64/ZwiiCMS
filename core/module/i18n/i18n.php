@@ -16,40 +16,15 @@ class i18n extends common {
 
 	public static $actions = [
 		'index' => self::GROUP_MODERATOR,
-		'lan' => self::GROUP_VISITOR
+		'lang' => self::GROUP_VISITOR
 	];
 
-
-	
-	public function lan () {
-		// Traitement du changement de langue
-		if (isset($_POST['i18nSelect'])) {
-			$this->seti18n($_POST['i18nSelect']);
-			// Valeurs en sortie sans post			
-			$this->addOutput([
-				'redirect' 		=> 	helper::baseUrl(false),
-				'notification'	=> 'Langue modifiée',
-				'state'			=> true
-			]);	
-		}
-	}
 
     /**
 	 * Configuration
 	 */
 	public function index() { 
-		// Traitement du changement de langue
-		if (isset($_POST['i18nSelect'])) {
-			$this->seti18n($_POST['i18nSelect']);
-			// Valeurs en sortie sans post			
-			$this->addOutput([
-				'redirect' 		=> 	helper::baseUrl(false),
-				'notification'	=> 'Langue modifiée',
-				'state'			=> true
-			]);	
-		}
 		
-		// Retour du formulaire
 		if($this->isPost()) {
 			// Et faire un backup
 			// Fonction à révoir dans core.php
@@ -115,6 +90,37 @@ class i18n extends common {
 			]);												
 		
 		}
+	}
+
+		/*
+	* Traitement du changement de langues
+	*/
+	public function lang() {
+		if ( isset($_POST)) {
+			// Clic dans le menu par l'utilisateur
+			if (strlen(array_keys($_POST)[0]) === 4) {
+				$lan = substr(array_keys($_POST)[0],0,2);
+			// Clic dans le menu de la barre d'administration
+			} elseif (  isset($_POST['i18nSelect'])) {
+				$lan = $_POST['i18nSelect'];
+			}
+		}
+		// Traitement du changement de langue
+		if (isset($lan)) {
+			$this->seti18n($lan);
+			// Valeurs en sortie sans post
+			$this->addOutput([
+				'redirect' 		=> 	helper::baseUrl(false),
+				'notification'	=> 'Langue modifiée',
+				'state'			=> true
+			]);							
+		} else {
+			$this->addOutput([
+				'redirect' 		=> 	helper::baseUrl(false)
+			]);	
+		}	
+
+
 	}
 
 }

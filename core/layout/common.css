@@ -542,6 +542,13 @@ ul .menuSideChild, li .menuSideChild {
 	padding-left:10px;
 }
 
+/* Icones de langues du menu */
+nav .flag {
+	width: 30px;
+	padding: 5px;
+	vertical-align: middle;
+}
+
 
 /* Corps */
 @media (min-width:769px) {

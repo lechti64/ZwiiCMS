@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.08.dev';
+	const ZWII_VERSION = '10.0.09.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -184,8 +184,8 @@ class common {
 		// Déterminer la langue du visiteur 
 		// --------------------------------
 		// 1 Langue sélectionnée par l'utilisateur prioritaire
-		if (isset($_COOKIE['ZWII_USER_I18N'])) {
-			$i18nPOST = $_COOKIE['ZWII_USER_I18N'];
+		if (isset($_SESSION['ZWII_USER_I18N'])) {
+			$i18nPOST = $_SESSION['ZWII_USER_I18N'];
 		} else {
 			$i18nPOST = '';
 		}
@@ -362,13 +362,13 @@ class common {
 	 */	
 	public function geti18n() {
 		// Vérifier l'existence du fichier de langue
-		if (isset ($_COOKIE["ZWII_USER_I18N"]) && 
-				key_exists($_COOKIE["ZWII_USER_I18N"], $this->i18nInstalled())) {
-			return ($_COOKIE["ZWII_USER_I18N"]);
+		if (isset ($_SESSION['ZWII_USER_I18N']) && 
+				key_exists($_SESSION['ZWII_USER_I18N'], $this->i18nInstalled())) {
+			return ($_SESSION['ZWII_USER_I18N']);
 		} else {
 			// La valeur du cookie n'est pas une version installée, remettre à fr
-			if (isset ($_COOKIE["ZWII_USER_I18N"])) {
-				helper::deleteCookie("ZWII_USER_I18N");
+			if (isset ($_SESSION['ZWII_USER_I18N'])) {
+				unset($_SESSION['ZWII_USER_I18N']);
 				$this->seti18n();
 			}
 			return ('fr');
@@ -383,7 +383,7 @@ class common {
 	 */	
 	public function seti18n($lan = 'fr') {	 
 	 	// Sauvegarder la sélection
-		return (setcookie('ZWII_USER_I18N',$lan,strtotime("+1 year"), helper::baseUrl(false, false)));
+		$_SESSION['ZWII_USER_I18N'] = $lan;
 	}
 
 
@@ -2226,7 +2226,6 @@ class layout extends common {
 		// Fermeture du bloc copyright
 		$items .= '</span></div>';
 		$items .=  $this->geti18n();
-        echo $items;
 	}
 	
 	
@@ -2407,20 +2406,7 @@ class layout extends common {
 			$items .= '</ul>';
 		}
 
-		// Menu de langue 
-		if (sizeof($this->i18nInstalled()) > 1) {
-			$items .= '<li><form method="POST" action="' . helper::baseUrl(true) . 'i18n/lan" id="barFormSelectLanguage">';
-			$items .= '<select id="barSelectLanguage" name="i18nSelect" >';
-			foreach ($this->i18nInstalled() as $itemKey => $item) {
-				$items .= '<option ';
-				$items .= 'value="' . $itemKey .'"';
-				if ($this->geti18n() === $itemKey) {
-					$items .= ' selected';
-				}
-				$items .= ' ><img src=core/vendor/icon-flags/svg/"' . $itemKey . '.svg>' . $item . '</option>';
-			}
-			$items .= '</select></form></li>';
-		}			
+			
 		// Lien de connexion
 		if(
 			(
@@ -2435,8 +2421,19 @@ class layout extends common {
 			strip_tags(str_replace('/', '_', $this->getUrl())) . 
 			'">Connexion</a></li>';
 		}
+
+		// Menu de langues 
+		if (sizeof($this->i18nInstalled()) > 1) {
+			foreach ($this->i18nInstalled() as $itemKey => $item) {
+				$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
+				$items .= '<input type="image" alt="'.$itemKey.'" class="flag" name="'.$itemKey.'" src="' . helper::baseUrl() .'core/vendor/icon-flags/svg/'.  $itemKey .'.svg" data-tippy-content="'. $item .'" />';
+				$items .= '</form></li>';
+			}
+		}
+
 		// Retourne les items du menu
 		echo '<ul class="navLevel1">' . $items . '</ul>';
+
 	}
 
 	/**
@@ -2537,7 +2534,7 @@ class layout extends common {
 	public function showMetaTitle() {
 		echo '<title>' . $this->core->output['metaTitle'] . '</title>';
 		echo '<meta property="og:title" content="' . $this->core->output['metaTitle'] . '" />';
-		echo '<link rel="canonical" href="'. helper::baseUrl(true).$this->getUrl() .'" />';		
+		echo '<link rel="canonical" href="'. helper::baseUrl().$this->getUrl() .'" />';		
 	}
 
 	/**
@@ -2611,9 +2608,8 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_MODERATOR) {
 				// ne pas afficher la barre de langue pour une seule
 				// Sélection des langues installées	
-				echo $this->geti18n();
 				if (sizeof($this->i18nInstalled()) > 1) {
-					$leftItems .= '<li><form method="POST" action="' . helper::baseUrl(true) . 'i18n" id="barFormSelectLanguage">';
+					$leftItems .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 					$leftItems .= '<select id="barSelectLanguage" name="i18nSelect" >';
 					foreach ($this->i18nInstalled() as $itemKey => $item) {
 						$leftItems .= '<option ';
