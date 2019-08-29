@@ -40,10 +40,14 @@ class i18n extends common {
 			if (!empty ($create)) {
 				// Mode création de langue
 				// La langue est déja créée ?
-				if (is_dir(self::DATA_DIR . $create) === false) {
+				if (in_array($create,$this->i18nInstalled()) === false) {
 					$copyFrom = $copyFrom === '' ? 'core/module/i18n/ressource/' : self::DATA_DIR . $copyFrom . '/';
 					// Créer le dossier
-					$success ['create'] = mkdir (self::DATA_DIR . $create);
+					if (is_dir(self::DATA_DIR . $create) === false ) {
+						$success ['create'] = mkdir (self::DATA_DIR . $create);
+					} else {
+						$success ['create'] = true;
+					}				
 					// Copier les données par défaut 
 					$success ['create'] = (copy ($copyFrom . 'module.json', self::DATA_DIR . $create . '/module.json') === true && $success ['create'] === true) ? true : false;
 					$success ['create'] = (copy ($copyFrom . 'page.json', self::DATA_DIR . $create . '/page.json') === true && $success ['create'] === true) ? true : false;
@@ -53,19 +57,19 @@ class i18n extends common {
 			} 
 			// Mode effacement 			
 			if (!empty ($remove)) {				
-				// La langue est celle par défaut : effacement bloqué
 				
 				// Une notification existe déjà, insérer un séparateur
 				if ($notification) {
 						$notification .= ' | ';
 				}
-				if ( $remove !== $this->getData(['i18n','frontend'])) {
+				// Suppression impossible langue actuelle ou fr
+				if ( $remove !== $this->geti18n()) {
 					// Le dossier existe  ?
 					if (is_dir(self::DATA_DIR . $remove) === true) {
 						$success ['remove'] = unlink (self::DATA_DIR . $remove . '/module.json');
 						$success ['remove'] = (unlink (self::DATA_DIR . $remove . '/page.json') && $success ['remove'] === true) ? true : false ;
 						$success ['remove'] = (rmdir (self::DATA_DIR . $remove) === true  && $success ['remove'] === true) ? true : false ;;
-					}
+					}	
 					// Valeurs en sortie
 					$notification .= $success['remove'] === true ? self::$i18nList[$remove] .' effacée' : self::$i18nList[$remove] . ' n\'existe pas' ;
 				} else {

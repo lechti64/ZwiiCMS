@@ -43,7 +43,7 @@
 		<div class="block">
 			<h4>Supprimer une localisation</h4>
 			<div class="row">
-				<?php echo template::select('i18nLanguageRemove', $this->i18nInstalled(true), [
+				<?php echo template::select('i18nLanguageRemove', $this->i18nInstalled(true, true), [
 					'label' => 'Localisations installées',
 					'help' => 'La suppression d\'une langue entraîne l\'effacement des pages et des modules',
 					'selected' => -1 					

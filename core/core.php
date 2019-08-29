@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.09.dev';
+	const ZWII_VERSION = '10.0.10.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -817,14 +817,17 @@ class common {
 	/**
 	* Retourne la liste les langues installées
 	* @return array liste de dossiers
-	* @param bool true la première contient une indication de sélection - false la liste est neutre
+	* @param bool $emptyline true la première contient une indication de sélection - false la liste est neutre
+	* @param bool $noFr true retourne une liste sans le français (pour l'effacement)
 	* @return array liste des pages installées sous la forme "fr" -> "Français"
 	* La fonction vérifie l'existence du dossier et des deux fichiers de configuration
 	*/
-	public function i18nInstalled ($emptyLine = false) {		
+	public function i18nInstalled ($emptyLine = false, $noFr = false) {		
 		$listLanguages = $emptyLine === true ? [''=>'Sélectionner'] : [];
 		$tempData = array_diff(scandir(self::DATA_DIR), array('..', '.'));
 		foreach ($tempData as $item) {
+			// Exclure le fr
+			if ($noFr && $item === 'fr') {continue;}
 			if (is_dir(self::DATA_DIR . $item) === true) {
 				if (is_file(self::DATA_DIR . $item . '/' . 'page.json') === true  && 
 					is_file(self::DATA_DIR . $item . '/' . 'module.json') === true ) {
@@ -2426,7 +2429,7 @@ class layout extends common {
 		if (sizeof($this->i18nInstalled()) > 1) {
 			foreach ($this->i18nInstalled() as $itemKey => $item) {
 				$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
-				$items .= '<input type="image" alt="'.$itemKey.'" class="flag" name="'.$itemKey.'" src="' . helper::baseUrl() .'core/vendor/icon-flags/svg/'.  $itemKey .'.svg" data-tippy-content="'. $item .'" />';
+				$items .= '<input type="image" alt="'.$itemKey.'" class="flag" name="'.$itemKey.'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/svg/'.  $itemKey .'.svg" data-tippy-content="'. $item .'" />';
 				$items .= '</form></li>';
 			}
 		}
