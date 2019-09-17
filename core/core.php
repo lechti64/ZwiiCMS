@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.10.dev';
+	const ZWII_VERSION = '10.0.11.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -707,11 +707,11 @@ class common {
 						PHP_EOL .
 						'# ZWII CONFIG ---------' . PHP_EOL .
 						'User-agent: *' . PHP_EOL .
-						'Disallow: /core/' . PHP_EOL .
-						'Disallow: /module/' .PHP_EOL .
-						'Disallow: /site/data' .PHP_EOL .
-						'Disallow: /site/tmp' .PHP_EOL .
-						'Disallow: /site/backup' .PHP_EOL .
+						// 'Disallow: /core/' . PHP_EOL .
+						// 'Disallow: /module/' .PHP_EOL .
+						'Disallow: /site/data/' .PHP_EOL .
+						'Disallow: /site/tmp/' .PHP_EOL .
+						'Disallow: /site/backup/' .PHP_EOL .
 						'Allow: /site/file/' .PHP_EOL .
 						'Sitemap: ' . helper::baseUrl(false) . 'sitemap.xml' . PHP_EOL .
 						'Sitemap: ' . helper::baseUrl(false) . 'sitemap.xml.gz' . PHP_EOL .
