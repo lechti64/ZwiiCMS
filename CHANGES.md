@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 9.2.06
+- Correction : 
+    - Validation html
+    - Syntaxe du fichier robots.txt  
+
 ## Version 9.2.05
 - Correction :
     - Suppression totale de Swiper (dossier source et template Tinymce)
