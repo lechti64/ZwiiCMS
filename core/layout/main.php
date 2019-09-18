@@ -190,7 +190,7 @@
 				)
 			) {		$position = 'site';	} else {
 					$position = 'body';
-					//echo '</div>';
+					echo '</div>';
 			}
 			?>
 			<!-- Pied de page -->		
@@ -245,7 +245,10 @@
 					</div>
 				</div>
 			</footer>
-		</div>
+		<?php
+		if ($this->getData(['theme', 'footer', 'position']) === 'site') {
+			echo '</div>';
+		} ?>
 		<!-- Lien remonter en haut -->
 		<div id="backToTop"><?php echo template::ico('up'); ?></div>
 		<?php $layout->showScript();?>
