@@ -618,8 +618,8 @@ class common {
 						PHP_EOL .
 						'# ZWII CONFIG ---------' . PHP_EOL .
 						'User-agent: *' . PHP_EOL .
+						'Allow: /site/file/' .PHP_EOL .						
 						'Disallow: /site/' .PHP_EOL .
-						'Allow: /site/file/' .PHP_EOL .
 						'Sitemap: ' . helper::baseUrl(false) . 'sitemap.xml' . PHP_EOL .
 						'Sitemap: ' . helper::baseUrl(false) . 'sitemap.xml.gz' . PHP_EOL .
 						'# ZWII CONFIG  ---------' . PHP_EOL ;
