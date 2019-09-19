@@ -276,8 +276,6 @@ class config extends common {
 					'maintenance' => $this->getInput('configMaintenance', helper::FILTER_BOOLEAN),
 					'cookieConsent' => $this->getInput('configCookieConsent', helper::FILTER_BOOLEAN),
 					'favicon' => $this->getInput('configFavicon'),
-					'homePageId' => $this->getInput('configHomePageId', helper::FILTER_ID, true),
-					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),
 					'social' => [
 						'facebookId' => $this->getInput('configSocialFacebookId'),
 						'linkedinId' => $this->getInput('configSocialLinkedinId'),
@@ -288,11 +286,19 @@ class config extends common {
 						'githubId' => $this->getInput('configSocialGithubId')
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
-					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
+
 					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true),
 					'legalPageId' => $this->getInput('configLegalPageId')
 				]
 			]);
+			$this->setData([
+				'page',
+					[
+						'homePageId' => $this->getInput('configHomePageId', helper::FILTER_ID, true),
+						'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),					
+						'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true)
+					]
+				]);								
 			if(self::$inputNotices === []) {
 				// Ecrire les fichiers de script
 				file_put_contents(self::DATA_DIR . 'head.inc.html',$this->getInput('configScriptHead',null));

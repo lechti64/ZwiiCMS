@@ -1,5 +1,5 @@
 <?php
-class initdata extends common {
+class init extends common {
 
     public static $defaultData = [
 		'config' => [
@@ -7,9 +7,7 @@ class initdata extends common {
 			'autoBackup' => true,
 			'cookieConsent' => true,
 			'favicon' => 'favicon.ico',
-			'homePageId' => 'accueil',
-			'maintenance' => false,
-			'metaDescription' => 'Zwii est un CMS sans base de données qui permet de créer et gérer facilement un site web sans aucune connaissance en programmation.',
+			'maintenance' => false,		
 			'social' => [
 				'facebookId' => 'facebook',
 				'instagramId' => '',
@@ -19,17 +17,19 @@ class initdata extends common {
 				'githubId' => ''
 			],
 			'timezone' => 'Europe/Paris',
-			'title' => 'Zwii, votre site en quelques clics !',
 			'itemsperPage' => 10,
 			'legalPageId' => '',
 			'i18n' => 'fr'
 		],
 		'core' => [
-			'dataVersion' => 0,
+			'dataVersion' => 1000,
 			'lastBackup' => 0,
 			'lastClearTmp' => 0
 		],
 		'page' => [
+			'homePageId' => 'accueil',			
+			'metaDescription' => 'Zwii est un CMS sans base de données qui permet de créer et gérer facilement un site web sans aucune connaissance en programmation.',
+			'title' => 'Zwii, votre site en quelques clics !',	
 			'accueil' => [
 			'typeMenu' => 'text',
                 	'iconUrl' => '',

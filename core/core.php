@@ -176,11 +176,11 @@ class common {
 		foreach (self::$dataStage as $stageId) {
 			$folder = $this->dirData ($stageId, 'fr');
 			if (file_exists($folder . $stageId .'.json') === false) {
-				$this->iniData($stageId,'fr');
+				$this->initData($stageId,'fr');
 				common::$coreNotices [] = $stageId ;
 			}
 		}
-		
+
 		// Déterminer la langue du visiteur 
 		// --------------------------------
 		// 1 Langue sélectionnée par l'utilisateur prioritaire
@@ -200,10 +200,9 @@ class common {
 
 		// Sauvegarder la sélection
 		$this->seti18N($i18nFrontEnd);
-				
+
 		// Mise à jour des données core
 		$this->update();
-
 
 		// Utilisateur connecté
 		if($this->user === []) {
@@ -270,7 +269,7 @@ class common {
 				$this->url = $url;
 			}
 			else {
-				$this->url = $this->getData(['config', 'homePageId']);
+				$this->url = $this->getData(['page', 'homePageId']);
 			}
 		}
 	}
@@ -686,10 +685,10 @@ class common {
 	 * @param $lang langue des pages
 	 * @return string du dossier à créer
 	 */
-	public function dirData ($stageId, $lang) {
+	public function dirData($id, $lang) {
 			// Sauf pour les pages et les modules
-			if ($stageId === 'page' ||
-				$stageId === 'module') {
+			if ($id === 'page' ||
+				$id === 'module') {
 					$folder = self::DATA_DIR . $lang . '/' ;
 			} else {
 				$folder = self::DATA_DIR;
@@ -854,8 +853,8 @@ class common {
 			$mail = new PHPMailer\PHPMailer\PHPMailer;
 			$mail->CharSet = 'UTF-8';
 			$host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-			$mail->setFrom('no-reply@' . $host, $this->getData(['config', 'title']));
-			$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
+			$mail->setFrom('no-reply@' . $host, $this->getData(['page', 'title']));
+			$mail->addReplyTo('no-reply@' . $host, $this->getData(['page', 'title']));
 			if(is_array($to)) {
 					foreach($to as $userMail) {
 							$mail->addAddress($userMail);
@@ -928,7 +927,7 @@ class common {
 	 * @param array $module : nom du module à générer 
 	 * choix valides :  core config user theme page module
 	 */ 
-	public function iniData($module, $lang = 'fr') {
+	public function initData($module, $lang = 'fr') {
 		
 		// Tableau avec les données vierges
 		require_once('core/module/install/ressource/defaultdata.php'); 
@@ -945,7 +944,7 @@ class common {
 			'dir' => $folder,
 			'template' => self::TEMP_DIR . 'data.template.json'
 		]);
-		$db->set($module,initdata::$defaultData[$module]);
+		$db->set($module,init::$defaultData[$module]);
 		$db->save;
 	}
 
@@ -1001,26 +1000,22 @@ class common {
 		// Version 8.4.4
 		if($this->getData(['core', 'dataVersion']) < 844) {			
 			$this->setData(['core', 'dataVersion', 844]);
-			//$this->SaveData();
 		}			
 		// Version 8.4.6
 		if($this->getData(['core', 'dataVersion']) < 846) {		
 			$this->setData(['config','itemsperPage',10]);
 			$this->setData(['core', 'dataVersion', 846]);
-			//$this->saveData();
 		}		
 		// Version 8.5.0
 		if($this->getData(['core', 'dataVersion']) < 850) {
 			$this->setData(['theme','menu','font','Open+Sans']);
 			$this->setData(['core', 'dataVersion', 850]);
-			//$this->saveData();
 		}	
 		// Version 8.5.1
 		if($this->getData(['core', 'dataVersion']) < 851) {
 			$this->setData(['config','itemsperPage',10]);
 			$this->deleteData(['config','ItemsperPage']);
 			$this->setData(['core', 'dataVersion', 851]);
-			//$this->saveData();
 		}	
 		// Version 9.0.0
 		if($this->getData(['core', 'dataVersion']) < 9000) {
@@ -1030,13 +1025,11 @@ class common {
 			}
 			$this->setData(['theme', 'menu','fixed',false]);						
 			$this->setData(['core', 'dataVersion', 9000]);
-			//$this->saveData();
 		}	
 		// Version 9.0.01
 		if($this->getData(['core', 'dataVersion']) < 9001) {
 			$this->deleteData(['config', 'social', 'googleplusId']);
 			$this->setData(['core', 'dataVersion', 9001]);
-			//$this->saveData();
 		}
 		// Version 9.0.08
 		if($this->getData(['core', 'dataVersion']) < 9008) {
@@ -1045,31 +1038,26 @@ class common {
 			$this->setData(['theme', 'footer', 'fontSize','.8em']);
 			$this->setData(['theme', 'footer', 'font','Open+Sans']);	
 			$this->setData(['core', 'dataVersion', 9008]);
-			//$this->saveData();
 		}
 		// Version 9.0.09
 		if($this->getData(['core', 'dataVersion']) < 9009) {
 			$this->setData(['core', 'dataVersion', 9009]);
-			//$this->saveData();
 		}
 		// Version 9.0.10
 		if($this->getData(['core', 'dataVersion']) < 9010) {
 			$this->deleteData(['config', 'social', 'googleplusId']);			
 			$this->setData(['core', 'dataVersion', 9010]);
-			//$this->saveData();
 		}
 		// Version 9.0.11
 		if($this->getData(['core', 'dataVersion']) < 9011) {
 			if ($this->getData(['theme','menu','position']) === 'body')
 				$this->setData(['theme','menu','position','site']);
 			$this->setData(['core', 'dataVersion', 9011]);
-			//$this->saveData();
 		}
 		// Version 9.0.17
 		if($this->getData(['core', 'dataVersion']) < 9017) {
 			$this->setData(['theme','footer','displayVersion', true ]);
 			$this->setData(['core', 'dataVersion', 9017]);
-			//$this->saveData();
 		}
 		// Version 9.1.0
 		if($this->getData(['core', 'dataVersion']) < 9100) {
@@ -1077,7 +1065,6 @@ class common {
 			$this->setData(['theme','footer','displaySiteMap', true ]);
 			$this->setData(['theme','footer','displayCopyright', true ]);
 			$this->setData(['core', 'dataVersion', 9100]);
-			//$this->saveData();
 		}
 		// Version 9.2.00
 		if($this->getData(['core', 'dataVersion']) < 9200) {
@@ -1087,7 +1074,6 @@ class common {
 			$this->setData(['theme','footer','displaySearch', false ]);
 			$this->setData(['config','social','githubId', '' ]);
 			$this->setData(['core', 'dataVersion', 9200]);
-			//$this->saveData();
 		}
 		// Version 9.2.05
 		if($this->getData(['core', 'dataVersion']) < 9205) {
@@ -1104,13 +1090,19 @@ class common {
 				rmdir ('core/vendor/swiper/');
 			}
 			$this->setData(['core', 'dataVersion', 9205]);
-			//$this->saveData();
 		}
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
 			$this->setData(['config','i18n','fr']);
-			$this->setData(['core', 'dataVersion', 10000]);
-			//$this->saveData();
+			if ($this->getData(['config','homePageId']) !== NULL) {
+				$this->setData(['page','homePageId',$this->getData(['config','homePageId'])]);
+				$this->setData(['page','title',$this->getData(['config','title'])]);
+				$this->setData(['page','metaDescription',$this->getData(['config','metaDescription'])]);
+				$this->deleteData(['config','homePageId']);
+				$this->deleteData(['config','title']);
+				$this->deleteData(['config','metaDescription']);
+			}
+			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 
 	}
@@ -1714,6 +1706,9 @@ class helper {
 	 */
 	public static function arrayCollumn($array, $column, $sort = null) {
 		$newArray = [];
+		unset($array['homePageId']);
+		unset($array['metaDescription']);
+		unset($array['title']);		
 		if(empty($array) === false) {
 			$newArray = array_map(function($element) use($column) {
 				return $element[$column];
