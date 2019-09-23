@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 9.2.07
+- Modification : 
+    - Balise <object> responsive
+
 ## Version 9.2.06
 - Correction : 
     - Validation html
