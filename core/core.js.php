@@ -310,7 +310,7 @@ core.start = function() {
 	/**
 	 * Iframes et vidéos responsives
 	 */
-	var elementDOM = $("iframe, video, embed");
+	var elementDOM = $("iframe, video, embed, object");
 	// Calcul du ratio et suppression de la hauteur / largeur des iframes
 	elementDOM.each(function() {
 		var _this = $(this);
