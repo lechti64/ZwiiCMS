@@ -3,6 +3,8 @@
 ## Version 9.2.07
 - Modification : 
     - Balise <object> responsive
+    - Placement possible de tous les modules
+    - Commande de placement libre des modules et du menu latéral [MENU] et [MODULE]
 
 ## Version 9.2.06
 - Correction : 
