@@ -2228,6 +2228,7 @@ class layout extends common {
 		// Fermeture du bloc copyright
 		$items .= '</span></div>';
 		$items .=  $this->geti18n();
+		echo $items;
 	}
 	
 	
