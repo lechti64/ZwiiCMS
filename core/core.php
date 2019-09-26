@@ -1552,9 +1552,15 @@ class core extends common {
 									'content' => ob_get_clean() . ($output['showPageContent'] ? $pageContent : '')]);
 								}
 								else if ($modpos === 'free') {
-									$begin = strstr($pageContent, '[]', true);
-									$end = strstr($pageContent, '[]');
-									$cut=2;
+									if ( strstr($pageContent, '[MODULE]', true) === false)  {
+										$begin = strstr($pageContent, '[]', true); } else {
+										$begin = strstr($pageContent, '[MODULE]', true);
+									}
+									if (  strstr($pageContent, '[MODULE]') === false ) {
+										$end = strstr($pageContent, '[]');} else {
+										$end = strstr($pageContent, '[MODULE]');
+										}
+									$cut=8;
 									$end=substr($end,-strlen($end)+$cut);
 									$this->addOutput([
 									'content' => ($output['showPageContent'] ? $begin : '') . ob_get_clean() . ($output['showPageContent'] ? $end : '')]);								}
@@ -2125,13 +2131,14 @@ class layout extends common {
 			echo $this->core->output['contentLeft'];
 		} else {
 			// $mark contient 0 le menu est positionné à la fin du contenu
-			$contentLeft = $this->core->output['contentLeft'];
-			$mark = strrpos($contentLeft,'[]')  !== false ? strrpos($contentLeft,'[]') : strlen($contentLeft);		
+			$contentLeft = str_replace ('[]','[MENU]',$this->core->output['contentLeft']);
+			$contentLeft = str_replace ('[menu]','[MENU]',$contentLeft);
+			$mark = strrpos($contentLeft,'[MENU]')  !== false ? strrpos($contentLeft,'[MENU]') : strlen($contentLeft);		
 			echo substr($contentLeft,0,$mark);			
 			echo '<div id="menuSideLeft">';
 			echo $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'parents' ? false : true);
 			echo '</div>';
-			echo substr($contentLeft,$mark+2,strlen($contentLeft));			
+			echo substr($contentLeft,$mark+6,strlen($contentLeft));			
 		}						
 	}
 
@@ -2145,13 +2152,14 @@ class layout extends common {
 			echo $this->core->output['contentRight'];
 		} else {
 			// $mark contient 0 le menu est positionné à la fin du contenu
-			$contentRight = $this->core->output['contentRight'];
-			$mark = strrpos($contentRight,'[]')  !== false ? strrpos($contentRight,'[]') : strlen($contentRight);		
+			$contentRight = str_replace ('[]','[MENU]',$this->core->output['contentRight']);
+			$contentRight = str_replace ('[menu]','[MENU]',$contentRight);
+			$mark = strrpos($contentRight,'[MENU]')  !== false ? strrpos($contentRight,'[MENU]') : strlen($contentRight);		
 			echo substr($contentRight,0,$mark);			
 			echo '<div id="menuSideRight">';
 			echo $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) === 'parents' ? false : true);
 			echo '</div>';
-			echo substr($contentRight,$mark+2,strlen($contentRight));			
+			echo substr($contentRight,$mark+6,strlen($contentRight));			
 		}	
 	}
 

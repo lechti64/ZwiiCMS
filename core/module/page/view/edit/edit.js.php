@@ -41,21 +41,23 @@ $( document ).ready(function() {
 	}
 
 	/**
-	* Masquer et affiche le contenu pour les modules form et gallery
+	* Masquer et affiche la sélection de position du module
 	*/
-	if($("#pageEditModuleId").val() === "form" ||
-  	$("#pageEditModuleId").val() === "gallery") {
-    	$("#configModulePositionWrapper").addClass("disabled");
-			$("#configModulePositionWrapper").slideDown();	
-	} else {
-	    $("#configModulePositionWrapper").removeClass("disabled");
-			$("#configModulePositionWrapper").slideUp();				
+	if( $("#pageEditModuleId").val() === "redirection" ||
+		$("#pageEditModuleId").val() === "" ) {
+		$("#configModulePositionWrapper").removeClass("disabled");
+		$("#configModulePositionWrapper").slideUp();		 	
 	}
+	else {
+		$("#configModulePositionWrapper").addClass("disabled");
+		$("#configModulePositionWrapper").slideDown();		
+	}
+	
+
 	/**
 	* Masquer et démasquer le contenu pour les modules code et redirection
 	*/
-	if($("#pageEditModuleId").val() === "code" ||
-    $("#pageEditModuleId").val() === "redirection") {
+	if(  $("#pageEditModuleId").val() === "redirection") {
 		$("#pageEditContentWrapper").removeClass("disabled");
 		$("#pageEditContentWrapper").slideUp();
 	} else {
@@ -65,8 +67,7 @@ $( document ).ready(function() {
 	/**
 	* Masquer et démasquer le masquage du titre pour le module redirection
 	*/
-	if($("#pageEditModuleId").val() === "redirection" ||
-    $("#pageEditModuleId").val() === "code") {
+	if( $("#pageEditModuleId").val() === "redirection" ) {
 		$("#pageEditHideTitleWrapper").removeClass("disabled");
 		$("#pageEditHideTitleWrapper").hide();
 		$("#pageEditBlockLayout").removeClass("disabled");
@@ -221,20 +222,22 @@ pageEditModuleIdDOM.on("change", function() {
 
 
 /**
- * Masquer et affiche le contenu pour les modules form et gallery
- */
+ * Masquer et affiche la sélection de position du module
+ *
+ * */
 var pageEditModuleIdDOM = $("#pageEditModuleId");
 pageEditModuleIdDOM.on("change", function() {
-	if($(this).val() === "form" ||
-	   $(this).val() === "gallery") {
-		$("#configModulePositionWrapper").addClass("disabled");
-		$("#configModulePositionWrapper").slideDown();	
+	if( $(this).val() === "redirection" || 
+		$(this).val() === "") {
+		$("#configModulePositionWrapper").removeClass("disabled");
+ 		$("#configModulePositionWrapper").slideUp();		
 	}
 	else {
-		$("#configModulePositionWrapper").removeClass("disabled");
- 		$("#configModulePositionWrapper").slideUp();			
+		$("#configModulePositionWrapper").addClass("disabled");
+		$("#configModulePositionWrapper").slideDown();				
 	}
 });
+
 
 
 
@@ -243,8 +246,7 @@ pageEditModuleIdDOM.on("change", function() {
  */
 var pageEditModuleIdDOM = $("#pageEditModuleId");
 pageEditModuleIdDOM.on("change", function() {
-	if($(this).val() === "code" ||
-	   $(this).val() === "redirection") {
+	if( $(this).val() === "redirection") {
 		$("#pageEditContentWrapper").removeClass("disabled");
 		$("#pageEditContentWrapper").slideUp();
 	}
@@ -261,8 +263,7 @@ pageEditModuleIdDOM.on("change", function() {
  */
 var pageEditModuleIdDOM = $("#pageEditModuleId");
 pageEditModuleIdDOM.on("change", function() {
-	if($(this).val() === "redirection" ||
-	   $(this).val() === "code") {
+	if( $(this).val() === "redirection") {
 		$("#pageEditHideTitleWrapper").removeClass("disabled");
 		$("#pageEditHideTitleWrapper").slideUp();	
 		$("#pageEditBlockLayout").removeClass("disabled");
