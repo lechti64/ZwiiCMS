@@ -72,7 +72,7 @@ echo template::formOpen('pageEditForm'); ?>
                     </div>
 					<div class="col4">
 					<?php echo template::select('configModulePosition', $module::$modulePosition,[
-							'help' => 'En position libre ajoutez le module en plaçant deux crochets [MODULE] à l\'endroit voulu dans votre page.',
+							'help' => 'En position libre ajoutez le module en plaçant [MODULE] à l\'endroit voulu dans votre page.',
 							'label' => 'Position du module dans la page',
 							'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
 						]); ?>
@@ -136,7 +136,7 @@ echo template::formOpen('pageEditForm'); ?>
 						<?php echo template::select('pageEditDisplayMenu', $module::$displayMenu, [
 							'label' => 'Configuration du menu vertical',
 							'selected' => $this->getData(['page', $this->getUrl(2), 'displayMenu']),
-							'help' => 'Par défaut le menu est affiché APRES le contenu de la page. Pour le positionner à un emplacement précis, insérez deux crochets [MENU] dans le contenu de la page.'
+							'help' => 'Par défaut le menu est affiché APRES le contenu de la page. Pour le positionner à un emplacement précis, insérez [MENU] dans le contenu de la page.'
 						]); ?>
 					</div>
 				</div>

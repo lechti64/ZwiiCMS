@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 9.2.08
+' Modification : 
+    - Aide de l'édition des pages
+    
 ## Version 9.2.07
 - Modification : 
     - Balise <object> responsive
