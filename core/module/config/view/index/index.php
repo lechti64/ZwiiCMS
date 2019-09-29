@@ -13,6 +13,36 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="col12">
+			<div class="block">
+				<h4>Informations générales</h4>
+				<div class="row">
+				<!--
+				Page d'accueil définie au niveau des langues
+					<div class="col4">
+						<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
+							'label' => 'Page d\'accueil',
+							'selected' => $this->getData(['config', 'homePageId'])
+						]); ?>
+					</div>
+				-->
+					<div class="col12">
+						<?php echo template::text('configTitle', [
+							'label' => 'Titre du site',
+							'value' => $this->getData(['config', 'title']),
+							'help'  => 'Il apparaît dans la barre de titre et les partages sur les réseaux sociaux.'
+						]); ?>
+					</div>						
+				</div>
+				<?php echo template::textarea('configMetaDescription', [
+					'label' => 'Description du site',
+					'value' => $this->getData(['config', 'metaDescription']),
+					'help'  => 'Elle apparaît dans les partages sur les réseaux sociaux.'
+				]); ?>
+			</div>
+		</div>		
+	</div>
+	<div class="row">
 		<div class="col6">
 			<div class="block">
 				<h4>Réglages</h4>
