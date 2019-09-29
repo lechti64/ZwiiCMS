@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.12.dev';
+	const ZWII_VERSION = '10.0.13.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2227,7 +2227,6 @@ class layout extends common {
 
 		// Fermeture du bloc copyright
 		$items .= '</span></div>';
-		$items .=  $this->geti18n();
 		echo $items;
 	}
 	
