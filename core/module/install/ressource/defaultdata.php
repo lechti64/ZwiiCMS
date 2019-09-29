@@ -18,8 +18,7 @@ class init extends common {
 			],
 			'timezone' => 'Europe/Paris',
 			'itemsperPage' => 10,
-			'legalPageId' => '',
-			'i18n' => 'fr',
+			'legalPageId' => ''
 			'metaDescription' => 'Zwii est un CMS sans base de données qui permet de créer et gérer facilement un site web sans aucune connaissance en programmation.',
 			'title' => 'Zwii, votre site en quelques clics !',
 		],
