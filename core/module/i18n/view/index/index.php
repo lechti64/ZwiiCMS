@@ -50,6 +50,7 @@
 			</div>
 		</div>	
 	</div>
+	<!--
 	<div class="row">
 		<div class="col4">
 			<?php echo template::select('i18nHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
@@ -58,4 +59,5 @@
 			]); ?>
 		</div>
 	</div>
+	-->
 <?php echo template::formClose(); ?>
