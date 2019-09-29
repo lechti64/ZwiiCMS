@@ -288,9 +288,13 @@ class config extends common {
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
 
 					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true),
-					'legalPageId' => $this->getInput('configLegalPageId')
+					'legalPageId' => $this->getInput('configLegalPageId'),
+					//'homePageId' => $this->getInput('configHomePageId', helper::FILTER_ID, true),
+					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),					
+					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true)
 				]
-			]);							
+			]);
+							
 			if(self::$inputNotices === []) {
 				// Ecrire les fichiers de script
 				file_put_contents(self::DATA_DIR . 'head.inc.html',$this->getInput('configScriptHead',null));
