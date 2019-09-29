@@ -16,37 +16,17 @@ class i18n extends common {
 
 	public static $actions = [
 		'index' => self::GROUP_MODERATOR,
-		'config' => self::GROUP_MODERATOR,
+		//'config' => self::GROUP_MODERATOR,
 		'lang' => self::GROUP_VISITOR
 	];
 
 
-	/**
-	 * Index : paramétrage des méta de la langue
-	 */
-	public function index() {
-		if($this->isPost()) {
-			$this->setData([
-				'page',
-					[
-						'homePageId' => $this->getInput('pagei18nHomePageId', helper::FILTER_ID, true),
-						'metaDescription' => $this->getInput('pagei18nMetaDescription', helper::FILTER_STRING_LONG, true),					
-						'title' => $this->getInput('pagei18nTitle', helper::FILTER_STRING_SHORT, true)
-					]
-				]);	
-		} else {
-			// Valeurs en sortie sans post
-			$this->addOutput([
-				'title' 		=> 'Internationalisation',
-				'view' 			=> 'index'
-			]);	
-		}
-	}
+
 
     /**
 	 * Config : gestion des langues
 	 */
-	public function config() { 
+	public function index() { 
 		
 		if($this->isPost()) {
 			// Et faire un backup
@@ -113,7 +93,7 @@ class i18n extends common {
 			// Valeurs en sortie sans post
 			$this->addOutput([
 				'title' 		=> 'Internationalisation',
-				'view' 			=> 'config'
+				'view' 			=> 'index'
 			]);												
 		
 		}
