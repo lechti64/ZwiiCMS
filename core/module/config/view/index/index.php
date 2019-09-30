@@ -17,16 +17,14 @@
 			<div class="block">
 				<h4>Informations générales</h4>
 				<div class="row">
-				<!--
-				Page d'accueil définie au niveau des langues
 					<div class="col4">
 						<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
 							'label' => 'Page d\'accueil',
-							'selected' => $this->getData(['config', 'homePageId'])
+							'selected' => $this->getData(['page', 'homePageId']),
+							'disabled' => true
 						]); ?>
 					</div>
-				-->
-					<div class="col12">
+					<div class="col8">
 						<?php echo template::text('configTitle', [
 							'label' => 'Titre du site',
 							'value' => $this->getData(['config', 'title']),

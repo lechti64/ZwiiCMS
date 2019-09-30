@@ -196,9 +196,9 @@ class page extends common {
 					$this->setData(['module', $pageId, $this->getData(['module', $this->getUrl(2)])]);
 					$this->deleteData(['module', $this->getUrl(2)]);
 					// Si la page correspond à la page d'accueil, change l'id dans la configuration du site
-					if($this->getData(['config', 'homePageId']) === $this->getUrl(2)) {
-						$this->setData(['config', 'homePageId', $pageId]);
-					}
+					//if($this->getData(['config', 'homePageId']) === $this->getUrl(2)) {
+					//	$this->setData(['config', 'homePageId', $pageId]);
+					//}
 				}
 				// Supprime les données du module en cas de changement de module
 				if($this->getInput('pageEditModuleId') !== $this->getData(['page', $this->getUrl(2), 'moduleId'])) {
@@ -225,6 +225,11 @@ class page extends common {
 					$this->setData(['page', $hierarchyPageId, 'position', $lastPosition]);
 					// Incrémente pour la prochaine position
 					$lastPosition++;
+
+					// Une seule homepage, si homePage est true, désactiver les autres pages
+					if ($this->getinput('pageHomePage', helper::FILTER_BOOLEAN) === true) {
+						$this->setData(['page',$hierarchyPageId,"homePage", false]);
+					}
 				}
 				if ($this->getinput('pageEditBlock') !== 'bar') {
 					$barLeft = $this->getinput('pageEditBarLeft');
@@ -266,6 +271,7 @@ class page extends common {
 						'hideMenuSide' => $this->getinput('pageEditHideMenuSide', helper::FILTER_BOOLEAN),
 						'hideMenuHead' => $this->getinput('pageEditHideMenuHead', helper::FILTER_BOOLEAN),
 						'hideMenuChildren' => $this->getinput('pageEditHideMenuChildren', helper::FILTER_BOOLEAN),
+						'homePage' => $this->getinput('pageHomePage', helper::FILTER_BOOLEAN)
 					]
 				]);				
 				// Barre renommée : changement le nom de la barre dans les pages mères

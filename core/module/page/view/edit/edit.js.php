@@ -26,6 +26,7 @@ $("#pageEditDelete").on("click", function() {
 * Paramètres par défaut au chargement
 */ 
 $( document ).ready(function() {
+
 	/**
 	* Bloque/Débloque le bouton de configuration au changement de module
 	* Affiche ou masque la position du module selon le call_user_func
@@ -185,7 +186,16 @@ $( document ).ready(function() {
 
 });
 
-
+/**
+* Bloque la désactivation du choix de la page d'accueil
+*/
+var pageHomePage = $("#pageHomePage");
+pageHomePage.on("change",function() {
+	if (this.checked)  {
+		$("input[name=pageHomePage]").attr("disabled",true);
+		console.log("checlked");
+	}
+});
 
 /**	
 * Cache les options de masquage dans les menus quand la page n'est pas affichée.

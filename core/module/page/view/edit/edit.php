@@ -55,7 +55,7 @@ echo template::formOpen('pageEditForm'); ?>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>				
 				<div class="row">
 					<div class="col4">
 						<?php echo template::select('pageTypeMenu', $module::$typeMenu,[
@@ -77,7 +77,14 @@ echo template::formOpen('pageEditForm'); ?>
 							'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
 						]); ?>
 					</div>
-                </div>
+        </div>
+				<div class="col3">
+					<?php echo template::checkbox('pageHomePage', true, 'Page d\'accueil', [
+							'checked' => $this->getData(['page', $this->getUrl(2), 'homePage']),
+							'disabled' => $this->getData(['page', $this->getUrl(2), 'homePage']) === true ? true : false ,
+							'help' => 'La page d\'accueil est affichée par défaut. Pour sélectionner une autre page d\'accueil, activez l\'option à partir de l\'écran de cette page.'
+						]); ?>
+				</div>
 			</div>
 		</div>
 	</div>
