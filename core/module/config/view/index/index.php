@@ -23,6 +23,7 @@
 							'selected' => $this->getData(['page', 'homePageId']),
 							'disabled' => true
 						]); ?>
+						<?php echo $this->getHomePageId(); ?> 
 					</div>
 					<div class="col8">
 						<?php echo template::text('configTitle', [

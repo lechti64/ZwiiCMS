@@ -479,6 +479,18 @@ class common {
 	}
 
 	/**
+	 * Retourne l'Id de la homePage de la langue  courante
+	 * @return string
+	 */
+	public function getHomePageId () {
+		foreach($hierarchy as $hierarchyPageId) {
+			if ($this->setData(['page',$hierarchyPageId,"homePage"]) === true) {
+				return ($hierarchyPageId);
+			}
+		}
+	}
+
+	/**
 	 * Accède à une valeur des variables http (ordre de recherche en l'absence de type : _COOKIE, _POST)
 	 * @param string $key Clé de la valeur
 	 * @param int $filter Filtre à appliquer à la valeur

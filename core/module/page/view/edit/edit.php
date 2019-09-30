@@ -77,7 +77,7 @@ echo template::formOpen('pageEditForm'); ?>
 							'selected' => $this->getData(['page', $this->getUrl(2), 'modulePosition'])
 						]); ?>
 					</div>
-        </div>
+      			</div>
 				<div class="col3">
 					<?php echo template::checkbox('pageHomePage', true, 'Page d\'accueil', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'homePage']),
