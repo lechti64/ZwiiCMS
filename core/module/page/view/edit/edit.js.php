@@ -333,21 +333,22 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditbreadCrumbWrapper").slideUp();
 			$("#pageEditModuleIdWrapper").removeClass("disabled");
 			$("#pageEditModuleIdWrapper").slideUp();
-			$("#pageEditModuleConfig").removeClass("disabled");
-			$("#pageEditModuleConfig").slideUp();	
+			//$("#pageEditModuleConfig").removeClass("disabled");
+			//$("#pageEditModuleConfig").slideUp();	
 			$("#pageEditDisplayMenuWrapper").addClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideDown();
 			$("#pageEditGroupWrapper").removeClass("disabled");
 			$("#pageEditGroupWrapper").slideUp();																					
 	} else {
+		console.log($("#pageEditModuleId").val());
 			$("#pageEditMenu").addClass("disabled");
 			$("#pageEditMenu").show();					
 			$("#pageEditHideTitleWrapper").addClass("disabled");
 			$("#pageEditHideTitleWrapper").slideDown();	
 			$("#pageEditModuleIdWrapper").addClass("disabled");
 			$("#pageEditModuleIdWrapper").slideDown();	
-			$("#pageEditModuleConfig").addClass("disabled");
-			$("#pageEditModuleConfig").slideDown();	
+			//$("#pageEditModuleConfig").addClass("disabled");
+			//$("#pageEditModuleConfig").slideDown();	
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideUp();	
 			$("#pageEditGroupWrapper").addClass("disabled");
