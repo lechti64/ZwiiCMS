@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 9.2.09
+## Version 9.2.08
 - Correction :
     - Edition de page : bug empêchant le paramétrage d'un module après un changement de gabarit.
 - Modification : 
