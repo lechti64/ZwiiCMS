@@ -20,8 +20,9 @@
 					<div class="col4">
 						<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
 							'label' => 'Page d\'accueil',
-							'selected' => $this->getData(['page', 'homePageId']),
-							'disabled' => true
+							'selected' => $this->getHomePageId(),
+							'disabled' => true,
+							'help' => 'La page d\'accueil est définie dans les pages de la langue sélectionnée'
 						]); ?>
 						<?php echo $this->getHomePageId(); ?> 
 					</div>

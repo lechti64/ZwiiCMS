@@ -10,7 +10,7 @@
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
  * @author Frédéric Tempez <frederic.tempez@outlook.com>
- * @copyright Copyright (C) 2018-2019, Frédéric Tempez
+ * @copyright Copyright (C) 2018-2020, Frédéric Tempez
  * @link http://zwiicms.com/
  */
 
@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.13.dev';
+	const ZWII_VERSION = '10.0.14.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -269,7 +269,8 @@ class common {
 				$this->url = $url;
 			}
 			else {
-				$this->url = $this->getData(['page', 'homePageId']);
+				// $this->url = $this->getData(['page', 'homePageId']);
+				$this->url = $this->getHomePageId();
 			}
 		}
 	}
@@ -483,9 +484,14 @@ class common {
 	 * @return string
 	 */
 	public function getHomePageId () {
-		foreach($hierarchy as $hierarchyPageId) {
-			if ($this->setData(['page',$hierarchyPageId,"homePage"]) === true) {
-				return ($hierarchyPageId);
+		$hierarchy = $this->getHierarchy(null, true);
+		//echo "<pre>";
+		//var_dump($hierarchy);
+		//die();
+		foreach($hierarchy as $parentPageId => $childrenPageIds) {
+			//var_dump($hierarchyPageId);
+			if ($this->getData(['page',$parentPageId,"homePageId"]) === true) {			
+				return ($parentPageId);
 			}
 		}
 	}
@@ -1106,14 +1112,6 @@ class common {
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
 			$this->setData(['config','i18n','fr']);
-			if ($this->getData(['config','homePageId']) !== NULL) {
-				$this->setData(['page','homePageId',$this->getData(['config','homePageId'])]);
-				$this->setData(['page','title',$this->getData(['config','title'])]);
-				$this->setData(['page','metaDescription',$this->getData(['config','metaDescription'])]);
-				$this->deleteData(['config','homePageId']);
-				$this->deleteData(['config','title']);
-				$this->deleteData(['config','metaDescription']);
-			}
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 

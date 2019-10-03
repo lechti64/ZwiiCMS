@@ -7,7 +7,7 @@
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @authorFrédéric Tempez <frederic.tempez@outlook.com>
- * @copyright Copyright (C) 2018-2019, Frédéric Tempez
+ * @copyright Copyright (C) 2018-2020, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
@@ -128,10 +128,14 @@ $( document ).ready(function() {
 			$("#pageEditDisplayMenuWrapper").addClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideDown();
 			$("#pageEditGroupWrapper").removeClass("disabled");
-			$("#pageEditGroupWrapper").slideUp();			
+			$("#pageEditGroupWrapper").slideUp();
+			$("#pageHomePageIdWrapper").removeClass("disabled");
+			$("#pageHomePageIdWrapper").slideUp();			
 	} else {
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideUp();	
+			$("#pageEditDisplayMenuWrapper").slideUp();
+			$("#pageHomePageIdWrapper").addClass("disabled");
+			$("#pageHomePageIdWrapper").slideDown();
 	}
 
 	/**
@@ -338,9 +342,10 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditDisplayMenuWrapper").addClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideDown();
 			$("#pageEditGroupWrapper").removeClass("disabled");
-			$("#pageEditGroupWrapper").slideUp();																					
+			$("#pageEditGroupWrapper").slideUp();
+			$("#pageHomePageIdWrapper").removeClass("disabled");
+			$("#pageHomePageIdWrapper").slideUp();
 	} else {
-		console.log($("#pageEditModuleId").val());
 			$("#pageEditMenu").addClass("disabled");
 			$("#pageEditMenu").show();					
 			$("#pageEditHideTitleWrapper").addClass("disabled");
@@ -352,11 +357,14 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideUp();	
 			$("#pageEditGroupWrapper").addClass("disabled");
-			$("#pageEditGroupWrapper").slideDown();														
+			$("#pageEditGroupWrapper").slideDown();	
+			$("#pageHomePageIdWrapper").addClass("disabled");
+			$("#pageHomePageIdWrapper").slideDown();													
 			if ($("#pageEditParentPageId").val() !== "") {
 				$("#pageEditbreadCrumbWrapper").addClass("disabled");
 				$("#pageEditbreadCrumbWrapper").slideDown();
 			}
+
 	}	
 });
 

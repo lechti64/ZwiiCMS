@@ -9,7 +9,7 @@
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @author Frédéric Tempez <frederic.tempez@outlook.com>
- * @copyright Copyright (C) 2018-2019, Frédéric Tempez
+ * @copyright Copyright (C) 2018-2020, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
@@ -227,8 +227,8 @@ class page extends common {
 					$lastPosition++;
 
 					// Une seule homepage, si homePage est true, désactiver les autres pages
-					if ($this->getinput('pageHomePage', helper::FILTER_BOOLEAN) === true) {
-						$this->setData(['page',$hierarchyPageId,"homePage", false]);
+					if ($this->getinput('pageHomePageId', helper::FILTER_BOOLEAN) === true) {
+						$this->setData(['page',$hierarchyPageId,"homePageId", false]);
 					}
 				}
 				if ($this->getinput('pageEditBlock') !== 'bar') {
@@ -271,7 +271,7 @@ class page extends common {
 						'hideMenuSide' => $this->getinput('pageEditHideMenuSide', helper::FILTER_BOOLEAN),
 						'hideMenuHead' => $this->getinput('pageEditHideMenuHead', helper::FILTER_BOOLEAN),
 						'hideMenuChildren' => $this->getinput('pageEditHideMenuChildren', helper::FILTER_BOOLEAN),
-						'homePage' => $this->getinput('pageHomePage', helper::FILTER_BOOLEAN)
+						'homePageId' => $this->getinput('pageHomePageId', helper::FILTER_BOOLEAN)
 					]
 				]);				
 				// Barre renommée : changement le nom de la barre dans les pages mères
