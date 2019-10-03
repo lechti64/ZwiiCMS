@@ -8,9 +8,15 @@
     - Procédures internes de gestion des données. 
         - Les données du site sont chargées à la demande au lieu d'être lues dans leur intégralité.
         - Les mises à jour et effacement sont appliquées en direct sur le disque. 
+    - Multilinguisme :
+        - Site publiable en différentes versions de langues européennes.
+        - Masque de gestion des langues disponibles
+        - Changement de la langue courante dans l'inerface d'administration
+        - En mode déconnecté, langue par défaut du navigateur ou choix de la langue dans la barre de menu 
+
 - Modifications : 
     - Procédure d'installation : 
-        - Les données manquantes sont installées  au cas par cas, les données présentes ne sont plus écrasées par l'installation. Par exemple, la suppression de core.json n'entraîne pas la réinstallation totale des données du site.
+        - Les données manquantes sont installées  au cas par cas, les données présentes ne sont plus écrasées par l'installation. 
         - Une notification est affichée quand un fichier  de données manquant a été réinstallé.
     - Procédure d'importation : 
         - L'importation des données est possible uniquement à partir d'une version 9. 
