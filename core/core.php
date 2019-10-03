@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.14.dev';
+	const ZWII_VERSION = '10.0.15.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2438,7 +2438,9 @@ class layout extends common {
 		if (sizeof($this->i18nInstalled()) > 1) {
 			foreach ($this->i18nInstalled() as $itemKey => $item) {
 				$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
-				$items .= '<input type="image" alt="'.$itemKey.'" class="flag" name="'.$itemKey.'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/svg/'.  $itemKey .'.svg" data-tippy-content="'. $item .'" />';
+				$items .= '<input type="image" alt="'.$itemKey.'" class="flag';
+				$items .= $this->geti18n() === $itemKey ? ' flagSelected"' : '"';
+				$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/svg/'.  $itemKey .'.svg" data-tippy-content="'. $item .'" />';
 				$items .= '</form></li>';
 			}
 		}

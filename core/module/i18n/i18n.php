@@ -21,8 +21,6 @@ class i18n extends common {
 	];
 
 
-
-
     /**
 	 * Config : gestion des langues
 	 */

@@ -18,8 +18,8 @@
 				<div class="row">			
 					<div class="col5">
 						<?php echo template::select('i18nLanguageCopyFrom', $this->i18nInstalled(true), [
-							'label' => 'Copier à partir ',
-							'help' => 'Pour démarrer sans copie des pages te des modules d\'une langue existante, ne rien sélectionner',
+							'label' => 'Copier la structure de',
+							'help' => 'Ne rien sélectionner pour une copie vierge ',
 							'selected' => -1 					
 						]); ?>
 					</div>

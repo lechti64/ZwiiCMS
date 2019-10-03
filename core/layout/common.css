@@ -544,10 +544,14 @@ ul .menuSideChild, li .menuSideChild {
 
 /* Icones de langues du menu */
 nav .flag {
-	width: 30px;
+	height: 30px;
 	padding: 5px;
 	vertical-align: middle;
 }
+nav .flagSelected {
+	padding: 0px;
+}
+
 
 
 /* Corps */
