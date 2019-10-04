@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.17.dev';
+	const ZWII_VERSION = '10.0.18.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1111,8 +1111,8 @@ class common {
 		}
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
-			//$this->setData(['page',$this->getData(['config','homePageId']),'homePageId']);
-			//$this->deleteData(['config','homePageId']);
+			$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
+			$this->deleteData(['config','homePageId']);
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 
