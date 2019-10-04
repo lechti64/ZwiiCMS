@@ -24,7 +24,6 @@
 							'disabled' => true,
 							'help' => 'La page d\'accueil est définie dans les pages de la langue sélectionnée'
 						]); ?>
-						<?php echo $this->getHomePageId(); ?> 
 					</div>
 					<div class="col8">
 						<?php echo template::text('configTitle', [

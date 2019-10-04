@@ -35,7 +35,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.15.dev';
+	const ZWII_VERSION = '10.0.17.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1111,7 +1111,8 @@ class common {
 		}
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
-			$this->setData(['config','i18n','fr']);
+			//$this->setData(['page',$this->getData(['config','homePageId']),'homePageId']);
+			//$this->deleteData(['config','homePageId']);
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 
@@ -1384,7 +1385,7 @@ class core extends common {
 				$access = true;
 			}
 			else {
-				if($this->getUrl(0) === $this->getData(['config', 'homePageId'])) {
+				if($this->getUrl(0) === $this->getHomePageId()) {
 					$access = 'login';
 				}
 				else {
@@ -1721,10 +1722,7 @@ class helper {
 	 * @return array
 	 */
 	public static function arrayCollumn($array, $column, $sort = null) {
-		$newArray = [];
-		unset($array['homePageId']);
-		unset($array['metaDescription']);
-		unset($array['title']);		
+		$newArray = [];	
 		if(empty($array) === false) {
 			$newArray = array_map(function($element) use($column) {
 				return $element[$column];
