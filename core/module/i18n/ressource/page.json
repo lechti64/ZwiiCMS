@@ -4,7 +4,7 @@
             "typeMenu": "text",
             "iconUrl": "",
             "disable": false,
-            "content": "<h3>Wellcome on The ZwiiCMS!</h3>",
+            "content": "<h3>Welcome to ZwiiCMS!</h3>",
             "hideTitle": false,
             "breadCrumb": false,
             "metaDescription": "",

@@ -3,8 +3,9 @@
 		<div class="col2">
 			<?php echo template::button('configBack', [
 				'class' => 'buttonGrey',
-				'href' => helper::baseUrl() . $this->getUrl(0) ,
-				'value' => 'Retour'
+				'href' => helper::baseUrl(false),
+				'ico' => 'home',
+				'value' => 'Accueil'
 			]); ?>
 		</div>
 		<div class="col2 offset8">

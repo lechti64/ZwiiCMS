@@ -22,7 +22,7 @@
 							'label' => 'Page d\'accueil',
 							'selected' => $this->getHomePageId(),
 							'disabled' => true,
-							'help' => 'La page d\'accueil est définie dans les pages de la langue sélectionnée'
+							'help' => 'La page d\'accueil doit être définie dans une des pages de la langue sélectionnée'
 						]); ?>
 					</div>
 					<div class="col8">
