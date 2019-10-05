@@ -167,6 +167,7 @@ class gallery extends common {
 				}
 				$legends = [];
 				foreach((array) $this->getInput('legend', null) as $file => $legend) {
+					$file = str_replace('.','',$file);
 					$legends[$file] = helper::filter($legend, helper::FILTER_STRING_SHORT);
 				}
 
@@ -193,7 +194,7 @@ class gallery extends common {
 						self::$pictures[$fileInfos->getFilename()] = [
 							$fileInfos->getFilename(),
 							template::text('legend[' . $fileInfos->getFilename() . ']', [
-								'value' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'legend', $fileInfos->getFilename()])
+								'value' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'legend', str_replace('.','',$fileInfos->getFilename())])
 							])
 						];
 					}
@@ -230,7 +231,7 @@ class gallery extends common {
 					$iterator = new DirectoryIterator($directory);
 					foreach($iterator as $fileInfos) {
 						if($fileInfos->isDot() === false AND $fileInfos->isFile() AND @getimagesize($fileInfos->getPathname())) {
-							self::$pictures[$directory . '/' . $fileInfos->getFilename()] = $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'legend', $fileInfos->getFilename()]);
+							self::$pictures[$directory . '/' . $fileInfos->getFilename()] = $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'legend', str_replace('.','',$fileInfos->getFilename())]);
 						}
 					}
 					// Tri des images par ordre alphabétique

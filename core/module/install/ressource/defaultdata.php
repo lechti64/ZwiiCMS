@@ -360,9 +360,9 @@ class init extends common {
 						'directory' => self::FILE_DIR.'source/galerie/landscape'
 					],
 					'legend' => [
-						'desert.jpg' => 'Un désert',
-						'iceberg.jpg' => 'Un iceberg',
-						'meadow.jpg' => 'Une prairie'
+						'desertjpg' => 'Un désert',
+						'icebergjpg' => 'Un iceberg',
+						'meadowjpg' => 'Une prairie'
 					]
 				],
 				'espace' => [
@@ -371,9 +371,9 @@ class init extends common {
 						'directory' => self::FILE_DIR.'source/galerie/space'
 					],
 					'legend' => [
-						'earth.jpg' => 'La Terre et la Lune',
-						'cosmos.jpg' => 'Le cosmos',
-						'nebula.jpg' => 'Une nébuleuse'
+						'earthjpg' => 'La Terre et la Lune',
+						'cosmosjpg' => 'Le cosmos',
+						'nebulajpg' => 'Une nébuleuse'
 					]
 				]
 			],
