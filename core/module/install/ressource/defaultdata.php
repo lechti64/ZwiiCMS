@@ -23,7 +23,7 @@ class init extends common {
 			'title' => 'Zwii, votre site en quelques clics !',
 		],
 		'core' => [
-			'dataVersion' => 1000,
+			'dataVersion' => 10000,
 			'lastBackup' => 0,
 			'lastClearTmp' => 0
 		],

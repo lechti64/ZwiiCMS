@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.21.dev';
+	const ZWII_VERSION = '10.0.22.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -972,82 +972,10 @@ class common {
 
 
 	/**
-	 * Mises à jour
+	 * Mises à jour Uniquement à partir d'une version 9.0.0 minimum
 	 */
 	private function update() {
-		// Version 8.1.0
-		if($this->getData(['core', 'dataVersion']) < 810) {
-			$this->setData(['config', 'timezone', 'Europe/Paris']);
-			$this->setData(['core', 'dataVersion', 810]);
-			//$this->saveData();
-		}
-		// Version 8.2.0
-		if($this->getData(['core', 'dataVersion']) < 820) {
-			$this->setData(['theme', 'body', 'backgroundColor', 'rgba(236, 239, 241, 1)']);
-			$this->setData(['theme', 'site', 'backgroundColor', 'rgba(255, 255, 255, 1)']);
-			$this->setData(['theme', 'text', 'fontSize', '13px']);
-			$this->setData(['theme', 'text', 'textColor', 'rgba(33, 34, 35, 1)']);
-			$this->setData(['theme', 'menu', 'fontSize', '1em']);
-			$this->setData(['theme', 'menu', 'textColor', 'rgba(255, 255, 255, 1)']);
-			$this->setData(['theme', 'header', 'fontSize', '2em']);
-			$this->setData(['theme', 'footer', 'textColor', 'rgba(33, 34, 35, 1)']);
-			$this->setData(['core', 'dataVersion', 820]);
-			//$this->saveData();
-		}
-		// Version 8.2.2
-		if($this->getData(['core', 'dataVersion']) < 822) {
-			$this->setData(['config', 'maintenance', false]);
-			$this->setData(['core', 'dataVersion', 822]);
-			//$this->saveData();
-		}
-		// Version 8.2.6
-		if($this->getData(['core', 'dataVersion']) < 826) {
-			$this->setData(['theme','header','linkHome',true]);
-			$this->setData(['core', 'dataVersion', 826]);
-			//$this->SaveData();
-		}
-		// Version 8.3.1
-		if($this->getData(['core', 'dataVersion']) < 831) {
-			$this->setData(['theme','header','imageContainer','auto']);
-			$this->setData(['core', 'dataVersion', 831]);
-			//$this->SaveData();
-		}
 
-		// Version 8.4.0
-		if($this->getData(['core', 'dataVersion']) < 840) {
-			$this->setData(['config','itemsperPage',10]);
-			$this->setData(['core', 'dataVersion', 840]);
-			//$this->SaveData();
-		}
-		// Version 8.4.4
-		if($this->getData(['core', 'dataVersion']) < 844) {			
-			$this->setData(['core', 'dataVersion', 844]);
-		}			
-		// Version 8.4.6
-		if($this->getData(['core', 'dataVersion']) < 846) {		
-			$this->setData(['config','itemsperPage',10]);
-			$this->setData(['core', 'dataVersion', 846]);
-		}		
-		// Version 8.5.0
-		if($this->getData(['core', 'dataVersion']) < 850) {
-			$this->setData(['theme','menu','font','Open+Sans']);
-			$this->setData(['core', 'dataVersion', 850]);
-		}	
-		// Version 8.5.1
-		if($this->getData(['core', 'dataVersion']) < 851) {
-			$this->setData(['config','itemsperPage',10]);
-			$this->deleteData(['config','ItemsperPage']);
-			$this->setData(['core', 'dataVersion', 851]);
-		}	
-		// Version 9.0.0
-		if($this->getData(['core', 'dataVersion']) < 9000) {
-			$this->deleteData(['theme', 'site', 'block']);
-			if ($this->getData(['theme','menu','position']) === 'body-top') {
-				$this->setData(['theme','menu','position','top']);
-			}
-			$this->setData(['theme', 'menu','fixed',false]);						
-			$this->setData(['core', 'dataVersion', 9000]);
-		}	
 		// Version 9.0.01
 		if($this->getData(['core', 'dataVersion']) < 9001) {
 			$this->deleteData(['config', 'social', 'googleplusId']);
@@ -1115,8 +1043,8 @@ class common {
 		}
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
-			//$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
-			//$this->deleteData(['config','homePageId']);
+			$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
+			$this->deleteData(['config','homePageId']);
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 
