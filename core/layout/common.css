@@ -457,6 +457,26 @@ nav li ul {
 	padding-left: 10px;	
 }
 
+nav #i18nUserSelect {
+	text-align: right;
+}
+
+nav .col1,
+nav .col2,
+nav .col3,
+nav .col4,
+nav .col5,
+nav .col6,
+nav .col7,
+nav .col8,
+nav .col9,
+nav .col10,
+nav .col11,
+nav .col12 {
+	padding-top: 0px;
+	padding-bottom: 0px ;
+}
+
 nav li ul li {
 	display: block;
 	text-align: left;
@@ -493,7 +513,7 @@ nav a:hover {
 		display: none;
 		text-align: left;
 	}
-	nav li {
+	nav li, .flag {
 		display: block;
 	}
 	nav li ul {
@@ -503,6 +523,7 @@ nav a:hover {
 		min-width: inherit;
 		width: auto;
 	}
+
 	/* Taille du menu hamburger */
 	nav .zwiico-menu {
 		font-size:1.5em;
@@ -544,12 +565,15 @@ ul .menuSideChild, li .menuSideChild {
 
 /* Icones de langues du menu */
 nav .flag {
-	height: 30px;
-	padding: 5px;
+	height: 20px;
 	vertical-align: middle;
+	padding: 3px;
+	margin-top:12px;
 }
+
+
 nav .flagSelected {
-	padding: 0px;
+	height: 25px;
 }
 
 

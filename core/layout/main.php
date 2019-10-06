@@ -41,8 +41,16 @@
 				<div id="menu" class="
 				<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}
 				?>">
+				
+					<div class="row">
+						<div class="col<?php echo floor((12 - sizeof($this->i18nInstalled()) /2)); ?>">
+							<?php $layout->showMenu(); ?>
+						</div>
+						<div class="col<?php echo ceil((sizeof($this->i18nInstalled()) /2)); ?>" id="i18nUserSelect">
+							<?php $layout->showi18nUserSelect(); ?>
+						</div>
+					</div>
 
-					<?php $layout->showMenu(); ?>
 				</div> <!--fin menu -->
 			</nav>
 		<?php endif; ?>
@@ -71,7 +79,16 @@
 			<!-- Menu dans le fond du site après la bannière -->
 			<nav>
 				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
-				<div id="menu" class="container"><?php $layout->showMenu(); ?></div>
+				<div id="menu" class="container">
+				<div class="row">
+						<div class="col<?php echo floor((12 - sizeof($this->i18nInstalled()) /2)); ?>">
+							<?php $layout->showMenu(); ?>
+						</div>
+						<div class="col<?php echo ceil((sizeof($this->i18nInstalled()) /2)); ?>" id="i18nUserSelect">
+							<?php $layout->showi18nUserSelect(); ?>
+						</div>
+					</div>
+				</div>
 			</nav>
 		<?php endif; ?>
 		<!-- Site -->
@@ -80,7 +97,16 @@
 				<!-- Menu dans le site avant la bannière -->
 				<nav>
 					<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
-					<div id="menu" class="container"><?php $layout->showMenu(); ?></div>
+					<div id="menu" class="container">
+					<div class="row">
+						<div class="col<?php echo floor((12 - sizeof($this->i18nInstalled()) /2)); ?>">
+							<?php $layout->showMenu(); ?>
+						</div>
+						<div class="col<?php echo ceil((sizeof($this->i18nInstalled()) /2)); ?>" id="i18nUserSelect">
+							<?php $layout->showi18nUserSelect(); ?>
+						</div>
+					</div>
+					</div>
 				</nav>
 			<?php endif; ?>
 			<?php if(
@@ -119,7 +145,16 @@
 			<!-- Menu dans le site après la bannière -->
 			<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
-				<div id="menu" class="container"><?php $layout->showMenu(); ?></div>
+				<div id="menu" class="container">
+				<div class="row">
+						<div class="col<?php echo floor((12 - sizeof($this->i18nInstalled()) /2)); ?>">
+							<?php $layout->showMenu(); ?>
+						</div>
+						<div class="col<?php echo ceil((sizeof($this->i18nInstalled()) /2)); ?>" id="i18nUserSelect">
+							<?php $layout->showi18nUserSelect(); ?>
+						</div>
+					</div>
+				</div>
 			</nav>
 			<?php endif; ?>
 			<!-- Corps de page -->
