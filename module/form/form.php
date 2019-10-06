@@ -14,6 +14,7 @@
  * @link http://zwiicms.com/
  */
 
+
 class form extends common {
 
 	public static $actions = [
@@ -353,7 +354,10 @@ class form extends common {
 					$subject = $this->getData(['module', $this->getUrl(0), 'config', 'subject']);
 					if($subject === '') {
 						$subject = 'Nouveau message en provenance de votre site';
-					}
+					}					
+					// phpMailer
+					require_once "core/vendor/phpmailer/phpmailer.php";
+					require_once "core/vendor/phpmailer/exception.php";
 					// Envoi le mail
 					$sent = $this->sendMail(
 						$to,

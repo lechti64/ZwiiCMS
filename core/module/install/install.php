@@ -12,6 +12,7 @@
  * @link http://zwiicms.com/
  */
 
+
 class install extends common {
 
 	public static $actions = [
@@ -86,7 +87,10 @@ class install extends common {
 						'mail' => $userMail,
 						'password' => $this->getInput('installPassword', helper::FILTER_PASSWORD, true)
 					]
-				]);				
+				]);
+				// phpMailer
+				require_once "core/vendor/phpmailer/phpmailer.php";
+				require_once "core/vendor/phpmailer/exception.php";						
 				// Envoie le mail
 				$sent = $this->sendMail(
 					$userMail,

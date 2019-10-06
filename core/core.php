@@ -14,10 +14,6 @@
  * @link http://zwiicms.com/
  */
 
- // Classes personnalisées
-require_once "core/vendor/autoload.php";
-
-// Classe internes
 class common {
 	const DISPLAY_RAW = 0;
 	const DISPLAY_JSON = 1;
@@ -35,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.20.dev';
+	const ZWII_VERSION = '10.0.21.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -116,7 +112,7 @@ class common {
 			// 'codemirror', // Désactivé par défaut
 			'tippy',
 			'zwiico',
-			'imagemap',
+			// 'imagemap',
 			'simplelightbox'
 		],
 		'view' => ''
@@ -317,7 +313,9 @@ class common {
 	public function deleteData($keys) {		
 		//Retourne une chaine contenant le dossier à créer
 		$folder = $this->dirData ($keys[0],$this->geti18n());
-		// Constructeur 
+		// Constructeur  JsonDB
+		require_once "core/vendor/jsondb/Dot.php";
+		require_once "core/vendor/jsondb/JsonDb.php";
 		$db = new \Prowebcraft\JsonDb([
 			'name' => $keys[0] . '.json',
 			'dir' => $folder,
@@ -421,7 +419,9 @@ class common {
 		if (count($keys) >= 1) {
 			//Retourne une chaine contenant le dossier à créer
 			$folder = $this->dirData ($keys[0],$this->geti18n());
-			// Constructeur du module de sauvegarde
+			// Constructeur  JsonDB
+			require_once "core/vendor/jsondb/Dot.php";
+			require_once "core/vendor/jsondb/JsonDb.php";
 			$db = new \Prowebcraft\JsonDb([
 				'name' => $keys[0] . '.json',
 				'dir' => $folder,
@@ -756,7 +756,7 @@ class common {
 
 	public function createSitemap($command = "all") {
 
-		//require_once "core/vendor/sitemap/SitemapGenerator.php";
+		require_once "core/vendor/sitemap/SitemapGenerator.php";
 
 		$timezone = $this->getData(['config','timezone']);
 
@@ -906,7 +906,9 @@ class common {
 	
 		//Retourne une chaine contenant le dossier à créer
 		$folder = $this->dirData ($keys[0],$this->geti18n());
-		// Constructeur 
+		// Constructeur  JsonDB
+		require_once "core/vendor/jsondb/Dot.php";
+		require_once "core/vendor/jsondb/JsonDb.php";
 		$db = new \Prowebcraft\JsonDb([
 			'name' => $keys[0] . '.json',
 			'dir' => $folder,
@@ -956,7 +958,9 @@ class common {
 			mkdir (self::DATA_DIR . '/' . $lang);
 		}
 		$folder = $this->dirData ($module,$lang);
-		// Constructeur
+		// Constructeur  JsonDB
+		require_once "core/vendor/jsondb/Dot.php";
+		require_once "core/vendor/jsondb/JsonDb.php";
 		$db = new \Prowebcraft\JsonDb([
 			'name' => $module . '.json',
 			'dir' => $folder,
@@ -1111,8 +1115,8 @@ class common {
 		}
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
-			$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
-			$this->deleteData(['config','homePageId']);
+			//$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
+			//$this->deleteData(['config','homePageId']);
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 
