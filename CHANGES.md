@@ -1,5 +1,10 @@
 # Changelog
 
+## version 9.2.09
+- Correections :
+    - Module Formulaire, erreur lors de l'envoi d'un premier formulaire
+    - Thème Footer , désactivation de l'aperçu du texte personnalisé
+
 ## Version 9.2.08
 - Correction :
     - Edition de page : bug empêchant le paramétrage d'un module après un changement de gabarit.
