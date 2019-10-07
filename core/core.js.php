@@ -250,6 +250,15 @@ core.start = function() {
 			$(location).attr("href", pageUrl);
 		}
 	});
+	 /**
+	 * Choix de la langue dans la barre de membre
+	 */
+	$("#barSelectLanguage").on("change", function(){
+		var i18nLang = $(this).val();
+		if(i18nLang) {
+			$("#barFormSelectLanguage").submit();	
+		}  
+	});
 	/**
 	 * Champs d'upload de fichiers
 	 */
@@ -376,14 +385,3 @@ $(document).ready(function(){
 		$("#navfixedconnected .navLevel2").css({ 'pointer-events' : 'none' });
 	});
 });
-
-
-/**
- * Traitement du changement de langue
- */
-
-$(document).ready(function(){
-	$("#barSelectLanguage").click(function(){
-		$("#barFormSelectLanguage").submit();	  
-	});
-  });
