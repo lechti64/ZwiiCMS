@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.23.dev';
+	const ZWII_VERSION = '10.0.24.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -335,7 +335,7 @@ class common {
 				$db->save();				
 				break;
 			case 4:
-				$db->deleteet($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3]);
+				$db->delete($keys[0].'.'.$keys[1].'.'.$keys[2].'.'.$keys[3]);
 				$db->save();
 				break;
 			case 5:
