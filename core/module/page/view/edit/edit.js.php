@@ -197,7 +197,6 @@ var pageHomePage = $("#pageHomePage");
 pageHomePage.on("change",function() {
 	if (this.checked)  {
 		$("input[name=pageHomePage]").attr("disabled",true);
-		console.log("checlked");
 	}
 });
 
