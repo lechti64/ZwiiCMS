@@ -3,6 +3,7 @@
 ## Version 9.2.09
 - Correction : 
     - Thème, footer, texte personnalisé, désactivation de l'aperçu.
+    - Module formulaire, suppression d'un warning à la première utilisation d'un nouveau formulaire
     
 ## Version 9.2.08
 - Correction :
