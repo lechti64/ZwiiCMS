@@ -253,7 +253,7 @@ core.start = function() {
 	 /**
 	 * Choix de la langue dans la barre de membre
 	 */
-	$("#barSelectLanguage").on("change", function(){
+	$("#barFormSelectLanguage").on("change", function(){
 		var i18nLang = $(this).val();
 		if(i18nLang) {
 			$("#barFormSelectLanguage").submit();	
