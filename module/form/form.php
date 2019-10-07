@@ -32,7 +32,7 @@ class form extends common {
 	
 	public static $pagination;
 	
-	const FORM_VERSION = '1.9'; 
+	const FORM_VERSION = '2.0'; 
 
 	const TYPE_MAIL = 'mail';
 	const TYPE_SELECT = 'select';
@@ -88,6 +88,8 @@ class form extends common {
 					'subject' => $this->getInput('formConfigSubject')
 				]
 			]);
+			// Génération des données vides
+			$this->setData(['module', $this->getUrl(0), 'data', []]);			
 			// Génération des champs
 			$inputs = [];
 			foreach($this->getInput('formConfigPosition', null) as $index => $position) {
