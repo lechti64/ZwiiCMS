@@ -5,11 +5,11 @@ tinymce.init({
 	// Classe où appliquer l'éditeur
 	selector: ".editorWysiwyg",
 	// Aperçu dans le pied de page
-	setup:function(ed) {
-		ed.on('change', function(e) {
-			$("#footerText").html(ed.getContent());
-		});
-	},
+	// setup:function(ed) {
+	//	ed.on('change', function(e) {
+	//		$("#footerText").html(ed.getContent());
+	//	});
+	//},
 	// Langue
 	language: "fr_FR",
 	// Plugins
