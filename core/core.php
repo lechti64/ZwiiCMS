@@ -2377,13 +2377,13 @@ class layout extends common {
 			if (sizeof($this->i18nInstalled()) > 1) {
 				$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 				$items .= '<input type="image" alt="'.$this->geti18n().'" class="flag flagSelected"';
-				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/svg/'.  $this->geti18n() .'.svg" data-tippy-content="'. $this->geti18n() .'" />';
+				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/png/'.  $this->geti18n() .'.png" data-tippy-content="'. $this->geti18n() .'" />';
 				$items .= '</form></li>';
 				foreach ($this->i18nInstalled() as $itemKey => $item) {
 					if ($this->geti18n() !== $itemKey ) {
 						$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 						$items .= '<input type="image" alt="'.$itemKey.'" class="flag"';
-						$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/svg/'.  $itemKey .'.svg" data-tippy-content="'. $item .'" />';
+						$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/png/'.  $itemKey .'.png" data-tippy-content="'. $item .'" />';
 						$items .= '</form></li>';
 					}
 				}
