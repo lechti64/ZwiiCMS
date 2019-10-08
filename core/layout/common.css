@@ -338,7 +338,7 @@ td > .col12 {
 	width: 200px;
 }
 #bar #barSelectLanguage {
-	width: 170px;
+	width: 140px;
 	margin-right: 10px;
 }
 @media (min-width: 769px) {
@@ -576,7 +576,15 @@ nav .flagSelected {
 	height: 27px;
 }
 
+/* Paramètres du menu et de la barre de langue */
 
+#menuBar {
+	display: inline-flex ;
+}
+#i18nBar {
+	display: inline-flex ;
+	float: right;
+}
 
 /* Corps */
 @media (min-width:769px) {

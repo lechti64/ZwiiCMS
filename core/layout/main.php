@@ -27,7 +27,6 @@
 			<nav
 			<?php 
 			// Détermine si le menu est fixe en haut de page lorsque l'utilisateur n'est pas connecté
-			// 
 			if($this->getData(['theme', 'menu', 'position']) === 'top' &&
 				$this->getData(['theme', 'menu', 'fixed']) === true) {
 					if ($this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD'))
@@ -35,22 +34,15 @@
 					elseif ($this->getUrl(0) !== 'theme') 
 						{echo 'id="navfixedconnected"';} 
 				}
-			?>
-			>
+			?>>
 				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
-				<div id="menu" class="
-				<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}
-				?>">
-				
-					<div class="row">
-						<div class="col<?php echo floor((12 - sizeof($this->i18nInstalled()) /2)); ?>">
-							<?php $layout->showMenu(); ?>
-						</div>
-						<div class="col<?php echo ceil((sizeof($this->i18nInstalled()) /2)); ?>" id="i18nUserSelect">
-							<?php $layout->showi18nUserSelect(); ?>
-						</div>
+				<div id="menu" class="<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}?>">
+					<div id="menuBar">
+						<?php $layout->showMenu(); ?>
+					</div>	
+					<div id="i18nBar">					
+						<?php $layout->showi18nUserSelect(); ?>
 					</div>
-
 				</div> <!--fin menu -->
 			</nav>
 		<?php endif; ?>
@@ -80,13 +72,11 @@
 			<nav>
 				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
 				<div id="menu" class="container">
-				<div class="row">
-						<div class="col<?php echo floor((12 - sizeof($this->i18nInstalled()) /2)); ?>">
-							<?php $layout->showMenu(); ?>
-						</div>
-						<div class="col<?php echo ceil((sizeof($this->i18nInstalled()) /2)); ?>" id="i18nUserSelect">
-							<?php $layout->showi18nUserSelect(); ?>
-						</div>
+					<div id="menuBar">
+						<?php $layout->showMenu(); ?>
+					</div>	
+					<div id="i18nBar">					
+						<?php $layout->showi18nUserSelect(); ?>
 					</div>
 				</div>
 			</nav>
@@ -98,14 +88,12 @@
 				<nav>
 					<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
 					<div id="menu" class="container">
-					<div class="row">
-						<div class="col<?php echo floor((12 - sizeof($this->i18nInstalled()) /2)); ?>">
+						<div id="menuBar">
 							<?php $layout->showMenu(); ?>
-						</div>
-						<div class="col<?php echo ceil((sizeof($this->i18nInstalled()) /2)); ?>" id="i18nUserSelect">
+						</div>	
+						<div id="i18nBar">					
 							<?php $layout->showi18nUserSelect(); ?>
 						</div>
-					</div>
 					</div>
 				</nav>
 			<?php endif; ?>
@@ -146,13 +134,11 @@
 			<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
 				<div id="menu" class="container">
-				<div class="row">
-						<div class="col<?php echo floor((12 - sizeof($this->i18nInstalled()) /2)); ?>">
-							<?php $layout->showMenu(); ?>
-						</div>
-						<div class="col<?php echo ceil((sizeof($this->i18nInstalled()) /2)); ?>" id="i18nUserSelect">
-							<?php $layout->showi18nUserSelect(); ?>
-						</div>
+					<div id="menuBar">
+						<?php $layout->showMenu(); ?>
+					</div>	
+					<div id="i18nBar">					
+						<?php $layout->showi18nUserSelect(); ?>
 					</div>
 				</div>
 			</nav>
