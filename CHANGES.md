@@ -1,7 +1,7 @@
 # Changelog
 
 ## version 9.2.09
-- Correections :
+- Corrections :
     - Module Formulaire, erreur lors de l'envoi d'un premier formulaire
     - Thème Footer , désactivation de l'aperçu du texte personnalisé
 
