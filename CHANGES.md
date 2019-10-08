@@ -21,6 +21,7 @@
     - Procédure d'importation : 
         - L'importation des données est possible uniquement à partir d'une version 9. 
         - Une notification est affichée après l'importation.
+        
 ## version 9.2.09
 - Correections :
     - Module Formulaire, erreur lors de l'envoi d'un premier formulaire
