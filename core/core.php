@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.26.dev';
+	const ZWII_VERSION = '10.0.27.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1217,6 +1217,7 @@ class core extends common {
 					$css .= 'nav{margin:0 20px 0}';
 				}
 			}
+			$css .= '#i18nBar {padding:' . $this->getData(['theme', 'menu', 'height']) . ';}';
 			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
