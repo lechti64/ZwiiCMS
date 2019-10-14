@@ -183,12 +183,18 @@ $( document ).ready(function() {
 	if ($("#pageEditParentPageId").val() !== "") {
 		  $("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideUp();
+			$("#pageHomePageIdWrapper").removeClass("disabled");
+			$("#pageHomePageIdWrapper").slideUp();
 		}	else {
 			$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideDown();
+			$("#pageHomePageIdWrapper").addClass("disabled");
+			$("#pageHomePageIdWrapper").slideDown();			
 		}
 
 });
+
+
 
 /**
 * Bloque la désactivation du choix de la page d'accueil
@@ -403,9 +409,13 @@ pageEditParentPageIdDOM.on("change", function() {
 	if ($(this).val() !== "") {
 		  $("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideUp();
+			$("#pageHomePageIdWrapper").removeClass("disabled");
+			$("#pageHomePageIdWrapper").slideUp();
 		}	else {
 			$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideDown();
+			$("#pageHomePageIdWrapper").addClass("disabled");
+			$("#pageHomePageIdWrapper").slideDown();
 		}
 });
 
