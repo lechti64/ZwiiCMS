@@ -225,11 +225,6 @@ class page extends common {
 					$this->setData(['page', $hierarchyPageId, 'position', $lastPosition]);
 					// Incrémente pour la prochaine position
 					$lastPosition++;
-
-					// Une seule homepage, si homePage est true, désactiver les autres pages
-					if ($this->getinput('pageHomePageId', helper::FILTER_BOOLEAN) === true) {
-						$this->setData(['page',$hierarchyPageId,"homePageId", false]);
-					}
 				}
 				if ($this->getinput('pageEditBlock') !== 'bar') {
 					$barLeft = $this->getinput('pageEditBarLeft');
@@ -243,6 +238,12 @@ class page extends common {
 					// Une barre est masquée
 					$position = 0;
 					$hideTitle = true;
+				}
+				// Reset homePage
+				if ($this->getinput('pageHomePageId', helper::FILTER_BOOLEAN) === true ) {
+					foreach($hierarchy as $hierarchyPageId) {
+						$this->setData(['page',$hierarchyPageId,"homePageId", false]);						
+					}
 				}
 				// Modifie la page ou en crée une nouvelle si l'id a changé
 				$this->setData([
