@@ -361,8 +361,12 @@ td > .col12 {
 		height: auto;
 	}
 	#bar #barSelectPage {
-		width: 50% ;
-		font-size: 0.6em;			
+		width: 40% ;
+		font-size: 0.8em;			
+	}
+	#bar #barSelectLanguage {
+		width: 30% ;
+		font-size: 0.8em;			
 	}
 	#bar #barLeft {
 		font-size: 1.6em;	
@@ -375,6 +379,25 @@ td > .col12 {
 		display: none;
 	}
 }
+
+@media (max-width: 485px) {
+	#bar #barSelectPage {
+		width: 30% ;
+		font-size: 0.8em;			
+	}
+	#bar #barSelectLanguage {
+		width: 30% ;
+		font-size: 0.8em;			
+	}
+	#bar #barLeft {
+		font-size: 1.2em;	
+		float : none;	
+	}
+	#bar #barRight {
+		font-size: 1.2em;		
+	}
+}
+
 
 
 /* Site */
@@ -508,12 +531,27 @@ nav a:hover {
 		position: static;
 		min-width: inherit;
 		width: auto;
+		margin: 15px;
 	}
 
 	/* Taille du menu hamburger */
 	nav .zwiico-menu {
 		font-size:1.5em;
-	}	
+	}
+	
+	nav .flag {
+		height: 18px;
+		vertical-align: top;
+		max-width: 100%;
+		float: right;
+		margin: 5px;
+		padding-bottom: 5px;
+		}
+	nav .flagSelected {
+		height: 22px;
+		padding-bottom: 5px;
+		margin-top: 15px;
+	} 	
 }
 
 
