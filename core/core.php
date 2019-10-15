@@ -2780,7 +2780,7 @@ class template {
 		// Début du wrapper
 		$html = '<div id="' . $attributes['id'] . 'Wrapper" class="inputWrapper ' . $attributes['classWrapper'] . '">';
 		// Label
-		$html .= self::label($attributes['id'], 'Combien font ' . $firstNumber . ' + ' . $secondNumber . ' ?', [
+		$html .= self::label($attributes['id'],  $firstNumber . ' + ' . $secondNumber . ' = ?', [
 			'help' => $attributes['help']
 		]);
 		// Notice
