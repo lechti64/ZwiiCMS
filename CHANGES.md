@@ -11,7 +11,7 @@
     - Multilinguisme :
         - Site publiable en différentes versions de langues européennes.
         - Masque de gestion des langues disponibles
-        - Changement de la langue courante dans l'inerface d'administration
+        - Changement de la langue courante dans l'interface d'administration
         - En mode déconnecté, langue par défaut du navigateur ou choix de la langue dans la barre de menu 
 
 - Modifications : 
