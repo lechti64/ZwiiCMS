@@ -380,7 +380,7 @@ td > .col12 {
 	}
 }
 
-@media (max-width: 380px) {
+@media (max-width: 485px) {
 	#bar #barSelectPage {
 		width: 30% ;
 		font-size: 0.8em;			
