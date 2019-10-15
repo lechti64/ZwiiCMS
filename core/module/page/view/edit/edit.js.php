@@ -184,12 +184,12 @@ $( document ).ready(function() {
 		  $("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideUp();
 			$("#pageHomePageIdWrapper").removeClass("disabled");
-			$("#pageHomePageIdWrapper").slideUp();
+			$("#pageHomePageIdWrapper").slideUp();		
 		}	else {
 			$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideDown();
 			$("#pageHomePageIdWrapper").addClass("disabled");
-			$("#pageHomePageIdWrapper").slideDown();			
+			$("#pageHomePageIdWrapper").slideDown();
 		}
 
 });
