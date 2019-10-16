@@ -21,6 +21,9 @@
     - Procédure d'importation : 
         - L'importation des données est possible uniquement à partir d'une version 9. 
         - Une notification est affichée après l'importation.
+    - Procédure d'installation :
+        - Modification de la gestion des données de site par défaut.
+        - Régénération automatisée des fichiers manquants de données manquants.
         
 ## version 9.2.09
 - Correections :

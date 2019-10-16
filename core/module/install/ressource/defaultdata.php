@@ -1,7 +1,7 @@
 <?php
 class init extends common {
 
-    public static $defaultData = [
+	public static $defaultData = [
 		'config' => [
 			'analyticsId' => '',
 			'autoBackup' => true,
@@ -27,6 +27,133 @@ class init extends common {
 			'lastBackup' => 0,
 			'lastClearTmp' => 0
 		],
+		'page' => [	
+			'accueil' => [
+			'typeMenu' => 'text',
+			'iconUrl' => '',
+			'disable' => false,
+			'content' => '<h3>Bienvenue sur votre nouveau site Zwii !</h3>
+							  <p><strong>Un email contenant le récapitulatif de votre installation vient de vous être envoyé.</strong></p>
+							  <p>Connectez-vous dès maintenant à votre espace membre afin de créer un site à votre image ! Vous pourrez personnaliser le thème, créer des pages, ajouter des utilisateurs et bien plus encore !</p>
+							  <p>Si vous avez besoin d\'aide ou si vous cherchez des informations sur Zwii, n\'hésitez pas à jeter un œil à notre <a title="Forum" href="https://forum.zwiicms.com/">forum</a>.</p>',
+			'hideTitle' => false,
+			'homePageId' => true,
+			'breadCrumb' => false,
+			'metaDescription' => '',
+			'metaTitle' => '',
+			'moduleId' => '',
+			'modulePosition' => 'bottom',
+			'parentPageId' => '',
+			'position' => 1,
+			'group' => self::GROUP_VISITOR,
+			'targetBlank' => false,
+			'title' => 'Accueil',
+			'block' => '12',
+			'barLeft' => '',
+			'barRight' => '',
+			'displayMenu' => 'none',
+			'hideMenuSide' => false,
+			'hideMenuChildren' =>false
+			]
+		],
+		'module' => [],
+		'user' => [],
+		'theme' =>  [
+			'body' => [
+				'backgroundColor' => 'rgba(236, 239, 241, 1)',
+				'image' => '',
+				'imageAttachment' => 'scroll',
+				'imageRepeat' => 'no-repeat',
+				'imagePosition' => 'top center',
+				'imageSize' => 'auto'
+			],
+			'button' => [
+				'backgroundColor' => 'rgba(32, 59, 82, 1)'
+			],
+			'footer' => [
+				'backgroundColor' => 'rgba(255, 255, 255, 1)',
+				'font' => 'Open+Sans',				
+				'fontSize' => '.8em',
+				'fontWeight' => 'normal',				
+				'height' => '0',
+				'loginLink' => true,
+				'margin' => true,
+				'position' => 'site',
+				'textColor' => 'rgba(33, 34, 35, 1)',
+				'copyrightPosition' => 'right',
+				'copyrightAlign' => 'right',
+				'text' => 'Pied de page personnalisé',				
+				'textPosition' => 'left',
+				'textAlign' => 'left',	
+				'textTransform' => 'none',							
+				'socialsPosition' => 'center',
+				'socialsAlign' => 'center',
+				'displayVersion' => true,
+				'displayVersion' => true,
+				'displaySiteMap' => true,
+				'displayCopyright' => true,
+				'displayLegal' => false,
+				'displaySearch' => false,
+				'template' => '3'
+			],
+			'header' => [
+				'backgroundColor' => 'rgba(255, 255, 255, 1)',
+				'font' => 'Oswald',
+				'fontSize' => '2em',
+				'fontWeight' => 'normal',
+				'height' => '150px',
+				'image' => 'banniere/zwii_banniere-960px.jpg',
+				'imagePosition' => 'center center',
+				'imageRepeat' => 'no-repeat',
+				'margin' => false,
+				'position' => 'site',
+				'textAlign' => 'center',
+				'textColor' => 'rgba(33, 34, 35, 1)',
+				'textHide' => true,
+				'textTransform' => 'none',
+				'linkHome' => true,
+				'imageContainer' => 'auto'
+			],
+			'link' => [
+				'textColor' => 'rgba(74, 105, 189, 1)'
+			],
+			'menu' => [
+				'backgroundColor' => 'rgba(32, 59, 82, 1)',
+				'font' => 'Open+Sans',				
+				'fontSize' => '1em',
+				'fontWeight' => 'normal',
+				'height' => '15px 10px',
+				'loginLink' => true,
+				'margin' => false,
+				'position' => 'site-second',
+				'textAlign' => 'left',
+				'textColor' => 'rgba(255, 255, 255, 1)',
+				'textTransform' => 'none',
+				'fixed' => false
+			],
+			'site' => [
+				'backgroundColor' => 'rgba(255, 255, 255, 1)',
+				'radius' => '0',
+				'shadow' => '0',
+				'width' => '960px'
+			],
+			'text' => [
+				'font' => 'Open+Sans',
+				'fontSize' => '13px',
+				'textColor' => 'rgba(33, 34, 35, 1)'
+			],
+			'title' => [
+				'font' => 'Oswald',
+				'fontWeight' => 'normal',
+				'textColor' => 'rgba(74, 105, 189, 1)',
+				'textTransform' => 'none'
+			],
+			'version' => 0,
+		]
+    ];
+
+
+    public static $siteData = [
 		'page' => [	
 			'accueil' => [
 			'typeMenu' => 'text',
@@ -414,99 +541,6 @@ class init extends common {
 					]
 				]
 			]
-		],
-		'user' => [],
-		'theme' =>  [
-			'body' => [
-				'backgroundColor' => 'rgba(236, 239, 241, 1)',
-				'image' => '',
-				'imageAttachment' => 'scroll',
-				'imageRepeat' => 'no-repeat',
-				'imagePosition' => 'top center',
-				'imageSize' => 'auto'
-			],
-			'button' => [
-				'backgroundColor' => 'rgba(32, 59, 82, 1)'
-			],
-			'footer' => [
-				'backgroundColor' => 'rgba(255, 255, 255, 1)',
-				'font' => 'Open+Sans',				
-				'fontSize' => '.8em',
-				'fontWeight' => 'normal',				
-				'height' => '0',
-				'loginLink' => true,
-				'margin' => true,
-				'position' => 'site',
-				'textColor' => 'rgba(33, 34, 35, 1)',
-				'copyrightPosition' => 'right',
-				'copyrightAlign' => 'right',
-				'text' => 'Pied de page personnalisé',				
-				'textPosition' => 'left',
-				'textAlign' => 'left',	
-				'textTransform' => 'none',							
-				'socialsPosition' => 'center',
-				'socialsAlign' => 'center',
-				'displayVersion' => true,
-				'displayVersion' => true,
-				'displaySiteMap' => true,
-				'displayCopyright' => true,
-				'displayLegal' => false,
-				'displaySearch' => false,
-				'template' => '3'
-			],
-			'header' => [
-				'backgroundColor' => 'rgba(255, 255, 255, 1)',
-				'font' => 'Oswald',
-				'fontSize' => '2em',
-				'fontWeight' => 'normal',
-				'height' => '150px',
-				'image' => 'banniere/zwii_banniere-960px.jpg',
-				'imagePosition' => 'center center',
-				'imageRepeat' => 'no-repeat',
-				'margin' => false,
-				'position' => 'site',
-				'textAlign' => 'center',
-				'textColor' => 'rgba(33, 34, 35, 1)',
-				'textHide' => true,
-				'textTransform' => 'none',
-				'linkHome' => true,
-				'imageContainer' => 'auto'
-			],
-			'link' => [
-				'textColor' => 'rgba(74, 105, 189, 1)'
-			],
-			'menu' => [
-				'backgroundColor' => 'rgba(32, 59, 82, 1)',
-				'font' => 'Open+Sans',				
-				'fontSize' => '1em',
-				'fontWeight' => 'normal',
-				'height' => '15px 10px',
-				'loginLink' => true,
-				'margin' => false,
-				'position' => 'site-second',
-				'textAlign' => 'left',
-				'textColor' => 'rgba(255, 255, 255, 1)',
-				'textTransform' => 'none',
-				'fixed' => false
-			],
-			'site' => [
-				'backgroundColor' => 'rgba(255, 255, 255, 1)',
-				'radius' => '0',
-				'shadow' => '0',
-				'width' => '960px'
-			],
-			'text' => [
-				'font' => 'Open+Sans',
-				'fontSize' => '13px',
-				'textColor' => 'rgba(33, 34, 35, 1)'
-			],
-			'title' => [
-				'font' => 'Oswald',
-				'fontWeight' => 'normal',
-				'textColor' => 'rgba(74, 105, 189, 1)',
-				'textTransform' => 'none'
-			],
-			'version' => 0,
 		]
     ];
 }

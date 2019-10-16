@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.29.dev';
+	const ZWII_VERSION = '10.0.30.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -947,7 +947,7 @@ class common {
 	 * @param array $module : nom du module à générer 
 	 * choix valides :  core config user theme page module
 	 */ 
-	public function initData($module, $lang = 'fr') {
+	public function initData($module, $lang = 'fr', $sampleSite = false) {
 		
 		// Tableau avec les données vierges
 		require_once('core/module/install/ressource/defaultdata.php'); 
@@ -966,7 +966,12 @@ class common {
 			'dir' => $folder,
 			'template' => self::TEMP_DIR . 'data.template.json'
 		]);
-		$db->set($module,init::$defaultData[$module]);
+		if ($sampleSite === true) {
+			$db->set($module,init::$siteData[$module]);
+		} else {
+			$db->set($module,init::$defaultData[$module]);
+		}
+		
 		$db->save;
 	}
 
