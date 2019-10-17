@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.30.dev';
+	const ZWII_VERSION = '10.0.31.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -265,7 +265,6 @@ class common {
 				$this->url = $url;
 			}
 			else {
-				// $this->url = $this->getData(['page', 'homePageId']);
 				$this->url = $this->getHomePageId();
 			}
 		}
@@ -623,9 +622,10 @@ class common {
 			// Backup
 			rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_core.json');
 			rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
+		
 			// Dossier de langues
-			if (!file_exists(self::DATA_DIR . '/' . $this->geti18n())) {
-				mkdir (self::DATA_DIR . '/' . $this->geti18n());
+			if (!file_exists(self::DATA_DIR . '/' . 'fr')) {
+				mkdir (self::DATA_DIR . '/' . 'fr');
 			}
 			// Ecriture des données
 			$this->setData(['config',$tempData['config']]);
