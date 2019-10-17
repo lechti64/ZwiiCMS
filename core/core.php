@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.31.dev';
+	const ZWII_VERSION = '10.0.32.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [

@@ -34,7 +34,8 @@ class install extends common {
 		if($this->getData(['user']) !== []) {
 			// Valeurs en sortie
 			$this->addOutput([
-				'access' => false
+				//'access' => false
+				'redirect' => helper::baseUrl(false)
 			]);
 		}
 		// Accès autorisé
@@ -95,7 +96,7 @@ class install extends common {
 					'state' => ($sent === true ? true : null)
 				]);
 			}
-
+			
 			// Valeurs en sortie
 			$this->addOutput([
 				'display' => self::DISPLAY_LAYOUT_LIGHT,
