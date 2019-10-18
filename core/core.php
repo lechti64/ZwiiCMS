@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.32.dev';
+	const ZWII_VERSION = '10.0.33.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -861,9 +861,11 @@ class common {
 	 * @return bool
 	 */
 	public function sendMail($to, $subject, $content) {
-		// Utilisation de PHPMailer version 6.0.6
 		// Layout
 		ob_start();
+		// phpMailer
+		require_once "core/vendor/phpmailer/phpmailer.php";
+		require_once "core/vendor/phpmailer/exception.php";			
 		include 'core/layout/mail.php';
 		$layout = ob_get_clean();
 		// Mail
