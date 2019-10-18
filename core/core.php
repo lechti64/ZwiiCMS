@@ -1805,7 +1805,7 @@ class helper {
 				$text = preg_replace('/([^a-z0-9-])/', '', $text);
 				// Cas où un identifiant est vide
 				if (empty($text)) {
-					$text = uniqid('page-');
+					$text = uniqid('');
 				}
 				// Un ID ne peut pas être un entier, pour éviter les conflits avec le système de pagination
 				if(intval($text) !== 0) {
