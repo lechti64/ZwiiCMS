@@ -1433,12 +1433,10 @@ class core extends common {
 						// Sinon traitement des données de sortie qui requiert qu'aucune notice ne soit présente
 						else {
 							// Enregistrement des données
-							/*
 							if($output['state'] !== false) {
 								$this->setData([$module->getData()]);
-								//$this->saveData();
 							}
-							*/
+							
 							// Notification
 							if($output['notification']) {
 								if($output['state'] === true) {
