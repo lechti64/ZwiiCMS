@@ -41,6 +41,7 @@ class install extends common {
 		else {
 			// Soumission du formulaire
 			if($this->isPost()) {
+				//$sent = $success = false;
 				// Double vérification pour le mot de passe
 				if($this->getInput('installPassword', helper::FILTER_STRING_SHORT, true) !== $this->getInput('installConfirmPassword', helper::FILTER_STRING_SHORT, true)) {
 					self::$inputNotices['installConfirmPassword'] = 'Incorrect';
@@ -59,7 +60,7 @@ class install extends common {
 					$this->setData(['module', 'blog', 'mon-deuxieme-article', 'userId', $userId]);
 					$this->setData(['module', 'blog', 'mon-troisieme-article', 'userId', $userId]);
 				}
-				$this->setData([
+				$success = $this->setData([
 					'user',
 					$userId,
 					[
@@ -71,29 +72,31 @@ class install extends common {
 						'password' => $this->getInput('installPassword', helper::FILTER_PASSWORD, true)
 					]
 				]);
-				// phpMailer
-				require_once "core/vendor/phpmailer/phpmailer.php";
-				require_once "core/vendor/phpmailer/exception.php";						
-				// Envoie le mail
-				$sent = $this->sendMail(
-					$userMail,
-					'Installation de votre site',
-					'Bonjour' . ' <strong>' . $userFirstname . ' ' . $userLastname . '</strong>,<br><br>' .
-					'Voici les détails de votre installation.<br><br>' .
-					'<strong>URL du site :</strong> <a href="' . helper::baseUrl(false) . '" target="_blank">' . helper::baseUrl(false) . '</a><br>' .
-					'<strong>Identifiant du compte :</strong> ' . $this->getInput('installId') . '<br>' .
-					'<strong>Mot de passe du compte :</strong> ' . $this->getInput('installPassword')
-				);
-				// Générer un fichier  robots.txt
-				$this->createRobots();
-				// Créer sitemap
-				$this->createSitemap('all');				
-				// Valeurs en sortie				
-				$this->addOutput([
-					'redirect' => helper::baseUrl(false),
-					'notification' => ($sent === true ? 'Installation terminée' : $sent),
-					'state' => ($sent === true ? true : null)
-				]);
+				if ($success === true) { // Formulaire complété envoi du mail
+					// phpMailer
+					require_once "core/vendor/phpmailer/phpmailer.php";
+					require_once "core/vendor/phpmailer/exception.php";						
+					// Envoie le mail
+					$sent = $this->sendMail(
+						$userMail,
+						'Installation de votre site',
+						'Bonjour' . ' <strong>' . $userFirstname . ' ' . $userLastname . '</strong>,<br><br>' .
+						'Voici les détails de votre installation.<br><br>' .
+						'<strong>URL du site :</strong> <a href="' . helper::baseUrl(false) . '" target="_blank">' . helper::baseUrl(false) . '</a><br>' .
+						'<strong>Identifiant du compte :</strong> ' . $this->getInput('installId') . '<br>' .
+						'<strong>Mot de passe du compte :</strong> ' . $this->getInput('installPassword')
+					);
+					// Générer un fichier  robots.txt
+					$this->createRobots();
+					// Créer sitemap
+					$this->createSitemap('all');				
+					// Valeurs en sortie				
+					$this->addOutput([
+						'redirect' => helper::baseUrl(false),
+						'notification' => ($sent === true ? 'Installation terminée' : $sent),
+						'state' => ($sent === true ? true : null)
+					]);
+				}
 			}
 			
 			// Valeurs en sortie

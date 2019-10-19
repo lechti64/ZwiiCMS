@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.35.dev';
+	const ZWII_VERSION = '10.0.36.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -917,7 +917,7 @@ class common {
 
 		// Pas d'enregistrement lorsque'une notice est présente
 		if (!empty(self::$inputNotices)) {
-			return;
+			return false;
 		}
 	
 		//Retourne une chaine contenant le dossier à créer
@@ -957,6 +957,7 @@ class common {
 				$db->save();
 				break;
 		}
+		return true;
 	}
 
 	/**
