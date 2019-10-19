@@ -293,6 +293,7 @@ class form extends common {
 			// Préparation le contenu du mail
 			$data = [];
 			$content = '';
+			$sent = false;
 			foreach($this->getData(['module', $this->getUrl(0), 'input']) as $index => $input) {
 				// Filtre la valeur
 				switch($input['type']) {
@@ -318,55 +319,56 @@ class form extends common {
 				$content .= '<strong>' . $this->getData(['module', $this->getUrl(0), 'input', $index, 'name']) . ' :</strong> ' . $value . '<br>';
 			}
 			// Crée les données
-			$this->setData(['module', $this->getUrl(0), 'data', helper::increment(1, $this->getData(['module', $this->getUrl(0), 'data'])), $data]);
+			$success = $this->setData(['module', $this->getUrl(0), 'data', helper::increment(1, $this->getData(['module', $this->getUrl(0), 'data'])), $data]);
 			// Envoi du mail
-			// Rechercher l'adresse en fonction du mail
-			$sent = true;
-			$singleuser = $this->getData(['user',
-										  $this->getData(['module', $this->getUrl(0), 'config', 'user']),
-										  'mail']);
-			$singlemail = $this->getData(['module', $this->getUrl(0), 'config', 'mail']);
-			$group = $this->getData(['module', $this->getUrl(0), 'config', 'group']);
-			// Verification si le mail peut être envoyé
-			if(
-				self::$inputNotices === [] && (
-					$group > 0 ||
-					$singleuser !== '' ||
-					$singlemail !== '' )
-			) {
-				// Utilisateurs dans le groupe
-				$to = [];
-				if ($group > 0){
-					foreach($this->getData(['user']) as $userId => $user) {
-						if($user['group'] >= $group) {
-							$to[] = $user['mail'];
+			if ($success === true) {
+				// Rechercher l'adresse en fonction du mail			
+				$singleuser = $this->getData(['user',
+											$this->getData(['module', $this->getUrl(0), 'config', 'user']),
+											'mail']);
+				$singlemail = $this->getData(['module', $this->getUrl(0), 'config', 'mail']);
+				$group = $this->getData(['module', $this->getUrl(0), 'config', 'group']);
+				// Verification si le mail peut être envoyé
+				if(
+					self::$inputNotices === [] && (
+						$group > 0 ||
+						$singleuser !== '' ||
+						$singlemail !== '' )
+				) {
+					// Utilisateurs dans le groupe
+					$to = [];
+					if ($group > 0){
+						foreach($this->getData(['user']) as $userId => $user) {
+							if($user['group'] >= $group) {
+								$to[] = $user['mail'];
+							}
 						}
+					}							
+					// Utilisateur désigné
+					if (!empty($singleuser)) {
+						$to[] = $singleuser;
 					}
-				}							
-				// Utilisateur désigné
-				if (!empty($singleuser)) {
-					$to[] = $singleuser;
-				}
-				// Mail désigné
-				if (!empty($singlemail)) {
-					$to[] = $singlemail;
-				}
-				if($to) {
-					// Sujet du mail
-					$subject = $this->getData(['module', $this->getUrl(0), 'config', 'subject']);
-					if($subject === '') {
-						$subject = 'Nouveau message en provenance de votre site';
-					}					
-					// phpMailer
-					require_once "core/vendor/phpmailer/phpmailer.php";
-					require_once "core/vendor/phpmailer/exception.php";
-					// Envoi le mail
-					$sent = $this->sendMail(
-						$to,
-						$subject,
-						'Nouveau message en provenance de la page "' . $this->getData(['page', $this->getUrl(0), 'title']) . '" :<br><br>' .
-						$content
-					);
+					// Mail désigné
+					if (!empty($singlemail)) {
+						$to[] = $singlemail;
+					}
+					if($to) {
+						// Sujet du mail
+						$subject = $this->getData(['module', $this->getUrl(0), 'config', 'subject']);
+						if($subject === '') {
+							$subject = 'Nouveau message en provenance de votre site';
+						}					
+						// phpMailer
+						require_once "core/vendor/phpmailer/phpmailer.php";
+						require_once "core/vendor/phpmailer/exception.php";
+						// Envoi le mail
+						$sent = $this->sendMail(
+							$to,
+							$subject,
+							'Nouveau message en provenance de la page "' . $this->getData(['page', $this->getUrl(0), 'title']) . '" :<br><br>' .
+							$content
+						);
+					}
 				}
 			}
 			// Redirection
