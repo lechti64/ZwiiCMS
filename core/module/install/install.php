@@ -34,8 +34,7 @@ class install extends common {
 		if($this->getData(['user']) !== []) {
 			// Valeurs en sortie
 			$this->addOutput([
-				//'access' => false
-				'redirect' => helper::baseUrl(false)
+				'access' => false			
 			]);
 		}
 		// Accès autorisé
@@ -89,7 +88,7 @@ class install extends common {
 				$this->createRobots();
 				// Créer sitemap
 				$this->createSitemap('all');				
-				// Valeurs en sortie
+				// Valeurs en sortie				
 				$this->addOutput([
 					'redirect' => helper::baseUrl(false),
 					'notification' => ($sent === true ? 'Installation terminée' : $sent),

@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.33.dev';
+	const ZWII_VERSION = '10.0.34.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -901,10 +901,15 @@ class common {
 }
 
 	/**
-	 * Insert des données
+	 * Sauvegarde des données
 	 * @param array $keys Clé(s) des données
 	 */
 	public function setData($keys = NULL) {
+
+		// Pas d'enregistrement lorsque'une notice est présente
+		if (!empty(self::$inputNotices)) {
+			return;
+		}
 	
 		//Retourne une chaine contenant le dossier à créer
 		$folder = $this->dirData ($keys[0],$this->geti18n());
@@ -916,6 +921,7 @@ class common {
 			'dir' => $folder,
 			'template' => self::TEMP_DIR . 'data.template.json'
 		]);
+
 		switch(count($keys)) {			
 			case 2:
 				$db->set($keys[0],$keys[1]);
@@ -1402,6 +1408,7 @@ class core extends common {
 						$action .= ucfirst($actionPart);
 					}
 				}
+			
 				$action = array_key_exists($action, $module::$actions) ? $action : 'index';
 				if(array_key_exists($action, $module::$actions)) {
 					$module->$action();
@@ -1430,13 +1437,12 @@ class core extends common {
 								}
 							}
 						}
-						// Sinon traitement des données de sortie qui requiert qu'aucune notice ne soit présente
+						// Sinon traitement des données de sortie qui requiert qu'aucune notice soit présente
 						else {
-							// Enregistrement des données
-							if($output['state'] !== false) {
-								$this->setData([$module->getData()]);
-							}
-							
+							// Enregistrement des données							
+							//if($output['state'] !== false) {
+								//$this->setData([$module->getData()]);
+							//}							
 							// Notification
 							if($output['notification']) {
 								if($output['state'] === true) {
