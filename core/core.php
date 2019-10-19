@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.34.dev';
+	const ZWII_VERSION = '10.0.35.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -622,7 +622,16 @@ class common {
 			// Backup
 			rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_core.json');
 			rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
-		
+
+			// Nettoyage des dossiers de langue
+			foreach ($this->i18nInstalled()  as $itemKey => $item) {
+				// Le dossier existe  ?
+				if (is_dir(self::DATA_DIR . $itemKey) === true) {
+					unlink (self::DATA_DIR . $itemKey . '/module.json');
+					unlink (self::DATA_DIR . $itemKey . '/page.json');
+					rmdir (self::DATA_DIR . $itemKey);
+				}
+			}
 			// Dossier de langues
 			if (!file_exists(self::DATA_DIR . '/' . 'fr')) {
 				mkdir (self::DATA_DIR . '/' . 'fr');
