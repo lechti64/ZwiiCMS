@@ -69,7 +69,7 @@ class i18n extends common {
 					if (is_dir(self::DATA_DIR . $remove) === true) {
 						$success ['remove'] = unlink (self::DATA_DIR . $remove . '/module.json');
 						$success ['remove'] = (unlink (self::DATA_DIR . $remove . '/page.json') && $success ['remove'] === true) ? true : false ;
-						$success ['remove'] = (rmdir (self::DATA_DIR . $remove) === true  && $success ['remove'] === true) ? true : false ;;
+						$success ['remove'] = (rmdir (self::DATA_DIR . $remove) === true  && $success ['remove'] === true) ? true : false ;
 					}	
 					// Valeurs en sortie
 					$notification .= $success['remove'] === true ? self::$i18nList[$remove] .' effacée' : self::$i18nList[$remove] . ' n\'existe pas' ;
