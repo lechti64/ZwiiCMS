@@ -35,7 +35,7 @@
 						{echo 'id="navfixedconnected"';} 
 				}
 			?>>
-				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
+				<div id="toggle"><div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div><?php echo template::ico('menu',null,null,'2em'); ?></div>
 				<div id="menu" class="<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}?>">
 					<div id="menuBar">
 						<?php $layout->showMenu(); ?>
@@ -70,7 +70,7 @@
 		<?php if($this->getData(['theme', 'menu', 'position']) === 'body-second'): ?>
 			<!-- Menu dans le fond du site après la bannière -->
 			<nav>
-				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
+				<div id="toggle"><div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div><?php echo template::ico('menu',null,null,'2em'); ?></div>
 				<div id="menu" class="container">
 					<div id="menuBar">
 						<?php $layout->showMenu(); ?>
@@ -86,7 +86,7 @@
 			<?php if($this->getData(['theme', 'menu', 'position']) === 'site-first'): ?>
 				<!-- Menu dans le site avant la bannière -->
 				<nav>
-					<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
+					<div id="toggle"><div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div><?php echo template::ico('menu',null,null,'2em'); ?></div>
 					<div id="menu" class="container">
 						<div id="menuBar">
 							<?php $layout->showMenu(); ?>
@@ -132,7 +132,7 @@
 			): ?>
 			<!-- Menu dans le site après la bannière -->
 			<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
-				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
+				<div id="toggle"><div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div><?php echo template::ico('menu',null,null,'2em'); ?></div>
 				<div id="menu" class="container">
 					<div id="menuBar">
 						<?php $layout->showMenu(); ?>
