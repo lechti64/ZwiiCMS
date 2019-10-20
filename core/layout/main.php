@@ -77,7 +77,7 @@
 			<nav>
 				<div id="toggle">
 				<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
-					<div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div>
+					<div id="burgerText"><?php echo $this->getData(['config','title']);?></div>
 				<?php endif; ?>
 				<?php echo template::ico('menu',null,null,'2em'); ?>
 				</div> <!-- fin burger -->
@@ -98,7 +98,7 @@
 				<nav>
 					<div id="toggle">
 					<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
-						<div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div>
+						<div id="burgerText"><?php echo $this->getData(['config','title']);?></div>
 					<?php endif; ?>
 					<?php echo template::ico('menu',null,null,'2em'); ?>
 					</div> <!-- fin burger -->
@@ -149,7 +149,7 @@
 			<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 			<div id="toggle">
 				<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
-					<div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div>
+					<div id="burgerText"><?php echo $this->getData(['config','title']);?></div>
 				<?php endif; ?>
 				<?php echo template::ico('menu',null,null,'2em'); ?>
 				</div> <!-- fin burger -->
