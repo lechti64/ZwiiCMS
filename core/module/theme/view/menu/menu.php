@@ -42,6 +42,10 @@
             <?php echo template::checkbox('themeMenuLoginLink', true, 'Lien de connexion', [
 					'checked' => $this->getData(['theme', 'menu', 'loginLink'])
 				]); ?>
+            <?php echo template::checkbox('themeMenuBurgerTitle', true, 'Titre dans le menu burger', [
+                    'checked' => $this->getData(['theme', 'menu', 'burgerTitle']),
+                    'help' => 'Le menu burger remplace le menu complet lorsque la largeur de l\'écran  n\est pas suffisante.'
+				]); ?>
         </div>
     </div>
 </div>

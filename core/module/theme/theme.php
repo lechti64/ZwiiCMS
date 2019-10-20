@@ -436,6 +436,7 @@ class theme extends common {
 				'fontWeight' => $this->getInput('themeMenuFontWeight'),
 				'height' => $this->getInput('themeMenuHeight'),
 				'loginLink' => $this->getInput('themeMenuLoginLink', helper::FILTER_BOOLEAN),
+				'burgerTitle' => $this->getInput('themeMenuBurgerTitle', helper::FILTER_BOOLEAN),
 				'margin' => $this->getInput('themeMenuMargin', helper::FILTER_BOOLEAN),
 				'position' => $this->getInput('themeMenuPosition'),
 				'textAlign' => $this->getInput('themeMenuTextAlign'),

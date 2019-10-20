@@ -25,17 +25,22 @@
 		<?php if($this->getData(['theme', 'menu', 'position']) === 'body-first' || $this->getData(['theme', 'menu', 'position']) === 'top' ): ?>
 			<!-- Menu dans le fond du site avant la bannière -->
 			<nav
-			<?php 
-			// Détermine si le menu est fixe en haut de page lorsque l'utilisateur n'est pas connecté
-			if($this->getData(['theme', 'menu', 'position']) === 'top' &&
-				$this->getData(['theme', 'menu', 'fixed']) === true) {
-					if ($this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD'))
-						{echo 'id="navfixedlogout"';}
-					elseif ($this->getUrl(0) !== 'theme') 
-						{echo 'id="navfixedconnected"';} 
-				}
-			?>>
-				<div id="toggle"><div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div><?php echo template::ico('menu',null,null,'2em'); ?></div>
+				<?php 
+				// Détermine si le menu est fixe en haut de page lorsque l'utilisateur n'est pas connecté
+				if($this->getData(['theme', 'menu', 'position']) === 'top' &&
+					$this->getData(['theme', 'menu', 'fixed']) === true) {
+						if ($this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD'))
+							{echo 'id="navfixedlogout"';}
+						elseif ($this->getUrl(0) !== 'theme') 
+							{echo 'id="navfixedconnected"';} 
+					}
+				?>>
+				<div id="toggle">
+				<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
+					<div id="burgerText"><?php echo $this->getData(['config','title']);?></div>
+				<?php endif; ?>
+				<?php echo template::ico('menu',null,null,'2em'); ?>
+				</div> <!-- fin burger -->
 				<div id="menu" class="<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}?>">
 					<div id="menuBar">
 						<?php $layout->showMenu(); ?>
@@ -70,7 +75,12 @@
 		<?php if($this->getData(['theme', 'menu', 'position']) === 'body-second'): ?>
 			<!-- Menu dans le fond du site après la bannière -->
 			<nav>
-				<div id="toggle"><div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div><?php echo template::ico('menu',null,null,'2em'); ?></div>
+				<div id="toggle">
+				<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
+					<div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div>
+				<?php endif; ?>
+				<?php echo template::ico('menu',null,null,'2em'); ?>
+				</div> <!-- fin burger -->
 				<div id="menu" class="container">
 					<div id="menuBar">
 						<?php $layout->showMenu(); ?>
@@ -86,7 +96,12 @@
 			<?php if($this->getData(['theme', 'menu', 'position']) === 'site-first'): ?>
 				<!-- Menu dans le site avant la bannière -->
 				<nav>
-					<div id="toggle"><div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div><?php echo template::ico('menu',null,null,'2em'); ?></div>
+					<div id="toggle">
+					<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
+						<div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div>
+					<?php endif; ?>
+					<?php echo template::ico('menu',null,null,'2em'); ?>
+					</div> <!-- fin burger -->
 					<div id="menu" class="container">
 						<div id="menuBar">
 							<?php $layout->showMenu(); ?>
@@ -132,7 +147,12 @@
 			): ?>
 			<!-- Menu dans le site après la bannière -->
 			<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
-				<div id="toggle"><div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div><?php echo template::ico('menu',null,null,'2em'); ?></div>
+			<div id="toggle">
+				<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
+					<div id="burgerText"><h3><?php echo $this->getData(['config','title']);?></h3></div>
+				<?php endif; ?>
+				<?php echo template::ico('menu',null,null,'2em'); ?>
+				</div> <!-- fin burger -->
 				<div id="menu" class="container">
 					<div id="menuBar">
 						<?php $layout->showMenu(); ?>

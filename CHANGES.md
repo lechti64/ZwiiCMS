@@ -3,27 +3,47 @@
 ## Version 10.0.00
 - Améliorations : 
     - Architecture de stockage des données.
-        - Les données sont désormais stockées par zone dans des fichiers distincts (core, config, theme, user, page et module).
-        - Les données relatives aux pages et aux modules sont stockées dans un dossier localisé fr par défaut, afin d'anticiper les fonctionnalités multi-langues.
+        - Les données sont désormais stockées dans des fichiers distincts (core, config, theme, user, page et module).
+        - Les données relatives aux pages et aux modules sont stockées dans un dossier localisé fr par défaut.
     - Procédures internes de gestion des données. 
+        - Le système ne conserve plus en mémoire l'intégralité des données de site comme dans les versions précédentes.    
         - Les données du site sont chargées à la demande au lieu d'être lues dans leur intégralité.
-        - Les mises à jour et effacement sont appliquées en direct sur le disque. 
+        - Les mises à jour et effacement sont appliquées en direct sur le disque.
     - Multilinguisme :
         - Site publiable en différentes versions de langues européennes.
-        - Masque de gestion des langues disponibles
-        - Changement de la langue courante dans l'interface d'administration
-        - En mode déconnecté, langue par défaut du navigateur ou choix de la langue dans la barre de menu 
+        - Un nouveau menu affiche le l'écran de gestion des langues disponibles.
+        - Le changement de la langue courante dans l'interface d'administration ainsi que dans le menu utilisateur.
+        - En mode déconnecté, la langue affichée est celle du navigateur ou choix de la langue dans la barre de menu.
+        - Les drapeaux affichés dans le menu ne font pas référence à un pays mais à une langue, sont proposés :
+            - Allemand
+            - Anglais
+            - Bulgare
+            - Danois
+            - Espagnol
+            - Finois
+            - Français
+            - Islandais
+            - Italien
+            - Néerlandais
+            - Norvégien
+            - Portugais
+            - Suédois
+            - Roumain
+            - Tchèque
+    - Thème menu :
+        - Lorsque le menu est réduit, le titre du site peut être inséré à la gauche du menu burger.
 
 - Modifications : 
     - Procédure d'installation : 
         - Les données manquantes sont installées  au cas par cas, les données présentes ne sont plus écrasées par l'installation. 
         - Une notification est affichée quand un fichier  de données manquant a été réinstallé.
+        - La suppression de user.json entraîne le déclenchement de la procédure d'installation
     - Procédure d'importation : 
-        - L'importation des données est possible uniquement à partir d'une version 9. 
+        - L'importation des données est possible uniquement à partir d'une version 9 et non des version ultérieures.
+        - Les données de site précédentes sont écrasées, les données localisées effacées.
         - Une notification est affichée après l'importation.
     - Procédure d'installation :
-        - Modification de la gestion des données de site par défaut.
-        - Régénération automatisée des fichiers manquants de données manquants.
+        - En cas d'effacement d'un des fichiers de donénes sauf user.json, une version par défaut est installée.
         
 ## version 9.2.09
 - Correections :

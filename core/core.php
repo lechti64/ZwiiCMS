@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.38.dev';
+	const ZWII_VERSION = '10.0.39.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1186,7 +1186,7 @@ class core extends common {
 			$css .= '.helpButton span:hover{color:' . $colors['darken'] . '}';
 			$css .= '.button:active,button[type=\'submit\']:active,.pagination a:active{background-color:' . $colors['veryDarken'] . '}';
 			$colors = helper::colorVariants($this->getData(['theme', 'title', 'textColor']));
-			$css .= 'h1,h2,h3,h4,h5,h6{color:' . $colors['normal'] . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'title', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'title', 'fontWeight']) . ';text-transform:' . $this->getData(['theme', 'title', 'textTransform']) . '}';
+			$css .= 'h1,h2,h3,h4,h5,h6 {color:' . $colors['normal'] . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'title', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'title', 'fontWeight']) . ';text-transform:' . $this->getData(['theme', 'title', 'textTransform']) . '}';
 			// Bannière
 			$colors = helper::colorVariants($this->getData(['theme', 'header', 'backgroundColor']));
 			if($this->getData(['theme', 'header', 'margin'])) {
@@ -1241,6 +1241,8 @@ class core extends common {
 				}
 			}
 			$css .= '#i18nBar {padding:' . $this->getData(['theme', 'menu', 'height']) . ';}';
+			$colors = helper::colorVariants($this->getData(['theme', 'menu', 'backgroundColor']));
+			$css .= 'nav #burgerText {color:' . $colors['text'] . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;' . 'font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
 			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));

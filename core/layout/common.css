@@ -460,7 +460,8 @@ nav #toggle span {
 
 nav #burgerText {
 	float: left;
-	margin-left: 10px;
+	font-size: 1.4em;
+	margin: 15px 0 0 10px;
 }
 
 nav ul {
