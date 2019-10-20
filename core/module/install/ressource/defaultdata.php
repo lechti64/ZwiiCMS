@@ -124,6 +124,7 @@ class init extends common {
 				'fontWeight' => 'normal',
 				'height' => '15px 10px',
 				'loginLink' => true,
+				'burgerTitle' => true,
 				'margin' => false,
 				'position' => 'site-second',
 				'textAlign' => 'left',
