@@ -643,6 +643,14 @@ class common {
 			$this->setData(['page',$tempData['page']]);
 			$this->setData(['module',$tempData['module']]);
 			$this->setData(['theme',$tempTheme['theme']]);
+			// Nettoyage du fichier de thème pour forcer une régénération
+			if (!file_exists(self::DATA_DIR . '/theme.css')) { // On ne sait jamais
+				unlink (self::DATA_DIR . '/theme.css');
+			}		
+			// Forcer un refresh
+			//http_response_code(301);
+			//header('Location:' . helper::baseUrl();
+		
 	}
 
 	/**
