@@ -66,10 +66,15 @@ Pour revenir à la version 8, renommez ce fichier "data.json".
 [R] site                   Contenu du site
   [R] backup               Sauvegardes automatiques
   [R] data                 Répertoire des données
-    [F] core.json          Contenu
-    [F] theme.json         Thème
-    [F] custom.css         Feuille de style de la personnalisation avancée
+    [R] fr                 Données localisées
+      [F] page.json        Contenu des pages
+      [F] module.json      Contenu des modules
+    [F] core.json          Paramètre du noyau
+    [F] config.json        Configuration du site
+    [F] theme.json         Donnes du Thème
     [F] theme.css          Thème compilé en CSS
+    [F] custom.css         Feuille de style de la personnalisation avancée
+    [F] user.json          Données de connexion
   [R] file                 Répertoire d'upload du gestionnaire de fichiers
     [R] source             Ressources diverses
     [R] thumb              Miniatures des images
