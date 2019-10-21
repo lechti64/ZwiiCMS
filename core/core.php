@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.40.dev';
+	const ZWII_VERSION = '10.0.41.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -646,11 +646,7 @@ class common {
 			// Nettoyage du fichier de thème pour forcer une régénération
 			if (!file_exists(self::DATA_DIR . '/theme.css')) { // On ne sait jamais
 				unlink (self::DATA_DIR . '/theme.css');
-			}		
-			// Forcer un refresh
-			//http_response_code(301);
-			//header('Location:' . helper::baseUrl();
-		
+			}				
 	}
 
 	/**
