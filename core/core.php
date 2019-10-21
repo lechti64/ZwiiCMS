@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.41.dev';
+	const ZWII_VERSION = '10.0.42.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -151,7 +151,6 @@ class common {
 	 * Constructeur commun
 	 */
 	public function __construct() {
-
 		// Extraction des données http
 		if(isset($_POST)) {
 			$this->input['_POST'] = $_POST;
@@ -164,7 +163,8 @@ class common {
 		if (file_exists(self::DATA_DIR . 'core.json') === true && 
 			$this->getData(['core','dataVersion']) < 10000) {
 				$this->importData();
-				common::$importNotices [] = "Importation réalisée avec succès" ;	
+				//common::$importNotices [] = "Importation réalisée avec succès" ;
+				echo '<script>window.location.replace("' .  helper::baseUrl() . $this->getData(['config','homePageId']) . '")</script>';
 			}
 			
 		// Installation fraîche, initialisation des modules manquants
