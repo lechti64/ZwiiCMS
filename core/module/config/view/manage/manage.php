@@ -35,7 +35,7 @@
 					<?php echo template::file('configImportFile', [
 						'label' => 'Sauvegarde ZIP',
 						'type' => 2,
-						'help' => 'Validez en cliquant sur Enregistrer'
+						'help' => 'Importe d\'une archive déposée dans le gestionaire de fichiers.'
 					]); ?>
 				</div>											
 			</div>				

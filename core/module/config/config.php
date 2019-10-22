@@ -200,7 +200,6 @@ class config extends common {
 	 * Sauvegarde des données
 	 */
 	public function backup() {
-
 		// Creation du ZIP
 		$fileName = date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
@@ -262,18 +261,38 @@ class config extends common {
 	public function manage() {
 		// Soumission du formulaire
 		if($this->isPost()) {
-			$file_parts = pathinfo($this->getInput('configImportFile'));
-			if ($file_parts['extension'] === 'zip') {
+			$fileZip = $this->getInput('configImportFile');
+			$file_parts = pathinfo($fileZip);
+			$folder = date('Y-m-d-h-i-s', time());
+			$zip = new ZipArchive();
+			$successOpen = $zip->open(self::FILE_DIR . 'source/' . $fileZip);
+			if (file_exists(self::FILE_DIR . 'source/' . $fileZip)) { echo "ok";}
+			if ($successOpen === FALSE) {
+				// Décompacter dans le dossier temp
+				die("erreur de zip");
+			}
+			// nettoyer le dossier temp
+			$lastClearTmp = mktime(0, 0, 0);
+			$this->clearTmpFolder();
+			// Date de la dernière suppression
+			$this->setData(['core', 'lastClearTmp', $lastClearTmp]);
+			// Extraire le zip 
+			$zip->extractTo(helper::baseUrl() . self::TEMP_DIR . $folder);
+			$zip->close();
+			// Vérifier la présence des fichiers
+			// Effectuer un backup forcé
+			// Transférer le contenu dans le dossier site
 
-			} else {
-			// Valeurs en sortie
+		} 
+			// Valeurs en sortie erreur
+			/**
 				$this->addOutput([
 				'notification' => 'Le fichier n\'est pas une archive ZIP',
 				'redirect' => helper::baseUrl() . 'config/manage',
 				'state' => false
 			]);	
-			}
-		}
+			*/
+
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Exporter / Importer',
