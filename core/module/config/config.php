@@ -19,7 +19,8 @@ class config extends common {
 		'configMetaImage' => self::GROUP_ADMIN,
 		'generateFiles' => self::GROUP_ADMIN,
 		'updateRobots' => self::GROUP_ADMIN,
-		'index' => self::GROUP_ADMIN
+		'index' => self::GROUP_ADMIN,
+		'manage' => self::GROUP_ADMIN
 	];
 	
 	public static $timezones = [
@@ -255,7 +256,30 @@ class config extends common {
 		]);
 	}	
 
-	
+	/**
+	 * Procédure d'importation
+	 */
+	public function manage() {
+		// Soumission du formulaire
+		if($this->isPost()) {
+			$file_parts = pathinfo($this->getInput('configImportFile'));
+			if ($file_parts['extension'] === 'zip') {
+
+			} else {
+			// Valeurs en sortie
+				$this->addOutput([
+				'notification' => 'Le fichier n\'est pas une archive ZIP',
+				'redirect' => helper::baseUrl() . 'config/manage',
+				'state' => false
+			]);	
+			}
+		}
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Sauvegardes',
+			'view' => 'manage'
+		]);
+	}
 
 	/**
 	 * Configuration
