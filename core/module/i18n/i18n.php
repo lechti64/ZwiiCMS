@@ -16,28 +16,23 @@ class i18n extends common {
 
 	public static $actions = [
 		'index' => self::GROUP_MODERATOR,
-		//'config' => self::GROUP_MODERATOR,
+		'add' => self::GROUP_MODERATOR,
 		'lang' => self::GROUP_VISITOR
 	];
 
 
-    /**
-	 * Config : gestion des langues
+	/**
+	 * Ajouter une localisation
 	 */
-	public function index() { 
-		
+	public function add() {
+		// Soumission du formulaire
 		if($this->isPost()) {
-			// Et faire un backup
-			// Fonction à révoir dans core.php
-
+			// Mode Création			
 			// Récupérer les données du formulaire
-			$create = $this->getInput('i18nLanguageAdd');			
-			$remove = $this->getInput('i18nLanguageRemove');
-			$copyFrom = $this->getInput('i18nLanguageCopyFrom');
+			$create = $this->getInput('i18nAddSelect');			
+			$copyFrom = $this->getInput('i18nAddCopyFrom');
 			$notification = '';
 			$success = array ('create' => false,'remove'=> false);
-			
-			// Mode Création
 			if (!empty ($create)) {
 				// Mode création de langue
 				// La langue est déja créée ?
@@ -56,6 +51,36 @@ class i18n extends common {
 				// Valeurs en sortie
 				$notification = $success['create'] === true ? self::$i18nList[$create] . ' installée' : self::$i18nList[$create] . ' déjà installée' ;
 			} 
+			$this->addOutput([
+				'notification'  =>  $notification,
+				'title' 		=> 'Ajouter une langue',
+				'view' 			=> 'add',
+				'state' 		=>  $success ['create']
+			]);			
+
+		} else {
+			// Valeurs en sortie sans post
+			$this->addOutput([
+				'title' 		=> 'Ajouter une langue',
+				'view' 			=> 'add'
+			]);												
+		
+		}
+	}
+
+    /**
+	 * Config : gestion des langues
+	 */
+	public function index() { 
+		// Soumission du formulaire		
+		if($this->isPost()) {
+			// Et faire un backup
+
+			// Récupérer les données du formulaire		
+			$remove = $this->getInput('i18nLanguageRemove');
+			$notification = '';
+			$success = array ('create' => false,'remove'=> false);
+		
 			// Mode effacement 			
 			if (!empty ($remove)) {				
 				
@@ -84,7 +109,7 @@ class i18n extends common {
 				'notification'  =>  $notification,
 				'title' 		=> 'Internationalisation',
 				'view' 			=> 'index',
-				'state' 		=>  $success ['create'] || $success ['remove']
+				'state' 		=>  $success ['remove']
 			]);			
 
 		} else {
@@ -97,7 +122,7 @@ class i18n extends common {
 		}
 	}
 
-		/*
+	/*
 	* Traitement du changement de langues
 	*/
 	public function lang() {
