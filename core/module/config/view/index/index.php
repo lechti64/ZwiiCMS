@@ -8,10 +8,10 @@
 				'value' => 'Accueil'
 			]); ?>
 		</div>
-		<div class="col2 offset6">
+		<div class="col3 offset5">
 			<?php echo template::button('configManageButton', [
 				'href' => helper::baseUrl() . 'config/manage',
-				'value' => 'Sauvegardes'
+				'value' => 'Exporter / Importer'
 			]); ?>
 		</div>		
 		<div class="col2">

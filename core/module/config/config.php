@@ -276,7 +276,7 @@ class config extends common {
 		}
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Sauvegardes',
+			'title' => 'Exporter / Importer',
 			'view' => 'manage'
 		]);
 	}

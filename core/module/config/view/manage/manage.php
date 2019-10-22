@@ -1,9 +1,9 @@
 <?php echo template::formOpen('configExportForm'); ?>
 	<div class="row">
 		<div class="col2">
-		<?php echo template::button('themeManageBack', [
+		<?php echo template::button('configManageBack', [
 				'class' => 'buttonGrey',
-				'href' => helper::baseUrl() . 'theme',
+				'href' => helper::baseUrl() . 'config',
 				'ico' => 'left',
 				'value' => 'Retour'
 			]); ?>
