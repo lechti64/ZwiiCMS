@@ -8,7 +8,13 @@
 				'value' => 'Accueil'
 			]); ?>
 		</div>
-		<div class="col2 offset8">
+		<div class="col2 offset6">
+			<?php echo template::button('configManageButton', [
+				'href' => helper::baseUrl() . 'config/manage',
+				'value' => 'Sauvegardes'
+			]); ?>
+		</div>		
+		<div class="col2">
 			<?php echo template::submit('configSubmit'); ?>
 		</div>
 	</div>
@@ -159,52 +165,27 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col6">
-			<div class="block">
-				<h4>Gestion et sauvegarde</h4>							
-				<div class="col12">
-					<div class="row">
-						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
-							'checked' => $this->getData(['config', 'maintenance'])
-						]); ?>	
-						<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique', [
-							'checked' => $this->getData(['config', 'autoBackup']),
-							'help' => 'Le fichier de données est copié quotidiennement dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.'
-						]); ?>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col10 offset1">
-						<?php echo template::button('configExport', [
-							'href' => helper::baseUrl() . 'config/backup',
-							'value' => 'Exporter une copie du site<br>(données, thème et fichiers)'
-						]); ?>
-					</div>
-				</div>
-			</div>				
-		</div>
-		<div class="col6">
+		<div class="col12">
 			<div class="block">
 				<h4>Référencement</h4>
 				<div class="row">
-					<div class="col5 ">	
-							<?php echo template::button('configMetaImage', [
-							'href' => helper::baseUrl() . 'config/configMetaImage',
-							'value' => 'Rafraîchir la capture d\'écran Open Graph',
-							'help' => 'bb'
-							]); ?>
+					<div class="col4 offset1">	
+						<?php echo template::button('configMetaImage', [
+						'href' => helper::baseUrl() . 'config/configMetaImage',
+						'value' => 'Rafraîchir la capture d\'écran Open Graph',
+						'help' => 'bb'
+						]); ?>
 					</div>
-					<div class="col7">
-						<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
-					</div>	
-
-				
-				<div class="row">
-					<div class="col10 offset1">
+					<div class="col4 offset2">
 						<?php echo template::button('configSiteMap', [
 							'href' => helper::baseUrl() . 'config/generateFiles',
 							'value' => 'Générer sitemap.xml et robots.txt'
 						]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col6 offset4">
+						<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
 					</div>
 				</div>
 			</div>	
