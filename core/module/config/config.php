@@ -265,33 +265,42 @@ class config extends common {
 			$file_parts = pathinfo($fileZip);
 			$folder = date('Y-m-d-h-i-s', time());
 			$zip = new ZipArchive();
-			$successOpen = $zip->open(self::FILE_DIR . 'source/' . $fileZip);
-			if (file_exists(self::FILE_DIR . 'source/' . $fileZip)) { echo "ok";}
-			if ($successOpen === FALSE) {
-				// Décompacter dans le dossier temp
-				die("erreur de zip");
+			if ($file_parts['extension'] !== 'zip') {
+				// Valeurs en sortie erreur
+				$this->addOutput([
+					'notification' => 'Le fichier n\'est pas une archive valide',
+					'redirect' => helper::baseUrl() . 'config/manage',
+					'state' => false
+					]);
 			}
-			// nettoyer le dossier temp
-			$lastClearTmp = mktime(0, 0, 0);
-			$this->clearTmpFolder();
-			// Date de la dernière suppression
-			$this->setData(['core', 'lastClearTmp', $lastClearTmp]);
-			// Extraire le zip 
-			$zip->extractTo(helper::baseUrl() . self::TEMP_DIR . $folder);
-			$zip->close();
-			// Vérifier la présence des fichiers
-			// Effectuer un backup forcé
-			// Transférer le contenu dans le dossier site
+			$successOpen = $zip->open(self::FILE_DIR . 'source/' . $fileZip);
+			if ($successOpen === FALSE) {					
+				// Valeurs en sortie erreur
+				$this->addOutput([
+					'notification' => 'Impossible de lire l\'archive',
+					'redirect' => helper::baseUrl() . 'config/manage',
+					'state' => false
+					]);
+			}
+			// Vérifier la présence des fichiers à minima theme et core
+			if ($zip->getFromName( 'site/data/theme.json') === true &&
+				$zip->getFromName( 'site/data/core.json') === true) {
+					// Extraire le zip
+					$zip->extractTo( '.' );			
+					// Fermer l'archive
+					$zip->close();
+			} else {
+				// Valeurs en sortie erreur
+				$this->addOutput([
+					'notification' => 'Cette archive n\'est pas une sauvegarde valide',
+					'redirect' => helper::baseUrl() . 'config/manage',
+					'state' => false
+					]);
+			}
+
 
 		} 
-			// Valeurs en sortie erreur
-			/**
-				$this->addOutput([
-				'notification' => 'Le fichier n\'est pas une archive ZIP',
-				'redirect' => helper::baseUrl() . 'config/manage',
-				'state' => false
-			]);	
-			*/
+
 
 		// Valeurs en sortie
 		$this->addOutput([
