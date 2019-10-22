@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.44.dev';
+	const ZWII_VERSION = '10.0.45.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -911,7 +911,21 @@ class common {
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
-}
+	}
+	/**
+	 * Nettoyage du dossier temporaire
+	 */
+	public static function clearTmpFolder() {
+		$iterator = new DirectoryIterator(self::TEMP_DIR);
+		foreach($iterator as $fileInfos) {
+			if( $fileInfos->isFile() && 
+				$fileInfos->getBasename() !== '.htaccess' &&
+				$fileInfos->getBasename() !== '.gitkeep'
+			) {
+				@unlink($fileInfos->getPathname());
+			}
+		}
+	}
 
 	/**
 	 * Sauvegarde des données
@@ -1096,20 +1110,9 @@ class core extends common {
 		// Supprime les fichiers temporaires
 		$lastClearTmp = mktime(0, 0, 0);
 		if($lastClearTmp > $this->getData(['core', 'lastClearTmp']) + 86400) {
-			$iterator = new DirectoryIterator(self::TEMP_DIR);
-			foreach($iterator as $fileInfos) {
-				if( $fileInfos->isFile() && 
-					$fileInfos->getBasename() !== '.htaccess' &&
-					$fileInfos->getBasename() !== '.gitkeep'
-				) {
-					@unlink($fileInfos->getPathname());
-				}
-			}
+			$this->clearTmpFolder();
 			// Date de la dernière suppression
 			$this->setData(['core', 'lastClearTmp', $lastClearTmp]);
-			// Enregistre les données
-			//$this->saveData();
-			//$this->saveData(['core', 'lastClearTmp', $lastClearTmp]);
 		}
 
 		// Backup automatique des données
