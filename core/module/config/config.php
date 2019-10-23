@@ -209,6 +209,8 @@ class config extends common {
 			}
 		}
 		$zip->close();
+		// Enregistre la date de backup manuel
+		$this->setData(['core', 'lastBackup', mktime(0, 0, 0)]);
 		// Téléchargement du ZIP
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Disposition: attachment; filename="' . $fileName . '"');

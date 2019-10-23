@@ -1138,8 +1138,6 @@ class core extends common {
 				// Date du dernier backup
 				$this->setData(['core', 'lastBackup', $lastBackup]);
 				// Enregistre les données
-				//$this->saveData();
-				//$this->saveData(['core', 'lastBackup', $lastBackup]);
 				// Supprime les backups de plus de 30 jours
 				$iterator = new DirectoryIterator(self::BACKUP_DIR);
 				foreach($iterator as $fileInfos) {
