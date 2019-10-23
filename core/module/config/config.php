@@ -261,6 +261,7 @@ class config extends common {
 	public function manage() {
 		// Soumission du formulaire
 		if($this->isPost()) {
+			if ($this->getInput('configImportFile'))
 			$fileZip = $this->getInput('configImportFile');
 			$file_parts = pathinfo($fileZip);
 			$folder = date('Y-m-d-h-i-s', time());
@@ -282,14 +283,27 @@ class config extends common {
 					'state' => false
 					]);
 			}
+			// Lire le contenu de l'archive dans le tableau files
+			for( $i = 0; $i < $zip->numFiles; $i++ ){ 
+				$stat = $zip->statIndex( $i ); 
+				$files [] = ( basename( $stat['name'] )); 
+			}
+
 			// Vérifier la présence des fichiers à minima theme et core
-			if ($zip->getFromName( 'site/data/theme.json') === true &&
-				$zip->getFromName( 'site/data/core.json') === true) {
+			if (in_array('theme.json',$files) === true &&
+				in_array('core.json',$files) === true) {
 					// Extraire le zip
-					$zip->extractTo( '.' );			
+					$success = $zip->extractTo( '.' );
 					// Fermer l'archive
 					$zip->close();
+					// Valeurs en sortie erreur					
+					$this->addOutput([
+						'notification' => 'Sauvegarde importée avec succès',
+						'redirect' => helper::baseUrl() . 'config/manage',
+						'state' => true
+					]);					
 			} else {
+				var_dump($zip->locateName( 'core.json'));
 				// Valeurs en sortie erreur
 				$this->addOutput([
 					'notification' => 'Cette archive n\'est pas une sauvegarde valide',

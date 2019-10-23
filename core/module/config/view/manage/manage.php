@@ -37,7 +37,14 @@
 						'type' => 2,
 						'help' => 'Importe d\'une archive déposée dans le gestionaire de fichiers.'
 					]); ?>
-				</div>											
+				</div>
+				<div class="row">
+				<div class="row">
+					<?php echo template::checkbox('configImportUser', true, 'Importer les utilisateurs', [
+						'checked' => false
+					]); ?>
+                    </div>
+				</div>										
 			</div>				
 		</div>		
     </div>
