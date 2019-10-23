@@ -316,7 +316,6 @@ class config extends common {
 					]);
 
 			} else {
-				var_dump($zip->locateName( 'core.json'));
 				// Valeurs en sortie erreur
 				$this->addOutput([
 					'notification' => 'Cette archive n\'est pas une sauvegarde valide',
@@ -324,8 +323,6 @@ class config extends common {
 					'state' => false
 					]);
 			}
-
-
 		} 
 
 
