@@ -40,7 +40,6 @@
 				</div>
 				<div class="row">
 					<?php echo template::checkbox('configManageImportUser', true, 'Préserver les comptes utilisateurs d\'une sauvegarde de version 10 ou +', [
-						'help' => 'Les chemins vers les ressources (images et vidéos) ne sont pas corrigés',
 						'checked' => true
 					]); ?>			
 				</div>	
