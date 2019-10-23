@@ -261,8 +261,8 @@ class config extends common {
 	public function manage() {
 		// Soumission du formulaire
 		if($this->isPost()) {
-			if ($this->getInput('configImportFile'))
-			$fileZip = $this->getInput('configImportFile');
+			//if ($this->getInput('configManageImportFile'))
+			$fileZip = $this->getInput('configManageImportFile');
 			$file_parts = pathinfo($fileZip);
 			$folder = date('Y-m-d-h-i-s', time());
 			$zip = new ZipArchive();
@@ -289,19 +289,29 @@ class config extends common {
 				$files [] = ( basename( $stat['name'] )); 
 			}
 
-			// Vérifier la présence des fichiers à minima theme et core
+			// Vérifier la présence des fichiers à minima theme et core (v9)
 			if (in_array('theme.json',$files) === true &&
 				in_array('core.json',$files) === true) {
+					// Users d'une version 10 conservés
+					if (in_array('user.json',$files) === true &&
+						$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ) { // Oui V10 avec user
+						$users = $this->getData(['user']);
+					}
 					// Extraire le zip
 					$success = $zip->extractTo( '.' );
 					// Fermer l'archive
 					$zip->close();
+					// Restaurer les users
+					if (!empty($users)) {
+						$this->setData(['user',$users]);
+					}
 					// Valeurs en sortie erreur					
 					$this->addOutput([
 						'notification' => 'Sauvegarde importée avec succès',
-						'redirect' => helper::baseUrl() . 'config/manage',
+						'redirect' => helper::baseUrl(),
 						'state' => true
-					]);					
+					]);
+
 			} else {
 				var_dump($zip->locateName( 'core.json'));
 				// Valeurs en sortie erreur

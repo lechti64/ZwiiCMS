@@ -1,4 +1,4 @@
-<?php echo template::formOpen('configExportForm'); ?>
+<?php echo template::formOpen('configManageForm'); ?>
 	<div class="row">
 		<div class="col2">
 		<?php echo template::button('configManageBack', [
@@ -9,7 +9,7 @@
 			]); ?>
 		</div>
 		<div class="col2 offset8">
-			<?php echo template::submit('configExportSubmit',[
+			<?php echo template::submit('configManageSubmit',[
 				'value' => 'Enregister'
 			]); ?>
 		</div>
@@ -20,7 +20,7 @@
 				<h4>Exporter</h4>											
 				<div class="row">
 					<div class="col10 offset1">
-						<?php echo template::button('configExportButton', [
+						<?php echo template::button('configManageButton', [
 							'href' => helper::baseUrl() . 'config/backup',
 							'value' => 'Exporter une copie du site<br>(données, thème et fichiers)'
 						]); ?>
@@ -32,19 +32,19 @@
 			<div class="block">
 				<h4>Importer</h4>
 				<div class="row">				
-					<?php echo template::file('configImportFile', [
+					<?php echo template::file('configManageImportFile', [
 						'label' => 'Sauvegarde ZIP',
 						'type' => 2,
 						'help' => 'Importe d\'une archive déposée dans le gestionaire de fichiers.'
 					]); ?>
 				</div>
 				<div class="row">
-				<div class="row">
-					<?php echo template::checkbox('configImportUser', true, 'Importer les utilisateurs', [
-						'checked' => false
-					]); ?>
-                    </div>
-				</div>										
+					<?php echo template::checkbox('configManageImportUser', true, 'Ne pas remplacer les comptes utilisateurs', [
+						'help' => 'Cette option ne fonctionne avec un backup provenant d\'une version 9',
+						'checked' => true
+					]); ?>			
+				</div>	
+							
 			</div>				
 		</div>		
     </div>
