@@ -298,18 +298,21 @@ class config extends common {
 						$users = $this->getData(['user']);
 					}
 					// Extraire le zip
-					$success = $zip->extractTo( '.' );
+					$success = $zip->extractTo( '.' );				
 					// Fermer l'archive
 					$zip->close();
-					// Restaurer les users
-					if (!empty($users)) {
+					// Restaurer les users lus
+					if (!empty($users)) { 
 						$this->setData(['user',$users]);
 					}
-					// Valeurs en sortie erreur					
+					// Message de notification
+					$notification  = $success === true ? 'Sauvegarde importée avec succès' : 'Erreur d\'extraction'; 
+					$notification .= ($success === true && !empty($users)) ? '<br> Comptes utilisateurs préservés' : '<br> Comptes utilisateurs importés';
+					// Valeurs en sortie erreur	
 					$this->addOutput([
-						'notification' => 'Sauvegarde importée avec succès',
+						'notification' => $notification,
 						'redirect' => helper::baseUrl(),
-						'state' => true
+						'state' => $success
 					]);
 
 			} else {

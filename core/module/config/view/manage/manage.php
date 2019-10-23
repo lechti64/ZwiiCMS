@@ -39,8 +39,7 @@
 					]); ?>
 				</div>
 				<div class="row">
-					<?php echo template::checkbox('configManageImportUser', true, 'Ne pas remplacer les comptes utilisateurs', [
-						'help' => 'Cette option ne fonctionne avec un backup provenant d\'une version 9',
+					<?php echo template::checkbox('configManageImportUser', true, 'Préserver les comptes utilisateurs d\'une sauvegarde de version 10 ou +', [
 						'checked' => true
 					]); ?>			
 				</div>	
