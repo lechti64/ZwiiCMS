@@ -201,7 +201,7 @@ class config extends common {
 	 */
 	public function backup() {
 		// Creation du ZIP
-		$fileName = date('Y-m-d-h-i-s', time()) . '.zip';
+		$fileName = str_replace('/','',helper::baseUrl(false,false)) . '-'. date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
 		if($zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE) === TRUE){
 			foreach(core::scanDir('site/') as $file) {
