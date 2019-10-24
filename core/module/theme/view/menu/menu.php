@@ -44,7 +44,7 @@
 				]); ?>
             <?php echo template::checkbox('themeMenuBurgerTitle', true, 'Titre du site dans le menu réduit', [
                     'checked' => $this->getData(['theme', 'menu', 'burgerTitle']),
-                    'help' => 'Le menu burger remplace le menu complet lorsque la largeur de l\'écran  n\est pas suffisante.'
+                    'help' => 'Le menu burger remplace le menu complet lorsque la largeur de l\'écran  n\'est pas suffisante.'
 				]); ?>
         </div>
     </div>

@@ -300,7 +300,7 @@ class config extends common {
 						$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ) { 
 						$users = $this->getData(['user']); 
 					} else {
-						// V9 on transmets l'option à la fonction importData	
+						// V9 on transmets l'option à la fonction importData appelée par core
 						$_POST['configManageImportUser'] = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN);
 					}
 					// Extraire le zip
