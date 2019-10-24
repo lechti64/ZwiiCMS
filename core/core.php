@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.51.dev';
+	const ZWII_VERSION = '10.0.52.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -112,7 +112,7 @@ class common {
 			// 'codemirror', // Désactivé par défaut
 			'tippy',
 			'zwiico',
-			// 'imagemap',
+			'imagemap',
 			'simplelightbox'
 		],
 		'view' => ''
@@ -163,8 +163,8 @@ class common {
 		if (file_exists(self::DATA_DIR . 'core.json') === true && 
 			$this->getData(['core','dataVersion']) < 10000) {
 				$this->importData();
-				//common::$importNotices [] = "Importation réalisée avec succès" ;
-				echo '<script>window.location.replace("' .  helper::baseUrl() . $this->getData(['config','homePageId']) . '")</script>';
+				common::$importNotices [] = "Importation réalisée avec succès" ;
+				//echo '<script>window.location.replace("' .  helper::baseUrl() . $this->getData(['config','homePageId']) . '")</script>';
 			}
 			
 		// Installation fraîche, initialisation des modules manquants
@@ -1257,7 +1257,7 @@ class core extends common {
 					$css .= 'nav{margin:0 20px 0}';
 				}
 			}
-			$css .= '#i18nBar {padding:' . $this->getData(['theme', 'menu', 'height']) . ';}';
+			//$css .= '#i18nBar {padding:' . $this->getData(['theme', 'menu', 'height']) . ';}';
 			$colors = helper::colorVariants($this->getData(['theme', 'menu', 'backgroundColor']));
 			$css .= 'nav #burgerText {color:' . $colors['text'] . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;' . 'font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
 			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
