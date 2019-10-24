@@ -33,7 +33,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.2.09';
+	const ZWII_VERSION = '9.2.10';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -955,6 +955,12 @@ class common {
 			}
 			$this->setData(['core', 'dataVersion', 9205]);
 			$this->saveData();
+		}
+		// Version 9.2.10
+		if($this->getData(['core', 'dataVersion']) < 9210) {
+			// Utile pour l'installation d'un backup sur un autre serveur
+			$this->setData(['core', 'baseUrl', str_replace('/','',helper::baseUrl(false,false)) ]);
+			$this->setData(['core', 'dataVersion', 9210]);
 		}
 	}
 }

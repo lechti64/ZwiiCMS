@@ -26,7 +26,8 @@ class install extends common {
 		'core' => [
 			'dataVersion' => 0,
 			'lastBackup' => 0,
-			'lastClearTmp' => 0
+			'lastClearTmp' => 0,
+			'baseUrl' => ''
 		],
 		'page' => [
 			'accueil' => [

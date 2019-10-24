@@ -1,5 +1,9 @@
 # Changelog
 
+## version 9.2.10
+- Modification pour la version 10 : 
+    - Lors de l'installation, stockage de l'url de base dans l'éventualité de la restauration d'un backup dans un autre arborecence.
+
 ## version 9.2.09
 - Corrections :
     - Module Formulaire, erreur lors de l'envoi d'un premier formulaire
