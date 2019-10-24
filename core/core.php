@@ -639,10 +639,18 @@ class common {
 			// Ecriture des données
 			$this->setData(['config',$tempData['config']]);
 			$this->setData(['core',$tempData['core']]);	
-			if (isset($_POST['configManageImportUser']) === true) {
-				$this->setData(['user',$tempData['user']]);	
-				unset($_POST['configManageImportUser']);
-			}							
+
+			// Import des users
+			if (isset($_POST['configManageImportUser']) === true ) { 
+				if ($_POST['configManageImportUser'] ===  false) {	 // user non préservés
+					$this->setData(['user',$tempData['user']]);		 // On importe les nouveaux
+				}			
+				unset($_POST['configManageImportUser']);				
+			} else {
+				$this->setData(['user',$tempData['user']]);
+			}
+
+
 			$this->setData(['page',$tempData['page']]);
 			$this->setData(['module',$tempData['module']]);
 			$this->setData(['theme',$tempTheme['theme']]);

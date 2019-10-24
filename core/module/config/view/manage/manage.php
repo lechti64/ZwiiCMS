@@ -17,7 +17,7 @@
 	<div class="row">
 		<div class="col6">
 			<div class="block">
-				<h4>Exporter</h4>											
+				<h4>Sauvegarder</h4>											
 				<div class="row">
 					<div class="col10 offset1">
 						<?php echo template::button('configManageButton', [
@@ -30,16 +30,16 @@
 		</div>	
 		<div class="col6">
 			<div class="block">
-				<h4>Importer</h4>
+				<h4>Restaurer</h4>
 				<div class="row">				
 					<?php echo template::file('configManageImportFile', [
-						'label' => 'Sauvegarde ZIP',
+						'label' => 'Sauvegarde au format ZIP',
 						'type' => 2,
 						'help' => 'Importe d\'une archive déposée dans le gestionaire de fichiers.'
 					]); ?>
 				</div>
 				<div class="row">
-					<?php echo template::checkbox('configManageImportUser', true, 'Préserver les comptes utilisateurs d\'une sauvegarde de version 10 ou +', [
+					<?php echo template::checkbox('configManageImportUser', true, 'Préserver les comptes des utilisateurs déjà installés', [
 						'checked' => true
 					]); ?>			
 				</div>	

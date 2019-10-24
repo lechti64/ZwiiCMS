@@ -11,7 +11,7 @@
 		<div class="col3 offset5">
 			<?php echo template::button('configManageButton', [
 				'href' => helper::baseUrl() . 'config/manage',
-				'value' => 'Exporter / Importer'
+				'value' => 'Sauvegarder / Restaurer'
 			]); ?>
 		</div>		
 		<div class="col2">

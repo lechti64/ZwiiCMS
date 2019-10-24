@@ -294,16 +294,20 @@ class config extends common {
 			// Vérifier la présence des fichiers à minima theme et core (v9)
 			if (in_array('theme.json',$files) === true &&
 				in_array('core.json',$files) === true) {
-					// Users d'une version 10 conservés
-					if ($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ) { 
-						$users = $this->getData(['user']);
+
+					// Users d'une version 10 conservés si option cochée
+					if (in_array('user.json',$files) === true && 
+						$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ) { 
+						$users = $this->getData(['user']); 
+					} else {
+						// V9 on transmets l'option à la fonction importData	
 						$_POST['configManageImportUser'] = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN);
 					}
 					// Extraire le zip
 					$success = $zip->extractTo( '.' );				
-					// Fermer l'archive
+					// Fermer l'archive	
 					$zip->close();
-					// Restaurer les users lus
+					// Restaurer les users originaux d'une v10 si option cochée
 					if (!empty($users)) { 
 						$this->setData(['user',$users]);						
 					}
