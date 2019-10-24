@@ -46,7 +46,7 @@
         - En cas d'effacement d'un des fichiers de donénes sauf user.json, une version par défaut est installée.
     - Configuration du site :
         - Ecran dédié à la sauvegarde automatique, à l'import et à l'export.
-        - Fonction intégré d'import des données provenant d'autres Zwii, avec option de préservation des données utilisateurs (uniquement lors d'un import des données d'une version 10 ou +)
+        - Fonction d'import des données provenant d'autres Zwii, avec option de préservation des données utilisateurs 
         - Le nom dess fichiers de sauvegarde contient l'adresse de base du site
 
         

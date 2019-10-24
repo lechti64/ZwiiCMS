@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.49.dev';
+	const ZWII_VERSION = '10.0.50.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -638,8 +638,11 @@ class common {
 			}
 			// Ecriture des données
 			$this->setData(['config',$tempData['config']]);
-			$this->setData(['core',$tempData['core']]);			
-			$this->setData(['user',$tempData['user']]);			
+			$this->setData(['core',$tempData['core']]);	
+			if (isset($_POST['configManageImportUser']) === true) {
+				$this->setData(['user',$tempData['user']]);	
+				unset($_POST['configManageImportUser']);
+			}							
 			$this->setData(['page',$tempData['page']]);
 			$this->setData(['module',$tempData['module']]);
 			$this->setData(['theme',$tempTheme['theme']]);
@@ -2671,8 +2674,8 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'i18n" data-tippy-content="Internationalisation">' . template::ico('flag') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Configurer le site">' . template::ico('cog-alt') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'i18n" data-tippy-content="Gérer les langues">' . template::ico('flag') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Gérer le site">' . template::ico('cog-alt') . '</a></li>';
 				// Mise à jour automatique
 				 if(helper::checkNewVersion() ) {
 				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
