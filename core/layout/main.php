@@ -86,7 +86,7 @@
 						<?php $layout->showMenu(); ?>
 					</div>	
 					<div id="i18nBar">					
-						<?php $layout->showi18nUserSelect(); ?>
+						<?php $layout->showi18nUserSelect(); ?>						
 					</div>
 				</div>
 			</nav>
@@ -107,7 +107,7 @@
 							<?php $layout->showMenu(); ?>
 						</div>	
 						<div id="i18nBar">					
-							<?php $layout->showi18nUserSelect(); ?>
+							<?php $layout->showi18nUserSelect(); ?>						
 						</div>
 					</div>
 				</nav>
