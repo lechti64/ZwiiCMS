@@ -428,7 +428,7 @@ Mise à jour :
     - Thème : aperçu de la modification de la barre de menu au-dessus du site
 * Modification : 
     - Mise à jour RFM 9.14
-    - Amélioration de la contre mesure CRSF
+    - Amélioration de la contre mesure CSRF
     - Libellé dans TinyMCE (gabarit)
     - Setlocal modification des paramètres FR    
 
