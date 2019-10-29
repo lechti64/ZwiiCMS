@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.54.dev';
+	const ZWII_VERSION = '10.0.55.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -484,13 +484,14 @@ class common {
 	 */
 	public function getHomePageId () {
 		$hierarchy = $this->getHierarchy(null, true);
-		//echo "<pre>";
-		//var_dump($hierarchy);
-		//die();
-		foreach($hierarchy as $parentPageId => $childrenPageIds) {
-			//var_dump($hierarchyPageId);
+		foreach($this->getHierarchy(null, null, null) as $parentPageId => $childrenPageIds) {
 			if ($this->getData(['page',$parentPageId,"homePageId"]) === true) {			
 				return ($parentPageId);
+			}
+			foreach($childrenPageIds as $childKey) {
+				if ($this->getData(['page',$childKey,"homePageId"]) === true) {			
+					return ($childKey);
+				}			
 			}
 		}
 	}

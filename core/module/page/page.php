@@ -241,8 +241,11 @@ class page extends common {
 				}
 				// Reset homePage
 				if ($this->getinput('pageHomePageId', helper::FILTER_BOOLEAN) === true ) {
-					foreach($hierarchy as $hierarchyPageId) {
-						$this->setData(['page',$hierarchyPageId,"homePageId", false]);						
+					foreach ($hierarchy as $hierarchyPageId) {
+						$this->setData(['page',$hierarchyPageId,"homePageId", false]);	
+						foreach ($hierarchyPageId as $childId) {
+							$this->setData(['page',$childId,"homePageId", false]);
+						}
 					}
 				}
 				// Modifie la page ou en crée une nouvelle si l'id a changé
@@ -348,5 +351,4 @@ class page extends common {
 			]);
 		}
 	}
-
 }
