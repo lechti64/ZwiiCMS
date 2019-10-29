@@ -250,15 +250,13 @@ core.start = function() {
 			$(location).attr("href", pageUrl);
 		}
 	});
+
 	 /**
 	 * Choix de la langue dans la barre de membre
 	 */
 	$("#barFormSelectLanguage").on("change", function(){
-		var i18nLang = $(this).val();
-		if(i18nLang) {
-			$("#barFormSelectLanguage").submit();	
-		}  
-	});
+        $("#barFormSelectLanguage").submit();
+    });
 	/**
 	 * Champs d'upload de fichiers
 	 */
