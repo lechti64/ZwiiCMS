@@ -594,14 +594,8 @@ ul .menuSideChild, li .menuSideChild {
 }
 
 /* Icones de langues du menu */
-nav .flag {
-	height: 12px;
-	padding: 0 3px 0 3px;
-	max-width:100%;
-}
-
-nav .flagSelected {
-	height: 15px;
+.flag {
+	margin: 0px 5px 0 5px;
 }
 
 /* Paramètres du menu et de la barre de langue */
@@ -610,12 +604,11 @@ nav .flagSelected {
 	display: inline-flex;
 }
 #i18nBar {
-	display: flex ;
+	margin-top: -4px;
+	display: inline-flex ;
 	float: right;
 }
-#i18nBar::after {
-	clear:right;
-}
+
 
 /* Corps */
 @media (min-width:769px) {

@@ -23,11 +23,12 @@ $("input, select").on("change", function() {
 	css += "nav a,#toggle span,nav a:hover{color:" + $("#themeMenuTextColor").val() + "}";
 	css += "nav a:hover{background-color:" + colors.darken + "}";
 	css += "nav a.active{background-color:" + colors.veryDarken + "}";
-	//css += "#i18nBar {padding:" + $("#themeMenuHeight").val() + "}";
+	css += "#i18nBar {padding:" + $("#themeMenuHeight").val() + "}";
+	css += ".flag {height: " + $("#themeMenuFontSize").val() + "}";
 	// Taille, hauteur, épaisseur et capitalisation de caractères du menu
 	css += "#toggle span,#menu a{padding:" + $("#themeMenuHeight").val() + ";font-family:'" + menuFont.replace(/\+/g, " ")  + "',sans-serif;font-weight:" + $("#themeMenuFontWeight").val() + ";font-size:" + $("#themeMenuFontSize").val() + ";text-transform:" + $("#themeMenuTextTransform").val() + "}";
 	// Alignement du menu
-	css += "#menu{text-align:" + $("#themeMenuTextAlign").val() + "}";
+	css += "#menu{text-align:" +  $("#themeMenuTextAlign").val() + "}";
 	// Marge
 	if($("#themeMenuMargin").is(":checked")) {
 		if(

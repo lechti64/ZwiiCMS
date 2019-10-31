@@ -16,113 +16,119 @@ class i18n extends common {
 
 	public static $actions = [
 		'index' => self::GROUP_MODERATOR,
-		'add' => self::GROUP_MODERATOR,
+		'delete' => self::GROUP_MODERATOR,
 		'lang' => self::GROUP_VISITOR
 	];
+	public static $languages = [];
 
-
-	/**
-	 * Ajouter une localisation
-	 */
-	public function add() {
-		// Soumission du formulaire
-		if($this->isPost()) {
-			// Mode Création			
-			// Récupérer les données du formulaire
-			$create = $this->getInput('i18nAddSelect');			
-			$copyFrom = $this->getInput('i18nAddCopyFrom');
-			$notification = '';
-			$success = array ('create' => false,'remove'=> false);
-			if (!empty ($create)) {
-				// Mode création de langue
-				// La langue est déja créée ?
-				if (in_array($create,$this->i18nInstalled()) === false) {
-					$copyFrom = $copyFrom === '' ? 'core/module/i18n/ressource/' : self::DATA_DIR . $copyFrom . '/';
-					// Créer le dossier
-					if (is_dir(self::DATA_DIR . $create) === false ) {
-						$success ['create'] = mkdir (self::DATA_DIR . $create);
-					} else {
-						$success ['create'] = true;
-					}				
-					// Copier les données par défaut 
-					$success ['create'] = (copy ($copyFrom . 'module.json', self::DATA_DIR . $create . '/module.json') === true && $success ['create'] === true) ? true : false;
-					$success ['create'] = (copy ($copyFrom . 'page.json', self::DATA_DIR . $create . '/page.json') === true && $success ['create'] === true) ? true : false;
-				}
-				// Valeurs en sortie
-				$notification = $success['create'] === true ? self::$i18nList[$create] . ' installée' : self::$i18nList[$create] . ' déjà installée' ;
-			} 
-			$this->addOutput([
-				'notification'  =>  $notification,
-				'title' 		=> 'Ajouter une langue',
-				'view' 			=> 'add',
-				'state' 		=>  $success ['create']
-			]);			
-
-		} else {
-			// Valeurs en sortie sans post
-			$this->addOutput([
-				'title' 		=> 'Ajouter une langue',
-				'view' 			=> 'add'
-			]);												
-		
-		}
-	}
 
     /**
 	 * Config : gestion des langues
 	 */
 	public function index() { 
-		// Soumission du formulaire		
-		if($this->isPost()) {
-			// Et faire un backup
-
-			// Récupérer les données du formulaire		
-			$remove = $this->getInput('i18nLanguageRemove');
-			$notification = '';
-			$success = array ('create' => false,'remove'=> false);
-		
-			// Mode effacement 			
-			if (!empty ($remove)) {				
-				
-				// Une notification existe déjà, insérer un séparateur
-				if ($notification) {
-						$notification .= ' | ';
-				}
-				// Suppression impossible langue actuelle ou fr
-				if ( $remove !== $this->geti18n()) {
-					// Le dossier existe  ?
-					if (is_dir(self::DATA_DIR . $remove) === true) {
-						$success ['remove'] = unlink (self::DATA_DIR . $remove . '/module.json');
-						$success ['remove'] = (unlink (self::DATA_DIR . $remove . '/page.json') && $success ['remove'] === true) ? true : false ;
-						$success ['remove'] = (rmdir (self::DATA_DIR . $remove) === true  && $success ['remove'] === true) ? true : false ;
-					}	
-					// Valeurs en sortie
-					$notification .= $success['remove'] === true ? self::$i18nList[$remove] .' effacée' : self::$i18nList[$remove] . ' n\'existe pas' ;
+		if ($this->isPost()) {
+			// Mode ajout de langue
+			// Récupérer les données du formulaire
+			if (!empty ($this->getInput('i18nLanguageAdd'))) { // Formulaire valide
+				$create = $this->getInput('i18nLanguageAdd');			
+				$copyFrom = $this->getInput('i18nLanguageCopyFrom');
+				// Mode création de langue
+				// La langue est déja créée ?
+				if (in_array($create,$this->i18nInstalled()) === false) { // La langue n'est pas installée ?
+					//Déterminer l'origine des données copiées
+					$copyFrom = $copyFrom === '' ? 'core/module/i18n/ressource/' : self::DATA_DIR . $copyFrom . '/';
+					// Créer le dossier
+					if (is_dir(self::DATA_DIR . $create) === false ) { // Si le dossier est déjà créé
+						$success  = mkdir (self::DATA_DIR . $create);
+					} else {
+						$success = true;
+					}				
+					// Copier les données par défaut avec gestion des erreurs
+					$success  = (copy ($copyFrom . 'module.json', self::DATA_DIR . $this->getInput('i18nLanguageAdd') . '/module.json') === true && $success  === true) ? true : false;
+					$success  = (copy ($copyFrom . 'page.json', self::DATA_DIR . $this->getInput('i18nLanguageAdd') . '/page.json') === true && $success  === true) ? true : false;
 				} else {
-					// Valeurs en sortie
-					$success ['remove'] = false;
-					$notification .= self::$i18nList[$remove] . ' est active, effacement impossible';
+					$notification = $create . ' est déjà installée';
+					$success =  false;
 				}
+				// Valeurs en sortie
+				$notification = $success === true ? self::$i18nList[$this->getInput('i18nLanguageAdd')] . ' installée' : self::$i18nList[create] . ' déjà installée' ;
+			} else {
+				$notification = 'Veuillez choisir une langue';
+				$success =  false;
 			}
-			
 			$this->addOutput([
 				'notification'  =>  $notification,
-				'title' 		=> 'Internationalisation',
+				'title' 		=> 'Gestion des langues',
 				'view' 			=> 'index',
-				'state' 		=>  $success ['remove']
-			]);			
+				'state' 		=>  $success
+			]);
+		// Fin traitement du formulaire
+		}
+		// Affichage par défaut			
+		$langIds = $this->i18nInstalled();
+		asort($langIds);
+		foreach($langIds as $itemKeyLang => $itemLang) {
+			self::$languages[] = [
+				$itemLang,
+				template::button('i18nDelete' . $itemKeyLang, [
+					'class' => 'i18nDelete buttonRed',
+					'href' => helper::baseUrl() . 'i18n/delete/' . $itemKeyLang. '/' . $_SESSION['csrf'],
+					'value' => template::ico('cancel')
+				])
+			];
+		}
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Gestion des langues',
+			'view' => 'index'
+		]);
+	}
 
-		} else {
-			// Valeurs en sortie sans post
+
+	/* Effacer une langue 
+	*
+	*/
+	public function delete() {
+		// Jeton incorrect
+		if ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
 			$this->addOutput([
-				'title' 		=> 'Internationalisation',
-				'view' 			=> 'index'
-			]);												
-		
+				'redirect' => helper::baseUrl() . 'i18n',
+				'notification' => 'Action non autorisée'
+			]);
+		} elseif ( $this->getUrl(2) === $this->geti18n()) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'i18n',
+				'notification' => 'Vous ne pouvez pas supprimer la langue courante'
+			]);
+		} elseif ( $this->getUrl(2) === 'fr') {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . 'i18n',
+				'notification' => 'Vous ne pouvez pas supprimer la langue par défaut'
+			]);
+		} else {
+			// Le dossier existe  ?
+			if (is_dir(self::DATA_DIR . $this->getUrl(2)) === true) {
+				$success  = unlink (self::DATA_DIR . $this->getUrl(2) . '/module.json');
+				$success  = (unlink (self::DATA_DIR . $this->getUrl(2) . '/page.json') && $success  === true) ? true : false ;
+				$success  = (rmdir (self::DATA_DIR . $this->getUrl(2)) === true  && $success  === true) ? true : false ;
+			} else {
+				$success = false;
+			}
+			// Valeurs en sortie
+			$notification = $success === true ? 'Langue ' . $this->getUrl(2) .' effacée' : 'Langue ' . $this->getUrl(2) . ' n\'existe pas' ;
+			$this->addOutput([
+				'notification' => $notification,
+				'redirect' => helper::baseUrl() . 'i18n',
+				'state' 	=> $success		
+			]);			
 		}
 	}
 
-	/*
+
+		/*
 	* Traitement du changement de langues
 	*/
 	public function lang() {
@@ -152,5 +158,4 @@ class i18n extends common {
 
 
 	}
-
 }

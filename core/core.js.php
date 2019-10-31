@@ -253,10 +253,12 @@ core.start = function() {
 
 	 /**
 	 * Choix de la langue dans la barre de membre
-	 */
-	$("#barFormSelectLanguage").on("change", function(){
-        $("#barFormSelectLanguage").submit();
-    });
+	*/
+	$("#barSelectLanguage").on("change", function(){
+		$("	#barFormSelectLanguage").submit();	
+	});
+
+
 	/**
 	 * Champs d'upload de fichiers
 	 */

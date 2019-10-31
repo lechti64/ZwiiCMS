@@ -17,7 +17,7 @@
 /**
  * Aperçu en direct
  */
-$("input, select").on("change", function() {
+$("input, select").not("#barSelectLanguage").on("change", function() {
 
 	// Récupérer la taille de l'image
 	var tmpImg = new Image();

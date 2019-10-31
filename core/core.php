@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.55.dev';
+	const ZWII_VERSION = '10.0.57.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1258,7 +1258,8 @@ class core extends common {
 					$css .= 'nav{margin:0 20px 0}';
 				}
 			}
-			//$css .= '#i18nBar {padding:' . $this->getData(['theme', 'menu', 'height']) . ';}';
+			$css .= '#i18nBar {padding:' . $this->getData(['theme', 'menu', 'height']) . ';}';
+			$css .= '.flag  {height: '  . $this->getData(['theme', 'menu', 'fontSize']) .  ';}';
 			$colors = helper::colorVariants($this->getData(['theme', 'menu', 'backgroundColor']));
 			$css .= 'nav #burgerText {color:' . $colors['text'] . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;' . 'font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
 			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
@@ -1277,8 +1278,6 @@ class core extends common {
 			$css .= "footer #footersite > div {padding:0}";
 			$css .= "footer #footerbody > div {padding:0}";
             $css .= '#footerFontText > p {margin-top: 0; margin-bottom: 0;}';
-			//$css .= '#footersiteLeft, #footersiteCenter, #footersiteRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
-			//$css .= '#footerbodyLeft, #footerbodyCenter, #footerbodyRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
 			$css .= '#footerSocials{text-align:' . $this->getData(['theme', 'footer', 'socialsAlign']) . '}';
 			$css .= '#footerText{text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';
@@ -2606,8 +2605,8 @@ class layout extends common {
 				// ne pas afficher la barre de langue pour une seule
 				// Sélection des langues installées	
 				if (sizeof($this->i18nInstalled()) > 1) {
-					$leftItems .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
-					$leftItems .= '<select id="barSelectLanguage" name="i18nSelect" >';
+					$leftItems .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang"  id="barFormSelectLanguage">';
+					$leftItems .= '<select id="barSelectLanguage" name="i18nSelect">'; //onchange="this.form.submit()"
 					foreach ($this->i18nInstalled() as $itemKey => $item) {
 						$leftItems .= '<option ';
 						$leftItems .= 'value="' . $itemKey .'"';
