@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.57.dev';
+	const ZWII_VERSION = '10.0.58.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -483,7 +483,6 @@ class common {
 	 * @return string
 	 */
 	public function getHomePageId () {
-		$hierarchy = $this->getHierarchy(null, true);
 		foreach($this->getHierarchy(null, null, null) as $parentPageId => $childrenPageIds) {
 			if ($this->getData(['page',$parentPageId,"homePageId"]) === true) {			
 				return ($parentPageId);
@@ -495,6 +494,24 @@ class common {
 			}
 		}
 	}
+
+	/**
+	 * Retourne l'Id de la homePage de la langue  courante
+	 * @return string
+	 */
+	public function resetHomePageId () {
+		foreach($this->getHierarchy(null, null, null) as $parentPageId => $childrenPageIds) {
+			if ($this->getData(['page',$parentPageId,"homePageId"]) === true) {			
+					$this->setData(['page',$parentPageId,"homePageId", false]);
+			}
+			foreach($childrenPageIds as $childKey) {
+				if ($this->getData(['page',$childKey,"homePageId"]) === true) {			
+					$this->setData(['page',$childKey,"homePageId", false]);
+				}			
+			}
+		}
+	}
+
 
 	/**
 	 * Accède à une valeur des variables http (ordre de recherche en l'absence de type : _COOKIE, _POST)
