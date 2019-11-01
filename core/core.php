@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.59.dev';
+	const ZWII_VERSION = '10.0.60.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2639,8 +2639,8 @@ class layout extends common {
 									($parentPageId === $currentPageId ? ' selected' : false) . 
 									($this->getData(['page', $parentPageId, 'disable']) === true ? ' class="inactive"' : '') .
 									'>' . 
-									$this->getData(['page', $parentPageId, 'title']) . 
-									'</option>';
+									$this->getData(['page', $parentPageId, 'title']);
+						$leftItems .=  $this->getData(['page',$parentPageId,'homePageId']) === true ? ' (A)</option>' : '</option>';
 						foreach($childrenPageIds as $childKey) {
 							$leftItems .= '<option value="' . 
 											helper::baseUrl() . 
@@ -2648,8 +2648,8 @@ class layout extends common {
 											($childKey === $currentPageId ? ' selected' : false) . 
 											($this->getData(['page', $childKey, 'disable']) === true ? ' class="inactive"' : '') .
 											'>&nbsp;&nbsp;&nbsp;&nbsp;' . 
-											$this->getData(['page', $childKey, 'title']) . 
-											'</option>';
+											$this->getData(['page', $childKey, 'title']) ;
+							$leftItems .=  $this->getData(['page',$childKey,'homePageId']) === true ? '&nbsp;&oplus;</option>' : '</option>';											
 						}
 					}
 				}
