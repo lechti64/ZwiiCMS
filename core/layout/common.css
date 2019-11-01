@@ -492,6 +492,7 @@ nav #i18nUserSelect {
 }
 */
 
+
 nav li ul li {
 	display: block;
 	text-align: left;
@@ -519,7 +520,7 @@ nav a:hover {
 
 @media (max-width: 768px) {
 	body > nav {
-		margin:0;
+		margin:0;		
 	}
 	nav #toggle {
 		display: block;
@@ -538,6 +539,7 @@ nav a:hover {
 		min-width: inherit;
 		width: auto;
 		margin: 15px;
+		
 	}
 
 	/* Taille du menu hamburger */
@@ -546,18 +548,9 @@ nav a:hover {
 	}
 	
 	nav .flag {
-		height: 18px;
-		vertical-align: top;
-		max-width: 100%;
-		float: right;
-		margin: 5px;
-		padding-bottom: 5px;
-		}
-	nav .flagSelected {
-		height: 22px;
-		padding-bottom: 5px;
-		margin-top: 15px;
-	} 	
+		margin: 20px 10px 20px 10px;
+		font-size: calc(100% * 2.5);
+		}	
 }
 
 
@@ -603,12 +596,17 @@ ul .menuSideChild, li .menuSideChild {
 #menuBar {
 	display: inline-flex;
 }
+
 #i18nBar {
-	margin-top: -4px;
 	display: inline-flex ;
 	float: right;
 }
-
+/* fin barre de menu */
+nav:after {
+	content: " ";
+	clear: both;
+	display: flex;
+}
 
 /* Corps */
 @media (min-width:769px) {
