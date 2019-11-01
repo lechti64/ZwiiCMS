@@ -196,16 +196,6 @@ $( document ).ready(function() {
 
 
 
-/**
-* Bloque la désactivation du choix de la page d'accueil
-*/
-var pageHomePage = $("#pageHomePage");
-pageHomePage.on("change",function() {
-	if (this.checked)  {
-		$("input[name=pageHomePage]").attr("disabled",true);
-	}
-});
-
 /**	
 * Cache les options de masquage dans les menus quand la page n'est pas affichée.
 */

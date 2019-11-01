@@ -241,7 +241,7 @@ class page extends common {
 				}
 				// Reset homePage
 				if ($this->getinput('pageHomePageId', helper::FILTER_BOOLEAN) === true ) {
-					$this->resetHomePageId();
+					$this->setData(['page',$this->getHomePageId(),'homePageId',false]);
 				}
 				// Modifie la page ou en crée une nouvelle si l'id a changé
 				$this->setData([

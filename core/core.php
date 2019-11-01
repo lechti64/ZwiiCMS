@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.58.dev';
+	const ZWII_VERSION = '10.0.59.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -483,33 +483,19 @@ class common {
 	 * @return string
 	 */
 	public function getHomePageId () {
-		foreach($this->getHierarchy(null, null, null) as $parentPageId => $childrenPageIds) {
-			if ($this->getData(['page',$parentPageId,"homePageId"]) === true) {			
+		foreach($this->getHierarchy(null, true, false) as $parentPageId => $childrenPageIds) {
+			if ($this->getData(['page',$parentPageId,'homePageId']) === true) {			
 				return ($parentPageId);
 			}
 			foreach($childrenPageIds as $childKey) {
-				if ($this->getData(['page',$childKey,"homePageId"]) === true) {			
+				if ($this->getData(['page',$childKey,'homePageId']) === true) {			
 					return ($childKey);
 				}			
 			}
 		}
-	}
-
-	/**
-	 * Retourne l'Id de la homePage de la langue  courante
-	 * @return string
-	 */
-	public function resetHomePageId () {
-		foreach($this->getHierarchy(null, null, null) as $parentPageId => $childrenPageIds) {
-			if ($this->getData(['page',$parentPageId,"homePageId"]) === true) {			
-					$this->setData(['page',$parentPageId,"homePageId", false]);
-			}
-			foreach($childrenPageIds as $childKey) {
-				if ($this->getData(['page',$childKey,"homePageId"]) === true) {			
-					$this->setData(['page',$childKey,"homePageId", false]);
-				}			
-			}
-		}
+		// Aucune homePage, définir la première page et boucler
+		$this->setData(['page',current(array_keyS ($this->getHierarchy(null, true, false))),'homePageId',true]);
+		$this->getHomePageId();
 	}
 
 
