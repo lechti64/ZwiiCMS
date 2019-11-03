@@ -147,7 +147,6 @@ class i18n extends common {
 			// Valeurs en sortie sans post
 			$this->addOutput([
 				'redirect' 		=> 	helper::baseUrl(false),
-				'notification'	=> 'Langue modifiée',
 				'state'			=> true
 			]);							
 		} else {
@@ -155,7 +154,5 @@ class i18n extends common {
 				'redirect' 		=> 	helper::baseUrl(false)
 			]);	
 		}	
-
-
 	}
 }
