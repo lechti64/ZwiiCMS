@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.62.dev';
+	const ZWII_VERSION = '10.0.63.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2640,7 +2640,7 @@ class layout extends common {
 									($this->getData(['page', $parentPageId, 'disable']) === true ? ' class="inactive"' : '') .
 									'>' . 
 									$this->getData(['page', $parentPageId, 'title']);
-						$leftItems .=  $this->getData(['page',$parentPageId,'homePageId']) === true ? ' (A)</option>' : '</option>';
+						$leftItems .=  $this->getData(['page',$parentPageId,'homePageId']) === true ? '&nbsp;&oplus;</option>' : '</option>';
 						foreach($childrenPageIds as $childKey) {
 							$leftItems .= '<option value="' . 
 											helper::baseUrl() . 
