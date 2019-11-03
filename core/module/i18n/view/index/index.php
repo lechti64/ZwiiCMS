@@ -13,37 +13,41 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col12">
+		<div class="col6">
 			<div class="block">
 				<h4>Ajouter une langue</h4>
+				<div class="col12">
+					<?php 
+						$available = array ('' => 'Sélectionner');
+						$available = array_merge ($available, self::$i18nList);
+						echo template::select('i18nLanguageAdd', $available, [
+						'label' => 'Sélectionner une langue à installer'
+						]); ?>	
+				</div>										
+			</div>
+		</div>				
+		<div class="col6">
+			<div class="block">
+				<h4>Options</h4>
 				<div class="row">			
-					<div class="col3 offset1">
+					<div class="12">
 						<?php echo template::select('i18nLanguageCopyFrom', $this->i18nInstalled(true), [
-							'label' => 'Copier les pages de',
+							'label' => 'Traduction manuelle à partir du site dans cette langue',
 							'selected' => -1 					
 						]); ?>
 					</div>
-					<div class="col1 offset1 textAlignCenter">
-						<h3>▶</h3>
-					</div>
-					<div class="col3 offset1">
-						<?php 
-							$available = array ('' => 'Sélectionner');
-							$available = array_merge ($available, self::$i18nList);
-							echo template::select('i18nLanguageAdd', $available, [
-							'label' => 'Langue à créer'
-							]); ?>
-					</div>					
-				</div>
-				<div class="row">
-					<div class="col12">
-					<em>L'ajout d'une langue est concrétisé par la création d'un nouveau jeu de pages. Ce jeu de pages peut être minimal, dans ce cas
-					une seule page d'accueil est créée. Sinon vous pouvez sélectionner un jeu de page existant ce qui vous permet de réaliser
-					la traduction des textes sans avoir à créer de nouvelles pages.</em> 
-					</div>
-				</div>
+				</div>					
 			</div>
 		</div>		
 	</div>
+	<div class="row">
+		<div class="col12">
+			<p><em>Comment ajouter une nouvelle langue .</em></p>
+			<p><em>1 - Sélectionnez simplement une langue et validez, une nouvelle page est créée.</em></p>
+			<p><em>2 - En supplément, sélectionnez une langue dans laquelle le site a déjà été réalisé et validez. Le site est créé dans la nouvelle langue, vous devez traduire les pages.</em></p>
+			<p><em>Note : le site bascule dans la langue du visiteur selon, la langue par défaut du navigateur ou le choix de la langue dans le menu.<em>
+		</div>
+	</div>
+
 	<?php echo template::table([11, 1], $module::$languages, ['Langues installées',  '']); ?>
 <?php echo template::formClose(); ?>	

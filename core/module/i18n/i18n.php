@@ -58,7 +58,7 @@ class i18n extends common {
 			}
 			$this->addOutput([
 				'notification'  =>  $notification,
-				'title' 		=> 'Gestion des langues',
+				'title' 		=> 'Langues du site',
 				'view' 			=> 'index',
 				'state' 		=>  $success
 			]);
@@ -79,7 +79,7 @@ class i18n extends common {
 		}
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Gestion des langues',
+			'title' => 'Langues du site',
 			'view' => 'index'
 		]);
 	}
