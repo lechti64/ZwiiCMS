@@ -47,13 +47,13 @@ class i18n extends common {
 					$success  = (copy ($copyFrom . 'module.json', self::DATA_DIR . $this->getInput('i18nLanguageAdd') . '/module.json') === true && $success  === true) ? true : false;
 					$success  = (copy ($copyFrom . 'page.json', self::DATA_DIR . $this->getInput('i18nLanguageAdd') . '/page.json') === true && $success  === true) ? true : false;
 				} else {
-					$notification = $create . ' est déjà installée';
+					$notification = $create . ' est déjà ajoutée.';
 					$success =  false;
 				}
 				// Valeurs en sortie
-				$notification = $success === true ? self::$i18nList[$this->getInput('i18nLanguageAdd')] . ' installée' : self::$i18nList[create] . ' déjà installée' ;
+				$notification = $success === true ? self::$i18nList[$this->getInput('i18nLanguageAdd')] . ' ajoutée' : self::$i18nList[create] . ' déjà ajooutée.' ;
 			} else {
-				$notification = 'Veuillez choisir une langue';
+				$notification = 'Veuillez choisir une langue.';
 				$success =  false;
 			}
 			$this->addOutput([
@@ -100,13 +100,13 @@ class i18n extends common {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'i18n',
-				'notification' => 'Vous ne pouvez pas supprimer la langue courante'
+				'notification' => 'Vous ne pouvez pas supprimer la langue courante.'
 			]);
 		} elseif ( $this->getUrl(2) === 'fr') {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . 'i18n',
-				'notification' => 'Vous ne pouvez pas supprimer la langue par défaut'
+				'notification' => 'Vous ne pouvez pas supprimer la langue par défaut.'
 			]);
 		} else {
 			// Le dossier existe  ?
@@ -118,7 +118,7 @@ class i18n extends common {
 				$success = false;
 			}
 			// Valeurs en sortie
-			$notification = $success === true ? 'Langue ' . $this->getUrl(2) .' effacée' : 'Langue ' . $this->getUrl(2) . ' n\'existe pas' ;
+			$notification = $success === true ? 'Langue ' . $this->getUrl(2) .' supprimée' : 'Langue ' . $this->getUrl(2) . ' n\'existe pas.' ;
 			$this->addOutput([
 				'notification' => $notification,
 				'redirect' => helper::baseUrl() . 'i18n',

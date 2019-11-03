@@ -51,7 +51,7 @@ class common {
 		'bg'	=> 'Bulgare (bg)',
 		'dk'	=> 'Danois (dk)',
 		'es'	=> 'Espagnol (es)',
-		'fi'	=> 'Finois (fi)',
+		'fi'	=> 'Finnois (fi)',
 		'fr'	=> 'Français (fr)',
 		'is' 	=> 'Islandais (is)',
 		'it'	=> 'Italien (it)',
@@ -2420,8 +2420,8 @@ class layout extends common {
 			// Menu de langues 
 			if (sizeof($this->i18nInstalled()) > 1) {
 				$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
-				$items .= '<input type="image" alt="'.$this->geti18n().'" class="flag flagSelected"';
-				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/png/'.  $this->geti18n() .'.png" data-tippy-content="'. $this->geti18n() .'" />';
+				$items .= '<input type="image" alt="' . self::$i18nList[$this->geti18n()] . '(' . $this->geti18n() . ')' . '" class="flag flagSelected"';
+				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/png/'.  $this->geti18n() .'.png" data-tippy-content="' . self::$i18nList[$this->geti18n()] . '" />';
 				$items .= '</form></li>';
 				foreach ($this->i18nInstalled() as $itemKey => $item) {
 					if ($this->geti18n() !== $itemKey ) {
