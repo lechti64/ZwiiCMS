@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.66.dev';
+	const ZWII_VERSION = '10.0.67.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2686,7 +2686,7 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'i18n" data-tippy-content="Langues du site">' . template::ico('flag') . '</a></li>';
+				$rightItems .= '<li><a href="' . helper::baseUrl() . 'i18n" data-tippy-content="Gestions des langues">' . template::ico('flag') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Gérer le site">' . template::ico('cog-alt') . '</a></li>';
 				// Mise à jour automatique
 				 if(helper::checkNewVersion() ) {

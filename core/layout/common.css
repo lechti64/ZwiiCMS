@@ -602,13 +602,13 @@ ul .menuSideChild, li .menuSideChild {
 	/*float: right; Dans le thème*/
 }
 /* fin barre de menu */
-nav:after {
+nav::after {
 	content: " ";
-	clear: right;
+	clear: both;
 	display: flex;
 }
 
-nav:before {
+nav::before {
 	content: " ";
 	clear: left;
 	display: flex;
