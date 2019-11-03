@@ -19,7 +19,7 @@
 				<div class="col12">
 					<?php 
 						$available = array ('' => 'Sélectionner');
-						$available = array_merge ($available, self::$i18nList);
+						$available = array_merge ($available, array_diff(self::$i18nList,$this->i18nInstalled()));
 						echo template::select('i18nLanguageAdd', $available, [
 						'label' => 'Sélectionner une langue à installer'
 						]); ?>	
