@@ -171,8 +171,8 @@ class theme extends common {
 	];	
 	public static $menui18nPosition = [
 		'right' => '&Agrave; droite de la barre de menu',
-		'left' => 'Après le menu',
-		'none' => '&Agrave; droite de la barre de menu'
+		'left' => '&Agrave; gauche de la barre de menu',
+		'none' => 'Après le menu'
 	];
 	public static $radius = [
 		'0px' => 'Aucun',
