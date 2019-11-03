@@ -81,8 +81,7 @@ echo template::formOpen('pageEditForm'); ?>
 				<div class="row">
 					<div class="col3">
 						<?php echo template::checkbox('pageHomePageId', true, 'Page d\'accueil', [
-								'checked' => $this->getData(['page', $this->getUrl(2), 'homePageId']),
-								'help' => 'Activer l\'option sur une page, pour choisir une autre page d\'accueil.',
+								'checked' => $this->getData(['page', $this->getUrl(2), 'homePageId'])
 							]); ?>
 					</div>
 				</div>
