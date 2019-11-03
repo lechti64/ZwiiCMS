@@ -130,7 +130,8 @@ class init extends common {
 				'textAlign' => 'left',
 				'textColor' => 'rgba(255, 255, 255, 1)',
 				'textTransform' => 'none',
-				'fixed' => false
+				'fixed' => false,
+				'i18nPosition' => 'right'
 			],
 			'site' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',

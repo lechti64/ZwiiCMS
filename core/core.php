@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.63.dev';
+	const ZWII_VERSION = '10.0.64.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1102,6 +1102,7 @@ class common {
 			$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
 			$this->deleteData(['config','homePageId']);
 			$this->setData(['theme','menu','burgerTitle',true]);
+			$this->setData(['theme','menu','i18nPosition', 'right']);
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 
@@ -1261,8 +1262,8 @@ class core extends common {
 					$css .= 'nav{margin:0 20px 0}';
 				}
 			}
-			$css .= '#i18nBar {padding:' . $this->getData(['theme', 'menu', 'height']) . ';}';
-			$css .= '.flag  {height: '  . $this->getData(['theme', 'menu', 'fontSize']) .  ';}';
+			$css .= '#i18nBar {padding:' . $this->getData(['theme', 'menu', 'height']) . '; float:' . $this->getData(['theme', 'menu', 'i18nPosition']) . ';}';
+			$css .= '.flag  {height:'  . $this->getData(['theme', 'menu', 'fontSize']) .  ';}';
 			$colors = helper::colorVariants($this->getData(['theme', 'menu', 'backgroundColor']));
 			$css .= 'nav #burgerText {color:' . $colors['text'] . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;' . 'font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
 			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';

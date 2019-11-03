@@ -599,7 +599,7 @@ ul .menuSideChild, li .menuSideChild {
 
 #i18nBar {
 	display: inline-flex ;
-	float: right;
+	/*float: right; Dans le thème*/
 }
 /* fin barre de menu */
 nav:after {
@@ -607,6 +607,13 @@ nav:after {
 	clear: right;
 	display: flex;
 }
+
+nav:before {
+	content: " ";
+	clear: left;
+	display: flex;
+}
+
 
 /* Corps */
 @media (min-width:769px) {

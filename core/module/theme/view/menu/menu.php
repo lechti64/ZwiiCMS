@@ -13,9 +13,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col8">
+    <div class="col7">
         <div class="block">
-            <h4>Couleur</h4>
+            <h4>Couleurs</h4>
             <div class="row">
                 <div class="col6">
                     <?php echo template::text('themeMenuBackgroundColor', [
@@ -36,16 +36,21 @@
             </div>
         </div>
     </div>
-    <div class="col4">
+    <div class="col5">
         <div class="block">
-            <h4>Contenu</h4>
+            <h4>Contenus</h4>
             <?php echo template::checkbox('themeMenuLoginLink', true, 'Lien de connexion', [
 					'checked' => $this->getData(['theme', 'menu', 'loginLink'])
 				]); ?>
             <?php echo template::checkbox('themeMenuBurgerTitle', true, 'Titre du site dans le menu réduit', [
                     'checked' => $this->getData(['theme', 'menu', 'burgerTitle']),
                     'help' => 'Le menu burger remplace le menu complet lorsque la largeur de l\'écran  n\'est pas suffisante.'
-				]); ?>
+                ]); ?>
+            <?php echo template::select('themeMenui18nPosition', $module::$menui18nPosition, [
+                    'label' => 'Position de la barre de langues',
+                    'selected' => $this->getData(['theme', 'menu', 'i18nPosition'])
+                ]); ?>   
+                
         </div>
     </div>
 </div>

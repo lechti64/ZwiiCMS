@@ -169,6 +169,11 @@ class theme extends common {
 		'site' => 'Dans le site',
 		'hide' => 'Caché'
 	];	
+	public static $menui18nPosition = [
+		'right' => '&Agrave; droite de la barre de menu',
+		'left' => 'Après le menu',
+		'none' => '&Agrave; droite de la barre de menu'
+	];
 	public static $radius = [
 		'0px' => 'Aucun',
 		'5px' => 'Très léger',
@@ -442,7 +447,8 @@ class theme extends common {
 				'textAlign' => $this->getInput('themeMenuTextAlign'),
 				'textColor' => $this->getInput('themeMenuTextColor'),
 				'textTransform' => $this->getInput('themeMenuTextTransform'),
-				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN)			
+				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN),
+				'i18nPosition' => $this->getInput('themeMenui18nPosition')		
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
