@@ -51,14 +51,14 @@ class i18n extends common {
 					$success =  false;
 				}
 				// Valeurs en sortie
-				$notification = $success === true ? self::$i18nList[$this->getInput('i18nLanguageAdd')] . ' ajoutée' : self::$i18nList[create] . ' déjà ajooutée.' ;
+				$notification = $success === true ? self::$i18nList[$this->getInput('i18nLanguageAdd')] . ' ajouté' : self::$i18nList[create] . ' déjà ajouté.' ;
 			} else {
 				$notification = 'Veuillez choisir une langue.';
 				$success =  false;
 			}
 			$this->addOutput([
 				'notification'  =>  $notification,
-				'title' 		=> 'Langues du site',
+				'title' 		=> 'Gestion des langues',
 				'view' 			=> 'index',
 				'state' 		=>  $success
 			]);
@@ -79,7 +79,7 @@ class i18n extends common {
 		}
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Langues du site',
+			'title' => 'Gestions des langues',
 			'view' => 'index'
 		]);
 	}
@@ -118,7 +118,7 @@ class i18n extends common {
 				$success = false;
 			}
 			// Valeurs en sortie
-			$notification = $success === true ? 'Langue ' . $this->getUrl(2) .' supprimée' : 'Langue ' . $this->getUrl(2) . ' n\'existe pas.' ;
+			$notification = $success === true ?  $this->getUrl(2) .' supprimé' :  $this->getUrl(2) . ' n\'existe pas.' ;
 			$this->addOutput([
 				'notification' => $notification,
 				'redirect' => helper::baseUrl() . 'i18n',
