@@ -1,8 +1,9 @@
 # Changelog
 
 ## version 9.2.10
-- Modification pour la version 10 : 
-    - Lors de l'installation, stockage de l'url de base dans l'éventualité de la restauration d'un backup dans un autre arborescence.
+- Modifications préparatoires à la version 10 : 
+    - Lors de l'installation, stockage de l'url de base dans l'éventualité de la restauration d'un backup et de son installation dans un autre arborescence.
+    - Modification des clés identifiant les légendes du module Gallery : suppression du point de séparation du nom de fichier de l'extension.
 
 ## version 9.2.09
 - Corrections :
