@@ -961,6 +961,7 @@ class common {
 			// Utile pour l'installation d'un backup sur un autre serveur
 			$this->setData(['core', 'baseUrl', str_replace('/','',helper::baseUrl(false,false)) ]);
 			$this->setData(['core', 'dataVersion', 9210]);
+			$this->saveData();
 		}
 	}
 }
