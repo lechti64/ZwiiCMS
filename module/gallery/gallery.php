@@ -230,18 +230,6 @@ class gallery extends common {
 				if(is_dir($directory)) {
 					$iterator = new DirectoryIterator($directory);
 					foreach($iterator as $fileInfos) {
-						// Préparation des clés de légendes pour la v10
-						$data =  $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'legend']);
-						foreach ($data as $itemKey=>$itemValue) {
-							// Ancien nom avec un point devant l'extension ?
-							if (strpos($itemKey,'.') > 0) {
-								// Créer une nouvelle clé
-								$this->setData(['module', $this->getUrl(0), $this->getUrl(1), 'legend',str_replace('.','',$itemKey),$itemValue]);
-								// Supprimer la valeur
-								$this->deleteData(['module', $this->getUrl(0), $this->getUrl(1), 'legend',$itemKey]);
-							}
-							$this->saveData();
-						}
 						if($fileInfos->isDot() === false AND $fileInfos->isFile() AND @getimagesize($fileInfos->getPathname())) {
 							self::$pictures[$directory . '/' . $fileInfos->getFilename()] = $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'legend', str_replace('.','',$fileInfos->getFilename())]);
 						}

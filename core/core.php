@@ -148,9 +148,6 @@ class common {
 		if($this->data === [])  {
 			$this->readData();
 		}
-
-		// Mise à jour des données core
-		$this->update();
 	
 		// Utilisateur connecté
 		if($this->user === []) {
@@ -219,6 +216,9 @@ class common {
 				$this->url = $this->getData(['config', 'homePageId']);
 			}
 		}
+
+		// Mise à jour des données core
+		$this->update();
 	}
 
 	/**
@@ -960,8 +960,36 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 9210) {
 			// Utile pour l'installation d'un backup sur un autre serveur
 			$this->setData(['core', 'baseUrl', str_replace('/','',helper::baseUrl(false,false)) ]);
+
+			// Préparation des clés de légendes pour la v10
+			// Parcours des pages du site
+			foreach ($this->getHierarchy(null,null,null) as $parentKey => $parent) {
+				//La page a une galerie
+				if ($this->getData(['page',$parentKey,'moduleId']) === 'gallery' ) {
+					// Lire les données du module
+					$tempData =  $this->getData(['module', $parentKey]);
+					// Parcourir les dossiers de la galerie
+					foreach ($tempData as $galleryKey => $galleryItem) {
+						foreach ($galleryItem as $legendKey => $legendValue) {
+							// Recherche la clé des légendes
+							if ($legendKey === 'legend') {
+								foreach ($legendValue as $itemKey=>$itemValue) {					
+									// Ancien nom avec un point devant l'extension ?
+									if (strpos($itemKey,'.') > 0) {
+										// Créer une nouvelle clé
+										$this->setData(['module', $parentKey, $galleryKey, 'legend',str_replace('.','',$itemKey),$itemValue]);
+										// Supprimer la valeur
+										$this->deleteData(['module', $parentKey, $galleryKey, 'legend',$itemKey]);
+									}									
+								}
+							}
+						}
+					}
+				}
+			}			
 			$this->setData(['core', 'dataVersion', 9210]);
 			$this->saveData();
+			die();
 		}
 	}
 }
