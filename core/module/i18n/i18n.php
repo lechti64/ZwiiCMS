@@ -118,7 +118,7 @@ class i18n extends common {
 				$success = false;
 			}
 			// Valeurs en sortie
-			$notification = $success === true ?  $this->getUrl(2) .' supprimé' :  $this->getUrl(2) . ' n\'existe pas.' ;
+			$notification = $success === true ?  self::$i18nList[$this->getUrl(2)] .' supprimé' : self::$i18nList[$this->getUrl(2)] . ' n\'existe pas.' ;
 			$this->addOutput([
 				'notification' => $notification,
 				'redirect' => helper::baseUrl() . 'i18n',
