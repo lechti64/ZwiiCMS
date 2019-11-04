@@ -989,7 +989,6 @@ class common {
 			}			
 			$this->setData(['core', 'dataVersion', 9210]);
 			$this->saveData();
-			die();
 		}
 	}
 }
