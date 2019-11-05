@@ -962,24 +962,33 @@ class common {
 			$this->setData(['core', 'baseUrl', str_replace('/','',helper::baseUrl(false,false)) ]);
 
 			// Préparation des clés de légendes pour la v10
-			// Parcours des pages du site
-			foreach ($this->getHierarchy(null,null,null) as $parentKey => $parent) {
+
+			// Construire une liste plate de parents et d'enfants
+			
+			foreach ($this->getHierarchy(null,null,null) as $parentKey=>$parentValue) {
+				$pageList [] = $parentKey;
+				foreach ($parentValue as $childKey) {
+					$pageList [] = $childKey;
+				}
+			}			
+			// Parcourir toutes les pages
+			foreach ($pageList as $parentKey => $parent) {
 				//La page a une galerie
-				if ($this->getData(['page',$parentKey,'moduleId']) === 'gallery' ) {
+				if ($this->getData(['page',$parent,'moduleId']) === 'gallery' ) {
 					// Lire les données du module
-					$tempData =  $this->getData(['module', $parentKey]);
 					// Parcourir les dossiers de la galerie
+					$tempData =  $this->getData(['module', $parent]);			
 					foreach ($tempData as $galleryKey => $galleryItem) {
 						foreach ($galleryItem as $legendKey => $legendValue) {
 							// Recherche la clé des légendes
 							if ($legendKey === 'legend') {
-								foreach ($legendValue as $itemKey=>$itemValue) {					
+								foreach ($legendValue as $itemKey=>$itemValue) {		
 									// Ancien nom avec un point devant l'extension ?
 									if (strpos($itemKey,'.') > 0) {
 										// Créer une nouvelle clé
-										$this->setData(['module', $parentKey, $galleryKey, 'legend',str_replace('.','',$itemKey),$itemValue]);
+										$this->setData(['module', $parent, $galleryKey, 'legend',str_replace('.','',$itemKey),$itemValue]);
 										// Supprimer la valeur
-										$this->deleteData(['module', $parentKey, $galleryKey, 'legend',$itemKey]);
+										$this->deleteData(['module', $parent, $galleryKey, 'legend',$itemKey]);
 									}									
 								}
 							}
