@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.69.dev';
+	const ZWII_VERSION = '10.0.70.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -483,7 +483,7 @@ class common {
 	 * @return string
 	 */
 	public function getHomePageId () {
-		foreach($this->getHierarchy(null, true, false) as $parentPageId => $childrenPageIds) {
+		foreach($this->getHierarchy(null, null, false) as $parentPageId => $childrenPageIds) {
 			if ($this->getData(['page',$parentPageId,'homePageId']) === true) {			
 				return ($parentPageId);
 			}
