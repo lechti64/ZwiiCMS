@@ -11,25 +11,10 @@
         - Les mises à jour et effacement sont appliquées en direct sur le disque.
     - Multilinguisme :
         - Site publiable en différentes versions de langues européennes.
-        - Un nouveau menu affiche le l'écran de gestion des langues disponibles.
+        - Un nouveau menu affiche l'écran de gestion des langues disponibles.
         - Le changement de la langue courante dans l'interface d'administration ainsi que dans le menu utilisateur.
         - En mode déconnecté, la langue affichée est celle du navigateur ou choix de la langue dans la barre de menu.
-        - Les drapeaux affichés dans le menu ne font pas référence à un pays mais à une langue, sont proposés :
-            - Allemand
-            - Anglais
-            - Bulgare
-            - Danois
-            - Espagnol
-            - Finois
-            - Français
-            - Islandais
-            - Italien
-            - Néerlandais
-            - Norvégien
-            - Portugais
-            - Suédois
-            - Roumain
-            - Tchèque
+        - Les drapeaux affichés dans le menu ne font pas référence à un pays mais à une langue, sont proposés des langues européennes et régionales nationales.
     - Thème menu :
         - Lorsque le menu est réduit, le titre du site peut être inséré à la gauche du menu burger.
 
@@ -41,13 +26,14 @@
     - Procédure d'importation : 
         - L'importation des données est possible uniquement à partir d'une version 9 et non des version ultérieures.
         - Les données de site précédentes sont écrasées, les données localisées effacées.
+	- Les données relatives aux comptes des utilisateurs déjà installés peuvent être conservées.
         - Une notification est affichée après l'importation.
     - Procédure d'installation :
-        - En cas d'effacement d'un des fichiers de donénes sauf user.json, une version par défaut est installée.
+        - En cas d'effacement d'un des fichiers de données sauf user.json, une version par défaut est installée.
     - Configuration du site :
         - Ecran dédié à la sauvegarde automatique, à l'import et à l'export.
         - Fonction d'import des données provenant d'autres Zwii, avec option de préservation des données utilisateurs 
-        - Le nom dess fichiers de sauvegarde contient l'adresse de base du site
+        - Le nom des fichiers de sauvegarde contient l'adresse de base du site
 
         
 ## version 9.2.09
