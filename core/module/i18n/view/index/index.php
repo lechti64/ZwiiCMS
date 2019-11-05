@@ -45,7 +45,7 @@
 			<p><em>Comment ajouter une nouvelle langue .</em></p>
 			<p><em>1 - Sélectionnez simplement une langue et validez, une nouvelle page est créée.</em></p>
 			<p><em>2 - En supplément, sélectionnez une langue dans laquelle le site a déjà été réalisé et validez. Le site est créé dans la nouvelle langue, vous devez traduire les pages.</em></p>
-			<p><em>Note : le site bascule dans la langue du visiteur selon, la langue par défaut du navigateur ou le choix de la langue dans le menu.<em>
+			<p><em>Note : le site bascule dans la langue du visiteur selon, la langue par défaut du navigateur ou le choix de la langue dans le menu.</em></p>
 		</div>
 	</div>
 
