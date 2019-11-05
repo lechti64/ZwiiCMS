@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.70.dev';
+	const ZWII_VERSION = '10.0.71.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -493,7 +493,7 @@ class common {
 				}			
 			}
 		}
-		// Aucune homePage, définir la première page et boucler
+		// Aucune homePage, définir la première page et boucle
 		$this->setData(['page',current(array_keyS ($this->getHierarchy(null, true, false))),'homePageId',true]);
 		$this->getHomePageId();
 	}
