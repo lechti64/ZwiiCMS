@@ -290,54 +290,67 @@ class config extends common {
 				$stat = $zip->statIndex( $i ); 
 				$files [] = ( basename( $stat['name'] )); 
 			}
+			
+			// Détermination de la version	à installer
+			if (in_array('theme.json',$files) === true && 
+				in_array('core.json',$files) === true && 
+				in_array ('user.json', $files) === false ) { 
+					// V9 pas de fichier user dans l'archive
+					// Stocker le choix de conserver les users installées
+					$version = '9';
 
-			// Vérifier la présence des fichiers à minima theme et core (v9)
-			if (in_array('theme.json',$files) === true &&
-				in_array('core.json',$files) === true) {
-
-					// Users d'une version 10 conservés si option cochée
-					if (in_array('user.json',$files) === true && 
-						$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ) { 
+			} elseif (in_array('theme.json',$files) === true && 					
+				in_array('core.json',$files) === true && 
+				in_array ('user.json', $files) === true && 
+				in_array ('config.json', $files) === true ) {
+					// V10 valide
+					$version = '10';
+					// Option active, les users sont stockées
+					if ($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ) { 
 						$users = $this->getData(['user']); 
-					} else {
-						// V9 on transmets l'option à la fonction importData appelée par core
-						$_POST['configManageImportUser'] = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN);
 					}
-					// Extraire le zip
-					$success = $zip->extractTo( '.' );				
-					// Fermer l'archive	
-					$zip->close();
-					// Restaurer les users originaux d'une v10 si option cochée
-					if (!empty($users)) { 
-						$this->setData(['user',$users]);						
-					}
-					// Message de notification
-					$notification  = $success === true ? 'Sauvegarde importée avec succès' : 'Erreur d\'extraction'; 
-					$notification .= ($success === true && !empty($users)) ? '<br> Comptes utilisateurs préservés' : '<br> Comptes utilisateurs importés';
-					// Valeurs en sortie erreur	
-					$this->addOutput([
-						'notification' => $notification,
-						'redirect' => helper::baseUrl(),
-						'state' => $success
-					]);
-
-			} else {
+			} else { // Version invalide
 				// Valeurs en sortie erreur
 				$this->addOutput([
 					'notification' => 'Cette archive n\'est pas une sauvegarde valide',
 					'redirect' => helper::baseUrl() . 'config/manage',
 					'state' => false
-					]);
+				]);
 			}
+
+			// Extraire le zip
+			$success = $zip->extractTo( '.' );				
+			// Fermer l'archive	
+			$zip->close();
+			
+			// Restaurer les users originaux d'une v10 si option cochée
+			if (!empty($users) &&
+				$version === '10' &&
+				$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true) { 
+					$this->setData(['user',$users]);						
+			}
+			if ($version === '9' ) {
+				$this->importData($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN));
+				$this->setData(['core','dataVersion',0]);
+			}			
+			// Message de notification
+			$notification  = $success === true ? 'Sauvegarde importée avec succès' : 'Erreur d\'extraction'; 
+			$redirect = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ?  helper::baseUrl() : helper::baseUrl() . 'user/login/';
+			// Valeurs en sortie erreur	
+			$this->addOutput([
+				'notification' => $notification,
+				'redirect' =>$redirect,
+				'state' => $success
+			]);
 		} 
-
-
+	
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Exporter / Importer',
 			'view' => 'manage'
 		]);
 	}
+
 
 	/**
 	 * Configuration

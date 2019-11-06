@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.72.dev';
+	const ZWII_VERSION = '10.0.73.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -168,7 +168,8 @@ class common {
 
 		// Import version 9 
 		if (file_exists(self::DATA_DIR . 'core.json') === true && 
-			$this->getData(['core','dataVersion']) < 10000) {
+			$this->getData(['core','dataVersion']) < 10000 && 
+			$this->getData(['core','dataVersion']) !== 0) { // Retour d'importation ne pas déclencher l'import
 				$this->importData();
 				common::$importNotices [] = "Importation réalisée avec succès" ;
 				//echo '<script>window.location.replace("' .  helper::baseUrl() . $this->getData(['config','homePageId']) . '")</script>';
@@ -615,8 +616,7 @@ class common {
 	 * Import des données de la version 9
 	 * Convertit un fichier de données data.json puis le renomme
 	 */
-	public function importData() {	
-
+	public function importData($keepUsers = false) {
 			// Trois tentatives de lecture
 			for($i = 0; $i < 3; $i++) {
 				$tempData=json_decode(file_get_contents(self::DATA_DIR.'core.json'), true);
@@ -643,28 +643,23 @@ class common {
 					rmdir (self::DATA_DIR . $itemKey);
 				}
 			}
+
 			// Dossier de langues
 			if (!file_exists(self::DATA_DIR . '/' . 'fr')) {
 				mkdir (self::DATA_DIR . '/' . 'fr');
 			}
+
 			// Ecriture des données
 			$this->setData(['config',$tempData['config']]);
 			$this->setData(['core',$tempData['core']]);	
-
-			// Import des users
-			if (isset($_POST['configManageImportUser']) === true ) { 
-				if ($_POST['configManageImportUser'] ===  false) {	 // user non préservés
-					$this->setData(['user',$tempData['user']]);		 // On importe les nouveaux
-				}			
-				unset($_POST['configManageImportUser']);				
-			} else {
-				$this->setData(['user',$tempData['user']]);
-			}
-
-
 			$this->setData(['page',$tempData['page']]);
 			$this->setData(['module',$tempData['module']]);
-			$this->setData(['theme',$tempTheme['theme']]);
+			// Import des users sauvegardés si option active
+			if ($keepUsers === false) {
+				$this->setData(['user',$tempData['user']]);			
+			}
+			$this->setData(['theme',$tempTheme['theme']]);			
+
 			// Nettoyage du fichier de thème pour forcer une régénération
 			if (!file_exists(self::DATA_DIR . '/theme.css')) { // On ne sait jamais
 				unlink (self::DATA_DIR . '/theme.css');
