@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.73.dev';
+	const ZWII_VERSION = '10.0.74.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -61,7 +61,7 @@ class common {
 		'sv'	=> 'Suédois (sv)',
 		'ro'	=> 'Roumain (ro)',
 		'cz'	=> 'Tchèque (cz)',
-		'tr'	=> 'Turquie (tr)',
+		'tr'	=> 'Turc (tr)',
 		'eu'	=> 'Basque (eu)',
 		'br'	=> 'Breton (br)',
 		'co'	=> 'Corse (co)',
@@ -664,6 +664,20 @@ class common {
 			if (!file_exists(self::DATA_DIR . '/theme.css')) { // On ne sait jamais
 				unlink (self::DATA_DIR . '/theme.css');
 			}				
+	}
+
+	/**
+	 * Met à jour les données de site avec l'adresse trannsmise
+	 */
+	public function updateBaseUrl () {		
+		if ($this->getData(['core','baseUrl']) !== helper::baseUrl()) {
+			foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
+				str_replace( '/' . $this->getData(['core','baseUrl']) . '/' , '/' . helper::baseUrl() .'/' , $this->getData(['page',$parentId,'content']));
+				foreach($childIds as $childId) {
+					str_replace( '/'.$this->getData(['core','baseUrl']).'/', '/'.helper::baseUrl().'/', $this->getData(['page',$childId,'content']));
+				}
+			}
+		}
 	}
 
 	/**

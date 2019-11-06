@@ -332,7 +332,9 @@ class config extends common {
 			if ($version === '9' ) {
 				$this->importData($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN));
 				$this->setData(['core','dataVersion',0]);
-			}			
+			}
+			// Met à jours les URL dans les contenus de page
+			$this->updateBaseUrl();			
 			// Message de notification
 			$notification  = $success === true ? 'Sauvegarde importée avec succès' : 'Erreur d\'extraction'; 
 			$redirect = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ?  helper::baseUrl() : helper::baseUrl() . 'user/login/';
