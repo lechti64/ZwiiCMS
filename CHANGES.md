@@ -32,12 +32,12 @@
         - En cas d'effacement d'un des fichiers de données sauf user.json, une version par défaut est installée.
     - Configuration du site :
         - Ecran dédié à la sauvegarde automatique, à l'import et à l'export.
-        - Fonction d'import des données provenant d'autres Zwii, avec option de préservation des données utilisateurs 
+        - Fonction d'import des données provenant d'autres version de ZwiiCMS, avec option de préservation des données utilisateurs 
         - Le nom des fichiers de sauvegarde contient l'adresse de base du site
 
         
 ## version 9.2.09
-- Correections :
+- Corrections :
     - Module Formulaire, erreur lors de l'envoi d'un premier formulaire
     - Thème Footer , désactivation de l'aperçu du texte personnalisé
 
@@ -174,11 +174,11 @@
 
 ## Version 9.1.05
 - Correction : 
-    - Site par défaut : lien Zwii masqué du menu horizontal
+    - Site par défaut : lien ZwiiCMS masqué du menu horizontal
 - Modifications : 
     - Présentation de l'édition des pages
     - Largeur dynamique du bouton envoyer dans le formulaire 
-    - Lien dans le footer vers le site Zwii
+    - Lien dans le footer vers le site ZwiiCMS
     - Redirection, écran de confirmation
 
 ## Version 9.1.04
@@ -274,12 +274,12 @@
 ## Version 9.0.13
 - Modifications :
     - Paramètre Tippy : ajouter area[title]
-    - SimpleLightbox : bug d'affichage sous Edge, erreur signalée mais corrigée dans Zwii
+    - SimpleLightbox : bug d'affichage sous Edge, erreur signalée mais corrigée dans ZwiiCMS
 
 ## Version 9.0.12
 - Corrections :
     - Configuration de Tippy pour l'utilisation de l'argument title dans les balises a et img. Data-tippy-content reste un argument reconnu
-    - Bug de la redirection lorsqu'un dossier porte le nom d'une page, le contrôle de cohérence est déplacé dans page.
+    - Bug de la redirection lorsque un dossier porte le nom d'une page, le contrôle de cohérence est déplacé dans page.
 
 ## Version 9.0.11
 - Corrections :
@@ -430,7 +430,7 @@ Mise à jour :
 * Correction : 
     - Faille CSRF lors de l'effacement d'une page
 
-## Verison 8.5.3
+## Version 8.5.3
 * Modification :
     - Config bouton de génération de la capture de l'écran OpenGraph
 * Correction :
@@ -492,7 +492,7 @@ Mise à jour :
 * Correction : 
     - URL incorrecte dans Metaimage
     - Erreur dans la génération du sitemap
-    - Taille du texte de la bannnière maximale relative (vmax)
+    - Taille du texte de la bannière maximale relative (vmax)
     - Préfixe des en-têtes html pour OpenGraph
     - Balise Titre dans Socials
     - Conformité W3C des URL dans socials
@@ -549,14 +549,14 @@ Mise à jour :
     - bug des commentaires non déposés quand connecté
     - bug présent depuis au moins la version 8.1 et qui faisait boucler l'édition d'une page avec un module de redirection; Après édition, un clic sur retour ou enregistrer renvoie vers la  page d'accueil en édition.
     - affichage d'une erreur 404 si le contenu d'une page est supprimé
-    - erreur deans le filemanger si une seule extension demandée
+    - erreur deans le FileManager si une seule extension demandée
     - corrige les droits sur la rédaction des commentaires
-    - nouvelles icones d'exemple pour les menus
+    - nouvelles icônes d'exemple pour les menus
 ## 8.2.9
-* Correction  :  filemanger : erreur dans la navigation du filemanager dans la sélection de la favicon
+* Correction  :  FileManager : erreur dans la navigation du FileManager dans la sélection de la favicon
 * Modification : on peut effacer le contenu d'une page sans provoquer d'erreur 404 
 ## 8.2.8
-* Correction : filemanager problème de lecture d'une seule extension
+* Correction : FileManager problème de lecture d'une seule extension
 ## 8.2.7
 * Correction : gestion des droits sur les commentaires du blog
 * Correction : une option en double dans TinyMCE
