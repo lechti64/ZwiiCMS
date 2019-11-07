@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.74.dev';
+	const ZWII_VERSION = '10.0.75.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -58,7 +58,7 @@ class common {
 		'nl' 	=> 'Néerlandais (nl)',
 		'no'	=> 'Norvégien (no)' ,
 		'pt'	=> 'Portugais (pt)',
-		'sv'	=> 'Suédois (sv)',
+		'se'	=> 'Suédois (se)',
 		'ro'	=> 'Roumain (ro)',
 		'cz'	=> 'Tchèque (cz)',
 		'tr'	=> 'Turc (tr)',

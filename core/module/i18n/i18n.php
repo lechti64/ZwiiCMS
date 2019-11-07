@@ -79,7 +79,7 @@ class i18n extends common {
 		}
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Gestions des langues',
+			'title' => 'Gestion des langues',
 			'view' => 'index'
 		]);
 	}

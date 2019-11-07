@@ -15,7 +15,7 @@
  */
 $(".i18nDelete").on("click", function() {
 	var _this = $(this);
-	return core.confirm("Êtes-vous sûr de vouloir supprimer cette langue ?", function() {
+	return core.confirm("Êtes-vous sûr de vouloir supprimer cette langue et le site correspondant ?", function() {
 		$(location).attr("href", _this.attr("href"));
 	});
 });
