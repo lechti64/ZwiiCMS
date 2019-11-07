@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.77.dev';
+	const ZWII_VERSION = '10.0.78.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -276,6 +276,9 @@ class common {
 				$this->url = $this->getHomePageId();
 			}
 		}
+
+		// Mise à jour des données core
+		$this->update();
 	}
 
 
@@ -1113,6 +1116,51 @@ class common {
 			}
 			$this->setData(['core', 'dataVersion', 9205]);
 		}
+
+		// Version 9.2.10
+		if($this->getData(['core', 'dataVersion']) < 9210) {
+			// Utile pour l'installation d'un backup sur un autre serveur
+			$this->setData(['core', 'baseUrl', str_replace('/','',helper::baseUrl(false,false)) ]);
+
+			// Préparation des clés de légendes pour la v10
+
+			// Construire une liste plate de parents et d'enfants
+			
+			foreach ($this->getHierarchy(null,null,null) as $parentKey=>$parentValue) {
+				$pageList [] = $parentKey;
+				foreach ($parentValue as $childKey) {
+					$pageList [] = $childKey;
+				}
+			}			
+			// Parcourir toutes les pages
+			foreach ($pageList as $parentKey => $parent) {
+				//La page a une galerie
+				if ($this->getData(['page',$parent,'moduleId']) === 'gallery' ) {
+					// Lire les données du module
+					// Parcourir les dossiers de la galerie
+					$tempData =  $this->getData(['module', $parent]);			
+					foreach ($tempData as $galleryKey => $galleryItem) {
+						foreach ($galleryItem as $legendKey => $legendValue) {
+							// Recherche la clé des légendes
+							if ($legendKey === 'legend') {
+								foreach ($legendValue as $itemKey=>$itemValue) {		
+									// Ancien nom avec un point devant l'extension ?
+									if (strpos($itemKey,'.') > 0) {
+										// Créer une nouvelle clé
+										$this->setData(['module', $parent, $galleryKey, 'legend',str_replace('.','',$itemKey),$itemValue]);
+										// Supprimer la valeur
+										$this->deleteData(['module', $parent, $galleryKey, 'legend',$itemKey]);
+									}									
+								}
+							}
+						}
+					}
+				}
+			}			
+			$this->setData(['core', 'dataVersion', 9210]);
+			$this->saveData();
+		}
+
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
 			$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
@@ -1121,7 +1169,6 @@ class common {
 			$this->setData(['theme','menu','i18nPosition', 'right']);
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
-
 	}
 }
 

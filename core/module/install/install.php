@@ -83,8 +83,7 @@ class install extends common {
 						'Bonjour' . ' <strong>' . $userFirstname . ' ' . $userLastname . '</strong>,<br><br>' .
 						'Voici les détails de votre installation.<br><br>' .
 						'<strong>URL du site :</strong> <a href="' . helper::baseUrl(false) . '" target="_blank">' . helper::baseUrl(false) . '</a><br>' .
-						'<strong>Identifiant du compte :</strong> ' . $this->getInput('installId') . '<br>' .
-						'<strong>Mot de passe du compte :</strong> ' . $this->getInput('installPassword')
+						'<strong>Identifiant du compte :</strong> ' . $this->getInput('installId') . '<br>' 
 					);
 					// Générer un fichier  robots.txt
 					$this->createRobots();

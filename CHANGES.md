@@ -36,6 +36,11 @@
         - Le nom des fichiers de sauvegarde contient l'adresse de base du site
 
         
+## version 9.2.10
+- Modifications préparatoires à la version 10 : 
+    - Lors de l'installation, stockage de l'url de base dans l'éventualité de la restauration d'un backup et de son installation dans une autre arborescence.
+    - Modification des clés identifiant les légendes du module Gallery : suppression du point de séparation du nom de fichier de l'extension.
+
 ## version 9.2.09
 - Corrections :
     - Module Formulaire, erreur lors de l'envoi d'un premier formulaire

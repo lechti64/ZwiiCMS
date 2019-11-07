@@ -25,7 +25,8 @@ class init extends common {
 		'core' => [
 			'dataVersion' => 10000,
 			'lastBackup' => 0,
-			'lastClearTmp' => 0
+			'lastClearTmp' => 0,
+			'baseUrl' => ''
 		],
 		'page' => [	
 			'accueil' => [
