@@ -309,6 +309,16 @@ class config extends common {
 					if ($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ) { 
 						$users = $this->getData(['user']); 
 					}
+					// Nettoyage des dossiers de langue
+					foreach (self::$i18nList  as $itemKey => $item) {
+						// Le dossier existe  ?
+						if (is_dir(self::DATA_DIR . $itemKey) === true)  {
+							unlink (self::DATA_DIR . $itemKey . '/module.json');
+							unlink (self::DATA_DIR . $itemKey . '/page.json');
+							rmdir (self::DATA_DIR . $itemKey);
+						}
+					}
+						
 			} else { // Version invalide
 				// Valeurs en sortie erreur
 				$this->addOutput([
