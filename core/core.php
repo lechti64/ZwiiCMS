@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.78.dev';
+	const ZWII_VERSION = '10.0.79.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -205,9 +205,6 @@ class common {
 		// Sauvegarder la sélection
 		$this->seti18N($i18nFrontEnd);
 
-		// Mise à jour des données core
-		$this->update();
-
 		// Utilisateur connecté
 		if($this->user === []) {
 			$this->user = $this->getData(['user', $this->getInput('ZWII_USER_ID')]);
@@ -277,8 +274,11 @@ class common {
 			}
 		}
 
+
 		// Mise à jour des données core
 		$this->update();
+
+
 	}
 
 
@@ -620,67 +620,53 @@ class common {
 	 * Convertit un fichier de données data.json puis le renomme
 	 */
 	public function importData($keepUsers = false) {
-			// Trois tentatives de lecture
-			for($i = 0; $i < 3; $i++) {
-				$tempData=json_decode(file_get_contents(self::DATA_DIR.'core.json'), true);
-				$tempTheme=json_decode(file_get_contents(self::DATA_DIR.'theme.json'), true);
-				if($tempData) {
-					break;
-				}
-				elseif($i === 2) {
-					exit('Unable to import data file.');
-				}
-				// Pause de 10 millisecondes
-				usleep(10000);
+		// Trois tentatives de lecture
+		for($i = 0; $i < 3; $i++) {
+			$tempData=json_decode(file_get_contents(self::DATA_DIR.'core.json'), true);
+			$tempTheme=json_decode(file_get_contents(self::DATA_DIR.'theme.json'), true);
+			if($tempData) {
+				break;
 			}
-			// Backup
-			rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_core.json');
-			rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
-
-			// Nettoyage des dossiers de langue
-			foreach ($this->i18nInstalled()  as $itemKey => $item) {
-				// Le dossier existe  ?
-				if (is_dir(self::DATA_DIR . $itemKey) === true) {
-					unlink (self::DATA_DIR . $itemKey . '/module.json');
-					unlink (self::DATA_DIR . $itemKey . '/page.json');
-					rmdir (self::DATA_DIR . $itemKey);
-				}
+			elseif($i === 2) {
+				exit('Unable to import data file.');
 			}
+			// Pause de 10 millisecondes
+			usleep(10000);
+		}
+		// Backup
+		rename (self::DATA_DIR.'core.json',self::DATA_DIR.'imported_core.json');
+		rename (self::DATA_DIR.'theme.json',self::DATA_DIR.'imported_theme.json');
 
-			// Dossier de langues
-			if (!file_exists(self::DATA_DIR . '/' . 'fr')) {
-				mkdir (self::DATA_DIR . '/' . 'fr');
-			}
-
-			// Ecriture des données
-			$this->setData(['config',$tempData['config']]);
-			$this->setData(['core',$tempData['core']]);	
-			$this->setData(['page',$tempData['page']]);
-			$this->setData(['module',$tempData['module']]);
-			// Import des users sauvegardés si option active
-			if ($keepUsers === false) {
-				$this->setData(['user',$tempData['user']]);			
-			}
-			$this->setData(['theme',$tempTheme['theme']]);			
-
-			// Nettoyage du fichier de thème pour forcer une régénération
-			if (!file_exists(self::DATA_DIR . '/theme.css')) { // On ne sait jamais
-				unlink (self::DATA_DIR . '/theme.css');
-			}				
-	}
-
-	/**
-	 * Met à jour les données de site avec l'adresse trannsmise
-	 */
-	public function updateBaseUrl () {		
-		if ($this->getData(['core','baseUrl']) !== helper::baseUrl()) {
-			foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
-				str_replace( '/' . $this->getData(['core','baseUrl']) . '/' , '/' . helper::baseUrl() .'/' , $this->getData(['page',$parentId,'content']));
-				foreach($childIds as $childId) {
-					str_replace( '/'.$this->getData(['core','baseUrl']).'/', '/'.helper::baseUrl().'/', $this->getData(['page',$childId,'content']));
-				}
+		// Nettoyage des dossiers de langue
+		foreach ($this->i18nInstalled()  as $itemKey => $item) {
+			// Le dossier existe  ?
+			if (is_dir(self::DATA_DIR . $itemKey) === true) {
+				unlink (self::DATA_DIR . $itemKey . '/module.json');
+				unlink (self::DATA_DIR . $itemKey . '/page.json');
+				rmdir (self::DATA_DIR . $itemKey);
 			}
 		}
+
+		// Dossier de langues
+		if (!file_exists(self::DATA_DIR . '/' . 'fr')) {
+			mkdir (self::DATA_DIR . '/' . 'fr');
+		}
+
+		// Ecriture des données
+		$this->setData(['config',$tempData['config']]);
+		$this->setData(['core',$tempData['core']]);	
+		$this->setData(['page',$tempData['page']]);
+		$this->setData(['module',$tempData['module']]);
+		// Import des users sauvegardés si option active
+		if ($keepUsers === false) {
+			$this->setData(['user',$tempData['user']]);			
+		}
+		$this->setData(['theme',$tempTheme['theme']]);			
+
+		// Nettoyage du fichier de thème pour forcer une régénération
+		if (file_exists(self::DATA_DIR . '/theme.css')) { // On ne sait jamais
+			unlink (self::DATA_DIR . '/theme.css');
+		}				
 	}
 
 	/**
@@ -1119,13 +1105,11 @@ class common {
 
 		// Version 9.2.10
 		if($this->getData(['core', 'dataVersion']) < 9210) {
-			// Utile pour l'installation d'un backup sur un autre serveur
-			$this->setData(['core', 'baseUrl', str_replace('/','',helper::baseUrl(false,false)) ]);
-
-			// Préparation des clés de légendes pour la v10
-
-			// Construire une liste plate de parents et d'enfants
+			// Utile pour l'installation d'un backup sur un autre serveur uniquement sur une V9			
+			// $this->setData(['core', 'baseUrl', str_replace('/','',helper::baseUrl(false,false)) ]);
 			
+			// Préparation des clés de légendes pour la v10
+			// Construire une liste plate de parents et d'enfants
 			foreach ($this->getHierarchy(null,null,null) as $parentKey=>$parentValue) {
 				$pageList [] = $parentKey;
 				foreach ($parentValue as $childKey) {
@@ -1157,8 +1141,7 @@ class common {
 					}
 				}
 			}			
-			$this->setData(['core', 'dataVersion', 9210]);
-			$this->saveData();
+			$this->setData(['core', 'dataVersion', 9210]);		
 		}
 
 		// Version 10.0.00
