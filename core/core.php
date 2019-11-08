@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.79.dev';
+	const ZWII_VERSION = '10.0.80.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -491,10 +491,10 @@ class common {
 
 	/**
 	 * Retourne l'Id de la homePage de la langue  courante
-	 * @return string
+	 * @return string ide la page
 	 */
-	public function getHomePageId () {
-		foreach($this->getHierarchy(null, null, false) as $parentPageId => $childrenPageIds) {
+	public function getHomePageId () {		
+		foreach($this->getHierarchy(null, false, false) as $parentPageId => $childrenPageIds) {
 			if ($this->getData(['page',$parentPageId,'homePageId']) === true) {			
 				return ($parentPageId);
 			}
@@ -504,10 +504,27 @@ class common {
 				}			
 			}
 		}
-		// Aucune homePage, définir la première page et boucle
-		$this->setData(['page',current(array_keyS ($this->getHierarchy(null, true, false))),'homePageId',true]);
-		$this->getHomePageId();
+		return($this->setHomePageId());
 	}
+
+		/**
+	 * Positionne l'Id de la homePage de la langue  courante
+	 * @return string id de la page
+	 * @param id de la page à positionner, si chaine vide, on cherche une page par défaut
+	 */
+	public function setHomePageId ($id = '') {
+		// La paramètre est-il correct ?
+		// définir la première n'étant pas une barre, pas désactivée, du groupe des visiteurs
+		foreach($this->getHierarchy(null, false, false) as $parentPageId => $childrenPageIds) {
+			if ($this->getData(['page',$parentPageId,'block']) !== 'bar' &&
+			$this->getData(['page',$parentPageId,'disable']) === false  &&
+			$this->getData(['page',$parentPageId,'group']) === 0 ) {
+				$this->setData(['page',$parentPageId,'homePageId',true]);
+				return($parentPageId);
+			}
+		}
+	}
+
 
 
 	/**

@@ -85,7 +85,7 @@ class page extends common {
 				'block' => '12',
 				'barLeft' => '',
 				'barRight' => '',
-				'displayMenu' => '0',
+				'displayMenu' => 'none',
 				'hideMenuSide' => false,
 				'hideMenuHead' => false,
 				'hideMenuChildren' => false
@@ -239,9 +239,14 @@ class page extends common {
 					$position = 0;
 					$hideTitle = true;
 				}
-				// Reset homePage
+				// Contrôle de la HomePage
+
+				// Page d'accueil
 				if ($this->getinput('pageHomePageId', helper::FILTER_BOOLEAN) === true ) {
+					// Effacer l'ancienne hompage 
 					$this->setData(['page',$this->getHomePageId(),'homePageId',false]);
+					// Positionner la nouvelle homepage
+					$this->setData(['page',$pageId,'homePageId',true]);
 				}
 				// Modifie la page ou en crée une nouvelle si l'id a changé
 				$this->setData([
