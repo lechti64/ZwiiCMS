@@ -100,7 +100,14 @@
                             'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
                         ]); ?>
                     </div>
-				</div>							
+				</div>	
+				<div class="col12">				
+					<div class="row">		
+						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
+							'checked' => $this->getData(['config', 'maintenance'])
+						]); ?>	
+					</div>
+				</div>				
 			</div>							
 		</div>
 		<div class="col6">

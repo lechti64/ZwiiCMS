@@ -20,7 +20,8 @@ class config extends common {
 		'generateFiles' => self::GROUP_ADMIN,
 		'updateRobots' => self::GROUP_ADMIN,
 		'index' => self::GROUP_ADMIN,
-		'manage' => self::GROUP_ADMIN
+		'manage' => self::GROUP_ADMIN,
+		'updateBaseUrl' => self::GROUP_ADMIN
 	];
 	
 	public static $timezones = [
@@ -204,7 +205,7 @@ class config extends common {
 		$fileName = str_replace('/','',helper::baseUrl(false,false)) . '-'. date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
 		if($zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE) === TRUE){
-			foreach(core::scanDir('site/') as $file) {
+			foreach(core::scanDir(self::DATA_DIR) as $file) {
 				$zip->addFile($file);
 			}
 		}
@@ -337,17 +338,19 @@ class config extends common {
 			if (!empty($users) &&
 				$version === '10' &&
 				$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true) { 
-					$this->setData(['user',$users]);						
+					$this->setData(['user',$users]);											
 			}
+
 			if ($version === '9' ) {
-				$this->importData($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN));
+				$this->importData($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN));	
 				$this->setData(['core','dataVersion',0]);
 			}
+			
 			// Met à jours les URL dans les contenus de page
-			$this->updateBaseUrl();			
+					
 			// Message de notification
 			$notification  = $success === true ? 'Sauvegarde importée avec succès' : 'Erreur d\'extraction'; 
-			$redirect = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ?  helper::baseUrl() : helper::baseUrl() . 'user/login/';
+			$redirect = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ?  helper::baseUrl() . 'config/manage' : helper::baseUrl() . 'user/login/';
 			// Valeurs en sortie erreur	
 			$this->addOutput([
 				'notification' => $notification,
@@ -358,7 +361,7 @@ class config extends common {
 	
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Exporter / Importer',
+			'title' => 'Sauvegarder / Restaurer',
 			'view' => 'manage'
 		]);
 	}
@@ -459,5 +462,28 @@ class config extends common {
 			'view' => 'index'
 		]);
 	}
-
+	
+	/**
+	 * Met à jour les données de site avec l'adresse trannsmise
+	 */
+	public function updateBaseUrl () {
+		$old = $this->getInput('configManageBaseURLToConvert');
+		$new = $this->getInput('configManageCurrentURL');			
+		foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
+			$content = $this->getData(['page',$parentId,'content']);			
+			$replace = str_replace( $old . '/site/' , $new . 'site/', $content) ;
+			$this->setData(['page',$parentId,'content', $replace ]);
+			foreach($childIds as $childId) {
+				$content = $this->getData(['page',$childId,'content']);
+				$replace = str_replace( $old . '/site/' , $new . 'site/', $content) ;
+				$this->setData(['page',$childId,'content', $replace ]);
+			}
+		}
+		$this->setData(['core','baseUrl',helper::baseUrl(false,false)]);
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Sauvegarder / Restaurer',
+			'view' => 'manage'
+		]);
+	}
 }
