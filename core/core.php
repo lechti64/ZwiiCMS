@@ -959,7 +959,7 @@ class common {
 		// Version 9.2.10
 		if($this->getData(['core', 'dataVersion']) < 9210) {
 			// Utile pour l'installation d'un backup sur un autre serveur
-			$this->setData(['core', 'baseUrl', str_replace('/','',helper::baseUrl(false,false)) ]);
+			$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
 
 			// Préparation des clés de légendes pour la v10
 
