@@ -28,6 +28,18 @@ $("#pageEditDelete").on("click", function() {
 $( document ).ready(function() {
 
 	/**
+	 * Interdit l'activation de la homePage pour uen page qui est une barre, désactivée ou non membre
+	 */
+	if ($('#pageEditGroup').val() > 0  ||
+		$('#pageEditDisable').is(':checked') ||
+		$('#pageEditBlockWrapper').val() === 'bar' ) {
+			$("#pageHomePageIdWrapper").removeClass("disabled");
+			$("#pageHomePageIdWrapper").slideUp();	
+			$("#pageHomePageId").removeAttr(checked);
+	}
+
+
+	/**
 	* Bloque/Débloque le bouton de configuration au changement de module
 	* Affiche ou masque la position du module selon le call_user_func
 	*/
@@ -195,7 +207,6 @@ $( document ).ready(function() {
 });
 
 
-
 /**	
 * Cache les options de masquage dans les menus quand la page n'est pas affichée.
 */
@@ -203,10 +214,16 @@ var pageEditPositionDOM = $("#pageEditPosition");
 pageEditPositionDOM.on("change", function() {
 	if ($(this).val()  === "0" ) {
 		$("#pageEditHideMenuSideWrapper").removeClass("disabled");
-		$("#pageEditHideMenuSideWrapper").slideUp();			
+		$("#pageEditHideMenuSideWrapper").slideUp();	
+		$("#pageHomePageIdWrapper").removeClass("disabled");
+		$("#pageHomePageIdWrapper").slideUp();
+		$("#pageHomePageId").prop("checked",false);	
 	} else {
 		$("#pageEditHideMenuSideWrapper").addClass("disabled");
 		$("#pageEditHideMenuSideWrapper").slideDown();								
+		$("#pageHomePageIdWrapper").removeClass("disabled");
+		$("#pageHomePageIdWrapper").addClass("disabled");
+		$("#pageHomePageIdWrapper").slideDown();
 	}
 });
 
@@ -324,42 +341,42 @@ pageEditBlockDOM.on("change", function() {
 			break;	
 	}
 	if ($(this).val() === "bar") {
-			$("#pageEditMenu").removeClass("disabled");
-			$("#pageEditMenu").hide();
-			$("#pageEditHideTitleWrapper").removeClass("disabled");
-			$("#pageEditHideTitleWrapper").slideUp();
-			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
-			$("#pageEditbreadCrumbWrapper").slideUp();
-			$("#pageEditModuleIdWrapper").removeClass("disabled");
-			$("#pageEditModuleIdWrapper").slideUp();
-			//$("#pageEditModuleConfig").removeClass("disabled");
-			//$("#pageEditModuleConfig").slideUp();	
-			$("#pageEditDisplayMenuWrapper").addClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideDown();
-			$("#pageEditGroupWrapper").removeClass("disabled");
-			$("#pageEditGroupWrapper").slideUp();
-			$("#pageHomePageIdWrapper").removeClass("disabled");
-			$("#pageHomePageIdWrapper").slideUp();
+		$("#pageEditMenu").removeClass("disabled");
+		$("#pageEditMenu").hide();
+		$("#pageEditHideTitleWrapper").removeClass("disabled");
+		$("#pageEditHideTitleWrapper").slideUp();
+		$("#pageEditbreadCrumbWrapper").removeClass("disabled");
+		$("#pageEditbreadCrumbWrapper").slideUp();
+		$("#pageEditModuleIdWrapper").removeClass("disabled");
+		$("#pageEditModuleIdWrapper").slideUp();
+		//$("#pageEditModuleConfig").removeClass("disabled");
+		//$("#pageEditModuleConfig").slideUp();	
+		$("#pageEditDisplayMenuWrapper").addClass("disabled");
+		$("#pageEditDisplayMenuWrapper").slideDown();
+		$("#pageEditGroupWrapper").removeClass("disabled");
+		$("#pageEditGroupWrapper").slideUp();
+		$("#pageHomePageIdWrapper").removeClass("disabled");
+		$("#pageHomePageIdWrapper").slideUp();
+		$("#pageHomePageId").prop("checked",false);	
 	} else {
-			$("#pageEditMenu").addClass("disabled");
-			$("#pageEditMenu").show();					
-			$("#pageEditHideTitleWrapper").addClass("disabled");
-			$("#pageEditHideTitleWrapper").slideDown();	
-			$("#pageEditModuleIdWrapper").addClass("disabled");
-			$("#pageEditModuleIdWrapper").slideDown();	
-			//$("#pageEditModuleConfig").addClass("disabled");
-			//$("#pageEditModuleConfig").slideDown();	
-			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideUp();	
-			$("#pageEditGroupWrapper").addClass("disabled");
-			$("#pageEditGroupWrapper").slideDown();	
-			$("#pageHomePageIdWrapper").addClass("disabled");
-			$("#pageHomePageIdWrapper").slideDown();													
-			if ($("#pageEditParentPageId").val() !== "") {
-				$("#pageEditbreadCrumbWrapper").addClass("disabled");
-				$("#pageEditbreadCrumbWrapper").slideDown();
-			}
-
+		$("#pageEditMenu").addClass("disabled");
+		$("#pageEditMenu").show();					
+		$("#pageEditHideTitleWrapper").addClass("disabled");
+		$("#pageEditHideTitleWrapper").slideDown();	
+		$("#pageEditModuleIdWrapper").addClass("disabled");
+		$("#pageEditModuleIdWrapper").slideDown();	
+		//$("#pageEditModuleConfig").addClass("disabled");
+		//$("#pageEditModuleConfig").slideDown();	
+		$("#pageEditDisplayMenuWrapper").removeClass("disabled");
+		$("#pageEditDisplayMenuWrapper").slideUp();	
+		$("#pageEditGroupWrapper").addClass("disabled");
+		$("#pageEditGroupWrapper").slideDown();	
+		$("#pageHomePageIdWrapper").addClass("disabled");
+		$("#pageHomePageIdWrapper").slideDown();													
+		if ($("#pageEditParentPageId").val() !== "") {
+			$("#pageEditbreadCrumbWrapper").addClass("disabled");
+			$("#pageEditbreadCrumbWrapper").slideDown();
+		}
 	}	
 });
 
@@ -381,6 +398,22 @@ pageEditHideTitleDOM.on("change", function() {
 });
 
 
+
+/**
+ * Interdit l'activation de la homePage pour une page non visiteur
+ */
+var pageEditGroupDOM = $("#pageEditGroup");
+	pageEditGroupDOM.on("change", function() {	
+	if ($(this).val() > 0 ) {
+		$("#pageHomePageIdWrapper").removeClass("disabled");
+		$("#pageHomePageIdWrapper").slideUp();
+		$("#pageHomePageId").prop("checked",false);	
+	} else {
+		$("#pageHomePageIdWrapper").addClass("disabled");
+		$("#pageHomePageIdWrapper").slideDown();
+	}
+
+});
 /**	
  * Masquer ou afficher le chemin de fer
  * Quand la page n'est pas mère et que le menu n'est pas masqué
