@@ -6,6 +6,8 @@
     - Modification des clés identifiant les légendes du module Gallery : suppression du point de séparation du nom de fichier de l'extension.
 - Corrections : 
     - Thème ; bannière : problème empêchant la bannière d'être cliquable lorsque la hauteur responsive de la bannière était sélectionnée.
+- Mise à jour : 
+    - CodeMirror 5.49.2 et modification des modules installés
 
 ## version 9.2.09
 - Corrections :
