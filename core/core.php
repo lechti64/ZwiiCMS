@@ -504,15 +504,6 @@ class common {
 				}			
 			}
 		}
-		return($this->setHomePageId());
-	}
-
-		/**
-	 * Positionne l'Id de la homePage de la langue  courante
-	 * @return string id de la page
-	 * @param id de la page à positionner, si chaine vide, on cherche une page par défaut
-	 */
-	public function setHomePageId ($id = '') {
 		// La paramètre est-il correct ?
 		// définir la première n'étant pas une barre, pas désactivée, du groupe des visiteurs
 		foreach($this->getHierarchy(null, false, false) as $parentPageId => $childrenPageIds) {
@@ -524,6 +515,7 @@ class common {
 			}
 		}
 	}
+
 
 
 

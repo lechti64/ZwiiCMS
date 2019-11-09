@@ -241,13 +241,14 @@ class page extends common {
 				}
 				// Contrôle de la HomePage
 
-				// Page d'accueil
+				// Gestion de la Page d'accueil
 				if ($this->getinput('pageHomePageId', helper::FILTER_BOOLEAN) === true ) {
 					// Effacer l'ancienne hompage 
 					$this->setData(['page',$this->getHomePageId(),'homePageId',false]);
 					// Positionner la nouvelle homepage
 					$this->setData(['page',$pageId,'homePageId',true]);
-				}
+				} 
+
 				// Modifie la page ou en crée une nouvelle si l'id a changé
 				$this->setData([
 					'page',
@@ -278,6 +279,8 @@ class page extends common {
 						'homePageId' => $this->getinput('pageHomePageId', helper::FILTER_BOOLEAN)
 					]
 				]);				
+				// Aucune homepage, sélection par défaut
+				$this->getHomePageId();
 				// Barre renommée : changement le nom de la barre dans les pages mères
 				if ($this->getinput('pageEditBlock') === 'bar') {
 					foreach ($this->getHierarchy() as $eachPageId=>$parentId) {
