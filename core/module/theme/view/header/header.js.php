@@ -19,6 +19,12 @@
  */
 $("input, select").on("change", function() {
 
+	// Récupérer la taille de l'image
+	/*
+	var tmpImg = new Image();
+	var url = "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
+	tmpImg.src= url;
+	*/
 
 	// Import des polices de caractères
 	var headerFont = $("#themeHeaderFont").val();
@@ -38,7 +44,11 @@ $("input, select").on("change", function() {
 		//$("header .container").show();
 
 	}
-	css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + $("#themeHeaderHeight").val() + "}";
+	/*if ($("#themeHeaderHeight").val() !== "none") {*/
+		css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + $("#themeHeaderHeight").val() + "}";
+	/*} else {
+		css += "line-height:" + tmpImg.height + ";height:" + tmpImg.height + "}";
+	}*/
 
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
 	css += "header span{color:" + $("#themeHeaderTextColor").val() + ";font-family:'" + headerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeHeaderFontWeight").val() + ";font-size:" + $("#themeHeaderFontSize").val() + ";text-transform:" + $("#themeHeaderTextTransform").val() + "}";
