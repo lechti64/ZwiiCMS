@@ -19,13 +19,6 @@
  */
 $("input, select").on("change", function() {
 
-	// Récupérer la taille de l'image
-	var tmpImg = new Image();
-	var url = "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
-	tmpImg.src= url;
-
-	var themeHeaderHeight = $("#themeHeaderHeight").val();
-	var themeHeaderImage = $("#themeHeaderImage").val();
 
 	// Import des polices de caractères
 	var headerFont = $("#themeHeaderFont").val();
@@ -34,40 +27,30 @@ $("input, select").on("change", function() {
 	// Couleurs, image, alignement et hauteur de la bannière
 	css += "header{background-color:" + $("#themeHeaderBackgroundColor").val() + ";text-align:" + $("#themeHeaderTextAlign").val() + ";";
 
-	if (themeHeaderImage) {
+	if ($("#themeHeaderImage").val()) {
 		// Une image est sélectionnée
-		css += "background-image:url('<?php echo helper::baseUrl(false); ?>site/file/source/" + themeHeaderImage + "');background-repeat:" + $("#themeHeaderImageRepeat").val() + ";background-position:" + $("#themeHeaderImagePosition").val() + ";";
+		css += "background-image:url('<?php echo helper::baseUrl(false); ?>site/file/source/" + $("#themeHeaderImage").val() + "');background-repeat:" + $("#themeHeaderImageRepeat").val() + ";background-position:" + $("#themeHeaderImagePosition").val() + ";";
 		css += "background-size:" + $("#themeHeaderImageContainer").val() + ";";
-		if (themeHeaderHeight === "none") {
-				// Position responsive
-				css += "height: 0;  padding-top:" + (tmpImg.height / tmpImg.width ) * 100 + "%}";	
-			} else {
-				// Positions standards
-				css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + "}";
-		}
 	// Pas d'image sélectionnée
 	} else {
 		// Désactiver l'option responsive
 		css += "background-image:none;";
-		$("header .container").show();
-		$("themeHeaderTextHide").prop("false");
-		if (themeHeaderHeight === "none") {
-			$("#themeHeaderHeight option:eq(2)").prop("selected", true);
-			css += "line-height: 150px;height: 150px}";
-		} else {
-			css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + themeHeaderHeight + "}";
-		}
+		//$("header .container").show();
+
 	}
+	css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + $("#themeHeaderHeight").val() + "}";
 
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
 	css += "header span{color:" + $("#themeHeaderTextColor").val() + ";font-family:'" + headerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeHeaderFontWeight").val() + ";font-size:" + $("#themeHeaderFontSize").val() + ";text-transform:" + $("#themeHeaderTextTransform").val() + "}";
 	// Cache le titre de la bannière
+	
 	if($("#themeHeaderTextHide").is(":checked")) {
-		$("header .container").hide();
+		$("header #themeHeaderTitle").hide();
 	}
 	else {
-		$("header .container").show();
+		$("header #themeHeaderTitle").show();
 	}
+	
 	// Marge
 	if($("#themeHeaderMargin").is(":checked")) {
 		if(<?php echo json_encode($this->getData(['theme', 'menu', 'position']) === 'site-first'); ?>) {
@@ -119,6 +102,8 @@ $("input, select").on("change", function() {
 		.appendTo("head");
 }).trigger("change");
 
+/**
+
 $("#themeHeaderHeight").on("change", function() {
 	if($(this).val() === 'none') {
 		$("#themeHeaderTextHide").prop("disabled", true);
@@ -127,6 +112,7 @@ $("#themeHeaderHeight").on("change", function() {
 		$("#themeHeaderTextHide").prop("disabled", false);
 	}
 }).trigger("change");
+*/
 
 
 // Affiche / Cache les options de l'image du fond

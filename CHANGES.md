@@ -4,6 +4,8 @@
 - Modifications préparatoires à la version 10 : 
     - Lors de l'installation, stockage de l'url de base dans l'éventualité de la restauration d'un backup et de son installation dans une autre arborescence.
     - Modification des clés identifiant les légendes du module Gallery : suppression du point de séparation du nom de fichier de l'extension.
+- Corrections : 
+    - Thème ; bannière : problème empêchant la bannière d'être cliquable lorsque la hauteur responsive de la bannière était sélectionnée.
 
 ## version 9.2.09
 - Corrections :

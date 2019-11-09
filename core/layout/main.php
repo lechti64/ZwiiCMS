@@ -58,7 +58,11 @@
 					OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
 				): ?>
 					<div class="container">
-						<span><?php echo $this->getData(['config', 'title']); ?></span>
+						<span id="themeHeaderTitle"><?php echo $this->getData(['config', 'title']); ?></span>
+					</div> <!--fin container -->
+				<?php else: ?>
+					<div class="container">
+						<span id="themeHeaderTitle">&nbsp;</span>
 					</div> <!--fin container -->
 				<?php endif; ?>
 				<?php
@@ -101,7 +105,13 @@
 						// Affiche toujours le titre de la bannière pour l'édition du thème
 						OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
 					): ?>
-					<div class="container"><span><?php echo $this->getData(['config', 'title']); ?></span></div>
+					<div class="container">
+						<span id="themeHeaderTitle"><?php echo $this->getData(['config', 'title']); ?></span>
+					</div>
+					<?php else: ?>
+						<div class="container">
+							<span id="themeHeaderTitle">&nbsp;</span>
+						</div> <!--fin container -->
 					<?php endif; ?>
 				</header>
 				<?php
