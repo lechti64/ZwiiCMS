@@ -460,7 +460,7 @@ class install extends common {
 				'textColor' => 'rgba(33, 34, 35, 1)',
 				'textHide' => true,
 				'textTransform' => 'none',
-				'linkHome' => true,
+				'linkHomePage' => true,
 				'imageContainer' => 'auto'
 			],
 			'link' => [

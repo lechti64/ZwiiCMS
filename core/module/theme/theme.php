@@ -366,7 +366,7 @@ class theme extends common {
 				'textAlign' => $this->getInput('themeHeaderTextAlign'),
 				'textColor' => $this->getInput('themeHeaderTextColor'),
 				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),		
-				'linkHome' => $this->getInput('themeHeaderlinkHome',helper::FILTER_BOOLEAN),
+				'linkHomePage' => $this->getInput('themeHeaderlinkHomePage',helper::FILTER_BOOLEAN),
 				'imageContainer' => $this->getInput('themeHeaderImageContainer')
 			]]);
 			// Modification de la position du menu selon la position de la bannière

@@ -958,11 +958,19 @@ class common {
 		}
 		// Version 9.2.10
 		if($this->getData(['core', 'dataVersion']) < 9210) {
+			
 			// Utile pour l'installation d'un backup sur un autre serveur
 			$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
 
-			// Préparation des clés de légendes pour la v10
+			// Suppression d'une option de hauteur de la bannière
+			if ($this->getData(['theme', 'header','height']) === 'none') {
+				$this->setData(['theme', 'header','height','150px']);
+			}	
+			// Changer le nom de la clé linkHome -> linkHomePage
+			$this->setdata(['theme','header','linkHomePage',$this->getData(['theme','header','linkHome'])]);
+			$this->deleteData(['theme','header','linkHome']);
 
+			// Préparation des clés de légendes pour la v10
 			// Construire une liste plate de parents et d'enfants
 			
 			foreach ($this->getHierarchy(null,null,null) as $parentKey=>$parentValue) {

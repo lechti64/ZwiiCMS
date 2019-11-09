@@ -81,8 +81,8 @@
 							]); ?>
                     </div>
                     <div id="themeHeaderShow" class="col6">
-                        <?php echo template::checkbox('themeHeaderlinkHome', true, 'Bannière cliquable', [
-                                'checked' => $this->getData(['theme', 'header', 'linkHome'])
+                        <?php echo template::checkbox('themeHeaderlinkHomePage', true, 'Bannière cliquable', [
+                                'checked' => $this->getData(['theme', 'header', 'linkHomePage'])
                             ]); ?>
                     </div>                    
                 </div>
