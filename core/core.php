@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.83.dev';
+	const ZWII_VERSION = '10.0.84.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1116,7 +1116,7 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 9210) {			
 			
 			// Utile pour l'installation d'un backup sur un autre serveur
-			$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
+			//$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
 
 			// Suppression d'une option de hauteur de la bannière
 			if ($this->getData(['theme', 'header','height']) === 'none') {
