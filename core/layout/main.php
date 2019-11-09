@@ -55,7 +55,7 @@
 			<!-- Bannière dans le fond du site -->
 			<header>	
 				<?php	
-				if ($this->getData(['theme','header','linkHome'])){
+				if ($this->getData(['theme','header','linkHomePage'])){
 				echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
 				<?php if(
 					$this->getData(['theme', 'header', 'textHide']) === false
@@ -63,11 +63,15 @@
 					OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
 				): ?>
 					<div class="container">
-						<span><?php echo $this->getData(['config', 'title']); ?></span>
+						<span id="themeHeaderTitle"><?php echo $this->getData(['config', 'title']); ?></span>
+					</div> <!--fin container -->
+				<?php else: ?>
+					<div class="container">
+						<span id="themeHeaderTitle">&nbsp;</span>
 					</div> <!--fin container -->
 				<?php endif; ?>
 				<?php
-				if ($this->getData(['theme','header','linkHome'])){echo "</a>";}
+				if ($this->getData(['theme','header','linkHomePage'])){echo "</a>";}
 				?>	
 			</header>
 		<?php endif; ?>
@@ -122,7 +126,7 @@
 			): ?>
 				<!-- Bannière dans le site -->
 				<?php	
-				if ($this->getData(['theme','header','linkHome'])){
+				if ($this->getData(['theme','header','linkHomePage'])){
 				echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
 				<header <?php if($this->getData(['theme', 'header', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
 					<?php if(
@@ -130,11 +134,17 @@
 						// Affiche toujours le titre de la bannière pour l'édition du thème
 						OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
 					): ?>
-					<div class="container"><span><?php echo $this->getData(['config', 'title']); ?></span></div>
+					<div class="container">
+						<span id="themeHeaderTitle"><?php echo $this->getData(['config', 'title']); ?></span>
+					</div>
+					<?php else: ?>
+						<div class="container">
+							<span id="themeHeaderTitle">&nbsp;</span>
+						</div> <!--fin container -->
 					<?php endif; ?>
 				</header>
 				<?php
-				if ($this->getData(['theme','header','linkHome'])){echo "</a>";}	?>
+				if ($this->getData(['theme','header','linkHomePage'])){echo "</a>";}	?>
 				<?php endif; ?>
 			<?php if(
 				$this->getData(['theme', 'menu', 'position']) === 'site-second' ||

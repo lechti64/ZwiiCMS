@@ -70,20 +70,21 @@
                     <div class="col4">
                         <?php echo template::select('themeHeaderImageContainer', $module::$headerWide, [
 								'label' => 'Adaptation',
-								'selected' => $this->getData(['theme', 'header', 'imageContainer']),
-								'help' => 'Responsive (cover) : rogne une image trop grande sans la déformer -
-									Responsive (contain) : agrandit une image trop petite sans la déformer.
-									<br><br>Pour une bannière full responsive, sélectionnez aussi Hauteur -> Responsive.
-									<br>Dans ce cas le titre est indisponible.'
+								'selected' => $this->getData(['theme', 'header', 'imageContainer'])
 							]); ?>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col12">
+                    <div class="col6">
                         <?php echo template::checkbox('themeHeaderTextHide', true, 'Cacher le titre du site', [
 								'checked' => $this->getData(['theme', 'header', 'textHide'])
 							]); ?>
                     </div>
+                    <div id="themeHeaderShow" class="col6">
+                        <?php echo template::checkbox('themeHeaderlinkHomePage', true, 'Bannière cliquable', [
+                                'checked' => $this->getData(['theme', 'header', 'linkHomePage'])
+                            ]); ?>
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -113,11 +114,6 @@
 						]); ?>
                 </div>
 
-            </div>
-            <div id="themeHeaderShow" class="displayNone">
-                <?php echo template::checkbox('themeHeaderlinkHome', true, 'Bannière cliquable', [
-								'checked' => $this->getData(['theme', 'header', 'linkHome'])
-							]); ?>
             </div>
             <div id="themeHeaderPositionOptions" class="displayNone">
                 <?php echo template::checkbox('themeHeaderMargin', true, 'Aligner la bannière avec le contenu', [

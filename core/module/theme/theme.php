@@ -118,7 +118,7 @@ class theme extends common {
 		'2.4vmax' => 'Très grande (240%)'
 	];
 	public static $headerHeights = [
-		'none' =>  'Responsive',
+	/*	'none' => 'Hauteur de l\'image',*/
 		'100px' => 'Très petite (100px) ',
 		'150px' => 'Petite (150px)',
 		'200px' => 'Moyenne (200px)',
@@ -220,10 +220,11 @@ class theme extends common {
 		'100%' => 'Fluide (100%)'
 	];
 	public static $headerWide = [	
-		'cover' => 'Responsive (cover)',
-		'contain' => 'Responsive (contain)',
 		'auto auto' => 'Automatique',	
-		'100% 100%' => 'Image étirée'
+		'100% 100%' => 'Image étirée (100% 100%)',
+		'100% auto' => 'Responsive (100% auto)',
+		'cover' => 'Responsive (cover)',
+		'contain' => 'Responsive (contain)'			
 	];
 	public static $footerTemplate = [	
 		'1' => 'Une seule colonne',
@@ -370,7 +371,7 @@ class theme extends common {
 				'textAlign' => $this->getInput('themeHeaderTextAlign'),
 				'textColor' => $this->getInput('themeHeaderTextColor'),
 				'textHide' => $this->getInput('themeHeaderTextHide', helper::FILTER_BOOLEAN),		
-				'linkHome' => $this->getInput('themeHeaderlinkHome',helper::FILTER_BOOLEAN),
+				'linkHomePage' => $this->getInput('themeHeaderlinkHomePage',helper::FILTER_BOOLEAN),
 				'imageContainer' => $this->getInput('themeHeaderImageContainer')
 			]]);
 			// Modification de la position du menu selon la position de la bannière

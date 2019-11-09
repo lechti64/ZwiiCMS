@@ -31,7 +31,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.81.dev';
+	const ZWII_VERSION = '10.0.82.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1117,6 +1117,18 @@ class common {
 			// Utile pour l'installation d'un backup sur un autre serveur uniquement sur une V9			
 			// $this->setData(['core', 'baseUrl', str_replace('/','',helper::baseUrl(false,false)) ]);
 			
+			
+			// Utile pour l'installation d'un backup sur un autre serveur
+			$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
+
+			// Suppression d'une option de hauteur de la bannière
+			if ($this->getData(['theme', 'header','height']) === 'none') {
+				$this->setData(['theme', 'header','height','150px']);
+			}	
+			// Changer le nom de la clé linkHome -> linkHomePage
+			$this->setdata(['theme','header','linkHomePage',$this->getData(['theme','header','linkHome'])]);
+			$this->deleteData(['theme','header','linkHome']);
+
 			// Préparation des clés de légendes pour la v10
 			// Construire une liste plate de parents et d'enfants
 			foreach ($this->getHierarchy(null,null,null) as $parentKey=>$parentValue) {
