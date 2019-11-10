@@ -75,16 +75,19 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col6">
+                    <div class="col4">
                         <?php echo template::checkbox('themeHeaderTextHide', true, 'Cacher le titre du site', [
 								'checked' => $this->getData(['theme', 'header', 'textHide'])
 							]); ?>
                     </div>
-                    <div id="themeHeaderShow" class="col6">
+                    <div id="themeHeaderShow" class="col4">
                         <?php echo template::checkbox('themeHeaderlinkHomePage', true, 'Bannière cliquable', [
                                 'checked' => $this->getData(['theme', 'header', 'linkHomePage'])
-                            ]); ?>
-                    </div>                    
+                            ]); ?>  
+                    </div>   
+                    <div class="col4">
+                        <em>(largeur:<span id="themeHeaderImageWidth"></span> ; hauteur:<span id="themeHeaderImageHeight"></span>)</em>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -104,7 +107,8 @@
                 <div class="col4">
                     <?php echo template::select('themeHeaderHeight', $module::$headerHeights, [
 							'label' => 'Hauteur',
-							'selected' => $this->getData(['theme', 'header', 'height'])
+                            'selected' => $this->getData(['theme', 'header', 'height']),
+                            'help' => "Quelque soit la taille de la bannière, la hauteur maximale autorisée est de 600 pixels."
 						]); ?>
                 </div>
                 <div class="col4">

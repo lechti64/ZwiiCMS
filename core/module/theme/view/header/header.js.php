@@ -20,11 +20,37 @@
 $("input, select").not("#barSelectLanguage").on("change", function() {
 
 	// Récupérer la taille de l'image
-	/*
+
 	var tmpImg = new Image();
-	var url = "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
-	tmpImg.src= url;
-	*/
+	
+	tmpImg.onload = function() {
+		// Informations affichées
+		$("#themeHeaderImageHeight").html(tmpImg.height + "px");
+		$("#themeHeaderImageWidth").html(tmpImg.width + "px");
+
+		// Limiter la hauteur à 600 px
+		if (tmpImg.height > 600) {
+			tmpImgHeight = 600;
+		} else {
+			tmpImgHeight = tmpImg.height;
+		}
+
+		//Modifier la dropdown liste
+		if ($("#themeHeaderImage").val() !== "") {
+			// Une image est ajoutée ou changée
+			if ($("#themeHeaderHeight option").length === 4) {
+				$("#themeHeaderHeight ").prepend('<option selected="selected" value="0"> Hauteur de l\'image sélectionnée </option>');
+			}
+			// Modifier la valeur
+			$("#themeHeaderHeight option:eq(0)").val(tmpImgHeight + "px");
+			// Modifier l'option
+			$("#themeHeaderHeight option:first-child").html("Hauteur de l\'image sélectionnée (" + tmpImgHeight + "px)");
+		} else {
+			$("#themeHeaderHeight option:first-child").html("Hauteur de l\'image sélectionnée");
+		}
+	};
+
+	tmpImg.src= "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
 
 	// Import des polices de caractères
 	var headerFont = $("#themeHeaderFont").val();
@@ -41,14 +67,10 @@ $("input, select").not("#barSelectLanguage").on("change", function() {
 	} else {
 		// Désactiver l'option responsive
 		css += "background-image:none;";
-		//$("header .container").show();
-
 	}
-	/*if ($("#themeHeaderHeight").val() !== "none") {*/
-		css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + $("#themeHeaderHeight").val() + "}";
-	/*} else {
-		css += "line-height:" + tmpImg.height + ";height:" + tmpImg.height + "}";
-	}*/
+
+	css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + $("#themeHeaderHeight").val() + "}";
+
 
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
 	css += "header span{color:" + $("#themeHeaderTextColor").val() + ";font-family:'" + headerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeHeaderFontWeight").val() + ";font-size:" + $("#themeHeaderFontSize").val() + ";text-transform:" + $("#themeHeaderTextTransform").val() + "}";
@@ -112,17 +134,6 @@ $("input, select").not("#barSelectLanguage").on("change", function() {
 		.appendTo("head");
 }).trigger("change");
 
-/**
-
-$("#themeHeaderHeight").on("change", function() {
-	if($(this).val() === 'none') {
-		$("#themeHeaderTextHide").prop("disabled", true);
-		$("#themeHeaderTextHide").prop("checked", true).trigger("change");	
-	} else {
-		$("#themeHeaderTextHide").prop("disabled", false);
-	}
-}).trigger("change");
-*/
 
 
 // Affiche / Cache les options de l'image du fond

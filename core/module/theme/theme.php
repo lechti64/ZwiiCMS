@@ -118,7 +118,7 @@ class theme extends common {
 		'2.4vmax' => 'Très grande (240%)'
 	];
 	public static $headerHeights = [
-	/*	'none' => 'Hauteur de l\'image',*/
+		'none' => 'Hauteur de l\'image sélectionnée',
 		'100px' => 'Très petite (100px) ',
 		'150px' => 'Petite (150px)',
 		'200px' => 'Moyenne (200px)',
@@ -221,10 +221,9 @@ class theme extends common {
 	];
 	public static $headerWide = [	
 		'auto auto' => 'Automatique',	
-		'100% 100%' => 'Image étirée (100% 100%)',
-		'100% auto' => 'Responsive (100% auto)',
 		'cover' => 'Responsive (cover)',
-		'contain' => 'Responsive (contain)'			
+		'100% 100%' => 'Image étirée (100% 100%)',
+		'contain' => 'Responsive (contain)'
 	];
 	public static $footerTemplate = [	
 		'1' => 'Une seule colonne',
