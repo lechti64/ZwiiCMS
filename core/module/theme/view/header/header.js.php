@@ -12,19 +12,30 @@
  * @link http://zwiicms.com/
  */
 
-
-
 /**
  * Aperçu en direct
  */
-$("input, select").on("change", function() {
+$("input, select, .lity-iframe").on("change", function() {
 
-	// Récupérer la taille de l'image
-	/*
-	var tmpImg = new Image();
-	var url = "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
-	tmpImg.src= url;
-	*/
+		// Récupérer la taille de l'image
+
+		var tmpImg = new Image();
+		tmpImg.src= "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
+
+		// Informations affichées
+		$("#themeHeaderImageHeight").html(tmpImg.height + "px");
+		$("#themeHeaderImageWidth").html(tmpImg.width + "px");
+
+		// Limiter la hauteur à 600 px
+		if (tmpImg.height > 600) {
+			tmpImgHeight = 600;
+		} else {
+			tmpImgHeight = tmpImg.height;
+		}
+
+		//Modifier la dropdown liste
+		$("#themeHeaderHeight option:eq(0)").val(tmpImgHeight + "px");
+		$("#themeHeaderHeight option:first-child").html("Hauteur de l\'image sélectionnée (" + tmpImgHeight + "px)");
 
 	// Import des polices de caractères
 	var headerFont = $("#themeHeaderFont").val();
@@ -41,14 +52,10 @@ $("input, select").on("change", function() {
 	} else {
 		// Désactiver l'option responsive
 		css += "background-image:none;";
-		//$("header .container").show();
-
 	}
-	/*if ($("#themeHeaderHeight").val() !== "none") {*/
-		css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + $("#themeHeaderHeight").val() + "}";
-	/*} else {
-		css += "line-height:" + tmpImg.height + ";height:" + tmpImg.height + "}";
-	}*/
+
+	css += "line-height:" + $("#themeHeaderHeight").val() + ";height:" + $("#themeHeaderHeight").val() + "}";
+
 
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
 	css += "header span{color:" + $("#themeHeaderTextColor").val() + ";font-family:'" + headerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeHeaderFontWeight").val() + ";font-size:" + $("#themeHeaderFontSize").val() + ";text-transform:" + $("#themeHeaderTextTransform").val() + "}";

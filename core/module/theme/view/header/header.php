@@ -51,6 +51,7 @@
                             'type' => 1,
                             'value' => $imageFile
                     ]); ?>
+                    <em>Largeur <span id="themeHeaderImageWidth"></span> - Hauteur <span id="themeHeaderImageHeight"></span></em>
                 </div>
             </div>
             <div id="themeHeaderImageOptions" class="displayNone">
@@ -75,16 +76,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col6">
+                    <div class="col4">
                         <?php echo template::checkbox('themeHeaderTextHide', true, 'Cacher le titre du site', [
 								'checked' => $this->getData(['theme', 'header', 'textHide'])
 							]); ?>
                     </div>
-                    <div id="themeHeaderShow" class="col6">
+                    <div id="themeHeaderShow" class="col4">
                         <?php echo template::checkbox('themeHeaderlinkHomePage', true, 'Bannière cliquable', [
                                 'checked' => $this->getData(['theme', 'header', 'linkHomePage'])
-                            ]); ?>
-                    </div>                    
+                            ]); ?>  
+                    </div>    
                 </div>
             </div>
         </div>
@@ -104,7 +105,8 @@
                 <div class="col4">
                     <?php echo template::select('themeHeaderHeight', $module::$headerHeights, [
 							'label' => 'Hauteur',
-							'selected' => $this->getData(['theme', 'header', 'height'])
+                            'selected' => $this->getData(['theme', 'header', 'height']),
+                            'help' => "La hauteur maximale est de 600 pixels lorsque l'option \'Hauteur de l\'image\' est sélectionnée."
 						]); ?>
                 </div>
                 <div class="col4">
