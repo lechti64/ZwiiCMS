@@ -12,16 +12,18 @@
  * @link http://zwiicms.com/
  */
 
+
+
 /**
  * Aperçu en direct
  */
-$("input, select, .lity-iframe").on("change", function() {
+$("input, select").on("change", function() {
 
-		// Récupérer la taille de l'image
+	// Récupérer la taille de l'image
 
-		var tmpImg = new Image();
-		tmpImg.src= "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
-
+	var tmpImg = new Image();
+	
+	tmpImg.onload = function() {
 		// Informations affichées
 		$("#themeHeaderImageHeight").html(tmpImg.height + "px");
 		$("#themeHeaderImageWidth").html(tmpImg.width + "px");
@@ -34,8 +36,21 @@ $("input, select, .lity-iframe").on("change", function() {
 		}
 
 		//Modifier la dropdown liste
-		$("#themeHeaderHeight option:eq(0)").val(tmpImgHeight + "px");
-		$("#themeHeaderHeight option:first-child").html("Hauteur de l\'image sélectionnée (" + tmpImgHeight + "px)");
+		if ($("#themeHeaderImage").val() !== "") {
+			// Une image est ajoutée ou changée
+			if ($("#themeHeaderHeight option").length === 4) {
+				$("#themeHeaderHeight ").prepend('<option selected="selected" value="0"> Hauteur de l\'image sélectionnée </option>');
+			}
+			// Modifier la valeur
+			$("#themeHeaderHeight option:eq(0)").val(tmpImgHeight + "px");
+			// Modifier l'option
+			$("#themeHeaderHeight option:first-child").html("Hauteur de l\'image sélectionnée (" + tmpImgHeight + "px)");
+		} else {
+			$("#themeHeaderHeight option:first-child").html("Hauteur de l\'image sélectionnée");
+		}
+	};
+
+	tmpImg.src= "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
 
 	// Import des polices de caractères
 	var headerFont = $("#themeHeaderFont").val();
@@ -119,17 +134,6 @@ $("input, select, .lity-iframe").on("change", function() {
 		.appendTo("head");
 }).trigger("change");
 
-/**
-
-$("#themeHeaderHeight").on("change", function() {
-	if($(this).val() === 'none') {
-		$("#themeHeaderTextHide").prop("disabled", true);
-		$("#themeHeaderTextHide").prop("checked", true).trigger("change");	
-	} else {
-		$("#themeHeaderTextHide").prop("disabled", false);
-	}
-}).trigger("change");
-*/
 
 
 // Affiche / Cache les options de l'image du fond

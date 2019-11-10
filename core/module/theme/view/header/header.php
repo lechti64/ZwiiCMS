@@ -51,7 +51,6 @@
                             'type' => 1,
                             'value' => $imageFile
                     ]); ?>
-                    <em>Largeur <span id="themeHeaderImageWidth"></span> - Hauteur <span id="themeHeaderImageHeight"></span></em>
                 </div>
             </div>
             <div id="themeHeaderImageOptions" class="displayNone">
@@ -85,7 +84,10 @@
                         <?php echo template::checkbox('themeHeaderlinkHomePage', true, 'Bannière cliquable', [
                                 'checked' => $this->getData(['theme', 'header', 'linkHomePage'])
                             ]); ?>  
-                    </div>    
+                    </div>   
+                    <div class="col4">
+                        <em>(largeur:<span id="themeHeaderImageWidth"></span> ; hauteur:<span id="themeHeaderImageHeight"></span>)</em>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -106,7 +108,7 @@
                     <?php echo template::select('themeHeaderHeight', $module::$headerHeights, [
 							'label' => 'Hauteur',
                             'selected' => $this->getData(['theme', 'header', 'height']),
-                            'help' => "La hauteur maximale est de 600 pixels lorsque l'option \'Hauteur de l\'image\' est sélectionnée."
+                            'help' => "Quelque soit la taille de la bannière, la hauteur maximale autorisée est de 600 pixels."
 						]); ?>
                 </div>
                 <div class="col4">
