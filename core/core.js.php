@@ -316,6 +316,7 @@ core.start = function() {
 			core.noticeAdd(_this.attr("id"), "Format incorrect");
 		}
 	});
+
 	/**
 	 * Iframes et vidéos responsives
 	 */
@@ -338,7 +339,25 @@ core.start = function() {
 		});
 	}).trigger("resize");
 
+	/*
+	* Header responsive
+	*/
+	$(window).on("resize", function() {
+		var responsive = "<?php echo $this->getdata(['theme','header','imageContainer']);?>";
+		if (responsive === "cover" || responsive === "contain" ) {
+			var widthpx = "<?php echo $this->getdata(['theme','site','width']);?>";
+			var width = widthpx.substr(0,widthpx.length-2);
+			var heightpx = "<?php echo $this->getdata(['theme','header','height']);?>";
+			var height = heightpx.substr(0,heightpx.length-2);
+			var ratio = width / height;
+			$("header").height( $(window).width() / ratio );
+			$("header").css("line-height", $(window).width() / ratio + "px"); 
+		}
+	}).trigger("resize");
+
 };
+
+
 core.start();
 
 /**

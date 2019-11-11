@@ -57,19 +57,17 @@
 				<?php	
 				if ($this->getData(['theme','header','linkHomePage'])){
 				echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
+				<div id="headerContainer" class="container">
 				<?php if(
 					$this->getData(['theme', 'header', 'textHide']) === false
 					// Affiche toujours le titre de la bannière pour l'édition du thème
 					OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
 				): ?>
-					<div class="container">
 						<span id="themeHeaderTitle"><?php echo $this->getData(['config', 'title']); ?></span>
-					</div> <!--fin container -->
 				<?php else: ?>
-					<div class="container">
 						<span id="themeHeaderTitle">&nbsp;</span>
-					</div> <!--fin container -->
 				<?php endif; ?>
+				</div> <!--fin container -->>
 				<?php
 				if ($this->getData(['theme','header','linkHomePage'])){echo "</a>";}
 				?>	
@@ -129,19 +127,17 @@
 				if ($this->getData(['theme','header','linkHomePage'])){
 				echo "<a href='" . helper::baseUrl(false) . "'>" ;}	?>
 				<header <?php if($this->getData(['theme', 'header', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
-					<?php if(
-						$this->getData(['theme', 'header', 'textHide']) === false
-						// Affiche toujours le titre de la bannière pour l'édition du thème
-						OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
-					): ?>
-					<div class="container">
-						<span id="themeHeaderTitle"><?php echo $this->getData(['config', 'title']); ?></span>
-					</div>
-					<?php else: ?>
-						<div class="container">
-							<span id="themeHeaderTitle">&nbsp;</span>
-						</div> <!--fin container -->
-					<?php endif; ?>
+					<div id="headerContainer" class="container">
+						<?php if(
+							$this->getData(['theme', 'header', 'textHide']) === false
+							// Affiche toujours le titre de la bannière pour l'édition du thème
+							OR ($this->getUrl(0) === 'theme' AND $this->getUrl(1) === 'header')
+						): ?>
+							<span id="themeHeaderTitle"><?php echo $this->getData(['config', 'title']); ?></span>
+						<?php else: ?>
+								<span id="themeHeaderTitle">&nbsp;</span>
+						<?php endif; ?>
+					</div> <!--fin container -->
 				</header>
 				<?php
 				if ($this->getData(['theme','header','linkHomePage'])){echo "</a>";}	?>

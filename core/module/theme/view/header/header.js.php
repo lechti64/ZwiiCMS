@@ -12,7 +12,10 @@
  * @link http://zwiicms.com/
  */
 
-
+$(document).ready(function(){
+	$("header").css("line-height", "");
+	$("header").css("height", "");
+});
 
 /**
  * Aperçu en direct
@@ -35,20 +38,24 @@ $("input, select").not("#barSelectLanguage").on("change", function() {
 			tmpImgHeight = tmpImg.height;
 		}
 
-		//Modifier la dropdown liste
-		if ($("#themeHeaderImage").val() !== "") {
+		//Modifier la dropdown liste si une image n'est pas sélectionnée
+		if ($("#themeHeaderImage").val() !== "" ) {
 			// Une image est ajoutée ou changée
-			if ($("#themeHeaderHeight option").length === 4) {
+			if ($("#themeHeaderHeight option").length === 5) {
+				// Pas d'image précédemment on ajoute l'option
 				$("#themeHeaderHeight ").prepend('<option selected="selected" value="0"> Hauteur de l\'image sélectionnée </option>');
-			}
+			} 
 			// Modifier la valeur
 			$("#themeHeaderHeight option:eq(0)").val(tmpImgHeight + "px");
 			// Modifier l'option
-			$("#themeHeaderHeight option:first-child").html("Hauteur de l\'image sélectionnée (" + tmpImgHeight + "px)");
-		} else {
-			$("#themeHeaderHeight option:first-child").html("Hauteur de l\'image sélectionnée");
+			$("#themeHeaderHeight option:eq(0)").html("Hauteur de l\'image sélectionnée (" + tmpImgHeight + "px)");
 		}
 	};
+
+	if ($("#themeHeaderImage").val() === "" &&
+		$("#themeHeaderHeight option").length === 6 ) {
+		$("#themeHeaderHeight option:eq(0)").remove();
+	}
 
 	tmpImg.src= "<?php echo helper::baseUrl(false); ?>" + "site/file/source/" + $("#themeHeaderImage").val();
 

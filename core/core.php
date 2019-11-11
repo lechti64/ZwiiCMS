@@ -1286,22 +1286,9 @@ class core extends common {
 			$css .= 'header{background-size:' . $this->getData(['theme','header','imageContainer']).'}';
 			$css .= 'header{background-color:' . $colors['normal'];
 
+			// Valeur de hauteur traditionnelle
+			$css .= ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) ;
 
-			if ($this->getData(['theme', 'header', 'height']) === 'none') {
-				// Controle de l'existence du fichier
-				if (file_exists(self::FILE_DIR.'source/' . $this->getData(['theme','header','image'])) &&
-					$this->getData(['theme', 'header', 'image'])	 ) {					
-					// On établie la hauteur du div en proportion de l'image
-					// (hauteur / largeur) . 100 
-					$sizes = getimagesize(self::FILE_DIR.'source/'.$this->getData(['theme','header','image']));
-					$css .= ';height: 0;  padding-top:';
-					$css .= ( $sizes[1] / $sizes[0] )* 100;
-					$css .= '%';
-				}
-			} else {
-				// Valeur de hauteur traditionnelle
-				$css .= ';height:' . $this->getData(['theme', 'header', 'height']) . ';line-height:' . $this->getData(['theme', 'header', 'height']) ;
-			}
 			$css .=  ';text-align:' . $this->getData(['theme', 'header', 'textAlign']) . '}';
 			if($themeHeaderImage = $this->getData(['theme', 'header', 'image'])) {
 				$css .= 'header{background-image:url("../file/source/' . $themeHeaderImage . '");background-position:' . $this->getData(['theme', 'header', 'imagePosition']) . ';background-repeat:' . $this->getData(['theme', 'header', 'imageRepeat']) . '}';
