@@ -216,8 +216,8 @@ class theme extends common {
 	];
 	public static $headerWide = [	
 		'auto auto' => 'Automatique',	
-		'cover' => 'Responsive (cover)',
 		'100% 100%' => 'Image étirée (100% 100%)',
+		'cover' => 'Responsive (cover)',
 		'contain' => 'Responsive (contain)'
 	];
 	public static $footerTemplate = [	
