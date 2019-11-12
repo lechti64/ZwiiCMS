@@ -26,10 +26,7 @@ $("input, select").on("change", function() {
 	css += "footer a{color:" + textColor + "}";
 	// Hauteur du pied de page
 	//css += "#footersiteLeft, #footersiteCenter, #footersiteRight, #footerbodyLeft, #footerbodyCenter, #footerbodyRight {margin:" + $("#themeFooterHeight").val() + " 0}";
-	css += "footer #footersite > div{padding:0}";	
-	css += "footer #footersite > div{margin:" + $("#themeFooterHeight").val() + " 0}";
-	css += "footer #footerbody > div{margin:" + $("#themeFooterHeight").val() + " 0}";
-	css += "footer #footerbody > div{padding:0}";		
+	css += "footer #footersite > div{margin:" + $("#themeFooterHeight").val() + " 0}";		
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
 	css += "#footerText{text-align:" + $("#themeFooterTextAlign").val() + "}";
@@ -38,7 +35,7 @@ $("input, select").on("change", function() {
 	css += "footer span{color:" + $("#themeFooterTextColor").val() + ";font-family:'" + footerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeFooterFontWeight").val() + ";font-size:" + $("#themeFooterFontSize").val() + ";text-transform:" + $("#themeFooterTextTransform").val() + "}";
 	// Marge
 	if($("#themeFooterMargin").is(":checked")) {
-		css += 'footer{margin:0 10px 10px;padding: 0px 10px;}';
+		css += 'footer{margin: 10px;padding: 10px;}';
 	}
 	else {
 		css += 'footer{margin:0;padding:0}';
@@ -261,6 +258,7 @@ $("#themeFooterDisplaySearch").on("change", function() {
 	}
 }).trigger("change");
 
+/*
 // Affiche / Cache les options de la position
 $("#themeFooterPosition").on("change", function() {
 	if($(this).val() === 'site') {
@@ -272,3 +270,4 @@ $("#themeFooterPosition").on("change", function() {
 		});
 	}
 }).trigger("change");
+*/

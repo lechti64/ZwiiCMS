@@ -43,6 +43,7 @@
 - Modifications :
     - Thème, bannière : nouvelle option de hauteur calculée à partir de la dimension de l'image sélectionnée.
     - Thème, bannière : informations sur l'image sélectionnée (largeur et hauteur).
+    - Thème, pied de page :  réactivation de l'aperçu.
 - Corrections : 
     - Thème, bannière : problème empêchant la bannière d'être cliquable lorsque la hauteur "responsive" de la bannière était sélectionnée.   
 - Mise à jour : 
@@ -51,7 +52,7 @@
 ## version 9.2.09
 - Corrections :
     - Module Formulaire, erreur lors de l'envoi d'un premier formulaire
-    - Thème Footer , désactivation de l'aperçu du texte personnalisé
+    - Thème Pied de page , désactivation de l'aperçu du texte personnalisé
 
 ## Version 9.2.08
 - Correction :

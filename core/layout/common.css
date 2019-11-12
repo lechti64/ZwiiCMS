@@ -666,6 +666,20 @@ footer {
 	padding: 0;
 }
 
+footer #footerbody > div {
+	margin: 0
+}
+footer #footersite > div {
+	padding:0
+}
+footer #footerbody > div {
+	padding:0
+}
+#footerFontText > p {
+	margin-top: 0; 
+	margin-bottom: 0;
+}
+
 #footerLoginLink, 
 #footerDisplayCopyright, 
 #footerDisplayVersion,
