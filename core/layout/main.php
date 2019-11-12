@@ -62,7 +62,7 @@
 				<?php else: ?>
 						<span id="themeHeaderTitle">&nbsp;</span>
 				<?php endif; ?>
-				</div> <!--fin container -->>
+				</div> <!--fin container -->
 				<?php
 				if ($this->getData(['theme','header','linkHomePage'])){echo "</a>";}
 				?>	
