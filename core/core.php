@@ -1153,7 +1153,7 @@ class core extends common {
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
 			if($this->getData(['theme', 'footer', 'margin'])) {
-				$css .= 'footer{margin:0 10px 10px;padding: 0px 10px;}';
+				$css .= 'footer{margin: 10px;padding: 10px;}';
 			} else {
 				$css .= 'footer{margin:0;padding:0}';
 			}
@@ -1161,12 +1161,6 @@ class core extends common {
 			$css .= 'footer{background-color:' . $colors['normal'] . ';color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
 			$css .= 'footer a{color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
 			$css .= 'footer #footersite > div {margin:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
-			$css .= 'footer #footerbody > div {margin:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
-			$css .= "footer #footersite > div {padding:0}";
-			$css .= "footer #footerbody > div {padding:0}";
-            $css .= '#footerFontText > p {margin-top: 0; margin-bottom: 0;}';
-			//$css .= '#footersiteLeft, #footersiteCenter, #footersiteRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
-			//$css .= '#footerbodyLeft, #footerbodyCenter, #footerbodyRight {padding:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
 			$css .= '#footerSocials{text-align:' . $this->getData(['theme', 'footer', 'socialsAlign']) . '}';
 			$css .= '#footerText{text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';
