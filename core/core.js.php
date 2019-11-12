@@ -341,7 +341,9 @@ core.start = function() {
 			var heightpx = "<?php echo $this->getdata(['theme','header','height']);?>";
 			var height = heightpx.substr(0,heightpx.length-2);
 			var ratio = width / height;
-			$("header").height( $(window).width() / ratio );
+			if ( ($(window).width() / ratio) <= height) {
+				$("header").height( $(window).width() / ratio );
+			}			
 			$("header").css("line-height", $(window).width() / ratio + "px"); 
 		}
 	}).trigger("resize");
