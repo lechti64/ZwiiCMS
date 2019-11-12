@@ -29,9 +29,10 @@ class common {
 	const DATA_DIR = 'site/data/';
 	const FILE_DIR = 'site/file/';
 	const TEMP_DIR = 'site/tmp/';
+	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.86.dev';
+	const ZWII_VERSION = '10.0.87.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -45,30 +46,6 @@ class common {
 		'user',
 		'i18n'
 	];
-	public static $i18nList = [
-		'de' 	=> 'Allemand (de)'	,
-		'en'	=> 'Anglais (en)',
-		'bg'	=> 'Bulgare (bg)',
-		'dk'	=> 'Danois (dk)',
-		'es'	=> 'Espagnol (es)',
-		'fi'	=> 'Finnois (fi)',
-		'fr'	=> 'Français (fr)',
-		'is' 	=> 'Islandais (is)',
-		'it'	=> 'Italien (it)',
-		'nl' 	=> 'Néerlandais (nl)',
-		'no'	=> 'Norvégien (no)' ,
-		'pt'	=> 'Portugais (pt)',
-		'se'	=> 'Suédois (se)',
-		'ro'	=> 'Roumain (ro)',
-		'cz'	=> 'Tchèque (cz)',
-		'tr'	=> 'Turc (tr)',
-		'eu'	=> 'Basque (eu)',
-		'br'	=> 'Breton (br)',
-		'co'	=> 'Corse (co)',
-		'ha'	=> 'Flamand (ha)',
-		'oc'	=> 'Occitan (oc)',
-		'pi'	=> 'Picard (pi)'
-	];
 	public static $dataStage = [
 		'config',
 		'core',
@@ -76,6 +53,15 @@ class common {
 		'page',
 		'user',
 		'theme'
+	];
+	public static $i18nList = [
+		'de' 	=> 'Allemand (de)'	,
+		'en'	=> 'Anglais (en)',
+		'es'	=> 'Espagnol (es)',
+		'fr'	=> 'Français (fr)',
+		'it'	=> 'Italien (it)',
+		'nl' 	=> 'Néerlandais (nl)',
+		'pt'	=> 'Portugais (pt)',
 	];
 	private $data = [];
 	private $hierarchy = [
@@ -158,6 +144,10 @@ class common {
 	 * Constructeur commun
 	 */
 	public function __construct() {
+
+		// Charger la liste des langues
+		require_once (self::I18N_DIR .  'init.php');
+
 		// Extraction des données http
 		if(isset($_POST)) {
 			$this->input['_POST'] = $_POST;
@@ -2469,13 +2459,13 @@ class layout extends common {
 			if (sizeof($this->i18nInstalled()) > 1) {
 				$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 				$items .= '<input type="image" alt="' . self::$i18nList[$this->geti18n()] . '(' . $this->geti18n() . ')' . '" class="flag flagSelected"';
-				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/png/'.  $this->geti18n() .'.png" data-tippy-content="' . self::$i18nList[$this->geti18n()] . '" />';
+				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) .self::I18N_DIR .  'png/'.  $this->geti18n() .'.png" data-tippy-content="' . self::$i18nList[$this->geti18n()] . '" />';
 				$items .= '</form></li>';
 				foreach ($this->i18nInstalled() as $itemKey => $item) {
 					if ($this->geti18n() !== $itemKey ) {
 						$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 						$items .= '<input type="image" alt="'.$itemKey.'" class="flag"';
-						$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) .'core/vendor/icon-flags/png/'.  $itemKey .'.png" data-tippy-content="'. $item .'" />';
+						$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) .self::I18N_DIR .  'png/'.  $itemKey .'.png" data-tippy-content="'. $item .'" />';
 						$items .= '</form></li>';
 					}
 				}
