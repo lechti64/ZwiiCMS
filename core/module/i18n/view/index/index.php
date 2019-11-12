@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col12">
 			<div class="block">
-			<h4>Ajouter ou dupliquer une nouvelle langue&nbsp;<a href="./core/module/i18n/ressource/readme.html" data-lity data-tippy-content="Aide en ligne"<?php echo template::ico('help'); ?></a></h4>
+			<h4>Ajouter ou dupliquer une nouvelle langue&nbsp;<a href="./core/module/i18n/ressource/help.html" data-lity data-tippy-content="Aide en ligne"<?php echo template::ico('help'); ?></a></h4>
 				<div class="row">
 					<div class="col6">
 						<?php 

@@ -1,0 +1,30 @@
+<html>
+<head>
+	<link rel="stylesheet" href="help.css">
+</head>
+<body>
+	<h1>Aide à la gestion des langues</h1>
+	<h2>1- Installer une langue disponible</h2>
+	<p>L'installation d'une nouvelle langue provoque la création d'une nouveau jeu de pages.</p>
+	<p>Deux possibilités sont proposées :</p>
+	<ol>
+		<li>Commencez par choisir une langue. A ce stade, votre nouveau site ne comprendra que la page d'accueil. Vous aurez à créer de nouvelles pages et à les traduire.</li>
+		<li>Pour vous éviter un fastidieux travail de mise en page, vous avez la possibilité de dupliquer un jeu de pages existant, il restera à traduire les textes dans la nouvelle langue.</li>
+		</ol>			
+	</div>
+	<h2>2 - Installation d'une langue non prévue et de son drapeau :</h2>
+	<p>Le drapeau est relatif à une langue et non à un pays, on ne doit donc pas insérer de pays comme la Belgique ou la Suisse.</p>
+	<p>Le dossier /data/i18n contient un fichier init.php où des langues supplémentaires sont déjà proposées.</p>
+	<ol>
+		<li>Soit la langue est disponible dans la liste prédéfinie, il suffit alors de supprimer les commentaires représentés par des barres obliques (//)</li>
+		<li>Soit la langue n'est pas disponible, complétez le tableau en ajoutant</li>
+			<ol>
+				<li>Le code iso sur deux caractères en vous  référant à cette page https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1 </li>
+				<li>Le nom de la langue en texte en clair, le rappel du code iso est facultatif. Le dernier élément de la liste ne doit pas se terminer par une virgule.</li>
+				<li>Enfin, créez  dans le dossier des drapeaux celui de la langue au format png avec les dimensions 30 pixels de large pour 20 pixels de haut. Le nom de l'image en minuscules correspond au code iso de la langue.</li>
+				<li>Sans l'image du drapeau, la langue n'est pas affichée.</li>
+			</ol>
+		</ol>
+	</ol>
+	</body>
+</html>
