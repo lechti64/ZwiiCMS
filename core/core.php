@@ -376,12 +376,16 @@ class common {
 
 	/**
 	 * Stocke la langue sélectionnée
-	 * @param @string langue sosu forem iso
+	 * @param @string langue sous la forme iso
 	 * @return @bool réussite ou échec
 	 */	
 	public function seti18n($lan = 'fr') {	 
 	 	// Sauvegarder la sélection
 		$_SESSION['ZWII_USER_I18N'] = $lan;
+		// Changer la locale
+		if ( $lan !== 'fr') {
+			setlocale (LC_TIME, $lan . '_' . strtoupper ($lan) );
+		}
 	}
 
 
