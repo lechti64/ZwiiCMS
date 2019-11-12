@@ -190,7 +190,7 @@
                 </div>
                 <div class="col6">
                     <div id="themeFooterPositionOptions">
-                        <?php echo template::checkbox('themeFooterMargin', true, 'Alignement sur les marges', [
+                        <?php echo template::checkbox('themeFooterMargin', true, 'Alignement sur une marge horizontale', [
                                 'checked' => $this->getData(['theme', 'footer', 'margin'])
                             ]); ?>
                     </div>
