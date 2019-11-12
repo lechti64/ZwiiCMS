@@ -189,12 +189,12 @@
                         ]); ?>
                 </div>
                 <div class="col6">
-                    <div id="themeFooterPositionOptions" class="displayNone">
-                        <?php echo template::checkbox('themeFooterMargin', true, 'Aligner le bas de page avec le contenu', [
+                    <div id="themeFooterPositionOptions">
+                        <?php echo template::checkbox('themeFooterMargin', true, 'Appliquer une marge à gauche et à droite', [
                                 'checked' => $this->getData(['theme', 'footer', 'margin'])
                             ]); ?>
                     </div>
-                </div>
+                </div>             
             </div>
         </div>
     </div>

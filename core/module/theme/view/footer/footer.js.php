@@ -261,6 +261,7 @@ $("#themeFooterDisplaySearch").on("change", function() {
 	}
 }).trigger("change");
 
+/*
 // Affiche / Cache les options de la position
 $("#themeFooterPosition").on("change", function() {
 	if($(this).val() === 'site') {
@@ -272,3 +273,4 @@ $("#themeFooterPosition").on("change", function() {
 		});
 	}
 }).trigger("change");
+*/
