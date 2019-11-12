@@ -36,7 +36,7 @@ $("input, select").on("change", function() {
 	css += "footer span{color:" + $("#themeFooterTextColor").val() + ";font-family:'" + footerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeFooterFontWeight").val() + ";font-size:" + $("#themeFooterFontSize").val() + ";text-transform:" + $("#themeFooterTextTransform").val() + "}";
 	// Marge
 	if($("#themeFooterMargin").is(":checked")) {
-		css += 'footer{padding: 0 10px;}';
+		css += 'footer{padding: 0 20px;}';
 	}
 	else {
 		css += 'footer{padding:0}';
