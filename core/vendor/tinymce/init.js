@@ -1,15 +1,20 @@
 /**
+
  * Initialisation de TinyMCE
+
  */
+
 tinymce.init({
 	// Classe où appliquer l'éditeur
 	selector: ".editorWysiwyg",
-	// Aperçu dans le pied de page
-	setup:function(ed) {
-		ed.on('change', function(e) {
-			$("#footerText").html(tinyMCE.get('themeFooterText').getContent());
-		});
-	},
+		// Aperçu dans le pied de page
+		setup:function(ed) {
+			ed.on('change', function(e) {
+				if (ed.id === 'themeFooterText') {
+					$("#footerText").html(tinyMCE.get('themeFooterText').getContent());
+				}
+			});
+		},
 	// Langue
 	language: "fr_FR",
 	// Plugins
@@ -56,7 +61,7 @@ tinymce.init({
 		baseUrl + "site/data/theme.css",
 		baseUrl + "site/data/custom.css"
 	],
-	// Classe à ajouter à la balise body dans l'iframe
+// Classe à ajouter à la balise body dans l'iframe
 	body_class: "editorWysiwyg",
 	// Cache les menus
 	menubar: false,
@@ -175,7 +180,7 @@ tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
 	$(window).on('scroll', function() {
 	  setSticky();
 	});
-	
+
 	function setSticky() {
 	  var container = editor.editorContainer;
 	  var toolbars = $(container).find('.mce-toolbar-grp');
@@ -209,7 +214,7 @@ tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
 		});
 		
 		toolbars.css({
-			top:0,
+  		top:0,
 		  position: 'relative',
 		  width: 'auto',
 		  borderBottom: 'none'
@@ -224,7 +229,7 @@ tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
 	  if (editorTop < 0) {
 		return true;
 	  }
-	  
+  
 	  return false;
 	}
 	
@@ -236,8 +241,8 @@ tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
 	  var footerHeight = $(container).find('.mce-statusbar').outerHeight();
 	  
 	  var hiddenHeight = -($(container).outerHeight() - toolbarHeight - footerHeight);
-	  
-	  if (editorTop < hiddenHeight) {
+
+  	  if (editorTop < hiddenHeight) {
 		return true;
 	  }
 	  
