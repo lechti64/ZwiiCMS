@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.89.dev';
+	const ZWII_VERSION = '10.0.90.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -152,6 +152,13 @@ class common {
 		if(isset($_COOKIE)) {
 			$this->input['_COOKIE'] = $_COOKIE;
 		}
+
+		/* Importer les langues supplémentaires
+		* Le fichier json contenant la liste des langues est positionné dans self::FILE_DIR / source / i18n
+		* Les images des drapeaux sont dans self::FILE_DIR / source / i18n /png
+		* L'installation ne base ne contient pas ces données
+		*/
+		self::$i18nList = array_merge (self::$i18nList, $this->importi18n());
 
 		// Import version 9 
 		if (file_exists(self::DATA_DIR . 'core.json') === true && 
@@ -384,6 +391,15 @@ class common {
 		}
 	}
 
+	/**
+	* Retourne le chemin du drapeau 
+	* @return @string
+	* @param @string code iso de la langue
+	*/
+	public function geti18FlagFolder($iso = '') {
+		$default = array ('de',	'en', 'es' , 'fr',  'it',  'nl', 'pt');
+		return (in_array($iso,$default) === true ? 'core/vendor/i18n/png/' . $iso : self::FILE_DIR . 'source/i18n/png/' . $iso);
+	}
 
 
 	/**
@@ -1224,15 +1240,6 @@ class core extends common {
 			// Date de la dernière suppression
 			$this->setData(['core', 'lastClearTmp', $lastClearTmp]);
 		}
-
-		/* Importer les langues supplémentaires
-		* Le fichier json contenant la liste des langues est positionné dans self::FILE_DIR / source / i18n
-		* Les images des drapeaux sont dans self::FILE_DIR / source / i18n /png
-		* L'installation ne base ne contient pas ces données
-		*/
-		self::$i18nList = array_merge (self::$i18nList, $this->importi18n());
-
-
 		// Backup automatique des données
 			$lastBackup = mktime(0, 0, 0);
 			if(
@@ -2506,15 +2513,17 @@ class layout extends common {
 		$items = '';
 			// Menu de langues 
 			if (sizeof($this->i18nInstalled()) > 1) {
+				
 				$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 				$items .= '<input type="image" alt="' . self::$i18nList[$this->geti18n()] . '(' . $this->geti18n() . ')' . '" class="flag flagSelected"';
-				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) . 'core/vendor/i18n/png/'.  $this->geti18n() .'.png" data-tippy-content="' . self::$i18nList[$this->geti18n()] . '" />';
+				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) . $this->geti18FlagFolder($this->geti18n()) .  '.png" data-tippy-content="' . self::$i18nList[$this->geti18n()] . '" />';
 				$items .= '</form></li>';
 				foreach ($this->i18nInstalled() as $itemKey => $item) {
 					if ($this->geti18n() !== $itemKey ) {
+
 						$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 						$items .= '<input type="image" alt="'.$itemKey.'" class="flag"';
-						$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) . 'core/vendor/i18n/png/'.  $itemKey .'.png" data-tippy-content="'. $item .'" />';
+						$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) . $this->geti18FlagFolder($itemKey) . '.png" data-tippy-content="'. $item .'" />';
 						$items .= '</form></li>';
 					}
 				}
