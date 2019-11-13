@@ -106,7 +106,8 @@ class common {
 			'tippy',
 			'zwiico',
 			'imagemap',
-			'simplelightbox'
+			'simplelightbox',
+			'translate'
 		],
 		'view' => ''
 	];
@@ -389,6 +390,7 @@ class common {
 		if ( $lan !== 'fr') {
 			setlocale (LC_TIME, $lan . '_' . strtoupper ($lan) );
 		}
+		setrawcookie("googtrans", htmlspecialchars('/fr') . htmlspecialchars ('/'. $lan), null, '/', null ) ;
 	}
 
 	/**
@@ -2483,7 +2485,7 @@ class layout extends common {
 				}
 				$items .= '</a></li>';
 			}
-			$items .= '</ul>';
+			$items .= '</ul>';			
 		}
 			
 		// Lien de connexion
@@ -2502,7 +2504,7 @@ class layout extends common {
 		}
 
 		// Retourne les items du menu
-		echo '<ul class="navLevel1">' . $items .  '</ul>';
+		echo '<ul class="navLevel1">' . $items .  '</ul>';		
 	}
 	
 	/*
@@ -2528,7 +2530,7 @@ class layout extends common {
 					}
 				}
 			}
-		echo '<ul>' . $items . '</ul>';
+		echo '<ul>' . $items . '</ul>';				
 	}
 
 	/**
