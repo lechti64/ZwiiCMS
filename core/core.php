@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.90.dev';
+	const ZWII_VERSION = '10.0.91.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
