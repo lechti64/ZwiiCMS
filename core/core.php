@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.88.dev';
+	const ZWII_VERSION = '10.0.89.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -144,9 +144,6 @@ class common {
 	 * Constructeur commun
 	 */
 	public function __construct() {
-
-		// Charger la liste des langues
-		require_once (self::I18N_DIR .  'init.php');
 
 		// Extraction des données http
 		if(isset($_POST)) {
@@ -267,7 +264,6 @@ class common {
 
 		// Mise à jour des données core
 		$this->update();
-
 
 	}
 
@@ -887,6 +883,46 @@ class common {
 		return $listLanguages;
 	}
 
+	/**
+	 * Complète les données de langue par ceux définis par l'utilisateur.
+	 * Effectue des contrôles d'intégrité
+	 * @return array avec les données à importer dans le tableau de base
+	 * 
+	 */
+
+	public function importi18n() {
+		$folder = self::FILE_DIR . '/source/i18n';
+		// Des données valides existent-elles ?
+		if (is_dir($folder) === false &&
+			is_dir($folder . '/png') === false &&
+			file_exists($folder . '/i18n.json') === false ) {
+				// Retourne un tableau vide
+				return([]);
+			}		
+		
+		//Retourne une chaine contenant le dossier à créer		
+		// Lire les langues stockées
+		// Constructeur  JsonDB
+		require_once "core/vendor/jsondb/Dot.php";
+		require_once "core/vendor/jsondb/JsonDb.php";
+		$db = new \Prowebcraft\JsonDb([
+			'name' => 'i18n.json',
+			'dir' => $folder,
+			'template' => self::TEMP_DIR . 'data.template.json'
+		]);
+		// Erreur de fichier
+		$data = $db->get('i18n');
+		if ( $data === null) {
+			 return([]);
+		}
+		// Contrôle des drapeaux présents
+		foreach ($data as $itemKey => $itemValue) {
+			if (file_exists($folder .  '/png/' . $itemKey . '.png') === false) {
+				unset($data[$itemKey]);
+			}
+		}
+		return($data);
+	}
 
 
 		/**
@@ -1188,6 +1224,14 @@ class core extends common {
 			// Date de la dernière suppression
 			$this->setData(['core', 'lastClearTmp', $lastClearTmp]);
 		}
+
+		/* Importer les langues supplémentaires
+		* Le fichier json contenant la liste des langues est positionné dans self::FILE_DIR / source / i18n
+		* Les images des drapeaux sont dans self::FILE_DIR / source / i18n /png
+		* L'installation ne base ne contient pas ces données
+		*/
+		self::$i18nList = array_merge (self::$i18nList, $this->importi18n());
+
 
 		// Backup automatique des données
 			$lastBackup = mktime(0, 0, 0);
@@ -2464,13 +2508,13 @@ class layout extends common {
 			if (sizeof($this->i18nInstalled()) > 1) {
 				$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 				$items .= '<input type="image" alt="' . self::$i18nList[$this->geti18n()] . '(' . $this->geti18n() . ')' . '" class="flag flagSelected"';
-				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) .self::I18N_DIR .  'png/'.  $this->geti18n() .'.png" data-tippy-content="' . self::$i18nList[$this->geti18n()] . '" />';
+				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) . 'core/vendor/i18n/png/'.  $this->geti18n() .'.png" data-tippy-content="' . self::$i18nList[$this->geti18n()] . '" />';
 				$items .= '</form></li>';
 				foreach ($this->i18nInstalled() as $itemKey => $item) {
 					if ($this->geti18n() !== $itemKey ) {
 						$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 						$items .= '<input type="image" alt="'.$itemKey.'" class="flag"';
-						$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) .self::I18N_DIR .  'png/'.  $itemKey .'.png" data-tippy-content="'. $item .'" />';
+						$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) . 'core/vendor/i18n/png/'.  $itemKey .'.png" data-tippy-content="'. $item .'" />';
 						$items .= '</form></li>';
 					}
 				}
