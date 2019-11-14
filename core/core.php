@@ -390,7 +390,11 @@ class common {
 		if ( $lan !== 'fr') {
 			setlocale (LC_TIME, $lan . '_' . strtoupper ($lan) );
 		}
-		setrawcookie("googtrans", '/fr/'. $lan) ;
+		if ($this->getData(['config','i18n',$lan,'autoTranslate']) === true ) {
+			setrawcookie("googtrans", '/fr/'. $lan) ;
+		} else {
+			setrawcookie("googtrans", '/fr/fr') ;
+		}
 	}
 
 	/**
