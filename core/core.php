@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.93.dev';
+	const ZWII_VERSION = '10.0.94.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -203,7 +203,7 @@ class common {
 		// Utilisateur connecté
 		if($this->user === []) {
 			$this->user = $this->getData(['user', $this->getInput('ZWII_USER_ID')]);
-		} 
+		}
 	
 		// Construit la liste des pages parents/enfants
 		if($this->hierarchy['all'] === []) {
@@ -368,7 +368,7 @@ class common {
 				key_exists($_SESSION['ZWII_USER_I18N'] , self::$i18nList) ) {
 			return ($_SESSION['ZWII_USER_I18N']);
 		} else {
-			// La valeur du cookie n'est pas une version installée, remettre à fr
+			// La valeur de la session n'est pas une version installée, remettre à fr
 			if (isset ($_SESSION['ZWII_USER_I18N'])) {
 				unset($_SESSION['ZWII_USER_I18N']);
 				$this->seti18n();
@@ -389,15 +389,8 @@ class common {
 		// Changer la locale
 		if ( $lan !== 'fr') {
 			setlocale (LC_TIME, $lan . '_' . strtoupper ($lan) );
-		}
-		// Positionner le cookie
-		
-		if($this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD') && 
-			$this->getData(['config','i18n',$lan,'autoTranslate']) === true) {
-			setrawcookie("googtrans", '/fr/'. $lan) ;
-		} else {
-			setrawcookie("googtrans", '/fr/fr') ;
-		}
+		} 
+		setrawcookie("googtrans", '/fr/'. $lan, time()+3600, helper::baseUrl()) ;
 	}
 
 

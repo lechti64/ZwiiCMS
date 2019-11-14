@@ -27,9 +27,7 @@
 								]); ?>		
 						</div>						
 						<div class="row">
-							<?php echo template::checkbox('i18AutoTranslation', true, 'Traduction automatique par Google', [
-								'help' => 'La traduction automatiques est active après la déconnexion.'
-							]); ?> 
+							<?php echo template::checkbox('i18AutoTranslation', true, 'Traduction automatique par Google'); ?> 
 						</div>
 					</div>				
 					<div class="col6">
