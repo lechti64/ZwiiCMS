@@ -18,12 +18,14 @@
 			<h4>Ajouter une langue&nbsp;<a href="./core/module/i18n/ressource/help.html" data-lity data-tippy-content="Aide en ligne"<?php echo template::ico('help'); ?></a></h4>
 				<div class="row">
 					<div class="col6">
+						<div class="row">
 							<?php 
 								$available = array ('' => 'Sélectionner');
 								$available = array_merge ($available, array_diff(self::$i18nList,$this->i18nInstalled()));
 								echo template::select('i18nLanguageAdd', $available, [
 								'label' => 'Nouvelle langue'
 								]); ?>							
+						</div>
 						<div class="row">
 							<?php echo template::checkbox('i18AutoTranslation', true, 'Traduction automatique par Google'); ?> 
 						</div>						
