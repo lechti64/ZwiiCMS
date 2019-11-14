@@ -23,12 +23,10 @@
 								$available = array_merge ($available, array_diff(self::$i18nList,$this->i18nInstalled()));
 								echo template::select('i18nLanguageAdd', $available, [
 								'label' => 'Nouvelle langue'
-								]); ?>		
-						<!--
+								]); ?>							
 						<div class="row">
 							<?php echo template::checkbox('i18AutoTranslation', true, 'Traduction automatique par Google'); ?> 
-						</div>
-						-->
+						</div>						
 					</div>				
 					<div class="col6">
 						<?php echo template::select('i18nLanguageCopyFrom', $this->i18nInstalled(true), [
@@ -41,5 +39,5 @@
 		</div>
 	</div>
 
-	<?php echo template::table([5,4,1], $module::$languages, ['Langues installées', 'Chemins des drapeaux' ,'']); ?>
+	<?php echo template::table([5,2,2,1], $module::$languages, ['Langues installées', 'Chemins des drapeaux', 'Traduction automatique' ,'']); ?>
 <?php echo template::formClose(); ?>	

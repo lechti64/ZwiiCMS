@@ -23,7 +23,8 @@ class init extends common {
 			'title' => 'Zwii, votre site en quelques clics !',
 			'i18n' => [
 				'fr' => [
-					'flagFolder' 	=> "core/vendor/i18n/png/"
+					'flagFolder' 	=> "core/vendor/i18n/png/",
+					'AutoTranslate' => false
 				]
 			]
 		],

@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.95.dev';
+	const ZWII_VERSION = '10.0.96.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -390,7 +390,7 @@ class common {
 		if ( $lan !== 'fr') {
 			setlocale (LC_TIME, $lan . '_' . strtoupper ($lan) );
 		} 
-		//setrawcookie("googtrans", '/fr/'. $lan, time()+3600, helper::baseUrl()) ;
+		setrawcookie("googtrans", '/fr/'. $lan, time()+3600, helper::baseUrl()) ;
 	}
 
 
@@ -1221,7 +1221,7 @@ class common {
 			$this->setData(['theme','menu','i18nPosition', 'right']);
 			// Données de langue par défaut
 			$this->setData(['config','i18n','fr', 'flagFolder', 'core/vendor/i18n/png/']);
-			//$this->setData(['config','i18n','fr', 'autotranslate', false]);
+			$this->setData(['config','i18n','fr', 'autotranslate', false]);
 
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
