@@ -74,7 +74,7 @@ class i18n extends common {
 		foreach($langIds as $itemKeyLang => $itemLang) {
 			self::$languages[] = [
 				$itemLang,
-				$this->getData(['config','i18n',$itemKeyLang,'flagFolder']),
+				stripslashes($this->getData(['config','i18n',$itemKeyLang,'flagFolder'])),
 				$this->getData(['config','i18n',$itemKeyLang,'autoTranslate']) === true ? 'Oui' : 'Non',
 				template::button('i18nDelete' . $itemKeyLang, [
 					'class' => 'i18nDelete buttonRed',

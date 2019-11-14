@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.92.dev';
+	const ZWII_VERSION = '10.0.93.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -365,7 +365,7 @@ class common {
 	public function geti18n() {
 		// Vérifier l'existence du fichier de langue
 		if (isset ($_SESSION['ZWII_USER_I18N']) && 
-				key_exists($_SESSION['ZWII_USER_I18N'], $this->i18nInstalled())) {
+				key_exists($_SESSION['ZWII_USER_I18N'] , self::$i18nList) ) {
 			return ($_SESSION['ZWII_USER_I18N']);
 		} else {
 			// La valeur du cookie n'est pas une version installée, remettre à fr
@@ -390,12 +390,16 @@ class common {
 		if ( $lan !== 'fr') {
 			setlocale (LC_TIME, $lan . '_' . strtoupper ($lan) );
 		}
-		if ($this->getData(['config','i18n',$lan,'autoTranslate']) === true ) {
+		// Positionner le cookie
+		
+		if($this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD') && 
+			$this->getData(['config','i18n',$lan,'autoTranslate']) === true) {
 			setrawcookie("googtrans", '/fr/'. $lan) ;
 		} else {
 			setrawcookie("googtrans", '/fr/fr') ;
 		}
 	}
+
 
 	/**
 	* Retourne le chemin du drapeau 
@@ -889,21 +893,23 @@ class common {
 	* @return array liste des pages installées sous la forme "fr" -> "Français"
 	* La fonction vérifie l'existence du dossier et des deux fichiers de configuration
 	*/
-	public function i18nInstalled ($emptyLine = false, $noFr = false) {		
+	public function i18nInstalled ($emptyLine = false, $noFr = false) {	
 		$listLanguages = $emptyLine === true ? [''=>'Sélectionner'] : [];
 		$tempData = array_diff(scandir(self::DATA_DIR), array('..', '.'));
 		foreach ($tempData as $item) {
-			// Exclure le fr
 			if ($noFr && $item === 'fr') {continue;}
 			if (is_dir(self::DATA_DIR . $item) === true) {
 				if (is_file(self::DATA_DIR . $item . '/' . 'page.json') === true  && 
-					is_file(self::DATA_DIR . $item . '/' . 'module.json') === true ) {
-					$listLanguages [$item] = self::$i18nList [$item];
+					is_file(self::DATA_DIR . $item . '/' . 'module.json') === true && 
+					is_array($this->getdata(['config','i18n',$item])) ) {
+						$listLanguages [$item] = self::$i18nList [$item];
 				}
 			}
 		}		
 		return $listLanguages;
 	}
+
+
 
 	/**
 	 * Complète les données de langue par ceux définis par l'utilisateur.
@@ -2172,7 +2178,7 @@ class layout extends common {
 		parent::__construct();
 		$this->core = $core;
 	}
-
+	
 	/**
 	 * Affiche le script Google Analytics
 	 */
