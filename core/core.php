@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.91.dev';
+	const ZWII_VERSION = '10.0.92.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -390,7 +390,7 @@ class common {
 		if ( $lan !== 'fr') {
 			setlocale (LC_TIME, $lan . '_' . strtoupper ($lan) );
 		}
-		setrawcookie("googtrans", htmlspecialchars('/fr') . htmlspecialchars ('/'. $lan), null, '/', null ) ;
+		setrawcookie("googtrans", '/fr/'. $lan) ;
 	}
 
 	/**
@@ -398,9 +398,9 @@ class common {
 	* @return @string
 	* @param @string code iso de la langue
 	*/
-	public function geti18FlagFolder($iso = '') {
+	public function geti18nFlagFolder($iso = '') {
 		$default = array ('de',	'en', 'es' , 'fr',  'it',  'nl', 'pt');
-		return (in_array($iso,$default) === true ? 'core/vendor/i18n/png/' . $iso : self::FILE_DIR . 'source/i18n/png/' . $iso);
+		return (in_array($iso,$default) === true ? 'core/vendor/i18n/png/'  : self::FILE_DIR . 'source/i18n/png/' );
 	}
 
 
@@ -907,7 +907,6 @@ class common {
 	 * @return array avec les données à importer dans le tableau de base
 	 * 
 	 */
-
 	public function importi18n() {
 		$folder = self::FILE_DIR . '/source/i18n';
 		// Des données valides existent-elles ?
@@ -1214,8 +1213,13 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 10000) {
 			$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
 			$this->deleteData(['config','homePageId']);
+			// Données de la barre de langue dans le menu
 			$this->setData(['theme','menu','burgerTitle',true]);
 			$this->setData(['theme','menu','i18nPosition', 'right']);
+			// Données de langue par défaut
+			$this->setData(['config','i18n','fr', 'flagFolder', 'core/vendor/i18n/png/']);
+			$this->setData(['config','i18n','fr', 'autotranslate', false]);
+
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 	}
@@ -2518,14 +2522,14 @@ class layout extends common {
 				
 				$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 				$items .= '<input type="image" alt="' . self::$i18nList[$this->geti18n()] . '(' . $this->geti18n() . ')' . '" class="flag flagSelected"';
-				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) . $this->geti18FlagFolder($this->geti18n()) .  '.png" data-tippy-content="' . self::$i18nList[$this->geti18n()] . '" />';
+				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) . $this->getData(['config','i18n',$this->geti18n(),'flagFolder']) . $this->geti18n() . '.png" data-tippy-content="' . self::$i18nList[$this->geti18n()] . '" />';
 				$items .= '</form></li>';
 				foreach ($this->i18nInstalled() as $itemKey => $item) {
 					if ($this->geti18n() !== $itemKey ) {
 
 						$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 						$items .= '<input type="image" alt="'.$itemKey.'" class="flag"';
-						$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) . $this->geti18FlagFolder($itemKey) . '.png" data-tippy-content="'. $item .'" />';
+						$items .= ' name="'.$itemKey.'" src="' . helper::baseUrl(false) . $this->getData(['config','i18n',$itemKey,'flagFolder']) . $itemKey . '.png" data-tippy-content="'. $item .'" />';
 						$items .= '</form></li>';
 					}
 				}
