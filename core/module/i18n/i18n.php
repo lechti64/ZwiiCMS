@@ -49,7 +49,7 @@ class i18n extends common {
 					// Enregistrement des données de langue dans la config
 					// Chemin des images
 					$this->setData(['config','i18n',$create,'flagFolder',$this->geti18nFlagFolder($create)]);
-					$this->setData(['config','i18n',$create,'autoTranslate',$this->getInput('i18AutoTranslation',helper::FILTER_BOOLEAN)]);
+					//$this->setData(['config','i18n',$create,'autoTranslate',$this->getInput('i18AutoTranslation',helper::FILTER_BOOLEAN)]);
 				} else {
 					$notification = $create . ' est déjà ajoutée.';
 					$success =  false;
@@ -75,7 +75,7 @@ class i18n extends common {
 			self::$languages[] = [
 				$itemLang,
 				stripslashes($this->getData(['config','i18n',$itemKeyLang,'flagFolder'])),
-				$this->getData(['config','i18n',$itemKeyLang,'autoTranslate']) === true ? 'Oui' : 'Non',
+				//$this->getData(['config','i18n',$itemKeyLang,'autoTranslate']) === true ? 'Oui' : 'Non',
 				template::button('i18nDelete' . $itemKeyLang, [
 					'class' => 'i18nDelete buttonRed',
 					'href' => helper::baseUrl() . 'i18n/delete/' . $itemKeyLang. '/' . $_SESSION['csrf'],
