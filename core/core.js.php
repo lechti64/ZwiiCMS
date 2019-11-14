@@ -352,8 +352,8 @@ core.start = function() {
 			var ratio = width / height;
 			if ( ($(window).width() / ratio) <= height) {
 				$("header").height( $(window).width() / ratio );
-			}			
-			$("header").css("line-height", $(window).width() / ratio + "px"); 
+				$("header").css("line-height", $(window).width() / ratio + "px"); 
+			}						
 		}
 	}).trigger("resize");
 
