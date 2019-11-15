@@ -2216,7 +2216,7 @@ class layout extends common {
 				OR $this->getData(['page', $this->getUrl(0), 'hideTitle']) === false
 			)
 		) {
-			echo '<h2 id="sectionTitle">' . $this->core->output['title'] . '</h2>';				
+			echo '<h2 class= "notranslate" id="sectionTitle">' . $this->core->output['title'] . '</h2>';				
 		}
 		echo $this->core->output['content'];
 
