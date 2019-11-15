@@ -13,12 +13,13 @@
 		</ol>			
 	</div>
 	<h2>2 - Installation d'une langue non prévue et de son drapeau :</h2>
-	<p>Le drapeau est relatif à une langue et non à un pays, on ne doit donc pas insérer de pays comme la Belgique ou la Suisse.</p>
-	<p>Le dossier /data/i18n contient un fichier init.php où des langues supplémentaires sont déjà proposées.</p>
 	<ol>
 		<li>Soit la langue est disponible dans la liste prédéfinie, il suffit alors de supprimer les commentaires représentés par des barres obliques (//)</li>
 		<li>Soit la langue n'est pas disponible, complétez le tableau en ajoutant</li>
 			<ol>
+				<p>Téléchargez sur le forum (rubrique téléchargement) une archive contenant une structure de données.</p>
+				<p>Copiez et décompressez cette archive à la racine de votre stockage dans le gestionnaire de fichiers</p>
+				<p>Un dossier i18n est créé, elle contient un fichier i18n.json, un dossier avec des drapeaux. Des langues supplémentaires sont proposées vous pouvez les modifier :</p>
 				<li>Le code iso sur deux caractères en vous  référant à cette page https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1 </li>
 				<li>Le nom de la langue en texte en clair, le rappel du code iso est facultatif. Le dernier élément de la liste ne doit pas se terminer par une virgule.</li>
 				<li>Enfin, créez  dans le dossier des drapeaux celui de la langue au format png avec les dimensions 30 pixels de large pour 20 pixels de haut. Le nom de l'image en minuscules correspond au code iso de la langue.</li>
