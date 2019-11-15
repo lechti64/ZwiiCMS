@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.101.dev';
+	const ZWII_VERSION = '10.0.102.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -364,6 +364,7 @@ class common {
 	 * @return string code iso de la langue
 	 */	
 	public function geti18n() {
+		
 		// Liste des langues dans la config
 		// On n'utilise pas getData pour éviter une boucle
 		require_once "core/vendor/jsondb/Dot.php";
@@ -374,19 +375,22 @@ class common {
 			'template' => self::TEMP_DIR . 'data.template.json'
 		]);
 		$tempData = $db->get('config.i18n');
-		// Vérifier l'existence du fichier de langue
-		if (isset ($_SESSION['ZWII_USER_I18N']) && 
-				key_exists($_SESSION['ZWII_USER_I18N'] , $tempData) ) {
-			return ($_SESSION['ZWII_USER_I18N']);
-		} else {
-			// La valeur de la session n'est pas une version installée, remettre à fr
-			if (isset ($_SESSION['ZWII_USER_I18N'])) {
-				unset($_SESSION['ZWII_USER_I18N']);
-				$this->seti18n();
-			}
-			return ('fr');
-		}		
-
+		// Phase d'installation pas de langue définie
+		if (!array($tempData)) {
+			// Vérifier l'existence du fichier de langue
+			if (isset ($_SESSION['ZWII_USER_I18N']) && 
+					key_exists($_SESSION['ZWII_USER_I18N'] , $tempData) ) {
+				return ($_SESSION['ZWII_USER_I18N']);
+			} else {
+				// La valeur de la session n'est pas une version installée, remettre à fr
+				if (isset ($_SESSION['ZWII_USER_I18N'])) {
+					unset($_SESSION['ZWII_USER_I18N']);
+					$this->seti18n();
+				}
+				return ('fr');
+			}		
+		}
+		return('fr');
 	}
 
 	/**
