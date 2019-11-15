@@ -589,6 +589,7 @@ ul .menuSideChild, li .menuSideChild {
 /* Icones de langues du menu */
 .flag {
 	margin: 0px 5px 0 5px;
+	font-size: calc(100% * 1.5);
 }
 
 /* Paramètres du menu et de la barre de langue */
