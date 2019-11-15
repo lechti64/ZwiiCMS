@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.97.dev';
+	const ZWII_VERSION = '10.0.98.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -358,14 +358,25 @@ class common {
 	}
 
 	/**
-	 * Récupère la langue sélectionnée
+	 * Récupère et vérifie la langue sélectionnée par l'utilisateur (navigateur)
+	 * Une langue valide a une structure de données et une description dans config.
 	 * @param aucun
 	 * @return string code iso de la langue
 	 */	
 	public function geti18n() {
+		// Liste des langues dans la config
+		// On n'utilise pas getData pour éviter une boucle
+		require_once "core/vendor/jsondb/Dot.php";
+		require_once "core/vendor/jsondb/JsonDb.php";
+		$db = new \Prowebcraft\JsonDb([
+			'name' =>  'config.json',
+			'dir' => self::DATA_DIR,
+			'template' => self::TEMP_DIR . 'data.template.json'
+		]);
+		$tempData = $db->get('config.i18n');
 		// Vérifier l'existence du fichier de langue
 		if (isset ($_SESSION['ZWII_USER_I18N']) && 
-				key_exists($_SESSION['ZWII_USER_I18N'] , self::$i18nList) ) {
+				key_exists($_SESSION['ZWII_USER_I18N'] , $tempData) ) {
 			return ($_SESSION['ZWII_USER_I18N']);
 		} else {
 			// La valeur de la session n'est pas une version installée, remettre à fr
