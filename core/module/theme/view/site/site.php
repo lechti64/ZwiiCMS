@@ -1,4 +1,5 @@
 <?php echo template::formOpen('themeSiteForm'); ?>
+<div class="notranslate">
 	<div class="row">
 		<div class="col2">
 			<?php echo template::button('themeSiteBack', [
@@ -137,4 +138,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 <?php echo template::formClose(); ?>

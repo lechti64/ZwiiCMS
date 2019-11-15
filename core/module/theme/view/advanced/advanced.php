@@ -1,4 +1,5 @@
 <?php echo template::formOpen('themeAdvancedForm'); ?>
+<div class="notranslate">
 	<div class="row">
 		<div class="col2">
 			<?php echo template::button('themeAdvancedBack', [
@@ -28,4 +29,5 @@
 			]); ?>
 		</div>
 	</div>
+</div>
 <?php echo template::formClose(); ?>

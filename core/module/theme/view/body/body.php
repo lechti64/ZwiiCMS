@@ -1,4 +1,5 @@
 <?php echo template::formOpen('themeBodyForm'); ?>
+<div class="notranslate">
 	<div class="row">
 		<div class="col2">
 			<?php echo template::button('themeBodyBack', [
@@ -67,4 +68,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 <?php echo template::formClose(); ?>

@@ -1,4 +1,5 @@
 <?php echo template::formOpen('configManageForm'); ?>
+<div class="notranslate">
 	<div class="row">
 		<div class="col2">
 		<?php echo template::button('configManageBack', [
@@ -95,4 +96,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 <?php echo template::formClose(); ?>

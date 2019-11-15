@@ -1,4 +1,5 @@
 <?php echo template::formOpen('themeManageForm'); ?>
+<div class="notranslate">
 	<div class="row">
 		<div class="col2">
 			<?php echo template::button('themeManageBack', [
@@ -48,4 +49,5 @@
 			</div>
 		</div>
 	</div>	
+</div>
 <?php echo template::formClose(); ?>

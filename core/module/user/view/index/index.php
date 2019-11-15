@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row notranslate">
 	<div class="col2">
 		<?php echo template::button('userAddBack', [
 			'class' => 'buttonGrey',

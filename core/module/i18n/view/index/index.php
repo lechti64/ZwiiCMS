@@ -1,4 +1,5 @@
-<?php echo template::formOpen('i18nIndexForm'); ?>	
+<?php echo template::formOpen('i18nIndexForm'); ?>
+<div class="notranslate">
 	<div class="row">
 		<div class="col2">
 			<?php echo template::button('i18nBack', [
@@ -42,4 +43,5 @@
 	</div>
 
 	<?php echo template::table([5,2,2,1], $module::$languages, ['Langues installées', 'Chemins des drapeaux', 'Traduction automatique' ,'']); ?>
+</div>
 <?php echo template::formClose(); ?>	

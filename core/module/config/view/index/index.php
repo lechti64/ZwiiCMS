@@ -1,4 +1,5 @@
 <?php echo template::formOpen('configForm'); ?>
+<div class="notranslate">
 	<div class="row">
 		<div class="col2">
 			<?php echo template::button('configBack', [
@@ -291,4 +292,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 <?php echo template::formClose(); ?>

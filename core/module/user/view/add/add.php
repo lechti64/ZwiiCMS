@@ -1,4 +1,5 @@
 <?php echo template::formOpen('userAddForm'); ?>
+<div class="notranslate">
 	<div class="row">
 		<div class="col2">
 			<?php echo template::button('userAddBack', [
@@ -78,4 +79,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 <?php echo template::formClose(); ?>

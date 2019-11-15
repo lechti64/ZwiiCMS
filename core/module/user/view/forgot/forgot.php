@@ -1,4 +1,5 @@
 <?php echo template::formOpen('userForgotForm'); ?>
+<div class="notranslate">
 	<?php echo template::text('userForgotId', [
 		'label' => 'Identifiant'
 	]); ?>
@@ -17,4 +18,5 @@
 			]); ?>
 		</div>
 	</div>
+</div>
 <?php echo template::formClose(); ?>

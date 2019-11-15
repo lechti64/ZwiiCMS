@@ -2,6 +2,7 @@
 // Mise à jour de la liste des pages pour TinyMCE
 $this->pages2Json();
 echo template::formOpen('pageEditForm'); ?>
+<div class="notranslate">
 	<div class="row">
 	<div class="col2">
 			<?php $href = helper::baseUrl() . $this->getUrl(2); ?>
@@ -222,4 +223,5 @@ echo template::formOpen('pageEditForm'); ?>
 			</div>
 		</div>
 	</div>
+</div>
 <?php echo template::formClose(); ?>

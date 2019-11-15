@@ -1,6 +1,6 @@
 <p><strong>Mise à jour de Zwii <?php echo self::ZWII_VERSION; ?> vers Zwii <?php echo $module::$newVersion; ?>.</strong></p>
 <p>Afin d'assurer le bon fonctionnement de Zwii, veuillez ne pas fermer cette page avant la fin de l'opération.</p>
-<div class="row">
+<div class="row notranslate">
 	<div class="col9 verticalAlignMiddle">
 		<div id="installUpdateProgress">
 			<?php echo template::ico('spin', '', true); ?>
