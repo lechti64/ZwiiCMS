@@ -197,7 +197,8 @@ if(isset($_GET['action']))
 									$fileinfo = pathinfo($FullFileName['name']);
 									if (in_array(strtolower($fileinfo['extension']), $config['ext']))
 									{
-										copy('zip://' . $path . '#' . $FullFileName['name'], $base_folder . $FullFileName['name']);
+										//copy('zip://' . $path . '#' . $FullFileName['name'], $base_folder . $FullFileName['name']);
+										$zip->extractTo($base_folder , $FullFileName['name']);
 									}
 								}
 							}
