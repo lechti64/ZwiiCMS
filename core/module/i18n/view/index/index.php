@@ -38,8 +38,6 @@
 				<div class="row">
 					<div class="col3 verticalAlignMiddle">
 						<?php echo template::checkbox('i18AutoTranslation', true, 'Traduction automatique'); ?> 
-					</div>
-					<div class="col3 verticalAlignMiddle">
 						<a href="//translate.google.com/intl/fr/about/" data-lity><img src="core/module/i18n/ressource/googtrans.png" /></a>
 					</div>
 				</div>	
