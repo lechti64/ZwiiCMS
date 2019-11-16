@@ -26,10 +26,7 @@
 								echo template::select('i18nLanguageAdd', $available, [
 								'label' => 'Nouvelle langue'
 								]); ?>							
-						</div>
-						<div class="row">
-							<?php echo template::checkbox('i18AutoTranslation', true, 'Traduction automatique par Google'); ?> 
-						</div>						
+						</div>					
 					</div>				
 					<div class="col6">
 						<?php echo template::select('i18nLanguageCopyFrom', $this->i18nInstalled(true), [
@@ -38,6 +35,14 @@
 						]); ?>
 					</div>	
 				</div>
+				<div class="row">
+					<div class="col3 verticalAlignMiddle">
+						<?php echo template::checkbox('i18AutoTranslation', true, 'Traduction automatique'); ?> 
+					</div>
+					<div class="col3 verticalAlignMiddle">
+						<a href="//translate.google.com/intl/fr/about/" data-lity><img src="core/module/i18n/ressource/googtrans.png" /></a>
+					</div>
+				</div>	
 			</div>
 		</div>
 	</div>
