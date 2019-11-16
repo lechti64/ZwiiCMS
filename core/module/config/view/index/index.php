@@ -108,6 +108,15 @@
 							'checked' => $this->getData(['config', 'maintenance'])
 						]); ?>	
 					</div>
+				</div>	
+				<div class="col12">				
+					<div class="row">		
+						<?php echo template::checkbox('configEnablei18n', true, 'Activer la gestion des langues', [
+							'checked' => $this->getData(['config', 'enablei18n']),
+							'disabled' => sizeof($this->i18nInstalled() ) > 1 ? true : false,
+							'help' => 'L\'option est désactivée quand au moins une langue est installée.'
+						]); ?>	
+					</div>
 				</div>				
 			</div>							
 		</div>

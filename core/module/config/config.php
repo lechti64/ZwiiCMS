@@ -403,7 +403,7 @@ class config extends common {
 					//'homePageId' => $this->getInput('configHomePageId', helper::FILTER_ID, true),
 					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),					
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
-					'enablei18n' => $this->getInput('configEnablei18n', helper::FILTER_BOOLEAN),
+					'enablei18n' => sizeof($this->i18nInstalled() ) > 1 ? true : $this->getInput('configEnablei18n', helper::FILTER_BOOLEAN),
 					'i18n' => $this->getData(['config','i18n'])
 				]
 			]);
