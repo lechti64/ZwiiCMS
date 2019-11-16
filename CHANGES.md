@@ -46,6 +46,7 @@
     - Thème, pied de page :  réactivation de l'aperçu.
 - Corrections : 
     - Thème, bannière : problème empêchant la bannière d'être cliquable lorsque la hauteur "responsive" de la bannière était sélectionnée.   
+    - Responsive File manager : erreur empêchant l'extraction d'une archive ZIP.
 - Mise à jour : 
     - CodeMirror 5.49.2 et modification des modules installés
 
