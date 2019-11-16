@@ -15,11 +15,11 @@
  */
 
 
-var configenablei18nDOM = $("#configEnablei18n");
-configenablei18nDOM.on("change", function() {
-    if ($("input[name=configEnablei18n]").is(':checked')) {
-        $(".zwiico-flag").css('display','block');
-    } else {
+var configdisablei18nDOM = $("#configdisablei18n");
+configdisablei18nDOM.on("change", function() {
+    if ($("input[name=configdisablei18n]").is(':checked')) {
         $(".zwiico-flag").css('display','none');
+    } else {
+        $(".zwiico-flag").css('display','block');
     }
 });

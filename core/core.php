@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.107.dev';
+	const ZWII_VERSION = '10.0.108.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1224,7 +1224,7 @@ class common {
 			$this->setData(['config','i18n','fr', 'flagFolder', 'core/vendor/i18n/png/']);
 			$this->setData(['config','i18n','fr', 'autotranslate', false]);
 			// Option de gestion des langues
-			$this->setData(['config','enablei18n', true]);
+			$this->setData(['config','disablei18n', false]);
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 	}
@@ -2794,7 +2794,7 @@ class layout extends common {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
 				// Activation de la gestion des langues
-				if ($this->getdata(['config','enablei18n']) === true ) {
+				if ($this->getdata(['config','disablei18n']) === false ) {
 					$rightItems .= '<li><a href="' . helper::baseUrl() . 'i18n" data-tippy-content="Gestion des langues">' . template::ico('flag') . '</a></li>';
 				}	
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Gérer le site">' . template::ico('cog-alt') . '</a></li>';
