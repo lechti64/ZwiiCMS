@@ -328,7 +328,7 @@ td > .col12 {
 #bar a:hover {
 	background: #191A1A;
 	text-decoration: none;
-	font-size: 1.6em;
+	font-size: 1.5em;
 	color: lightblue;
 }
 #bar a:active {
@@ -593,7 +593,7 @@ ul .menuSideChild, li .menuSideChild {
 /* Icones de langues du menu */
 .flag {
 	margin: 0px 5px 0 5px;
-	font-size: calc(100% * 1.5);
+	font-size: calc(100% * 1.2);
 }
 
 /* Paramètres du menu et de la barre de langue */

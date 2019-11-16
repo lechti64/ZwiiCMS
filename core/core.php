@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.102.dev';
+	const ZWII_VERSION = '10.0.104.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -359,38 +359,18 @@ class common {
 
 	/**
 	 * Récupère et vérifie la langue sélectionnée par l'utilisateur (navigateur)
-	 * Une langue valide a une structure de données et une description dans config.
 	 * @param aucun
 	 * @return string code iso de la langue
 	 */	
 	public function geti18n() {
 		
-		// Liste des langues dans la config
-		// On n'utilise pas getData pour éviter une boucle
-		require_once "core/vendor/jsondb/Dot.php";
-		require_once "core/vendor/jsondb/JsonDb.php";
-		$db = new \Prowebcraft\JsonDb([
-			'name' =>  'config.json',
-			'dir' => self::DATA_DIR,
-			'template' => self::TEMP_DIR . 'data.template.json'
-		]);
-		$tempData = $db->get('config.i18n');
-		// Phase d'installation pas de langue définie
-		if (!array($tempData)) {
-			// Vérifier l'existence du fichier de langue
-			if (isset ($_SESSION['ZWII_USER_I18N']) && 
-					key_exists($_SESSION['ZWII_USER_I18N'] , $tempData) ) {
-				return ($_SESSION['ZWII_USER_I18N']);
-			} else {
-				// La valeur de la session n'est pas une version installée, remettre à fr
-				if (isset ($_SESSION['ZWII_USER_I18N'])) {
-					unset($_SESSION['ZWII_USER_I18N']);
-					$this->seti18n();
-				}
-				return ('fr');
-			}		
+		if (isset ($_SESSION['ZWII_USER_I18N']) ) {
+			return ($_SESSION['ZWII_USER_I18N']);
 		}
-		return('fr');
+		// La valeur de la session n'est pas une version installée, remettre à fr
+		unset($_SESSION['ZWII_USER_I18N']);
+		$this->seti18n();
+		return ('fr');
 	}
 
 	/**
@@ -2220,9 +2200,9 @@ class layout extends common {
 				OR $this->getData(['page', $this->getUrl(0), 'hideTitle']) === false
 			)
 		) {
-			echo '<h2 class= "notranslate" id="sectionTitle">' . $this->core->output['title'] . '</h2>';				
+			echo '<h2 id="sectionTitle">' . $this->core->output['title'] . '</h2>';				
 		}
-		echo $this->core->output['content'];
+		echo '<div class="translate">' . $this->core->output['content'] . '</div>';
 
 	}
 
@@ -2242,7 +2222,7 @@ class layout extends common {
 			$contentLeft = str_replace ('[menu]','[MENU]',$contentLeft);
 			$mark = strrpos($contentLeft,'[MENU]')  !== false ? strrpos($contentLeft,'[MENU]') : strlen($contentLeft);		
 			echo substr($contentLeft,0,$mark);			
-			echo '<div id="menuSideLeft">';
+			echo '<div class="translate" id="menuSideLeft">';
 			echo $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'parents' ? false : true);
 			echo '</div>';
 			echo substr($contentLeft,$mark+6,strlen($contentLeft));			
@@ -2263,7 +2243,7 @@ class layout extends common {
 			$contentRight = str_replace ('[menu]','[MENU]',$contentRight);
 			$mark = strrpos($contentRight,'[MENU]')  !== false ? strrpos($contentRight,'[MENU]') : strlen($contentRight);		
 			echo substr($contentRight,0,$mark);			
-			echo '<div id="menuSideRight">';
+			echo '<div class="translate" id="menuSideRight">';
 			echo $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) === 'parents' ? false : true);
 			echo '</div>';
 			echo substr($contentRight,$mark+6,strlen($contentRight));			
@@ -2531,7 +2511,7 @@ class layout extends common {
 		}
 
 		// Retourne les items du menu
-		echo '<ul class="navLevel1">' . $items .  '</ul>';		
+		echo '<ul class="navLevel1 translate">' . $items .  '</ul>';		
 	}
 	
 	/*
@@ -2541,8 +2521,7 @@ class layout extends common {
 	public function showi18nUserSelect() {
 		$items = '';
 			// Menu de langues 
-			if (sizeof($this->i18nInstalled()) > 1) {
-				
+			if (sizeof($this->i18nInstalled()) > 1) {				
 				$items .= '<li><form method="POST" action="' . helper::baseUrl() . 'i18n/lang" id="barFormSelectLanguage">';
 				$items .= '<input type="image" alt="' . self::$i18nList[$this->geti18n()] . '(' . $this->geti18n() . ')' . '" class="flag flagSelected"';
 				$items .= ' name="'.$this->geti18n().'" src="' . helper::baseUrl(false) . $this->getData(['config','i18n',$this->geti18n(),'flagFolder']) . $this->geti18n() . '.png" data-tippy-content="' . self::$i18nList[$this->geti18n()] . '" />';
@@ -2810,7 +2789,10 @@ class layout extends common {
 			if($this->getUser('group') >= self::GROUP_ADMIN) {
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'user" data-tippy-content="Configurer les utilisateurs">' . template::ico('users') . '</a></li>';
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'theme" data-tippy-content="Personnaliser le thème">' . template::ico('brush') . '</a></li>';
-				$rightItems .= '<li><a href="' . helper::baseUrl() . 'i18n" data-tippy-content="Gestion des langues">' . template::ico('flag') . '</a></li>';
+				// Activation de la gestion des langues
+				if ($this->getdata(['config','enablei18n']) === true ) {
+					$rightItems .= '<li class="enablei18n"><a href="' . helper::baseUrl() . 'i18n" data-tippy-content="Gestion des langues">' . template::ico('flag') . '</a></li>';
+				}	
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Gérer le site">' . template::ico('cog-alt') . '</a></li>';
 				// Mise à jour automatique
 				 if(helper::checkNewVersion() ) {

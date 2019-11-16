@@ -19,7 +19,7 @@
 			include('site/data/head.inc.html'); 
 		}?>
 	</head>
-	<body>
+	<body class="notranslate">
 		<?php $layout->showBar(); ?>
 		<?php $layout->showNotification(); ?>		
 		<?php if($this->getData(['theme', 'menu', 'position']) === 'body-first' || $this->getData(['theme', 'menu', 'position']) === 'top' ): ?>
