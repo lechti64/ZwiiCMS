@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.108.dev';
+	const ZWII_VERSION = '10.0.109.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2202,7 +2202,13 @@ class layout extends common {
 				OR $this->getData(['page', $this->getUrl(0), 'hideTitle']) === false
 			)
 		) {
-			echo '<h2 id="sectionTitle">' . $this->core->output['title'] . '</h2>';				
+			$pattern = ['user','theme','i18n','config'];
+			if (in_array($this->getUrl(0),$pattern)) {
+				echo '<h2 id="sectionTitle">' . $this->core->output['title'] . '</h2>';	
+			} else {
+				echo '<h2 id="sectionTitle" class="translate">' . $this->core->output['title'] . '</h2>';	
+			}
+			
 		}
 		echo '<div class="translate">' . $this->core->output['content'] . '</div>';
 		 if ($this->getData(['config','i18n',$this->geti18n(),'autoTranslate']) === true) {
@@ -2219,14 +2225,14 @@ class layout extends common {
 		// Détermine si le menu est présent
 		if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'none') {
 			// Pas de menu
-			echo $this->core->output['contentLeft'];
+			echo '<div class="translate">' . $this->core->output['contentLeft'] . '</div>';
 		} else {
 			// $mark contient 0 le menu est positionné à la fin du contenu
 			$contentLeft = str_replace ('[]','[MENU]',$this->core->output['contentLeft']);
 			$contentLeft = str_replace ('[menu]','[MENU]',$contentLeft);
 			$mark = strrpos($contentLeft,'[MENU]')  !== false ? strrpos($contentLeft,'[MENU]') : strlen($contentLeft);		
 			echo substr($contentLeft,0,$mark);			
-			echo '<div class="translate" id="menuSideLeft">';
+			echo '<div id="menuSideLeft">';
 			echo $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'displayMenu']) === 'parents' ? false : true);
 			echo '</div>';
 			echo substr($contentLeft,$mark+6,strlen($contentLeft));			
@@ -2240,14 +2246,14 @@ class layout extends common {
 		// Détermine si le menu est présent
 		if ($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) === 'none') {
 			// Pas de menu
-			echo $this->core->output['contentRight'];
+			echo '<div class="translate">' .  $this->core->output['contentRight'] . '</div>';
 		} else {
 			// $mark contient 0 le menu est positionné à la fin du contenu
 			$contentRight = str_replace ('[]','[MENU]',$this->core->output['contentRight']);
 			$contentRight = str_replace ('[menu]','[MENU]',$contentRight);
 			$mark = strrpos($contentRight,'[MENU]')  !== false ? strrpos($contentRight,'[MENU]') : strlen($contentRight);		
 			echo substr($contentRight,0,$mark);			
-			echo '<div class="translate" id="menuSideRight">';
+			echo '<div id="menuSideRight">';
 			echo $this->showMenuSide($this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'displayMenu']) === 'parents' ? false : true);
 			echo '</div>';
 			echo substr($contentRight,$mark+6,strlen($contentRight));			
@@ -2565,7 +2571,7 @@ class layout extends common {
 				$filterCurrentPageId = $currentParentPageId;				
 			}
 		} else {
-			$items .= '<ul class="menuSide">';
+			$items .= '<ul class="menuSide translate">';
 		}
 
 		foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
@@ -2618,7 +2624,7 @@ class layout extends common {
 			}
 			// Concaténe les items enfants
 			if (!empty($itemsChildren)) {
-				$items .= '<ul class="menuSideChild">';
+				$items .= '<ul class="menuSideChild translate">';
 				$items .= $itemsChildren;
 				$items .= '</ul>';
 			} else {
