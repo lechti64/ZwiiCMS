@@ -595,6 +595,14 @@ ul .menuSideChild, li .menuSideChild {
 	font-size: calc(100% * 1.1);
 }
 
+/* Emplacement des conditions d'utilisation */
+#googTransLogo {
+	float: right;
+}
+#googTransLogo img {
+	width: 60%;
+}
+
 /* Paramètres du menu et de la barre de langue */
 
 #menuBar {

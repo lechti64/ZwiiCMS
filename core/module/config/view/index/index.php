@@ -88,14 +88,14 @@
 					</div>	
 				</div>	
 				<div class="row">			
-					<div class="col7">
+					<div class="col6">
 						<div class="row">
 								<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
 									'checked' => $this->getData(['config', 'cookieConsent'])
 								]); ?>
 						</div>
 					</div>	
-					<div class="col5">
+					<div class="col6">
 						<div class="row">
 							<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
 								'checked' => helper::checkRewrite(),
@@ -105,35 +105,35 @@
 					</div>	
 				</div>
 				<div class="row">
-					<div class="col7">				
+					<div class="col6">				
 						<div class="row">		
-							<?php echo template::checkbox('configdisablei18n', true, 'Désactiver la gestion des langues', [
+							<?php echo template::checkbox('configdisablei18n', true, 'Désactivation de la gestion des langues', [
 								'checked' => $this->getData(['config', 'disablei18n']),
 								'disabled' => sizeof($this->i18nInstalled() ) > 1 ? true : false,
 								'help' => 'L\'option n\'est pas modifiable  quand une langue est installée.'
 							]); ?>	
 						</div>
 					</div>
-					<div class="col5">
+					<div class="col6">
 						<div class="row">		
-							<?php echo template::checkbox('configdGoogTransLogo', true, 'Logo Google Traduction', [
+							<?php echo template::checkbox('configdGoogTransLogo', true, 'Conditions d\'utilisation Google Traduction', [
 								'checked' => $this->getData(['config', 'googTransLogo']),
-								'help' => 'Affiche en logo Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
+								'help' => 'Affiche les conditions d\'utilisation de Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
 							]); ?>	
 						</div>										
 					</div>
 				</div>
 				<div class="row">
-					<div class="col7">				
+					<div class="col8">				
 						<div class="row">
 							<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
 								'checked' => $this->getData(['config', 'maintenance'])
 							]); ?>	
 						</div>
 					</div>
-					<div class="col5">
+					<div class="col4">
 						<div class="row">
-						<a href="//translate.google.com/intl/fr/about/" data-lity><img src=" <?php echo helper::baseUrl(false); ?>core/module/i18n/ressource/googtrans.png" /></a>
+						<a href="//policies.google.com/terms" data-lity><img src=" <?php echo helper::baseUrl(false); ?>core/module/i18n/ressource/googtrans.png" /></a>
 						</div>
 					</div>
 				</div>		

@@ -2220,7 +2220,7 @@ class layout extends common {
 		echo '<div class="translate">' . $this->core->output['content'] . '</div>';
 		 if ($this->getData(['config','i18n',$this->geti18n(),'autoTranslate']) === true && 
 		 	$this->getData(['config','googTransLogo']) === true) {
-			echo '<div id="googTransLogo"><a href="//translate.google.com/intl/fr/about/" data-lity><img src="' . helper::baseUrl(false) . 'core/module/i18n/ressource/googtrans.png" /></a></div>';
+			echo '<div id="googTransLogo"><a href="//policies.google.com/terms" data-lity><img src="' . helper::baseUrl(false) . 'core/module/i18n/ressource/googtrans.png" /></a></div>';
 		 }
 	}
 
