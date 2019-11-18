@@ -117,6 +117,12 @@
 							'help' => 'L\'option n\'est pas modifiable  quand une langue est installée.'
 						]); ?>	
 					</div>
+					<div class="row">		
+						<?php echo template::checkbox('configdGoogTransLogo', true, 'Logo Google Translation', [
+							'checked' => $this->getData(['config', 'googTransLogo']),
+							'help' => 'Affiche en logo Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
+						]); ?>	
+					</div>					
 				</div>				
 			</div>							
 		</div>

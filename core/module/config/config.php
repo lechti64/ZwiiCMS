@@ -404,6 +404,7 @@ class config extends common {
 					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),					
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
 					'disablei18n' => sizeof($this->i18nInstalled() ) === 1 ? $this->getInput('configdisablei18n', helper::FILTER_BOOLEAN) : false,
+					'googTransLogo' => $this->getInput('configdGoogTransLogo', helper::FILTER_BOOLEAN),
 					'i18n' => $this->getData(['config','i18n'])
 				]
 			]);

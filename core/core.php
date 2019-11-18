@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.110.dev';
+	const ZWII_VERSION = '10.0.111.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1231,6 +1231,7 @@ class common {
 			$this->setData(['config','i18n','fr', 'autotranslate', false]);
 			// Option de gestion des langues
 			$this->setData(['config','disablei18n', false]);
+			$this->setData(['config','googTransLogo', true]);
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 	}
@@ -2217,7 +2218,8 @@ class layout extends common {
 			
 		}
 		echo '<div class="translate">' . $this->core->output['content'] . '</div>';
-		 if ($this->getData(['config','i18n',$this->geti18n(),'autoTranslate']) === true) {
+		 if ($this->getData(['config','i18n',$this->geti18n(),'autoTranslate']) === true && 
+		 	$this->getData(['config','googTransLogo']) === true) {
 			echo '<div><a href="//translate.google.com/intl/fr/about/" data-lity><img src="' . helper::baseUrl(false) . 'core/module/i18n/ressource/googtrans.png" /></a></div>';
 		 }
 	}
