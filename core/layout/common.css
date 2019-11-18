@@ -343,7 +343,7 @@ td > .col12 {
 	width: 140px;
 	margin-right: 10px;
 }
-@media (min-width: 784px) {
+@media (min-width: 950px) {
 	#bar #barLeft {
 		float: left;
 	}	
@@ -353,7 +353,7 @@ td > .col12 {
 	}
 }
 
-@media (max-width: 784px) {
+@media (max-width: 950px) {
 	#bar {
 		text-align: center;
 		padding: 0;
@@ -382,7 +382,7 @@ td > .col12 {
 	}
 }
 
-@media (max-width: 485px) {
+@media (max-width: 550px) {
 	#bar #barSelectPage {
 		width: 30% ;
 		font-size: 0.8em;			
@@ -515,7 +515,7 @@ nav a:hover {
 	text-decoration: none;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
 	nav #menu {
 		display: block;
 	}
