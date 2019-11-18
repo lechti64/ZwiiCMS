@@ -197,8 +197,8 @@ class common {
 		$i18nFrontEnd = $i18nPOST === '' ? $i18nHTTP : $i18nPOST;
 
 		// Vérifier la validité de la langue sélectionnée sinon fr
-		if ( !file_exists(self::DATA_DIR . $i18nFrontEnd . 'page.json') &&
-			 !file_exists(self::DATA_DIR . $i18nFrontEnd . 'module.json')  ) {
+		if ( !file_exists(self::DATA_DIR . $i18nFrontEnd . '/page.json') &&
+			 !file_exists(self::DATA_DIR . $i18nFrontEnd . '/module.json')  ) {
 				$i18nFrontEnd = 'fr';
 				$_SESSION['ZWII_USER_I18N'] = 'fr';
 			 }
