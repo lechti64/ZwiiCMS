@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.111.dev';
+	const ZWII_VERSION = '10.0.112.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2220,7 +2220,7 @@ class layout extends common {
 		echo '<div class="translate">' . $this->core->output['content'] . '</div>';
 		 if ($this->getData(['config','i18n',$this->geti18n(),'autoTranslate']) === true && 
 		 	$this->getData(['config','googTransLogo']) === true) {
-			echo '<div><a href="//translate.google.com/intl/fr/about/" data-lity><img src="' . helper::baseUrl(false) . 'core/module/i18n/ressource/googtrans.png" /></a></div>';
+			echo '<div id="googTransLogo><a href="//translate.google.com/intl/fr/about/" data-lity><img src="' . helper::baseUrl(false) . 'core/module/i18n/ressource/googtrans.png" /></a></div>';
 		 }
 	}
 

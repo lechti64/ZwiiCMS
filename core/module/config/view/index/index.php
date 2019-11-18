@@ -49,7 +49,7 @@
 		</div>		
 	</div>
 	<div class="row">
-		<div class="col6">
+		<div class="col7">
 			<div class="block">
 				<h4>Réglages</h4>
 				<div class="row">
@@ -86,88 +86,103 @@
                             'help' => 'Les mentions légales sont obligatoires en France'
 						]); ?>
 					</div>	
-				</div>				
-				<div class="col12">
-                    <div class="row">
-                            <?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
-                                'checked' => $this->getData(['config', 'cookieConsent'])
-                            ]); ?>
-                    </div>
 				</div>	
-				<div class="col12">
-                    <div class="row">
-                        <?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
-                            'checked' => helper::checkRewrite(),
-                            'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
-                        ]); ?>
-                    </div>
-				</div>	
-				<div class="col12">				
-					<div class="row">		
-						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
-							'checked' => $this->getData(['config', 'maintenance'])
-						]); ?>	
+				<div class="row">			
+					<div class="col7">
+						<div class="row">
+								<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
+									'checked' => $this->getData(['config', 'cookieConsent'])
+								]); ?>
+						</div>
+					</div>	
+					<div class="col5">
+						<div class="row">
+							<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
+								'checked' => helper::checkRewrite(),
+								'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
+							]); ?>
+						</div>
+					</div>	
+				</div>
+				<div class="row">
+					<div class="col7">				
+						<div class="row">		
+							<?php echo template::checkbox('configdisablei18n', true, 'Désactiver la gestion des langues', [
+								'checked' => $this->getData(['config', 'disablei18n']),
+								'disabled' => sizeof($this->i18nInstalled() ) > 1 ? true : false,
+								'help' => 'L\'option n\'est pas modifiable  quand une langue est installée.'
+							]); ?>	
+						</div>
 					</div>
-				</div>	
-				<div class="col12">				
-					<div class="row">		
-						<?php echo template::checkbox('configdisablei18n', true, 'Désactiver la gestion des langues', [
-							'checked' => $this->getData(['config', 'disablei18n']),
-							'disabled' => sizeof($this->i18nInstalled() ) > 1 ? true : false,
-							'help' => 'L\'option n\'est pas modifiable  quand une langue est installée.'
-						]); ?>	
+					<div class="col5">
+						<div class="row">		
+							<?php echo template::checkbox('configdGoogTransLogo', true, 'Logo Google Traduction', [
+								'checked' => $this->getData(['config', 'googTransLogo']),
+								'help' => 'Affiche en logo Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
+							]); ?>	
+						</div>										
 					</div>
-					<div class="row">		
-						<?php echo template::checkbox('configdGoogTransLogo', true, 'Logo Google Translation', [
-							'checked' => $this->getData(['config', 'googTransLogo']),
-							'help' => 'Affiche en logo Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
-						]); ?>	
-					</div>					
-				</div>				
+				</div>
+				<div class="row">
+					<div class="col7">				
+						<div class="row">
+							<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
+								'checked' => $this->getData(['config', 'maintenance'])
+							]); ?>	
+						</div>
+					</div>
+					<div class="col5">
+						<div class="row">
+						<a href="//translate.google.com/intl/fr/about/" data-lity><img src=" <?php echo helper::baseUrl(false); ?>core/module/i18n/ressource/googtrans.png" /></a>
+						</div>
+					</div>
+				</div>		
 			</div>							
 		</div>
-		<div class="col6">
+		<div class="col5">
 			<div class="block">
 				<h4>Réseaux sociaux</h4>
 				<div class="row">
-					<div class="col4">
+					<div class="col6">
 						<?php echo template::text('configSocialFacebookId', [
 							'help' => 'Saisissez votre ID : https://www.facebook.com/[ID].',
 							'label' => 'Facebook',
 							'value' => $this->getData(['config', 'social', 'facebookId'])
 						]); ?>
 					</div>
-					<div class="col4">					
+					<div class="col6">					
 						<?php echo template::text('configSocialInstagramId', [
 							'help' => 'Saisissez votre ID : https://www.instagram.com/[ID].',
 							'label' => 'Instagram',
 							'value' => $this->getData(['config', 'social', 'instagramId'])
 						]); ?>
 					</div>
-					<div class="col4">
-						<?php echo template::text('configSocialYoutubeId', [
-							'help' => 'Saisissez votre ID : https://www.youtube.com/channel/[ID].',
-							'label' => 'Youtube',
-							'value' => $this->getData(['config', 'social', 'youtubeId'])
-						]); ?>
-					</div>					
-				</div>
+				</div>									
 				<div class="row">
-					<div class="col4">
-						<?php echo template::text('configSocialTwitterId', [
-							'help' => 'Saisissez votre ID : https://twitter.com/[ID].',
-							'label' => 'Twitter',
+					<div class="col6">
+							<?php echo template::text('configSocialYoutubeId', [
+								'help' => 'Saisissez votre ID : https://www.youtube.com/channel/[ID].',
+								'label' => 'Youtube',
+								'value' => $this->getData(['config', 'social', 'youtubeId'])
+							]); ?>
+						</div>
+					<div class="col6">
+							<?php echo template::text('configSocialTwitterId', [
+								'help' => 'Saisissez votre ID : https://twitter.com/[ID].',
+								'label' => 'Twitter',
 							'value' => $this->getData(['config', 'social', 'twitterId'])
 						]); ?>
 					</div>
-					<div class="col4">
+				</div>
+				<div class="row">
+					<div class="col6">
 						<?php echo template::text('configSocialPinterestId', [
 							'help' => 'Saisissez votre ID : https://pinterest.com/[ID].',
 							'label' => 'Pinterest',
 							'value' => $this->getData(['config', 'social', 'pinterestId'])
 						]); ?>
 					</div>					
-					<div class="col4">
+					<div class="col6">
 						<?php echo template::text('configSocialLinkedinId', [
 							'help' => 'Saisissez votre ID Linkedin : https://fr.linkedin.com/in/[ID].',
 							'label' => 'Linkedin',
@@ -176,7 +191,7 @@
 					</div>											
 				</div>
 				<div class="row">			
-					<div class="col4 offset4">
+					<div class="col6 offset3">
 							<?php echo template::text('configSocialGithubId', [
 								'help' => 'Saisissez votre ID Github : https://github.com/[ID].',
 								'label' => 'Github',
