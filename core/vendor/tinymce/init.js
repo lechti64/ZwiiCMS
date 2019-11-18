@@ -71,6 +71,8 @@ tinymce.init({
 	statusbar: false,
 	// Autorise l'ajout de script
 	extended_valid_elements: "script[language|type|src]",
+	// Autorise les styles dans le code source,
+	valid_children : "+body[style]",
 	// Bloque le dimensionnement des médias (car automatiquement en fullsize avec fitvids pour le responsive)
 	media_dimensions: false,
 	// Désactiver la dimension des images
@@ -166,6 +168,11 @@ tinymce.init({
 			title: "Grille asymétrique : 10 - 2",
 			url: baseUrl + "core/vendor/tinymce/templates/col10-2.html",
 			description: "Grille adaptative sur 12 colonnes, sur mobile elles passent les unes en dessous des autres."
+		},
+		{
+			title: "Paragraphe non traduit",
+			url: baseUrl + "core/vendor/tinymce/templates/googtrans.html",
+			description: "Empêche par la traduction automatique par le traducteur Google."
 		}
 	]
 });
