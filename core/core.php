@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.109.dev';
+	const ZWII_VERSION = '10.0.110.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -169,7 +169,6 @@ class common {
 				common::$importNotices [] = "Importation réalisée avec succès" ;
 				//echo '<script>window.location.replace("' .  helper::baseUrl() . $this->getData(['config','homePageId']) . '")</script>';
 			}
-			
 		// Installation fraîche, initialisation des modules manquants
 		// La langue d'installation par défaut est fr
 		foreach (self::$dataStage as $stageId) {
@@ -196,6 +195,13 @@ class common {
 
 		// Détermine la langue selon la priorité
 		$i18nFrontEnd = $i18nPOST === '' ? $i18nHTTP : $i18nPOST;
+
+		// Vérifier la validité de la langue sélectionnée sinon fr
+		if ( !file_exists(self::DATA_DIR . $i18nFrontEnd . 'page.json') &&
+			 !file_exists(self::DATA_DIR . $i18nFrontEnd . 'module.json')  ) {
+				$i18nFrontEnd = 'fr';
+				$_SESSION['ZWII_USER_I18N'] = 'fr';
+			 }
 
 		// Sauvegarder la sélection
 		$this->seti18N($i18nFrontEnd);
@@ -2212,7 +2218,7 @@ class layout extends common {
 		}
 		echo '<div class="translate">' . $this->core->output['content'] . '</div>';
 		 if ($this->getData(['config','i18n',$this->geti18n(),'autoTranslate']) === true) {
-			echo '<div><a href="//translate.google.com/intl/fr/about/" data-lity><img src="core/module/i18n/ressource/googtrans.png" /></a></div>';
+			echo '<div><a href="//translate.google.com/intl/fr/about/" data-lity><img src="' . helper::baseUrl(false) . 'core/module/i18n/ressource/googtrans.png" /></a></div>';
 		 }
 	}
 
