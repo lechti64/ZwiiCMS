@@ -393,6 +393,7 @@ class common {
 		} 
 		if ($this->getdata(['config','i18n',$lan,'autoTranslate']) === true &&
 		 	$lan !== 'fr') {
+			// Charge la librairie Google Translate
 			setrawcookie("googtrans", '/fr/'. $lan, time() + 3600, helper::baseUrl());
 		} else {
 			setrawcookie("googtrans", '/fr/fr', time() + 3600, helper::baseUrl());
