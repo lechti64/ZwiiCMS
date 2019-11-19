@@ -172,7 +172,7 @@ tinymce.init({
 		{
 			title: "Paragraphe non traduit",
 			url: baseUrl + "core/vendor/tinymce/templates/googtrans.html",
-			description: "Empêche par la traduction automatique par le traducteur Google."
+			description: "Empêche la traduction automatique par Google Traduction."
 		}
 	]
 });

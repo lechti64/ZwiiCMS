@@ -25,7 +25,7 @@ class init extends common {
 			'i18n' => [
 				'fr' => [
 					'flagFolder' 	=> "core/vendor/i18n/png/",
-					'AutoTranslate' => false
+					'autoTranslate' => false
 				]
 			]
 		],

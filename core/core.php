@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.116.dev';
+	const ZWII_VERSION = '10.0.118.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2861,6 +2861,12 @@ class layout extends common {
 		// Librairies
 		$moduleId = $this->getData(['page', $this->getUrl(0), 'moduleId']);
 		foreach($this->core->output['vendor'] as $vendorName) {
+			// Chargement des scripts Google Translate si option active
+			if ( $vendorName === 'translate' && 
+				($this->geti18n() === 'fr' ||
+				$this->getData(['config','i18n',$this->geti18n(),'autoTranslate']) === false))  {
+					continue;
+			}
 			// Coeur
 			if(file_exists('core/vendor/' . $vendorName . '/inc.json')) {
 				$vendorPath = 'core/vendor/' . $vendorName . '/';
