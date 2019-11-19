@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.119.dev';
+	const ZWII_VERSION = '10.0.120.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2212,7 +2212,7 @@ class layout extends common {
 		) {
 			$pattern = ['user','theme','i18n','config'];
 			if (in_array($this->getUrl(0),$pattern)) {
-				echo '<h2 id="sectionTitle">' . $this->core->output['title'] . '</h2>';	
+				echo '<h2 id="sectionTitle" class="notranslate">' . $this->core->output['title'] . '</h2>';	
 			} else {
 				echo '<h2 id="sectionTitle" class="translate">' . $this->core->output['title'] . '</h2>';	
 			}
