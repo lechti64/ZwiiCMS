@@ -131,11 +131,6 @@
 							]); ?>	
 						</div>
 					</div>
-					<div class="col4">
-						<div class="row">
-						<a href="//policies.google.com/terms#toc-content" data-lity><img src=" <?php echo helper::baseUrl(false); ?>core/module/i18n/ressource/googtrans.png" /></a>
-						</div>
-					</div>
 				</div>		
 			</div>							
 		</div>

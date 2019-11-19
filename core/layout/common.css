@@ -337,10 +337,10 @@ td > .col12 {
 	border: 0;
 }
 #bar #barSelectPage {
-	width: 200px;
+	width: 180px;
 }
 #bar #barSelectLanguage {
-	width: 140px;
+	width: 120px;
 	margin-right: 10px;
 }
 @media (min-width: 950px) {

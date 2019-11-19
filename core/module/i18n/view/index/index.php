@@ -36,9 +36,11 @@
 					</div>	
 				</div>
 				<div class="row">
-					<div class="col3 verticalAlignMiddle">
+					<div class="col4">
 						<?php echo template::checkbox('i18AutoTranslation', true, 'Traduction automatique'); ?> 
-						<a href="//translate.google.com/intl/fr/about/" data-lity><img src="core/module/i18n/ressource/googtrans.png" /></a>
+					</div>
+					<div class="col4">
+						<a href="//policies.google.com/terms#toc-content" data-lity><img src="core/module/i18n/ressource/googtrans.png" /></a>
 					</div>
 				</div>	
 			</div>
