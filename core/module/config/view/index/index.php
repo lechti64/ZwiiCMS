@@ -49,7 +49,7 @@
 		</div>		
 	</div>
 	<div class="row">
-		<div class="col7">
+		<div class="col12">
 			<div class="block">
 				<h4>Réglages</h4>
 				<div class="row">
@@ -134,7 +134,9 @@
 				</div>		
 			</div>							
 		</div>
-		<div class="col5">
+	</div>
+	<div class="row">
+		<div class="col6">
 			<div class="block">
 				<h4>Réseaux sociaux</h4>
 				<div class="row">
@@ -196,20 +198,19 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col12">
+	<!--</div>
+	<div class="row">-->
+		<div class="col6">
 			<div class="block">
 				<h4>Référencement</h4>
 				<div class="row">
-					<div class="col4 offset1">	
+					<div class="col5">	
 						<?php echo template::button('configMetaImage', [
 						'href' => helper::baseUrl() . 'config/configMetaImage',
-						'value' => 'Rafraîchir la capture d\'écran Open Graph',
-						'help' => 'bb'
+						'value' => 'Rafraîchir la capture d\'écran Open Graph'
 						]); ?>
 					</div>
-					<div class="col4 offset2">
+					<div class="col5 offset2">
 						<?php echo template::button('configSiteMap', [
 							'href' => helper::baseUrl() . 'config/generateFiles',
 							'value' => 'Générer sitemap.xml et robots.txt'
