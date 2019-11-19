@@ -83,7 +83,7 @@ class init extends common {
 				'font' => 'Open+Sans',				
 				'fontSize' => '.8em',
 				'fontWeight' => 'normal',				
-				'height' => '0',
+				'height' => '5px',
 				'loginLink' => true,
 				'margin' => true,
 				'position' => 'site',
