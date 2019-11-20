@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.120.dev';
+	const ZWII_VERSION = '10.0.121.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -181,30 +181,35 @@ class common {
 
 		// Déterminer la langue du visiteur 
 		// --------------------------------
-		// 1 Langue sélectionnée par l'utilisateur prioritaire
+		// 1 Lire la langue sélectionnée
 		if (isset($_SESSION['ZWII_USER_I18N'])) {
-			$i18nPOST = $_SESSION['ZWII_USER_I18N'];
+
+			$i18nFront = $this->i18nIsValid($_SESSION['ZWII_USER_I18N']) ? $_SESSION['ZWII_USER_I18N'] : 'fr';
+
+			// Sauvegarder la sélection
+			$this->seti18N($i18nFront);
+
 		} else {
+			// Déterminer la langue de l'interface
 			$i18nPOST = '';
+
+			// Lire la langue du navigateur
+			$i18nHTTP = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);	
+
+			// La langue sélectionnée par l'utilisateur est-elle valide sinon fr
+			$i18nPOST = $this->i18nIsValid($i18nPOST) === true ? $i18nPOST : '';
+
+			// La langue du navigateur est elle disponible sinon fr
+			$i18nHTTP = $this->i18nIsValid($i18nHTTP) === true ? $i18nHTTP : 'fr';
+
+			// Détermine la langue selon la priorité
+			$i18nFront = $i18nPOST === '' ? $i18nHTTP : 'fr';
+
+			// Sauvegarder la sélection
+			$this->seti18N($i18nFront);
 		}
-		// 2 Langue du navigateur
-		$i18nHTTP = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);	
 
-		// !! La langue du navigateur est elle disponible sinon fr
-		$i18nHTTP = key_exists($i18nHTTP, self::$i18nList) ? $i18nHTTP : 'fr';
 
-		// Détermine la langue selon la priorité
-		$i18nFrontEnd = $i18nPOST === '' ? $i18nHTTP : $i18nPOST;
-
-		// Vérifier la validité de la langue sélectionnée sinon fr
-		if ( !file_exists(self::DATA_DIR . $i18nFrontEnd . '/page.json') &&
-			 !file_exists(self::DATA_DIR . $i18nFrontEnd . '/module.json')  ) {
-				$i18nFrontEnd = 'fr';
-				$_SESSION['ZWII_USER_I18N'] = 'fr';
-			 }
-
-		// Sauvegarder la sélection
-		$this->seti18N($i18nFrontEnd);
 
 		// Utilisateur connecté
 		if($this->user === []) {
@@ -368,15 +373,10 @@ class common {
 	 * @param aucun
 	 * @return string code iso de la langue
 	 */	
-	public function geti18n() {
-		
+	public function geti18n() {		
 		if (isset ($_SESSION['ZWII_USER_I18N']) ) {
 			return ($_SESSION['ZWII_USER_I18N']);
 		}
-		// La valeur de la session n'est pas une version installée, remettre à fr
-		unset($_SESSION['ZWII_USER_I18N']);
-		$this->seti18n();
-		return ('fr');
 	}
 
 	/**
@@ -409,6 +409,22 @@ class common {
 	public function geti18nFlagFolder($iso = '') {
 		$default = array ('de',	'en', 'es' , 'fr',  'it',  'nl', 'pt');
 		return (in_array($iso,$default) === true ? 'core/vendor/i18n/png/'  : self::FILE_DIR . 'source/i18n/png/' );
+	}
+
+	/** Vérifier si la langue est installée
+	 * @return @bool 
+	 * Vérifie : l'existence des fichiers de données ; 
+	 * la présence dans la liste des langues dispos ; 
+	 * la présence dans la configuration su site
+	 */
+	public function i18nIsValid ($lan) {
+		if ( file_exists(self::DATA_DIR . $lan . '/page.json') && 
+			 file_exists(self::DATA_DIR . $lan . '/module.json') &&
+			 key_exists($lan, self::$i18nList) &&
+			 is_array($this->getData(['config','i18n',$lan]) ) ) {
+			return (true);			
+		}
+		return (false);
 	}
 
 
