@@ -2290,7 +2290,7 @@ class layout extends common {
 	 */
 	public function showFooterText() {
 		if($footerText = $this->getData(['theme', 'footer', 'text']) OR $this->getUrl(0) === 'theme') {
-			echo '<div id="footerText"><span id="footerFontText">' . nl2br($footerText) . '</span></div>';
+			echo '<div class="translate" id="footerText"><span id="footerFontText">' . nl2br($footerText) . '</span></div>';
 		}
 	}
 
@@ -2300,7 +2300,7 @@ class layout extends common {
     public function showCopyright() {
 		
 		// Ouverture Bloc copyright
-		$items = '<div id="footerCopyright">';
+		$items = '<div class="translate" id="footerCopyright">';
 		$items .= '<span id="footerFontCopyright">';
 		// Affichage de motorisé par 
 		$items .= '<span id="footerDisplayCopyright" ';
