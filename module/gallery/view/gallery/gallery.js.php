@@ -21,4 +21,7 @@ $(".galleryGalleryPicture").simpleLightbox({
 });
 
 // Traduite les légendes
-$('body').removeClass("notranslate");
+$(".galleryGalleryPicture").on("click", function() {
+	$('body').removeClass("notranslate");
+});
+
