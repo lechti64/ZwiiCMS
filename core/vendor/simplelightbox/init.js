@@ -4,7 +4,5 @@
 		$("a[rel='gallery']").addClass("gallery translate");
 
 		$('.gallery').simpleLightbox({closeText:"&times;",captionsData:'alt'});
-		
-		// Traduite les légendes
-		$('body').removeClass("notranslate");		
+				
 	});

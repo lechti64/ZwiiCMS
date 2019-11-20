@@ -19,3 +19,6 @@ $(".galleryGalleryPicture").simpleLightbox({
 	captionsData: "caption",
 	closeText: "&times;"
 });
+
+// Traduite les légendes
+$('body').removeClass("notranslate");
