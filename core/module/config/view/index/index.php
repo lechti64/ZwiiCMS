@@ -167,10 +167,11 @@
 							'checked' => $this->getData(['config', 'maintenance'])
 						]); ?>	
 						<?php echo template::checkbox('configAutodate', true, 'Mise à jour automatique', [
-							'checked' => $this->getData(['config', 'autoUpdate'])
+							'checked' => $this->getData(['config', 'autoUpdate']),
+							'help' => 'Vérifie une fois par jour l\'existence d\'une mise à jour.'
 						]); ?>						
 						<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique', [
-							'checked' => $this->getData(['config', 'autoBackup']),
+							'checked' => $this->getData(['config', 'autoUpdate']),
 							'help' => 'Le fichier de données est copié quotidiennement dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.'
 						]); ?>
 					</div>
@@ -198,9 +199,7 @@
 					</div>
 					<div class="col7">
 						<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
-					</div>	
-
-				
+					</div>					
 				<div class="row">
 					<div class="col10 offset1">
 						<?php echo template::button('configSiteMap', [
