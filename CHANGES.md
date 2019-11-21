@@ -8,6 +8,8 @@
         - Affichage de l'option Fil d'ariane alors que le titre est masquée.
         - Page parente, l'option "ne pas afficher les pages enfants dans le meneu horizontal" est incompatible avec une page désactivée : désactivation et masquage lorsque la page est désactivée.
         - Mauvais encodage des titres de pages perturbant l'affichage des caractères spéciaux ( ex: apostrophes ).
+- Modification : 
+    - Recherche d'une mise à jour en ligne, s'effectue une fois par jour et devient optionnelle.
 
 ## version 9.2.10
 - Modifications préparatoires à la version 10 : 
