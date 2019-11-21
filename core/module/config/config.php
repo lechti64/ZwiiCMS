@@ -291,7 +291,7 @@ class config extends common {
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
 					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true),
 					'legalPageId' => $this->getInput('configLegalPageId'),
-					'autoUpdate' => $this->getInput('configAutoUpdate')
+					'autoUpdate' => $this->getInput('configAutoUpdate', helper::FILTER_BOOLEAN)
 				]
 			]);
 			if(self::$inputNotices === []) {
