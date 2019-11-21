@@ -124,11 +124,18 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col8">				
+					<div class="col6">				
 						<div class="row">
 							<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
 								'checked' => $this->getData(['config', 'maintenance'])
 							]); ?>	
+						</div>
+					</div>
+					<div class="col6">				
+						<div class="row">
+							<?php echo template::checkbox('configAutoUpdate', true, 'Sauvegarde automatique', [
+									'checked' => $this->getData(['config', 'autoUpdate'])
+								]); ?>
 						</div>
 					</div>
 				</div>		

@@ -36,6 +36,17 @@
         - Le nom des fichiers de sauvegarde contient l'adresse de base du site
 
         
+## version 9.2.11
+- Corrections : 
+    - Marge du pied de page par défaut 5px
+    - Installation sans site exemple : suppression des barres latérales
+    - Edition de page : 
+        - Affichage de l'option Fil d'ariane alors que le titre est masquée.
+        - Page parente, l'option "ne pas afficher les pages enfants dans le meneu horizontal" est incompatible avec une page désactivée : désactivation et masquage lorsque la page est désactivée.
+        - Mauvais encodage des titres de pages perturbant l'affichage des caractères spéciaux ( ex: apostrophes ).
+- Modification : 
+    - Recherche d'une mise à jour en ligne, s'effectue une fois par jour et devient optionnelle.
+
 ## version 9.2.10
 - Modifications préparatoires à la version 10 : 
     - Lors de l'installation, stockage de l'url de base dans l'éventualité de la restauration d'un backup et de son installation dans une autre arborescence.

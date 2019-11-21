@@ -397,7 +397,6 @@ class config extends common {
 						'githubId' => $this->getInput('configSocialGithubId')
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
-
 					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true),
 					'legalPageId' => $this->getInput('configLegalPageId'),
 					//'homePageId' => $this->getInput('configHomePageId', helper::FILTER_ID, true),
@@ -405,7 +404,8 @@ class config extends common {
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
 					'disablei18n' => sizeof($this->i18nInstalled() ) === 1 ? $this->getInput('configdisablei18n', helper::FILTER_BOOLEAN) : false,
 					'googTransLogo' => $this->getInput('configdGoogTransLogo', helper::FILTER_BOOLEAN),
-					'i18n' => $this->getData(['config','i18n'])
+					'i18n' => $this->getData(['config','i18n']),
+					'autoUpdate' => $this->getInput('configAutoUpdate')
 				]
 			]);
 							

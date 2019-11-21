@@ -202,9 +202,37 @@ $( document ).ready(function() {
 			$("#pageEditHideMenuChildrenWrapper").slideDown();
 			//$("#pageHomePageIdWrapper").addClass("disabled");
 			//$("#pageHomePageIdWrapper").slideDown();
-		}
+	}
+
+	/**
+	 * Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée
+	 */
+	if ($("#pageEditDisable").is(':checked') ) {
+		$("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
+		$("#pageEditHideMenuChildrenWrapper").slideUp();			
+	} else {
+		$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
+		$("#pageEditHideMenuChildrenWrapper").slideDown();								
+	}
 
 });
+
+
+/**
+* Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée
+*/
+var pageEditDisableDOM = $("#pageEditDisable");
+pageEditDisableDOM.on("change", function() {
+if ($(this).is(':checked') ) {
+	$("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
+	$("#pageEditHideMenuChildrenWrapper").slideUp();
+	$("#pageEditHideMenuChildren").prop("checked", false);			
+} else {
+	$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
+	$("#pageEditHideMenuChildrenWrapper").slideDown();								
+}
+});
+
 
 
 /**	

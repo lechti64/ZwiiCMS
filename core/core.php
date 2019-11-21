@@ -1251,6 +1251,14 @@ class common {
 			$this->setData(['config','googTransLogo', true]);
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
+		// Version 9.2.11
+		if($this->getData(['core', 'dataVersion']) < 9211) {
+			$autoUpdate= mktime(0, 0, 0);
+			$this->setData(['core', 'lastAutoUpdate', $autoUpdate]);
+			$this->setData(['config','autoUpdate', true]);
+			$this->setData(['core', 'dataVersion', 9211]);
+			$this->saveData();
+		}
 	}
 }
 
@@ -2830,10 +2838,14 @@ class layout extends common {
 				}	
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Gérer le site">' . template::ico('cog-alt') . '</a></li>';
 				// Mise à jour automatique
-				 if(helper::checkNewVersion() ) {
-				  $rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
-				 }
-				// Mise à jour automatique
+				$lastAutoUpdate = mktime(0, 0, 0); 
+				if( $this->getData(['config','autoUpdate']) &&
+					$lastAutoUpdate > $this->getData(['core','lastAutoUpdate']) + 86400 ) {
+					$this->setData(['core','lastAutoUpdate',$lastAutoUpdate]);
+				    if ( helper::checkNewVersion()  ) {
+						$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
+					}
+				}	
 			}
 			$rightItems .= '<li><a href="' . helper::baseUrl() . 'user/edit/' . $this->getUser('id'). '/' . $_SESSION['csrf'] . '" data-tippy-content="Configurer mon compte">' . template::ico('user', 'right') . '<span id="displayUsername">' .  $this->getUser('firstname') . ' ' . $this->getUser('lastname') . '</span></a></li>';
 			$rightItems .= '<li><a id="barLogout" href="' . helper::baseUrl() . 'user/logout" data-tippy-content="Se déconnecter">' . template::ico('logout') . '</a></li>';
