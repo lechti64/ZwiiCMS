@@ -59,8 +59,8 @@ echo template::formOpen('pageEditForm'); ?>
 				<div class="row">
 					<div class="col4">
 						<?php echo template::select('pageTypeMenu', $module::$typeMenu,[
-								'help' => 'Choisissez une icône ou une image de petite taille.',
-								'label' => 'Aspect du menu',
+								'help' => 'La page peut être représentée par une image de petite taille.',
+								'label' => 'Apparence dans le menu horizontal',
 								'selected' => $this->getData(['page', $this->getUrl(2), 'typeMenu'])
 						]); ?>
 					</div>

@@ -61,6 +61,9 @@ class install extends common {
 							$this->deleteData(['page', $childKey]);
 						}
 					}
+					// Effacer les barres
+					$this->deleteData(['page', 'barre']);
+					$this->deleteData(['page', 'barrelateraleavecmenu']);
 					// Effacer les modules 
 					$this->deleteData(['module']);
 					// Ajouter ici la liste des pages privées qui ne sont pas vues lors de l'installation.

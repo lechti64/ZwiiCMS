@@ -137,9 +137,8 @@ $( document ).ready(function() {
 	* Masquer ou afficher le chemin de fer
 	* Quand le titre est masqué 
 	*/
-	if ($("input[name=pageEditHideTitle]").is(':checked') &&
-		  $("#pageEditParentPageId").val() === "" &&
-		  !$('input[name=pageEditHideTitle]').is(':checked') )  {
+	if ($("input[name=pageEditHideTitle]").is(':checked') ||
+		  $("#pageEditParentPageId").val() === "" )  {
 
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideUp();
@@ -183,8 +182,34 @@ $( document ).ready(function() {
 			$("#pageEditHideMenuChildrenWrapper").slideDown();
 		}
 
+/**
+ * Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée
+ */
+	if ($("#pageEditDisable").is(':checked') ) {
+		$("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
+		$("#pageEditHideMenuChildrenWrapper").slideUp();			
+	} else {
+		$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
+		$("#pageEditHideMenuChildrenWrapper").slideDown();								
+	}
+
 });
 
+
+/**
+ * Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée
+ */
+var pageEditDisableDOM = $("#pageEditDisable");
+pageEditDisableDOM.on("change", function() {
+	if ($(this).is(':checked') ) {
+		$("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
+		$("#pageEditHideMenuChildrenWrapper").slideUp();
+		$("#pageEditHideMenuChildren").prop("checked", false);			
+	} else {
+		$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
+		$("#pageEditHideMenuChildrenWrapper").slideDown();								
+	}
+});
 
 
 /**	
@@ -423,7 +448,10 @@ $("#pageEditModuleConfig").on("click", function() {
  * Affiche les pages en fonction de la page parent dans le choix de la position
  */
 var hierarchy = <?php echo json_encode($this->getHierarchy()); ?>;
+
 var pages = <?php echo json_encode($this->getData(['page'])); ?>;
+
+
 // 9.0.07 corrige une mauvaise sélection d'une page orpheline avec enfant
 var positionInitial = <?php echo $this->getData(['page',$this->getUrl(2),"position"]); ?>;
 // 9.0.07
@@ -451,7 +479,7 @@ $("#pageEditParentPageId").on("change", function() {
 					positionPrevious++;
 					// Ajout à la liste
 					positionDOM.append(
-						$("<option>").val(positionPrevious).text("Après \"" + pages[key].title + "\"")
+						$("<option>").val(positionPrevious).text("Après \"" + (pages[key].title) + "\"")
 					);
 				}
 			}
@@ -476,7 +504,7 @@ $("#pageEditParentPageId").on("change", function() {
 				positionPrevious++;
 				// Ajout à la liste
 				positionDOM.append(
-					$("<option>").val(positionPrevious).text("Après \"" + pages[hierarchy[parentSelected][i]].title + "\"")
+					$("<option>").val(positionPrevious).text("Après \"" + (pages[hierarchy[parentSelected][i]].title) + "\"")
 				);
 			}
 		}
