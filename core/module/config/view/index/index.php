@@ -92,7 +92,8 @@
                             'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
                         ]); ?>
                     </div>
-				</div>							
+				</div>	
+
 			</div>							
 		</div>
 		<div class="col6">
@@ -165,6 +166,9 @@
 						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
 							'checked' => $this->getData(['config', 'maintenance'])
 						]); ?>	
+						<?php echo template::checkbox('configAutodate', true, 'Mise à jour automatique', [
+							'checked' => $this->getData(['config', 'autoUpdate'])
+						]); ?>						
 						<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique', [
 							'checked' => $this->getData(['config', 'autoBackup']),
 							'help' => 'Le fichier de données est copié quotidiennement dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.'
