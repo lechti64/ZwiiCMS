@@ -166,12 +166,12 @@
 						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
 							'checked' => $this->getData(['config', 'maintenance'])
 						]); ?>	
-						<?php echo template::checkbox('configAutodate', true, 'Mise à jour automatique', [
+						<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
 							'checked' => $this->getData(['config', 'autoUpdate']),
 							'help' => 'Vérifie une fois par jour l\'existence d\'une mise à jour.'
 						]); ?>						
 						<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique', [
-							'checked' => $this->getData(['config', 'autoUpdate']),
+							'checked' => $this->getData(['config', 'autoBackup']),
 							'help' => 'Le fichier de données est copié quotidiennement dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.'
 						]); ?>
 					</div>
