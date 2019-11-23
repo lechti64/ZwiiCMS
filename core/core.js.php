@@ -326,6 +326,7 @@ core.start = function() {
 		var _this = $(this);
 		_this
 			.data("ratio", _this.height() / _this.width())
+			.data("maxwidth", _this.width())
 			.removeAttr("width height");
 	});
 	// Prend la largeur du parent et détermine la hauteur à l'aide du ratio lors du resize de la fenêtre
@@ -333,6 +334,7 @@ core.start = function() {
 		elementDOM.each(function() {
 			var _this = $(this);
 			var width = _this.parent().first().width();
+			if (width > _this.data("maxwidth")){ width = _this.data("maxwidth");}
 			_this
 				.width(width)
 				.height(width * _this.data("ratio"));
