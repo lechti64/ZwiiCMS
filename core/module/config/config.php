@@ -399,7 +399,6 @@ class config extends common {
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
 					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true),
 					'legalPageId' => $this->getInput('configLegalPageId'),
-					//'homePageId' => $this->getInput('configHomePageId', helper::FILTER_ID, true),
 					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),					
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
 					'disablei18n' => sizeof($this->i18nInstalled() ) === 1 ? $this->getInput('configdisablei18n', helper::FILTER_BOOLEAN) : false,
