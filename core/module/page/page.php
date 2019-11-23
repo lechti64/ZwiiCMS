@@ -92,7 +92,7 @@ class page extends common {
 			]
 		]);
 		// Met à jour le site map
-		$this->createSitemap('all');
+		$this->createSitemap();
 		// Valeurs en sortie
 		$this->addOutput([
 			'redirect' => helper::baseUrl() . $pageId,
@@ -148,7 +148,7 @@ class page extends common {
 		// Suppression
 		else {		
 			// Met à jour le site map
-			$this->createSitemap('all');
+			$this->createSitemap();
 			// Effacer la page	
 			$this->deleteData(['page', $url[0]]);
 			$this->deleteData(['module', $url[0]]);
@@ -301,7 +301,7 @@ class page extends common {
 					}
 				}
 				// Met à jour le site map
-				$this->createSitemap('all');
+				$this->createSitemap();
 				// Redirection vers la configuration
 				if($this->getInput('pageEditModuleRedirect', helper::FILTER_BOOLEAN)) {
 					// Valeurs en sortie

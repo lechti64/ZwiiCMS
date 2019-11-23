@@ -358,9 +358,7 @@ class form extends common {
 						if($subject === '') {
 							$subject = 'Nouveau message en provenance de votre site';
 						}					
-						// phpMailer
-						require_once "core/vendor/phpmailer/phpmailer.php";
-						require_once "core/vendor/phpmailer/exception.php";
+						
 						// Envoi le mail
 						$sent = $this->sendMail(
 							$to,

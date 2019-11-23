@@ -29,9 +29,11 @@ setlocale (LC_TIME, 'fra_FRA', 'french');
  * Initialisation de Zwii
  */
 session_start();
+// Chargement des classes
+require 'core/class/autoload.php';
+autoload::autoloader();
+// Chargement du coeur
 require 'core/core.php';
-require 'core/class/helper.class.php';
-require 'core/class/template.class.php';
 $core = new core;
 spl_autoload_register('core::autoload');
 echo $core->router();

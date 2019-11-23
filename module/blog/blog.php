@@ -350,10 +350,7 @@ class blog extends common {
 						}
 					}
 					// Envoi du mail $sent code d'erreur ou de réusssite
-					if ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'mailNotification']) === true) {
-						// phpMailer
-						require_once "core/vendor/phpmailer/phpmailer.php";
-						require_once "core/vendor/phpmailer/exception.php";
+					if ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'mailNotification']) === true) {						  
 						$sent = $this->sendMail(
 							$to,
 							'Nouveau commentaire',

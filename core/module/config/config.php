@@ -150,7 +150,7 @@ class config extends common {
 
 	public function generateFiles() {
 		// Mettre à jour le site map
-		$successSitemap=$this->createSitemap('all');
+		$successSitemap=$this->createSitemap();
 
 		// Creer un fichier robots.txt
 		$successRobots=$this->updateRobots();

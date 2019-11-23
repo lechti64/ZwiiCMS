@@ -73,10 +73,7 @@ class user extends common {
 			}
 			// Envoie le mail
 			$sent = true;
-			if($this->getInput('userAddSendMail', helper::FILTER_BOOLEAN) && $check === true) {								
-				// phpMailer
-				require_once "core/vendor/phpmailer/phpmailer.php";
-				require_once "core/vendor/phpmailer/exception.php";
+			if($this->getInput('userAddSendMail', helper::FILTER_BOOLEAN) && $check === true) {												  
 				$sent = $this->sendMail(
 					$userMail,
 					'Compte créé sur ' . $this->getData(['config', 'title']),
@@ -264,10 +261,7 @@ class user extends common {
 				// Enregistre la date de la demande dans le compte utilisateur
 				$this->setData(['user', $userId, 'forgot', time()]);
 				// Crée un id unique pour la réinitialisation
-				$uniqId = md5(json_encode($this->getData(['user', $userId])));
-				// phpMailer
-				require_once "core/vendor/phpmailer/phpmailer.php";
-				require_once "core/vendor/phpmailer/exception.php";				
+				$uniqId = md5(json_encode($this->getData(['user', $userId])));							
 				// Envoi le mail
 				$sent = $this->sendMail(
 					$this->getData(['user', $userId, 'mail']),

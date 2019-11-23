@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.123.dev';
+	const ZWII_VERSION = '10.0.124.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -830,7 +830,7 @@ class common {
 
 	public function createSitemap($command = "all") {
 
-		require_once "core/vendor/sitemap/SitemapGenerator.php";
+		//require_once "core/vendor/sitemap/SitemapGenerator.php";
 
 		$timezone = $this->getData(['config','timezone']);
 
@@ -850,7 +850,7 @@ class common {
 		$datetime->format(DateTime::ATOM); // Updated ISO8601
 		// sitemap index file name
 		$sitemap->sitemapIndexFileName = "sitemap-index.xml";
-		foreach($this->getHierarchy(null, null, null) as $parentPageId => $childrenPageIds) {
+		foreach($this->getHierarchy(null, false, false) as $parentPageId => $childrenPageIds) {
 			// Exclure les barres et les pages non publiques et les pages masquées
 			if ($this->getData(['page',$parentPageId,'group']) !== 0  || 
 				$this->getData(['page', $parentPageId, 'block']) === 'bar' )  {
@@ -978,9 +978,6 @@ class common {
 	public function sendMail($to, $subject, $content) {
 		// Layout
 		ob_start();
-		// phpMailer
-		require_once "core/vendor/phpmailer/phpmailer.php";
-		require_once "core/vendor/phpmailer/exception.php";			
 		include 'core/layout/mail.php';
 		$layout = ob_get_clean();
 		// Mail

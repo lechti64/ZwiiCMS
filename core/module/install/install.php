@@ -72,10 +72,7 @@ class install extends common {
 						'password' => $this->getInput('installPassword', helper::FILTER_PASSWORD, true)
 					]
 				]);
-				if ($success === true) { // Formulaire complété envoi du mail
-					// phpMailer
-					require_once "core/vendor/phpmailer/phpmailer.php";
-					require_once "core/vendor/phpmailer/exception.php";						
+				if ($success === true) { // Formulaire complété envoi du mail											
 					// Envoie le mail
 					$sent = $this->sendMail(
 						$userMail,
@@ -90,7 +87,7 @@ class install extends common {
 					// Générer un fichier  robots.txt
 					$this->createRobots();
 					// Créer sitemap
-					$this->createSitemap('all');				
+					$this->createSitemap();				
 					// Valeurs en sortie				
 					$this->addOutput([
 						'redirect' => helper::baseUrl(false),
