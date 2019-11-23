@@ -89,47 +89,43 @@
 				</div>	
 				<div class="row">			
 					<div class="col6">
-						<div class="row">
-								<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
-									'checked' => $this->getData(['config', 'cookieConsent'])
-								]); ?>
-						</div>
+						<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
+							'checked' => $this->getData(['config', 'cookieConsent'])
+						]); ?>
 					</div>	
 					<div class="col6">
-						<div class="row">
-							<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
-								'checked' => helper::checkRewrite(),
-								'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
-							]); ?>
-						</div>
+						<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
+							'checked' => helper::checkRewrite(),
+							'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
+						]); ?>
 					</div>	
+				</div>
+				<div class="row">
+					<div class="col6">						
+						<?php echo template::checkbox('configdisablei18n', true, 'Désactivation de la gestion des langues', [
+							'checked' => $this->getData(['config', 'disablei18n']),
+							'disabled' => sizeof($this->i18nInstalled() ) > 1 ? true : false,
+							'help' => 'L\'option n\'est pas modifiable  quand une langue est installée.'
+						]); ?>	
+					</div>
+					<div class="col6">
+						<?php echo template::checkbox('configdGoogTransLogo', true, 'Conditions d\'utilisation Google Traduction', [
+							'checked' => $this->getData(['config', 'googTransLogo']),
+							'help' => 'Affiche les conditions d\'utilisation de Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
+						]); ?>										
+					</div>
 				</div>
 				<div class="row">
 					<div class="col6">				
-						<div class="row">		
-							<?php echo template::checkbox('configdisablei18n', true, 'Désactivation de la gestion des langues', [
-								'checked' => $this->getData(['config', 'disablei18n']),
-								'disabled' => sizeof($this->i18nInstalled() ) > 1 ? true : false,
-								'help' => 'L\'option n\'est pas modifiable  quand une langue est installée.'
-							]); ?>	
-						</div>
+						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
+							'checked' => $this->getData(['config', 'maintenance'])
+						]); ?>	
 					</div>
-					<div class="col6">
-						<div class="row">		
-							<?php echo template::checkbox('configdGoogTransLogo', true, 'Conditions d\'utilisation Google Traduction', [
-								'checked' => $this->getData(['config', 'googTransLogo']),
-								'help' => 'Affiche les conditions d\'utilisation de Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
-							]); ?>	
-						</div>										
-					</div>
-				</div>
-				<div class="row">
-					<div class="col8">				
-						<div class="row">
-							<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
-								'checked' => $this->getData(['config', 'maintenance'])
-							]); ?>	
-						</div>
+					<div class="col6">				
+						<?php echo template::checkbox('configAutoUpdate', true, 'Sauvegarde automatique', [
+								'checked' => $this->getData(['config', 'autoUpdate']),
+								'help' => 'Vérifie une fois par jour l\'existence d\'une mise à jour.'
+							]); ?>
 					</div>
 				</div>		
 			</div>							

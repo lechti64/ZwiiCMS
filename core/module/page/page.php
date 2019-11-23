@@ -268,7 +268,7 @@ class page extends common {
 						'position' => $position,
 						'group' => $this->getInput('pageEditGroup', helper::FILTER_INT),
 						'targetBlank' => $this->getInput('pageEditTargetBlank', helper::FILTER_BOOLEAN),
-						'title' => $this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true),
+						'title' => htmlspecialchars_decode($this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true), ENT_QUOTES),
 						'block' => $this->getinput('pageEditBlock'),
 						'barLeft' => $barLeft,
 						'barRight' => $barRight,
