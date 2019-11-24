@@ -5,10 +5,10 @@
     - Marge du pied de page par défaut 5px
     - Installation sans site exemple : suppression des barres latérales
     - Edition de page : 
-        - Affichage de l'option Fil d'ariane alors que le titre est masquée.
+        - Affichage de l'option Fil d'ariane alors que le titre est masqué.
         - Page parente, l'option "ne pas afficher les pages enfants dans le menu horizontal" est incompatible avec une page désactivée : désactivation et masquage lorsque la page est désactivée.
         - Mauvais encodage des titres de pages perturbant l'affichage des caractères spéciaux ( ex: apostrophes ).
-- Modification : 
+- Modifications : 
     - Recherche d'une mise à jour en ligne, s'effectue une fois par jour et devient optionnelle.
     - Amélioration de l'écran d'édition des pages.
     - iframe responsive
