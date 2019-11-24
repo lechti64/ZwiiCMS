@@ -183,8 +183,7 @@ echo template::formOpen('pageEditForm'); ?>
 				<div class="row">		
 					<div class="col12">
 						<?php echo template::checkbox('pageEditDisable', true, 'Désactivée', [
-							'disabled' => (bool) ($this->getdata(['config','homePageId']) === $this->getUrl(2)) ? true : false,
-							'checked' => (bool) ($this->getdata(['config','homePageId']) === $this->getUrl(2)) ? false : $this->getData(['page', $this->getUrl(2), 'disable']),	
+							'checked' => $this->getData(['page', $this->getUrl(2), 'disable']),	
 							'help' => 'Une page désactivée n\'est pas cliquable en mode déconnecté, les pages enfants sont visibles et accessibles. La page d\'accueil n\'est pas désactivable.'
 						]); ?>
 					</div>
