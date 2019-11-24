@@ -194,14 +194,10 @@ $( document ).ready(function() {
 	*/
 	if ($("#pageEditParentPageId").val() !== "") {
 		  $("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
-			$("#pageEditHideMenuChildrenWrapper").slideUp();
-			//$("#pageHomePageIdWrapper").removeClass("disabled");
-			//$("#pageHomePageIdWrapper").slideUp();		
+			$("#pageEditHideMenuChildrenWrapper").slideUp();	
 		}	else {
 			$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideDown();
-			//$("#pageHomePageIdWrapper").addClass("disabled");
-			//$("#pageHomePageIdWrapper").slideDown();
 	}
 
 	/**
@@ -215,22 +211,57 @@ $( document ).ready(function() {
 		$("#pageEditHideMenuChildrenWrapper").slideDown();								
 	}
 
+	/**
+	 * Cache l'option ddésactivé lorsque la page est une homePage
+	 */
+
+	 if ($('#pageHomePageId').is(':checked')) {
+		 $("#pageEditDisableWrapper").removeClass("disabled");
+		 $("#pageEditDisableWrapper").slideUp();
+	 } 	else {
+		$("#pageEditDisableWrapper").addClass("disabled");
+		$("#pageEditDisableWrapper").slideDown();								
+	}
+
 });
 
 
 /**
-* Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée
+ * Cache l'option ddésactivé lorsque la page est une homePage
+ */
+var pageHomePageIdDOM = $("#pageHomePageId");
+pageHomePageIdDOM.on("change", function() {
+	if ($('#pageHomePageId').is(':checked')) {
+		$("#pageEditDisableWrapper").removeClass("disabled");
+		$("#pageEditDisableWrapper").slideUp();
+	} 	else {
+		$("#pageEditDisableWrapper").addClass("disabled");
+		$("#pageEditDisableWrapper").slideDown();								
+	}
+});
+
+
+
+
+/**
+* Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée 
+* Cache l'option homePage
 */
 var pageEditDisableDOM = $("#pageEditDisable");
 pageEditDisableDOM.on("change", function() {
-if ($(this).is(':checked') ) {
-	$("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
-	$("#pageEditHideMenuChildrenWrapper").slideUp();
-	$("#pageEditHideMenuChildren").prop("checked", false);			
-} else {
-	$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
-	$("#pageEditHideMenuChildrenWrapper").slideDown();								
-}
+	if ($(this).is(':checked') ) {
+		$("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
+		$("#pageEditHideMenuChildrenWrapper").slideUp();
+		$("#pageEditHideMenuChildren").prop("checked", false);
+		$("#pageHomePageIdWrapper").removeClass("disabled");
+		$("#pageHomePageIdWrapper").slideUp();
+
+	} else {
+		$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
+		$("#pageEditHideMenuChildrenWrapper").slideDown();	
+		$("#pageHomePageIdWrapper").addClass("disabled");
+		$("#pageHomePageIdWrapper").slideDown();										
+	}
 });
 
 
