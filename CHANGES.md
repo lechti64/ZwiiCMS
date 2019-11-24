@@ -11,6 +11,7 @@
 - Modification : 
     - Recherche d'une mise à jour en ligne, s'effectue une fois par jour et devient optionnelle.
     - Amélioration de l'écran d'édition des pages.
+    - iframe responsive
 
 ## version 9.2.10
 - Modifications préparatoires à la version 10 : 
