@@ -46,6 +46,7 @@
         - Mauvais encodage des titres de pages perturbant l'affichage des caractères spéciaux ( ex: apostrophes ).
 - Modification : 
     - Recherche d'une mise à jour en ligne, s'effectue une fois par jour et devient optionnelle.
+    - Amélioration de l'écran d'édition des pages.
 
 ## version 9.2.10
 - Modifications préparatoires à la version 10 : 
