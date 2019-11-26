@@ -35,6 +35,6 @@
 		</div>
 	</div>
 <?php echo template::formClose(); ?>
-<div class="moduleVersion">Module version n°
+<div class="moduleVersion">Version n°
 	<?php echo $module::REDIRECTION_VERSION; ?>
 </div>
