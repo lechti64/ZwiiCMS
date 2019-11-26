@@ -69,10 +69,9 @@ tinymce.init({
 	link_context_toolbar: true,	
 	// Cache la barre de statut
 	statusbar: false,
-	// Autorise l'ajout de script
-	extended_valid_elements: "script[language|type|src]",
-	// Autorise les styles dans le code source,
-	valid_children : "+body[style]",
+	// Autorise tous les éléments
+	valid_elements :"*[*]",
+	valid_children : "*[*]",
 	// Bloque le dimensionnement des médias (car automatiquement en fullsize avec fitvids pour le responsive)
 	media_dimensions: false,
 	// Désactiver la dimension des images
