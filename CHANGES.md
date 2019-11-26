@@ -36,6 +36,13 @@
         - Le nom des fichiers de sauvegarde contient l'adresse de base du site
 
         
+## version 9.2.12
+- Modifications 
+    - TinyMCE :
+        - Supprimer le filtrage des éléments.
+        - Supprimer le forçage de l'affichage des médias à 100%
+        - Activer le dimensionnement des médias
+
 ## version 9.2.11
 - Corrections : 
     - Marge du pied de page par défaut 5px

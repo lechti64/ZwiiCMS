@@ -73,9 +73,9 @@ tinymce.init({
 	valid_elements :"*[*]",
 	valid_children : "*[*]",
 	// Bloque le dimensionnement des médias (car automatiquement en fullsize avec fitvids pour le responsive)
-	media_dimensions: false,
+	media_dimensions: true,
 	// Désactiver la dimension des images
-	// image_dimensions: false,
+	image_dimensions: true,
 	// Active l'onglet avancé lors de l'ajout d'une image
 	image_advtab: true,
 	// Urls absolues
