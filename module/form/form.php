@@ -313,7 +313,7 @@ class form extends common {
 					default:
 						$filter = helper::FILTER_STRING_SHORT;
 				}
-				$value = $this->getInput('formInput[' . $index . ']', $filter, $input['required']);
+				$value = $this->getInput('formInput[' . $index . ']', $filter, $input['required']) === true ? 'X' : $this->getInput('formInput[' . $index . ']', $filter, $input['required']);
 				// Préparation des données pour la création dans la base
 				$data[$this->getData(['module', $this->getUrl(0), 'input', $index, 'name'])] = $value;
 				// Préparation des données pour le mail
