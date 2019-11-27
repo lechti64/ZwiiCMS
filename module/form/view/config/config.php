@@ -33,12 +33,17 @@
 				]); ?>
 			</div>
 		</div>
+		<div class="formConfigMoreLabel displayNone">
+			<?php echo template::label('formConfigLabel', 'Aucune option pour une étiquette', [
+					'class' => 'displayNone formConfigLabelWrapper'
+				]); ?>
+		</div>		
 		<div class="formConfigMore displayNone">
 			<?php echo template::text('formConfigValues[]', [
 				'placeholder' => 'Liste des valeurs séparées par des virgules (valeur1,valeur2,...)',
 				'class' => 'formConfigValues',
 				'classWrapper' => 'displayNone formConfigValuesWrapper'
-			]); ?>
+			]); ?>			
 			<?php echo template::checkbox('formConfigRequired[]', true, 'Champ obligatoire'); ?>
 		</div>
 	</div>
@@ -150,6 +155,6 @@
 		</div>
 	</div>
 <?php echo template::formClose(); ?>
-<div class="moduleVersion">Module version n°
+<div class="moduleVersion">Version n°
 	<?php echo $module::FORM_VERSION; ?>
 </div>
