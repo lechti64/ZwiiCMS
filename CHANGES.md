@@ -37,6 +37,7 @@
 ## version 9.2.12
 - Modifications 
     - TinyMCE :
+        - Ajout d'un template effet accordéon.
         - Supprimer le filtrage des éléments.
         - Supprimer le forçage de l'affichage des médias à 100%
         - Activer le dimensionnement des médias
