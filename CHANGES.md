@@ -1,5 +1,16 @@
 # Changelog
 
+## version 9.2.12
+- Modifications 
+    - TinyMCE :
+        - Ajout d'un template effet accordéon.
+        - Supprimer le filtrage des éléments.
+        - Supprimer le forçage de l'affichage des médias à 100%
+        - Activer le dimensionnement des médias
+    - Module Form :
+        - Etiquette de séparation
+        - Checbox retourne un astérisque plutôt que 1
+
 ## version 9.2.11
 - Corrections : 
     - Marge du pied de page par défaut 5px

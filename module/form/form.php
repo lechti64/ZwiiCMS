@@ -32,14 +32,16 @@ class form extends common {
 	
 	public static $pagination;
 	
-	const FORM_VERSION = '2.0'; 
+	const FORM_VERSION = '2.1'; 
 
+	// Objets
 	const TYPE_MAIL = 'mail';
 	const TYPE_SELECT = 'select';
 	const TYPE_TEXT = 'text';
 	const TYPE_TEXTAREA = 'textarea';
-	const TYPE_DATETIME = "date";
-	const TYPE_CHECKBOX = "checkbox";
+	const TYPE_DATETIME = 'date';
+	const TYPE_CHECKBOX = 'checkbox';
+	const TYPE_LABEL = 'label';
 
 
 	public static $types = [
@@ -48,7 +50,8 @@ class form extends common {
 		self::TYPE_MAIL => 'Champ mail',
 		self::TYPE_SELECT => 'Sélection',
 		self::TYPE_DATETIME => 'Date',
-		self::TYPE_CHECKBOX => 'Case à cocher'
+		self::TYPE_CHECKBOX => 'Case à cocher',
+		self::TYPE_LABEL => 'Etiquette',
 	];
 
 	public static $listUsers = [
@@ -310,7 +313,7 @@ class form extends common {
 					default:
 						$filter = helper::FILTER_STRING_SHORT;
 				}
-				$value = $this->getInput('formInput[' . $index . ']', $filter, $input['required']);
+				$value = $this->getInput('formInput[' . $index . ']', $filter, $input['required']) === true ? 'X' : $this->getInput('formInput[' . $index . ']', $filter, $input['required']);
 				// Préparation des données pour la création dans la base
 				$data[$this->getData(['module', $this->getUrl(0), 'input', $index, 'name'])] = $value;
 				// Préparation des données pour le mail

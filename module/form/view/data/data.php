@@ -26,3 +26,6 @@
 </div>
 <?php echo template::table([11, 1], $module::$data, ['Données', '']); ?>
 <?php echo $module::$pagination; ?>
+<div class="moduleVersion">Version n°
+	<?php echo $module::FORM_VERSION; ?>
+</div>

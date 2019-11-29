@@ -79,7 +79,9 @@ if(inputs) {
  * Afficher/cacher les options supplémentaires
  */
 $(document).on("click", ".formConfigMoreToggle", function() {
+
 	$(this).parents(".formConfigInput").find(".formConfigMore").slideToggle();
+	$(this).parents(".formConfigInput").find(".formConfigMoreLabel").slideToggle();
 });
 
 /**
@@ -122,7 +124,10 @@ $("#formConfigInputs")
 	.on("change", ".formConfigType", function() {
 		var _this = $(this);
 		if(_this.val() === "select") {
-			_this.parents(".formConfigInput").find(".formConfigValuesWrapper").slideDown();
+			_this.parents(".formConfigInput").find(".formConfigValuesWrapper").slideDown();			
+		} else if ( _this.val() === "label") {
+			_this.parents(".formConfigInput").find("label[for*=formConfigRequired]").hide();
+			_this.parents(".formConfigInput").find(".formConfigLabelWrapper").slideDown();			
 		}
 		else {
 			_this.parents(".formConfigInput").find(".formConfigValuesWrapper").slideUp();
