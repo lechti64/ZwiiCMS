@@ -76,26 +76,28 @@
             <div class="block">
                 <h4>Mise en forme du texte</h4>
                 <div class="row">
-                    <div class="col3">
+                    <div class="col6">
                         <?php echo template::select('themeMenuFont', $module::$fonts, [
                                     'label' => 'Police',
                                     'selected' => $this->getData(['theme', 'menu', 'font'])
                                 ]); ?>
                     </div>
-                    <div class="col3">
+                    <div class="col6">
                         <?php echo template::select('themeMenuFontSize', $module::$menuFontSizes, [
                                     'label' => 'Taille',
                                     'help' => 'Proportionnelle à celle définie dans le site',								
                                     'selected' => $this->getData(['theme', 'menu', 'fontSize'])
                                 ]); ?>
                     </div>
-                    <div class="col3">
+                </div>
+                <div class="row">
+                    <div class="col6">
                         <?php echo template::select('themeMenuFontWeight', $module::$fontWeights, [
                                 'label' => 'Style',
                                 'selected' => $this->getData(['theme', 'menu', 'fontWeight'])
                             ]); ?>
                     </div>
-                    <div class="col3">
+                    <div class="col6">
                         <?php echo template::select('themeMenuTextTransform', $module::$textTransforms, [
                                 'label' => 'Casse',
                                 'selected' => $this->getData(['theme', 'menu', 'textTransform'])
