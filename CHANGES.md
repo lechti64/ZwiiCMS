@@ -43,7 +43,10 @@
         - Activer le dimensionnement des médias
     - Module Form :
         - Etiquette de séparation
-        - Checbox retourne un astérisque plutôt que 1
+        - Checkbox retourne un astérisque plutôt que 1
+    - Thème - Menu :
+        - Couleur de fond de la page sélectionnée
+        - Effet bord arrondi, page sélectionnée
 
 ## version 9.2.11
 - Corrections : 
