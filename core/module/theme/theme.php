@@ -170,6 +170,14 @@ class theme extends common {
 		'site' => 'Dans le site',
 		'hide' => 'Caché'
 	];	
+	public static $menuRadius = [
+		'0px' => 'Aucun',
+		'3px 3px 0px 0px' => 'Très léger',
+		'6px 6px 0px 0px' => 'Léger',
+		'9px 9px 0px 0px' => 'Moyen',
+		'12px 12px 0px 0px' => 'Important',
+		'15px 15px 0px 0px' => 'Très important'
+	];
 	public static $radius = [
 		'0px' => 'Aucun',
 		'5px' => 'Très léger',
@@ -444,7 +452,8 @@ class theme extends common {
 				'textTransform' => $this->getInput('themeMenuTextTransform'),
 				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN),
 				'activeColorAuto' => $this->getInput('themeMenuActiveColorAuto', helper::FILTER_BOOLEAN),
-				'activeColor' => $this->getInput('themeMenuActiveColor')
+				'activeColor' => $this->getInput('themeMenuActiveColor'),
+				'radius' => $this->getInput('themeMenuRadius')
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

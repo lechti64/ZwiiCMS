@@ -123,7 +123,7 @@
 					</div>
 					<div class="col4">
 						<?php echo template::select('themeSiteRadius', $module::$radius, [
-							'label' => 'Arrondi des coins',
+							'label' => 'Bords arrondis',
 							'selected' => $this->getData(['theme', 'site', 'radius'])
 						]); ?>
 					</div>
