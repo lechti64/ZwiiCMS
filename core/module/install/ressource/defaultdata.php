@@ -478,7 +478,9 @@ class install extends common {
 				'textAlign' => 'left',
 				'textColor' => 'rgba(255, 255, 255, 1)',
 				'textTransform' => 'none',
-				'fixed' => false
+				'fixed' => false,
+				'activeColor' => 'rgba(255, 255, 255, 1)',
+				'activeColorAuto' => true
 			],
 			'site' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',

@@ -442,7 +442,9 @@ class theme extends common {
 				'textAlign' => $this->getInput('themeMenuTextAlign'),
 				'textColor' => $this->getInput('themeMenuTextColor'),
 				'textTransform' => $this->getInput('themeMenuTextTransform'),
-				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN)			
+				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN),
+				'activeColorAuto' => $this->getInput('themeMenuActiveColorAuto', helper::FILTER_BOOLEAN),
+				'activeColor' => $this->getInput('themeMenuActiveColor')
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

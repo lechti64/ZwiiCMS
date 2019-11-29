@@ -1015,6 +1015,13 @@ class common {
 			$this->setData(['core', 'dataVersion', 9211]);
 			$this->saveData();
 		}
+		// Version 9.2.12
+		if($this->getData(['core', 'dataVersion']) < 9212) {
+			$this->setData(['theme','menu', 'activeColorAuto',true]);
+			$this->setData(['theme','menu', 'activeColor','rgba(255, 255, 255, 1)']);
+			$this->setData(['core', 'dataVersion', 9212]);
+			$this->saveData();
+		}
 	}
 }
 
@@ -1140,11 +1147,17 @@ class core extends common {
 			$colors = helper::colorVariants($this->getData(['theme', 'header', 'textColor']));
 			$css .= 'header span{color:' . $colors['normal'] . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'header', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'header', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'header', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'header', 'textTransform']) . '}';
 			// Menu
-			$colors = helper::colorVariants($this->getData(['theme', 'menu', 'backgroundColor']));
+			$colors = helper::colorVariants($this->getData(['theme', 'menu', 'backgroundColor']));							
 			$css .= 'nav,nav a{background-color:' . $colors['normal'] . '}';
 			$css .= 'nav a,#toggle span,nav a:hover{color:' . $this->getData(['theme', 'menu', 'textColor']) . '}';
 			$css .= 'nav a:hover{background-color:' . $colors['darken'] . '}';
-			$css .= 'nav a.active{background-color:' . $colors['veryDarken'] . '}';
+			if ($this->getData(['theme','menu','activeColorAuto']) === true) {
+				$css .= 'nav a.active{background-color:' . $colors['veryDarken'] . '}';				
+			} else {
+				$css .= 'nav a.active{background-color:' . $this->getData(['theme','menu','activeColor']) . '}';
+				$color2 = helper::colorVariants($this->getData(['theme', 'menu', 'textColor']));
+				$css .= 'nav a.active{color:' .  $color2['text'] . '}';
+			}				
 			$css .= '#menu{text-align:' . $this->getData(['theme', 'menu', 'textAlign']) . '}';
 			if($this->getData(['theme', 'menu', 'margin'])) {
 				if(
@@ -1157,7 +1170,7 @@ class core extends common {
 					$css .= 'nav{margin:0 20px 0}';
 				}
 			}
-			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';
+			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';			
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
 			if($this->getData(['theme', 'footer', 'margin'])) {
