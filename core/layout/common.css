@@ -1125,6 +1125,17 @@ input[type='checkbox']:disabled + label:before{
 	padding: 0; /* À cause du padding ajouté aux selects */
 }
 
+/* Paramètres de l'étiquette dans form */
+.formLabel {
+	margin-top: 20px;
+}
+
+.formLabel  hr {
+	border: 1px solid;
+	margin: 5px 0 5px;
+}
+
+
 /**
  * Grille
  */
@@ -1365,4 +1376,25 @@ th.col12 {
     background-color: transparent !important;
     border: none !important; 
     box-shadow: none !important;
+}
+* Effet accordéon
+*/
+
+.accordion {
+	padding: 0;
+	list-style: none; 
+}
+.accordion-title {
+	display: block;
+	margin: 0;
+	//padding: 0 7px;
+	line-height: 34px;
+	text-decoration: none;
+	cursor: pointer;
+}
+.accordion-title:hover {
+	background: lightgrey;
+}
+.accordion-content {
+	padding: 7px;
 }

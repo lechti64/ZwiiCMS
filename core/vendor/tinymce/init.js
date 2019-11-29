@@ -69,14 +69,15 @@ tinymce.init({
 	link_context_toolbar: true,	
 	// Cache la barre de statut
 	statusbar: false,
+	// Autorise tous les éléments
+	valid_elements :"*[*]",
+	valid_children : "*[*]",
 	// Autorise l'ajout de script
-	extended_valid_elements: "script[language|type|src]",
-	// Autorise les styles dans le code source,
-	valid_children : "+body[style]",
+	// extended_valid_elements: "script[language|type|src]",
 	// Bloque le dimensionnement des médias (car automatiquement en fullsize avec fitvids pour le responsive)
-	media_dimensions: false,
+	media_dimensions: true,
 	// Désactiver la dimension des images
-	// image_dimensions: false,
+	image_dimensions: true,
 	// Active l'onglet avancé lors de l'ajout d'une image
 	image_advtab: true,
 	// Urls absolues
@@ -133,6 +134,11 @@ tinymce.init({
 			title: "Bloc de texte",
 			url: baseUrl + "core/vendor/tinymce/templates/block.html",
 			description: "Bloc de texte avec un titre."
+		},
+		{
+			title: "Effet accordéon",
+			url: baseUrl + "core/vendor/tinymce/templates/accordion.html",
+			description: "Bloc de texte avec effet accordéon."
 		},
 		{
 			title: "Grille symétrique : 6 - 6",

@@ -26,6 +26,11 @@ $("input, select").on("change", function() {
 	css += "#i18nBar {padding:" + $("#themeMenuHeight").val() + "}";
 	css += ".flag {height: " + $("#themeMenuFontSize").val() + "}";
 	css += "#i18nBar {float: " + $("#themeMenui18nPosition").val() + "}";
+	if ($("#themeMenuActiveColorAuto").is(':checked')) {
+		css += "nav a.active{background-color:" + colors.veryDarken + "}";
+	} else {
+		css += "nav a.active{background-color:" +  $("#themeMenuActiveColor").val() +  "}";
+	}	
 	// Taille, hauteur, épaisseur et capitalisation de caractères du menu
 	css += "#toggle span,#menu a{padding:" + $("#themeMenuHeight").val() + ";font-family:'" + menuFont.replace(/\+/g, " ")  + "',sans-serif;font-weight:" + $("#themeMenuFontWeight").val() + ";font-size:" + $("#themeMenuFontSize").val() + ";text-transform:" + $("#themeMenuTextTransform").val() + "}";
 	// Alignement du menu
@@ -95,6 +100,7 @@ $("input, select").on("change", function() {
 			break;			
 	}
 });
+//
 // Lien de connexion (addClass() et removeClass() au lieu de hide() et show() car ils ne conservent pas le display-inline: block; de #themeMenuLoginLink)
 $("#themeMenuLoginLink").on("change", function() {
 	if($(this).is(":checked")) {
@@ -104,6 +110,7 @@ $("#themeMenuLoginLink").on("change", function() {
 		$("#menuLoginLink").addClass('displayNone');
 	}
 }).trigger("change");
+
 // Affiche / Cache les options de la position
 $("#themeMenuPosition").on("change", function() {
 	if($(this).val() === 'site-first' || $(this).val() === 'site-second') {
@@ -115,6 +122,7 @@ $("#themeMenuPosition").on("change", function() {
 		});
 	}
 }).trigger("change");
+
 // Affiche / Cache les options du menu fixe
 $("#themeMenuPosition").on("change", function() {
 	if($(this).val() === 'top') {
@@ -124,5 +132,15 @@ $("#themeMenuPosition").on("change", function() {
 		$("#themeMenuPositionFixed").slideUp(function() {
 			$("#themeMenuFixed").prop("checked", false).trigger("change");
 		});
+	}
+}).trigger("change");
+
+// Affiche la sélection de couleur auto
+
+$("#themeMenuActiveColorAuto").on("change", function() {
+	if ($(this).is(':checked') ) {
+		$("#themeMenuActiveColorWrapper").slideUp();
+	} else {			
+		$("#themeMenuActiveColorWrapper").slideDown();
 	}
 }).trigger("change");

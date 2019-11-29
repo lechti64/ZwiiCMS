@@ -36,6 +36,22 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+               <div class="col6">
+                        <?php echo template::checkbox('themeMenuActiveColorAuto', true, 'Page active, couleur de fond automatique.', [
+                            'checked' => $this->getData(['theme', 'menu', 'activeColorAuto']),
+                            'help' => 'La couleur de fond de la page active peut être définie automatique ou selon une couleur définie, comme par exemple celle de fond des pages.'
+                        ]); ?>
+                </div>             
+                <div class="col6">
+                    <?php echo template::text('themeMenuActiveColor', [
+							'class' => 'colorPicker',
+							'help' => 'Couleur d\'arrièreplan du menu sélectionné.<br>Le curseur horizontal règle le niveau de transparence.',							
+							'label' => 'Page active',
+							'value' => $this->getData(['theme', 'menu', 'activeColor'])
+						]); ?>
+                </div>   
+            </div>
         </div>
         <div class="col5">
             <div class="block">
@@ -86,50 +102,46 @@
                             ]); ?>
                     </div>
                 </div>
-                <div>
-                </div>
             </div>
-            <div class="row">
-                <div class="col12">
-                    <div class="block">
-                        <h4>Configuration</h4>
-                        <div class="row">
-                            <div class="col4">
-                                <?php
-                        if ( $this->getData(['theme', 'header', 'position']) == "site")
-                        {	echo template::select('themeMenuPosition', $module::$menuPositionsSite, [
+        </div>
+        <div class="row">
+            <div class="col12">
+                <div class="block">
+                    <h4>Configuration</h4>
+                    <div class="row">
+                        <div class="col6">
+                            <?php
+                            if ( $this->getData(['theme', 'header', 'position']) == "site")
+                            {	echo template::select('themeMenuPosition', $module::$menuPositionsSite, [
+                                    'label' => 'Position',
+                                    'selected' => $this->getData(['theme', 'menu', 'position'])
+                                ]);
+                            }else{
+                            echo template::select('themeMenuPosition', $module::$menuPositionsBody, [
                                 'label' => 'Position',
                                 'selected' => $this->getData(['theme', 'menu', 'position'])
-                            ]);
-                        }else{
-                        echo template::select('themeMenuPosition', $module::$menuPositionsBody, [
-                            'label' => 'Position',
-                            'selected' => $this->getData(['theme', 'menu', 'position'])
-                        ]);	}
-                        ?>
-                            </div>
-                            <div class="col4">
-                                <?php echo template::select('themeMenuHeight', $module::$menuHeights, [
-                                'label' => 'Hauteur',
-                                'selected' => $this->getData(['theme', 'menu', 'height'])
-                            ]); ?>
-                            </div>
-                            <div class="col4">
-                                <?php echo template::select('themeMenuTextAlign', $module::$aligns, [
-                                'label' => 'Alignement du contenu',
-                                'selected' => $this->getData(['theme', 'menu', 'textAlign'])
-                            ]); ?>
-                            </div>
+                            ]);	}
+                            ?>
                         </div>
-                        <div id="themeMenuPositionOptions" class="displayNone">
-                            <?php echo template::checkbox('themeMenuMargin', true, 'Aligner le menu avec le contenu', [
-                                    'checked' => $this->getData(['theme', 'menu', 'margin'])
-                                ]); ?>
+                        <div class="col6">
+                            <?php echo template::select('themeMenuRadius', $module::$menuRadius, [
+                            'label' => 'Bords arrondis',
+                            'selected' => $this->getData(['theme', 'menu', 'radius'])
+                            ]); ?>
                         </div>
-                        <div id="themeMenuPositionFixed" class="displayNone">
-                            <?php echo template::checkbox('themeMenuFixed', true, 'Menu fixe', [
-                                    'checked' => $this->getData(['theme', 'menu', 'fixed'])
-                                ]); ?>
+                    </div>
+                    <div class="row">
+                        <div class="col6">
+                            <?php echo template::select('themeMenuHeight', $module::$menuHeights, [
+							'label' => 'Hauteur',
+							'selected' => $this->getData(['theme', 'menu', 'height'])
+						]); ?>
+                        </div>
+                        <div class="col6">
+                            <?php echo template::select('themeMenuTextAlign', $module::$aligns, [
+							'label' => 'Alignement du contenu',
+							'selected' => $this->getData(['theme', 'menu', 'textAlign'])
+						]); ?>
                         </div>
 
                     </div>
