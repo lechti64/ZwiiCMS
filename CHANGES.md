@@ -28,8 +28,6 @@
         - Les données de site précédentes sont écrasées, les données localisées effacées.
 	- Les données relatives aux comptes des utilisateurs déjà installés peuvent être conservées.
         - Une notification est affichée après l'importation.
-    - Procédure d'installation :
-        - En cas d'effacement d'un des fichiers de données sauf user.json, une version par défaut est installée.
     - Configuration du site :
         - Ecran dédié à la sauvegarde automatique, à l'import et à l'export.
         - Fonction d'import des données provenant d'autres version de ZwiiCMS, avec option de préservation des données utilisateurs 
