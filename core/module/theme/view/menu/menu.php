@@ -35,22 +35,22 @@
                             ]); ?>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-               <div class="col6">
-                        <?php echo template::checkbox('themeMenuActiveColorAuto', true, 'Page active, couleur de fond automatique.', [
-                            'checked' => $this->getData(['theme', 'menu', 'activeColorAuto']),
-                            'help' => 'La couleur de fond de la page active peut être définie automatique ou selon une couleur définie, comme par exemple celle de fond des pages.'
-                        ]); ?>
-                </div>             
-                <div class="col6">
-                    <?php echo template::text('themeMenuActiveColor', [
-							'class' => 'colorPicker',
-							'help' => 'Couleur d\'arrièreplan du menu sélectionné.<br>Le curseur horizontal règle le niveau de transparence.',							
-							'label' => 'Page active',
-							'value' => $this->getData(['theme', 'menu', 'activeColor'])
-						]); ?>
-                </div>   
+                <div class="row">
+                    <div class="col6">
+                            <?php echo template::checkbox('themeMenuActiveColorAuto', true, 'Page active, couleur de fond automatique.', [
+                                'checked' => $this->getData(['theme', 'menu', 'activeColorAuto']),
+                                'help' => 'La couleur de fond de la page active peut être définie automatique ou selon une couleur définie, comme par exemple celle de fond des pages.'
+                            ]); ?>
+                    </div>             
+                    <div class="col6">
+                        <?php echo template::text('themeMenuActiveColor', [
+                                'class' => 'colorPicker',
+                                'help' => 'Couleur d\'arrièreplan du menu sélectionné.<br>Le curseur horizontal règle le niveau de transparence.',							
+                                'label' => 'Page active',
+                                'value' => $this->getData(['theme', 'menu', 'activeColor'])
+                            ]); ?>
+                    </div>   
+                </div>
             </div>
         </div>
         <div class="col5">
