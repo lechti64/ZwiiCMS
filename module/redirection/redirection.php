@@ -18,6 +18,12 @@ class redirection extends common {
 		'config' => self::GROUP_MODERATOR,
 		'index' => self::GROUP_VISITOR
 	];
+	public static $openIn = [
+		'tab' => 'Un nouvel onglet',
+		'lity' => 'Une popup intégrée',
+		'popup' => 'Une popup',
+		'window' => 'La fenêtre'
+	];
 
 	const REDIRECTION_VERSION = '1.4';
 
@@ -29,7 +35,7 @@ class redirection extends common {
 		if($this->isPost()) {
 			$this->setData(['module', $this->getUrl(0), [ 
 				'url' => $this->getInput('redirectionConfigUrl', helper::FILTER_URL, true),
-				'openIn' => $this->getInput('redirectionConfigOpenIn', helper::FILTER_BOOLEAN)
+				'target' => $this->getInput('redirectionConfigTarget'),
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
@@ -66,10 +72,33 @@ class redirection extends common {
 		else {
 			// Incrémente le compteur de clics
 			$this->setData(['module', $this->getUrl(0), 'count', helper::filter($this->getData(['module', $this->getUrl(0), 'count']) + 1, helper::FILTER_INT)]);
+
+			switch ($this->getData(['module', $this->getUrl(0), 'target'])) {
+				case 'tab':
+					$script = ' window.history.back();
+							    window.open("' . $this->getData(['module',$this->getUrl(0), 'url'])  . '", "_blank");';
+					break;
+				case 'lity':
+					$script = '$(document).on("lity:close", function(event, instance) {
+									location.replace("' . helper::baseURl() . '");
+								});
+								// Open a URL in a lightbox
+								var lightbox = lity("'. $this->getData(['module',$this->getUrl(0), 'url']) .'");
+
+								// Bind as an event handler
+								$(document).on("click", "[data-lightbox]", lity);';
+					break;
+				case "popup":
+					$script = ' window.history.back();
+								window.open("' . $this->getData(['module',$this->getUrl(0), 'url'])  . '", "_blank", "toolbar=0,location=0,menubar=0");';
+								break;
+				case 'window':
+					$script = '';					
+			}
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => $this->getData(['module', $this->getUrl(0), 'url']),
-				'script' => $this->getData(['module', $this->getUrl(0), 'openIn']) ? 'redirectdatality' : '',
+				'script' =>  $script,
 				'state' => true
 			]);
 		}
