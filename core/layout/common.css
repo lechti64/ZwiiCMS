@@ -1285,7 +1285,7 @@ th.col12 {
 .accordion-title {
 	display: block;
 	margin: 0;
-	//padding: 0 7px;
+	padding: 0 7px;
 	line-height: 34px;
 	text-decoration: none;
 	cursor: pointer;
