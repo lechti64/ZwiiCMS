@@ -166,14 +166,14 @@ echo template::formOpen('pageEditForm'); ?>
 					</div>
 				</div>								
 				<div class="row">
-					<div class="col12">
+					<div class="col6">
 						<?php echo template::checkbox('pageEditTargetBlank', true, 'Nouvel onglet', [
 							'checked' => $this->getData(['page', $this->getUrl(2), 'targetBlank'])
 						]); ?>
 					</div>
 				</div>
 				<div class="row">		
-					<div class="col12">
+					<div class="col6">
 						<?php echo template::checkbox('pageEditDisable', true, 'Désactivée', [
 							'disabled' => (bool) ($this->getdata(['config','homePageId']) === $this->getUrl(2)) ? true : false,
 							'checked' => (bool) ($this->getdata(['config','homePageId']) === $this->getUrl(2)) ? false : $this->getData(['page', $this->getUrl(2), 'disable']),	
@@ -184,7 +184,7 @@ echo template::formOpen('pageEditForm'); ?>
 			</div>
 		</div>
 	</div>
-	<div class='row'>
+	<div class='row' id="pageEditSeoWrapper">
 		<div class="col12">
 			<div class="block">
 				<h4>Référencement</h4>
@@ -208,22 +208,24 @@ echo template::formOpen('pageEditForm'); ?>
 			</div>
 		</div>
 	</div>
-	<div class='row'>
+	<div class='row' id="pageEditAdvancedWrapper">
 		<div class="col12">
 			<div class="block">
 				<h4>Options Avancées</h4>
-				<div class="col12">
-						<?php echo template::checkbox('pageEditHideMenuSide', true, 'Masquer la page dans le menu vertical', [
-							'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuSide']),
-							'help' => 'La page est affichée dans un menu horizontal mais pas dans un menu vertical inséré dans une barre latérale.'
-						]); ?>
+				<div class="row">
+				<div class="col6">
+							<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Masquer les pages enfants dans le menu horizontal', [
+								'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuChildren']),
+								'help' => 'Les pages enfants ne sont pas visibles dans le menu horizontal, elles se seront dans un menu vertical. La page doit intégrer un lien vers l\'une des pages enfants sinon elles ne seront pas accessibles.'
+							]); ?>
 					</div>					
-					<div class="col12">
-						<?php echo template::checkbox('pageEditHideMenuChildren', true, 'Masquer les pages enfants dans le menu horizontal', [
-							'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuChildren']),
-							'help' => 'Les pages enfants ne sont pas visibles dans le menu horizontal, elles se seront dans un menu vertical. La page doit intégrer un lien vers l\'une des pages enfants sinon elles ne seront pas accessibles.'
-						]); ?>
-					</div>
+					<div class="col6">
+							<?php echo template::checkbox('pageEditHideMenuSide', true, 'Masquer la page dans le menu vertical', [
+								'checked' => $this->getData(['page', $this->getUrl(2), 'hideMenuSide']),
+								'help' => 'La page est affichée dans un menu horizontal mais pas dans un menu vertical inséré dans une barre latérale.'
+							]); ?>
+					</div>					
+				</div>
 			</div>
 		</div>
 	</div>
