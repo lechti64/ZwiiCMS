@@ -1393,9 +1393,20 @@ class core extends common {
 							}
 							// Redirection
 							if($output['redirect']) {
-								http_response_code(301);
-								header('Location:' . $output['redirect']);
-								exit();
+								// Redirection Lity
+								if ($output['script'] === 'redirectdatality') {
+									$this->addOutput ([ 
+										'content' => '<a href="' . $output['redirect'] . '" class="displayNone" data-lity id="redirectdatality">Lien</a>',
+										'script' => '$(document).on("lity:close", function(event, instance) {
+														location.replace("' . helper::baseURl() . '");
+													});
+													document.getElementById("redirectdatality").click();'
+									]);
+								} else {
+									http_response_code(301);
+									header('Location:' . $output['redirect']);
+									exit();
+								}
 							}
 						}
 						// Données en sortie applicables même lorsqu'une notice est présente

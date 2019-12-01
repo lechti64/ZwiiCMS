@@ -19,7 +19,7 @@ class redirection extends common {
 		'index' => self::GROUP_VISITOR
 	];
 
-	const REDIRECTION_VERSION = '1.3';
+	const REDIRECTION_VERSION = '1.4';
 
 	/**
 	 * Configuration
@@ -27,7 +27,10 @@ class redirection extends common {
 	public function config() {
 		// Soumission du formulaire
 		if($this->isPost()) {
-			$this->setData(['module', $this->getUrl(0), 'url', $this->getInput('redirectionConfigUrl', helper::FILTER_URL, true)]);
+			$this->setData(['module', $this->getUrl(0), [ 
+				'url' => $this->getInput('redirectionConfigUrl', helper::FILTER_URL, true),
+				'openIn' => $this->getInput('redirectionConfigOpenIn', helper::FILTER_BOOLEAN)
+			]]);
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . $this->getUrl(),
@@ -66,6 +69,7 @@ class redirection extends common {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => $this->getData(['module', $this->getUrl(0), 'url']),
+				'script' => $this->getData(['module', $this->getUrl(0), 'openIn']) ? 'redirectdatality' : '',
 				'state' => true
 			]);
 		}

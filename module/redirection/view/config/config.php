@@ -21,6 +21,10 @@
 					'placeholder' => 'http://',
 					'value' => $this->getData(['module', $this->getUrl(0), 'url'])
 				]); ?>
+				<?php echo template::checkbox('redirectionConfigOpenIn', true ,  'Ouvrir dans une popup intégrée', [
+					'checked' => $this->getData(['module', $this->getUrl(0), 'openIn'])
+				]);
+				?>
 			</div>
 		</div>
 		<div class="col6">
