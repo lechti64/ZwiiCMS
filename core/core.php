@@ -1395,12 +1395,15 @@ class core extends common {
 							if($output['redirect']) {
 								// Redirection Lity
 								if ($output['script'] === 'redirectdatality') {
-									$this->addOutput ([ 
-										'content' => '<a href="' . $output['redirect'] . '" class="displayNone" data-lity id="redirectdatality">Lien</a>',
+									$this->addOutput ([ 										
 										'script' => '$(document).on("lity:close", function(event, instance) {
 														location.replace("' . helper::baseURl() . '");
 													});
-													document.getElementById("redirectdatality").click();'
+													// Open a URL in a lightbox
+													var lightbox = lity("'. $output['redirect'] .'");
+
+													// Bind as an event handler
+													$(document).on("click", "[data-lightbox]", lity);'
 									]);
 								} else {
 									http_response_code(301);
