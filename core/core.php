@@ -1638,9 +1638,15 @@ class core extends common {
 							}
 							// Redirection
 							if($output['redirect']) {
-								http_response_code(301);
-								header('Location:' . $output['redirect']);
-								exit();
+								if (!empty($output['script']) ) {
+									$this->addOutput ([ 										
+										'script' => $output['script']
+									]);
+								} else {
+									http_response_code(301);
+									header('Location:' . $output['redirect']);
+									exit();
+								}
 							}
 						}
 						// Données en sortie applicables même lorsqu'une notice est présente

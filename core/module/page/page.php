@@ -266,7 +266,7 @@ class page extends common {
 						'modulePosition' => $this->getInput('configModulePosition'),
 						'parentPageId' => $this->getInput('pageEditParentPageId'),
 						'position' => $position,
-						'group' => $this->getInput('pageEditGroup', helper::FILTER_INT),
+						'group' => $this->getinput('pageEditBlock') !== 'bar' ? $this->getInput('pageEditGroup', helper::FILTER_INT) : 0,
 						'targetBlank' => $this->getInput('pageEditTargetBlank', helper::FILTER_BOOLEAN),
 						'title' => htmlspecialchars_decode($this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true), ENT_QUOTES),
 						'block' => $this->getinput('pageEditBlock'),

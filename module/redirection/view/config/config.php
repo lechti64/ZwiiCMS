@@ -21,6 +21,10 @@
 					'placeholder' => 'http://',
 					'value' => $this->getData(['module', $this->getUrl(0), 'url'])
 				]); ?>
+				<?php echo template::select('redirectionConfigTarget', $module::$openIn,[
+						'label' => 'Ouvrir dans',
+						'selected' => $this->getData(['module', $this->getUrl(0), 'target'])
+				]); ?>		
 			</div>
 		</div>
 		<div class="col6">
