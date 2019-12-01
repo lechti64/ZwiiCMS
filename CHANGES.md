@@ -34,6 +34,10 @@
         - Le nom des fichiers de sauvegarde contient l'adresse de base du site
 
         
+## version 9.2.13
+- Corrections 
+    - Gestionnaire de fichiers, modifications des paramètres des miniatures.
+    
 ## version 9.2.12
 - Modifications 
     - TinyMCE :

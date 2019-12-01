@@ -1258,7 +1258,7 @@ class common {
 		}
 		// Version 9.2.12
 		if($this->getData(['core', 'dataVersion']) < 9212) {
-			$this->setData(['theme','menu', 'activeColorAuto',false]);
+			$this->setData(['theme','menu', 'activeColorAuto',true]);
 			$this->setData(['theme','menu', 'activeColor','rgba(255, 255, 255, 1)']);
 			$this->setData(['core', 'dataVersion', 9212]);
 			$this->saveData();

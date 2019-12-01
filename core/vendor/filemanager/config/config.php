@@ -338,7 +338,7 @@ $config = array(
 	'preview_text_files'                      => true, // eg.: txt, log etc.
 	'edit_text_files'                         => true, // eg.: txt, log etc.
 	'create_text_files'                       => true, // only create files with exts. defined in $config['editable_text_file_exts']
-	'download_files'			  => true, // allow download files or just preview
+	'download_files'						  => true, // allow download files or just preview
 
 	// you can preview these type of files if $preview_text_files is true
 	'previewable_text_file_exts'              => array( "bsh", "c","css", "cc", "cpp", "cs", "csh", "cyc", "cv", "htm", "html", "java", "js", "m", "mxml", "perl", "pl", "pm", "py", "rb", "sh", "xhtml", "xml","xsl",'txt', 'log','' ),
@@ -441,8 +441,8 @@ $config = array(
 	'fixed_path_from_filemanager'             => array( '../../../site/file/thumb' ), //fixed path of the image folder from the current position on upload folder
 	'fixed_image_creation_name_to_prepend'    => array( '' ), //name to prepend on filename
 	'fixed_image_creation_to_append'          => array( '' ), //name to appendon filename
-	'fixed_image_creation_width'              => array( 480 ), //width of image
-	'fixed_image_creation_height'             => array( 320 ), //height of image
+	'fixed_image_creation_width'              => array( 300,400 ), //width of image
+	'fixed_image_creation_height'             => array( 200,300 ), //height of image
 	/*
 	#             $option:     0 / exact = defined size;
 	#                          1 / portrait = keep aspect set height;
@@ -450,7 +450,7 @@ $config = array(
 	#                          3 / auto = auto;
 	#                          4 / crop= resize and crop;
 	*/
-	'fixed_image_creation_option'             => array( 'landscape' ), //set the type of the crop
+	'fixed_image_creation_option'             => array('crop', 'crop'), //set the type of the crop
 
 
 	// New image resized creation with relative path inside to upload folder after uploading (thumbnails in relative mode)
