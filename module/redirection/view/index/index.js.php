@@ -16,7 +16,7 @@
  if (document.referrer.indexOf("edit") === -1)
  {
   	core.confirm(
-  		"OUI pour modifier la page et accéder aux statitiques de ce module.\r\n NON pour être redirigé vers l'URL saisie dans le module.",
+  		"OUI : éditer la page | NON : tester la redirection.",
    		function() {
   			$(location).attr("href", "<?php echo helper::baseUrl(); ?>page/edit/<?php echo $this->getUrl(0); ?>");
   		},
