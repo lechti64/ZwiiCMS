@@ -2167,7 +2167,8 @@ class layout extends common {
 			// Passer les entrées masquées	
 			// Propriétés de l'item
 			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
-			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';		
+			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
+			$targetLity = ($this->getData(['page', $parentPageId, 'targetLity'])  && $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')) ? ' rel="data-lity"' : '';	
 			// Mise en page de l'item
 			$items .= '<li>';
 			
@@ -2176,7 +2177,7 @@ class layout extends common {
 
 					{$items .= '<a href="'.$this->getUrl(1).'">';
 			} else {
-					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
+					$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . $targetLity . '>';	
 			}
 
 			switch ($this->getData(['page', $parentPageId, 'typeMenu'])) {
@@ -2224,13 +2225,14 @@ class layout extends common {
 				// Propriétés de l'item
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
+				$targetLity = ($this->getData(['page', $childKey, 'targetLity'])  && $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')) ? ' rel="data-lity"' : '';		
 				// Mise en page du sous-item
 				$items .= '<li>';
 				if ( $this->getData(['page',$childKey,'disable']) === true
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
 						$items .= '<a href="'.$this->getUrl(1).'">';
 				} else {
-					$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';			
+					$items .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank  . $targetLity . '>';			
 				}
 
 				switch ($this->getData(['page', $childKey, 'typeMenu'])) {
@@ -2323,6 +2325,7 @@ class layout extends common {
 			// Propriétés de l'item
 			$active = ($parentPageId === $currentPageId OR in_array($currentPageId, $childrenPageIds)) ? ' class="active"' : '';
 			$targetBlank = $this->getData(['page', $parentPageId, 'targetBlank']) ? ' target="_blank"' : '';
+			$targetLity = ($this->getData(['page', $parentPageId, 'targetLity'])  && $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')) ? ' rel="data-lity"' : '';	
 			// Mise en page de l'item;
 			// Ne pas afficher le parent d'une sous-page quand l'option est sélectionnée.
 			if ($onlyChildren === false) {
@@ -2331,7 +2334,7 @@ class layout extends common {
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
 						$items .= '<a href="'.$this->getUrl(1).'">';
 				} else {
-						$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . '>';	
+						$items .= '<a href="' . helper::baseUrl() . $parentPageId . '"' . $active . $targetBlank . $targetLity . '>';	
 				}
 				$items .= $this->getData(['page', $parentPageId, 'title']);
 				$items .= '</a>';
@@ -2346,6 +2349,7 @@ class layout extends common {
 				// Propriétés de l'item
 				$active = ($childKey === $currentPageId) ? ' class="active"' : '';
 				$targetBlank = $this->getData(['page', $childKey, 'targetBlank']) ? ' target="_blank"' : '';
+				$targetLity = ($this->getData(['page', $childKey, 'targetLity'])  && $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')) ? ' rel="data-lity"' : '';	
 				// Mise en page du sous-item
 				$itemsChildren .= '<li class="menuSideChild">';
 
@@ -2353,7 +2357,7 @@ class layout extends common {
 					AND $this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')	) {
 						$itemsChildren .= '<a href="'.$this->getUrl(1).'">';
 				} else {
-					$itemsChildren .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . '>';
+					$itemsChildren .= '<a href="' . helper::baseUrl() . $childKey . '"' . $active . $targetBlank . $targetLity . '>';
 				}
 
 				$itemsChildren .= $this->getData(['page', $childKey, 'title']);					
