@@ -7,7 +7,7 @@
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @authorFrédéric Tempez <frederic.tempez@outlook.com>
- * @copyright Copyright (C) 2018-2020, Frédéric Tempez
+ * @copyright Copyright (C) 2018-2019, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
@@ -26,19 +26,6 @@ $("#pageEditDelete").on("click", function() {
 * Paramètres par défaut au chargement
 */ 
 $( document ).ready(function() {
-
-	/**
-	 * Interdit l'activation de la homePage pour une page qui est une barre, désactivée ou non membre
-	 */
-	if ($('#pageEditGroup').val() > 0  ||
-		$('#pageEditDisable').is(':checked') ||
-		$('#pageEditBlockWrapper').val() === 'bar' ) {
-			$("#pageHomePageIdWrapper").removeClass("disabled");
-			$("#pageHomePageIdWrapper").slideUp();	
-			$("#pageHomePageId").removeAttr(checked);
-	}
-
-
 	/**
 	* Bloque/Débloque le bouton de configuration au changement de module
 	* Affiche ou masque la position du module selon le call_user_func
@@ -213,42 +200,30 @@ $( document ).ready(function() {
 		$("#pageEditHideMenuChildrenWrapper").slideDown();								
 	}
 
-	/**
-	 * Cache l'option "Page Ddésactivée" lorsque la page est une homePage
-	 */
-
-	 if ($('#pageHomePageId').is(':checked')) {
-		 $("#pageEditDisableWrapper").removeClass("disabled");
-		 $("#pageEditDisableWrapper").slideUp();
-	 } 	else {
-		$("#pageEditDisableWrapper").addClass("disabled");
-		$("#pageEditDisableWrapper").slideDown();								
-	}
-
 });
 
 
 /**
- * Cache l'option "Page désactivée" lorsque la page est une homePage
+ * Empêche la double sélection Blank et Lity
  */
-var pageHomePageIdDOM = $("#pageHomePageId");
-pageHomePageIdDOM.on("change", function() {
-	if ($('#pageHomePageId').is(':checked')) {
-		$("#pageEditDisableWrapper").removeClass("disabled");
-		$("#pageEditDisableWrapper").slideUp();
-	} 	else {
-		$("#pageEditDisableWrapper").addClass("disabled");
-		$("#pageEditDisableWrapper").slideDown();								
+var pageEditTargetBlankDOM = $("#pageEditTargetBlank");
+pageEditTargetBlankDOM.on("change", function() {
+	if ($(this).is(':checked')  &&
+	 $("#pageEditTargetLity").is(':checked') ) {
+		$("#pageEditTargetLity").prop("checked", false);	
+	}
+});
+var pageEditTargetLityDOM = $("#pageEditTargetLity");
+pageEditTargetLityDOM.on("change", function() {
+	if ($(this).is(':checked')  &&
+	 $("#pageEditTargetBlank").is(':checked') ) {
+		$("#pageEditTargetBlank").prop("checked", false);	
 	}
 });
 
-
-
-
 /**
-* Cache l'option "Ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée 
-* Cache l'option homePage
-*/
+ * Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée
+ */
 var pageEditDisableDOM = $("#pageEditDisable");
 pageEditDisableDOM.on("change", function() {
 	if ($(this).is(':checked') ) {
@@ -262,7 +237,6 @@ pageEditDisableDOM.on("change", function() {
 });
 
 
-
 /**	
 * Cache les options de masquage dans les menus quand la page n'est pas affichée.
 */
@@ -270,7 +244,10 @@ var pageEditPositionDOM = $("#pageEditPosition");
 pageEditPositionDOM.on("change", function() {
 	if ($(this).val()  === "0" ) {
 		$("#pageEditHideMenuSideWrapper").removeClass("disabled");
-		$("#pageEditHideMenuSideWrapper").slideUp();			
+		$("#pageEditHideMenuSideWrapper").slideUp();	
+		$("#pageHomePageIdWrapper").removeClass("disabled");
+		$("#pageHomePageIdWrapper").slideUp();
+		$("#pageHomePageId").prop("checked",false);	
 	} else {
 		$("#pageEditHideMenuSideWrapper").addClass("disabled");
 		$("#pageEditHideMenuSideWrapper").slideDown();								
@@ -278,6 +255,22 @@ pageEditPositionDOM.on("change", function() {
 		$("#pageHomePageIdWrapper").addClass("disabled");
 		$("#pageHomePageIdWrapper").slideDown();
 	}
+});
+
+/**
+ * Interdit l'activation de la homePage pour une page non visiteur
+ */
+var pageEditGroupDOM = $("#pageEditGroup");
+	pageEditGroupDOM.on("change", function() {	
+	if ($(this).val() > 0 ) {
+		$("#pageHomePageIdWrapper").removeClass("disabled");
+		$("#pageHomePageIdWrapper").slideUp();
+		$("#pageHomePageId").prop("checked",false);	
+	} else {
+		$("#pageHomePageIdWrapper").addClass("disabled");
+		$("#pageHomePageIdWrapper").slideDown();
+	}
+
 });
 
 /**
@@ -438,6 +431,30 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditBlockLayout").removeClass("col12");
 			$("#pageEditBlockLayout").addClass("col6");
 	}	
+
+	/**
+	 * Interdit l'activation de la homePage pour une page qui est une barre, désactivée ou non membre
+	 */
+	if ($('#pageEditGroup').val() > 0  ||
+		$('#pageEditDisable').is(':checked') ||
+		$('#pageEditBlockWrapper').val() === 'bar' ) {
+			$("#pageHomePageIdWrapper").removeClass("disabled");
+			$("#pageHomePageIdWrapper").slideUp();	
+			$("#pageHomePageId").removeAttr(checked);
+	}
+
+	/**
+	 * Cache l'option désactivé lorsque la page est une homePage
+	 */
+
+	 if ($('#pageHomePageId').is(':checked')) {
+		 $("#pageEditDisableWrapper").removeClass("disabled");
+		 $("#pageEditDisableWrapper").slideUp();
+	 } 	else {
+		$("#pageEditDisableWrapper").addClass("disabled");
+		$("#pageEditDisableWrapper").slideDown();								
+	}
+
 });
 
 /**
@@ -458,22 +475,6 @@ pageEditHideTitleDOM.on("change", function() {
 });
 
 
-
-/**
- * Interdit l'activation de la homePage pour une page non visiteur
- */
-var pageEditGroupDOM = $("#pageEditGroup");
-	pageEditGroupDOM.on("change", function() {	
-	if ($(this).val() > 0 ) {
-		$("#pageHomePageIdWrapper").removeClass("disabled");
-		$("#pageHomePageIdWrapper").slideUp();
-		$("#pageHomePageId").prop("checked",false);	
-	} else {
-		$("#pageHomePageIdWrapper").addClass("disabled");
-		$("#pageHomePageIdWrapper").slideDown();
-	}
-
-});
 /**	
  * Masquer ou afficher le chemin de fer
  * Quand la page n'est pas mère et que le menu n'est pas masqué
@@ -492,13 +493,9 @@ pageEditParentPageIdDOM.on("change", function() {
 	if ($(this).val() !== "") {
 		  $("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideUp();
-			//$("#pageHomePageIdWrapper").removeClass("disabled");
-			//$("#pageHomePageIdWrapper").slideUp();
 		}	else {
 			$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideDown();
-			//$("#pageHomePageIdWrapper").addClass("disabled");
-			//$("#pageHomePageIdWrapper").slideDown();
 		}
 });
 
@@ -533,7 +530,10 @@ $("#pageEditModuleConfig").on("click", function() {
  * Affiche les pages en fonction de la page parent dans le choix de la position
  */
 var hierarchy = <?php echo json_encode($this->getHierarchy()); ?>;
+
 var pages = <?php echo json_encode($this->getData(['page'])); ?>;
+
+
 // 9.0.07 corrige une mauvaise sélection d'une page orpheline avec enfant
 var positionInitial = <?php echo $this->getData(['page',$this->getUrl(2),"position"]); ?>;
 // 9.0.07
@@ -561,7 +561,7 @@ $("#pageEditParentPageId").on("change", function() {
 					positionPrevious++;
 					// Ajout à la liste
 					positionDOM.append(
-						$("<option>").val(positionPrevious).text("Après \"" + pages[key].title + "\"")
+						$("<option>").val(positionPrevious).text("Après \"" + (pages[key].title) + "\"")
 					);
 				}
 			}
@@ -586,7 +586,7 @@ $("#pageEditParentPageId").on("change", function() {
 				positionPrevious++;
 				// Ajout à la liste
 				positionDOM.append(
-					$("<option>").val(positionPrevious).text("Après \"" + pages[hierarchy[parentSelected][i]].title + "\"")
+					$("<option>").val(positionPrevious).text("Après \"" + (pages[hierarchy[parentSelected][i]].title) + "\"")
 				);
 			}
 		}
