@@ -19,7 +19,7 @@ class redirection extends common {
 		'index' => self::GROUP_VISITOR
 	];
 
-	const REDIRECTION_VERSION = '1.3';
+	const REDIRECTION_VERSION = '1.4';
 
 	/**
 	 * Configuration
