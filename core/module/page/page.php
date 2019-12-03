@@ -53,8 +53,8 @@ class page extends common {
 	];
 	public static $displayMenu = [
 		'none'	=> 'Aucun',
-		'parents' 	=> 'Menu principal',
-		'children'	=> 'Sous-menu de la page parente'
+		'parents' 	=> 'Le menu horizontal',
+		'children'	=> 'Le sous-menu de la page parente'
 	];
 	
 	/**
@@ -269,8 +269,8 @@ class page extends common {
 						'position' => $position,
 						'group' => $this->getinput('pageEditBlock') !== 'bar' ? $this->getInput('pageEditGroup', helper::FILTER_INT) : 0,
 						'targetBlank' => $this->getInput('pageEditTargetBlank', helper::FILTER_BOOLEAN),
-						'targetLity' => $this->getInput('pageEditTargetBlank', helper::FILTER_BOOLEAN) === true ? false : $this->getInput('pageEditTargetLity', helper::FILTER_BOOLEAN),
-						'title' => htmlspecialchars_decode($this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT, true), ENT_QUOTES),
+						'targetLity' => $this->getInput('pageEditTargetBlank', helper::FILTER_BOOLEAN) === true ? false : $this->getInput('pageEditTargetLity', helper::FILTER_BOOLEAN),						
+						'title' => $this->getInput('pageEditTitle', helper::FILTER_STRING_SHORT),
 						'block' => $this->getinput('pageEditBlock'),
 						'barLeft' => $barLeft,
 						'barRight' => $barRight,
