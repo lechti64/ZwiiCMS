@@ -53,8 +53,8 @@ class page extends common {
 	];
 	public static $displayMenu = [
 		'none'	=> 'Aucun',
-		'parents' 	=> 'Menu principal',
-		'children'	=> 'Sous-menu de la page parente'
+		'parents' 	=> 'Le menu horizontal',
+		'children'	=> 'Le sous-menu de la page parente'
 	];
 	
 	/**
