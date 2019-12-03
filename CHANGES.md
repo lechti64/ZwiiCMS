@@ -4,6 +4,7 @@
 - Corrections 
     - Gestionnaire de fichiers, modifications des paramètres des miniatures.
     - Suppression d'options inutiles dans l'édition d'une page de type de barre latérale.
+    - Filtrage du nom des pages dans la fenêtre d'édition des pages.
     
 ## version 9.2.12
 - Modifications 
