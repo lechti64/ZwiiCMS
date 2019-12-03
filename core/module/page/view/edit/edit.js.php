@@ -7,7 +7,7 @@
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @authorFrédéric Tempez <frederic.tempez@outlook.com>
- * @copyright Copyright (C) 2018-2019, Frédéric Tempez
+ * @copyright Copyright (C) 2018-2020, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
@@ -26,6 +26,9 @@ $("#pageEditDelete").on("click", function() {
 * Paramètres par défaut au chargement
 */ 
 $( document ).ready(function() {
+
+
+
 	/**
 	* Bloque/Débloque le bouton de configuration au changement de module
 	* Affiche ou masque la position du module selon le call_user_func
@@ -126,26 +129,30 @@ $( document ).ready(function() {
 			$("#pageEditModuleConfig").slideUp();	
 			$("#pageEditDisplayMenuWrapper").addClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideDown();
-			$("#pageTypeMenuWrapper").removeClass("disabled");
-			$("#pageTypeMenuWrapper").slideUp();	
+			$("#pageEditGroupWrapper").removeClass("disabled");
+			$("#pageEditGroupWrapper").slideUp();
+			$("#pageHomePageIdWrapper").removeClass("disabled");
+			$("#pageHomePageIdWrapper").slideUp();
 			$("#pageEditSeoWrapper").removeClass("disabled");
-			$("#pageEditSeoWrapper").slideUp();		
+			$("#pageEditSeoWrapper").slideUp();
 			$("#pageEditAdvancedWrapper").removeClass("disabled");
 			$("#pageEditAdvancedWrapper").slideUp();
-			$("#pageEditBlockLayout").removeClass("col6");
+			$("#pageEditBlockLayout").removeClass("col6");								
 			$("#pageEditBlockLayout").addClass("col12");
-						
 	} else {
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideUp();	
+			$("#pageEditDisplayMenuWrapper").slideUp();
+			$("#pageHomePageIdWrapper").addClass("disabled");
+			$("#pageHomePageIdWrapper").slideDown();
 	}
 
 	/**
 	* Masquer ou afficher le chemin de fer
 	* Quand le titre est masqué 
 	*/
-	if ($("input[name=pageEditHideTitle]").is(':checked') ||
-		  $("#pageEditParentPageId").val() === "" )  {
+	if ($("input[name=pageEditHideTitle]").is(':checked') &&
+		  $("#pageEditParentPageId").val() === "" &&
+		  !$('input[name=pageEditHideTitle]').is(':checked') )  {
 
 			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideUp();
@@ -183,15 +190,15 @@ $( document ).ready(function() {
 	*/
 	if ($("#pageEditParentPageId").val() !== "") {
 		  $("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
-			$("#pageEditHideMenuChildrenWrapper").slideUp();
+			$("#pageEditHideMenuChildrenWrapper").slideUp();	
 		}	else {
 			$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideDown();
-		}
+	}
 
-/**
- * Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée
- */
+	/**
+	 * Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée
+	 */
 	if ($("#pageEditDisable").is(':checked') ) {
 		$("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
 		$("#pageEditHideMenuChildrenWrapper").slideUp();			
@@ -200,6 +207,58 @@ $( document ).ready(function() {
 		$("#pageEditHideMenuChildrenWrapper").slideDown();								
 	}
 
+	/**
+	 * Si la page est une homepage
+	 * Cache l'option désactivé lorsque la page est une homePage
+	 * Cache la sélection d'un memebre
+	 */
+
+	 if ($('#pageHomePageId').is(':checked')) {
+		 $("#pageEditDisableWrapper").removeClass("disabled");
+		 $("#pageEditDisableWrapper").slideUp();
+		 $("#pageEditGroupWrapper").removeClass("disabled");
+		 $("#pageEditGroupWrapper").slideUp();
+		 $("#pageEditGroupWrapper").val(0);		 		 
+	 } 	else {
+		$("#pageEditDisableWrapper").addClass("disabled");
+		$("#pageEditDisableWrapper").slideDown();	
+		$("#pageEditGroupWrapper").addClass("disabled");
+		$("#pageEditGroupWrapper").slideDown();									
+	}
+
+	/**
+	 * Interdit l'activation de la homePage pour une page qui est une barre, désactivée ou non membre
+	 */
+	if ($('#pageEditGroup').val() > 0  ||
+		$('#pageEditDisable').is(':checked') ) {
+			$("#pageHomePageIdWrapper").removeClass("disabled");
+			$("#pageHomePageIdWrapper").slideUp();				
+	}
+
+
+});
+
+
+/**
+ * Si la page est une homepage
+ * Cache l'option désactivé lorsque la page est une homePage
+ * Cache la sélection d'un memebre
+ */
+
+ var pageHomePageIdDOM = $("#pageHomePageId");
+pageHomePageIdDOM.on("change", function() {
+	if ($('#pageHomePageId').is(':checked')) {
+		$("#pageEditDisableWrapper").removeClass("disabled");
+		$("#pageEditDisableWrapper").slideUp();
+		$("#pageEditGroupWrapper").removeClass("disabled");
+		$("#pageEditGroupWrapper").slideUp();	
+		$("#pageEditGroupWrapper").val(0);
+	} 	else {
+		$("#pageEditDisableWrapper").addClass("disabled");
+		$("#pageEditDisableWrapper").slideDown();	
+		$("#pageEditGroupWrapper").addClass("disabled");
+		$("#pageEditGroupWrapper").slideDown();										
+	}
 });
 
 
@@ -221,20 +280,29 @@ pageEditTargetLityDOM.on("change", function() {
 	}
 });
 
+
+
 /**
- * Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée
- */
+* Cache le l'option "ne pas afficher les pages enfants dans le menu horizontal" lorsque la page est désactivée 
+* Cache l'option homePage
+*/
 var pageEditDisableDOM = $("#pageEditDisable");
 pageEditDisableDOM.on("change", function() {
 	if ($(this).is(':checked') ) {
 		$("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
 		$("#pageEditHideMenuChildrenWrapper").slideUp();
-		$("#pageEditHideMenuChildren").prop("checked", false);			
+		$("#pageEditHideMenuChildren").prop("checked", false);
+		$("#pageHomePageIdWrapper").removeClass("disabled");
+		$("#pageHomePageIdWrapper").slideUp();
+
 	} else {
 		$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
-		$("#pageEditHideMenuChildrenWrapper").slideDown();								
+		$("#pageEditHideMenuChildrenWrapper").slideDown();	
+		$("#pageHomePageIdWrapper").addClass("disabled");
+		$("#pageHomePageIdWrapper").slideDown();										
 	}
 });
+
 
 
 /**	
@@ -255,22 +323,6 @@ pageEditPositionDOM.on("change", function() {
 		$("#pageHomePageIdWrapper").addClass("disabled");
 		$("#pageHomePageIdWrapper").slideDown();
 	}
-});
-
-/**
- * Interdit l'activation de la homePage pour une page non visiteur
- */
-var pageEditGroupDOM = $("#pageEditGroup");
-	pageEditGroupDOM.on("change", function() {	
-	if ($(this).val() > 0 ) {
-		$("#pageHomePageIdWrapper").removeClass("disabled");
-		$("#pageHomePageIdWrapper").slideUp();
-		$("#pageHomePageId").prop("checked",false);	
-	} else {
-		$("#pageHomePageIdWrapper").addClass("disabled");
-		$("#pageHomePageIdWrapper").slideDown();
-	}
-
 });
 
 /**
@@ -387,74 +439,55 @@ pageEditBlockDOM.on("change", function() {
 			break;	
 	}
 	if ($(this).val() === "bar") {
-			$("#pageEditMenu").removeClass("disabled");
-			$("#pageEditMenu").hide();
-			$("#pageEditHideTitleWrapper").removeClass("disabled");
-			$("#pageEditHideTitleWrapper").slideUp();
-			$("#pageTypeMenuWrapper").removeClass("disabled");
-			$("#pageTypeMenuWrapper").slideUp();	
-			$("#pageEditSeoWrapper").removeClass("disabled");
-			$("#pageEditSeoWrapper").slideUp();	
-			$("#pageEditAdvancedWrapper").removeClass("disabled");
-			$("#pageEditAdvancedWrapper").slideUp();								
-			$("#pageEditbreadCrumbWrapper").removeClass("disabled");
-			$("#pageEditbreadCrumbWrapper").slideUp();
-			$("#pageEditModuleIdWrapper").removeClass("disabled");
-			$("#pageEditModuleIdWrapper").slideUp();
-			$("#pageEditModuleConfig").removeClass("disabled");
-			$("#pageEditModuleConfig").slideUp();	
-			$("#pageEditDisplayMenuWrapper").addClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideDown();							
-			$("#pageEditBlockLayout").removeClass("col6");
-			$("#pageEditBlockLayout").addClass("col12");																			
+		$("#pageEditMenu").removeClass("disabled");
+		$("#pageEditMenu").hide();
+		$("#pageEditHideTitleWrapper").removeClass("disabled");
+		$("#pageEditHideTitleWrapper").slideUp();
+		$("#pageEditbreadCrumbWrapper").removeClass("disabled");
+		$("#pageEditbreadCrumbWrapper").slideUp();
+		$("#pageEditModuleIdWrapper").removeClass("disabled");
+		$("#pageEditModuleIdWrapper").slideUp();
+		//$("#pageEditModuleConfig").removeClass("disabled");
+		//$("#pageEditModuleConfig").slideUp();	
+		$("#pageEditDisplayMenuWrapper").addClass("disabled");
+		$("#pageEditDisplayMenuWrapper").slideDown();
+		$("#pageEditGroupWrapper").removeClass("disabled");
+		$("#pageEditGroupWrapper").slideUp();
+		$("#pageHomePageIdWrapper").removeClass("disabled");
+		$("#pageHomePageIdWrapper").slideUp();
+		$("#pageHomePageId").prop("checked",false);	
+		$("#pageEditSeoWrapper	").removeClass("disabled");
+		$("#pageEditSeoWrapper	").slideUp();
+		$("#pageEditAdvancedWrapper").removeClass("disabled");
+		$("#pageEditAdvancedWrapper").slideUp();
+		$("#pageEditBlockLayout").removeClass("col6");								
+		$("#pageEditBlockLayout").addClass("col12");
 	} else {
-			$("#pageEditMenu").addClass("disabled");
-			$("#pageEditMenu").show();					
-			$("#pageEditHideTitleWrapper").addClass("disabled");
-			$("#pageEditHideTitleWrapper").slideDown();	
-			$("#pageTypeMenuWrapper").addClass("disabled");
-			$("#pageTypeMenuWrapper").slideDown();	
-			$("#pageEditSeoWrapper").addClass("disabled");
-			$("#pageEditSeoWrapper").slideDown();		
-			$("#pageEditAdvancedWrapper").addClass("disabled");
-			$("#pageEditAdvancedWrapper").slideDown();						
-			$("#pageEditModuleIdWrapper").addClass("disabled");
-			$("#pageEditModuleIdWrapper").slideDown();	
-			$("#pageEditModuleConfig").addClass("disabled");
-			$("#pageEditModuleConfig").slideDown();	
-			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
-			$("#pageEditDisplayMenuWrapper").slideUp();													
-			if ($("#pageEditParentPageId").val() !== "") {
-				$("#pageEditbreadCrumbWrapper").addClass("disabled");
-				$("#pageEditbreadCrumbWrapper").slideDown();
-			}
-			$("#pageEditBlockLayout").removeClass("col12");
-			$("#pageEditBlockLayout").addClass("col6");
+		$("#pageEditMenu").addClass("disabled");
+		$("#pageEditMenu").show();					
+		$("#pageEditHideTitleWrapper").addClass("disabled");
+		$("#pageEditHideTitleWrapper").slideDown();	
+		$("#pageEditModuleIdWrapper").addClass("disabled");
+		$("#pageEditModuleIdWrapper").slideDown();	
+		//$("#pageEditModuleConfig").addClass("disabled");
+		//$("#pageEditModuleConfig").slideDown();	
+		$("#pageEditDisplayMenuWrapper").removeClass("disabled");
+		$("#pageEditDisplayMenuWrapper").slideUp();	
+		$("#pageEditGroupWrapper").addClass("disabled");
+		$("#pageEditGroupWrapper").slideDown();	
+		$("#pageHomePageIdWrapper").addClass("disabled");
+		$("#pageHomePageIdWrapper").slideDown();													
+		if ($("#pageEditParentPageId").val() !== "") {
+			$("#pageEditbreadCrumbWrapper").addClass("disabled");
+			$("#pageEditbreadCrumbWrapper").slideDown();
+		}
+		$("#pageEditSeoWrapper	").addClass("disabled");
+		$("#pageEditSeoWrapper	").slideDown();
+		$("#pageEditAdvancedWrapper").addClass("disabled");
+		$("#pageEditAdvancedWrapper").slideDown();
+		$("#pageEditBlockLayout").removeClass("col12");								
+		$("#pageEditBlockLayout").addClass("col6");
 	}	
-
-	/**
-	 * Interdit l'activation de la homePage pour une page qui est une barre, désactivée ou non membre
-	 */
-	if ($('#pageEditGroup').val() > 0  ||
-		$('#pageEditDisable').is(':checked') ||
-		$('#pageEditBlockWrapper').val() === 'bar' ) {
-			$("#pageHomePageIdWrapper").removeClass("disabled");
-			$("#pageHomePageIdWrapper").slideUp();	
-			$("#pageHomePageId").removeAttr(checked);
-	}
-
-	/**
-	 * Cache l'option désactivé lorsque la page est une homePage
-	 */
-
-	 if ($('#pageHomePageId').is(':checked')) {
-		 $("#pageEditDisableWrapper").removeClass("disabled");
-		 $("#pageEditDisableWrapper").slideUp();
-	 } 	else {
-		$("#pageEditDisableWrapper").addClass("disabled");
-		$("#pageEditDisableWrapper").slideDown();								
-	}
-
 });
 
 /**
@@ -475,6 +508,22 @@ pageEditHideTitleDOM.on("change", function() {
 });
 
 
+
+/**
+ * Interdit l'activation de la homePage pour une page non visiteur
+ */
+var pageEditGroupDOM = $("#pageEditGroup");
+	pageEditGroupDOM.on("change", function() {	
+	if ($(this).val() > 0 ) {
+		$("#pageHomePageIdWrapper").removeClass("disabled");
+		$("#pageHomePageIdWrapper").slideUp();
+		$("#pageHomePageId").prop("checked",false);	
+	} else {
+		$("#pageHomePageIdWrapper").addClass("disabled");
+		$("#pageHomePageIdWrapper").slideDown();
+	}
+
+});
 /**	
  * Masquer ou afficher le chemin de fer
  * Quand la page n'est pas mère et que le menu n'est pas masqué
@@ -493,9 +542,13 @@ pageEditParentPageIdDOM.on("change", function() {
 	if ($(this).val() !== "") {
 		  $("#pageEditHideMenuChildrenWrapper").removeClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideUp();
+			//$("#pageHomePageIdWrapper").removeClass("disabled");
+			//$("#pageHomePageIdWrapper").slideUp();
 		}	else {
 			$("#pageEditHideMenuChildrenWrapper").addClass("disabled");
 			$("#pageEditHideMenuChildrenWrapper").slideDown();
+			//$("#pageHomePageIdWrapper").addClass("disabled");
+			//$("#pageHomePageIdWrapper").slideDown();
 		}
 });
 
@@ -530,10 +583,7 @@ $("#pageEditModuleConfig").on("click", function() {
  * Affiche les pages en fonction de la page parent dans le choix de la position
  */
 var hierarchy = <?php echo json_encode($this->getHierarchy()); ?>;
-
 var pages = <?php echo json_encode($this->getData(['page'])); ?>;
-
-
 // 9.0.07 corrige une mauvaise sélection d'une page orpheline avec enfant
 var positionInitial = <?php echo $this->getData(['page',$this->getUrl(2),"position"]); ?>;
 // 9.0.07
@@ -561,7 +611,7 @@ $("#pageEditParentPageId").on("change", function() {
 					positionPrevious++;
 					// Ajout à la liste
 					positionDOM.append(
-						$("<option>").val(positionPrevious).text("Après \"" + (pages[key].title) + "\"")
+						$("<option>").val(positionPrevious).text("Après \"" + pages[key].title + "\"")
 					);
 				}
 			}
@@ -586,7 +636,7 @@ $("#pageEditParentPageId").on("change", function() {
 				positionPrevious++;
 				// Ajout à la liste
 				positionDOM.append(
-					$("<option>").val(positionPrevious).text("Après \"" + (pages[hierarchy[parentSelected][i]].title) + "\"")
+					$("<option>").val(positionPrevious).text("Après \"" + pages[hierarchy[parentSelected][i]].title + "\"")
 				);
 			}
 		}
