@@ -561,7 +561,7 @@ $("#pageEditParentPageId").on("change", function() {
 					positionPrevious++;
 					// Ajout à la liste
 					positionDOM.append(
-						$("<option>").val(positionPrevious).text("Après \"" + (pages[key].title) + "\"")
+						$("<option>").val(positionPrevious).html("Après \"" + (pages[key].title) + "\"")
 					);
 				}
 			}
@@ -586,7 +586,7 @@ $("#pageEditParentPageId").on("change", function() {
 				positionPrevious++;
 				// Ajout à la liste
 				positionDOM.append(
-					$("<option>").val(positionPrevious).text("Après \"" + (pages[hierarchy[parentSelected][i]].title) + "\"")
+					$("<option>").val(positionPrevious).html("Après \"" + (pages[hierarchy[parentSelected][i]].title) + "\"")
 				);
 			}
 		}
