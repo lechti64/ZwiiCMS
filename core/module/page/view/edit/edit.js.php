@@ -132,7 +132,13 @@ $( document ).ready(function() {
 			$("#pageEditGroupWrapper").removeClass("disabled");
 			$("#pageEditGroupWrapper").slideUp();
 			$("#pageHomePageIdWrapper").removeClass("disabled");
-			$("#pageHomePageIdWrapper").slideUp();			
+			$("#pageHomePageIdWrapper").slideUp();
+			$("#pageEditSeoWrapper").removeClass("disabled");
+			$("#pageEditSeoWrapper").slideUp();
+			$("#pageEditAdvancedWrapper").removeClass("disabled");
+			$("#pageEditAdvancedWrapper").slideUp();
+			$("#pageEditBlockLayout").removeClass("col6");								
+			$("#pageEditBlockLayout").addClass("col12");
 	} else {
 			$("#pageEditDisplayMenuWrapper").removeClass("disabled");
 			$("#pageEditDisplayMenuWrapper").slideUp();
@@ -224,8 +230,7 @@ $( document ).ready(function() {
 	 * Interdit l'activation de la homePage pour une page qui est une barre, désactivée ou non membre
 	 */
 	if ($('#pageEditGroup').val() > 0  ||
-		$('#pageEditDisable').is(':checked') ||
-		$('#pageEditBlockWrapper').val() === 'bar' ) {
+		$('#pageEditDisable').is(':checked') ) {
 			$("#pageHomePageIdWrapper").removeClass("disabled");
 			$("#pageHomePageIdWrapper").slideUp();				
 	}
@@ -451,6 +456,12 @@ pageEditBlockDOM.on("change", function() {
 		$("#pageHomePageIdWrapper").removeClass("disabled");
 		$("#pageHomePageIdWrapper").slideUp();
 		$("#pageHomePageId").prop("checked",false);	
+		$("#pageEditSeoWrapper	").removeClass("disabled");
+		$("#pageEditSeoWrapper	").slideUp();
+		$("#pageEditAdvancedWrapper").removeClass("disabled");
+		$("#pageEditAdvancedWrapper").slideUp();
+		$("#pageEditBlockLayout").removeClass("col6");								
+		$("#pageEditBlockLayout").addClass("col12");
 	} else {
 		$("#pageEditMenu").addClass("disabled");
 		$("#pageEditMenu").show();					
@@ -470,6 +481,12 @@ pageEditBlockDOM.on("change", function() {
 			$("#pageEditbreadCrumbWrapper").addClass("disabled");
 			$("#pageEditbreadCrumbWrapper").slideDown();
 		}
+		$("#pageEditSeoWrapper	").addClass("disabled");
+		$("#pageEditSeoWrapper	").slideDown();
+		$("#pageEditAdvancedWrapper").addClass("disabled");
+		$("#pageEditAdvancedWrapper").slideDown();
+		$("#pageEditBlockLayout").removeClass("col12");								
+		$("#pageEditBlockLayout").addClass("col6");
 	}	
 });
 
