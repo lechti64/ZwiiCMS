@@ -731,8 +731,8 @@ class common {
 	 */
 	public function sendMail($to, $subject, $content) {
 		// Utilisation de PHPMailer version 6.0.6
-		require "core/vendor/phpmailer/phpmailer.php";
-		require "core/vendor/phpmailer/exception.php";
+		require_once "core/vendor/phpmailer/phpmailer.php";
+		require_once "core/vendor/phpmailer/exception.php";
 
 		// Layout
 		ob_start();
