@@ -34,9 +34,10 @@ $( document ).ready(function() {
 		$('#pageEditDisable').is(':checked') ||
 		$('#pageEditBlockWrapper').val() === 'bar' ) {
 			$("#pageHomePageIdWrapper").removeClass("disabled");
-			$("#pageHomePageIdWrapper").slideUp();	
-			$("#pageHomePageId").removeAttr(checked);
+			$("#pageHomePageIdWrapper").slideUp();				
 	}
+	
+	
 
 
 	/**
@@ -221,7 +222,7 @@ $( document ).ready(function() {
 		 $("#pageEditDisableWrapper").removeClass("disabled");
 		 $("#pageEditDisableWrapper").slideUp();
 		 $("#pageEditGroupWrapper").removeClass("disabled");
-		 $("#pageEditGroupWrapper").slideUp();		 
+		 $("#pageEditGroupWrapper").slideUp();		 		 
 	 } 	else {
 		$("#pageEditDisableWrapper").addClass("disabled");
 		$("#pageEditDisableWrapper").slideDown();	
@@ -244,7 +245,8 @@ pageHomePageIdDOM.on("change", function() {
 		$("#pageEditDisableWrapper").removeClass("disabled");
 		$("#pageEditDisableWrapper").slideUp();
 		$("#pageEditGroupWrapper").removeClass("disabled");
-		$("#pageEditGroupWrapper").slideUp();			
+		$("#pageEditGroupWrapper").slideUp();	
+		$("#pageEditGroupWrapper").val(0);
 	} 	else {
 		$("#pageEditDisableWrapper").addClass("disabled");
 		$("#pageEditDisableWrapper").slideDown();	
