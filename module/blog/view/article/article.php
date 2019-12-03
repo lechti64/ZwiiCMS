@@ -1,6 +1,6 @@
 <div class="blogDate">
 	<i class="far fa-calendar-alt"></i>
-	<?php echo utf8_encode(strftime('- %d %B %Y', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn']))); ?>
+	<?php echo utf8_encode(strftime('%d %B %Y', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn']))); ?>
 		à <?php echo utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'publishedOn']))); ?>		
 </div>
 
