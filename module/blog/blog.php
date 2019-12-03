@@ -112,9 +112,8 @@ class blog extends common {
 		for($i = $pagination['first']; $i < $pagination['last']; $i++) {
 			// Met en forme le tableau
 			$comment = $comments[$commentIds[$i]];
-			self::$comments[] = [
-				//date('d/m/Y H:i', $comment['createdOn']),
-				strftime('%d %B %Y à %H:%M', $comment['createdOn']),
+			self::$comments[] = [				
+				utf8_encode(strftime('%d %B %Y - %H:%M', $comment['createdOn'])),
 				$comment['content'],
 				$comment['userId'] ? $this->getData(['user', $comment['userId'], 'firstname']) . ' ' . $this->getData(['user', $comment['userId'], 'lastname']) : $comment['author'],
 				template::button('blogCommentDelete' . $commentIds[$i], [

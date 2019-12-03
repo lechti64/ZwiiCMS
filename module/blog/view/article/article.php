@@ -95,7 +95,7 @@
 					<?php else: ?>
 						<?php echo $comment['author']; ?>
 					<?php endif; ?>
-					le <?php echo strftime('%d %B %Y à %H:%M', $comment['createdOn']); ?>
+					le <?php echo utf8_encode(strftime('%d %B %Y - %H:%M', $comment['createdOn'])); ?>
 				</h4>
 				<?php echo $comment['content']; ?>
 			</div>
