@@ -561,23 +561,23 @@ class common {
 			if ($this->getData(['page', $parentId, 'block']) !== 'bar' ) { 
 				// Boucler sur les enfants et récupérer le tableau children avec la liste des enfants
 				foreach($childIds as $childId) {					
-					$children [] = [ 'title' => ' » '. $this->getData(['page', $childId, 'title']) ,
+					$children [] = [ 'title' => ' » '. html_entity_decode($this->getData(['page', $childId, 'title']), ENT_QUOTES) ,
 								'value'=> $rewrite.$childId
 					];				
 				}
 				// Traitement 
 				if (empty($childIds)) {						
 					// Pas d'enfant, uniuement l'entrée du parent
-					$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) ,
+					$parents [] = ['title' =>   html_entity_decode($this->getData(['page', $parentId, 'title']), ENT_QUOTES) ,
 									'value'=> $rewrite.$parentId 		
 					];	
 				} else {
 					// Des enfants, on ajoute la page parent en premier
-					array_unshift ($children ,  ['title' => $this->getData(['page', $parentId, 'title']) ,
+					array_unshift ($children ,  ['title' => html_entity_decode($this->getData(['page', $parentId, 'title']), ENT_QUOTES) ,
 									'value'=> $rewrite.$parentId 		
 					]);	
 					// puis on ajoute les enfants au parent
-					$parents [] = ['title' => $this->getData(['page', $parentId, 'title']) ,
+					$parents [] = ['title' => html_entity_decode($this->getData(['page', $parentId, 'title']), ENT_QUOTES) ,
 									'value'=> $rewrite.$parentId ,  
 									'menu' => $children 
 					];							
@@ -731,8 +731,8 @@ class common {
 	 */
 	public function sendMail($to, $subject, $content) {
 		// Utilisation de PHPMailer version 6.0.6
-		require "core/vendor/phpmailer/phpmailer.php";
-		require "core/vendor/phpmailer/exception.php";
+		require_once "core/vendor/phpmailer/phpmailer.php";
+		require_once "core/vendor/phpmailer/exception.php";
 
 		// Layout
 		ob_start();
