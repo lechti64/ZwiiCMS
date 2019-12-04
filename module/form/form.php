@@ -45,13 +45,13 @@ class form extends common {
 
 
 	public static $types = [
+		self::TYPE_LABEL => 'Etiquette',		
 		self::TYPE_TEXT => 'Champ texte',
 		self::TYPE_TEXTAREA => 'Grand champ texte',
 		self::TYPE_MAIL => 'Champ mail',
 		self::TYPE_SELECT => 'Sélection',
 		self::TYPE_DATETIME => 'Date',
 		self::TYPE_CHECKBOX => 'Case à cocher',
-		self::TYPE_LABEL => 'Etiquette',
 	];
 
 	public static $listUsers = [
