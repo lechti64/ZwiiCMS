@@ -78,13 +78,14 @@
 				<?php echo template::checkbox('blogEditCloseComment', true, 'Fermer les commentaires', [
 					'checked' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'closeComment'])
 				]); ?>
-				<?php echo template::checkbox('blogEditMailNotification', true, 'Notifier quand un commentaire est déposé :', [
-					'checked' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'mailNotification'])
+				<?php echo template::checkbox('blogEditMailNotification', true, 'Notifier le commentaire aux groupes à partir de :', [
+					'checked' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'mailNotification']),
+					'help' => 'Editeurs = éditeurs + administrateurs<br/> Membres = membres + éditeurs + administrateurs'
+
 				]); ?>
 				<?php echo template::select('blogEditGroupNotification', $module::$groupNews, [
 							'label' => '',
-							'selected' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'groupNotification']),
-							'help' => 'Editeurs = éditeurs + administrateurs<br/> Membres = membres + éditeurs + administrateurs'
+							'selected' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'groupNotification'])
 						]); ?>
 			</div>
 		</div>

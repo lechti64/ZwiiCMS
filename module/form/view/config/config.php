@@ -101,7 +101,7 @@
 					<div class="row">
 						<div class="col6 offset1">
 							<?php echo template::select('formConfigGroup', $groupMembers, [
-								'label' => 'Les groupes hiérarchiques à partir du groupe :',
+								'label' => 'A partir du groupe :',
 								'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'group']),
 								'help' => 'Editeurs = éditeurs + administrateurs<br/> Membres = membres + éditeurs + administrateurs'
 							]); ?>
@@ -134,7 +134,7 @@
 						'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'pageId'])
 					]); ?>
 				</div>
-				<?php echo template::checkbox('formConfigCapcha', true, 'Capcha à remplir pour soumettre le formulaire', [
+				<?php echo template::checkbox('formConfigCapcha', true, 'Valider un capcha popur soumettre le formulaire.', [
 					'checked' => $this->getData(['module', $this->getUrl(0), 'config', 'capcha'])
 				]); ?>
 			</div>

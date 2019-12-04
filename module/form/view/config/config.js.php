@@ -123,15 +123,22 @@ $("#formConfigInputs")
 	// Affiche/cache le champ "Valeurs" en fonction des champs cachés
 	.on("change", ".formConfigType", function() {
 		var _this = $(this);
-		if(_this.val() === "select") {
-			_this.parents(".formConfigInput").find(".formConfigValuesWrapper").slideDown();			
-		} else if ( _this.val() === "label") {
-			_this.parents(".formConfigInput").find("label[for*=formConfigRequired]").hide();
-			_this.parents(".formConfigInput").find(".formConfigLabelWrapper").slideDown();			
-		}
-		else {
-			_this.parents(".formConfigInput").find(".formConfigValuesWrapper").slideUp();
-		}
+		switch (_this.val()) {
+			case "select":
+				_this.parents(".formConfigInput").find("label[for*=formConfigRequired]").show();
+				_this.parents(".formConfigInput").find(".formConfigValuesWrapper").slideDown();
+				_this.parents(".formConfigInput").find(".formConfigLabelWrapper").slideUp();
+				break;
+			case  "label":
+				_this.parents(".formConfigInput").find("label[for*=formConfigRequired]").hide();
+				_this.parents(".formConfigInput").find(".formConfigLabelWrapper").slideDown();
+				_this.parents(".formConfigInput").find(".formConfigValuesWrapper").slideUp();					
+				break;
+			default:
+				_this.parents(".formConfigInput").find("label[for*=formConfigRequired]").show();
+				_this.parents(".formConfigInput").find(".formConfigValuesWrapper").slideUp();					
+				_this.parents(".formConfigInput").find(".formConfigLabelWrapper").slideUp();	
+		}	
 	});
 // Simule un changement de type au chargement de la page
 $(".formConfigType").trigger("change");
