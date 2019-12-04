@@ -81,7 +81,7 @@
 					'checked' => (bool) $this->getData(['module', $this->getUrl(0), 'config', 'group']) ||
 										!empty($this->getData(['module', $this->getUrl(0), 'config', 'user'])) ||
 										!empty($this->getData(['module', $this->getUrl(0), 'config', 'mail'])),
-					'help' => 'Sélectionnez au moins un groupe, un utilisateur ou saississez un email.'
+					'help' => 'Sélectionnez au moins un groupe, un utilisateur ou saississez un email. Votre serveur doit autoriser les envois de mail.'
 				]); ?>						
 				<div id="formConfigMailOptions" class="displayNone">
 					<div class="row">
@@ -97,44 +97,44 @@
 						// Element 0 quand aucun membre a été sélectionné
 						$groupMembers = [''] + $module::$groupNews; 
 					?>
-					Destinataires  :
 					<div class="row">
-						<div class="col6 offset1">
+						<div class="col3 offset1">
 							<?php echo template::select('formConfigGroup', $groupMembers, [
-								'label' => 'A partir du groupe :',
+								'label' => 'Aux groupes à partir de',
 								'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'group']),
 								'help' => 'Editeurs = éditeurs + administrateurs<br/> Membres = membres + éditeurs + administrateurs'
 							]); ?>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col6 offset1">
+						</div>="row">
+						<div class="col3">
 							<?php echo template::select('formConfigUser', $module::$listUsers, [
-								'label' => 'Un membre :',
+								'label' => 'A un membre',
 								'selected' => array_search($this->getData(['module', $this->getUrl(0), 'config', 'user']),$module::$listUsers)
 							]); ?>
-						</div>
-					</div>
-					<div class="row">								
-						<div class="col6 offset1">
+						</div>							
+						<div class="col4">
 							<?php echo template::text('formConfigMail', [
-								'label' => 'Une adresse email ou une liste de diffusion:',
-								'value' => $this->getData(['module', $this->getUrl(0), 'config', 'mail'])
+								'label' => 'A une adresse email',
+								'value' => $this->getData(['module', $this->getUrl(0), 'config', 'mail']),
+								'help' => 'Un email ou une liste de diffusion'
 							]); ?>
 						</div>
 					</div>
 				</div>
-				<?php echo template::checkbox('formConfigPageIdToggle', true, 'Redirection après soumission du formulaire', [
-					'checked' => (bool) $this->getData(['module', $this->getUrl(0), 'config', 'pageId'])
-				]); ?>
-				<div class="col6 offset1">
-					<?php echo template::select('formConfigPageId', $module::$pages, [
-						'classWrapper' => 'displayNone',
-						'label' => 'Sélectionner une page du site :',
-						'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'pageId'])
-					]); ?>
+				<div class="row">
+					<div class="col6">
+						<?php echo template::checkbox('formConfigPageIdToggle', true, 'Redirection après soumission du formulaire', [
+							'checked' => (bool) $this->getData(['module', $this->getUrl(0), 'config', 'pageId'])
+						]); ?>
+					</div>
+					<div class="col5">
+						<?php echo template::select('formConfigPageId', $module::$pages, [
+							'classWrapper' => 'displayNone',
+							'label' => 'Sélectionner une page du site :',
+							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'pageId'])
+						]); ?>
+					</div>
 				</div>
-				<?php echo template::checkbox('formConfigCapcha', true, 'Valider un capcha popur soumettre le formulaire.', [
+				<?php echo template::checkbox('formConfigCapcha', true, 'Valider un capcha afin de soumettre le formulaire.', [
 					'checked' => $this->getData(['module', $this->getUrl(0), 'config', 'capcha'])
 				]); ?>
 			</div>
