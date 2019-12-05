@@ -1,7 +1,7 @@
 # Changelog
 
 ## version 9.2.13
-- Corrections 
+- Corrections :
     - Gestionnaire de fichiers, modifications des paramètres des miniatures.
     - Filtrage du nom des pages dans la fenêtre d'édition des pages.
     - Format de date dans le module Blog
