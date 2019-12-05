@@ -6,6 +6,10 @@
     - Suppression d'options inutiles dans l'édition d'une page de type de barre latérale.
     - Filtrage du nom des pages dans la fenêtre d'édition des pages.
     - Format de date dans le module Blog
+    - Form : 
+        - correction des options de champ pour le type étiquette
+        - édition  : champs d’options condensés 
+        - édition : ordre des champs dans le sélecteur 
     
 ## version 9.2.12
 - Modifications 
