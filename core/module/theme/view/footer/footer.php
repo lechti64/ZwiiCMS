@@ -133,10 +133,11 @@
             <h4>Configuration</h4>
             <div class="row">
                 <div class="col4">
-                    <?php 	$footerBlockPosition = $module::$footerblocks [$this->getData(['theme', 'footer', 'template'])]; ?>
+                
+                    <?php $footerBlockPosition =  is_null($this->getData(['theme', 'footer', 'template'])) ? $module::$footerblocks[3] : $module::$footerblocks [$this->getData(['theme', 'footer', 'template'])] ;?>
                     <?php echo template::select('themeFooterTemplate', $module::$footerTemplate, [
                             'label' => 'Disposition',
-                            'selected' => $this->getData(['theme', 'footer', 'template'])
+                            'selected' => is_null($this->getData(['theme', 'footer', 'template'])) ? 4 : $this->getData(['theme', 'footer', 'template'])
                         ]); ?>
                 </div>
                 <div class="col4">
