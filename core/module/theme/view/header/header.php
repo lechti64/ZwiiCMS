@@ -69,19 +69,23 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col4">
+                    <div class="col6">
                         <?php echo template::checkbox('themeHeaderTextHide', true, 'Masquer le titre du site', [
 								'checked' => $this->getData(['theme', 'header', 'textHide'])
 							]); ?>
                     </div>
-                    <div id="themeHeaderShow" class="col4">
+                    <div id="themeHeaderShow" class="col6">
                         <?php echo template::checkbox('themeHeaderlinkHomePage', true, 'Bannière cliquable', [
                                 'checked' => $this->getData(['theme', 'header', 'linkHomePage'])
                             ]); ?>  
                     </div>   
-                    <div class="col4">
-                        <em>(largeur:<span id="themeHeaderImageWidth"></span> ; hauteur:<span id="themeHeaderImageHeight"></span>)</em>
-                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col12 textAlignCenter">
+                        <span id="themeHeaderImage">
+                            Dimensions de l'image : largeur  <span id="themeHeaderImageWidth"></span> - hauteur  <span id="themeHeaderImageHeight"></span>
+                        </span>
+                    </div>                 
                 </div>
             </div>
         </div>
