@@ -104,12 +104,12 @@ class theme extends common {
 		'body' => 'En dessous du site'
 	];
 	public static $footerFontSizes = [
-		'.5em' => 'Microscopique (50%)',
-		'.6em' => 'Minuscule (60%)',
-		'.7em' => 'Infime (70%)',
 		'.8em' => 'Très petite (80%)',
 		'.9em' => 'Petite (90%)',
 		'1em' => 'Standard (100%)',
+		'1.1em' => 'Moyenne (110%)',
+		'1.2em' => 'Grande (120%)',
+		'1.3em' => 'Très grande (130%)'
 	];	
 	public static $headerFontSizes = [
 		'1.6em' => 'Très petite (160%)',
