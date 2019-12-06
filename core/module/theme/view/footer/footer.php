@@ -21,7 +21,8 @@
                     <?php echo template::text('themeFooterBackgroundColor', [
 							'class' => 'colorPicker',
 							'label' => 'Fond',
-							'value' => $this->getData(['theme', 'footer', 'backgroundColor'])
+                            'value' => $this->getData(['theme', 'footer', 'backgroundColor']),
+                            'help'  => 'Quand le pied de page est dans le site, l\'arrière plan transparent montre le fond de la page. Quand le pied de page est hors du site, l\'arrière plan transparent montre le fond du site.'
 						]); ?>
                 </div>
                 <div class="col6">
