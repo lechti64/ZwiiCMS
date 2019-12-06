@@ -1,5 +1,9 @@
 # Changelog
 
+## version 9.2.14
+- Mise à jour :
+    - Script d'upload du gestionnaire de fichiers
+
 ## version 9.2.13
 - Corrections 
     - Gestionnaire de fichiers, modifications des paramètres des miniatures.
