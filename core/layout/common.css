@@ -436,7 +436,15 @@ header span {
 }
 header .container {
 	overflow: hidden;
-	height: 100%;
+	height: 1
+	00%;
+}
+
+/* Elemnt du header */
+
+#themeHeaderImage {
+	font-style: italic;
+	font-size: 0.9em;
 }
 
 /* Menu */
