@@ -34,6 +34,16 @@
 						]); ?>
 					</div>
 					<div class="col4">
+						<?php echo template::text('themeLinkTextColor', [
+							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
+							'label' => 'Liens',
+							'value' => $this->getData(['theme', 'link', 'textColor'])
+						]); ?>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="col4">
 						<?php echo template::text('themeTitleTextColor', [
 							'class' => 'colorPicker',
 							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
@@ -41,22 +51,12 @@
 							'value' => $this->getData(['theme', 'title', 'textColor'])
 						]); ?>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col4 offset2">
+					<div class="col4 offset4">
 						<?php echo template::text('themeButtonBackgroundColor', [
 							'class' => 'colorPicker',
 							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
 							'label' => 'Boutons',
 							'value' => $this->getData(['theme', 'button', 'backgroundColor'])
-						]); ?>
-					</div>
-					<div class="col4">
-						<?php echo template::text('themeLinkTextColor', [
-							'class' => 'colorPicker',
-							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
-							'label' => 'Liens',
-							'value' => $this->getData(['theme', 'link', 'textColor'])
 						]); ?>
 					</div>
 				</div>
