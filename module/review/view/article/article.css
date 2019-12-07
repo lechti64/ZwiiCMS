@@ -1,0 +1,27 @@
+.blogArticlePicture {
+	height: auto;
+	width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	margin-top: 15px;
+}
+#blogArticleCommentShow {
+	cursor: text;
+}
+#blogArticleOr {
+	padding: 10px;
+}
+.blogDate {
+	font-size:0.8em;
+	font-style: italic;
+	color: grey;
+	margin-left: 10px;
+}
+@media (max-width: 767px) {
+	.blogArticlePicture {
+	height:auto;
+	max-width: 100%;}
+  }
+
+
