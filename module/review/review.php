@@ -15,18 +15,26 @@
 class review extends common {
 
 	public static $actions = [
-		'add' => self::GROUP_MODERATOR,
-		'comment' => self::GROUP_MODERATOR,
-		'commentDelete' => self::GROUP_MODERATOR,
+		'rates' => self::GROUP_MODERATOR,
+		'ratesDelete' => self::GROUP_MODERATOR,
 		'config' => self::GROUP_MODERATOR,
 		'delete' => self::GROUP_MODERATOR,
 		'edit' => self::GROUP_MODERATOR,
 		'index' => self::GROUP_VISITOR
 	];
 
+	public static $iconGrades = [
+		'3' => '3 valeurs',
+		'4' => '4 valeurs',
+		'5' => '5 valeurs',
+		'6' => '6 valeurs',
+	];
+
+	public static $reviews = [];
+
 	public static $articles = [];
 
-	public static $comments = [];
+	public static $rates = [];
 
 	public static $pages;
 
@@ -37,61 +45,24 @@ class review extends common {
 
 	public static $users = [];
 
-	const BLOG_VERSION = '1.8';
+	const REVIEW_VERSION = '1.0';
+
 
 	/**
-	 * Édition
+	 * Configuration du module d'avis
 	 */
-	public function add() {
-		// Soumission du formulaire
-		if($this->isPost()) {
-			// Incrémente l'id de l'article
-			$articleId = helper::increment($this->getInput('blogAddTitle', helper::FILTER_ID), $this->getData(['page']));
-			$articleId = helper::increment($articleId, (array) $this->getData(['module', $this->getUrl(0)]));
-			$articleId = helper::increment($articleId, array_keys(self::$actions));
-			// Crée l'article
-			$this->setData(['module', $this->getUrl(0), $articleId, [
-				'closeComment' => $this->getInput('blogAddCloseComment', helper::FILTER_BOOLEAN),
-				'mailNotification'  => $this->getInput('blogEditMailNotification', helper::FILTER_BOOLEAN),
-				'groupNotification' => 	$this->getInput('blogEditGroupNotification', helper::FILTER_INT),		
-				'comment' => [],
-				'content' => $this->getInput('blogAddContent', null),
-				'picture' => $this->getInput('blogAddPicture', helper::FILTER_STRING_SHORT, true),
-				'hidePicture' => $this->getInput('blogAddHidePicture', helper::FILTER_BOOLEAN),				
-				'publishedOn' => $this->getInput('blogAddPublishedOn', helper::FILTER_DATETIME, true),
-				'state' => $this->getInput('blogAddState', helper::FILTER_BOOLEAN),
-				'title' => $this->getInput('blogAddTitle', helper::FILTER_STRING_SHORT, true),
-				'userId' => $this->getInput('blogAddUserId', helper::FILTER_ID, true)
-			]]);
-			// Valeurs en sortie
-			$this->addOutput([
-				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
-				'notification' => 'Nouvel article créé',
-				'state' => true
-			]);
-		}
-		// Liste des utilisateurs
-		self::$users = helper::arrayCollumn($this->getData(['user']), 'firstname');
-		ksort(self::$users);
-		foreach(self::$users as $userId => &$userFirstname) {
-			$userFirstname = $userFirstname . ' ' . $this->getData(['user', $userId, 'lastname']);
-		}
-		unset($userFirstname);
+
+	public function config() {
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Nouvel article',
-			'vendor' => [
-				'flatpickr',
-				'tinymce'
-			],
-			'view' => 'add'
+			'title' => 'Configuration des avis',
+			'view' => 'config'
 		]);
 	}
-
 	/**
 	 * Liste des commentaires
 	 */
-	public function comment() {
+	public function rates() {
 		// Liste les commentaires
 		$comments = [];
 		foreach((array) $this->getData(['module', $this->getUrl(0)]) as $articleId => $article) {
@@ -131,7 +102,7 @@ class review extends common {
 	/**
 	 * Suppression de commentaire
 	 */
-	public function commentDelete() {
+	public function ratesDelete() {
 		// Le commentaire n'existe pas
 		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'comment', $this->getUrl(3)]) === null) {
 			// Valeurs en sortie
@@ -162,30 +133,30 @@ class review extends common {
 	/**
 	 * Configuration
 	 */
-	public function config() {
+	public function grade() {
 		// Ids des articles par ordre de publication
-		$articleIds = array_keys(helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'SORT_DESC'));
+		$ratesIds = array_keys(helper::arrayCollumn($this->getData(['module', $this->getUrl(0)],'rates'), 'publishedOn', 'SORT_DESC'));
 		// Pagination
-		$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
+		$pagination = helper::pagination($ratesIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
 		// Liste des pages
 		self::$pages = $pagination['pages']; 
 		// Articles en fonction de la pagination
 		for($i = $pagination['first']; $i < $pagination['last']; $i++) {
 			// Met en forme le tableau
-			self::$articles[] = [
-				$this->getData(['module', $this->getUrl(0), $articleIds[$i], 'title']),
+			self::$reviews[] = [
+				$this->getData(['module', $this->getUrl(0), $review[$i], 'title']),
 				// date('d/m/Y H:i', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])),
-				utf8_encode(strftime('%d %B %Y', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn'])))
+				utf8_encode(strftime('%d %B %Y', $this->getData(['module', $this->getUrl(0), $ratesIds[$i], 'publishedOn'])))
 				.' à '.
-				utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $articleIds[$i], 'publishedOn']))),				
-				self::$states[$this->getData(['module', $this->getUrl(0), $articleIds[$i], 'state'])],
-				template::button('blogConfigEdit' . $articleIds[$i], [
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $articleIds[$i] . '/' . $_SESSION['csrf'],
+				utf8_encode(strftime('%H:%M', $this->getData(['module', $this->getUrl(0), $ratesIds[$i], 'publishedOn']))),				
+				self::$states[$this->getData(['module', $this->getUrl(0), $ratesIds[$i], 'state'])],
+				template::button('blogConfigEdit' . $ratesIds[$i], [
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $ratesIds[$i] . '/' . $_SESSION['csrf'],
 					'value' => template::ico('pencil')
 				]),
-				template::button('blogConfigDelete' . $articleIds[$i], [
+				template::button('blogConfigDelete' . $ratesIds[$i], [
 					'class' => 'blogConfigDelete buttonRed',
-					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $articleIds[$i] . '/' . $_SESSION['csrf'],
+					'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $ratesIds[$i] . '/' . $_SESSION['csrf'],
 					'value' => template::ico('cancel')
 				])
 			];
@@ -227,78 +198,6 @@ class review extends common {
 		}
 	}
 
-	/**
-	 * Édition
-	 */
-	public function edit() {
-		// Jeton incorrect
-		if ($this->getUrl(3) !== $_SESSION['csrf']) {
-			// Valeurs en sortie
-			$this->addOutput([
-				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
-				'notification' => 'Action  non autorisée'
-			]);
-		}			
-		// L'article n'existe pas
-		if($this->getData(['module', $this->getUrl(0), $this->getUrl(2)]) === null) {
-			// Valeurs en sortie
-			$this->addOutput([
-				'access' => false
-			]);
-		}
-		// L'article existe
-		else {
-			// Soumission du formulaire
-			if($this->isPost()) {	
-				$articleId = $this->getInput('blogEditTitle', helper::FILTER_ID, true);
-				// Incrémente le nouvel id de l'article
-				if($articleId !== $this->getUrl(2)) {
-					$articleId = helper::increment($articleId, $this->getData(['page']));
-					$articleId = helper::increment($articleId, $this->getData(['module', $this->getUrl(0)]));
-					$articleId = helper::increment($articleId, array_keys(self::$actions));
-				}
-				$this->setData(['module', $this->getUrl(0), $articleId, [
-					'closeComment' => $this->getInput('blogEditCloseComment'),
-					'mailNotification'  => $this->getInput('blogEditMailNotification', helper::FILTER_BOOLEAN),
-					'groupNotification' => $this->getInput('blogEditGroupNotification', helper::FILTER_INT),
-					'comment' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'comment']),
-					'content' => $this->getInput('blogEditContent', null),
-					'picture' => $this->getInput('blogEditPicture', helper::FILTER_STRING_SHORT, true),
-					'hidePicture' => $this->getInput('blogEditHidePicture', helper::FILTER_BOOLEAN),					
-					'publishedOn' => $this->getInput('blogEditPublishedOn', helper::FILTER_DATETIME, true),
-					'state' => $this->getInput('blogEditState', helper::FILTER_BOOLEAN),
-					'title' => $this->getInput('blogEditTitle', helper::FILTER_STRING_SHORT, true),
-					'userId' => $this->getInput('blogEditUserId', helper::FILTER_ID, true)
-				]]);
-				// Supprime l'ancien article
-				if($articleId !== $this->getUrl(2)) {
-					$this->deleteData(['module', $this->getUrl(0), $this->getUrl(2)]);
-				}
-				// Valeurs en sortie
-				$this->addOutput([
-					'redirect' => helper::baseUrl() . $this->getUrl(0) . '/config',
-					'notification' => 'Modifications enregistrées',
-					'state' => true
-				]);
-			}
-			// Liste des utilisateurs
-			self::$users = helper::arrayCollumn($this->getData(['user']), 'firstname');
-			ksort(self::$users);
-			foreach(self::$users as $userId => &$userFirstname) {
-				$userFirstname = $userFirstname . ' ' . $this->getData(['user', $userId, 'lastname']);
-			}
-			unset($userFirstname);
-			// Valeurs en sortie
-			$this->addOutput([
-				'title' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'title']),
-				'vendor' => [
-					'flatpickr',
-					'tinymce'
-				],
-				'view' => 'edit'
-			]);
-		}
-	}
 
 	/**
 	 * Accueil (deux affichages en un pour éviter une url à rallonge)
@@ -392,24 +291,18 @@ class review extends common {
 			}
 
 		}
-		// Liste des articles
+		// Listes des notes
 		else {
 			// Ids des articles par ordre de publication
-			$articleIdsPublishedOns = helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'SORT_DESC');
-			$articleIdsStates = helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'state', 'SORT_DESC');
-			$articleIds = [];
-			foreach($articleIdsPublishedOns as $articleId => $articlePublishedOn) {
-				if($articlePublishedOn <= time() AND $articleIdsStates[$articleId]) {
-					$articleIds[] = $articleId;
-				}
-			}
+
+			$ratesIds = helper::arrayCollumn($this->getData(['module', $this->getUrl(0),'rates']), 'publishedOn', 'SORT_DESC');
 			// Pagination
-			$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
+			$pagination = helper::pagination($ratesIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
 			// Liste des pages
 			self::$pages = $pagination['pages'];
 			// Articles en fonction de la pagination
 			for($i = $pagination['first']; $i < $pagination['last']; $i++) {
-				self::$articles[$articleIds[$i]] = $this->getData(['module', $this->getUrl(0), $articleIds[$i]]);
+				self::$rates[$ratesIds[$i]] = $this->getData(['module', $this->getUrl(0), $ratesIds[$i]]);
 			}
 			// Valeurs en sortie
 			$this->addOutput([
