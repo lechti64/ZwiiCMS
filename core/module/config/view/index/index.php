@@ -109,7 +109,7 @@
 						]); ?>	
 					</div>
 					<div class="col6">
-						<?php echo template::checkbox('configdGoogTransLogo', true, 'Conditions d\'utilisation Google Traduction', [
+						<?php echo template::checkbox('configdGoogTransLogo', true, 'Conditions Google Traduction', [
 							'checked' => $this->getData(['config', 'googTransLogo']),
 							'help' => 'Affiche les conditions d\'utilisation de Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
 						]); ?>										
@@ -122,7 +122,7 @@
 						]); ?>	
 					</div>
 					<div class="col6">				
-						<?php echo template::checkbox('configAutoUpdate', true, 'Sauvegarde automatique', [
+						<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
 								'checked' => $this->getData(['config', 'autoUpdate']),
 								'help' => 'Vérifie une fois par jour l\'existence d\'une mise à jour.'
 							]); ?>
