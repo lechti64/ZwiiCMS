@@ -20,6 +20,7 @@ class common {
 	const DISPLAY_LAYOUT_BLANK = 2;
 	const DISPLAY_LAYOUT_MAIN = 3;
 	const DISPLAY_LAYOUT_LIGHT = 4;
+	const DISPLAY_LAYOUT_POPUP = 5;
 	const GROUP_BANNED = -1;
 	const GROUP_VISITOR = 0;
 	const GROUP_MEMBER = 1;
@@ -88,6 +89,7 @@ class common {
 		'notification' => '',
 		'redirect' => '',
 		'script' => '',
+		'targetLity' => false,
 		'showBarEditButton' => false,
 		'showPageContent' => false,
 		'state' => false,
@@ -1547,7 +1549,8 @@ class core extends common {
 				'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
 				'disable' => $this->getData(['page', $this->getUrl(0), 'disable']),
 				'contentRight' => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']),
-				'contentLeft'  => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content'])
+				'contentLeft'  => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content']),
+				'targetLity' => is_null($this->getData(['page', $this->getUrl(0), 'targetLity'])) ? false : $this->getData(['page', $this->getUrl(0), 'targetLity'])
 			]);
 		}
 		// Importe le module
@@ -1564,7 +1567,8 @@ class core extends common {
 					'iconUrl' => $this->getData(['page', $this->getUrl(0), 'iconUrl']),
 					'disable' => $this->getData(['page', $this->getUrl(0), 'disable']),
 					'contentRight' => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barRight']),'content']),
-					'contentLeft'  => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content'])
+					'contentLeft'  => $this->getData(['page',$this->getData(['page',$this->getUrl(0),'barLeft']),'content']),
+					'targetLity' => is_null($this->getData(['page', $this->getUrl(0), 'targetLity'])) ? false : $this->getData(['page', $this->getUrl(0), 'targetLity'])
 				]);
 				$pageContent = $this->getData(['page', $this->getUrl(0), 'content']);
 			}
@@ -1642,13 +1646,13 @@ class core extends common {
 								header('Location:' . $output['redirect']);
 								exit();								
 							}
-						}
+						}						
 						// Données en sortie applicables même lorsqu'une notice est présente
 						// Affichage
-						if($output['display']) {
+						if($output['display']) { 
 							$this->addOutput([
 								'display' => $output['display']
-							]);
+							]);			
 						}
 						// Contenu brut
 						if($output['content']) {
@@ -1768,29 +1772,37 @@ class core extends common {
 				'metaDescription' => $this->getData(['config', 'metaDescription'])
 			]);
 		}
-		// Choix du type d'affichage
-		switch($this->output['display']) {
-			// Layout vide
-			case self::DISPLAY_LAYOUT_BLANK:
-				require 'core/layout/blank.php';
-				break;
-			// Affichage en JSON
-			case self::DISPLAY_JSON:
-				header('Content-Type: application/json');
-				echo json_encode($this->output['content']);
-				break;
-			// Layout alléger
-			case self::DISPLAY_LAYOUT_LIGHT:
-				require 'core/layout/light.php';
-				break;
-			// Layout principal
-			case self::DISPLAY_LAYOUT_MAIN:
-				require 'core/layout/main.php';
-				break;
-			// Layout brut
-			case self::DISPLAY_RAW:
-				echo $this->output['content'];
-				break;
+
+		if($this->output['targetLity'])  {
+				require 'core/layout/popup.php';
+		} else {
+			switch($this->output['display']) {
+				// Layout vide
+				case self::DISPLAY_LAYOUT_BLANK:
+					require 'core/layout/blank.php';
+					break;
+				// Affichage en JSON
+				case self::DISPLAY_JSON:
+					header('Content-Type: application/json');
+					echo json_encode($this->output['content']);
+					break;
+				// Layout alléger
+				case self::DISPLAY_LAYOUT_LIGHT:
+					require 'core/layout/light.php';
+					break;
+				// Layout principal
+				case self::DISPLAY_LAYOUT_MAIN:
+					require 'core/layout/main.php';
+					break;
+				// Layout poup lity
+				case self::DISPLAY_LAYOUT_POPUP:
+
+					break;								
+				// Layout brut
+				case self::DISPLAY_RAW:
+					echo $this->output['content'];
+					break;
+			}
 		}
 	}
 

@@ -34,9 +34,17 @@
         - Le nom des fichiers de sauvegarde contient l'adresse de base du site
 
         
+## version 9.2.15
+- Amélioration : 
+    - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page
+
 ## version 9.2.14
 - Mise à jour :
     - Script d'upload du gestionnaire de fichiers
+- Modifications :
+    - Thème : optimisation des masques de saisie pour le site en largeur 750px.    
+- Corrections : 
+    - Thème : gestion d'erreur lors de l'import d'un thème issu d'une version inférieure. 
 
 ## version 9.2.13
 - Corrections :
@@ -50,7 +58,6 @@
     - Module Form : 
         - édition  : champs d’options condensés 
         - édition : ordre des champs dans le sélecteur 
-
     
 ## version 9.2.12
 - Modifications 
