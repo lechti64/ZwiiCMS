@@ -19,7 +19,8 @@
 			include('site/data/head.inc.html'); 
 		}?>
 	</head>
-	<body>				
+	<body>		
+	<?php $layout->showNotification(); ?>		
 	<!-- Corps de page -->
 	<section>
 	<?php 
