@@ -1528,7 +1528,9 @@ class core extends common {
 			]);
 		}
 
-		if($this->output['targetLity'])  {
+		if( $this->output['targetLity'] &&
+		 	$this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')
+		)  {
 				require 'core/layout/popup.php';
 		} else {
 			switch($this->output['display']) {
