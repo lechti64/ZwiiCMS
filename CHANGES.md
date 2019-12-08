@@ -1,5 +1,9 @@
 # Changelog
 
+## version 9.2.15
+- Amélioration : 
+    - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page
+
 ## version 9.2.14
 - Mise à jour :
     - Script d'upload du gestionnaire de fichiers
