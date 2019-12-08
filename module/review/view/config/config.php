@@ -3,12 +3,18 @@
 		<div class="col2">
 			<?php echo template::button('reviewConfigBack', [
 				'class' => 'buttonGrey',
-				'href' => helper::baseUrl() . $this->getUrl(0) . '/config',
+				'href' => helper::baseUrl() . $this->getUrl(0) . '/index',
 				'ico' => 'left',
 				'value' => 'Retour'
 			]); ?>
 		</div>
-		<div class="col2 offset8">
+        <div class="col2 offset6">
+            <?php echo template::button('blogConfigComment', [
+                'href' => helper::baseUrl() . $this->getUrl(0) . '/edit',
+                'value' => 'Gérer les avis'
+            ]); ?>
+        </div>
+		<div class="col2">
 			<?php echo template::submit('reviewConfigSubmit', [
 				'value' => 'Enregistrer'
 			]); ?>
