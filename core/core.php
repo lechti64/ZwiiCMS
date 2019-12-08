@@ -1772,40 +1772,40 @@ class core extends common {
 				'metaDescription' => $this->getData(['config', 'metaDescription'])
 			]);
 		}
-
+		// Traitement de la popup hors connexion.
 		if( $this->output['targetLity'] &&
 		 	$this->getUser('password') !== $this->getInput('ZWII_USER_PASSWORD')
 		)  {
-				require 'core/layout/popup.php';
-		} else {
-			switch($this->output['display']) {
-				// Layout vide
-				case self::DISPLAY_LAYOUT_BLANK:
-					require 'core/layout/blank.php';
-					break;
-				// Affichage en JSON
-				case self::DISPLAY_JSON:
-					header('Content-Type: application/json');
-					echo json_encode($this->output['content']);
-					break;
-				// Layout alléger
-				case self::DISPLAY_LAYOUT_LIGHT:
-					require 'core/layout/light.php';
-					break;
-				// Layout principal
-				case self::DISPLAY_LAYOUT_MAIN:
-					require 'core/layout/main.php';
-					break;
-				// Layout poup lity
-				case self::DISPLAY_LAYOUT_POPUP:
-
-					break;								
-				// Layout brut
-				case self::DISPLAY_RAW:
-					echo $this->output['content'];
-					break;
-			}
+			$this->output['display'] = self::DISPLAY_LAYOUT_POPUP;
 		}
+				
+		switch($this->output['display']) {
+			// Layout vide
+			case self::DISPLAY_LAYOUT_BLANK:
+				require 'core/layout/blank.php';
+				break;
+			// Affichage en JSON
+			case self::DISPLAY_JSON:
+				header('Content-Type: application/json');
+				echo json_encode($this->output['content']);
+				break;
+			// Layout alléger
+			case self::DISPLAY_LAYOUT_LIGHT:
+				require 'core/layout/light.php';
+				break;
+			// Layout principal
+			case self::DISPLAY_LAYOUT_MAIN:
+				require 'core/layout/main.php';
+				break;
+			// Layout poup lity
+			case self::DISPLAY_LAYOUT_POPUP:
+				require 'core/layout/popup.php';
+				break;								
+			// Layout brut
+			case self::DISPLAY_RAW:
+				echo $this->output['content'];
+				break;
+		}		
 	}
 
 		
