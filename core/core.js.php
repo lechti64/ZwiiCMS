@@ -423,9 +423,14 @@ $(document).ready(function(){
 
 		// au clic sur un titre...
 		accordion.on('click', '.accordion-title', function(ev) {
-			ev.preventDefault();
-			// ...on lance l'affichage de l'élément, avec animation
-			open($(this).closest('.accordion-item'), toggleSpeed);
+			ev.preventDefault();		
+			// Masquer l'élément déjà actif
+			if ($(this).closest('.accordion-item').hasClass('active')) {
+				$(this).removeClass('active').next('.accordion-content').slideUp(toggleSpeed);
+			} else {
+				// ...on lance l'affichage de l'élément, avec animation	
+				open($(this).closest('.accordion-item'), toggleSpeed);	
+			}
 		});
 	});
 });
