@@ -3,7 +3,7 @@
 		<div class="col2">
 			<?php echo template::button('reviewConfigBack', [
 				'class' => 'buttonGrey',
-				'href' => helper::baseUrl() . $this->getUrl(0) . '/index',
+				'href' => helper::baseUrl() . 'page/edit/' . $this->getUrl(0) ,
 				'ico' => 'left',
 				'value' => 'Retour'
 			]); ?>
@@ -33,10 +33,10 @@
                 -->
                 <div class="row">
                     <div class="col12">
-                        <?php echo template::select('reviewConfigiconGrades', $module::$iconGrades, [
+                        <?php echo template::select('reviewConfigGrades', $module::$iconGrades, [
                             'label' => 'Echelle de satisfaction',
                             'help'  => 'Entre 3 à 6',
-                            'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'user'])
+                            'selected' => $this->getData(['module', $this->getUrl(0), 'grades'])
                         ]); ?>
 					</div>            
                 </div>
@@ -44,7 +44,7 @@
                     <div class="col12">
                         <?php echo template::checkbox('reviewConfigMinusZero', true, 'Autoriser un vote sans note', [
                             'help' => 'Dérermine la valeur de note minimale, soit ZERO, soit UN.',
-                            'checked' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'minusZero'])
+                            'checked' => $this->getData(['module', $this->getUrl(0), 'minusZero'])
                             ]); ?>
 					</div>        
                 </div>
@@ -56,7 +56,7 @@
                 <div class="row">
                     <div class="col12">
                         <?php echo template::checkbox('reviewConfigmailNotification', true, 'Notifier du dépôt d\'un avis', [
-                                'checked' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'mailNotification'])
+                                'checked' => $this->getData(['module', $this->getUrl(0), 'mailNotification'])
                             ]); ?>
                     </div>
                 </div>    
@@ -64,7 +64,7 @@
                     <div class="col12">
                     <?php echo template::select('reviewConfigGroupNotification', $module::$groupNews, [
                             'label' => 'A partir du groupe :',
-                            'selected' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'groupNotification'])
+                            'selected' => $this->getData(['module', $this->getUrl(0),  'groupNotification'])
                         ]); ?>
                     </div>
                 </div>            
@@ -77,8 +77,8 @@
             <h4>Paramètres avancés</h4>
                 <div class="row">
                     <div class="col6"> 
-                        <?php echo template::checkbox('reviewConfigCloseComment', true, 'Fermer les avis', [
-                                'checked' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'closeComment'])
+                        <?php echo template::checkbox('reviewConfigCloseRatings', true, 'Fermer les avis', [
+                                'checked' => $this->getData(['module', $this->getUrl(0), 'closeRatings'])
                             ]); ?>
                     </div>
                 </div>

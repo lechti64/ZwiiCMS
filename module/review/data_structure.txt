@@ -2,18 +2,21 @@ STRUCTURE DE DONNEES
 
 module  
     pageId (getUrl(0))
-        closeReview -> bool (Les avis sont ouverts ou fermés)
+        closeRatings -> bool (Les avis sont ouverts ou fermés)
         mailNotification -> bool (notifation par email du dépôt d'un nouvel avis) 
         groupNotification -> groupId (Id du groupe concerné par la notification)
-        iconGrades -> int (nombre d'icônes de vote, note maxi)
+        Grades -> int (nombre d'icônes de vote, note maxi)
         iconPictureNoRate -> string (fichier vers l'icône vide)
         iconPictureRate -> string (fichier vers l'icône vote)
         minusZero -> bool (true autorise un vote à 0, false limite le vote minima à 1)
         moderation -> bool (modération des votes, usage ultérieur)
-            grades
-                publishedOn -> date (date du vote)
-                commentReview -> string (commentaire)
-                rateGrade -> int (vote)
+            ratings
+                RastingId                    
+                    publishedOn -> date (date du vote)
+                    comment -> string (commentaire)
+                    rateGrade -> int (vote)
+                    userName -> string shot (nom du dépositaire)
+
 
 
 
