@@ -1,6 +1,8 @@
 # Changelog
 
 ## version 9.2.15
+- Correction :
+    - Sauvegarde des données de site.
 - Amélioration : 
     - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page.
     - Editeur de texte ; effet accordéon, les accordéons peuvent être tous refermés.
