@@ -417,6 +417,10 @@ $(document).ready(function(){
 			item.addClass('active')
 				.find('.accordion-content').slideDown(speed);
 		}
+		function close(item, speed) {
+			accordion.find('.accordion-item').removeClass('active')
+				.find('.accordion-content').slideUp(speed);
+		}
 
 		// on initialise l'accordéon, sans animation 
 		open(accordion.find('.active:first'), 0);
@@ -426,7 +430,7 @@ $(document).ready(function(){
 			ev.preventDefault();		
 			// Masquer l'élément déjà actif
 			if ($(this).closest('.accordion-item').hasClass('active')) {
-				$(this).removeClass('active').next('.accordion-content').slideUp(toggleSpeed);
+				close($(this).closest('.accordion-item'), toggleSpeed);
 			} else {
 				// ...on lance l'affichage de l'élément, avec animation	
 				open($(this).closest('.accordion-item'), toggleSpeed);	
