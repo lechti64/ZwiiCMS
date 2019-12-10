@@ -33,7 +33,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '11.0.134.dev';
+	const ZWII_VERSION = '11.0.135.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1239,22 +1239,24 @@ class common {
 			$this->setData(['core', 'lastAutoUpdate', $autoUpdate]);
 			$this->setData(['config','autoUpdate', true]);
 			$this->setData(['core', 'dataVersion', 9211]);
-			$this->saveData();
 		}
 		// Version 9.2.12
 		if($this->getData(['core', 'dataVersion']) < 9212) {
 			$this->setData(['theme','menu', 'activeColorAuto',true]);
 			$this->setData(['theme','menu', 'activeColor','rgba(255, 255, 255, 1)']);
 			$this->setData(['core', 'dataVersion', 9212]);
-			$this->saveData();
+		}
+		// Version 9.2.15
+		if($this->getData(['core', 'dataVersion']) < 9215) {
+			// Données de la barre de langue dans le menu
+			$this->setData(['theme','menu','burgerTitle',true]);
+			$this->setData(['core', 'dataVersion', 9215]);
 		}
 		// Version 11.0.00
 		if($this->getData(['core', 'dataVersion']) < 11000) {
 			// La clé devient homePageId
 			$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
 			$this->deleteData(['config','homePageId']);
-			// Données de la barre de langue dans le menu
-			$this->setData(['theme','menu','burgerTitle',true]);
 			$this->setData(['theme','menu','i18nPosition', 'right']);
 			// Données de langue par défaut
 			$this->setData(['config','i18n','fr', 'flagFolder', 'core/vendor/i18n/png/']);

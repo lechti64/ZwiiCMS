@@ -59,25 +59,25 @@
             <div class="block">
                 <h4>Contenus</h4>
                 <div class="row">
-                    <div class="col6">
+                    <div class="col6"> 
                         <?php echo template::checkbox('themeMenuLoginLink', true, 'Lien de connexion', [
                                 'checked' => $this->getData(['theme', 'menu', 'loginLink'])
-                            ]); ?>
+                            ]); ?>  
                     </div>
-                    <div class="col6">
+                    <div class="col6"> 
                         <?php echo template::checkbox('themeMenuBurgerTitle', true, 'Titre du site dans le menu réduit', [
-                                'checked' => $this->getData(['theme', 'menu', 'burgerTitle']),
-                                'help' => 'Le menu burger remplace le menu complet lorsque la largeur de l\'écran  n\'est pas suffisante.'
-                            ]); ?>
+                                    'checked' => $this->getData(['theme', 'menu', 'burgerTitle']),
+                                    'help' => 'Le menu burger remplace le menu complet lorsque la largeur de l\'écran  n\'est pas suffisante.'
+                                ]); ?>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row">                          
                     <div class="col6">
-                    <?php echo template::select('themeMenui18nPosition', $module::$menui18nPosition, [
-                            'label' => 'Position de la barre de langues',
-                            'selected' => $this->getData(['theme', 'menu', 'i18nPosition'])
-                        ]); ?>   
-                    </div>
+                        <?php echo template::select('themeMenui18nPosition', $module::$menui18nPosition, [
+                                    'label' => 'Position de la barre de langues',
+                                    'selected' => $this->getData(['theme', 'menu', 'i18nPosition'])
+                            ]); ?> 
+                    </div>                   
                 </div>
             </div>
         </div>
