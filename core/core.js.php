@@ -426,15 +426,24 @@ $(document).ready(function(){
 			item.addClass('active')
 				.find('.accordion-content').slideDown(speed);
 		}
+		function close(item, speed) {
+			accordion.find('.accordion-item').removeClass('active')
+				.find('.accordion-content').slideUp(speed);
+		}
 
 		// on initialise l'accordéon, sans animation 
 		open(accordion.find('.active:first'), 0);
 
 		// au clic sur un titre...
 		accordion.on('click', '.accordion-title', function(ev) {
-			ev.preventDefault();
-			// ...on lance l'affichage de l'élément, avec animation
-			open($(this).closest('.accordion-item'), toggleSpeed);
+			ev.preventDefault();		
+			// Masquer l'élément déjà actif
+			if ($(this).closest('.accordion-item').hasClass('active')) {
+				close($(this).closest('.accordion-item'), toggleSpeed);
+			} else {
+				// ...on lance l'affichage de l'élément, avec animation	
+				open($(this).closest('.accordion-item'), toggleSpeed);	
+			}
 		});
 	});
 });
