@@ -37,7 +37,7 @@
             <div class="row">
                <div class="col6">
                         <?php
-                         echo template::checkbox('themeMenuActiveColorAuto', true, 'Couleur de fond automatique de la page sélectionnée', [
+                         echo template::checkbox('themeMenuActiveColorAuto', true, 'Page sélectionnée, couleur de fond automatique ', [
                             'checked' => is_null($this->getData(['theme', 'menu', 'activeColor'])) ? true : $this->getData(['theme', 'menu', 'activeColorAuto']),
                             'help' => 'La couleur de fond de la page active peut être définie automatique ou selon une couleur définie, comme par exemple celle de fond des pages.'
                         ]); ?>
@@ -45,8 +45,8 @@
                 <div class="col6">
                     <?php echo template::text('themeMenuActiveColor', [
 							'class' => 'colorPicker',
-							'help' => 'Couleur d\'arrière-plan du menu sélectionné.<br>Le curseur horizontal règle le niveau de transparence.',							
-							'label' => 'Fond de la la page sélectionnée',
+							'help' => 'Couleur de fond de la page sélectionnée dans le menu.<br>Le curseur horizontal règle le niveau de transparence.',							
+							'label' => 'Fond',
 							'value' => $this->getData(['theme', 'menu', 'activeColor'])
 						]); ?>
                 </div>   
@@ -122,7 +122,8 @@
                         <div class="col6">
                             <?php echo template::select('themeMenuRadius', $module::$menuRadius, [
                             'label' => 'Bords arrondis',
-                            'selected' => $this->getData(['theme', 'menu', 'radius'])
+                            'selected' => $this->getData(['theme', 'menu', 'radius']),
+                            'help' => 'Autour de la page sélectionnée'
                             ]); ?>
                         </div>
                     </div>
