@@ -26,6 +26,8 @@
     - Nouveau masque dédié à la sauvegarde automatique, à l'import et à l'export des données de site.
         
 ## version 9.2.15
+- Correction :
+    - Sauvegarde des données de site.
 - Améliorations : 
     - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page.
     - Editeur de texte ; effet accordéon, les accordéons peuvent être tous refermés.
