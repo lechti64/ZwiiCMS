@@ -1,37 +1,13 @@
 # Changelog
 
 ## Version 11.0.00
-- Améliorations : 
-    - Architecture de stockage des données.
-        - Les données sont désormais stockées dans des fichiers distincts (core, config, theme, user, page et module).
-        - Les données relatives aux pages et aux modules sont stockées dans un dossier localisé fr par défaut.
-    - Procédures internes de gestion des données. 
-        - Le système ne conserve plus en mémoire l'intégralité des données de site comme dans les versions précédentes.    
-        - Les données du site sont chargées à la demande au lieu d'être lues dans leur intégralité.
-        - Les mises à jour et effacement sont appliquées en direct sur le disque.
     - Multilinguisme :
         - Site publiable en différentes versions de langues européennes.
         - Un nouveau menu affiche l'écran de gestion des langues disponibles.
         - Le changement de la langue courante dans l'interface d'administration ainsi que dans le menu utilisateur.
         - En mode déconnecté, la langue affichée est celle du navigateur ou choix de la langue dans la barre de menu.
         - Les drapeaux affichés dans le menu ne font pas référence à un pays mais à une langue, sont proposés des langues européennes et régionales nationales.
-    - Thème menu :
-        - Lorsque le menu est réduit, le titre du site peut être inséré à la gauche du menu burger.
 
-- Modifications : 
-    - Procédure d'installation : 
-        - Les données manquantes sont installées  au cas par cas, les données présentes ne sont plus écrasées par l'installation. 
-        - Une notification est affichée quand un fichier  de données manquant a été réinstallé.
-        - La suppression de user.json entraîne le déclenchement de la procédure d'installation
-    - Procédure d'importation : 
-        - L'importation des données est possible uniquement à partir d'une version 9 et non des version ultérieures.
-        - Les données de site précédentes sont écrasées, les données localisées effacées.
-	- Les données relatives aux comptes des utilisateurs déjà installés peuvent être conservées.
-        - Une notification est affichée après l'importation.
-    - Configuration du site :
-        - Ecran dédié à la sauvegarde automatique, à l'import et à l'export.
-        - Fonction d'import des données provenant d'autres version de ZwiiCMS, avec option de préservation des données utilisateurs 
-        - Le nom des fichiers de sauvegarde contient l'adresse de base du site
 
 ## version 10.0.00
         
