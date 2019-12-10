@@ -21,7 +21,8 @@
 ## version 9.2.15
 - Amélioration : 
     - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page.
-    - Effet accordéon, les accordéons peuvent être tous fermés.
+    - Editeur de texte ; effet accordéon, les accordéons peuvent être tous refermés.
+    - Thème ; menu : lorsque le menu est réduit, le titre du site peut être inséré à la gauche du menu burger.
 
 ## version 9.2.14
 - Mise à jour :
