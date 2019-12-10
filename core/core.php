@@ -1109,7 +1109,6 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 10000) {
 			// Données de la barre de langue dans le menu
 			$this->setData(['theme','menu','burgerTitle',true]);
-			$this->setData(['theme','menu','i18nPosition', 'right']);
 			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 	}
