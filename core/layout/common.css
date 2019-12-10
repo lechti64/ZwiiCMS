@@ -434,8 +434,15 @@ nav #toggle {
 	display: none;
 	font-weight: bold;
 }
+
 nav #toggle span {
 	display: block;
+}
+
+nav #burgerText {
+	float: left;
+	font-size: 1.4em;
+	margin: 15px 0 0 10px;
 }
 
 nav ul {

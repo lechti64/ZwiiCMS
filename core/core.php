@@ -1031,6 +1031,12 @@ class common {
 			$this->setData(['core', 'dataVersion', 9212]);
 			$this->saveData();
 		}
+		// Version 9.2.15
+		if($this->getData(['core', 'dataVersion']) < 9215) {
+			// Données de la barre de langue dans le menu
+			$this->setData(['theme','menu','burgerTitle',true]);
+			$this->setData(['core', 'dataVersion', 9215]);
+		}
 	}
 }
 

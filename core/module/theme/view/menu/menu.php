@@ -57,10 +57,20 @@
 <div class="row">
     <div class="col12">
         <div class="block">
-            <h4>Contenu</h4>
-            <?php echo template::checkbox('themeMenuLoginLink', true, 'Lien de connexion', [
-					'checked' => $this->getData(['theme', 'menu', 'loginLink'])
-				]); ?>
+        <h4>Contenus</h4>
+            <div class="row">
+                <div class="col6">
+                        <?php echo template::checkbox('themeMenuLoginLink', true, 'Lien de connexion', [
+                                'checked' => $this->getData(['theme', 'menu', 'loginLink'])
+                            ]); ?>
+                </div>
+                <div class="col6">
+                        <?php echo template::checkbox('themeMenuBurgerTitle', true, 'Titre du site dans le menu réduit', [
+                                'checked' => $this->getData(['theme', 'menu', 'burgerTitle']),
+                                'help' => 'Le menu burger remplace le menu complet lorsque la largeur de l\'écran  n\'est pas suffisante.'
+                            ]); ?>
+                </div>
+            </div>                
         </div>
     </div>
 </div>

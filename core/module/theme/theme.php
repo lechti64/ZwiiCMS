@@ -453,7 +453,8 @@ class theme extends common {
 				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN),
 				'activeColorAuto' => $this->getInput('themeMenuActiveColorAuto', helper::FILTER_BOOLEAN),
 				'activeColor' => $this->getInput('themeMenuActiveColor'),
-				'radius' => $this->getInput('themeMenuRadius')
+				'radius' => $this->getInput('themeMenuRadius'),
+				'burgerTitle' => $this->getInput('themeMenuBurgerTitle', helper::FILTER_BOOLEAN)
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

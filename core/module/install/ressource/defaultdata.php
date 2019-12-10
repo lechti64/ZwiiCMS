@@ -473,6 +473,7 @@ class install extends common {
 				'fontWeight' => 'normal',
 				'height' => '15px 10px',
 				'loginLink' => true,
+				'burgerTitle' => true,
 				'margin' => false,
 				'position' => 'site-second',
 				'textAlign' => 'left',
@@ -480,7 +481,8 @@ class install extends common {
 				'textTransform' => 'none',
 				'fixed' => false,
 				'activeColor' => 'rgba(255, 255, 255, 1)',
-				'activeColorAuto' => true
+				'activeColorAuto' => true,
+
 			],
 			'site' => [
 				'backgroundColor' => 'rgba(255, 255, 255, 1)',
