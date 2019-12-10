@@ -529,8 +529,14 @@ class common {
 		// Save config core page module et user
 		// 5 premières clés principales
 		// Trois tentatives
+		$core = ['core' => $this->getData(['core'])];
+		$config = ['config' => $this->getData(['config'])];
+		$page = ['page' => $this->getData(['page'])];
+		$module = ['module' => $this->getData(['module'])];
+		$user = ['user' => $this->getData(['user'])];
+
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
+			if(file_put_contents(self::DATA_DIR.'core.json', json_encode( $core + $config + $page + $module + $user ) , LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
@@ -539,8 +545,9 @@ class common {
 		// Save theme
 		// dernière clé principale
 		// Trois tentatives
+		$theme = ['theme' => $this->getData(['theme'])];		
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents(self::DATA_DIR.'theme.json', json_encode(array_slice($this->getData(),5)), LOCK_EX) !== false) {
+			if(file_put_contents(self::DATA_DIR.'theme.json', json_encode($theme), LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
