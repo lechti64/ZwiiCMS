@@ -19,7 +19,9 @@ class config extends common {
 		'configMetaImage' => self::GROUP_ADMIN,
 		'generateFiles' => self::GROUP_ADMIN,
 		'updateRobots' => self::GROUP_ADMIN,
-		'index' => self::GROUP_ADMIN
+		'index' => self::GROUP_ADMIN,
+		'manage' => self::GROUP_ADMIN,
+		'updateBaseUrl' => self::GROUP_ADMIN
 	];
 	
 	public static $timezones = [
@@ -148,7 +150,7 @@ class config extends common {
 
 	public function generateFiles() {
 		// Mettre à jour le site map
-		$successSitemap=$this->createSitemap('all');
+		$successSitemap=$this->createSitemap();
 
 		// Creer un fichier robots.txt
 		$successRobots=$this->updateRobots();
@@ -199,16 +201,17 @@ class config extends common {
 	 * Sauvegarde des données
 	 */
 	public function backup() {
-
 		// Creation du ZIP
-		$fileName = date('Y-m-d-h-i-s', time()) . '.zip';
+		$fileName = str_replace('/','',helper::baseUrl(false,false)) . '-'. date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
 		if($zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE) === TRUE){
-			foreach(configHelper::scanDir('site/') as $file) {
+			foreach(core::scanDir(self::DATA_DIR) as $file) {
 				$zip->addFile($file);
 			}
 		}
 		$zip->close();
+		// Enregistre la date de backup manuel
+		$this->setData(['core', 'lastBackup', mktime(0, 0, 0)]);
 		// Téléchargement du ZIP
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Disposition: attachment; filename="' . $fileName . '"');
@@ -255,7 +258,105 @@ class config extends common {
 		]);
 	}	
 
+	/**
+	 * Procédure d'importation
+	 */
+	public function manage() {
+		// Soumission du formulaire
+		if($this->isPost()) {
+			//if ($this->getInput('configManageImportFile'))
+			$fileZip = $this->getInput('configManageImportFile');
+			$file_parts = pathinfo($fileZip);
+			$folder = date('Y-m-d-h-i-s', time());
+			$zip = new ZipArchive();
+			if ($file_parts['extension'] !== 'zip') {
+				// Valeurs en sortie erreur
+				$this->addOutput([
+					'notification' => 'Le fichier n\'est pas une archive valide',
+					'redirect' => helper::baseUrl() . 'config/manage',
+					'state' => false
+					]);
+			}
+			$successOpen = $zip->open(self::FILE_DIR . 'source/' . $fileZip);
+			if ($successOpen === FALSE) {					
+				// Valeurs en sortie erreur
+				$this->addOutput([
+					'notification' => 'Impossible de lire l\'archive',
+					'redirect' => helper::baseUrl() . 'config/manage',
+					'state' => false
+					]);
+			}
+			// Lire le contenu de l'archive dans le tableau files
+			for( $i = 0; $i < $zip->numFiles; $i++ ){ 
+				$stat = $zip->statIndex( $i ); 
+				$files [] = ( basename( $stat['name'] )); 
+			}
+			
+			// Détermination de la version	à installer
+			if (in_array('theme.json',$files) === true && 
+				in_array('core.json',$files) === true && 
+				in_array ('user.json', $files) === false ) { 
+					// V9 pas de fichier user dans l'archive
+					// Stocker le choix de conserver les users installées
+					$version = '9';
+
+			} elseif (in_array('theme.json',$files) === true && 					
+				in_array('core.json',$files) === true && 
+				in_array ('user.json', $files) === true && 
+				in_array ('config.json', $files) === true ) {
+					// V10 valide
+					$version = '10';
+					// Option active, les users sont stockées
+					if ($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ) { 
+						$users = $this->getData(['user']); 
+					}
+						
+			} else { // Version invalide
+				// Valeurs en sortie erreur
+				$this->addOutput([
+					'notification' => 'Cette archive n\'est pas une sauvegarde valide',
+					'redirect' => helper::baseUrl() . 'config/manage',
+					'state' => false
+				]);
+			}
+
+			// Extraire le zip
+			$success = $zip->extractTo( '.' );				
+			// Fermer l'archive	
+			$zip->close();
+			
+			// Restaurer les users originaux d'une v10 si option cochée
+			if (!empty($users) &&
+				$version === '10' &&
+				$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true) { 
+					$this->setData(['user',$users]);											
+			}
+
+			if ($version === '9' ) {
+				$this->importData($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN));	
+				$this->setData(['core','dataVersion',0]);
+			}
+			
+			// Met à jours les URL dans les contenus de page
+					
+			// Message de notification
+			$notification  = $success === true ? 'Sauvegarde importée avec succès' : 'Erreur d\'extraction'; 
+			$redirect = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ?  helper::baseUrl() . 'config/manage' : helper::baseUrl() . 'user/login/';
+			// Valeurs en sortie erreur	
+			$this->addOutput([
+				'notification' => $notification,
+				'redirect' =>$redirect,
+				'state' => $success
+			]);
+		} 
 	
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Sauvegarder / Restaurer',
+			'view' => 'manage'
+		]);
+	}
+
 
 	/**
 	 * Configuration
@@ -268,6 +369,7 @@ class config extends common {
 			} else {
 				$legalPageId = '';
 			}
+
 			$this->setData([
 				'config',
 				[
@@ -276,8 +378,6 @@ class config extends common {
 					'maintenance' => $this->getInput('configMaintenance', helper::FILTER_BOOLEAN),
 					'cookieConsent' => $this->getInput('configCookieConsent', helper::FILTER_BOOLEAN),
 					'favicon' => $this->getInput('configFavicon'),
-					'homePageId' => $this->getInput('configHomePageId', helper::FILTER_ID, true),
-					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),
 					'social' => [
 						'facebookId' => $this->getInput('configSocialFacebookId'),
 						'linkedinId' => $this->getInput('configSocialLinkedinId'),
@@ -288,12 +388,15 @@ class config extends common {
 						'githubId' => $this->getInput('configSocialGithubId')
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
-					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
 					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true),
 					'legalPageId' => $this->getInput('configLegalPageId'),
+					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),					
+					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
+					'googTransLogo' => $this->getInput('configdGoogTransLogo', helper::FILTER_BOOLEAN),
 					'autoUpdate' => $this->getInput('configAutoUpdate', helper::FILTER_BOOLEAN)
 				]
 			]);
+							
 			if(self::$inputNotices === []) {
 				// Ecrire les fichiers de script
 				file_put_contents(self::DATA_DIR . 'head.inc.html',$this->getInput('configScriptHead',null));
@@ -351,31 +454,28 @@ class config extends common {
 			'view' => 'index'
 		]);
 	}
-
-}
-
-class configHelper extends helper {
-
+	
 	/**
-	 * Scan le contenu d'un dossier et de ses sous-dossiers
-	 * @param string $dir Dossier à scanner
-	 * @return array
+	 * Met à jour les données de site avec l'adresse trannsmise
 	 */
-	public static function scanDir($dir) {
-		$dirContent = [];
-		$iterator = new DirectoryIterator($dir);
-		foreach($iterator as $fileInfos) {
-			if(in_array($fileInfos->getFilename(), ['.', '..', 'backup'])) {
-				continue;
-			}
-			elseif($fileInfos->isDir()) {
-				$dirContent = array_merge($dirContent, self::scanDir($fileInfos->getPathname()));
-			}
-			else {
-				$dirContent[] = $fileInfos->getPathname();
+	public function updateBaseUrl () {
+		$old = $this->getInput('configManageBaseURLToConvert');
+		$new = $this->getInput('configManageCurrentURL');			
+		foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
+			$content = $this->getData(['page',$parentId,'content']);			
+			$replace = str_replace( $old . '/site/' , $new . 'site/', $content) ;
+			$this->setData(['page',$parentId,'content', $replace ]);
+			foreach($childIds as $childId) {
+				$content = $this->getData(['page',$childId,'content']);
+				$replace = str_replace( $old . '/site/' , $new . 'site/', $content) ;
+				$this->setData(['page',$childId,'content', $replace ]);
 			}
 		}
-		return $dirContent;
+		$this->setData(['core','baseUrl',helper::baseUrl(false,false)]);
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Sauvegarder / Restaurer',
+			'view' => 'manage'
+		]);
 	}
-
 }

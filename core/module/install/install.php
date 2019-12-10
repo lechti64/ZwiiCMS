@@ -12,6 +12,7 @@
  * @link http://zwiicms.com/
  */
 
+
 class install extends common {
 
 	public static $actions = [
@@ -33,13 +34,14 @@ class install extends common {
 		if($this->getData(['user']) !== []) {
 			// Valeurs en sortie
 			$this->addOutput([
-				'access' => false
+				'access' => false			
 			]);
 		}
 		// Accès autorisé
 		else {
 			// Soumission du formulaire
 			if($this->isPost()) {
+				//$sent = $success = false;
 				// Double vérification pour le mot de passe
 				if($this->getInput('installPassword', helper::FILTER_STRING_SHORT, true) !== $this->getInput('installConfirmPassword', helper::FILTER_STRING_SHORT, true)) {
 					self::$inputNotices['installConfirmPassword'] = 'Incorrect';
@@ -50,35 +52,15 @@ class install extends common {
 				$userMail = $this->getInput('installMail', helper::FILTER_MAIL, true);
 				$userId = $this->getInput('installId', helper::FILTER_ID, true);
 				// Configure certaines données par défaut
-				if ($this->getInput('installDefaultData',helper::FILTER_BOOLEAN) === FALSE) {					
-					foreach($this->getHierarchy(null, false) as $parentPageId => $childrenPageIds) {
-						if ( $parentPageId !== 'accueil') {														
-							if ($this->getdata(['page',$parentPageId,'moduleId'])) {
-								$this->deleteData(['page',$parentPageId]);
-							}							
-						}
-						foreach($childrenPageIds as $childKey) {
-							$this->deleteData(['page', $childKey]);
-						}
-					}
-					// Effacer les barres
-					$this->deleteData(['page', 'barre']);
-					$this->deleteData(['page', 'barrelateraleavecmenu']);
-					// Effacer les modules 
-					$this->deleteData(['module']);
-					// Ajouter ici la liste des pages privées qui ne sont pas vues lors de l'installation.
-					$this->deleteData(['page', 'privee']);
-					// Effacer les fichiers par défaut
-					if (is_dir(self::FILE_DIR.'source/galerie')) {
-						$this->removeAll(self::FILE_DIR.'source/galerie');
-						$this->removeAll(self::FILE_DIR.'thumb/galerie');
-					}
+				if ($this->getInput('installDefaultData',helper::FILTER_BOOLEAN) === TRUE) {					
+					$this->initData('page','fr',true);
+					$this->initData('module','fr',true);
 				} else {
 					$this->setData(['module', 'blog', 'mon-premier-article', 'userId', $userId]);
 					$this->setData(['module', 'blog', 'mon-deuxieme-article', 'userId', $userId]);
 					$this->setData(['module', 'blog', 'mon-troisieme-article', 'userId', $userId]);
 				}
-				$this->setData([
+				$success = $this->setData([
 					'user',
 					$userId,
 					[
@@ -89,28 +71,32 @@ class install extends common {
 						'mail' => $userMail,
 						'password' => $this->getInput('installPassword', helper::FILTER_PASSWORD, true)
 					]
-				]);				
-				// Envoie le mail
-				$sent = $this->sendMail(
-					$userMail,
-					'Installation de votre site',
-					'Bonjour' . ' <strong>' . $userFirstname . ' ' . $userLastname . '</strong>,<br><br>' .
-					'Voici les détails de votre installation.<br><br>' .
-					'<strong>URL du site :</strong> <a href="' . helper::baseUrl(false) . '" target="_blank">' . helper::baseUrl(false) . '</a><br>' .
-					'<strong>Identifiant du compte :</strong> ' . $this->getInput('installId') . '<br>'
-				);
-				// Générer un fichier  robots.txt
-				$this->createRobots();
-				// Créer sitemap
-				$this->createSitemap('all');				
-				// Valeurs en sortie
-				$this->addOutput([
-					'redirect' => helper::baseUrl(false),
-					'notification' => ($sent === true ? 'Installation terminée' : $sent),
-					'state' => ($sent === true ? true : null)
 				]);
+				if ($success === true) { // Formulaire complété envoi du mail											
+					// Envoie le mail
+					$sent = $this->sendMail(
+						$userMail,
+						'Installation de votre site',
+						'Bonjour' . ' <strong>' . $userFirstname . ' ' . $userLastname . '</strong>,<br><br>' .
+						'Voici les détails de votre installation.<br><br>' .
+						'<strong>URL du site :</strong> <a href="' . helper::baseUrl(false) . '" target="_blank">' . helper::baseUrl(false) . '</a><br>' .
+						'<strong>Identifiant du compte :</strong> ' . $this->getInput('installId') . '<br>' 
+					);
+					// Stocker le dossier d'installation
+					$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
+					// Générer un fichier  robots.txt
+					$this->createRobots();
+					// Créer sitemap
+					$this->createSitemap();				
+					// Valeurs en sortie				
+					$this->addOutput([
+						'redirect' => helper::baseUrl(false),
+						'notification' => ($sent === true ? 'Installation terminée' : $sent),
+						'state' => ($sent === true ? true : null)
+					]);
+				}
 			}
-
+			
 			// Valeurs en sortie
 			$this->addOutput([
 				'display' => self::DISPLAY_LAYOUT_LIGHT,

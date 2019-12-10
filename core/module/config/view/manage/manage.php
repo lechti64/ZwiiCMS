@@ -1,0 +1,100 @@
+<?php echo template::formOpen('configManageForm'); ?>
+<div class="notranslate">
+	<div class="row">
+		<div class="col2">
+		<?php echo template::button('configManageBack', [
+				'class' => 'buttonGrey',
+				'href' => helper::baseUrl() . 'config',
+				'ico' => 'left',
+				'value' => 'Retour'
+			]); ?>
+		</div>
+		<div class="col2 offset8">
+			<?php echo template::submit('configManageSubmit',[
+				'value' => 'Enregister'
+			]); ?>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col6">
+			<div class="block">
+				<h4>Sauvegarde du site (données et thème)</h4>	
+				<div class="row">
+					<div class="col10 offset1">
+						<?php echo template::button('configManageButton', [
+							'href' => helper::baseUrl() . 'config/backup',
+							'value' => 'Générer et télécharger <br />une archive des données de site',
+						]); ?>
+					</div>					
+				</div>
+				<div class="row">
+					<?php echo template::checkbox('configExportAutoBackup', true, 'Sauvegarde automatique quotidienne', [
+							'checked' => $this->getData(['config', 'autoBackup']),
+							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Les fichiers du site ne sont pas sauvegardés automatiquement.</p>'
+						]); ?>	
+				</div>
+			</div>				
+		</div>	
+		<div class="col6">
+			<div class="block">
+				<h4>Restauration ou transfert d'un site</h4>
+				<div class="row">				
+					<?php echo template::file('configManageImportFile', [
+						'label' => 'Sélectionnez une archive au format ZIP',
+						'type' => 2,
+						'help' => 'L\'archive a été déposée dans le gestionaire de fichiers. Les archives inférieures à la version 9 ne sont pas acceptées.'
+					]); ?>
+				</div>
+				<div class="row">
+					<?php echo template::checkbox('configManageImportUser', true, 'Préserver les comptes des utilisateurs déjà installés', [
+						'checked' => true
+					]); ?>			
+				</div>			
+			</div>				
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col12">
+			<div class="block">
+				<h4>Conversion des URL après transfert de site</h4>
+				<div class="row">
+					<div class="col5">
+						<?php 
+						if (is_null($this->getData(['core', 'baseUrl'])) ) {
+							$baseUrlValue = 'Pas de donnée dans la sauvegarde';
+							$buttonClass = 'disabled'; 
+						} elseif ($this->getData(['core', 'baseUrl']) === '') {
+							$baseUrlValue = '/';
+							$buttonClass = (helper::baseUrl(false,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
+						} else {
+							$baseUrlValue = $this->getData(['core', 'baseUrl']);
+							$buttonClass = (helper::baseUrl(false,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
+						}
+						echo template::text('configManageBaseURLToConvert', [
+							'label' => 'Dossier d\'installation de l\'archive' ,
+							'value' => $baseUrlValue,
+							'readonly' => true,
+							'help'  => 'Lors de la restauration d\'un backup d\'une version 9.2.10 ou supérieure, l\'URL de base est stockée dans la configuration sinon cette donnée est vide.'
+						]); ?>
+					</div>
+					<div class="col5">
+						<?php echo template::text('configManageCurrentURL', [
+							'label' => 'Dossier du site actuel',
+							'value' => helper::baseUrl(false,false),
+							'readonly' => true,
+							'help'  => 'Dossier du site installé.'
+						]); ?>
+					</div>			
+					<div class="col2 verticalAlignBottom">
+						<?php echo template::button('configManageUpdateBaseURLButton', [
+							'href' => helper::baseUrl() . 'config/updateBaseUrl',
+							'class' => $buttonClass,
+							'value' => 'convertir'
+						]); ?>						
+					</div>		
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php echo template::formClose(); ?>
