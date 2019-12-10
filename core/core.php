@@ -1173,7 +1173,7 @@ class core extends common {
 				$color2 = helper::colorVariants($this->getData(['theme', 'menu', 'textColor']));
 				$css .= 'nav a.active{color:' .  $color2['text'] . '}';
 			}				
-			$css .= 'nav a.active {border-radius:' . $this->getData(['theme', 'menu', 'radius']) . '}'; 
+			$css .= 'nav .navLevel1 a.active {border-radius:' . $this->getData(['theme', 'menu', 'radius']) . '}'; 
 			$css .= '#menu{text-align:' . $this->getData(['theme', 'menu', 'textAlign']) . '}';
 			if($this->getData(['theme', 'menu', 'margin'])) {
 				if(
