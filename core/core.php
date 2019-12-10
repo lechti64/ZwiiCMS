@@ -34,7 +34,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.005.dev';
+	const ZWII_VERSION = '10.0.006.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1110,6 +1110,11 @@ class common {
 			// Données de la barre de langue dans le menu
 			$this->setData(['theme','menu','burgerTitle',true]);
 			$this->setData(['core', 'dataVersion', 9215]);
+		}	
+		// Version 10.0.00
+		if($this->getData(['core', 'dataVersion']) < 10000) {
+
+			$this->setData(['core', 'dataVersion', 10000]);
 		}		
 	}
 }
