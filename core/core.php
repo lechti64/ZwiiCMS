@@ -33,7 +33,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '11.0.133.dev';
+	const ZWII_VERSION = '11.0.134.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1233,23 +1233,6 @@ class common {
 			}			
 			$this->setData(['core', 'dataVersion', 9210]);		
 		}
-
-		// Version 10.0.00
-		if($this->getData(['core', 'dataVersion']) < 10000) {
-			// La clé devient homePageId
-			$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
-			$this->deleteData(['config','homePageId']);
-			// Données de la barre de langue dans le menu
-			$this->setData(['theme','menu','burgerTitle',true]);
-			$this->setData(['theme','menu','i18nPosition', 'right']);
-			// Données de langue par défaut
-			$this->setData(['config','i18n','fr', 'flagFolder', 'core/vendor/i18n/png/']);
-			$this->setData(['config','i18n','fr', 'autotranslate', false]);
-			// Option de gestion des langues
-			$this->setData(['config','disablei18n', false]);
-			$this->setData(['config','googTransLogo', true]);
-			$this->setData(['core', 'dataVersion', 10000]);		
-		}
 		// Version 9.2.11
 		if($this->getData(['core', 'dataVersion']) < 9211) {
 			$autoUpdate= mktime(0, 0, 0);
@@ -1264,6 +1247,22 @@ class common {
 			$this->setData(['theme','menu', 'activeColor','rgba(255, 255, 255, 1)']);
 			$this->setData(['core', 'dataVersion', 9212]);
 			$this->saveData();
+		}
+		// Version 11.0.00
+		if($this->getData(['core', 'dataVersion']) < 11000) {
+			// La clé devient homePageId
+			$this->setData(['page',$this->getData(['config','homePageId']),'homePageId', true]);
+			$this->deleteData(['config','homePageId']);
+			// Données de la barre de langue dans le menu
+			$this->setData(['theme','menu','burgerTitle',true]);
+			$this->setData(['theme','menu','i18nPosition', 'right']);
+			// Données de langue par défaut
+			$this->setData(['config','i18n','fr', 'flagFolder', 'core/vendor/i18n/png/']);
+			$this->setData(['config','i18n','fr', 'autotranslate', false]);
+			// Option de gestion des langues
+			$this->setData(['config','disablei18n', false]);
+			$this->setData(['config','googTransLogo', true]);
+			$this->setData(['core', 'dataVersion', 11000]);		
 		}
 	}
 }
