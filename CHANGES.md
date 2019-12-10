@@ -1,12 +1,12 @@
 # Changelog
 
 ## Version 11.0.00
-    - Multilinguisme :
-        - Site publiable en différentes versions de langues européennes.
-        - Un nouveau menu affiche l'écran de gestion des langues disponibles.
-        - Le changement de la langue courante dans l'interface d'administration ainsi que dans le menu utilisateur.
-        - En mode déconnecté, la langue affichée est celle du navigateur ou choix de la langue dans la barre de menu.
-        - Les drapeaux affichés dans le menu ne font pas référence à un pays mais à une langue, sont proposés des langues européennes et régionales nationales.
+- Multilinguisme :
+    - Site publiable en différentes versions de langues européennes.
+    - Un nouveau menu affiche l'écran de gestion des langues disponibles.
+    - Le changement de la langue courante dans l'interface d'administration ainsi que dans le menu utilisateur.
+    - En mode déconnecté, la langue affichée est celle du navigateur ou choix de la langue dans la barre de menu.
+    - Les drapeaux affichés dans le menu ne font pas référence à un pays mais à une langue, sont proposés des langues européennes et régionales nationales.
 
 ## version 10.0.00
 - Architecture de stockage des données.
@@ -26,9 +26,10 @@
     - Nouveau masque dédié à la sauvegarde automatique, à l'import et à l'export des données de site.
         
 ## version 9.2.15
-- Amélioration : 
+- Améliorations : 
     - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page.
-    - Effet accordéon, les accordéons peuvent être tous fermés.
+    - Editeur de texte ; effet accordéon, les accordéons peuvent être tous refermés.
+    - Thème ; menu : lorsque le menu est réduit, le titre du site peut être inséré à la gauche du menu burger.
 
 ## version 9.2.14
 - Mise à jour :
