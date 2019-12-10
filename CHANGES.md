@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 10.0.00
+## Version 11.0.00
 - Améliorations : 
     - Architecture de stockage des données.
         - Les données sont désormais stockées dans des fichiers distincts (core, config, theme, user, page et module).
