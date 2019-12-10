@@ -12,39 +12,40 @@
 	<div class="row">
 		<div class="col6">
 			<div class="block">
-			<h4>Importer un thème</h4>
+			<h4>Appliquer un thème archivé</h4>
+				<div class="col10 offset1">
 					<?php echo template::file('themeManageImport', [
-							'label' => 'Archive ZIP',
-							'type' => 2,
+							'label' => 'Archive ZIP :',
+							'type' => 2
 					]); ?>
-					<div class="col5 offset3">
-						<?php echo template::submit('themeImportSubmit', [
-							'value' => 'Importer'
-						]); ?>
-					</div>	
+				</div>
+				<div class="col5 offset3">
+					<?php echo template::submit('themeImportSubmit', [
+						'value' => 'Appliquer'
+					]); ?>
+				</div>	
 			</div>
 		</div>
 		<div class="col6">
 			<div class="block">
-			<h4>Exporter un thème</h4>
+			<h4>Sauvegarder le thème</h4>
 			<div class="row">
-				<div class="col5 offset1">
-						<?php echo template::button('themeSave', [
-							'href' => helper::baseUrl() . 'theme/save',
-							'ico' => 'download-cloud',
-							'value' => 'Sauvegarder'
-						]); ?>
+				<div class="col8 offset2">
+					<?php echo template::button('themeSave', [
+						'href' => helper::baseUrl() . 'theme/save',
+						'ico' => 'upload-cloud',
+						'value' => 'Sauvegarder dans les fichiers'
+					]); ?>
 				</div>
-				<div class="col5">
+			</div>
+			<div class="row">
+				<div class="col8 offset2">
 					<?php echo template::button('themeExport', [
 						'href' => helper::baseUrl() . 'theme/export',
 						'ico' => 'download',
 						'value' => 'Télécharger'
 					]); ?>
-				</div>
-			</div>
-			L'archive ZIP contient un dossier "site" à copier à la racine du répertoire d'installation de ZwiiCMS. Il comprend les données du thème et les images qu'il utilise le cas échéant.
-    		<p \>Le nom du thème est généré automatiquement à partir de la date et de l'heure de son enregistrement et d'un nombre aléatoire.
+				</div>		
 			</div>
 		</div>
 	</div>	
