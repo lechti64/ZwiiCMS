@@ -34,7 +34,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.002.dev';
+	const ZWII_VERSION = '10.0.003.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1104,6 +1104,13 @@ class common {
 			$this->setData(['theme','menu', 'activeColor','rgba(255, 255, 255, 1)']);
 			$this->setData(['core', 'dataVersion', 9212]);
 			//$this->SaveData();
+		}
+		// Version 10.0.00
+		if($this->getData(['core', 'dataVersion']) < 10000) {
+			// Données de la barre de langue dans le menu
+			$this->setData(['theme','menu','burgerTitle',true]);
+			$this->setData(['theme','menu','i18nPosition', 'right']);
+			$this->setData(['core', 'dataVersion', 10000]);		
 		}
 	}
 }
