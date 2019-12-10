@@ -8,8 +8,22 @@
         - En mode déconnecté, la langue affichée est celle du navigateur ou choix de la langue dans la barre de menu.
         - Les drapeaux affichés dans le menu ne font pas référence à un pays mais à une langue, sont proposés des langues européennes et régionales nationales.
 
-
 ## version 10.0.00
+- Architecture de stockage des données.
+    - Les données sont désormais stockées dans des fichiers distincts (core, config, theme, user, page et module).
+    - Les données relatives aux pages et aux modules sont stockées dans un dossier localisé fr par défaut.
+- Gestion des données. 
+    - Le système ne conserve plus en mémoire l'intégralité des données de site comme dans les versions précédentes.    
+    - Les données du site sont chargées à la demande au lieu d'être lues dans leur intégralité.
+    - Les mises à jour et effacement sont appliquées en direct sur le disque.
+- Installation : 
+    - Les fichiers de données manquants sont réinitialisés au cas par cas et plus dans leur globalité.
+    - Une notification est affichée quand un fichier  de données manquant a été réinstallé.
+    - La suppression de user.json entraîne le déclenchement de la procédure d'installation
+- Importation : 
+    - L'importation des données est possible uniquement à partir d'une version 9.
+    - Fonction d'import des données provenant d'autres version de ZwiiCMS, avec option de préservation des données utilisateurs 
+    - Nouveau masque dédié à la sauvegarde automatique, à l'import et à l'export des données de site.
         
 ## version 9.2.15
 - Amélioration : 
