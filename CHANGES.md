@@ -28,6 +28,7 @@
 ## version 9.2.15
 - Correction :
     - Sauvegarde des données de site.
+    - Couleur du titre de site dans le menu réduit.    
 - Améliorations : 
     - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page.
     - Editeur de texte ; effet accordéon, les accordéons peuvent être tous refermés.
