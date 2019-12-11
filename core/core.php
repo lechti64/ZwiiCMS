@@ -33,7 +33,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '11.0.137.dev';
+	const ZWII_VERSION = '11.0.138.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1120,7 +1120,15 @@ class common {
 	 * Mises à jour Uniquement à partir d'une version 9.0.0 minimum
 	 */
 	private function update() {
-
+		// Version 9.0.0
+		if($this->getData(['core', 'dataVersion']) < 9000) {
+			$this->deleteData(['theme', 'site', 'block']);
+			if ($this->getData(['theme','menu','position']) === 'body-top') {
+				$this->setData(['theme','menu','position','top']);
+			}
+			$this->setData(['theme', 'menu','fixed',false]);						
+			$this->setData(['core', 'dataVersion', 9000]);
+		}		
 		// Version 9.0.01
 		if($this->getData(['core', 'dataVersion']) < 9001) {
 			$this->deleteData(['config', 'social', 'googleplusId']);
