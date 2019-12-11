@@ -19,10 +19,11 @@
     - Nouveau masque dédié à la sauvegarde automatique, à l'import et à l'export des données de site.
 
 ## version 9.2.15
-- Correction :
+- Corrections :
     - Sauvegarde des données de site.
     - Couleur du titre de site dans le menu réduit.
-- Amélioration : 
+    - L'effet de couleur de fond personnalisé d'une page sélectionnée dans le menu est limité aux pages parents.
+- Améliorations : 
     - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page.
     - Editeur de texte ; effet accordéon, les accordéons peuvent être tous refermés.
     - Thème ; menu : lorsque le menu est réduit, le titre du site peut être inséré à la gauche du menu burger.
