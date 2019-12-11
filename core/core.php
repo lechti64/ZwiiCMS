@@ -33,7 +33,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '11.0.136.dev';
+	const ZWII_VERSION = '11.0.137.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -671,7 +671,7 @@ class common {
 				break;
 			}
 			elseif($i === 2) {
-				exit('Unable to import data file.');
+				exit('Impossible de lire les fichiers de données.');
 			}
 			// Pause de 10 millisecondes
 			usleep(10000);
@@ -695,16 +695,19 @@ class common {
 			mkdir (self::DATA_DIR . '/' . 'fr');
 		}
 
+		// Un seul fichier pour éviter les erreurs de sauvegarde des v9
+		$tempData = array_merge($tempData,$tempTheme);
+
 		// Ecriture des données
 		$this->setData(['config',$tempData['config']]);
 		$this->setData(['core',$tempData['core']]);	
 		$this->setData(['page',$tempData['page']]);
 		$this->setData(['module',$tempData['module']]);
+		$this->setData(['theme',$tempTheme['theme']]);			
 		// Import des users sauvegardés si option active
 		if ($keepUsers === false) {
 			$this->setData(['user',$tempData['user']]);			
-		}
-		$this->setData(['theme',$tempTheme['theme']]);			
+		}		
 
 		// Nettoyage du fichier de thème pour forcer une régénération
 		if (file_exists(self::DATA_DIR . '/theme.css')) { // On ne sait jamais
