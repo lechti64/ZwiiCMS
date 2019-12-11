@@ -34,7 +34,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.006.dev';
+	const ZWII_VERSION = '10.0.007.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -803,7 +803,7 @@ class common {
 	 * Sauvegarde des données
 	 * @param array $keys Clé(s) des données
 	 */
-	public function setData($keys) {
+	public function setData($keys = []) {
 
 		// Pas d'enregistrement lorsque'une notice est présente
 		if (!empty(self::$inputNotices)) {
@@ -1250,7 +1250,8 @@ class core extends common {
 				$css .= 'nav a.active{background-color:' . $this->getData(['theme','menu','activeColor']) . '}';
 				$color2 = helper::colorVariants($this->getData(['theme', 'menu', 'textColor']));
 				$css .= 'nav a.active{color:' .  $color2['text'] . '}';
-			}				
+			}		
+			$css .= 'nav #burgerText{color:' .  $colors['text'] . '}';
 			$css .= 'nav .navLevel1 a.active {border-radius:' . $this->getData(['theme', 'menu', 'radius']) . '}'; 
 			$css .= '#menu{text-align:' . $this->getData(['theme', 'menu', 'textAlign']) . '}';
 			if($this->getData(['theme', 'menu', 'margin'])) {
