@@ -343,8 +343,8 @@ class common {
 	 * @param array $keys Clé(s) des données
 	 * @return mixed
 	 */
-	public function getData($keys = null) {
-
+	public function getData($keys = []) {
+		
 		if (count($keys) >= 1) {
 			//Retourne une chaine contenant le dossier à créer
 			$folder = $this->dirData ($keys[0],'fr');
@@ -803,7 +803,7 @@ class common {
 	 * Sauvegarde des données
 	 * @param array $keys Clé(s) des données
 	 */
-	public function setData($keys = NULL) {
+	public function setData($keys) {
 
 		// Pas d'enregistrement lorsque'une notice est présente
 		if (!empty(self::$inputNotices)) {
@@ -1113,7 +1113,6 @@ class common {
 		}	
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
-
 			$this->setData(['core', 'dataVersion', 10000]);
 		}		
 	}
@@ -1470,10 +1469,12 @@ class core extends common {
 						// Sinon traitement des données de sortie qui requiert qu'aucune notice ne soit présente
 						else {
 							// Enregistrement des données
-							if($output['state'] !== false) {
-								$this->setData([$module->getData()]);
-								//$this->SaveData();
-							}
+							/** 
+							* if($output['state'] !== false) {
+							* 	$this->setData([$module->getData()]);
+							*	$this->SaveData();
+							* }
+							*/
 							// Notification
 							if($output['notification']) {
 								if($output['state'] === true) {
