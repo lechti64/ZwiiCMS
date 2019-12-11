@@ -671,7 +671,7 @@ class common {
 				break;
 			}
 			elseif($i === 2) {
-				exit('Impossible de lire les fichiers de données.');
+				exit('Impossible de lire les données à importer.');
 			}
 			// Pause de 10 millisecondes
 			usleep(10000);
