@@ -34,7 +34,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.008.dev';
+	const ZWII_VERSION = '10.0.009.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -538,18 +538,21 @@ class common {
 		if (!file_exists(self::DATA_DIR . '/fr')) {
 			mkdir (self::DATA_DIR . '/fr');
 		}
+
+		// Un seul fichier pour éviter les erreurs de sauvegarde des v9
+		$tempData = array_merge($tempData,$tempTheme);
+
 		// Ecriture des données
 		$this->setData(['config',$tempData['config']]);
 		$this->setData(['core',$tempData['core']]);	
 		$this->setData(['page',$tempData['page']]);
-		// Import des modules
-		$this->setData(['module',$tempData['module']]);
+		$this->setData(['module',$tempData['module']]);		
+		$this->setData(['theme',$tempData['theme']]);
+
 		// Import des users sauvegardés si option active
 		if ($keepUsers === false) {
 			$this->setData(['user',$tempData['user']]);			
 		}
-		// Import du theme
-		$this->setData(['theme',$tempTheme['theme']]);
 
 		// Nettoyage du fichier de thème pour forcer une régénération
 		if (file_exists(self::DATA_DIR . '/theme.css')) { // On ne sait jamais
