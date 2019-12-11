@@ -107,7 +107,7 @@
 					<div class="col6">				
 						<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
 								'checked' => $this->getData(['config', 'autoUpdate']),
-								'help' => 'Vérification quotidiene des mises à jour.'
+								'help' => 'Vérification quotidienne des mises à jour.'
 							]); ?>
 					</div>
 				</div>		
