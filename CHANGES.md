@@ -4,6 +4,7 @@
 - Corrections :
     - Sauvegarde des données de site.
     - Couleur du titre de site dans le menu réduit.
+    - L'effet de couleur de fond personnalisé d'une page sélectionnée dans le menu est limité aux pages parents.
 - Améliorations : 
     - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page.
     - Editeur de texte ; effet accordéon, les accordéons peuvent être tous refermés.
