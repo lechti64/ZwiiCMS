@@ -34,7 +34,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.007.dev';
+	const ZWII_VERSION = '10.0.008.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2527,6 +2527,10 @@ class layout extends common {
 	 * Affiche la notification
 	 */
 	public function showNotification() {
+		if (common::$importNotices) {
+			$notification = common::$importNotices [0];
+			$notificationClass = 'notificationSuccess';
+		}
 		if(common::$inputNotices) {
 			$notification = 'Impossible de soumettre le formulaire, car il contient des erreurs';
 			$notificationClass = 'notificationError';
