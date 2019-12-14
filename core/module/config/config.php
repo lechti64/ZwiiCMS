@@ -375,6 +375,7 @@ class config extends common {
 				[
 					'analyticsId' => $this->getInput('configAnalyticsId'),
 					'autoBackup' => $this->getInput('configAutoBackup', helper::FILTER_BOOLEAN),
+					'homePageId' => $this->getInput('configHomePageId', helper::FILTER_ID, true),
 					'maintenance' => $this->getInput('configMaintenance', helper::FILTER_BOOLEAN),
 					'cookieConsent' => $this->getInput('configCookieConsent', helper::FILTER_BOOLEAN),
 					'favicon' => $this->getInput('configFavicon'),
@@ -393,7 +394,7 @@ class config extends common {
 					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),					
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
 					'googTransLogo' => $this->getInput('configdGoogTransLogo', helper::FILTER_BOOLEAN),
-					'autoUpdate' => $this->getInput('configAutoUpdate', helper::FILTER_BOOLEAN)
+					'autoUpdate' => $this->getInput('configAutoUpdate', helper::FILTER_BOOLEAN),
 				]
 			]);
 							
