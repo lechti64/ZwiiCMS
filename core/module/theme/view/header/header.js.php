@@ -30,6 +30,7 @@ $("input, select").on("change", function() {
 		// Informations affichées
 		$("#themeHeaderImageHeight").html(tmpImg.height + "px");
 		$("#themeHeaderImageWidth").html(tmpImg.width + "px");
+		$("#themeHeaderImageRatio").html(tmpImg.width / tmpImg.height);
 
 		// Limiter la hauteur à 600 px
 		if (tmpImg.height > 600) {

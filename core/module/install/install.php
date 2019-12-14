@@ -51,15 +51,19 @@ class install extends common {
 				$userLastname = $this->getInput('installLastname', helper::FILTER_STRING_SHORT, true);
 				$userMail = $this->getInput('installMail', helper::FILTER_MAIL, true);
 				$userId = $this->getInput('installId', helper::FILTER_ID, true);
+				// Copier la bannière par défaut
+				mkdir(self::FILE_DIR.'source/banner/');
+				mkdir(self::FILE_DIR.'thumb/banner/');
+				copy('core/module/install/ressource/file/source/banner960.jpg',self::FILE_DIR.'source/banner/banner960.jpg');
+				copy('core/module/install/ressource/file/thumb/banner960.jpg',self::FILE_DIR.'thumb/banner/banner960.jpg');
 				// Configure certaines données par défaut
 				if ($this->getInput('installDefaultData',helper::FILTER_BOOLEAN) === TRUE) {					
 					$this->initData('page','fr',true);
 					$this->initData('module','fr',true);
-				} else {
 					$this->setData(['module', 'blog', 'mon-premier-article', 'userId', $userId]);
 					$this->setData(['module', 'blog', 'mon-deuxieme-article', 'userId', $userId]);
-					$this->setData(['module', 'blog', 'mon-troisieme-article', 'userId', $userId]);
-				}
+					$this->setData(['module', 'blog', 'mon-troisieme-article', 'userId', $userId]);					
+				} 
 				$success = $this->setData([
 					'user',
 					$userId,
