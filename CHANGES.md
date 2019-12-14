@@ -13,6 +13,7 @@
     - Les fichiers de données manquants sont réinitialisés au cas par cas et plus dans leur globalité.
     - Une notification est affichée quand un fichier  de données manquant a été réinstallé.
     - La suppression de user.json entraîne le déclenchement de la procédure d'installation
+    - Thème à l'installation, la bannière et le favicon sont livrés dans les paramètres de l'installation et copiés dans site.
 - Importation : 
     - L'importation des données est possible uniquement à partir d'une version 9.
     - Fonction d'import des données provenant d'autres version de ZwiiCMS, avec option de préservation des données utilisateurs 
