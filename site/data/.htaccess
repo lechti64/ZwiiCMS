@@ -1,8 +1,8 @@
 # Bloque l'accès aux données
-<Files core.json>
+<FilesMatch "\.json$">
 	Order deny,allow
 	Deny from all
-</Files>
+</FilesMatch>
 # Bloque l'accès htaccess
 <Files .htaccess>
 	Order deny,allow
