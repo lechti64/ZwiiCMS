@@ -33,7 +33,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '11.0.136.dev';
+	const ZWII_VERSION = '11.0.137.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -331,8 +331,8 @@ class common {
 		//Retourne une chaine contenant le dossier à créer
 		$folder = $this->dirData ($keys[0],$this->geti18n());
 		// Constructeur  JsonDB
-		require_once "core/vendor/jsondb/Dot.php";
-		require_once "core/vendor/jsondb/JsonDb.php";
+		//require_once "core/vendor/jsondb/Dot.php";
+		//require_once "core/vendor/jsondb/JsonDb.php";
 		$db = new \Prowebcraft\JsonDb([
 			'name' => $keys[0] . '.json',
 			'dir' => $folder,
@@ -464,8 +464,8 @@ class common {
 			//Retourne une chaine contenant le dossier à créer
 			$folder = $this->dirData ($keys[0],$this->geti18n());
 			// Constructeur  JsonDB
-			require_once "core/vendor/jsondb/Dot.php";
-			require_once "core/vendor/jsondb/JsonDb.php";
+			//require_once "core/vendor/jsondb/Dot.php";
+			//require_once "core/vendor/jsondb/JsonDb.php";
 			$db = new \Prowebcraft\JsonDb([
 				'name' => $keys[0] . '.json',
 				'dir' => $folder,
@@ -948,8 +948,8 @@ class common {
 		//Retourne une chaine contenant le dossier à créer		
 		// Lire les langues stockées
 		// Constructeur  JsonDB
-		require_once "core/vendor/jsondb/Dot.php";
-		require_once "core/vendor/jsondb/JsonDb.php";
+		//require_once "core/vendor/jsondb/Dot.php";
+		//require_once "core/vendor/jsondb/JsonDb.php";
 		$db = new \Prowebcraft\JsonDb([
 			'name' => 'i18n.json',
 			'dir' => $folder,
@@ -1042,8 +1042,8 @@ class common {
 		//Retourne une chaine contenant le dossier à créer
 		$folder = $this->dirData ($keys[0],$this->geti18n());
 		// Constructeur  JsonDB
-		require_once "core/vendor/jsondb/Dot.php";
-		require_once "core/vendor/jsondb/JsonDb.php";
+		//require_once "core/vendor/jsondb/Dot.php";
+		//require_once "core/vendor/jsondb/JsonDb.php";
 		$db = new \Prowebcraft\JsonDb([
 			'name' => $keys[0] . '.json',
 			'dir' => $folder,
@@ -1096,8 +1096,8 @@ class common {
 		}
 		$folder = $this->dirData ($module,$lang);
 		// Constructeur  JsonDB
-		require_once "core/vendor/jsondb/Dot.php";
-		require_once "core/vendor/jsondb/JsonDb.php";
+		//require_once "core/vendor/jsondb/Dot.php";
+		//require_once "core/vendor/jsondb/JsonDb.php";
 		$db = new \Prowebcraft\JsonDb([
 			'name' => $module . '.json',
 			'dir' => $folder,
