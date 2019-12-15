@@ -36,14 +36,14 @@
 						<?php echo template::text('configTitle', [
 							'label' => 'Titre du site',
 							'value' => $this->getData(['config', 'title']),
-							'help'  => 'Il apparaît dans la barre de titre et les partages sur les réseaux sociaux.'
+							'help'  => 'Le titre apparaît dans la barre de titre et les partages sur les réseaux sociaux.'
 						]); ?>
 					</div>						
 				</div>
 				<?php echo template::textarea('configMetaDescription', [
 					'label' => 'Description du site',
 					'value' => $this->getData(['config', 'metaDescription']),
-					'help'  => 'Elle apparaît dans les partages sur les réseaux sociaux.'
+					'help'  => 'La description apparaît dans les partages sur les réseaux sociaux.'
 				]); ?>
 			</div>
 		</div>		
@@ -124,7 +124,7 @@
 					<div class="col6">				
 						<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
 								'checked' => $this->getData(['config', 'autoUpdate']),
-								'help' => 'Vérifie une fois par jour l\'existence d\'une mise à jour.'
+								'help' => 'Vérification quotidienne des mises à jour.'
 							]); ?>
 					</div>
 				</div>		
