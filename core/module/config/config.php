@@ -219,9 +219,10 @@ class config extends common {
 		foreach ($files as $name => $file) 	{
 			if (!$file->isDir()) 	{
 				$filePath = $file->getRealPath();
-				$relativePath = substr($filePath, strlen(realpath($directory)) + 1);
+				$relativePath = substr($filePath, strlen(realpath('site/')) + 1);
 				$zip->addFile($filePath, $relativePath);
-			} 			
+			} 
+			
 		}
 		$zip->close();
 		// Téléchargement du ZIP
