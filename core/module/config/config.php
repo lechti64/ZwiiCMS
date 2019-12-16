@@ -204,16 +204,25 @@ class config extends common {
 		// Creation du ZIP
 		$fileName = str_replace('/','',helper::baseUrl(false,false)) . '-'. date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
-		if($zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE) === TRUE){
-			foreach(core::scanDir(self::DATA_DIR) as $file) {
-				$zip->addFile($file);
+
+		$zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+		$files = new RecursiveIteratorIterator(
+			new RecursiveDirectoryIterator(realpath(self::DATA_DIR)),
+			RecursiveIteratorIterator::LEAVES_ONLY
+		);		
+		foreach ($files as $name => $file) 	{
+			if (!$file->isDir()) 	{
+				$filePath = $file->getRealPath();
+				$relativePath = substr($filePath, strlen(realpath(self::DATA_DIR)) + 1);
+				$zip->addFile($filePath, $relativePath);
 			}
 		}
 		$zip->close();
 		// Enregistre la date de backup manuel
 		$this->setData(['core', 'lastBackup', mktime(0, 0, 0)]);
 		// Téléchargement du ZIP
-		header('Content-Transfer-Encoding: binary');
+		header('Content-Type: application/zip');
 		header('Content-Disposition: attachment; filename="' . $fileName . '"');
 		header('Content-Length: ' . filesize(self::TEMP_DIR . $fileName));
 		readfile(self::TEMP_DIR . $fileName);
@@ -223,6 +232,7 @@ class config extends common {
 		]);
 		unlink(self::TEMP_DIR . $fileName);
 	}
+
 
 	/**
 	 * Réalise une copie d'écran du site
