@@ -799,7 +799,7 @@ class common {
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
-}
+	}
 
 
 	/**
