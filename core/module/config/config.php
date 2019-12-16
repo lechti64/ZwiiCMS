@@ -196,7 +196,6 @@ class config extends common {
 		unlink('robots.bak');
 		return(fclose($filenew));
 	}
-
 	/**
 	 * Sauvegarde des données
 	 */
@@ -204,23 +203,29 @@ class config extends common {
 		// Creation du ZIP
 		$fileName = str_replace('/','',helper::baseUrl(false,false)) . '-'. date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
-
 		$zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
-
-		$files = new RecursiveIteratorIterator(
-			new RecursiveDirectoryIterator(realpath(self::DATA_DIR)),
-			RecursiveIteratorIterator::LEAVES_ONLY
-		);		
+		$directory = 'site/';
+		$filter = array('backup','tmp');
+		$files =  new RecursiveIteratorIterator(
+			new RecursiveCallbackFilterIterator(
+			  new RecursiveDirectoryIterator(
+				$directory,
+				RecursiveDirectoryIterator::SKIP_DOTS
+			  ),
+			  function ($fileInfo, $key, $iterator) use ($filter) {
+				return $fileInfo->isFile() || !in_array($fileInfo->getBaseName(), $filter);
+			  }
+			)
+		  );
 		foreach ($files as $name => $file) 	{
 			if (!$file->isDir()) 	{
 				$filePath = $file->getRealPath();
-				$relativePath = substr($filePath, strlen(realpath(self::DATA_DIR)) + 1);
+				$relativePath = substr($filePath, strlen(realpath($directory)) + 1);
 				$zip->addFile($filePath, $relativePath);
-			}
+			} 
+			
 		}
 		$zip->close();
-		// Enregistre la date de backup manuel
-		$this->setData(['core', 'lastBackup', mktime(0, 0, 0)]);
 		// Téléchargement du ZIP
 		header('Content-Type: application/zip');
 		header('Content-Disposition: attachment; filename="' . $fileName . '"');
