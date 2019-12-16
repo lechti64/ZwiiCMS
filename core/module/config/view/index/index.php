@@ -25,7 +25,15 @@
 				<h4>Informations générales</h4>
 				<div class="row">
 					<div class="col4">
-						<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
+						<?php							
+							$pages = $this->getData(['page']);
+							foreach($pages as $page => $pageId) {
+								if ($this->getData(['page',$page,'block']) === 'bar' ||
+								$this->getData(['page',$page,'disable']) === true) {
+									unset($pages[$page]);
+								}
+							}
+							echo template::select('configHomePageId', helper::arrayCollumn($pages, 'title', 'SORT_ASC'), [
 							'label' => 'Page d\'accueil',
 							'selected' => $this->getHomePageId(),
 							'disabled' => true,
