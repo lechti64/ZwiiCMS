@@ -558,7 +558,7 @@ class common {
 	/**
 	 * Génére un fichier json avec la liste des pages
 	 * 
-*/
+    */
     public function pages2Json() {
     // Sauve la liste des pages pour TinyMCE
 		$parents = [];
@@ -777,7 +777,7 @@ class common {
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
-}
+	}
 
 	/**
 	 * Insert des données
