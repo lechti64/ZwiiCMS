@@ -8,16 +8,11 @@
 			'value' => 'Retour'
 		]); ?>
 	</div>
-	<div class="col2 offset8">
-		<?php echo template::submit('configManageSubmit',[
-			'value' => 'Enregister'
-		]); ?>
-	</div>
 </div>
 <div class="row">
 	<div class="col6">
 		<div class="block">
-			<h4>Sauvegarde du site (données et thème)</h4>	
+			<h4>Sauvegarde totale du site</h4>	
 			<div class="row">
 				<div class="col10 offset1">
 					<?php echo template::button('configManageButton', [
@@ -27,7 +22,7 @@
 				</div>					
 			</div>
 			<div class="row">
-				<?php echo template::checkbox('configExportAutoBackup', true, 'Sauvegarde automatique quotidienne', [
+				<?php echo template::checkbox('configExportAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
 						'checked' => $this->getData(['config', 'autoBackup']),
 						'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Les fichiers du site ne sont pas sauvegardés automatiquement.</p>'
 					]); ?>	
@@ -37,19 +32,29 @@
 	<div class="col6">
 		<div class="block">
 			<h4>Restauration ou transfert d'un site</h4>
-			<div class="row">				
-				<?php echo template::file('configManageImportFile', [
-					'label' => 'Sélectionnez une archive au format ZIP',
-					'type' => 2,
-					'help' => 'L\'archive a été déposée dans le gestionaire de fichiers. Les archives inférieures à la version 9 ne sont pas acceptées.'
-				]); ?>
-			</div>
-			<div class="row">
-				<?php echo template::checkbox('configManageImportUser', true, 'Préserver les comptes des utilisateurs déjà installés', [
-					'checked' => true
-				]); ?>			
+			<div class="row">		
+				<div class="col12">		
+					<?php echo template::file('configManageImportFile', [
+						'label' => 'Sélectionnez une archive au format ZIP',
+						'type' => 2,
+						'help' => 'L\'archive a été déposée dans le gestionaire de fichiers. Les archives inférieures à la version 9 ne sont pas acceptées.'
+					]); ?>
+				</div>
 			</div>			
-		</div>				
+			<div class="row">
+				<div class="col8">
+					<?php echo template::checkbox('configManageImportUser', true, 'Préserver utilisateurs installés', [
+						'checked' => true,
+						'help' => 'Les données des utilisateurs installés ne sont pas écrasés par la restauration quand l\'option est active.'
+					]); ?>		
+				</div>	
+				<div class="col4">
+					<?php echo template::submit('configManageSubmit',[
+						'value' => 'Restaurer'
+					]); ?>
+				</div>
+			</div>			
+		</div>
 	</div>		
 </div>
 <div class="row">
