@@ -981,6 +981,8 @@ class common {
 
 			// Préparation des clés de légendes pour la v10
 			// Construire une liste plate de parents et d'enfants
+
+			$pageList = array();
 			
 			foreach ($this->getHierarchy(null,null,null) as $parentKey=>$parentValue) {
 				$pageList [] = $parentKey;
