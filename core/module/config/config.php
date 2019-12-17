@@ -473,15 +473,18 @@ class config extends common {
 	 * Met à jour les données de site avec l'adresse trannsmise
 	 */
 	public function updateBaseUrl () {
-		$old = $this->getInput('configManageBaseURLToConvert');
-		$new = $this->getInput('configManageCurrentURL');			
+		// Récuperer les données
+		// Les contrôles ont été effectués sur la page de formulaire
+		$old = $this->getData(['core', 'baseUrl']);
+		$new = helper::baseUrl(false,false);
+		// Boucler sur les pages			
 		foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
 			$content = $this->getData(['page',$parentId,'content']);			
-			$replace = str_replace( $old . '/site/' , $new . 'site/', $content) ;
+			$replace = str_replace( $old . 'site' , $new . 'site', $content,$count) ;
 			$this->setData(['page',$parentId,'content', $replace ]);
 			foreach($childIds as $childId) {
 				$content = $this->getData(['page',$childId,'content']);
-				$replace = str_replace( $old . '/site/' , $new . 'site/', $content) ;
+				$replace = str_replace( $old . 'site' , $new . 'site', $content,$count) ;
 				$this->setData(['page',$childId,'content', $replace ]);
 			}
 		}
