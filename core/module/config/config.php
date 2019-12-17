@@ -495,26 +495,4 @@ class config extends common {
 			'view' => 'manage'
 		]);
 	}
-
-
-	public function recursiveDirectoryIterator ($directory = null, $files = array()) {
-		$iterator = new \DirectoryIterator ( $directory );
-	
-		foreach ( $iterator as $info ) {
-			if ($info->isFile ()) {
-				$files [$info->__toString ()] = $info;
-			} elseif (!$info->isDot ()) {
-				$list = array($info->__toString () => $this->recursiveDirectoryIterator(
-							$directory.DIRECTORY_SEPARATOR.$info->__toString ()
-				));
-				if(!empty($files))
-					$files = array_merge_recursive($files, $filest);
-				else {
-					$files = $list;
-				}
-			}
-		}
-		return $files;
-	}
-
 }
