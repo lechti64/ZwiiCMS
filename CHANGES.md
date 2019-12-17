@@ -1,5 +1,9 @@
 # Changelog
 
+## version 9.2.16
+- Optimisation :
+    - Sauvegarde manuelle des données de site (dossiers file et data).
+
 ## version 9.2.15
 - Corrections :
     - Sauvegarde des données de site.
