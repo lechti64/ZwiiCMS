@@ -34,7 +34,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.017.dev';
+	const ZWII_VERSION = '10.0.018.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -145,9 +145,10 @@ class common {
 
 		// Import version 9 
 		if (file_exists(self::DATA_DIR . 'core.json') === true && 
-			$this->getData(['core','dataVersion']) < 10000) { 								
-				$this->importData($_SESSION['KeepUsers']);
-				unset ($_SESSION['KeepUsers']);
+			$this->getData(['core','dataVersion']) < 10000) { 
+				$keepUsers = isset($_SESSION['KEEP_USERS']) ? $_SESSION['KEEP_USERS'] : false;
+				$this->importData($keepUsers);
+				unset ($_SESSION['KEEP_USERS']);
 				// Réinstaller htaccess		
 				copy('core/module/config/ressource/.htaccess', self::DATA_DIR . '.htaccess');		
 				common::$importNotices [] = "Importation réalisée avec succès" ;

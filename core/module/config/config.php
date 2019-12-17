@@ -335,9 +335,8 @@ class config extends common {
 
 			// Préserver les comptes des utilisateurs d'une version 9 si option cochée
 			// Positionnement d'une  variable de session lue au constructeur
-			if ($version === '9' &&
-				$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true) {
-					$_SESSION['KeepUsers'] = true;	
+			if ($version === '9') {
+				$_SESSION['KEEP_USERS'] = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN);
 			}
 
 			// Extraire le zip
@@ -349,7 +348,7 @@ class config extends common {
 			if (!empty($users) &&
 				$version === '10' &&
 				$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true) { 
-					$this->setData(['user',$users]);						
+					$this->setData(['user',$users]);					
 			}		
 	
 			// Message de notification
