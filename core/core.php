@@ -33,7 +33,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '11.0.140.dev';
+	const ZWII_VERSION = '11.0.141.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -163,14 +163,16 @@ class common {
 		*/
 		self::$i18nList = array_merge (self::$i18nList, $this->importi18n());
 
-		// Import version 9 
+    	// Import version 9 
 		if (file_exists(self::DATA_DIR . 'core.json') === true && 
-			$this->getData(['core','dataVersion']) < 10000 && 
-			$this->getData(['core','dataVersion']) !== 0) { // Retour d'importation ne pas déclencher l'import
-				$this->importData();
+			$this->getData(['core','dataVersion']) < 10000) { 								
+				$this->importData($_SESSION['KeepUsers']);
+				unset ($_SESSION['KeepUsers']);
+				// Réinstaller htaccess		
+				copy('core/module/config/ressource/.htaccess', self::DATA_DIR . '.htaccess');		
 				common::$importNotices [] = "Importation réalisée avec succès" ;
 				//echo '<script>window.location.replace("' .  helper::baseUrl() . $this->getData(['config','homePageId']) . '")</script>';
-			}
+		}
 		// Installation fraîche, initialisation des modules manquants
 		// La langue d'installation par défaut est fr
 		foreach (self::$dataStage as $stageId) {
