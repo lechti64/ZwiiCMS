@@ -318,13 +318,12 @@ class config extends common {
 				in_array('core.json',$files) === true && 
 				in_array ('user.json', $files) === true && 
 				in_array ('config.json', $files) === true ) {
-					// V10 valide
+					// V10 valide user et config
 					$version = '10';
 					// Option active, les users sont stockées
 					if ($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ) { 
 						$users = $this->getData(['user']); 
-					}
-						
+					}						
 			} else { // Version invalide
 				// Valeurs en sortie erreur
 				$this->addOutput([
@@ -334,25 +333,25 @@ class config extends common {
 				]);
 			}
 
+			// Préserver les comptes des utilisateurs d'une version 9 si option cochée
+			// Positionnement d'une  variable de session lue au constructeur
+			if ($version === '9' &&
+				$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true) {
+					$_SESSION['KeepUsers'] = true;	
+			}
+
 			// Extraire le zip
-			$success = $zip->extractTo( '.' );				
+			$success = $zip->extractTo( 'site/' );				
 			// Fermer l'archive	
 			$zip->close();
-			
+
 			// Restaurer les users originaux d'une v10 si option cochée
 			if (!empty($users) &&
 				$version === '10' &&
 				$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true) { 
-					$this->setData(['user',$users]);											
-			}
-
-			if ($version === '9' ) {
-				$this->importData($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN));	
-				$this->setData(['core','dataVersion',0]);
-			}
-			
-			// Met à jours les URL dans les contenus de page
-					
+					$this->setData(['user',$users]);						
+			}		
+	
 			// Message de notification
 			$notification  = $success === true ? 'Sauvegarde importée avec succès' : 'Erreur d\'extraction'; 
 			$redirect = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ?  helper::baseUrl() . 'config/manage' : helper::baseUrl() . 'user/login/';
