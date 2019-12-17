@@ -33,7 +33,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '11.0.141.dev';
+	const ZWII_VERSION = '11.0.142.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -163,11 +163,12 @@ class common {
 		*/
 		self::$i18nList = array_merge (self::$i18nList, $this->importi18n());
 
-    	// Import version 9 
+		// Import version 9 
 		if (file_exists(self::DATA_DIR . 'core.json') === true && 
-			$this->getData(['core','dataVersion']) < 10000) { 								
-				$this->importData($_SESSION['KeepUsers']);
-				unset ($_SESSION['KeepUsers']);
+			$this->getData(['core','dataVersion']) < 10000) { 
+				$keepUsers = isset($_SESSION['KEEP_USERS']) ? $_SESSION['KEEP_USERS'] : false;
+				$this->importData($keepUsers);
+				unset ($_SESSION['KEEP_USERS']);
 				// Réinstaller htaccess		
 				copy('core/module/config/ressource/.htaccess', self::DATA_DIR . '.htaccess');		
 				common::$importNotices [] = "Importation réalisée avec succès" ;
