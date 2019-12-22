@@ -226,8 +226,6 @@ class config extends common {
 			
 		}
 		$zip->close();
-		// Enregistre la date de backup manuel
-		$this->setData(['core', 'lastBackup', mktime(0, 0, 0)]);
 		// Téléchargement du ZIP
 		header('Content-Type: application/zip');
 		header('Content-Disposition: attachment; filename="' . $fileName . '"');
@@ -239,6 +237,7 @@ class config extends common {
 		]);
 		unlink(self::TEMP_DIR . $fileName);
 	}
+
 
 	/**
 	 * Réalise une copie d'écran du site
@@ -274,7 +273,8 @@ class config extends common {
 		]);
 	}	
 
-	/**
+
+     /**
 	 * Procédure d'importation
 	 */
 	public function manage() {
@@ -478,15 +478,18 @@ class config extends common {
 	 * Met à jour les données de site avec l'adresse trannsmise
 	 */
 	public function updateBaseUrl () {
-		$old = $this->getInput('configManageBaseURLToConvert');
-		$new = $this->getInput('configManageCurrentURL');			
+		// Récuperer les données
+		// Les contrôles ont été effectués sur la page de formulaire
+		$old = $this->getData(['core', 'baseUrl']);
+		$new = helper::baseUrl(false,false);
+		// Boucler sur les pages			
 		foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
 			$content = $this->getData(['page',$parentId,'content']);			
-			$replace = str_replace( $old  , $new , $content) ;
+			$replace = str_replace( $old . 'site' , $new . 'site', $content,$count) ;
 			$this->setData(['page',$parentId,'content', $replace ]);
 			foreach($childIds as $childId) {
 				$content = $this->getData(['page',$childId,'content']);
-				$replace = str_replace( $old , $new , $content) ;
+				$replace = str_replace( $old . 'site' , $new . 'site', $content,$count) ;
 				$this->setData(['page',$childId,'content', $replace ]);
 			}
 		}
@@ -497,4 +500,5 @@ class config extends common {
 			'view' => 'manage'
 		]);
 	}
+	
 }
