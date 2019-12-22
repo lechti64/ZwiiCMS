@@ -969,7 +969,7 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 9210) {
 			
 			// Utile pour l'installation d'un backup sur un autre serveur
-			$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
+			//$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
 
 			// Suppression d'une option de hauteur de la bannière
 			if ($this->getData(['theme', 'header','height']) === 'none') {
