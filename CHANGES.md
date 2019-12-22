@@ -3,6 +3,8 @@
 ## version 9.2.16
 - Optimisation :
     - Sauvegarde manuelle des données de site (dossiers file et data).
+- Modification :
+    - Stocke la réécriture d'url dans baseUrl en cas de changement d'arborescence lors d'un transfert de site
 
 ## version 9.2.15
 - Corrections :
