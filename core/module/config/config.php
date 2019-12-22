@@ -487,7 +487,7 @@ class config extends common {
 				$this->setData(['page',$childId,'content', $replace ]);
 			}
 		}
-		//$this->setData(['core','baseUrl',helper::baseUrl(false,false)]);
+		$this->setData(['core','baseUrl',helper::baseUrl(false,false)]);
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Sauvegarder / Restaurer',
