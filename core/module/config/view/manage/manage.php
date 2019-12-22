@@ -69,10 +69,10 @@
 						$buttonClass = 'disabled'; 
 					} elseif ($this->getData(['core', 'baseUrl']) === '') {
 						$baseUrlValue = '/';
-						$buttonClass = (helper::baseUrl(false,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
+						$buttonClass = (helper::baseUrl(true,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
 					} else {
 						$baseUrlValue = $this->getData(['core', 'baseUrl']);
-						$buttonClass = (helper::baseUrl(false,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
+						$buttonClass = (helper::baseUrl(true,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
 					}
 					echo template::text('configManageBaseURLToConvert', [
 						'label' => 'Dossier d\'installation de l\'archive' ,
@@ -84,7 +84,7 @@
 				<div class="col5">
 					<?php echo template::text('configManageCurrentURL', [
 						'label' => 'Dossier du site actuel',
-						'value' => helper::baseUrl(false,false),
+						'value' => helper::baseUrl(true,false),
 						'readonly' => true,
 						'help'  => 'Dossier du site installé.'
 					]); ?>

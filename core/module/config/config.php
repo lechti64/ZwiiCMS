@@ -475,7 +475,7 @@ class config extends common {
 		// Récuperer les données
 		// Les contrôles ont été effectués sur la page de formulaire
 		$old = $this->getData(['core', 'baseUrl']);
-		$new = helper::baseUrl(false,false);
+		$new = helper::baseUrl(true,false);
 		// Boucler sur les pages			
 		foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
 			$content = $this->getData(['page',$parentId,'content']);			
@@ -487,7 +487,7 @@ class config extends common {
 				$this->setData(['page',$childId,'content', $replace ]);
 			}
 		}
-		$this->setData(['core','baseUrl',helper::baseUrl(false,false)]);
+		$this->setData(['core','baseUrl',helper::baseUrl(true,false)]);
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Sauvegarder / Restaurer',
