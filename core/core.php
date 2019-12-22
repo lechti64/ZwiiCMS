@@ -1052,6 +1052,13 @@ class common {
 			$this->setData(['theme','menu','burgerTitle',true]);
 			$this->setData(['core', 'dataVersion', 9215]);
 		}	
+		// Version 9.2.16
+		if($this->getData(['core', 'dataVersion']) < 9216) {
+			// Utile pour l'installation d'un backup sur un autre serveur
+			// mais avec la réécriture d'URM
+			$this->setData(['core', 'baseUrl', helper::baseUrl(true,false) ]);
+			$this->setData(['core', 'dataVersion', 9216]);
+		}
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
 			$this->setData(['core', 'dataVersion', 10000]);

@@ -446,6 +446,8 @@ class config extends common {
 					// Change le statut de la réécriture d'URL (pour le helper::baseUrl() de la redirection)
 					helper::$rewriteStatus = false;
 				}
+				// Met à jour la baseUrl
+				$this->setData(['core', 'baseUrl', helper::baseUrl(true,false) ]);
 			}
 			// Générer robots.txt et sitemap
 			$this->generateFiles();
@@ -478,15 +480,15 @@ class config extends common {
 		// Boucler sur les pages			
 		foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
 			$content = $this->getData(['page',$parentId,'content']);			
-			$replace = str_replace( $old . 'site' , $new . 'site', $content,$count) ;
+			$replace = str_replace( $old , $new , $content,$count) ;
 			$this->setData(['page',$parentId,'content', $replace ]);
 			foreach($childIds as $childId) {
 				$content = $this->getData(['page',$childId,'content']);
-				$replace = str_replace( $old . 'site' , $new . 'site', $content,$count) ;
+				$replace = str_replace( $old , $new, $content,$count) ;
 				$this->setData(['page',$childId,'content', $replace ]);
 			}
 		}
-		$this->setData(['core','baseUrl',helper::baseUrl(false,false)]);
+		//$this->setData(['core','baseUrl',helper::baseUrl(false,false)]);
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Sauvegarder / Restaurer',
