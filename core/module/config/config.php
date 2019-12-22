@@ -222,8 +222,7 @@ class config extends common {
 				$filePath = $file->getRealPath();
 				$relativePath = substr($filePath, strlen(realpath($directory)) + 1);
 				$zip->addFile($filePath, $relativePath);
-			} 
-			
+			} 			
 		}
 		$zip->close();
 		// Téléchargement du ZIP
