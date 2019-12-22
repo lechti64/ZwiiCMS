@@ -193,6 +193,31 @@
 					</div>						
 				</div>
 			</div>
+			<div class="row">
+				<div class="col6">
+					<?php echo template::text('configSocialPinterestId', [
+						'help' => 'Saisissez votre ID : https://pinterest.com/[ID].',
+						'label' => 'Pinterest',
+						'value' => $this->getData(['config', 'social', 'pinterestId'])
+					]); ?>
+				</div>					
+				<div class="col6">
+					<?php echo template::text('configSocialLinkedinId', [
+						'help' => 'Saisissez votre ID Linkedin : https://fr.linkedin.com/in/[ID].',
+						'label' => 'Linkedin',
+						'value' => $this->getData(['config', 'social', 'linkedinId'])
+					]); ?>
+				</div>											
+			</div>
+			<div class="row">			
+				<div class="col6 offset3">
+						<?php echo template::text('configSocialGithubId', [
+							'help' => 'Saisissez votre ID Github : https://github.com/[ID].',
+							'label' => 'Github',
+							'value' => $this->getData(['config', 'social', 'githubId'])
+						]); ?>
+				</div>						
+			</div>
 		</div>
 	<!--</div>
 	<div class="row">-->
@@ -213,105 +238,100 @@
 						]); ?>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col12 textAlignCenter">
-						<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
-					</div>
+			</div>
+		</div>	
+	</div>
+</div>
+<div class="row">
+	<div class="col12">
+		<?php 							
+		// Lire le contenu des fichiers de script
+		$headerFile = "";			
+		if (file_exists( self::DATA_DIR . 'head.inc.html')) {
+			$headerFile = file_get_contents (self::DATA_DIR . 'head.inc.html');
+		}
+		$bodyFile = "";
+		if (file_exists( self::DATA_DIR . 'body.inc.html')) {
+			$bodyFile = file_get_contents (self::DATA_DIR . 'body.inc.html');
+		}
+		?>
+		<div class="block">
+			<h4>Options avancées</h4>
+			<div class="row">
+				<div class="col3">
+					<?php echo template::text('configAnalyticsId', [
+						'help' => 'Saisissez l\'ID de suivi.',
+						'label' => 'Google Analytics',
+						'placeholder' => 'UA-XXXXXXXX-X',
+						'value' => $this->getData(['config', 'analyticsId'])
+					]); ?>
 				</div>
 			</div>	
-		</div>
-	</div>
-	<div class="row">
-		<div class="col12">
-			<?php 							
-			// Lire le contenu des fichiers de script
-			$headerFile = "";			
-			if (file_exists( self::DATA_DIR . 'head.inc.html')) {
-				$headerFile = file_get_contents (self::DATA_DIR . 'head.inc.html');
-			}
-			$bodyFile = "";
-			if (file_exists( self::DATA_DIR . 'body.inc.html')) {
-				$bodyFile = file_get_contents (self::DATA_DIR . 'body.inc.html');
-			}
-			?>
-			<div class="block">
-				<h4>Options avancées</h4>
-				<div class="row">
-					<div class="col3">
-						<?php echo template::text('configAnalyticsId', [
-							'help' => 'Saisissez l\'ID de suivi.',
-							'label' => 'Google Analytics',
-							'placeholder' => 'UA-XXXXXXXX-X',
-							'value' => $this->getData(['config', 'analyticsId'])
-						]); ?>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="col6">
-						<?php echo template::textarea('configScriptHead', [
-							'label' => 'Insérer un script dans "Head"',
-							'value' => $headerFile
-						]); ?>
-					</div>
-					<div class="col6">
-						<?php echo template::textarea('configScriptBody', [
-							'label' => 'Insérer un script dans "Body"',
-							'value' => $bodyFile
-						]); ?>
-					</div>
+			<div class="row">
+				<div class="col6">
+					<?php echo template::textarea('configScriptHead', [
+						'label' => 'Insérer un script dans "Head"',
+						'value' => $headerFile
+					]); ?>
+				</div>
+				<div class="col6">
+					<?php echo template::textarea('configScriptBody', [
+						'label' => 'Insérer un script dans "Body"',
+						'value' => $bodyFile
+					]); ?>
 				</div>
 			</div>
-		</div>		
-	</div>
-	<div class="row">
-		<div class="col12">
-			<div class="block">
-				<h4>Versions système</h4>
-				<div class="row">
-					<div  class="col2">
-						<?php echo template::text('configVersion', [
-						'label' => 'ZwiiCMS',
+		</div>
+	</div>		
+</div>
+<div class="row">
+	<div class="col12">
+		<div class="block">
+			<h4>Versions système</h4>
+			<div class="row">
+				<div  class="col2">
+					<?php echo template::text('configVersion', [
+					'label' => 'ZwiiCMS',
+					'readonly' => true,
+					'value' => common::ZWII_VERSION
+				]); ?>	
+				</div>
+				<div  class="col2">
+					<?php echo template::text('moduleBlogVersion', [
+						'label' => 'Blog',
 						'readonly' => true,
-						'value' => common::ZWII_VERSION
-					]); ?>	
-					</div>
-					<div  class="col2">
-						<?php echo template::text('moduleBlogVersion', [
-							'label' => 'Blog',
-							'readonly' => true,
-							'value' => blog::BLOG_VERSION
-						]); ?>
-					</div>
-					<div  class="col2">
-						<?php echo template::text('moduleFormVersion', [
-							'label' => 'Form',
-							'readonly' => true,
-							'value' => form::FORM_VERSION
-						]); ?>
-					</div>
-					<div  class="col2">
-						<?php echo template::text('moduleGalleryVersion', [
-							'label' => 'Gallery',
-							'readonly' => true,
-							'value' => gallery::GALLERY_VERSION
-						]); ?>
-					</div>
-					<div  class="col2">
-						<?php echo template::text('moduleNewsVersion', [
-							'label' => 'News',
-							'readonly' => true,
-							'value' => news::NEWS_VERSION
-						]); ?>
-					</div>
-					<div  class="col2">
-						<?php echo template::text('moduleRedirectionVersion', [
-							'label' => 'Redirection',
-							'readonly' => true,
-							'value' => redirection::REDIRECTION_VERSION
-						]); ?>
-					</div>								
-				</div>	
-			</div>
+						'value' => blog::BLOG_VERSION
+					]); ?>
+				</div>
+				<div  class="col2">
+					<?php echo template::text('moduleFormVersion', [
+						'label' => 'Form',
+						'readonly' => true,
+						'value' => form::FORM_VERSION
+					]); ?>
+				</div>
+				<div  class="col2">
+					<?php echo template::text('moduleGalleryVersion', [
+						'label' => 'Gallery',
+						'readonly' => true,
+						'value' => gallery::GALLERY_VERSION
+					]); ?>
+				</div>
+				<div  class="col2">
+					<?php echo template::text('moduleNewsVersion', [
+						'label' => 'News',
+						'readonly' => true,
+						'value' => news::NEWS_VERSION
+					]); ?>
+				</div>
+				<div  class="col2">
+					<?php echo template::text('moduleRedirectionVersion', [
+						'label' => 'Redirection',
+						'readonly' => true,
+						'value' => redirection::REDIRECTION_VERSION
+					]); ?>
+				</div>								
+			</div>	
 		</div>
 	</div>
 </div>

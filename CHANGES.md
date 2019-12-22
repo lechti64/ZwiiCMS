@@ -24,7 +24,13 @@
     - L'importation des données est possible uniquement à partir d'une version 9.
     - Fonction d'import des données provenant d'autres version de ZwiiCMS, avec option de préservation des données utilisateurs 
     - Nouveau masque dédié à la sauvegarde automatique, à l'import et à l'export des données de site.
-        
+
+## version 9.2.16
+- Optimisation :
+    - Sauvegarde manuelle des données de site (dossiers file et data).
+- Modification :
+    - Stocke la réécriture d'url dans baseUrl en cas de changement d'arborescence lors d'un transfert de site    
+
 ## version 9.2.15
 - Corrections :
     - Sauvegarde des données de site.

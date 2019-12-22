@@ -82,7 +82,7 @@
                         </div>   
                     <div class="col12 textAlignCenter">
                         <span id="themeHeaderImage">
-                            Dimensions de l'image : largeur  <span id="themeHeaderImageWidth"></span> - hauteur  <span id="themeHeaderImageHeight"></span>
+                            Dimensions de l'image : largeur  <span id="themeHeaderImageWidth"></span> - hauteur  <span id="themeHeaderImageHeight"></span> - ratio <span id="themeHeaderImageRatio"></span>
                         </span>
                     </div>
                 </div>

@@ -56,13 +56,21 @@ class common {
 		'theme'
 	];
 	public static $i18nList = [
-		'de' 	=> 'Allemand (de)'	,
+		'de' 	=> 'Allemand (de)',
 		'en'	=> 'Anglais (en)',
 		'es'	=> 'Espagnol (es)',
 		'fr'	=> 'Français (fr)',
 		'it'	=> 'Italien (it)',
 		'nl' 	=> 'Néerlandais (nl)',
 		'pt'	=> 'Portugais (pt)',
+	];
+	public static $dataStage = [
+		'config',
+		'core',
+		'module',			
+		'page',
+		'user',
+		'theme'
 	];
 	private $data = [];
 	private $hierarchy = [
@@ -715,6 +723,7 @@ class common {
 		}				
 	}
 
+
 	/**
 	 * Génére un fichier json avec la liste des pages
 	 * 
@@ -1256,7 +1265,6 @@ class common {
 			$this->setData(['theme','menu', 'activeColorAuto',true]);
 			$this->setData(['theme','menu', 'activeColor','rgba(255, 255, 255, 1)']);
 			$this->setData(['core', 'dataVersion', 9212]);
-		}
 		// Version 9.2.15
 		if($this->getData(['core', 'dataVersion']) < 9215) {
 			// Données de la barre de langue dans le menu
@@ -1277,6 +1285,20 @@ class common {
 			$this->setData(['config','googTransLogo', true]);
 			$this->setData(['core', 'dataVersion', 11000]);		
 		}
+			$this->setData(['theme','menu','burgerTitle',true]);
+			$this->setData(['core', 'dataVersion', 9215]);
+		}	
+		// Version 9.2.16
+		if($this->getData(['core', 'dataVersion']) < 9216) {
+			// Utile pour l'installation d'un backup sur un autre serveur
+			// mais avec la réécriture d'URM
+			$this->setData(['core', 'baseUrl', helper::baseUrl(true,false) ]);
+			$this->setData(['core', 'dataVersion', 9216]);
+		}
+		// Version 10.0.00
+		if($this->getData(['core', 'dataVersion']) < 10000) {
+			$this->setData(['core', 'dataVersion', 10000]);
+		}		
 	}
 }
 

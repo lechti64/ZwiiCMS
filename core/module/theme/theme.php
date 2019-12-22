@@ -460,7 +460,8 @@ class theme extends common {
 				'i18nPosition' => $this->getInput('themeMenui18nPosition'),
 				'activeColorAuto' => $this->getInput('themeMenuActiveColorAuto', helper::FILTER_BOOLEAN),
 				'activeColor' => $this->getInput('themeMenuActiveColor'),
-				'radius' => $this->getInput('themeMenuRadius')
+				'radius' => $this->getInput('themeMenuRadius'),
+				'burgerTitle' => $this->getInput('themeMenuBurgerTitle', helper::FILTER_BOOLEAN)
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

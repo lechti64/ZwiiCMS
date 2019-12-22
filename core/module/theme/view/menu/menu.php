@@ -39,7 +39,7 @@
                <div class="col6">
                         <?php
                          echo template::checkbox('themeMenuActiveColorAuto', true, 'Page sélectionnée, couleur de fond automatique ', [
-                            'checked' => is_null($this->getData(['theme', 'menu', 'activeColor'])) ? true : $this->getData(['theme', 'menu', 'activeColorAuto']),
+                            'checked' => $this->getData(['theme', 'menu', 'activeColorAuto']),
                             'help' => 'La couleur de fond de la page active peut être définie automatique ou selon une couleur définie, comme par exemple celle de fond des pages.'
                         ]); ?>
                 </div>             

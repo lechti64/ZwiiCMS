@@ -14,7 +14,7 @@ class init extends common {
 				'pinterestId' => '',
 				'twitterId' => '',
 				'youtubeId' => '',
-				'githubId' => ''
+				'githubId' => 'fredtempez/ZwiiCMS/'
 			],
 			'timezone' => 'Europe/Paris',
 			'itemsperPage' => 10,
@@ -110,14 +110,14 @@ class init extends common {
 				'fontSize' => '2em',
 				'fontWeight' => 'normal',
 				'height' => '150px',
-				'image' => 'banniere/zwii_banniere-960px.jpg',
+				'image' => 'banner/banner960.jpg',
 				'imagePosition' => 'center center',
 				'imageRepeat' => 'no-repeat',
 				'margin' => false,
 				'position' => 'site',
 				'textAlign' => 'center',
 				'textColor' => 'rgba(33, 34, 35, 1)',
-				'textHide' => true,
+				'textHide' => false,
 				'textTransform' => 'none',
 				'linkHomePage' => true,
 				'imageContainer' => 'auto'
