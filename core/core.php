@@ -1038,6 +1038,7 @@ class common {
 			// Données de la barre de langue dans le menu
 			$this->setData(['theme','menu','burgerTitle',true]);
 			$this->setData(['core', 'dataVersion', 9215]);
+			$this->saveData();
 		}
 		// Version 9.2.16
 		if($this->getData(['core', 'dataVersion']) < 9216) {
@@ -1045,6 +1046,7 @@ class common {
 			// mais avec la réécriture d'URM
 			$this->setData(['core', 'baseUrl', helper::baseUrl(true,false) ]);
 			$this->setData(['core', 'dataVersion', 9216]);
+			$this->saveData();
 		}		
 	}
 }
