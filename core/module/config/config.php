@@ -481,9 +481,15 @@ class config extends common {
 			$content = $this->getData(['page',$parentId,'content']);			
 			$replace = str_replace( $old , $new , $content,$count) ;
 			$this->setData(['page',$parentId,'content', $replace ]);
+			if (strpos($old,'?') > 0) {
+				$replace = str_replace( str_replace('?','',$old) , $new , $content,$count) ;
+			}
 			foreach($childIds as $childId) {
 				$content = $this->getData(['page',$childId,'content']);
 				$replace = str_replace( $old , $new, $content,$count) ;
+								if (strpos($old,'?') > 0) {
+					$replace = str_replace( str_replace('?','',$old) , $new , $content,$count) ;
+				}
 				$this->setData(['page',$childId,'content', $replace ]);
 			}
 		}
