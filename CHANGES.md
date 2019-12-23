@@ -4,7 +4,9 @@
 - Optimisation :
     - Sauvegarde manuelle des données de site (dossiers file et data).
 - Modification :
-    - Stocke la réécriture d'url dans baseUrl en cas de changement d'arborescence lors d'un transfert de site
+    - Stocke la réécriture d'url dans baseUrl en cas de changement d'arborescence lors d'un transfert de site.
+- Correction : 
+    - Problème lors de la mise à jour de la variable dataVersion.
 
 ## version 9.2.15
 - Corrections :
