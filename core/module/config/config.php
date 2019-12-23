@@ -266,7 +266,7 @@ class config extends common {
 
 		// Valeurs en sortie
 		$this->addOutput([
-			'notification' => $success === true ? 'Image tag réinitialisée' : "Erreur : image tag non créée",
+			'notification' => $success === true ? 'Image tag réinitialisée' : 'Erreur : image tag non créée',
 			'redirect' => helper::baseUrl() . 'config',
 			'state' => $success
 		]);
@@ -480,7 +480,14 @@ class config extends common {
 		// Récuperer les données
 		// Les contrôles ont été effectués sur la page de formulaire
 		$old = $this->getData(['core', 'baseUrl']);
-		$new = helper::baseUrl(false,false);
+		$oldCheckRw = strpos($old,'/?')  > 0 ? false : true;
+		$new = helper::baseUrl(true,false);
+		$newCheckRw = strpos($new,'/?') > 0 ? false : true;
+		var_dump($oldCheckRw);
+		echo "-";
+		echo strpos($new,'?') ;
+		var_dump($newCheckRw);
+		die();
 		// Boucler sur les pages			
 		foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
 			$content = $this->getData(['page',$parentId,'content']);			
@@ -491,12 +498,14 @@ class config extends common {
 				$replace = str_replace( $old . 'site' , $new . 'site', $content,$count) ;
 				$this->setData(['page',$childId,'content', $replace ]);
 			}
+			
 		}
 		$this->setData(['core','baseUrl',helper::baseUrl(true,false)]);
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Sauvegarder / Restaurer',
-			'view' => 'manage'
+			'notification' => 'Conversion effectuée',
+			'redirect' => helper::baseUrl() . 'config/manage',
+			'state' => true			
 		]);
 	}
 	
