@@ -473,46 +473,36 @@ class config extends common {
 	 */
 	public function updateBaseUrl () {
 		// Récuperer les données
-		// Les contrôles ont été effectués sur la page de formulaire
-		$old = $this->getData(['core', 'baseUrl']);
-		$oldCheckRw = strpos($old,'/?')  > 0 ? false : true;
-		$new = helper::baseUrl(true,false);
-		$newCheckRw = strpos($new,'/?') > 0 ? false : true;
-		var_dump($oldCheckRw);
-		echo "-";
-		echo strpos($new,'?') ;
-		var_dump($newCheckRw);
-		die();
+		// Supprimer l'information de redirection
+		//$old = str_replace('?','',$this->getData(['core', 'baseUrl']));
+		$old = str_replace('?','',$this->getData(['core', 'baseUrl']));
+		$new = helper::baseUrl(false,false);
+		$success = false ;
 		// Boucler sur les pages			
 		foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
-			$content = $this->getData(['page',$parentId,'content']);
-			if ($oldCheckRw === helper::checkRewrite() ||
-				($oldCheckRw === false  && helper::checkRewrite() === true)
-				) {	
-				$replace = str_replace( $old , $new , $content);				
+			$content = $this->getData(['page',$parentId,'content']);			
+			$replace = str_replace( $old , $new , stripslashes($content),$count) ;			
+			if ($count > 0) {
+				$success = true;
 				$this->setData(['page',$parentId,'content', $replace ]);
-			} elseif ($oldCheckRw === true  && helper::checkRewrite() === false) {
-				die();
 			}
-
 			foreach($childIds as $childId) {
 				$content = $this->getData(['page',$childId,'content']);
-				if ($oldCheckRw === helper::checkRewrite() ||
-					$oldCheckRw === false  && helper::checkRewrite() === true
-					) {	
-					$replace = str_replace( $old , $new , $content);				
+				$replace = str_replace( $old , $new, stripslashes($content),$count) ;				
+				if ($count > 0) {
+					$success = true;
 					$this->setData(['page',$childId,'content', $replace ]);
-				}				
+				}
 			}
-			
+		}		
+		if ($success ===  true) {
+			 $this->setData(['core','baseUrl',helper::baseUrl(true,false)]);
 		}
-	
-		$this->setData(['core','baseUrl',helper::baseUrl(true,false)]);
 		// Valeurs en sortie
 		$this->addOutput([
-			'notification' => 'Conversion effectuée',
+			'notification' => $success ? 'Conversion effectuée' : 'Aucune conversion',
 			'redirect' => helper::baseUrl() . 'config/manage',
-			'state' => true			
+			'state' => $success ? true : false
 		]);
 	}
 }
