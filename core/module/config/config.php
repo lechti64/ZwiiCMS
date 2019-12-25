@@ -471,10 +471,8 @@ class config extends common {
 	/**
 	 * Met à jour les données de site avec l'adresse trannsmise
 	 */
-	public function updateBaseUrl () {
-		// Récuperer les données
+	public function updateBaseUrl () {		
 		// Supprimer l'information de redirection
-		//$old = str_replace('?','',$this->getData(['core', 'baseUrl']));
 		$old = str_replace('?','',$this->getData(['core', 'baseUrl']));
 		$new = helper::baseUrl(false,false);
 		$success = false ;
