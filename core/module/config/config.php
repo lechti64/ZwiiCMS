@@ -476,36 +476,37 @@ class config extends common {
 	/**
 	 * Met à jour les données de site avec l'adresse trannsmise
 	 */
-	public function updateBaseUrl () {
-		// Récuperer les données
-		// Les contrôles ont été effectués sur la page de formulaire
-		$old = $this->getData(['core', 'baseUrl']);
-		$oldCheckRw = strpos($old,'/?')  > 0 ? false : true;
-		$new = helper::baseUrl(true,false);
-		$newCheckRw = strpos($new,'/?') > 0 ? false : true;
-		var_dump($oldCheckRw);
-		echo "-";
-		echo strpos($new,'?') ;
-		var_dump($newCheckRw);
-		die();
+	public function updateBaseUrl () {		
+		// Supprimer l'information de redirection
+		$old = str_replace('?','',$this->getData(['core', 'baseUrl']));
+		$new = helper::baseUrl(false,false);
+		$success = false ;
 		// Boucler sur les pages			
 		foreach($this->getHierarchy(null,null,null) as $parentId => $childIds) {
 			$content = $this->getData(['page',$parentId,'content']);			
-			$replace = str_replace( $old . 'site' , $new . 'site', $content,$count) ;
-			$this->setData(['page',$parentId,'content', $replace ]);
+			$replace = str_replace( $old , $new , stripslashes($content),$count) ;			
+			if ($count > 0) {
+				$success = true;
+				$this->setData(['page',$parentId,'content', $replace ]);
+			}
 			foreach($childIds as $childId) {
 				$content = $this->getData(['page',$childId,'content']);
-				$replace = str_replace( $old . 'site' , $new . 'site', $content,$count) ;
-				$this->setData(['page',$childId,'content', $replace ]);
+				$replace = str_replace( $old , $new, stripslashes($content),$count) ;				
+				if ($count > 0) {
+					$success = true;
+					$this->setData(['page',$childId,'content', $replace ]);
+				}
 			}
-			
+		}		
+		if ($success ===  true) {
+			 $this->setData(['core','baseUrl',helper::baseUrl(true,false)]);
 		}
 		$this->setData(['core','baseUrl',helper::baseUrl(true,false)]);
 		// Valeurs en sortie
 		$this->addOutput([
-			'notification' => 'Conversion effectuée',
+			'notification' => $success ? 'Conversion effectuée' : 'Aucune conversion',
 			'redirect' => helper::baseUrl() . 'config/manage',
-			'state' => true			
+			'state' => $success ? true : false
 		]);
 	}
 	
