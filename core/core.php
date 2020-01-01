@@ -64,14 +64,6 @@ class common {
 		'nl' 	=> 'Néerlandais (nl)',
 		'pt'	=> 'Portugais (pt)',
 	];
-	public static $dataStage = [
-		'config',
-		'core',
-		'module',			
-		'page',
-		'user',
-		'theme'
-	];
 	private $data = [];
 	private $hierarchy = [
 		'all' => [],
