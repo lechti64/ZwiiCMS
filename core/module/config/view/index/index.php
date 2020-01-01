@@ -200,11 +200,6 @@
 			<div class="block">
 				<h4>Référencement</h4>
 				<div class="row">
-					<div class="col12 textAlignCenter">
-						<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
-					</div>
-				</div>
-				<div class="row">
 					<div class="col5">	
 						<?php echo template::button('configMetaImage', [
 						'href' => helper::baseUrl() . 'config/configMetaImage',
@@ -216,6 +211,11 @@
 							'href' => helper::baseUrl() . 'config/generateFiles',
 							'value' => 'Générer sitemap.xml et robots.txt'
 						]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col12 textAlignCenter">
+						<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
 					</div>
 				</div>
 			</div>
