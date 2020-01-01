@@ -805,7 +805,6 @@ class common {
 		}
 	}
 
-
 	/**
 	 * Sauvegarde des données
 	 * @param array $keys Clé(s) des données
@@ -983,7 +982,7 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 9210) {
 			
 			// Utile pour l'installation d'un backup sur un autre serveur
-			$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
+			//$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
 
 			// Suppression d'une option de hauteur de la bannière
 			if ($this->getData(['theme', 'header','height']) === 'none') {
@@ -995,6 +994,8 @@ class common {
 
 			// Préparation des clés de légendes pour la v10
 			// Construire une liste plate de parents et d'enfants
+
+			$pageList = array();
 			
 			$pageList = array();
 
