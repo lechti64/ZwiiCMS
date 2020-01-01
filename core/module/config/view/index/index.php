@@ -193,37 +193,17 @@
 					</div>						
 				</div>
 			</div>
-			<div class="row">
-				<div class="col6">
-					<?php echo template::text('configSocialPinterestId', [
-						'help' => 'Saisissez votre ID : https://pinterest.com/[ID].',
-						'label' => 'Pinterest',
-						'value' => $this->getData(['config', 'social', 'pinterestId'])
-					]); ?>
-				</div>					
-				<div class="col6">
-					<?php echo template::text('configSocialLinkedinId', [
-						'help' => 'Saisissez votre ID Linkedin : https://fr.linkedin.com/in/[ID].',
-						'label' => 'Linkedin',
-						'value' => $this->getData(['config', 'social', 'linkedinId'])
-					]); ?>
-				</div>											
-			</div>
-			<div class="row">			
-				<div class="col6 offset3">
-						<?php echo template::text('configSocialGithubId', [
-							'help' => 'Saisissez votre ID Github : https://github.com/[ID].',
-							'label' => 'Github',
-							'value' => $this->getData(['config', 'social', 'githubId'])
-						]); ?>
-				</div>						
-			</div>
 		</div>
 	<!--</div>
 	<div class="row">-->
 		<div class="col6">
 			<div class="block">
 				<h4>Référencement</h4>
+				<div class="row">
+					<div class="col12 textAlignCenter">
+						<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
+					</div>
+				</div>
 				<div class="row">
 					<div class="col5">	
 						<?php echo template::button('configMetaImage', [

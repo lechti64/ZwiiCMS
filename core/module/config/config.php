@@ -386,7 +386,7 @@ class config extends common {
 			$this->setData([
 				'config',
 				[
-					'homePageId' => $this->getInput('configHomePageId', helper::FILTER_ID, true),
+					//'homePageId' => $this->getInput('configHomePageId', helper::FILTER_ID, true),
 					'analyticsId' => $this->getInput('configAnalyticsId'),
 					'autoBackup' => $this->getInput('configAutoBackup', helper::FILTER_BOOLEAN),
 					'maintenance' => $this->getInput('configMaintenance', helper::FILTER_BOOLEAN),
