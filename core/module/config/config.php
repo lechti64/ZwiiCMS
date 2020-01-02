@@ -390,6 +390,7 @@ class config extends common {
 					'maintenance' => $this->getInput('configMaintenance', helper::FILTER_BOOLEAN),
 					'cookieConsent' => $this->getInput('configCookieConsent', helper::FILTER_BOOLEAN),
 					'favicon' => $this->getInput('configFavicon'),
+					'faviconDark' => $this->getInput('configFaviconDark'),
 					'social' => [
 						'facebookId' => $this->getInput('configSocialFacebookId'),
 						'linkedinId' => $this->getInput('configSocialLinkedinId'),

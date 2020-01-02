@@ -58,14 +58,22 @@
 		<div class="block">
 			<h4>Réglages</h4>
 			<div class="row">
-				<div class="col6">
+				<div class="col3">
 					<?php echo template::file('configFavicon', [
 						'type' => 1,
 						'help' => 'Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
-						'label' => 'Favicon',
+						'label' => 'Favicon thème clair',
 						'value' => $this->getData(['config', 'favicon'])
 					]); ?>
 				</div>
+				<div class="col3">
+					<?php echo template::file('configFaviconDark', [
+						'type' => 1,
+						'help' => 'Sélectionnez une icône adaptée à un thème sombre.<br>Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
+						'label' => 'Favicon thème sombre',
+						'value' => $this->getData(['config', 'faviconDark'])
+					]); ?>
+				</div>				
 				<div class="col6">
 					<?php echo template::select('itemsperPage', $module::$ItemsList, [
 					'label' => 'Articles par page',
