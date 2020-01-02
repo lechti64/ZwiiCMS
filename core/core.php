@@ -1217,6 +1217,9 @@ class common {
 
 			// Préparation des clés de légendes pour la v10
 			// Construire une liste plate de parents et d'enfants
+
+			$pageList = array();
+
 			foreach ($this->getHierarchy(null,null,null) as $parentKey=>$parentValue) {
 				$pageList [] = $parentKey;
 				foreach ($parentValue as $childKey) {
@@ -2087,14 +2090,25 @@ class layout extends common {
 	 * Affiche le favicon
 	 */
 	public function showFavicon() {
-		$favicon = $this->getData(['config', 'favicon']);
+		// Light scheme
+		$favicon = $this->getData(['config', 'favicon']);		
 		if($favicon &&
 			file_exists(self::FILE_DIR.'source/' . $favicon)
 			) {
-			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . self::FILE_DIR.'source/' . $favicon . '">';
+			echo '<link rel="shortcut icon" media="(prefers-color-scheme:light)" href="' . helper::baseUrl(false) . self::FILE_DIR.'source/' . $favicon . '">';
 		} else {
-			echo '<link rel="shortcut icon" href="' . helper::baseUrl(false) . 'core/vendor/zwiico/ico/favicon.ico">';
+			echo '<link rel="shortcut icon" media="(prefers-color-scheme:light)"  href="' . helper::baseUrl(false) . 'core/vendor/zwiico/ico/favicon.ico">';
 		}
+		// Dark scheme
+		$faviconDark = $this->getData(['config', 'faviconDark']);		
+		if($faviconDark &&
+		file_exists(self::FILE_DIR.'source/' . $faviconDark)
+		) {
+			echo '<link rel="shortcut icon" media="(prefers-color-scheme:dark)" href="' . helper::baseUrl(false) . self::FILE_DIR.'source/' . $faviconDark . '">';
+			echo '<script src="https://unpkg.com/favicon-switcher@1.2.0/dist/index.js" crossorigin="anonymous" type="application/javascript"></script>';
+		}  else {
+			echo '<link rel="shortcut icon" media="(prefers-color-scheme:dark)"  href="' . helper::baseUrl(false) . 'core/vendor/zwiico/ico/faviconDark.ico">';
+		}		
 	}
 
 

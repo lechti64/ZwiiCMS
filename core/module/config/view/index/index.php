@@ -9,36 +9,35 @@
 				'value' => 'Accueil'
 			]); ?>
 		</div>
-		<div class="col3 offset5">
-			<?php echo template::button('configManageButton', [
-				'href' => helper::baseUrl() . 'config/manage',
-				'value' => 'Sauvegarder / Restaurer'
-			]); ?>
-		</div>		
-		<div class="col2">
-			<?php echo template::submit('configSubmit'); ?>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col12">
-			<div class="block">
-				<h4>Informations générales</h4>
-				<div class="row">
-					<div class="col4">
-						<?php echo template::select('configHomePageId', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
-							'label' => 'Page d\'accueil',
-							'selected' => $this->getHomePageId(),
-							'disabled' => true,
-							'help' => 'La page d\'accueil doit être définie dans une des pages de la langue sélectionnée'
-						]); ?>
-					</div>
-					<div class="col8">
-						<?php echo template::text('configTitle', [
-							'label' => 'Titre du site',
-							'value' => $this->getData(['config', 'title']),
-							'help'  => 'Le titre apparaît dans la barre de titre et les partages sur les réseaux sociaux.'
-						]); ?>
-					</div>						
+	</div>		
+</div>
+<div class="row">
+	<div class="col12">
+		<div class="block">
+			<h4>Réglages</h4>
+			<div class="row">
+				<div class="col3">
+					<?php echo template::file('configFavicon', [
+						'type' => 1,
+						'help' => 'Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
+						'label' => 'Favicon thème clair',
+						'value' => $this->getData(['config', 'favicon'])
+					]); ?>
+				</div>
+				<div class="col3">
+					<?php echo template::file('configFaviconDark', [
+						'type' => 1,
+						'help' => 'Sélectionnez une icône adaptée à un thème sombre.<br>Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
+						'label' => 'Favicon thème sombre',
+						'value' => $this->getData(['config', 'faviconDark'])
+					]); ?>
+				</div>				
+				<div class="col6">
+					<?php echo template::select('itemsperPage', $module::$ItemsList, [
+					'label' => 'Articles par page',
+					'selected' => $this->getData(['config', 'itemsperPage']),
+					'help' => 'Modules Blog et News'
+					]); ?>
 				</div>
 				<?php echo template::textarea('configMetaDescription', [
 					'label' => 'Description du site',
