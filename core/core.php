@@ -109,8 +109,7 @@ class common {
 			'zwiico',
 			'imagemap',
 			'simplelightbox',
-			'translate',
-			'lazysimon'
+			'translate'
 		],
 		'view' => ''
 	];
