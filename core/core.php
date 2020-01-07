@@ -34,7 +34,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.023.dev';
+	const ZWII_VERSION = '10.0.024.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -99,8 +99,7 @@ class common {
 			'tippy',
 			'zwiico',
 			'imagemap',
-			'simplelightbox',
-			'lazysimon'
+			'simplelightbox'
 		],
 		'view' => ''
 	];

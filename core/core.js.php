@@ -400,6 +400,11 @@ $(document).ready(function(){
 	});
 
 	/**
+	 * Chargement paresseux des images et des iframes
+	 */
+	$("img,picture,iframe").attr("loading","lazy");
+
+	/**
 	 * Effet accordéon
 	 */
 	$('.accordion').each(function(e) {
