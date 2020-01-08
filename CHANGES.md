@@ -1,5 +1,9 @@
 # Changelog
 
+## version 9.2.17
+- Corretion :
+    - Affiche le nom du la page plutôt que son id dans le fil d'ariane
+
 ## version 9.2.16
 - Optimisation :
     - Sauvegarde manuelle des données de site (dossiers file et data).

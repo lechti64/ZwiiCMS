@@ -34,7 +34,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.2.16';
+	const ZWII_VERSION = '9.2.17';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1303,17 +1303,17 @@ class core extends common {
 		}
 
 		// Breadcrumb
-
 		$title = $this->getData(['page', $this->getUrl(0), 'title']);
 		if (!empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
 				$this->getData(['page', $this->getUrl(0), 'breadCrumb'])) {
 				$title = '<a href="' . helper::baseUrl() . 
 						$this->getData(['page', $this->getUrl(0), 'parentPageId']) .
 						'">' .
-						ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) .
+						ucfirst($this->getData(['page',$this->getData(['page', $this->getUrl(0), 'parentPageId']), 'title'])) .
 						'</a> &#8250; '.
 						$this->getData(['page', $this->getUrl(0), 'title']);			
 		} 
+		
 		// Importe la page
 		if(
 			$this->getData(['page', $this->getUrl(0)]) !== null
