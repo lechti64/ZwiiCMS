@@ -19,13 +19,18 @@
 - Installation : 
     - Les fichiers de données manquants sont réinitialisés au cas par cas et plus dans leur globalité.
     - Une notification est affichée quand un fichier  de données manquant a été réinstallé.
-    - La suppression de user.json entraîne le déclenchement de la procédure d'installation
+    - La suppression de user.json entraîne le déclenchement de la procédure d'installation.
+    - Thème à l'installation, la bannière et le favicon sont livrés dans les paramètres de l'installation et copiés dans site.
 - Importation : 
     - L'importation des données est possible uniquement à partir d'une version 9.
-    - Fonction d'import des données provenant d'autres version de ZwiiCMS, avec option de préservation des données utilisateurs 
+    - Fonction d'import des données provenant d'autres version de ZwiiCMS, avec option de préservation des données utilisateurs.
     - Nouveau masque dédié à la sauvegarde automatique, à l'import et à l'export des données de site.
-- Nouveauté :
-    - Chargement paresseux des images (lazy_simon)
+- Modification :
+    - Chargement paresseux des images.
+    
+## version 9.2.17
+- Corretion :
+    - Affiche le nom du la page plutôt que son id dans le fil d'ariane
 
 ## version 9.2.16
 - Optimisation :

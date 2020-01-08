@@ -1557,17 +1557,17 @@ class core extends common {
 		}
 
 		// Breadcrumb
-
 		$title = $this->getData(['page', $this->getUrl(0), 'title']);
 		if (!empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
 				$this->getData(['page', $this->getUrl(0), 'breadCrumb'])) {
 				$title = '<a href="' . helper::baseUrl() . 
 						$this->getData(['page', $this->getUrl(0), 'parentPageId']) .
 						'">' .
-						ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) .
+						ucfirst($this->getData(['page',$this->getData(['page', $this->getUrl(0), 'parentPageId']), 'title'])) .
 						'</a> &#8250; '.
 						$this->getData(['page', $this->getUrl(0), 'title']);			
 		} 
+		
 		// Importe la page
 		if(
 			$this->getData(['page', $this->getUrl(0)]) !== null
