@@ -51,7 +51,7 @@ class form extends common {
 		self::TYPE_MAIL => 'Champ mail',
 		self::TYPE_SELECT => 'Sélection',
 		self::TYPE_CHECKBOX => 'Case à cocher',		
-		self::TYPE_DATETIME => 'Date',
+		self::TYPE_DATETIME => 'Date'
 	];
 
 	public static $listUsers = [
