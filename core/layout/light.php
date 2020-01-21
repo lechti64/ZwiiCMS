@@ -10,13 +10,13 @@
 	<?php $layout->showMetaImage(); ?>		
 	<?php $layout->showFavicon(); ?>
 	<?php $layout->showVendor(); ?>
+	<?php $layout->showStyle(); ?>
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>core/layout/common.css">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>core/layout/light.css">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/theme.css?<?php echo md5_file(self::DATA_DIR.'theme.css'); ?>">
 	<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/custom.css?<?php echo md5_file(self::DATA_DIR.'custom.css'); ?>">
 </head>
 <body>
-<?php $layout->showStyle(); ?>
 <?php $layout->showNotification(); ?>
 <div id="site" class="container">
 	<section><?php $layout->showContent(); ?></section>
