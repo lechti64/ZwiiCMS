@@ -2160,8 +2160,12 @@ class layout extends common {
 					break;
 				case 'youtubeId':
 					$socialUrl = 'https://www.youtube.com/channel/';
-					$title = 'YouTube';
+					$title = 'Chaîne YouTube';
 					break;
+				case 'youtubeIdUser':
+					$socialUrl = 'https://www.youtube.com/user/';
+					$title = 'YouTube';
+					break;					
 				case 'githubId':
 					$socialUrl = 'https://www.github.com/';
 					$title = 'Github';
@@ -2170,6 +2174,9 @@ class layout extends common {
 					$socialUrl = '';
 			}
 			if($socialId !== '') {
+				//
+				if ($socialName === 'youtubeIdUser')
+					{$socialName = 'youtubeId';}
 				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" data-tippy-content="' . $title . '">' . template::ico(substr($socialName, 0, -2)) . '</a>';
 			}
 		}

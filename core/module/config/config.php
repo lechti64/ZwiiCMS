@@ -301,6 +301,7 @@ class config extends common {
 						'pinterestId' => $this->getInput('configSocialPinterestId'),
 						'twitterId' => $this->getInput('configSocialTwitterId'),
 						'youtubeId' => $this->getInput('configSocialYoutubeId'),
+						'youtubeIdUser' => $this->getInput('configSocialYoutubeIdUser'),
 						'githubId' => $this->getInput('configSocialGithubId')
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
