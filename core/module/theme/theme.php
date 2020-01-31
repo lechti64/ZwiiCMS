@@ -212,9 +212,11 @@ class theme extends common {
 		'15px' => '15 pixels',
 		'16px' => '16 pixels'
 	];
-	public static $sizes = [
+	public static $bodySizes = [
 		'auto' => 'Automatique',	
-		'100% 100%' => 'Image étirée'	
+		'100% 100%' => 'Image étirée (100% 100%)',
+		'cover' => 'Responsive (cover)',
+		'contain' => 'Responsive (contain)'
 	];
 	public static $textTransforms = [
 		'none' => 'Standard',
