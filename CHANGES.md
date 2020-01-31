@@ -1,8 +1,11 @@
 # Changelog
 
 ## version 9.2.17
-- Corretion :
-    - Affiche le nom du la page plutôt que son id dans le fil d'ariane
+- Corretions :
+    - Affiche le nom du la page plutôt que son id dans le fil d'ariane.
+    - Petites corrections.
+- Modifications : 
+    - Image du fond (body), options responsive cover et contain.
 
 ## version 9.2.16
 - Optimisation :

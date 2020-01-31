@@ -57,7 +57,7 @@
 							]); ?>
 						</div>
 						<div class="col6">
-							<?php echo template::select('themeBodyImageSize', $module::$sizes, [
+							<?php echo template::select('themeBodyImageSize', $module::$bodySizes, [
 								'label' => 'Taille',
 								'selected' => $this->getData(['theme', 'body', 'imageSize'])
 							]); ?>
