@@ -125,16 +125,16 @@
 				<div class="row">
 					<div class="col4">
 						<?php echo template::text('configSocialYoutubeId', [
-							'help' => 'Saisissez votre ID Channel: https://www.youtube.com/channel/[ID].',
-							'label' => 'Youtube Channel',
+							'help' => 'ID de la chaîne : https://www.youtube.com/channel/[ID].',
+							'label' => 'Chaîne Youtube',
 							'value' => $this->getData(['config', 'social', 'youtubeId'])
 						]); ?>
 					</div>					
 					<div class="col4">
-						<?php echo template::text('configSocialYoutubeIdUser', [
-							'help' => 'Saisissez votre ID User : https://www.youtube.com/user/[ID].',
-							'label' => 'Youtube User',
-							'value' => $this->getData(['config', 'social', 'youtubeIdUser'])
+						<?php echo template::text('configSocialYoutubeUserId', [
+							'help' => 'Saisissez votre ID Utilisateur : https://www.youtube.com/user/[ID].',
+							'label' => 'Youtube',
+							'value' => $this->getData(['config', 'social', 'youtubeUserId'])
 						]); ?>
 					</div>										
 					<div class="col4">
