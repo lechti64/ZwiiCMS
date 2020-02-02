@@ -29,6 +29,7 @@
 - Modifications : 
     - Image du fond (body), options responsive cover et contain.
     - Réseaux sociaux, icône Youtube chaîne ou utilisateur.
+    - Pied de page, position fixe dans le site.
 
 ## version 9.2.16
 - Optimisation :
