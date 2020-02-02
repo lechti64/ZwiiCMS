@@ -317,6 +317,7 @@ class theme extends common {
 					'loginLink' => $this->getInput('themeFooterLoginLink'),
 					'margin' => $this->getInput('themeFooterMargin', helper::FILTER_BOOLEAN),
 					'position' => $this->getInput('themeFooterPosition'),
+					'fixed' => $this->getInput('themeFooterFixed', helper::FILTER_BOOLEAN),
 					'socialsAlign' => $this->getInput('themeFooterSocialsAlign'),
 					'text' => $this->getInput('themeFooterText', null),
 					'textAlign' => $this->getInput('themeFooterTextAlign'),
