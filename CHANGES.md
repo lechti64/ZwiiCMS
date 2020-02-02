@@ -22,11 +22,12 @@
     - Chargement paresseux des images.
     
 ## version 9.2.17
-- Corretions :
+- Corrections :
     - Affiche le nom du la page plutôt que son id dans le fil d'ariane.
     - Petites corrections.
 - Modifications : 
     - Image du fond (body), options responsive cover et contain.
+    - Réseaux sociaux, icône Youtube chaîne ou utilisateur.
 
 ## version 9.2.16
 - Optimisation :
