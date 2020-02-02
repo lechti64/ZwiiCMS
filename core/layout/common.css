@@ -645,9 +645,11 @@ nav::before {
 section {
 	min-height: 450px;
 }
+
 section #sectionTitle {
 	margin-top: 0;
 }
+
 .userLogin, .updateForm {
 	min-height: 0px;
 }
@@ -678,6 +680,16 @@ footer {
 
 #footerbody, #footersite {
 	margin: 0;
+}
+
+.footerbodyFixed {
+	position: fixed;
+	bottom: 0;
+    left: 0;
+	width: 100%;
+	z-index:50;
+	background-color: inherit;
+	padding: inherit;
 }
 
 #footersiteRight, #footersiteLeft, #footersiteCenter,

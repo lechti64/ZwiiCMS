@@ -9,6 +9,9 @@
 				'value' => 'Accueil'
 			]); ?>
 		</div>
+		<div class="col2 offset8">
+            <?php echo template::submit('configSubmit'); ?>
+        </div>
 	</div>		
 </div>
 <div class="row">

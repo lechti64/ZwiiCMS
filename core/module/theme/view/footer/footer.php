@@ -196,7 +196,14 @@
                                 ]); ?>
                         </div>
                     </div>             
+                    <div class="col6">
+                    <div id="themeFooterPositionFixed" class="displayNone">
+                        <?php echo template::checkbox('themeFooterFixed', true, 'Pied de page fixe', [
+							'checked' => $this->getData(['theme', 'footer', 'fixed'])
+						]); ?>
+                    </div>        
                 </div>
+                </div> 
             </div>
         </div>
     </div>
