@@ -31,6 +31,7 @@
 ## version 9.2.17
 - Corrections :
     - Affiche le nom du la page plutôt que son id dans le fil d'ariane.
+    - Conformité balise p dans span.
     - Petites corrections.
 - Modifications : 
     - Image du fond (body), options responsive cover et contain.
