@@ -207,7 +207,17 @@ $("#themeFooterCopyrightPosition").on("change", function() {
 			}
 		}
 }).trigger("change");
-
+// Affiche / Cache les options du footer fixe
+$("#themeFooterPosition").on("change", function() {
+	if($(this).val() === 'body') {
+		$("#themeFooterPositionFixed").slideDown();	
+	}
+	else {
+		$("#themeFooterPositionFixed").slideUp(function() {
+			$("#themeFooterPositionFixed").prop("checked", false).trigger("change");
+		});
+	}
+}).trigger("change");
 
 // Lien de connexion
 $("#themeFooterLoginLink").on("change", function() {

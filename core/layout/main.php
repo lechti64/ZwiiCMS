@@ -212,7 +212,10 @@
 				)
 			) {		$position = 'site';	} else {
 					$position = 'body';
-					echo '</div>';
+					if ( $this->getData(['theme', 'footer', 'fixed']) === true) {
+						$positionFixed = 'footerbodyFixed';
+					}
+ 					echo '</div>';
 			}
 			?>
 			<!-- Pied de page -->		
@@ -221,7 +224,7 @@
 				if ($position === 'site'): ?>
 					<div class="container"><div class="row" id="footersite">
 				<?php else: ?>
-					<div class="container-large"><div class="row" id="footerbody">
+					<div class="container-large <?php echo $positionFixed; ?>"><div class="row" id="footerbody">
 				<?php endif?>
 					<!-- Mise en page -->
 					<?php switch($this->getData(['theme', 'footer', 'template'])) {
