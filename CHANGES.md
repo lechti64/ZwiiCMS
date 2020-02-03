@@ -28,15 +28,18 @@
 - Modification :
     - Chargement paresseux des images.
     
-## version 9.2.17
+## version 9.2.18
 - Corrections :
-    - Affiche le nom du la page plutôt que son id dans le fil d'ariane.
     - Conformité balise p dans span (footer).
     - Petites corrections.
 - Modifications : 
     - Image du fond (body), options responsive cover et contain.
     - Réseaux sociaux, icône Youtube chaîne ou utilisateur.
     - Pied de page, position fixe dans le site.
+
+## version 9.2.17
+- Correction :
+    - Affiche le nom du la page plutôt que son id dans le fil d'ariane
 
 ## version 9.2.16
 - Optimisation :
