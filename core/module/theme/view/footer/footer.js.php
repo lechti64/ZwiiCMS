@@ -214,7 +214,7 @@ $("#themeFooterPosition").on("change", function() {
 	}
 	else {
 		$("#themeFooterPositionFixed").slideUp(function() {
-			$("#themeFooterPositionFixed").prop("checked", false).trigger("change");
+			$("#themeFooterFixed").prop("checked", false).trigger("change");
 		});
 	}
 }).trigger("change");
