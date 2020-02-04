@@ -52,7 +52,9 @@
                     </div>
                     <div class="row">
                         <?php echo template::checkbox('themeFooterDisplayLegal', true, 'Mentions légales', [
-                                'checked' =>  $this->getData(['config', 'legalPageId']) === '' ? false : $this->getData(['theme', 'footer', 'displayLegal']),
+                                    'checked' => (bool) empty($this->getData(['config', 'legalPageId'])) ? false : $this->getData(['theme', 'footer', 'displayLegal']),
+                                    'disabled' => (bool) empty($this->getData(['config', 'legalPageId'])) ? true : false,
+                                    'help' => (bool) empty($this->getData(['config', 'legalPageId'])) ? 'Pour activer cette option, sélectionnez la page contenant les mentions légales dans la gestion du site' : ''
                             ]); ?>
                     </div>
                 </div>
