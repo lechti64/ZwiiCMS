@@ -36,6 +36,7 @@
     - Image du fond (body), options responsive cover et contain.
     - Réseaux sociaux, icône Youtube chaîne ou utilisateur.
     - Pied de page, position fixe dans le site.
+    - Pied de page, option d'affichage des mentions légales disponible uniquement si une page est sélectionnée.
 
 ## version 9.2.17
 - Correction :
