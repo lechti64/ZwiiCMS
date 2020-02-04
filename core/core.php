@@ -1469,7 +1469,8 @@ class core extends common {
 			$css .= '#footerText > p {text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';
 			// Marge supplémentaire lorsque le pied de page est fixe 
-			if ( $this->getData(['theme', 'footer', 'fixed']) === true) {
+			if ( $this->getData(['theme', 'footer', 'fixed']) === true &&
+				 $this->getData(['theme', 'footer', 'position']) === 'body') {
 				$css .= "@media (min-width: 769px) { #site {margin-bottom: 100px;} }";
 				$css .= "@media (max-width: 768px) { #site {margin-bottom: 150px;} }";
 			}
