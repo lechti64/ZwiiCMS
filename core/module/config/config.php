@@ -279,11 +279,6 @@ class config extends common {
 	public function index() {
 		// Soumission du formulaire
 		if($this->isPost()) {
-			if ($this->getInput('configLegalCheck', helper::FILTER_BOOLEAN) === true ) {
-				$legalPageId = $this->getInput('configLegalPageId', helper::FILTER_ID);
-			} else {
-				$legalPageId = '';
-			}
 			$this->setData([
 				'config',
 				[
