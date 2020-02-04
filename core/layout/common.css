@@ -28,7 +28,7 @@ body {
 }
 
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
 	body {
 		margin:0px 10px;
 	}
@@ -336,7 +336,7 @@ td > .col12 {
 	border: 0;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
 	#bar #barLeft {
 		float: left;
 	}	
@@ -486,7 +486,7 @@ nav a {
 nav a:hover {
 	text-decoration: none;
 }
-@media (min-width: 769px) {
+@media (min-width: 768px) {
 	nav #menu {
 		display: block;
 	}
