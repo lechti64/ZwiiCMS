@@ -1214,6 +1214,10 @@ class core extends common {
 			$css .= '#footerSocials{text-align:' . $this->getData(['theme', 'footer', 'socialsAlign']) . '}';
 			$css .= '#footerText > p {text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';
+			// Marge supplémentaire lorsque le pied de page est fixe 
+			if ( $this->getData(['theme', 'footer', 'fixed']) === true) {
+				$css .= "#site {margin-bottom: 150px;}";
+			}
 			// Enregistre la personnalisation
 			file_put_contents(self::DATA_DIR.'theme.css', $css);
 		}
