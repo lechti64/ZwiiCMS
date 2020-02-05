@@ -26,6 +26,7 @@
     - Conformité balise p dans span (footer).
     - Petites corrections.
 - Modifications : 
+    - Installation par défaut : livraison d'une page de mentions légales.
     - Image du fond (body), options responsive cover et contain.
     - Réseaux sociaux, icône Youtube chaîne ou utilisateur.
     - Pied de page, position fixe dans le site.
