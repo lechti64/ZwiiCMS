@@ -1171,7 +1171,7 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 9100) {
 			$this->setData(['theme','footer','displayVersion', true ]);
 			$this->setData(['theme','footer','displaySiteMap', true ]);
-			$this->setData(['theme','footer','displayCopyright', true ]);
+			$this->setData(['theme','footer','displayCopyright', false ]);
 			$this->setData(['core', 'dataVersion', 9100]);
 		}
 		// Version 9.2.00

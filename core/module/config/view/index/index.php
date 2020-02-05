@@ -139,67 +139,65 @@
 		<div class="block">
 			<h4>Réseaux sociaux</h4>
 			<div class="row">
-				<div class="col6">
+				<div class="col4">
 					<?php echo template::text('configSocialFacebookId', [
 						'help' => 'Saisissez votre ID : https://www.facebook.com/[ID].',
 						'label' => 'Facebook',
 						'value' => $this->getData(['config', 'social', 'facebookId'])
 					]); ?>
 				</div>
-				<div class="col6">					
+				<div class="col4">					
 					<?php echo template::text('configSocialInstagramId', [
 						'help' => 'Saisissez votre ID : https://www.instagram.com/[ID].',
 						'label' => 'Instagram',
 						'value' => $this->getData(['config', 'social', 'instagramId'])
 					]); ?>
 				</div>
-			</div>									
-			<div class="row">
-				<div class="col6">
-						<?php echo template::text('configSocialYoutubeId', [
-							'help' => 'ID de la chaîne : https://www.youtube.com/channel/[ID].',
-							'label' => 'Chaîne Youtube',
-							'value' => $this->getData(['config', 'social', 'youtubeId'])
-						]); ?>
-					</div>
-				<div class="col6">
-						<?php echo template::text('configSocialYoutubeUserId', [
-							'help' => 'Saisissez votre ID Utilisateur : https://www.youtube.com/user/[ID].',
-							'label' => 'Youtube',
-							'value' => $this->getData(['config', 'social', 'youtubeUserId'])
-						]); ?>
-					</div>						
+				<div class="col4">
+					<?php echo template::text('configSocialTwitterId', [
+						'help' => 'Saisissez votre ID : https://twitter.com/[ID].',
+						'label' => 'Twitter',
+						'value' => $this->getData(['config', 'social', 'twitterId'])
+					]); ?>
+				</div>				
 			</div>
 			<div class="row">
-				<div class="col6">
+				<div class="col4">
+					<?php echo template::text('configSocialYoutubeId', [
+						'help' => 'ID de la chaîne : https://www.youtube.com/channel/[ID].',
+						'label' => 'Chaîne Youtube',
+						'value' => $this->getData(['config', 'social', 'youtubeId'])
+					]); ?>
+				</div>					
+				<div class="col4">
+					<?php echo template::text('configSocialYoutubeUserId', [
+						'help' => 'Saisissez votre ID Utilisateur : https://www.youtube.com/user/[ID].',
+						'label' => 'Youtube',
+						'value' => $this->getData(['config', 'social', 'youtubeUserId'])
+					]); ?>
+				</div>										
+				<div class="col4">
 					<?php echo template::text('configSocialPinterestId', [
 						'help' => 'Saisissez votre ID : https://pinterest.com/[ID].',
 						'label' => 'Pinterest',
 						'value' => $this->getData(['config', 'social', 'pinterestId'])
 					]); ?>
-				</div>					
-				<div class="col6">
-					<?php echo template::text('configSocialLinkedinId', [
-						'help' => 'Saisissez votre ID Linkedin : https://fr.linkedin.com/in/[ID].',
-						'label' => 'Linkedin',
-						'value' => $this->getData(['config', 'social', 'linkedinId'])
-					]); ?>
-				</div>											
+				</div>															
 			</div>
-			<div class="row">	
-				<div class="col6">
-						<?php echo template::text('configSocialTwitterId', [
-							'help' => 'Saisissez votre ID : https://twitter.com/[ID].',
-							'label' => 'Twitter',
-						'value' => $this->getData(['config', 'social', 'twitterId'])
-					]); ?>
-				</div>						
-				<div class="col6">
+			<div class="row">			
+				<div class="col4 offset2">
 						<?php echo template::text('configSocialGithubId', [
 							'help' => 'Saisissez votre ID Github : https://github.com/[ID].',
 							'label' => 'Github',
 							'value' => $this->getData(['config', 'social', 'githubId'])
 						]); ?>
+				</div>						
+				<div class="col4">
+					<?php echo template::text('configSocialLinkedinId', [
+						'help' => 'Saisissez votre ID Linkedin : https://fr.linkedin.com/in/[ID].',
+						'label' => 'Linkedin',
+						'value' => $this->getData(['config', 'social', 'linkedinId'])
+					]); ?>
 				</div>						
 			</div>
 		</div>
