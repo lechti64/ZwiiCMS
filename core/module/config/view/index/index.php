@@ -19,6 +19,20 @@
 		<div class="block">
 			<h4>Réglages</h4>
 			<div class="row">
+				<div class="col12">
+					<?php echo template::text('configTitle', [
+						'label' => 'Titre du site',
+						'value' => $this->getData(['config', 'title']),
+						'help'  => 'Le titre apparaît dans la barre de titre et les partages sur les réseaux sociaux.'
+					]); ?>
+				</div>
+				<div class="col12">
+					<?php echo template::textarea('configMetaDescription', [
+						'label' => 'Description du site',
+						'value' => $this->getData(['config', 'metaDescription']),
+						'help'  => 'La description apparaît dans les partages sur les réseaux sociaux.'
+					]); ?>
+				</div>
 				<div class="col3">
 					<?php echo template::file('configFavicon', [
 						'type' => 1,
@@ -41,21 +55,7 @@
 					'selected' => $this->getData(['config', 'itemsperPage']),
 					'help' => 'Modules Blog et News'
 					]); ?>
-				</div>
-				<div class="col8">
-					<?php echo template::text('configTitle', [
-						'label' => 'Titre du site',
-						'value' => $this->getData(['config', 'title']),
-						'help'  => 'Le titre apparaît dans la barre de titre et les partages sur les réseaux sociaux.'
-					]); ?>
-				</div>
-				<div class="col12">
-					<?php echo template::textarea('configMetaDescription', [
-						'label' => 'Description du site',
-						'value' => $this->getData(['config', 'metaDescription']),
-						'help'  => 'La description apparaît dans les partages sur les réseaux sociaux.'
-					]); ?>
-				</div>
+				</div>				
 			</div>
 		</div>		
 	</div>
