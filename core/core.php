@@ -941,8 +941,8 @@ class common {
 		// Version 9.2.00
 		if($this->getData(['core', 'dataVersion']) < 9200) {
 			$this->setData(['theme','footer','template', 3 ]);
-			$this->setData(['theme','footer','margin', true ]);
-			$this->setData(['theme','footer','displayLegal', false ]);
+			$this->setData(['theme','footer','margin', true ]);			
+			$this->setData(['theme','footer','displayLegal', !empty($this->getdata(['config','legalPageId'])) ]);
 			$this->setData(['theme','footer','displaySearch', false ]);
 			$this->setData(['config','social','githubId', '' ]);
 			$this->setData(['core', 'dataVersion', 9200]);
@@ -1047,7 +1047,7 @@ class common {
 			$this->setData(['core', 'baseUrl', helper::baseUrl(true,false) ]);
 			$this->setData(['core', 'dataVersion', 9216]);
 			$this->saveData();
-		}		
+		}
 	}
 }
 
