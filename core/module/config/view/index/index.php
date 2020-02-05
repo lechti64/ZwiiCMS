@@ -44,12 +44,14 @@
 						'help'  => 'Le titre apparaît dans la barre de titre et les partages sur les réseaux sociaux.'
 					]); ?>
 				</div>						
+				<div class="col12">
+					<?php echo template::textarea('configMetaDescription', [
+						'label' => 'Description du site',
+						'value' => $this->getData(['config', 'metaDescription']),
+						'help'  => 'La description apparaît dans les partages sur les réseaux sociaux.'
+					]); ?>
+				</div>
 			</div>
-			<?php echo template::textarea('configMetaDescription', [
-				'label' => 'Description du site',
-				'value' => $this->getData(['config', 'metaDescription']),
-				'help'  => 'La description apparaît dans les partages sur les réseaux sociaux.'
-			]); ?>
 		</div>
 	</div>		
 </div>
