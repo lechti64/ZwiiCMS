@@ -42,11 +42,20 @@
 					'help' => 'Modules Blog et News'
 					]); ?>
 				</div>
-				<?php echo template::textarea('configMetaDescription', [
-					'label' => 'Description du site',
-					'value' => $this->getData(['config', 'metaDescription']),
-					'help'  => 'La description apparaît dans les partages sur les réseaux sociaux.'
-				]); ?>
+				<div class="col8">
+					<?php echo template::text('configTitle', [
+						'label' => 'Titre du site',
+						'value' => $this->getData(['config', 'title']),
+						'help'  => 'Le titre apparaît dans la barre de titre et les partages sur les réseaux sociaux.'
+					]); ?>
+				</div>
+				<div class="col12">
+					<?php echo template::textarea('configMetaDescription', [
+						'label' => 'Description du site',
+						'value' => $this->getData(['config', 'metaDescription']),
+						'help'  => 'La description apparaît dans les partages sur les réseaux sociaux.'
+					]); ?>
+				</div>
 			</div>
 		</div>		
 	</div>
@@ -80,8 +89,7 @@
 						]); ?>	
 					</div>
 					<div class="col6">
-						<?php  $listePageId =  array_merge(['' => 'Sélectionner'] , helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC') ); 
-						?>
+						<?php  $listePageId =  array_merge(['' => 'Sélectionner'] , helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC') ); ?>
 						<?php echo template::select('configLegalPageId', $listePageId , [
 							'label' => 'Mentions légales',
 							'selected' => $this->getData(['config', 'legalPageId']),
