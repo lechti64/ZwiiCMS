@@ -15,6 +15,7 @@ class install extends common {
 				'pinterestId' => '',
 				'twitterId' => '',
 				'youtubeId' => '',
+				'youtubeUserId' => '',
 				'githubId' => ''
 			],
 			'timezone' => 'Europe/Paris',
