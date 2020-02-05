@@ -13,7 +13,8 @@ class init extends common {
 				'pinterestId' => '',
 				'twitterId' => '',
 				'youtubeId' => '',
-				'githubId' => 'fredtempez/ZwiiCMS/'
+				'youtubeUserId' => '',
+				'githubId' => ''
 			],
 			'timezone' => 'Europe/Paris',
 			'itemsperPage' => 10,
