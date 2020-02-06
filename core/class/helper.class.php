@@ -42,6 +42,43 @@ class helper {
 		return $newArray;
 	}
 
+
+	/**
+	 * Génére un backup des données de site
+	 * @param string $folder dossier de sauvegarde
+	 * @param array $exclude dossier exclus
+	 * @return string nom du fichier de sauvegarde
+	 */
+
+	public static function autoBackup($folder, $filter = ['backup','tmp'] ) {
+		// Creation du ZIP
+		$fileName = str_replace('/','',helper::baseUrl(false,false)) . '-'. date('Y-m-d-h-i-s', time()) . '.zip';
+		$zip = new ZipArchive();
+		$zip->open($folder . $fileName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+		$directory = 'site/';
+		//$filter = array('backup','tmp','file');
+		$files =  new RecursiveIteratorIterator(
+			new RecursiveCallbackFilterIterator(
+			  new RecursiveDirectoryIterator(
+				$directory,
+				RecursiveDirectoryIterator::SKIP_DOTS
+			  ),
+			  function ($fileInfo, $key, $iterator) use ($filter) {
+				return $fileInfo->isFile() || !in_array($fileInfo->getBaseName(), $filter);
+			  }
+			)
+		  );
+		foreach ($files as $name => $file) 	{
+			if (!$file->isDir()) 	{
+				$filePath = $file->getRealPath();
+				$relativePath = substr($filePath, strlen(realpath($directory)) + 1);
+				$zip->addFile($filePath, $relativePath);
+			} 			
+		}
+		$zip->close();
+		return ($fileName);
+	}
+
 	/**
 	 * Retourne l'URL de base du site
 	 * @param bool $queryString Affiche ou non le point d'interrogation

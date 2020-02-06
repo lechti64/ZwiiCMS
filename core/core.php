@@ -34,7 +34,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.027.dev';
+	const ZWII_VERSION = '10.0.028.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -888,6 +888,7 @@ class common {
 		$db->save;
 	}
 
+
 	/**
 	 * Mises à jour
 	 */
@@ -1103,8 +1104,9 @@ class core extends common {
 			AND $lastBackup > $this->getData(['core', 'lastBackup']) + 86400
 			AND $this->getData(['user']) // Pas de backup pendant l'installation
 		) {
-			// Copie du fichier de données
-			copy(self::DATA_DIR.'core.json', self::BACKUP_DIR . date('Y-m-d', $lastBackup) . '.json');
+			// Copie des fichier de données
+			//copy(self::DATA_DIR.'core.json', self::BACKUP_DIR . date('Y-m-d', $lastBackup) . '.json');
+			helper::autoBackup(self::BACKUP_DIR,['backup','tmp','file']);
 			// Date du dernier backup
 			$this->setData(['core', 'lastBackup', $lastBackup]);
 			// Enregistre les données
