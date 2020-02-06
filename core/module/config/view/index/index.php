@@ -81,19 +81,6 @@
                             'help' => 'Les mentions légales sont obligatoires en France'
 						]); ?>
 					</div>	
-				</div>	
-				<div class="row">			
-					<div class="col6">
-						<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
-							'checked' => $this->getData(['config', 'cookieConsent'])
-						]); ?>
-					</div>	
-					<div class="col6">
-						<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
-							'checked' => helper::checkRewrite(),
-							'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
-						]); ?>
-					</div>	
 				</div>
 				<div class="row">
 					<div class="col6">						
@@ -109,11 +96,25 @@
 							'help' => 'Affiche les conditions d\'utilisation de Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
 						]); ?>										
 					</div>
-				</div>
+				</div>		
+				<div class="row">			
+					<div class="col6">
+						<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
+						'checked' => $this->getData(['config', 'cookieConsent'])
+					]); ?>
+					</div>	
+					<div class="col6">
+					<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
+						'checked' => helper::checkRewrite(),
+						'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
+					]); ?>
+					</div>	
+				</div>	
 				<div class="row">
-					<div class="col6">				
-						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
-							'checked' => $this->getData(['config', 'maintenance'])
+					<div class="col6">
+						<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
+							'checked' => $this->getData(['config', 'autoBackup']),
+							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Les fichiers du site ne sont pas inclus.</p>'
 						]); ?>	
 					</div>
 					<div class="col6">				
@@ -122,7 +123,14 @@
 								'help' => 'Vérification quotidienne des mises à jour.'
 							]); ?>
 					</div>
-				</div>		
+				</div>
+				<div class="row">
+					<div class="col6">				
+						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
+							'checked' => $this->getData(['config', 'maintenance'])
+						]); ?>	
+					</div>			
+				</div>	
 			</div>							
 		</div>
 	</div>
