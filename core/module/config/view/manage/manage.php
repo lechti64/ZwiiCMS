@@ -74,10 +74,10 @@
 						$buttonClass = 'disabled'; 
 					} elseif ($this->getData(['core', 'baseUrl']) === '') {
 						$baseUrlValue = '/';
-						$buttonClass = (helper::baseUrl(true,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
+						$buttonClass = (helper::baseUrl(false,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
 					} else {
 						$baseUrlValue = $this->getData(['core', 'baseUrl']);
-						$buttonClass = (helper::baseUrl(true,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
+						$buttonClass = (helper::baseUrl(false,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
 					}
 					echo template::text('configManageBaseURLToConvert', [
 						'label' => 'Dossier d\'installation de l\'archive' ,
@@ -89,54 +89,18 @@
 				<div class="col5">
 					<?php echo template::text('configManageCurrentURL', [
 						'label' => 'Dossier du site actuel',
-						'value' => helper::baseUrl(true,false),
+						'value' => helper::baseUrl(false,false),
 						'readonly' => true,
 						'help'  => 'Dossier du site installé.'
 					]); ?>
 				</div>			
-			</div>
-		</div>		
-	</div>
-	<div class="row">
-		<div class="col12">
-			<div class="block">
-				<h4>Conversion des URL après transfert de site</h4>
-				<div class="row">
-					<div class="col5">
-						<?php 
-						if (is_null($this->getData(['core', 'baseUrl'])) ) {
-							$baseUrlValue = 'Pas de donnée dans la sauvegarde';
-							$buttonClass = 'disabled'; 
-						} elseif ($this->getData(['core', 'baseUrl']) === '') {
-							$baseUrlValue = '/';
-							$buttonClass = (helper::baseUrl(false,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
-						} else {
-							$baseUrlValue = $this->getData(['core', 'baseUrl']);
-							$buttonClass = (helper::baseUrl(false,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
-						}
-						echo template::text('configManageBaseURLToConvert', [
-							'label' => 'Dossier d\'installation de l\'archive' ,
-							'value' => $baseUrlValue,
-							'readonly' => true,
-							'help'  => 'Lors de la restauration d\'un backup d\'une version 9.2.10 ou supérieure, l\'URL de base est stockée dans la configuration sinon cette donnée est vide.'
-						]); ?>
-					</div>
-					<div class="col5">
-						<?php echo template::text('configManageCurrentURL', [
-							'label' => 'Dossier du site actuel',
-							'value' => helper::baseUrl(false,false),
-							'readonly' => true,
-							'help'  => 'Dossier du site installé.'
-						]); ?>
-					</div>			
-					<div class="col2 verticalAlignBottom">
-						<?php echo template::button('configManageUpdateBaseURLButton', [
-							'href' => helper::baseUrl() . 'config/updateBaseUrl',
-							'class' => $buttonClass,
-							'value' => 'convertir'
-						]); ?>						
-					</div>		
-				</div>
+				<div class="col2 verticalAlignBottom">
+					<?php echo template::button('configManageUpdateBaseURLButton', [
+						'href' => helper::baseUrl() . 'config/updateBaseUrl',
+						'class' => $buttonClass,
+						'value' => 'convertir'
+					]); ?>						
+				</div>		
 			</div>
 		</div>
 	</div>
