@@ -23,10 +23,10 @@
 			</div>
 			<div class="row">
 				<div class="col10">
-					<?php echo template::checkbox('configBackupOption', true, 'Inclure le contenu du gestionnaire de fichier', [
+					<?php echo template::checkbox('configBackupOption', true, 'Inclure le contenu du gestionnaire de fichiers', [
 						'checked' => true,
 						'disabled' => true,
-						'help' => 'Cette option n\'est pas recommandée lorsque le contenu du gestionnaire de fichier est très volumineux.'
+						'help' => 'Cette option n\'est pas recommandée lorsque le contenu du gestionnaire de fichiers est très volumineux.'
 					]); ?>		
 				</div>	
 			</div>

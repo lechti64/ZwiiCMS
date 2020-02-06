@@ -119,7 +119,7 @@
 			<div class="col6">
 					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
 							'checked' => $this->getData(['config', 'autoBackup']),
-							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Les fichiers du site ne sont pas inclus.</p>'
+							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Le contenu du gestionnaire de fichiers n\'est pas sauvegardé.</p>'
 					]); ?>	
 				</div>
 				<div class="col6">				
