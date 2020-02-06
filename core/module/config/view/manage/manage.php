@@ -25,10 +25,10 @@
 			</div>
 			<div class="row">
 				<div class="col10">
-					<?php echo template::checkbox('configBackupOption', true, 'Inclure le contenu du gestionnaire de fichier', [
+					<?php echo template::checkbox('configBackupOption', true, 'Inclure le contenu du gestionnaire de fichiers', [
 						'checked' => true,
 						'disabled' => true,
-						'help' => 'Cette option n\'est pas recommandée lorsque le contenu du gestionnaire de fichier est très volumineux.'
+						'help' => 'Cette option n\'est pas recommandée lorsque le contenu du gestionnaire de fichiers est très volumineux.'
 					]); ?>		
 				</div>	
 			</div>
@@ -45,11 +45,18 @@
 						'help' => 'L\'archive a été déposée dans le gestionaire de fichiers. Les archives inférieures à la version 9 ne sont pas acceptées.'
 					]); ?>
 				</div>
-				<div class="row">
-					<?php echo template::checkbox('configExportAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
-							'checked' => $this->getData(['config', 'autoBackup']),
-							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Les fichiers du site ne sont pas sauvegardés automatiquement.</p>'
-						]); ?>	
+			</div>	
+			<div class="row">
+				<div class="col8">
+					<?php echo template::checkbox('configManageImportUser', true, 'Préserver utilisateurs installés', [
+						'checked' => true,
+						'help' => 'Les données des utilisateurs installés ne sont pas écrasés par la restauration quand l\'option est active.'
+					]); ?>		
+				</div>	
+				<div class="col4">
+					<?php echo template::submit('configManageSubmit',[
+						'value' => 'Restaurer'
+					]); ?>
 				</div>
 			</div>			
 		</div>

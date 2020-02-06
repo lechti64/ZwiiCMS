@@ -1,31 +1,50 @@
 <?php echo template::formOpen('configForm'); ?>
 <div class="notranslate">
-	<div class="row">
-		<div class="col2">
-			<?php echo template::button('configBack', [
-				'class' => 'buttonGrey',
-				'href' => helper::baseUrl(false),
-				'ico' => 'home',
-				'value' => 'Accueil'
-			]); ?>
-		</div>
-		<div class="col2 offset8">
-            <?php echo template::submit('configSubmit'); ?>
-        </div>
+<div class="row">
+	<div class="col2">
+		<?php echo template::button('configBack', [
+			'class' => 'buttonGrey',
+			'href' => helper::baseUrl(false),
+			'ico' => 'home',
+			'value' => 'Accueil'
+		]); ?>
+	</div>
+	<div class="col3 offset5">
+		<?php echo template::button('configManageButton', [
+			'href' => helper::baseUrl() . 'config/manage',
+			'value' => 'Sauvegarder / Restaurer'
+		]); ?>
 	</div>		
+	<div class="col2">
+		<?php echo template::submit('configSubmit'); ?>
+	</div>
 </div>
 <div class="row">
 	<div class="col12">
 		<div class="block">
-			<h4>Réglages</h4>
+			<h4>Informations générales</h4>
 			<div class="row">
-				<div class="col12">
+				<div class="col4">
+					<?php 
+						$pages = $this->getData(['page']);
+						foreach($pages as $page => $pageId) {
+							if ($this->getData(['page',$page,'block']) === 'bar' ||
+							$this->getData(['page',$page,'disable']) === true) {
+								unset($pages[$page]);
+							}
+						}
+						echo template::select('configHomePageId', helper::arrayCollumn($pages, 'title', 'SORT_ASC'), [
+						'label' => 'Page d\'accueil',
+						'selected' =>$this->getData(['config', 'homePageId'])
+					]); ?>
+				</div>
+				<div class="col8">
 					<?php echo template::text('configTitle', [
 						'label' => 'Titre du site',
 						'value' => $this->getData(['config', 'title']),
 						'help'  => 'Le titre apparaît dans la barre de titre et les partages sur les réseaux sociaux.'
 					]); ?>
-				</div>
+				</div>						
 				<div class="col12">
 					<?php echo template::textarea('configMetaDescription', [
 						'label' => 'Description du site',
@@ -34,108 +53,107 @@
 					]); ?>
 				</div>
 			</div>
-		</div>		
-	</div>
-	<div class="row">
-		<div class="col12">
-			<div class="block">
-				<h4>Réglages</h4>
-				<div class="row">
-					<div class="col4">
-						<?php echo template::file('configFavicon', [
-							'type' => 1,
-							'help' => 'Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
-							'label' => 'Favicon',
-							'value' => $this->getData(['config', 'favicon'])
-						]); ?>
-					</div>
-					<div class="col4">
-						<?php echo template::file('configFaviconDark', [
-							'type' => 1,
-							'help' => 'Sélectionnez une icône adaptée à un thème sombre.<br>Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
-							'label' => 'Favicon thème sombre',
-							'value' => $this->getData(['config', 'faviconDark'])
-						]); ?>
-					</div>						
-					<div class="col4">
-						<?php echo template::select('itemsperPage', $module::$ItemsList, [
-						'label' => 'Articles par page',
-						'selected' => $this->getData(['config', 'itemsperPage']),
-						'help' => 'Modules Blog et News'
-						]); ?>
-					</div>
+		</div>
+	</div>		
+</div>
+<div class="row">
+	<div class="col12">
+		<div class="block">
+			<h4>Réglages</h4>
+			<div class="row">
+				<div class="col3">
+					<?php echo template::file('configFavicon', [
+						'type' => 1,
+						'help' => 'Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
+						'label' => 'Favicon thème clair',
+						'value' => $this->getData(['config', 'favicon'])
+					]); ?>
 				</div>
-				<div class="row">
-					<div class="col6">
-						<?php echo template::select('configTimezone', $module::$timezones, [
-							'label' => 'Fuseau horaire',
-							'selected' => $this->getData(['config', 'timezone']),
-                            'help' => 'Le fuseau horaire est utile au bon référencement'
-						]); ?>	
-					</div>
-					<div class="col6">
-						<?php  $listePageId =  array_merge(['' => 'Sélectionner'] , helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC') ); ?>
-						<?php echo template::select('configLegalPageId', $listePageId , [
-							'label' => 'Mentions légales',
-							'selected' => $this->getData(['config', 'legalPageId']),
-                            'help' => 'Les mentions légales sont obligatoires en France'
-						]); ?>
-					</div>	
+				<div class="col3">
+					<?php echo template::file('configFaviconDark', [
+						'type' => 1,
+						'help' => 'Sélectionnez une icône adaptée à un thème sombre.<br>Pensez à supprimer le cache de votre navigateur si la favicon ne change pas.',
+						'label' => 'Favicon thème sombre',
+						'value' => $this->getData(['config', 'faviconDark'])
+					]); ?>
+				</div>				
+				<div class="col6">
+					<?php echo template::select('itemsperPage', $module::$ItemsList, [
+					'label' => 'Articles par page',
+					'selected' => $this->getData(['config', 'itemsperPage']),
+					'help' => 'Modules Blog et News'
+					]); ?>
 				</div>
-				<div class="row">
-					<div class="col6">						
-						<?php echo template::checkbox('configdisablei18n', true, 'Désactivation de la gestion des langues', [
-							'checked' => $this->getData(['config', 'disablei18n']),
-							'disabled' => sizeof($this->i18nInstalled() ) > 1 ? true : false,
-							'help' => 'L\'option n\'est pas modifiable  quand une langue est installée.'
-						]); ?>	
-					</div>
-					<div class="col6">
-						<?php echo template::checkbox('configdGoogTransLogo', true, 'Conditions Google Traduction', [
-							'checked' => $this->getData(['config', 'googTransLogo']),
-							'help' => 'Affiche les conditions d\'utilisation de Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
-						]); ?>										
-					</div>
-				</div>		
-				<div class="row">			
-					<div class="col6">
-						<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
+			</div>
+			<div class="row">
+				<div class="col6">
+					<?php echo template::select('configTimezone', $module::$timezones, [
+						'label' => 'Fuseau horaire',
+						'selected' => $this->getData(['config', 'timezone']),
+						'help' => 'Le fuseau horaire est utile au bon référencement'
+					]); ?>	
+				</div>
+			<div class="col6">
+				<?php  $listePageId =  array_merge(['' => 'Sélectionner'] , helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC') ); 
+				?>
+				<?php echo template::select('configLegalPageId', $listePageId , [
+					'label' => 'Mentions légales',
+					'selected' => $this->getData(['config', 'legalPageId']),
+					'help' => 'Les mentions légales sont obligatoires en France'
+					]); ?>
+				</div>	
+			</div>	
+			<div class="row">
+				<div class="col6">						
+					<?php echo template::checkbox('configdisablei18n', true, 'Désactivation de la gestion des langues', [
+						'checked' => $this->getData(['config', 'disablei18n']),
+						'disabled' => sizeof($this->i18nInstalled() ) > 1 ? true : false,
+						'help' => 'L\'option n\'est pas modifiable  quand une langue est installée.'
+					]); ?>	
+				</div>
+				<div class="col6">
+					<?php echo template::checkbox('configdGoogTransLogo', true, 'Conditions Google Traduction', [
+						'checked' => $this->getData(['config', 'googTransLogo']),
+						'help' => 'Affiche les conditions d\'utilisation de Google Translation en bas des pages traduites automatiquement. Si vous ne traduisez pas vous-même vos pages, cette option est vivement recommandée.'
+					]); ?>										
+				</div>
+			</div>	
+			<div class="row">			
+				<div class="col6">
+					<?php echo template::checkbox('configCookieConsent', true, 'Message de consentement aux cookies', [
 						'checked' => $this->getData(['config', 'cookieConsent'])
 					]); ?>
-					</div>	
-					<div class="col6">
+				</div>	
+				<div class="col6">
 					<?php echo template::checkbox('rewrite', true, 'Réécriture d\'URL', [
 						'checked' => helper::checkRewrite(),
 						'help' => 'Vérifiez d\'abord que votre serveur l\'autorise : ce n\'est pas le cas chez Free.'
 					]); ?>
-					</div>	
 				</div>	
-				<div class="row">
-					<div class="col6">
-						<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
+			</div>	
+			<div class="row">
+			<div class="col6">
+					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
 							'checked' => $this->getData(['config', 'autoBackup']),
-							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Les fichiers du site ne sont pas inclus.</p>'
-						]); ?>	
-					</div>
-					<div class="col6">				
-						<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
-								'checked' => $this->getData(['config', 'autoUpdate']),
-								'help' => 'Vérification quotidienne des mises à jour.'
-							]); ?>
-					</div>
+							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Le contenu du gestionnaire de fichiers n\'est pas sauvegardé.</p>'
+					]); ?>	
 				</div>
-				<div class="row">
-					<div class="col6">				
-						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
-							'checked' => $this->getData(['config', 'maintenance'])
-						]); ?>	
-					</div>			
-				</div>	
-			</div>							
+				<div class="col6">				
+					<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
+							'checked' => $this->getData(['config', 'autoUpdate']),
+							'help' => 'Vérification quotidienne des mises à jour.'
+						]); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col6">				
+					<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
+						'checked' => $this->getData(['config', 'maintenance'])
+					]); ?>	
+				</div>			
+			</div>
 		</div>
-	</div>
-</div>
-<div class="row">	
+	</div>	
 	<div class="col6">
 		<div class="block">
 			<h4>Réseaux sociaux</h4>
@@ -225,8 +243,8 @@
 					<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
 				</div>
 			</div>
-		</div>
-	</div>	
+		</div>	
+	</div>
 </div>
 <div class="row">
 	<div class="col12">
