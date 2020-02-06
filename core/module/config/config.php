@@ -200,32 +200,11 @@ class config extends common {
 	 * Sauvegarde des données
 	 */
 	public function backup() {
-		// Creation du ZIP
-		$fileName = str_replace('/','',helper::baseUrl(false,false)) . '-'. date('Y-m-d-h-i-s', time()) . '.zip';
-		$zip = new ZipArchive();
-		$zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
-		$directory = 'site/';
-		$filter = array('backup','tmp');
-		$files =  new RecursiveIteratorIterator(
-			new RecursiveCallbackFilterIterator(
-			  new RecursiveDirectoryIterator(
-				$directory,
-				RecursiveDirectoryIterator::SKIP_DOTS
-			  ),
-			  function ($fileInfo, $key, $iterator) use ($filter) {
-				return $fileInfo->isFile() || !in_array($fileInfo->getBaseName(), $filter);
-			  }
-			)
-		  );
-		foreach ($files as $name => $file) 	{
-			if (!$file->isDir()) 	{
-				$filePath = $file->getRealPath();
-				$relativePath = substr($filePath, strlen(realpath($directory)) + 1);
-				$zip->addFile($filePath, $relativePath);
-			} 			
-		}
-		$zip->close();
-		// Téléchargement du ZIP
+		// Creation du ZIP		
+		$filter = $this->getInput('configBackupOption',helper::FILTER_BOOLEAN) === true ? ['backup','tmp'] : ['backup','tmp','file'];
+		$fileName = helper::autoBackup(self::TEMP_DIR,$filter);
+
+		// Téléchargement du ZIP		
 		header('Content-Type: application/zip');
 		header('Content-Disposition: attachment; filename="' . $fileName . '"');
 		header('Content-Length: ' . filesize(self::TEMP_DIR . $fileName));
@@ -235,6 +214,7 @@ class config extends common {
 			'display' => self::DISPLAY_RAW
 		]);
 		unlink(self::TEMP_DIR . $fileName);
+		exit();		
 	}
 
 

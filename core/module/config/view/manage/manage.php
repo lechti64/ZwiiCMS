@@ -17,11 +17,20 @@
 			<h4>Sauvegarde totale du site</h4>	
 			<div class="row">
 				<div class="col10 offset1">
-					<?php echo template::button('configManageButton', [
+					<?php echo template::button('configBackupButton', [
 						'href' => helper::baseUrl() . 'config/backup',
-						'value' => 'Générer et télécharger <br />une archive des données de site',
+						'value' => 'Générer et télécharger <br />les données de site',
 					]); ?>
 				</div>					
+			</div>
+			<div class="row">
+				<div class="col10">
+					<?php echo template::checkbox('configBackupOption', true, 'Inclure le contenu du gestionnaire de fichier', [
+						'checked' => true,
+						'disabled' => true,
+						'help' => 'Cette option n\'est pas recommandée lorsque le contenu du gestionnaire de fichier est très volumineux.'
+					]); ?>		
+				</div>	
 			</div>
 		</div>				
 	</div>	
