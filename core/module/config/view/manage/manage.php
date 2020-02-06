@@ -21,12 +21,6 @@
 					]); ?>
 				</div>					
 			</div>
-			<div class="row">
-				<?php echo template::checkbox('configExportAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
-						'checked' => $this->getData(['config', 'autoBackup']),
-						'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Les fichiers du site ne sont pas sauvegardés automatiquement.</p>'
-					]); ?>	
-			</div>
 		</div>				
 	</div>	
 	<div class="col6">

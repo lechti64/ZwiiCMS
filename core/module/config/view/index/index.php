@@ -116,9 +116,10 @@
 				</div>	
 			</div>	
 			<div class="row">
-				<div class="col6">				
-					<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
-						'checked' => $this->getData(['config', 'maintenance'])
+			<div class="col6">
+					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
+							'checked' => $this->getData(['config', 'autoBackup']),
+							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Les fichiers du site ne sont pas inclus.</p>'
 					]); ?>	
 				</div>
 				<div class="col6">				
@@ -127,6 +128,13 @@
 							'help' => 'Vérification quotidienne des mises à jour.'
 						]); ?>
 				</div>
+			</div>
+			<div class="row">
+				<div class="col6">				
+					<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
+						'checked' => $this->getData(['config', 'maintenance'])
+					]); ?>	
+				</div>			
 			</div>
 		</div>
 	</div>	
