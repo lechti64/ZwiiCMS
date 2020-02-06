@@ -8,7 +8,7 @@
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
  * @author Frédéric Tempez <frederic.tempez@outlook.com>
- * @copyright Copyright (C) 2018-2019, Frédéric Tempez
+ * @copyright Copyright (C) 2018-2020, Frédéric Tempez
  * @link http://zwiicms.com/
  */
 
@@ -30,10 +30,10 @@ $("input, select").on("change", function() {
 	css += "footer #footerbody > div{margin:" + $("#themeFooterHeight").val() + " 0}";		
 	// Alignement du contenu
 	css += "#footerSocials{text-align:" + $("#themeFooterSocialsAlign").val() + "}";
-	css += "#footerText{text-align:" + $("#themeFooterTextAlign").val() + "}";
+	css += "#footerText > p {text-align:" + $("#themeFooterTextAlign").val() + "}";
 	css += "#footerCopyright{text-align:" + $("#themeFooterCopyrightAlign").val() + "}";
 	// Taille, couleur, épaisseur et capitalisation du titre de la bannière
-	css += "footer span{color:" + $("#themeFooterTextColor").val() + ";font-family:'" + footerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeFooterFontWeight").val() + ";font-size:" + $("#themeFooterFontSize").val() + ";text-transform:" + $("#themeFooterTextTransform").val() + "}";
+	css += "footer span, #footerText > p {color:" + $("#themeFooterTextColor").val() + ";font-family:'" + footerFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeFooterFontWeight").val() + ";font-size:" + $("#themeFooterFontSize").val() + ";text-transform:" + $("#themeFooterTextTransform").val() + "}";
 	// Marge
 	if($("#themeFooterMargin").is(":checked")) {
 		css += 'footer{padding: 0 20px;}';
@@ -65,8 +65,8 @@ $("input, select").on("change", function() {
 			break;
 	}
     // Réduire la marge du paragraphe de la zone de texte enrichie
-    $("#footerFontText > p").css("margin-top","0");
-    $("#footerFontText > p").css("margin-bottom","0");
+    $("#footerText > p").css("margin-top","0");
+    $("#footerText > p").css("margin-bottom","0");
 });
 
 
@@ -207,7 +207,17 @@ $("#themeFooterCopyrightPosition").on("change", function() {
 			}
 		}
 }).trigger("change");
-
+// Affiche / Cache les options du footer fixe
+$("#themeFooterPosition").on("change", function() {
+	if($(this).val() === 'body') {
+		$("#themeFooterPositionFixed").slideDown();	
+	}
+	else {
+		$("#themeFooterPositionFixed").slideUp(function() {
+			$("#themeFooterFixed").prop("checked", false).trigger("change");
+		});
+	}
+}).trigger("change");
 
 // Lien de connexion
 $("#themeFooterLoginLink").on("change", function() {

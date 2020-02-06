@@ -11,7 +11,7 @@
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/  
  * @copyright  :  Frédéric Tempez <frederic.tempez@outlook.com>
- * @copyright Copyright (C) 2018-2019, Frédéric Tempez
+ * @copyright Copyright (C) 2018-2020, Frédéric Tempez
  */
 
 class theme extends common {
@@ -207,9 +207,11 @@ class theme extends common {
 		'15px' => '15 pixels',
 		'16px' => '16 pixels'
 	];
-	public static $sizes = [
+	public static $bodySizes = [
 		'auto' => 'Automatique',	
-		'100% 100%' => 'Image étirée'	
+		'100% 100%' => 'Image étirée (100% 100%)',
+		'cover' => 'Responsive (cover)',
+		'contain' => 'Responsive (contain)'
 	];
 	public static $textTransforms = [
 		'none' => 'Standard',
@@ -315,6 +317,7 @@ class theme extends common {
 					'loginLink' => $this->getInput('themeFooterLoginLink'),
 					'margin' => $this->getInput('themeFooterMargin', helper::FILTER_BOOLEAN),
 					'position' => $this->getInput('themeFooterPosition'),
+					'fixed' => $this->getInput('themeFooterFixed', helper::FILTER_BOOLEAN),
 					'socialsAlign' => $this->getInput('themeFooterSocialsAlign'),
 					'text' => $this->getInput('themeFooterText', null),
 					'textAlign' => $this->getInput('themeFooterTextAlign'),
@@ -453,7 +456,8 @@ class theme extends common {
 				'fixed' => $this->getInput('themeMenuFixed', helper::FILTER_BOOLEAN),
 				'activeColorAuto' => $this->getInput('themeMenuActiveColorAuto', helper::FILTER_BOOLEAN),
 				'activeColor' => $this->getInput('themeMenuActiveColor'),
-				'radius' => $this->getInput('themeMenuRadius')
+				'radius' => $this->getInput('themeMenuRadius'),
+				'burgerTitle' => $this->getInput('themeMenuBurgerTitle', helper::FILTER_BOOLEAN)
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([

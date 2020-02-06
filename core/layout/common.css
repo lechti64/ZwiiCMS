@@ -28,7 +28,7 @@ body {
 }
 
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
 	body {
 		margin:0px 10px;
 	}
@@ -336,7 +336,7 @@ td > .col12 {
 	border: 0;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
 	#bar #barLeft {
 		float: left;
 	}	
@@ -434,8 +434,15 @@ nav #toggle {
 	display: none;
 	font-weight: bold;
 }
+
 nav #toggle span {
 	display: block;
+}
+
+nav #burgerText {
+	float: left;
+	font-size: 1.4em;
+	margin: 15px 0 0 10px;
 }
 
 nav ul {
@@ -479,7 +486,7 @@ nav a {
 nav a:hover {
 	text-decoration: none;
 }
-@media (min-width: 769px) {
+@media (min-width: 768px) {
 	nav #menu {
 		display: block;
 	}
@@ -556,9 +563,11 @@ ul .menuSideChild, li .menuSideChild {
 section {
 	min-height: 450px;
 }
+
 section #sectionTitle {
 	margin-top: 0;
 }
+
 .userLogin, .updateForm {
 	min-height: 0px;
 }
@@ -591,6 +600,16 @@ footer {
 	margin: 0;
 }
 
+.footerbodyFixed {
+	position: fixed;
+	bottom: 0;
+    left: 0;
+	width: 100%;
+	z-index:50;
+	background-color: inherit;
+	padding: inherit;
+}
+
 #footersiteRight, #footersiteLeft, #footersiteCenter,
 #footerbodyRight, #footerbodyLeft, #footerbodyCenter {
 	vertical-align: middle;
@@ -606,7 +625,7 @@ footer #footersite > div {
 footer #footerbody > div {
 	padding:0
 }
-#footerFontText > p {
+#footerText > p {
 	margin-top: 0; 
 	margin-bottom: 0;
 }

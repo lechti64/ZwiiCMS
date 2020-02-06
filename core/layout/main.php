@@ -37,7 +37,11 @@
 				}
 			?>
 			>
-				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
+				<div id="toggle">
+				<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
+					<div id="burgerText"><?php echo $this->getData(['config','title']);?></div>
+				<?php endif; ?>
+				<?php echo template::ico('menu',null,null,'2em'); ?></div>
 				<div id="menu" class="
 				<?php if($this->getData(['theme', 'menu', 'position']) === 'top'){echo 'container-large';}else{echo'container';}
 				?>">
@@ -72,7 +76,11 @@
 		<?php if($this->getData(['theme', 'menu', 'position']) === 'body-second'): ?>
 			<!-- Menu dans le fond du site après la bannière -->
 			<nav>
-				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
+				<div id="toggle">
+				<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
+					<div id="burgerText"><?php echo $this->getData(['config','title']);?></div>
+				<?php endif; ?>
+				<?php echo template::ico('menu',null,null,'2em'); ?></div>
 				<div id="menu" class="container"><?php $layout->showMenu(); ?></div>
 			</nav>
 		<?php endif; ?>
@@ -81,7 +89,11 @@
 			<?php if($this->getData(['theme', 'menu', 'position']) === 'site-first'): ?>
 				<!-- Menu dans le site avant la bannière -->
 				<nav>
-					<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
+					<div id="toggle">
+					<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
+						<div id="burgerText"><?php echo $this->getData(['config','title']);?></div>
+					<?php endif; ?>
+					<?php echo template::ico('menu',null,null,'2em'); ?></div>
 					<div id="menu" class="container"><?php $layout->showMenu(); ?></div>
 				</nav>
 			<?php endif; ?>
@@ -124,7 +136,11 @@
 			): ?>
 			<!-- Menu dans le site après la bannière -->
 			<nav <?php if($this->getData(['theme', 'menu', 'position']) === 'hide'): ?>class="displayNone"<?php endif; ?>>
-				<div id="toggle"><?php echo template::ico('menu',null,null,'2em'); ?></div>
+				<div id="toggle">
+				<?php if ($this->getData(['theme','menu','burgerTitle']) === true ): ?>
+						<div id="burgerText"><?php echo $this->getData(['config','title']);?></div>
+					<?php endif; ?>
+				<?php echo template::ico('menu',null,null,'2em'); ?></div>
 				<div id="menu" class="container"><?php $layout->showMenu(); ?></div>
 			</nav>
 			<?php endif; ?>
@@ -196,7 +212,10 @@
 				)
 			) {		$position = 'site';	} else {
 					$position = 'body';
-					echo '</div>';
+					if ( $this->getData(['theme', 'footer', 'fixed']) === true) {
+						$positionFixed = 'footerbodyFixed';
+					}
+ 					echo '</div>';
 			}
 			?>
 			<!-- Pied de page -->		
@@ -205,7 +224,7 @@
 				if ($position === 'site'): ?>
 					<div class="container"><div class="row" id="footersite">
 				<?php else: ?>
-					<div class="container-large"><div class="row" id="footerbody">
+					<div class="container-large <?php echo $positionFixed; ?>"><div class="row" id="footerbody">
 				<?php endif?>
 					<!-- Mise en page -->
 					<?php switch($this->getData(['theme', 'footer', 'template'])) {

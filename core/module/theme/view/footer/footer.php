@@ -52,7 +52,9 @@
                     </div>
                     <div class="row">
                         <?php echo template::checkbox('themeFooterDisplayLegal', true, 'Mentions légales', [
-                                'checked' =>  $this->getData(['config', 'legalPageId']) === '' ? false : $this->getData(['theme', 'footer', 'displayLegal']),
+                                    'checked' => (bool) empty($this->getData(['config', 'legalPageId'])) ? false : $this->getData(['theme', 'footer', 'displayLegal']),
+                                    'disabled' => (bool) empty($this->getData(['config', 'legalPageId'])) ? true : false,
+                                    'help' => (bool) empty($this->getData(['config', 'legalPageId'])) ? 'Pour activer cette option, sélectionnez la page contenant les mentions légales dans la gestion du site' : ''
                             ]); ?>
                     </div>
                 </div>
@@ -196,7 +198,14 @@
                                 'checked' => $this->getData(['theme', 'footer', 'margin'])
                             ]); ?>
                     </div>
-                </div>             
+                </div> 
+                <div class="col6">
+                    <div id="themeFooterPositionFixed" class="displayNone">
+                        <?php echo template::checkbox('themeFooterFixed', true, 'Pied de page fixe', [
+							'checked' => $this->getData(['theme', 'footer', 'fixed'])
+						]); ?>
+                    </div>        
+                </div>
             </div>
         </div>
     </div>

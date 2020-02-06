@@ -1,8 +1,37 @@
 # Changelog
 
+## version 9.2.18
+- Corrections :
+    - Conformité balise p dans span (footer).
+    - Petites corrections.
+- Modifications : 
+    - Installation par défaut : livraison d'une page de mentions légales.
+    - Image du fond (body), options responsive cover et contain.
+    - Réseaux sociaux, icône Youtube chaîne ou utilisateur.
+    - Pied de page, position fixe dans le site.
+    - Pied de page, option d'affichage des mentions légales disponible uniquement si une page est sélectionnée.
+
+## version 9.2.17
+- Correction :
+    - Affiche le nom du la page plutôt que son id dans le fil d'ariane
+
+## version 9.2.16
+- Optimisation :
+    - Sauvegarde manuelle des données de site (dossiers file et data).
+- Modification :
+    - Stocke la réécriture d'url dans baseUrl en cas de changement d'arborescence lors d'un transfert de site.
+- Correction : 
+    - Problème lors de la mise à jour de la variable dataVersion.
+
 ## version 9.2.15
-- Amélioration : 
-    - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page
+- Corrections :
+    - Sauvegarde des données de site.
+    - Couleur du titre de site dans le menu réduit.
+    - L'effet de couleur de fond personnalisé d'une page sélectionnée dans le menu est limité aux pages parents.
+- Améliorations : 
+    - Affichage du contenu seul d'une page du site dans une popup Lity sans menu, bannière et pied de page.
+    - Editeur de texte ; effet accordéon, les accordéons peuvent être tous refermés.
+    - Thème ; menu : lorsque le menu est réduit, le titre du site peut être inséré à la gauche du menu burger.
 
 ## version 9.2.14
 - Mise à jour :
