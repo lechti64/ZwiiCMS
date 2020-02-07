@@ -51,13 +51,19 @@ class install extends common {
 				$userLastname = $this->getInput('installLastname', helper::FILTER_STRING_SHORT, true);
 				$userMail = $this->getInput('installMail', helper::FILTER_MAIL, true);
 				$userId = $this->getInput('installId', helper::FILTER_ID, true);
-				// Copie la bannière par défaut
-				mkdir(self::FILE_DIR.'source/banner/');
-				mkdir(self::FILE_DIR.'thumb/banner/');
+				// Bannière par défaut
+				// Créer les dossiers
+				if (!is_dir(self::FILE_DIR.'source/banner/')) {
+					mkdir(self::FILE_DIR.'source/banner/');}
+				if (!is_dir(self::FILE_DIR.'thumb/banner/')) {					
+					mkdir(self::FILE_DIR.'thumb/banner/');
+					}
+				// Copier les fichiers
 				copy('core/module/install/ressource/file/source/banner960.jpg',self::FILE_DIR.'source/banner/banner960.jpg');
 				copy('core/module/install/ressource/file/thumb/banner960.jpg',self::FILE_DIR.'thumb/banner/banner960.jpg');
-				// Copie l'icône de favori
+				// Copie des icônes
 				copy('core/module/install/ressource/file/source/favicon.ico',self::FILE_DIR.'source/favicon.ico'); 
+				copy('core/module/install/ressource/file/source/faviconDark.ico',self::FILE_DIR.'source/faviconDark.ico'); 
 				// Configure certaines données par défaut
 				if ($this->getInput('installDefaultData',helper::FILTER_BOOLEAN) === TRUE) {					
 					$this->initData('page','fr',true);

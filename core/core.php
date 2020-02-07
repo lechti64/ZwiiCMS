@@ -34,7 +34,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.028.dev';
+	const ZWII_VERSION = '10.0.029.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1061,6 +1061,7 @@ class common {
 		}
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
+			$this->setData(['config', 'faviconDark','faviconDark.ico']);
 			$this->setData(['core', 'dataVersion', 10000]);
 		}		
 	}
