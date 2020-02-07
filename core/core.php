@@ -1296,6 +1296,7 @@ class common {
 		}
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
+			$this->setData(['config', 'faviconDark','faviconDark.ico']);
 			$this->setData(['core', 'dataVersion', 10000]);
 		}		
 	}

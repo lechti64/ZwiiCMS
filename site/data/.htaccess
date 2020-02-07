@@ -1,5 +1,5 @@
 # Bloque l'accès aux données
-<FilesMatch "\.json$">
+<FilesMatch "\.json">
 	Order deny,allow
 	Deny from all
 </FilesMatch>
