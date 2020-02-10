@@ -1,8 +1,7 @@
 <?php
 
 /**
- * This file is part of Zwii.
- *
+ * This file is part of Zwii. *
  * For full copyright and license information, please see the LICENSE
  * file that was distributed with this source code.
  *
@@ -34,7 +33,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.2.18';
+	const ZWII_VERSION = '9.2.19';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
