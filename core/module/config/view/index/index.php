@@ -109,19 +109,6 @@
 					]); ?>
 				</div>	
 			</div>	
-			<div class="row">
-				<div class="col6">				
-					<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
-						'checked' => $this->getData(['config', 'maintenance'])
-					]); ?>	
-				</div>	
-				<div class="col6">				
-					<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
-							'checked' => $this->getData(['config', 'autoUpdate']),
-							'help' => 'Vérification quotidienne des mises à jour.'
-						]); ?>
-				</div>		
-			</div>
 		</div>
 	</div>	
 </div>
@@ -197,23 +184,34 @@
 <div class="row">
 	<div class="col6">
 		<div class="block">
-			<h4>Sauvegarde et restauration</h4>	
+			<h4>Gestion et sauvegarde</h4>	
 			<div class="row">
 				<div class="col12">
 					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
 							'checked' => $this->getData(['config', 'autoBackup']),
 							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Le contenu du gestionnaire de fichiers n\'est pas sauvegardé.</p>'
-					]); ?>	
+					]); ?>						
 				</div>
+				<div class="col12">
+					<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
+							'checked' => $this->getData(['config', 'autoUpdate']),
+							'help' => 'Vérification quotidienne des mises à jour.'
+						]); ?>
+				</div>				
+				<div class="col12">				
+					<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
+						'checked' => $this->getData(['config', 'maintenance'])
+					]); ?>	
+				</div>										
 			</div>
 			<div class="row">
-				<div class="col4 offset2">
+				<div class="col5 offset1">
 					<?php echo template::button('configManageButton', [
 						'href' => helper::baseUrl() . 'config/backup',
 						'value' => 'Sauvegarder'
 					]); ?>
 				</div>	
-				<div class="col4 offset1">
+				<div class="col5">
 					<?php echo template::button('configManageButton', [
 						'href' => helper::baseUrl() . 'config/restore',
 						'value' => 'Restaurer'
@@ -226,16 +224,16 @@
 		<div class="block">
 			<h4>Référencement</h4>
 			<div class="row">
-				<div class="col5">	
+				<div class="col5 offset1">	
 					<?php echo template::button('configMetaImage', [
 					'href' => helper::baseUrl() . 'config/configMetaImage',
 					'value' => 'Rafraîchir la capture d\'écran Open Graph'
 					]); ?>
 				</div>
-				<div class="col5 offset2">
+				<div class="col5">
 					<?php echo template::button('configSiteMap', [
 						'href' => helper::baseUrl() . 'config/generateFiles',
-						'value' => 'Générer sitemap.xml et robots.txt'
+						'value' => 'Rafraîchir sitemap.xml et robots.txt'
 					]); ?>
 				</div>
 			</div>

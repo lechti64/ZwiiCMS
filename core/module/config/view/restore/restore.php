@@ -22,7 +22,7 @@
 			<div class="row">		
 				<div class="col8 offset2">		
 					<?php echo template::file('configRestoreImportFile', [
-						'label' => 'Sélectionnez une archive au format ZIP',
+						'label' => 'Sélectionnez une sauvegarde au format ZIP',
 						'type' => 2,
 						'help' => 'L\'archive a été déposée dans le gestionaire de fichiers. Les archives inférieures à la version 9 ne sont pas acceptées.'
 					]); ?>
@@ -30,7 +30,7 @@
 			</div>			
 			<div class="row">
 				<div class="col8 offset2">
-					<?php echo template::checkbox('configRestoreImportUser', true, 'Préserver utilisateurs installés', [
+					<?php echo template::checkbox('configRestoreImportUser', true, 'Préserver les comptes des utilisateurs', [
 						'checked' => true,
 						'help' => 'Les données des utilisateurs installés ne sont pas écrasés par la restauration quand l\'option est active.'
 					]); ?>		
