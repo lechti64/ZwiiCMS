@@ -1,43 +1,27 @@
-<?php echo template::formOpen('configManageForm'); ?>
+<?php echo template::formOpen('configRestoreForm'); ?>
 <div class="row">
 	<div class="col2">
-	<?php echo template::button('configManageBack', [
+	<?php echo template::button('configRestoreBack', [
 			'class' => 'buttonGrey',
 			'href' => helper::baseUrl() . 'config',
 			'ico' => 'left',
 			'value' => 'Retour'
 		]); ?>
 	</div>
+	<div class="col2 offset8">
+		<?php echo template::submit('configRestoreSubmit',[
+			'value' => 'Restaurer',
+			'ico' => 'upload'
+		]); ?>
+	</div>
 </div>
 <div class="row">
-	<div class="col6">
-		<div class="block">
-			<h4>Sauvegarde totale du site</h4>	
-			<div class="row">
-				<div class="col10 offset1">
-					<?php echo template::button('configBackupButton', [
-						'href' => helper::baseUrl() . 'config/backup',
-						'value' => 'Générer et télécharger <br />les données de site',
-					]); ?>
-				</div>					
-			</div>
-			<div class="row">
-				<div class="col10">
-					<?php echo template::checkbox('configBackupOption', true, 'Inclure le contenu du gestionnaire de fichiers', [
-						'checked' => true,
-						'disabled' => true,
-						'help' => 'Cette option n\'est pas recommandée lorsque le contenu du gestionnaire de fichiers est très volumineux.'
-					]); ?>		
-				</div>	
-			</div>
-		</div>				
-	</div>	
-	<div class="col6">
+	<div class="col12">
 		<div class="block">
 			<h4>Restauration ou transfert d'un site</h4>
 			<div class="row">		
-				<div class="col12">		
-					<?php echo template::file('configManageImportFile', [
+				<div class="col8 offset2">		
+					<?php echo template::file('configRestoreImportFile', [
 						'label' => 'Sélectionnez une archive au format ZIP',
 						'type' => 2,
 						'help' => 'L\'archive a été déposée dans le gestionaire de fichiers. Les archives inférieures à la version 9 ne sont pas acceptées.'
@@ -45,17 +29,12 @@
 				</div>
 			</div>			
 			<div class="row">
-				<div class="col8">
-					<?php echo template::checkbox('configManageImportUser', true, 'Préserver utilisateurs installés', [
+				<div class="col8 offset2">
+					<?php echo template::checkbox('configRestoreImportUser', true, 'Préserver utilisateurs installés', [
 						'checked' => true,
 						'help' => 'Les données des utilisateurs installés ne sont pas écrasés par la restauration quand l\'option est active.'
 					]); ?>		
 				</div>	
-				<div class="col4">
-					<?php echo template::submit('configManageSubmit',[
-						'value' => 'Restaurer'
-					]); ?>
-				</div>
 			</div>			
 		</div>
 	</div>		
@@ -77,7 +56,7 @@
 						$baseUrlValue = $this->getData(['core', 'baseUrl']);
 						$buttonClass = (helper::baseUrl(true,false) !== $this->getData(['core', 'baseUrl']) ) ? '' : 'disabled';
 					}
-					echo template::text('configManageBaseURLToConvert', [
+					echo template::text('configRestoreBaseURLToConvert', [
 						'label' => 'Dossier d\'installation de l\'archive' ,
 						'value' => $baseUrlValue,
 						'readonly' => true,
@@ -85,7 +64,7 @@
 					]); ?>
 				</div>
 				<div class="col5">
-					<?php echo template::text('configManageCurrentURL', [
+					<?php echo template::text('configRestoreCurrentURL', [
 						'label' => 'Dossier du site actuel',
 						'value' => helper::baseUrl(true,false),
 						'readonly' => true,
@@ -93,7 +72,7 @@
 					]); ?>
 				</div>			
 				<div class="col2 verticalAlignBottom">
-					<?php echo template::button('configManageUpdateBaseURLButton', [
+					<?php echo template::button('configRestoreUpdateBaseURLButton', [
 						'href' => helper::baseUrl() . 'config/updateBaseUrl',
 						'class' => $buttonClass,
 						'value' => 'convertir'
@@ -103,5 +82,4 @@
 		</div>
 	</div>
 </div>
-
 <?php echo template::formClose(); ?>

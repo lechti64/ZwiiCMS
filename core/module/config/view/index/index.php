@@ -7,14 +7,8 @@
 			'ico' => 'home',
 			'value' => 'Accueil'
 		]); ?>
-	</div>
-	<div class="col3 offset5">
-		<?php echo template::button('configManageButton', [
-			'href' => helper::baseUrl() . 'config/manage',
-			'value' => 'Sauvegarder / Restaurer'
-		]); ?>
-	</div>		
-	<div class="col2">
+	</div>	
+	<div class="col2 offset8">
 		<?php echo template::submit('configSubmit'); ?>
 	</div>
 </div>
@@ -116,29 +110,23 @@
 				</div>	
 			</div>	
 			<div class="row">
-			<div class="col6">
-					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
-							'checked' => $this->getData(['config', 'autoBackup']),
-							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Le contenu du gestionnaire de fichiers n\'est pas sauvegardé.</p>'
+				<div class="col6">				
+					<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
+						'checked' => $this->getData(['config', 'maintenance'])
 					]); ?>	
-				</div>
+				</div>	
 				<div class="col6">				
 					<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
 							'checked' => $this->getData(['config', 'autoUpdate']),
 							'help' => 'Vérification quotidienne des mises à jour.'
 						]); ?>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col6">				
-					<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
-						'checked' => $this->getData(['config', 'maintenance'])
-					]); ?>	
-				</div>			
+				</div>		
 			</div>
 		</div>
 	</div>	
-	<div class="col6">
+</div>
+<div class="row">
+	<div class="col12">
 		<div class="block">
 			<h4>Réseaux sociaux</h4>
 			<div class="row">
@@ -205,6 +193,35 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="row">
+	<div class="col6">
+		<div class="block">
+			<h4>Sauvegarde et restauration</h4>	
+			<div class="row">
+				<div class="col12">
+					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
+							'checked' => $this->getData(['config', 'autoBackup']),
+							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Le contenu du gestionnaire de fichiers n\'est pas sauvegardé.</p>'
+					]); ?>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col4 offset2">
+					<?php echo template::button('configManageButton', [
+						'href' => helper::baseUrl() . 'config/backup',
+						'value' => 'Sauvegarder'
+					]); ?>
+				</div>	
+				<div class="col4 offset1">
+					<?php echo template::button('configManageButton', [
+						'href' => helper::baseUrl() . 'config/restore',
+						'value' => 'Restaurer'
+					]); ?>
+				</div>	
+			</div>
+		</div>
+	</div>
 	<div class="col6">
 		<div class="block">
 			<h4>Référencement</h4>
@@ -224,13 +241,11 @@
 			</div>
 			<div class="row">
 				<div class="col12 textAlignCenter">
-					<img src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
+					<img id="metaImage" src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
 				</div>
 			</div>
 		</div>	
 	</div>
-</div>
-<div class="row">
 	<div class="col12">
 		<?php 							
 		// Lire le contenu des fichiers de script
