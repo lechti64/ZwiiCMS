@@ -985,7 +985,7 @@ label {
 	background: #F5F5F5;
 	text-align: center;
 	float: right;
-  	min-height :100%;
+  	min-height: 100%;
 }
 .inputFile:hover {
 	text-decoration: none;
