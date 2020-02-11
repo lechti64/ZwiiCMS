@@ -21,6 +21,16 @@
 - Modification :
     - Chargement paresseux des images.
     
+## version 9.2.20
+- Corrections : 
+    - Footer / Texte personnalisé : problème d'alignement des colonnes
+    - Variable non déclarée dans main.php provoquant un warning
+
+## version 9.2.19
+- Corrections :
+    - CSS : marge bouton InputDelete.
+    - Texte de la page des mentions légales du site d'exemple.
+
 ## version 9.2.18
 - Corrections :
     - Conformité balise p dans span (footer).

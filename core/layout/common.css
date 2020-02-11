@@ -643,6 +643,12 @@ footer #footerbody > div {
 	font-size: inherit;
 }
 
+/* Corrige le problème des <br> dans les col du texte personnalisé */
+#footerText div {
+	display: inline-flex;
+	float: left;	
+}
+
 /* Conserve le pied de page sur une ligne */
 @media (max-width: 768px) {
 	body > footer {
@@ -982,8 +988,7 @@ label {
 	background: #F5F5F5;
 	text-align: center;
 	float: right;
-	min-height :100%;
-	
+  	min-height: 100%;
 }
 .inputFile:hover {
 	text-decoration: none;
