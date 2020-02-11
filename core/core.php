@@ -33,7 +33,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.2.20';
+	const ZWII_VERSION = '9.2.21';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2075,7 +2075,7 @@ class layout extends common {
 	 */
 	public function showFooterText() {
 		if($footerText = $this->getData(['theme', 'footer', 'text']) OR $this->getUrl(0) === 'theme') {
-			echo '<div id="footerText">' . nl2br($footerText) . '</div>';
+			echo '<div id="footerText">' . $footerText . '</div>';
 		}
 	}
 
