@@ -1058,11 +1058,18 @@ class common {
 			$this->setData(['core', 'baseUrl', helper::baseUrl(true,false) ]);
 			$this->setData(['core', 'dataVersion', 9216]);
 		}
+		// Version 9.2.21
+		if($this->getData(['core', 'dataVersion']) < 9221) {
+			// Utile pour l'installation d'un backup sur un autre serveur
+			// mais avec la réécriture d'URM
+			$this->setData(['theme', 'body', 'toTopbackgroundColor', 'rgba(33, 34, 35, .8)' ]);
+			$this->setData(['theme', 'body', 'toTopColor', 'rgba(255, 255, 255, 1)' ]);
+			$this->setData(['core', 'dataVersion', 9221]);
+		}			
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
 			$this->setData(['config', 'faviconDark','faviconDark.ico']);
-			$this->setData(['core', 'dataVersion', 10000]);
-		}		
+			$this->setData(['core', 'dataVersion', 10000]);	
 	}
 }
 
@@ -1146,6 +1153,8 @@ class core extends common {
 			if($themeBodyImage = $this->getData(['theme', 'body', 'image'])) {
 				$css .= 'body{background-image:url("../file/source/' . $themeBodyImage . '");background-position:' . $this->getData(['theme', 'body', 'imagePosition']) . ';background-attachment:' . $this->getData(['theme', 'body', 'imageAttachment']) . ';background-size:' . $this->getData(['theme', 'body', 'imageSize']) . ';background-repeat:' . $this->getData(['theme', 'body', 'imageRepeat']) . '}';
 			}
+			// Icône BacktoTop
+			$css .= '#backToTop {background-color:' .$this->getData(['theme', 'body', 'toTopbackgroundColor']). ';color:'.$this->getData(['theme', 'body', 'toTopColor']).';}';
 			// Site
 			$colors = helper::colorVariants($this->getData(['theme', 'link', 'textColor']));
 			$css .= 'a{color:' . $colors['normal'] . '}';
@@ -1709,7 +1718,7 @@ class layout extends common {
 	 */
 	public function showFooterText() {
 		if($footerText = $this->getData(['theme', 'footer', 'text']) OR $this->getUrl(0) === 'theme') {
-			echo '<div id="footerText">' . nl2br($footerText) . '</div>';
+			echo '<div id="footerText">' . $footerText . '</div>';
 		}
 	}
 

@@ -15,14 +15,36 @@
 	<div class="row">
 		<div class="col6">
 			<div class="block">
-				<h4>Couleur</h4>
-				<?php echo template::text('themeBodyBackgroundColor', [
-					'class' => 'colorPicker',
-					'help' => 'Le curseur horizontal règle le niveau de transparence.',
-					'label' => 'Fond',
-					'value' => $this->getData(['theme', 'body', 'backgroundColor'])
-				]); ?>
-			</div>
+				<h4>Couleurs</h4>
+				<div class="row">
+					<div class="col12">
+						<?php echo template::text('themeBodyBackgroundColor', [
+							'class' => 'colorPicker',
+							'help' => 'Couleur visible en l\'absence d\'une image.<br />Le curseur horizontal règle le niveau de transparence.',
+							'label' => 'Arrière-plan',
+							'value' => $this->getData(['theme', 'body', 'backgroundColor'])
+						]); ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col6">
+						<?php echo template::text('themeBodyToTopBackground', [
+							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence.',
+							'label' => 'Fond icône haut de page',
+							'value' => $this->getData(['theme', 'body', 'toTopbackgroundColor'])
+						]); ?>
+					</div>
+					<div class="col6">
+						<?php echo template::text('themeBodyToTopColor', [
+							'class' => 'colorPicker',
+							'help' => 'Le curseur horizontal règle le niveau de transparence.',
+							'label' => 'Icône haut de page',
+							'value' => $this->getData(['theme', 'body', 'toTopColor'])
+						]); ?>					
+					</div>
+				</div>
+			</div>			
 		</div>
 		<div class="col6">
 			<div class="block">

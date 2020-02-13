@@ -67,7 +67,9 @@ class init extends common {
 				'imageAttachment' => 'scroll',
 				'imageRepeat' => 'no-repeat',
 				'imagePosition' => 'top center',
-				'imageSize' => 'auto'
+				'imageSize' => 'auto',
+				'toTopbackgroundColor' => 'rgba(33, 34, 35, .8)',
+				'toTopColor' => 'rgba(255, 255, 255, 1)'
 			],
 			'button' => [
 				'backgroundColor' => 'rgba(32, 59, 82, 1)'
