@@ -743,8 +743,10 @@ footer #footerSocials .zwiico-github:hover {
 	right: 30px;
 	bottom: 50px;
 	padding: 13px 16px 16px;
+	/*
+	Paramétré dans le thème (9.2.21)
 	background: rgba(33, 34, 35, .8);
-	color: #FFF;
+	color: #FFF;*/
 	cursor: pointer;
 	display: none;
 	border-radius: 50%;
