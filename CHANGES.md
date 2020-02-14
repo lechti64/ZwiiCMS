@@ -1,5 +1,11 @@
 # Changelog
 
+## version 9.2.21
+- Correction :
+    - Footer / Texte personnalisé : suppression des sauts de ligne et de paragraphe.
+- Modification : 
+    - Thème / Body, couleurs de l'icône retour en haut de page perso personnalisables.
+
 ## version 9.2.20
 - Corrections : 
     - Footer / Texte personnalisé : problème d'alignement des colonnes
