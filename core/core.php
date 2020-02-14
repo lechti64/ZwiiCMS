@@ -1,8 +1,7 @@
 <?php
 
 /**
- * This file is part of Zwii.
- *
+ * This file is part of Zwii. *
  * For full copyright and license information, please see the LICENSE
  * file that was distributed with this source code.
  *
@@ -10,7 +9,7 @@
  * @copyright Copyright (C) 2008-2018, Rémi Jean
  * @license GNU General Public License, version 3
  * @author Frédéric Tempez <frederic.tempez@outlook.com>
- * @copyright Copyright (C) 2018-2019, Frédéric Tempez
+ * @copyright Copyright (C) 2018-2020, Frédéric Tempez
  * @link http://zwiicms.com/
  */
 
@@ -34,7 +33,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.2.15';
+	const ZWII_VERSION = '9.2.21';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -529,8 +528,14 @@ class common {
 		// Save config core page module et user
 		// 5 premières clés principales
 		// Trois tentatives
+		$core = ['core' => $this->getData(['core'])];
+		$config = ['config' => $this->getData(['config'])];
+		$page = ['page' => $this->getData(['page'])];
+		$module = ['module' => $this->getData(['module'])];
+		$user = ['user' => $this->getData(['user'])];
+
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents(self::DATA_DIR.'core.json', json_encode(array_slice($this->getData(),0,5)) , LOCK_EX) !== false) {
+			if(file_put_contents(self::DATA_DIR.'core.json', json_encode( $core + $config + $page + $module + $user ) , LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
@@ -539,8 +544,9 @@ class common {
 		// Save theme
 		// dernière clé principale
 		// Trois tentatives
+		$theme = ['theme' => $this->getData(['theme'])];		
 		for($i = 0; $i < 3; $i++) {
-			if(file_put_contents(self::DATA_DIR.'theme.json', json_encode(array_slice($this->getData(),5)), LOCK_EX) !== false) {
+			if(file_put_contents(self::DATA_DIR.'theme.json', json_encode($theme), LOCK_EX) !== false) {
 				break;
 			}
 			// Pause de 10 millisecondes
@@ -551,7 +557,7 @@ class common {
 	/**
 	 * Génére un fichier json avec la liste des pages
 	 * 
-*/
+    */
     public function pages2Json() {
     // Sauve la liste des pages pour TinyMCE
 		$parents = [];
@@ -770,7 +776,7 @@ class common {
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
-}
+	}
 
 	/**
 	 * Insert des données
@@ -927,15 +933,15 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 9100) {
 			$this->setData(['theme','footer','displayVersion', true ]);
 			$this->setData(['theme','footer','displaySiteMap', true ]);
-			$this->setData(['theme','footer','displayCopyright', true ]);
+			$this->setData(['theme','footer','displayCopyright', false ]);
 			$this->setData(['core', 'dataVersion', 9100]);
 			$this->saveData();
 		}
 		// Version 9.2.00
 		if($this->getData(['core', 'dataVersion']) < 9200) {
 			$this->setData(['theme','footer','template', 3 ]);
-			$this->setData(['theme','footer','margin', true ]);
-			$this->setData(['theme','footer','displayLegal', false ]);
+			$this->setData(['theme','footer','margin', true ]);			
+			$this->setData(['theme','footer','displayLegal', !empty($this->getdata(['config','legalPageId'])) ]);
 			$this->setData(['theme','footer','displaySearch', false ]);
 			$this->setData(['config','social','githubId', '' ]);
 			$this->setData(['core', 'dataVersion', 9200]);
@@ -962,7 +968,7 @@ class common {
 		if($this->getData(['core', 'dataVersion']) < 9210) {
 			
 			// Utile pour l'installation d'un backup sur un autre serveur
-			$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
+			//$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);
 
 			// Suppression d'une option de hauteur de la bannière
 			if ($this->getData(['theme', 'header','height']) === 'none') {
@@ -974,6 +980,8 @@ class common {
 
 			// Préparation des clés de légendes pour la v10
 			// Construire une liste plate de parents et d'enfants
+
+			$pageList = array();
 			
 			foreach ($this->getHierarchy(null,null,null) as $parentKey=>$parentValue) {
 				$pageList [] = $parentKey;
@@ -1024,6 +1032,30 @@ class common {
 			$this->setData(['core', 'dataVersion', 9212]);
 			$this->saveData();
 		}
+		// Version 9.2.15
+		if($this->getData(['core', 'dataVersion']) < 9215) {
+			// Données de la barre de langue dans le menu
+			$this->setData(['theme','menu','burgerTitle',true]);
+			$this->setData(['core', 'dataVersion', 9215]);
+			$this->saveData();
+		}
+		// Version 9.2.16
+		if($this->getData(['core', 'dataVersion']) < 9216) {
+			// Utile pour l'installation d'un backup sur un autre serveur
+			// mais avec la réécriture d'URM
+			$this->setData(['core', 'baseUrl', helper::baseUrl(true,false) ]);
+			$this->setData(['core', 'dataVersion', 9216]);
+			$this->saveData();
+		}
+		// Version 9.2.21
+		if($this->getData(['core', 'dataVersion']) < 9221) {
+			// Utile pour l'installation d'un backup sur un autre serveur
+			// mais avec la réécriture d'URM
+			$this->setData(['theme', 'body', 'toTopbackgroundColor', 'rgba(33, 34, 35, .8)' ]);
+			$this->setData(['theme', 'body', 'toTopColor', 'rgba(255, 255, 255, 1)' ]);
+			$this->setData(['core', 'dataVersion', 9221]);
+			$this->saveData();
+		}		
 	}
 }
 
@@ -1106,6 +1138,8 @@ class core extends common {
 			if($themeBodyImage = $this->getData(['theme', 'body', 'image'])) {
 				$css .= 'body{background-image:url("../file/source/' . $themeBodyImage . '");background-position:' . $this->getData(['theme', 'body', 'imagePosition']) . ';background-attachment:' . $this->getData(['theme', 'body', 'imageAttachment']) . ';background-size:' . $this->getData(['theme', 'body', 'imageSize']) . ';background-repeat:' . $this->getData(['theme', 'body', 'imageRepeat']) . '}';
 			}
+			// Icône BacktoTop
+			$css .= '#backToTop {background-color:' .$this->getData(['theme', 'body', 'toTopbackgroundColor']). ';color:'.$this->getData(['theme', 'body', 'toTopColor']).';}';
 			// Site
 			$colors = helper::colorVariants($this->getData(['theme', 'link', 'textColor']));
 			$css .= 'a{color:' . $colors['normal'] . '}';
@@ -1159,8 +1193,9 @@ class core extends common {
 				$css .= 'nav a.active{background-color:' . $this->getData(['theme','menu','activeColor']) . '}';
 				$color2 = helper::colorVariants($this->getData(['theme', 'menu', 'textColor']));
 				$css .= 'nav a.active{color:' .  $color2['text'] . '}';
-			}				
-			$css .= 'nav a.active {border-radius:' . $this->getData(['theme', 'menu', 'radius']) . '}'; 
+			}		
+			$css .= 'nav #burgerText{color:' .  $colors['text'] . '}';		
+			$css .= 'nav .navLevel1 a.active {border-radius:' . $this->getData(['theme', 'menu', 'radius']) . '}'; 
 			$css .= '#menu{text-align:' . $this->getData(['theme', 'menu', 'textAlign']) . '}';
 			if($this->getData(['theme', 'menu', 'margin'])) {
 				if(
@@ -1181,14 +1216,20 @@ class core extends common {
 			} else {
 				$css .= 'footer{padding:0}';
 			}
-			$css .= 'footer span{color:' . $this->getData(['theme', 'footer', 'textColor']) . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'footer', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'footer', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'footer', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'footer', 'textTransform']) . '}';
+			$css .= 'footer span, #footerText > p {color:' . $this->getData(['theme', 'footer', 'textColor']) . ';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'footer', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'footer', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'footer', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'footer', 'textTransform']) . '}';
 			$css .= 'footer{background-color:' . $colors['normal'] . ';color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
 			$css .= 'footer a{color:' . $this->getData(['theme', 'footer', 'textColor']) . '}';
 			$css .= 'footer #footersite > div {margin:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
 			$css .= 'footer #footerbody > div {margin:' . $this->getData(['theme', 'footer', 'height']) . ' 0}';
 			$css .= '#footerSocials{text-align:' . $this->getData(['theme', 'footer', 'socialsAlign']) . '}';
-			$css .= '#footerText{text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
+			$css .= '#footerText > p {text-align:' . $this->getData(['theme', 'footer', 'textAlign']) . '}';
 			$css .= '#footerCopyright{text-align:' . $this->getData(['theme', 'footer', 'copyrightAlign']) . '}';
+			// Marge supplémentaire lorsque le pied de page est fixe 
+			if ( $this->getData(['theme', 'footer', 'fixed']) === true &&
+				 $this->getData(['theme', 'footer', 'position']) === 'body') {
+				$css .= "@media (min-width: 769px) { #site {margin-bottom: 100px;} }";
+				$css .= "@media (max-width: 768px) { #site {margin-bottom: 150px;} }";
+			}
 			// Enregistre la personnalisation
 			file_put_contents(self::DATA_DIR.'theme.css', $css);
 		}
@@ -1278,17 +1319,17 @@ class core extends common {
 		}
 
 		// Breadcrumb
-
 		$title = $this->getData(['page', $this->getUrl(0), 'title']);
 		if (!empty($this->getData(['page', $this->getUrl(0), 'parentPageId'])) &&
 				$this->getData(['page', $this->getUrl(0), 'breadCrumb'])) {
 				$title = '<a href="' . helper::baseUrl() . 
 						$this->getData(['page', $this->getUrl(0), 'parentPageId']) .
 						'">' .
-						ucfirst($this->getData(['page', $this->getUrl(0), 'parentPageId'])) .
+						ucfirst($this->getData(['page',$this->getData(['page', $this->getUrl(0), 'parentPageId']), 'title'])) .
 						'</a> &#8250; '.
 						$this->getData(['page', $this->getUrl(0), 'title']);			
 		} 
+		
 		// Importe la page
 		if(
 			$this->getData(['page', $this->getUrl(0)]) !== null
@@ -2045,7 +2086,7 @@ class layout extends common {
 	 */
 	public function showFooterText() {
 		if($footerText = $this->getData(['theme', 'footer', 'text']) OR $this->getUrl(0) === 'theme') {
-			echo '<div id="footerText"><span id="footerFontText">' . nl2br($footerText) . '</span></div>';
+			echo '<div id="footerText">' . $footerText . '</div>';
 		}
 	}
 
@@ -2135,8 +2176,12 @@ class layout extends common {
 					break;
 				case 'youtubeId':
 					$socialUrl = 'https://www.youtube.com/channel/';
-					$title = 'YouTube';
+					$title = 'Chaîne YouTube';
 					break;
+				case 'youtubeUserId':
+					$socialUrl = 'https://www.youtube.com/user/';
+					$title = 'YouTube';
+					break;					
 				case 'githubId':
 					$socialUrl = 'https://www.github.com/';
 					$title = 'Github';
@@ -2145,7 +2190,7 @@ class layout extends common {
 					$socialUrl = '';
 			}
 			if($socialId !== '') {
-				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" data-tippy-content="' . $title . '">' . template::ico(substr($socialName, 0, -2)) . '</a>';
+				$socials .= '<a href="' . $socialUrl . $socialId . '" onclick="window.open(this.href);return false" data-tippy-content="' . $title . '">' . template::ico(substr(str_replace('User','',$socialName), 0, -2)) . '</a>';
 			}
 		}
 		if($socials !== '') {

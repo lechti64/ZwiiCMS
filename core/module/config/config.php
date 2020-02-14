@@ -199,18 +199,34 @@ class config extends common {
 	 * Sauvegarde des données
 	 */
 	public function backup() {
-
 		// Creation du ZIP
-		$fileName = date('Y-m-d-h-i-s', time()) . '.zip';
+		$fileName = str_replace('/','',helper::baseUrl(false,false)) . '-'. date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();
-		if($zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE) === TRUE){
-			foreach(configHelper::scanDir('site/') as $file) {
-				$zip->addFile($file);
-			}
+		$zip->open(self::TEMP_DIR . $fileName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+		$directory = 'site/';
+		$filter = array('backup','tmp');
+		$files =  new RecursiveIteratorIterator(
+			new RecursiveCallbackFilterIterator(
+			  new RecursiveDirectoryIterator(
+				$directory,
+				RecursiveDirectoryIterator::SKIP_DOTS
+			  ),
+			  function ($fileInfo, $key, $iterator) use ($filter) {
+				return $fileInfo->isFile() || !in_array($fileInfo->getBaseName(), $filter);
+			  }
+			)
+		  );
+		foreach ($files as $name => $file) 	{
+			if (!$file->isDir()) 	{
+				$filePath = $file->getRealPath();
+				$relativePath = substr($filePath, strlen(realpath($directory)) + 1);
+				$zip->addFile($filePath, $relativePath);
+			} 
+			
 		}
 		$zip->close();
 		// Téléchargement du ZIP
-		header('Content-Transfer-Encoding: binary');
+		header('Content-Type: application/zip');
 		header('Content-Disposition: attachment; filename="' . $fileName . '"');
 		header('Content-Length: ' . filesize(self::TEMP_DIR . $fileName));
 		readfile(self::TEMP_DIR . $fileName);
@@ -263,11 +279,6 @@ class config extends common {
 	public function index() {
 		// Soumission du formulaire
 		if($this->isPost()) {
-			if ($this->getInput('configLegalCheck', helper::FILTER_BOOLEAN) === true ) {
-				$legalPageId = $this->getInput('configLegalPageId', helper::FILTER_ID);
-			} else {
-				$legalPageId = '';
-			}
 			$this->setData([
 				'config',
 				[
@@ -285,6 +296,7 @@ class config extends common {
 						'pinterestId' => $this->getInput('configSocialPinterestId'),
 						'twitterId' => $this->getInput('configSocialTwitterId'),
 						'youtubeId' => $this->getInput('configSocialYoutubeId'),
+						'youtubeUserId' => $this->getInput('configSocialYoutubeUserId'),
 						'githubId' => $this->getInput('configSocialGithubId')
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
@@ -331,6 +343,8 @@ class config extends common {
 					// Change le statut de la réécriture d'URL (pour le helper::baseUrl() de la redirection)
 					helper::$rewriteStatus = false;
 				}
+				// Met à jour la baseUrl
+				$this->setData(['core', 'baseUrl', helper::baseUrl(true,false) ]);
 			}
 			// Générer robots.txt et sitemap
 			$this->generateFiles();
