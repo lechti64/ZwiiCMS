@@ -390,7 +390,7 @@ class config extends common {
 					'legalPageId' => $this->getInput('configLegalPageId'),
 					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),					
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
-					'disablei18n' => sizeof($this->i18nInstalled() ) === 1 ? $this->getInput('configdisablei18n', helper::FILTER_BOOLEAN) : false,
+					'disablei18n' => $this->getInput('configdisablei18n', helper::FILTER_BOOLEAN),
 					'googTransLogo' => $this->getInput('configdGoogTransLogo', helper::FILTER_BOOLEAN),
 					'i18n' => $this->getData(['config','i18n']),
 					'autoUpdate' => $this->getInput('configAutoUpdate', helper::FILTER_BOOLEAN)

@@ -100,8 +100,8 @@
 			<div class="row">
 				<div class="col6">						
 					<?php echo template::checkbox('configdisablei18n', true, 'Désactivation de la gestion des langues', [
-						'checked' => $this->getData(['config', 'disablei18n']),
-						'disabled' => sizeof($this->i18nInstalled() ) > 1 ? true : false,
+						'checked' => (bool) (sizeof($this->i18nInstalled() ) === 1) ? $this->getData(['config', 'disablei18n']) : false,
+						'disabled' => (bool) (sizeof($this->i18nInstalled() ) === 1) ? false : true,
 						'help' => 'L\'option n\'est pas modifiable  quand une langue est installée.'
 					]); ?>	
 				</div>

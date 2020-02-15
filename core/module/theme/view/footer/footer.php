@@ -30,7 +30,7 @@
                                 'class' => 'colorPicker',
                                 'label' => 'Texte',
                                 'value' => $this->getData(['theme', 'footer', 'textColor'])
-                        ); ?>
+                        ]); ?>
                 </div>
             </div>
         </div>

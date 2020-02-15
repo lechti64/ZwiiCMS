@@ -18,8 +18,10 @@
 var configdisablei18nDOM = $("#configdisablei18n");
 configdisablei18nDOM.on("change", function() {
     if ($("input[name=configdisablei18n]").is(':checked')) {
-        $(".zwiico-flag").css('display','none');
+        $(".zwiico-flag").css("display","none");
+        $(".zwiico-flag").parents("li").css("display","none");
     } else {
         $(".zwiico-flag").css('display','block');
+        $(".zwiico-flag").parents("li").css("display","inline");
     }
 });
