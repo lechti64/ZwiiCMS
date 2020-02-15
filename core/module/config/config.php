@@ -20,7 +20,7 @@ class config extends common {
 		'generateFiles' => self::GROUP_ADMIN,
 		'updateRobots' => self::GROUP_ADMIN,
 		'index' => self::GROUP_ADMIN,
-		'manage' => self::GROUP_ADMIN,
+		'restore' => self::GROUP_ADMIN,
 		'updateBaseUrl' => self::GROUP_ADMIN
 	];
 	
@@ -200,21 +200,29 @@ class config extends common {
 	 * Sauvegarde des données
 	 */
 	public function backup() {
-		// Creation du ZIP		
-		$filter = $this->getInput('configBackupOption',helper::FILTER_BOOLEAN) === true ? ['backup','tmp'] : ['backup','tmp','file'];
-		$fileName = helper::autoBackup(self::TEMP_DIR,$filter);
+		// Soumission du formulaire
+		if($this->isPost()) {
+			// Creation du ZIP		
+			$filter = $this->getInput('configBackupOption',helper::FILTER_BOOLEAN) === true ? ['backup','tmp'] : ['backup','tmp','file'];
+			$fileName = helper::autoBackup(self::TEMP_DIR,$filter);
 
-		// Téléchargement du ZIP		
-		header('Content-Type: application/zip');
-		header('Content-Disposition: attachment; filename="' . $fileName . '"');
-		header('Content-Length: ' . filesize(self::TEMP_DIR . $fileName));
-		readfile(self::TEMP_DIR . $fileName);
-		// Valeurs en sortie
-		$this->addOutput([
-			'display' => self::DISPLAY_RAW
-		]);
-		unlink(self::TEMP_DIR . $fileName);
-		exit();		
+			// Téléchargement du ZIP		
+			header('Content-Type: application/zip');
+			header('Content-Disposition: attachment; filename="' . $fileName . '"');
+			header('Content-Length: ' . filesize(self::TEMP_DIR . $fileName));
+			readfile(self::TEMP_DIR . $fileName);
+			// Valeurs en sortie
+			$this->addOutput([
+				'display' => self::DISPLAY_RAW
+			]);
+			unlink(self::TEMP_DIR . $fileName);
+		} else {
+			// Valeurs en sortie
+			$this->addOutput([
+				'title' => 'Télécharger une archive du site',
+				'view' => 'backup'
+			]);
+		}
 	}
 
 
@@ -256,11 +264,11 @@ class config extends common {
      /**
 	 * Procédure d'importation
 	 */
-	public function manage() {
+	public function restore() {
 		// Soumission du formulaire
 		if($this->isPost()) {
-			//if ($this->getInput('configManageImportFile'))
-			$fileZip = $this->getInput('configManageImportFile');
+			//if ($this->getInput('configrestoreImportFile'))
+			$fileZip = $this->getInput('configRestoreImportFile');
 			$file_parts = pathinfo($fileZip);
 			$folder = date('Y-m-d-h-i-s', time());
 			$zip = new ZipArchive();
@@ -268,7 +276,7 @@ class config extends common {
 				// Valeurs en sortie erreur
 				$this->addOutput([
 					'notification' => 'Le fichier n\'est pas une archive valide',
-					'redirect' => helper::baseUrl() . 'config/manage',
+					'redirect' => helper::baseUrl() . 'config/restore',
 					'state' => false
 					]);
 			}
@@ -277,7 +285,7 @@ class config extends common {
 				// Valeurs en sortie erreur
 				$this->addOutput([
 					'notification' => 'Impossible de lire l\'archive',
-					'redirect' => helper::baseUrl() . 'config/manage',
+					'redirect' => helper::baseUrl() . 'config/restore',
 					'state' => false
 					]);
 			}
@@ -302,14 +310,14 @@ class config extends common {
 					// V10 valide user et config
 					$version = '10';
 					// Option active, les users sont stockées
-					if ($this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ) { 
+					if ($this->getInput('configRestoreImportUser', helper::FILTER_BOOLEAN) === true ) { 
 						$users = $this->getData(['user']); 
 					}						
 			} else { // Version invalide
 				// Valeurs en sortie erreur
 				$this->addOutput([
 					'notification' => 'Cette archive n\'est pas une sauvegarde valide',
-					'redirect' => helper::baseUrl() . 'config/manage',
+					'redirect' => helper::baseUrl() . 'config/restore',
 					'state' => false
 				]);
 			}
@@ -317,7 +325,7 @@ class config extends common {
 			// Préserver les comptes des utilisateurs d'une version 9 si option cochée
 			// Positionnement d'une  variable de session lue au constructeur
 			if ($version === '9') {
-				$_SESSION['KEEP_USERS'] = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN);
+				$_SESSION['KEEP_USERS'] = $this->getInput('configRestoreImportUser', helper::FILTER_BOOLEAN);
 			}
 
 			// Extraire le zip
@@ -328,13 +336,13 @@ class config extends common {
 			// Restaurer les users originaux d'une v10 si option cochée
 			if (!empty($users) &&
 				$version === '10' &&
-				$this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true) { 
+				$this->getInput('configRestoreImportUser', helper::FILTER_BOOLEAN) === true) { 
 					$this->setData(['user',$users]);					
 			}		
 	
 			// Message de notification
 			$notification  = $success === true ? 'Sauvegarde importée avec succès' : 'Erreur d\'extraction'; 
-			$redirect = $this->getInput('configManageImportUser', helper::FILTER_BOOLEAN) === true ?  helper::baseUrl() . 'config/manage' : helper::baseUrl() . 'user/login/';
+			$redirect = $this->getInput('configRestoreImportUser', helper::FILTER_BOOLEAN) === true ?  helper::baseUrl() . 'config/restore' : helper::baseUrl() . 'user/login/';
 			// Valeurs en sortie erreur	
 			$this->addOutput([
 				'notification' => $notification,
@@ -345,8 +353,8 @@ class config extends common {
 	
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Sauvegarder / Restaurer',
-			'view' => 'manage'
+			'title' => 'Restaurer une sauvegarde',
+			'view' => 'restore'
 		]);
 	}
 
@@ -481,7 +489,7 @@ class config extends common {
 		// Valeurs en sortie
 		$this->addOutput([
 			'notification' => $success ? 'Conversion effectuée' : 'Aucune conversion',
-			'redirect' => helper::baseUrl() . 'config/manage',
+			'redirect' => helper::baseUrl() . 'config/restore',
 			'state' => $success ? true : false
 		]);
 	}

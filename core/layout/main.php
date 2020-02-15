@@ -235,7 +235,9 @@
 					$this->getData(['theme', 'footer', 'position']) === 'hide'
 					AND $this->getUrl(0) === 'theme'
 				)
-			) {		$position = 'site';	} else {
+			) 	{	$position = 'site';
+					$positionFixed = '';	
+			  	} else {
 					$position = 'body';
 					if ( $this->getData(['theme', 'footer', 'fixed']) === true) {
 						$positionFixed = 'footerbodyFixed';

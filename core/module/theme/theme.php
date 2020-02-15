@@ -280,7 +280,9 @@ class theme extends common {
 				'imageAttachment' => $this->getInput('themeBodyImageAttachment'),
 				'imagePosition' => $this->getInput('themeBodyImagePosition'),
 				'imageRepeat' => $this->getInput('themeBodyImageRepeat'),
-				'imageSize' => $this->getInput('themeBodyImageSize')
+				'imageSize' => $this->getInput('themeBodyImageSize'),
+				'toTopbackgroundColor' => $this->getInput('themeBodyToTopBackground'),
+				'toTopColor' => $this->getInput('themeBodyToTopColor')
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
