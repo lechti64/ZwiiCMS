@@ -130,8 +130,8 @@ class helper {
 	 * Renvoie le numéro de version de Zwii est en ligne
 	 * @return string
 	 */
-	public static function getOnlineVersion() {
-		return (@file_get_contents('http://zwiicms.com/update/version'));
+	public static function getOnlineVersion($channel = '') {
+		return (@file_get_contents('http://zwiicms.com/update' . $channel . '/version'));
 	}
 
 
@@ -139,8 +139,8 @@ class helper {
 	 * Check si une nouvelle version de Zwii est disponible
 	 * @return bool
 	 */
-	public static function checkNewVersion() {
-		if($version = helper::getOnlineVersion()) {
+	public static function checkNewVersion($channel = '') {
+		if($version = helper::getOnlineVersion($channel)) {
 			//return (trim($version) !== common::ZWII_VERSION);
 			return ((version_compare(common::ZWII_VERSION,$version)) === -1);
 		}

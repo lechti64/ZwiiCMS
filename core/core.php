@@ -33,7 +33,12 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.033.dev';
+	const ZWII_VERSION = '10.0.034.dev';
+
+	// Laisser vide pour la version officiel
+	// v10 version 10
+	// v11 verison 11
+	const ZWII_UPDATE_CHANNEL = 'v10';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -2246,7 +2251,7 @@ class layout extends common {
 				if( $this->getData(['config','autoUpdate']) &&
 					$lastAutoUpdate > $this->getData(['core','lastAutoUpdate']) + 86400 ) {
 					$this->setData(['core','lastAutoUpdate',$lastAutoUpdate]);
-				    if ( helper::checkNewVersion()  ) {
+				    if ( helper::checkNewVersion(common::ZWII_UPDATE_CHANNEL)  ) {
 						$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
 					}
 				}	
