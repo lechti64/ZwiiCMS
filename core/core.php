@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '11.0.147.dev';
+	const ZWII_VERSION = '11.0.148.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1308,6 +1308,7 @@ class common {
 		}
 		// Version 11.0.00
 		if($this->getData(['core', 'dataVersion']) < 11000) {
+			$this->setdata(['config','disablei18n', false]);			
 			$this->setdata(['config','i18n','fr','flagFolder','core/vendor/i18n/png/']);
 			$this->setdata(['config','i18n','fr','autoTranslate', true]);
 			$this->setData(['core', 'dataVersion', 11000]);	
