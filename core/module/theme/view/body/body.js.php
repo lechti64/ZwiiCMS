@@ -24,6 +24,8 @@ $("input, select").on("change", function() {
 	else {
 		css += "body{background-image:none}";
 	}
+	css += '#backToTop {background-color:'  + $("#themeBodyToTopBackground").val() + ';color:' + $("#themeBodyToTopColor").val() + ';}';
+	
 	// Ajout du css au DOM
 	$("#themePreview").remove();
 	$("<style>")

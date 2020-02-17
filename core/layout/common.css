@@ -743,8 +743,10 @@ footer #footerSocials .zwiico-github:hover {
 	right: 30px;
 	bottom: 50px;
 	padding: 13px 16px 16px;
+	/*
+	Paramétré dans le thème (9.2.21)
 	background: rgba(33, 34, 35, .8);
-	color: #FFF;
+	color: #FFF;*/
 	cursor: pointer;
 	display: none;
 	border-radius: 50%;
@@ -973,13 +975,13 @@ label {
 	width: 88%;
 }
 .inputFileDelete {
-	display: inline-block;
+	display: block;
 	width: 10%;
 	padding: 10px 0;
 	background: #F5F5F5;
 	text-align: center;
-	/*float: right;*/
-  min-height :100%;
+	float: right;
+  	min-height: 100%;
 }
 .inputFile:hover {
 	text-decoration: none;

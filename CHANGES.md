@@ -1,5 +1,21 @@
 # Changelog
 
+## version 9.2.21
+- Correction :
+    - Footer / Texte personnalisé : suppression des sauts de ligne et de paragraphe.
+- Modification : 
+    - Thème / Body, couleurs de l'icône retour en haut de page perso personnalisables.
+
+## version 9.2.20
+- Corrections : 
+    - Footer / Texte personnalisé : problème d'alignement des colonnes
+    - Variable non déclarée dans main.php provoquant un warning
+
+## version 9.2.19
+- Corrections :
+    - CSS : marge bouton InputDelete.
+    - Texte de la page des mentions légales du site d'exemple.
+
 ## version 9.2.18
 - Corrections :
     - Conformité balise p dans span (footer).
