@@ -33,7 +33,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.032.dev';
+	const ZWII_VERSION = '10.0.033.dev';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -383,6 +383,14 @@ class common {
 			}
 			return $tempData;
 		}
+	}
+
+	/*
+	* Dummy function
+	* Compatibilité avec v8 et v9
+	*/
+	public function saveData() {
+		return;
 	}
 
 	/**
