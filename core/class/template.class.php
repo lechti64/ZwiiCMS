@@ -543,7 +543,7 @@ class template {
             $html .=   $attributes['fonts'] === true ? sprintf(
                     '<option value="%s"%s style="font-family: %s;">%s</option>',
                     $value,
-                    $attributes['selected'] == str_replace('+',' ',$value) ? ' selected' : '', // Double == pour ignorer le type de variable car $_POST change les types en string
+                    $attributes['selected'] == $value ? ' selected' : '', // Double == pour ignorer le type de variable car $_POST change les types en string
                     str_replace('+',' ',$value),
                     $text
                 ) : sprintf(
