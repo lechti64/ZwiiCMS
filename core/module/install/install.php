@@ -126,10 +126,9 @@ class install extends common {
 			// Préparation
 			case 1:
 				$success = true;
-				// Copie du fichier de données
-				copy(self::DATA_DIR.'core.json', self::BACKUP_DIR . date('Y-m-d', time()) . '-core-update.json');
-				copy(self::DATA_DIR.'theme.json', self::BACKUP_DIR . date('Y-m-d', time()) . '-theme-update.json');
-				// Nettoyage des fichiers temporaires
+				// Backup du dossier Data
+				helper::autoBackup(self::BACKUP_DIR,['backup','tmp','file']);
+				// Nettoyage des fichiers d'installation précédents
 				if(file_exists(self::TEMP_DIR.'update.tar.gz')) {
 					$success = unlink(self::TEMP_DIR.'update.tar.gz');
 				}
