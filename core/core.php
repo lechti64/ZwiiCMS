@@ -500,6 +500,14 @@ class common {
 		}
 	}
 
+	/*
+	* Dummy function
+	* Compatibilité des modules avec v8 et v9
+	*/
+	public function saveData() {
+		return;
+	}
+
 	/**
 	 * Accède à la liste des pages parents et de leurs enfants
 	 * @param int $parentId Id de la page parent
