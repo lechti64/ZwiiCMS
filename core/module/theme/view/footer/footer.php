@@ -103,7 +103,8 @@
                 <div class="col3">
                     <?php echo template::select('themeFooterFont', $module::$fonts, [
 							'label' => 'Police',
-							'selected' => $this->getData(['theme', 'footer', 'font'])
+							'selected' => $this->getData(['theme', 'footer', 'font']),
+							'fonts' => true
 						]); ?>
                 </div>
                 <div class="col3">
