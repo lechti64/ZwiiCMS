@@ -507,11 +507,18 @@ class template {
             'id' => $nameId,
             'label' => '',
             'name' => $nameId,
-            'selected' => ''
+            'selected' => '',
+            'fonts' => false
         ], $attributes);
         // Sauvegarde des données en cas d'erreur
         if($attributes['before'] AND array_key_exists($attributes['id'], common::$inputBefore)) {
             $attributes['selected'] = common::$inputBefore[$attributes['id']];
+        }
+        // Liste des polices à intégrer
+        if ($attributes['fonts'] === true) {
+            foreach ($options as $fontId) {
+                echo "<link href='http://fonts.googleapis.com/css?family=".str_replace(" ", "+", $fontId)."' rel='stylesheet' type='text/css'>\n";
+            }
         }
         // Début du wrapper
         $html = '<div id="' . $attributes['id'] . 'Wrapper" class="inputWrapper ' . $attributes['classWrapper'] . '">';
@@ -533,12 +540,18 @@ class template {
             helper::sprintAttributes($attributes)
         );
         foreach($options as $value => $text) {
-            $html .= sprintf(
-                '<option value="%s"%s>%s</option>',
-                $value,
-                $attributes['selected'] == $value ? ' selected' : '', // Double == pour ignorer le type de variable car $_POST change les types en string
-                $text
-            );
+            $html .=   $attributes['fonts'] === true ? sprintf(
+                    '<option value="%s"%s style="font-family: %s;">%s</option>',
+                    $value,
+                    $attributes['selected'] == $value ? ' selected' : '', // Double == pour ignorer le type de variable car $_POST change les types en string
+                    str_replace('+',' ',$value),
+                    $text
+                ) : sprintf(
+                    '<option value="%s"%s>%s</option>',
+                        $value,
+                        $attributes['selected'] == $value ? ' selected' : '', // Double == pour ignorer le type de variable car $_POST change les types en string
+                        $text
+                );
         }
         // Fin sélection
         $html .= '</select>';
