@@ -72,7 +72,8 @@
 					<div class="col6">
 						<?php echo template::select('themeTextFont', $module::$fonts, [
 							'label' => 'Police',
-							'selected' => $this->getData(['theme', 'text', 'font'])
+							'selected' => $this->getData(['theme', 'text', 'font']),
+							'fonts' => true
 						]); ?>
 					</div>				
 					<div class="col6">
@@ -92,7 +93,8 @@
 					<div class="col4">
 						<?php echo template::select('themeTitleFont', $module::$fonts, [
 							'label' => 'Police',
-							'selected' => $this->getData(['theme', 'title', 'font'])
+							'selected' => $this->getData(['theme', 'title', 'font']),
+							'fonts' => true
 						]); ?>
 					</div>
 					<div class="col4">

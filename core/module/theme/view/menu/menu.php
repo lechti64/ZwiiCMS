@@ -90,7 +90,8 @@
                     <div class="col6">
                         <?php echo template::select('themeMenuFont', $module::$fonts, [
                                     'label' => 'Police',
-                                    'selected' => $this->getData(['theme', 'menu', 'font'])
+                                    'selected' => $this->getData(['theme', 'menu', 'font']),
+                                    'fonts' => true
                                 ]); ?>
                     </div>
                     <div class="col6">
