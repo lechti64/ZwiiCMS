@@ -1,5 +1,9 @@
 # Changelog
 
+## version 9.2.22
+- Modification :
+    - Aperçu de la police dans les sélecteurs.
+
 ## version 9.2.21
 - Correction :
     - Footer / Texte personnalisé : suppression des sauts de ligne et de paragraphe.

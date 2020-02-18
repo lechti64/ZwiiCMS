@@ -33,7 +33,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '9.2.21';
+	const ZWII_VERSION = '9.2.22';
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -3157,58 +3157,71 @@ class template {
 	 * @param array $attributes Attributs ($key => $value)
 	 * @return string
 	 */
-	public static function select($nameId, array $options, array $attributes = []) {
-		// Attributs par défaut
-		$attributes = array_merge([
-			'before' => true,
-			'class' => '',
-			'classWrapper' => '',
-			'noDirty' => false,
-			'disabled' => false,
-			'help' => '',
-			'id' => $nameId,
-			'label' => '',
-			'name' => $nameId,
-			'selected' => ''
-		], $attributes);
-		// Sauvegarde des données en cas d'erreur
-		if($attributes['before'] AND array_key_exists($attributes['id'], common::$inputBefore)) {
-			$attributes['selected'] = common::$inputBefore[$attributes['id']];
-		}
-		// Début du wrapper
-		$html = '<div id="' . $attributes['id'] . 'Wrapper" class="inputWrapper ' . $attributes['classWrapper'] . '">';
-		// Label
-		if($attributes['label']) {
-			$html .= self::label($attributes['id'], $attributes['label'], [
-				'help' => $attributes['help']
-			]);
-		}
-		// Notice
-		$notice = '';
-		if(array_key_exists($attributes['id'], common::$inputNotices)) {
-			$notice = common::$inputNotices[$attributes['id']];
-			$attributes['class'] .= ' notice';
-		}
-		$html .= self::notice($attributes['id'], $notice);
-		// Début sélection
-		$html .= sprintf('<select %s>',
-			helper::sprintAttributes($attributes)
-		);
-		foreach($options as $value => $text) {
-			$html .= sprintf(
-				'<option value="%s"%s>%s</option>',
-				$value,
-				$attributes['selected'] == $value ? ' selected' : '', // Double == pour ignorer le type de variable car $_POST change les types en string
-				$text
-			);
-		}
-		// Fin sélection
-		$html .= '</select>';
-		// Fin du wrapper
-		$html .= '</div>';
-		// Retourne le html
-		return $html;
-	}
+    public static function select($nameId, array $options, array $attributes = []) {
+        // Attributs par défaut
+        $attributes = array_merge([
+            'before' => true,
+            'class' => '',
+            'classWrapper' => '',
+            'noDirty' => false,
+            'disabled' => false,
+            'help' => '',
+            'id' => $nameId,
+            'label' => '',
+            'name' => $nameId,
+            'selected' => '',
+            'fonts' => false
+        ], $attributes);
+        // Sauvegarde des données en cas d'erreur
+        if($attributes['before'] AND array_key_exists($attributes['id'], common::$inputBefore)) {
+            $attributes['selected'] = common::$inputBefore[$attributes['id']];
+        }
+        // Liste des polices à intégrer
+        if ($attributes['fonts'] === true) {
+            foreach ($options as $fontId) {
+                echo "<link href='http://fonts.googleapis.com/css?family=".str_replace(" ", "+", $fontId)."' rel='stylesheet' type='text/css'>\n";
+            }
+        }
+        // Début du wrapper
+        $html = '<div id="' . $attributes['id'] . 'Wrapper" class="inputWrapper ' . $attributes['classWrapper'] . '">';
+        // Label
+        if($attributes['label']) {
+            $html .= self::label($attributes['id'], $attributes['label'], [
+                'help' => $attributes['help']
+            ]);
+        }
+        // Notice
+        $notice = '';
+        if(array_key_exists($attributes['id'], common::$inputNotices)) {
+            $notice = common::$inputNotices[$attributes['id']];
+            $attributes['class'] .= ' notice';
+        }
+        $html .= self::notice($attributes['id'], $notice);
+        // Début sélection
+        $html .= sprintf('<select %s>',
+            helper::sprintAttributes($attributes)
+        );
+        foreach($options as $value => $text) {
+            $html .=   $attributes['fonts'] === true ? sprintf(
+                    '<option value="%s"%s style="font-family:%s;">%s</option>',
+                    $value,
+                    $attributes['selected'] == $value ? ' selected' : '', // Double == pour ignorer le type de variable car $_POST change les types en string
+                    str_replace('+',' ',$value),
+                    $text
+                ) : sprintf(
+                    '<option value="%s"%s>%s</option>',
+                        $value,
+                        $attributes['selected'] == $value ? ' selected' : '', // Double == pour ignorer le type de variable car $_POST change les types en string
+                        $text
+                );
+        }
+        // Fin sélection
+        $html .= '</select>';
+        // Fin du wrapper
+        $html .= '</div>';
+        // Retourne le html
+        return $html;
+    }
 
 	/**
 	 * Crée une bulle de dialogue
