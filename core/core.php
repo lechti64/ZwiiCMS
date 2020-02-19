@@ -34,6 +34,7 @@ class common {
 
 	// Numéro de version 
 	const ZWII_VERSION = '9.2.22';
+	const ZWII_UPDATE_CHANNEL = "v9";
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -1700,8 +1701,8 @@ class helper {
 	 * Renvoie le numéro de version de Zwii est en ligne
 	 * @return string
 	 */
-	public static function getOnlineVersion() {
-		return (@file_get_contents('http://zwiicms.com/update/version'));
+	public static function getOnlineVersion($channel = common::ZWII_UPDATE_CHANNEL) {
+		return (@file_get_contents('http://zwiicms.com/update/'. $channel . '/version'));
 	}
 
 
@@ -1709,8 +1710,8 @@ class helper {
 	 * Check si une nouvelle version de Zwii est disponible
 	 * @return bool
 	 */
-	public static function checkNewVersion() {
-		if($version = helper::getOnlineVersion()) {
+	public static function checkNewVersion($channel = common::ZWII_UPDATE_CHANNEL) {
+		if($version = helper::getOnlineVersion($channel)) {
 			//return (trim($version) !== common::ZWII_VERSION);
 			return ((version_compare(common::ZWII_VERSION,$version)) === -1);
 		}
@@ -2581,8 +2582,8 @@ class layout extends common {
 				if( $this->getData(['config','autoUpdate']) &&
 					$lastAutoUpdate > $this->getData(['core','lastAutoUpdate']) + 86400 ) {
 					$this->setData(['core','lastAutoUpdate',$lastAutoUpdate]);
-				    if ( helper::checkNewVersion()  ) {
-						$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
+				    if ( helper::checkNewVersion(common::ZWII_UPDATE_CHANNEL)  ) {
+						$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion(common::ZWII_UPDATE_CHANNEL) .'">' . template::ico('update colorRed') . '</a></li>';
 					}
 				}	
 			}
