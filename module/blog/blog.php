@@ -395,6 +395,7 @@ class blog extends common {
 		// Liste des articles
 		else {
 			// Ids des articles par ordre de publication
+			echo '<pre>';
 			$articleIdsPublishedOns = helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'publishedOn', 'SORT_DESC');
 			$articleIdsStates = helper::arrayCollumn($this->getData(['module', $this->getUrl(0)]), 'state', 'SORT_DESC');
 			$articleIds = [];
@@ -403,6 +404,8 @@ class blog extends common {
 					$articleIds[] = $articleId;
 				}
 			}
+			var_dump($articleIds);
+			die();			
 			// Pagination
 			$pagination = helper::pagination($articleIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
 			// Liste des pages

@@ -235,12 +235,10 @@ class review extends common {
 		if($this->isPost()) {
 
 			// Crée le commentaire
-			$this->setData(['module', $this->getUrl(0), 'ratings', [
-				'rateId ' => uniqid(),
+			$this->setData(['module', $this->getUrl(0), 'ratings', uniqid(), [
 				'rateGrade' => $this->getInput('ratingsGrades', helper::FILTER_INT, true),
-				'comment' => $this->getInput('ratingsComment', helper::FILTER_STRING_LONG, true),				
-				'comment' => $this->getInput('ratingsComment', helper::FILTER_STRING_LONG, true),				
-				'publishedOn' => time(),				
+				'comment' => $this->getInput('ratingsComment', helper::FILTER_STRING_LONG, true),						
+				'publishedOn' => time()
 			]]);
 			$this->saveData();
 			// Envoi d'une notification aux administrateurs
@@ -281,21 +279,23 @@ class review extends common {
 			$this->addOutput([
 				'showBarEditButton' => true,
 				'title' => $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'title']),
-				'view' => 'article'
+				'view' => 'index'
 			]);
 		} // Listes des notes
 		else {
 			// Ids des articles par ordre de publication
-
-			$ratingsIds = helper::arrayCollumn($this->getData(['module', $this->getUrl(0),'ratingss']), 'publishedOn', 'SORT_DESC');
+			echo '<pre>';
+			$ratingIdsPublishedOns = helper::arrayCollumn($this->getData(['module', $this->getUrl(0),'ratings']), 'publishedOn', 'SORT_DESC');
+			var_dump($ratingIdsPublishedOns);
+			
 			// Pagination
-			$pagination = helper::pagination($ratingsIds, $this->getUrl(),$this->getData(['config','itemsperPage']));
-			// Liste des pages
-			self::$pages = $pagination['pages'];
-			// Articles en fonction de la pagination
-			for($i = $pagination['first']; $i < $pagination['last']; $i++) {
-				self::$ratings[$ratingsIds[$i]] = $this->getData(['module', $this->getUrl(0), $ratingsIds[$i]]);
+			$ratingsIds = [];
+			foreach($ratingIdsPublishedOns as $rateGrade) {
+					echo $rateGrade;				
+					$ratingIds[] = $rateGrade;
 			}
+			var_dump($ratingsIds);
+			die();
 			// Valeurs en sortie
 			$this->addOutput([
 				'showBarEditButton' => true,
