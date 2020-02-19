@@ -227,7 +227,7 @@ class install extends common {
 	 */
 	public function update() {
 		// Nouvelle version
-		self::$newVersion = file_get_contents('http://zwiicms.com/update/' . common::ZWII_UPDATE_CHANNEL . 'version');
+		self::$newVersion = file_get_contents('http://zwiicms.com/update/' . common::ZWII_UPDATE_CHANNEL . '/version');
 		// Valeurs en sortie
 		$this->addOutput([
 			'display' => self::DISPLAY_LAYOUT_LIGHT,
