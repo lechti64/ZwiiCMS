@@ -2243,8 +2243,8 @@ class layout extends common {
 				if( $this->getData(['config','autoUpdate']) &&
 					$lastAutoUpdate > $this->getData(['core','lastAutoUpdate']) + 86400 ) {
 					$this->setData(['core','lastAutoUpdate',$lastAutoUpdate]);
-				    if ( helper::checkNewVersion()  ) {
-						$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion() .'">' . template::ico('update colorRed') . '</a></li>';
+				    if ( helper::checkNewVersion(common::ZWII_UPDATE_CHANNEL)  ) {
+						$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion(common::ZWII_UPDATE_CHANNEL) .'">' . template::ico('update colorRed') . '</a></li>';
 					}
 				}	
 			}

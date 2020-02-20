@@ -22,8 +22,11 @@
     - Chargement paresseux des images.
     
 ## version 9.2.22
-- Modification :
+- Modifications :
     - Aperçu de la police dans les sélecteurs.
+    - Gestion du canal de mise à jour selon la version installée
+- Mises à jour :
+    - Configurations Code Mirror pour TinyMCE et standalone
 
 ## version 9.2.21
 - Correction :

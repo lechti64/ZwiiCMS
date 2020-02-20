@@ -1,9 +1,10 @@
 [
-	"codemirror.css",
 	"codemirror.js",
-	"mode/css.js",
-	"mode/javascript.js",
-	"mode/xml.js",
+	"codemirror.css",
+	"mode/css/css.js",
+	"mode/javascript/javascript.js",
+	"mode/xml/xml.js",
+	"modes.js",
 	"init.js",
 	"init.css"
 ]
