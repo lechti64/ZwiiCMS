@@ -3,6 +3,6 @@ tinymce.addI18n('fr_FR',{
 	'Start search': 'Rechercher',
 	'Find next': 'Chercher suiv.',
 	'Find previous': 'Chercher préc.',
-	'Replace': 'Remplacer',
-	'Replace all': 'Tout remplacer'
+	'Replace': 'Replace',
+	'Replace all': 'Replace all'
 });

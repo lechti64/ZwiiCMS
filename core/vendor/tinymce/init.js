@@ -26,16 +26,16 @@ tinymce.init({
 		indentOnInit: true, // Whether or not to indent code on init.
 		fullscreen: false,   // Default setting is false
 		path: 'codemirror', // Path to CodeMirror distribution
+		saveCursorPosition: true,    // Insert caret marker
 		config: {           // CodeMirror config object
 			mode: 'application/x-httpd-php',
 			lineNumbers: true
 		},
 		width: 800,         // Default value is 800
 		height: 500,       // Default value is 550
-		files: [          // Additional JS files to load
-			baseUrl + 'core/vendor/tinymce/mode/clike/clike.js',
-			baseUrl + 'core/vendor/tinymce/mode/php/php.js'
-		]
+		cssFiles: [
+			'theme/neat.css'
+		 ]
 	}, 
 	// Cibles de la target
 	target_list: [
