@@ -34,7 +34,7 @@ tinymce.init({
 		width: 800,         // Default value is 800
 		height: 500,       // Default value is 550
 		cssFiles: [
-			'theme/neat.css'
+			'theme/3024-day.css'
 		 ]
 	}, 
 	// Cibles de la target
