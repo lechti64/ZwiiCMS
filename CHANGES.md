@@ -517,7 +517,21 @@ Mise à jour :
 	- Normalize.css version 8.0.1
 	- Tippy version 3.3.0
 
-     
+## Version 8.5.9
+* Correction :
+    - Module Form : faille CSRF gestion data
+    - Problème empêchant la suppression d'une galerie
+* Modification : 
+    - Module Form : Bouton tout effacer
+ 
+## Version 8.5.8
+* Correction :
+    - Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
+
+## Version 8.5.7
+* Correction : 
+    - Message d'erreur ecran modification du compte
+
 ## Version 8.5.6
 * Correction : 
     - Destruction de la session au logout
