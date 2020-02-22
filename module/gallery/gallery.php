@@ -39,7 +39,7 @@ class gallery extends common {
 		// Liste des galeries
 		$galleries = $this->getData(['module', $this->getUrl(0)]);
 		if($galleries) {
-			ksort($galleries);
+			ksort($galleries,SORT_NATURAL);
 			foreach($galleries as $galleryId => $gallery) {
 				// Erreur dossier vide
 				if(is_dir($gallery['config']['directory'])) {
@@ -165,16 +165,25 @@ class gallery extends common {
 					// Supprime l'ancienne galerie
 					$this->deleteData(['module', $this->getUrl(0), $this->getUrl(2)]);
 				}
+				// légendes
 				$legends = [];
 				foreach((array) $this->getInput('legend', null) as $file => $legend) {
 					$file = str_replace('.','',$file);
 					$legends[$file] = helper::filter($legend, helper::FILTER_STRING_SHORT);
 				}
-
+				// Photo de la page de garde de l'album
+				$homePictures = [];
+				foreach((array) $this->getInput('homePicture', null) as $file => $homePicture) {
+					$homePictures[$file] = $file;
+				}
+				// Pas de sélection, retourne NULL plutôt que 0
+				// Permet de traiter aussi le cas où l'image d'album n'est pas définie.
+				$homePictures[$file] = $homePictures[$file] === 0 ? NULL : $homePictures[$file];
 				$this->setData(['module', $this->getUrl(0), $galleryId, [
 					'config' => [
 						'name' => $this->getInput('galleryEditName', helper::FILTER_STRING_SHORT, true),
-						'directory' => $this->getInput('galleryEditDirectory', helper::FILTER_STRING_SHORT, true)
+						'directory' => $this->getInput('galleryEditDirectory', helper::FILTER_STRING_SHORT, true),
+						'homePicture' => $homePictures[$file]
 					],
 					'legend' => $legends
 				]]);
@@ -193,6 +202,11 @@ class gallery extends common {
 					if($fileInfos->isDot() === false AND $fileInfos->isFile() AND @getimagesize($fileInfos->getPathname())) {
 						self::$pictures[$fileInfos->getFilename()] = [
 							$fileInfos->getFilename(),
+							template::checkbox( 'homePicture[' . $fileInfos->getFilename() . ']', true, '', [ 
+								'checked' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2),'config', 'homePicture']) === $fileInfos->getFilename() ? true : false,
+								'class' => 'homePicture'
+
+							]),	
 							template::text('legend[' . $fileInfos->getFilename() . ']', [
 								'value' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'legend', str_replace('.','',$fileInfos->getFilename())])
 							])
@@ -200,7 +214,7 @@ class gallery extends common {
 					}
 				}
 				// Tri des images par ordre alphabétique
-				ksort(self::$pictures);
+				ksort(self::$pictures,SORT_NATURAL);
 			}
 			// Valeurs en sortie
 			$this->addOutput([
@@ -226,7 +240,7 @@ class gallery extends common {
 			// La galerie existe
 			else {
 				// Images de la galerie
-				$directory = $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'config', 'directory']);
+				$directory = $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'config', 'directory']);			
 				if(is_dir($directory)) {
 					$iterator = new DirectoryIterator($directory);
 					foreach($iterator as $fileInfos) {
@@ -235,7 +249,7 @@ class gallery extends common {
 						}
 					}
 					// Tri des images par ordre alphabétique
-					ksort(self::$pictures);
+					ksort(self::$pictures,SORT_NATURAL);
 				}
 				// Affichage du template
 				if(self::$pictures) {
@@ -260,7 +274,7 @@ class gallery extends common {
 
 		}
 		// Liste des galeries
-		else {
+		else {		
 			foreach((array) $this->getData(['module', $this->getUrl(0)]) as $galleryId => $gallery) {
 				if(is_dir($gallery['config']['directory'])) {
 					$iterator = new DirectoryIterator($gallery['config']['directory']);
@@ -271,7 +285,6 @@ class gallery extends common {
 							continue(2);
 						}
 					}
-
 				}
 			}
 			// Valeurs en sortie

@@ -4,6 +4,10 @@
 - Modifications :
     - Aperçu de la police dans les sélecteurs.
     - Gestion du canal de mise à jour selon la version installée
+    - Module Blog : position des boutons d'édition de l'article au-dessus des commentaires.
+    - Module Gallery : 
+        - choix de la vignette d'album
+        - Tri ordre naturel de la galerie et des images de la galerie
 - Mises à jour :
     - Configurations Code Mirror pour TinyMCE et standalone
 

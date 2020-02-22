@@ -38,6 +38,6 @@
 		</div>
 	</div>
 	<?php if($module::$pictures): ?>
-		<?php echo template::table([4, 8], $module::$pictures, ['Image', 'Légende']); ?>
+		<?php echo template::table([4, 1, 7], $module::$pictures, ['Image', 'Album','Légende']); ?>
 	<?php endif; ?>
 <?php echo template::formClose(); ?>
