@@ -37,6 +37,7 @@
 				<div class="row">
 					<div class="col6">
 						<?php echo template::select('galleryEditOrder', $module::$order, [
+							'selected' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'config', 'order']),
 							'label' => 'Tri des images',
 							'help' => 'Les images sont triées par nom de fichier grâce à la méthode naturelle qui donne de meilleurs résultats lorsque les images sont numérotées.'
 						]); ?>	

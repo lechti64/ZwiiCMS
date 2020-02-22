@@ -221,7 +221,17 @@ class gallery extends common {
 					}
 				}
 				// Tri des images par ordre alphabétique
-				ksort(self::$pictures,SORT_NATURAL);
+				switch ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'config', 'order'])) {
+					case 'none':
+						break;
+					case 'dsc':
+						krsort(self::$pictures,SORT_NATURAL);
+						break;													
+					case 'asc':
+					default:
+						ksort(self::$pictures,SORT_NATURAL);
+						break;
+				}	
 			}
 			// Valeurs en sortie
 			$this->addOutput([
