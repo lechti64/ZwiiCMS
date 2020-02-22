@@ -221,7 +221,7 @@ class gallery extends common {
 					}
 				}
 				// Tri des images par ordre alphabétique
-				switch ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'config', 'order'])) {
+				switch ($this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'config', 'order'])) {
 					case 'none':
 						break;
 					case 'dsc':
