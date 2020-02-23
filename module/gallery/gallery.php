@@ -22,7 +22,7 @@ class gallery extends common {
 		'index' => self::GROUP_VISITOR
 	];
 
-	public static $order = [
+	public static $sort = [
 		'asc' => 'Tri alphabétique naturel',
 		'dsc' => 'Tri alphabétique naturel inverse',
 		'none' => 'Aucun tri',
@@ -58,10 +58,10 @@ class gallery extends common {
 					$gallery['config']['directory'] = '<span class="galleryConfigError">' . $gallery['config']['directory'] . ' (dossier introuvable)</span>';
 				}
 				// Met en forme le tableau
-				self::$galleries[] = [
+				self::$galleries[] = [						
 					$gallery['config']['name'],
 					$gallery['config']['directory'],
-					template::button('galleryConfigEdit' . $galleryId, [
+					template::button('galleryConfigEdit' . $galleryId , [
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $galleryId  . '/' . $_SESSION['csrf'],
 						'value' => template::ico('pencil')
 					]),
@@ -79,7 +79,8 @@ class gallery extends common {
 			$this->setData(['module', $this->getUrl(0), $galleryId, [
 				'config' => [
 					'name' => $this->getInput('galleryConfigName'),
-					'directory' => $this->getInput('galleryConfigDirectory', helper::FILTER_STRING_SHORT, true)
+					'directory' => $this->getInput('galleryConfigDirectory', helper::FILTER_STRING_SHORT, true),
+					'sort' => $this->getInput('galleryConfigSort')
 				],
 				'legend' => []
 			]]);
@@ -188,7 +189,7 @@ class gallery extends common {
 						'name' => $this->getInput('galleryEditName', helper::FILTER_STRING_SHORT, true),
 						'directory' => $this->getInput('galleryEditDirectory', helper::FILTER_STRING_SHORT, true),
 						'homePicture' => $homePictures[$file],
-						'order' => $this->getInput('galleryEditOrder')
+						'sort' => $this->getInput('galleryEditSort')
 					],
 					'legend' => $legends
 				]]);
@@ -219,7 +220,7 @@ class gallery extends common {
 					}
 				}
 				// Tri des images par ordre alphabétique
-				switch ($this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'config', 'order'])) {
+				switch ($this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'config', 'sort'])) {
 					case 'none':
 						break;
 					case 'dsc':
@@ -264,7 +265,7 @@ class gallery extends common {
 						}
 					}
 					// Tri des images par ordre alphabétique
-					switch ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'config', 'order'])) {
+					switch ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'config', 'sort'])) {
 						case 'none':
 							break;
 						case 'dsc':
