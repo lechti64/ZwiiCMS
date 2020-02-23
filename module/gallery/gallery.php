@@ -180,11 +180,9 @@ class gallery extends common {
 				// Photo de la page de garde de l'album
 				$homePictures = [];
 				foreach((array) $this->getInput('homePicture', null) as $file => $homePicture) {
-					$homePictures[$file] = $file;
+					// null : pas de variable définie (compatibilité) ou choix non effectif
+					$homePictures[$file] = $file === 0 ? null : helper::filter($file, helper::FILTER_STRING_SHORT) ;
 				}
-				// Pas de sélection, retourne NULL plutôt que 0
-				// Permet de traiter aussi le cas où l'image d'album n'est pas définie.
-				$homePictures[$file] = $homePictures[$file] === 0 ? NULL : $homePictures[$file];
 				$this->setData(['module', $this->getUrl(0), $galleryId, [
 					'config' => [
 						'name' => $this->getInput('galleryEditName', helper::FILTER_STRING_SHORT, true),
