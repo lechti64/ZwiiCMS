@@ -6,7 +6,6 @@
 			<div class="row">
 		<?php endif; ?>		
 			<div class="col6">
-			<?php var_dump($this->getData(['module', $this->getUrl(0), $galleryId, 'config', 'homePicture']));?>
 				<a
 					href="<?php echo helper::baseUrl() . $this->getUrl(0); ?>/<?php echo $galleryId; ?>"
 					class="galleryPicture"
