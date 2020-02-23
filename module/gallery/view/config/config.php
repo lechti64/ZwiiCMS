@@ -35,11 +35,19 @@
 						]); ?>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col6">
+						<?php echo template::select('galleryConfigSort', $module::$sort, [
+							'label' => 'Tri des images',
+							'help' => 'Les images sont triées par nom de fichier grâce à la méthode naturelle qui donne de meilleurs résultats lorsque les images sont numérotées.'
+						]); ?>	
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<?php if($module::$galleries): ?>
-		<?php echo template::table([4, 6, 1, 1], $module::$galleries, ['Nom', 'Dossier cible', '', '']); ?>
+	<?php echo template::table([4, 6, 1, 1], $module::$galleries, ['Nom', 'Dossier cible', '', '']); ?>
 	<?php else: ?>
 		<?php echo template::speech('Aucune galerie.'); ?>
 	<?php endif; ?>

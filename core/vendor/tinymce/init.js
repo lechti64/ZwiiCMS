@@ -32,10 +32,7 @@ tinymce.init({
 			lineNumbers: true
 		},
 		width: 800,         // Default value is 800
-		height: 500,       // Default value is 550
-		cssFiles: [
-			'theme/3024-day.css'
-		 ]
+		height: 500       // Default value is 550
 	}, 
 	// Cibles de la target
 	target_list: [
