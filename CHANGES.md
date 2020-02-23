@@ -7,7 +7,8 @@
     - Module Blog : position des boutons d'édition de l'article au-dessus des commentaires.
     - Module Gallery : 
         - choix de la vignette d'album
-        - Tri ordre naturel de la galerie et des images de la galerie
+        - Ordres de tri des images d'une galerie, ascendant, descendant ou sans 
+        - Tri, ordre naturel de la galerie et des images de la galerie
 - Mises à jour :
     - Configurations Code Mirror pour TinyMCE et standalone
 
