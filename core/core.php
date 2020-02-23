@@ -33,6 +33,7 @@ class common {
 
 	// Numéro de version 
 	const ZWII_VERSION = '11.0.149.dev';
+	const ZWII_UPDATE_CHANNEL = "v11";
 
 	public static $actions = [];
 	public static $coreModuleIds = [
