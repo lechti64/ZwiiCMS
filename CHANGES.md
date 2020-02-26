@@ -1,5 +1,13 @@
 # Changelog
 
+## version 9.2.23
+- Correction : 
+    - Fonction magic_quotes dépréciée supprimée.
+Modifications : 
+    - TinyMCE : libellé des fonctions  "Afficher dans"
+    - TinyMCE : boutons souligné et barré dans la barre d'outils.
+    - Module Form : Opion permettant d'ajouter le premier mail dans le formulaire au message de notification (Reply To) afin de répondre directement au message.
+
 ## version 9.2.22
 - Modifications :
     - Aperçu de la police dans les sélecteurs.
