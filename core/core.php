@@ -738,7 +738,7 @@ class common {
 	 * @param string $content Contenu
 	 * @return bool
 	 */
-	public function sendMail($to, $subject, $content) {
+	public function sendMail($to, $subject, $content, $replyTo = '') {
 		// Utilisation de PHPMailer version 6.0.6
 		require_once "core/vendor/phpmailer/phpmailer.php";
 		require_once "core/vendor/phpmailer/exception.php";
@@ -753,7 +753,11 @@ class common {
 			$mail->CharSet = 'UTF-8';
 			$host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
 			$mail->setFrom('no-reply@' . $host, $this->getData(['config', 'title']));
-			$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
+			if (empty($replyTo)) {
+				$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
+			} else {
+				$mail->addReplyTo($replyTo);
+			}			
 			if(is_array($to)) {
 					foreach($to as $userMail) {
 							$mail->addAddress($userMail);
@@ -1807,7 +1811,7 @@ class helper {
 				$text = filter_var($text, FILTER_SANITIZE_URL);
 				break;
 		}
-		return get_magic_quotes_gpc() ? stripslashes($text) : $text;
+		return  $text;
 	}
 
 	/**

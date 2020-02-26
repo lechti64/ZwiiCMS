@@ -1,5 +1,11 @@
 # Changelog
 
+## version 9.2.23
+- Correction : 
+    - Fonction magic_quotes dépréciée.
+Modifications : 
+    - TinyMCE : libellé des fonctions  "Afficher dans"
+
 ## version 9.2.22
 - Modifications :
     - Aperçu de la police dans les sélecteurs.
