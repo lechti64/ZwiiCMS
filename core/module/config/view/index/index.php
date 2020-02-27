@@ -185,10 +185,16 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col10 offset1">
+					<div class="col6">
 						<?php echo template::button('configExport', [
 							'href' => helper::baseUrl() . 'config/backup',
-							'value' => 'Exporter une copie du site<br>(données, thème et fichiers)'
+							'value' => 'Exporter une copie intégrale',
+						]); ?>
+					</div>
+					<div  class="col6">
+						<?php echo template::button('configUpdateOnline', [
+									'href' => helper::baseUrl() . 'config/updateOnline',
+									'value' => 'Mise à jour en ligne'
 						]); ?>
 					</div>
 				</div>

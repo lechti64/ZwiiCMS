@@ -19,8 +19,11 @@ class config extends common {
 		'configMetaImage' => self::GROUP_ADMIN,
 		'generateFiles' => self::GROUP_ADMIN,
 		'updateRobots' => self::GROUP_ADMIN,
-		'index' => self::GROUP_ADMIN
+		'index' => self::GROUP_ADMIN,
+		'updateOnline' =>  self::GROUP_ADMIN
 	];
+
+	public static $newVersion;
 	
 	public static $timezones = [
 		'Pacific/Midway'		=> '(GMT-11:00) Midway Island',
@@ -363,6 +366,20 @@ class config extends common {
 		$this->addOutput([
 			'title' => 'Configuration',
 			'view' => 'index'
+		]);
+	}
+
+	/**
+	 * Mise à jour présente
+	 */
+	public function updateOnline() {
+		// Nouvelle version
+		self::$newVersion = file_get_contents('http://zwiicms.com/update/' . common::ZWII_UPDATE_CHANNEL . '/version');
+		// Valeurs en sortie
+		$this->addOutput([
+			'notification' => 'Version installée : '. common::ZWII_VERSION  . '<br>Version de la mise à jour en ligne : '. self::$newVersion ,
+			'redirect' => helper::baseUrl() . 'config',
+			'state' => true
 		]);
 	}
 
