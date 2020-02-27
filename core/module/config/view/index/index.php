@@ -217,7 +217,13 @@
 						'value' => 'Restaurer'
 					]); ?>
 				</div>	
-			</div>
+				<div class="col10 offset1">
+					<?php echo template::button('configUpdateOnline', [
+						'href' => helper::baseUrl() . 'config/updateOnline',
+						'value' => 'Vérifier la version de la mise à jour en ligne'
+					]); ?>
+				</div>
+			</div>		
 		</div>
 	</div>
 	<div class="col6">
