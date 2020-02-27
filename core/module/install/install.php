@@ -92,7 +92,8 @@ class install extends common {
 						'Bonjour' . ' <strong>' . $userFirstname . ' ' . $userLastname . '</strong>,<br><br>' .
 						'Voici les détails de votre installation.<br><br>' .
 						'<strong>URL du site :</strong> <a href="' . helper::baseUrl(false) . '" target="_blank">' . helper::baseUrl(false) . '</a><br>' .
-						'<strong>Identifiant du compte :</strong> ' . $this->getInput('installId') . '<br>' 
+						'<strong>Identifiant du compte :</strong> ' . $this->getInput('installId') . '<br>',
+						null
 					);
 					// Stocker le dossier d'installation
 					$this->setData(['core', 'baseUrl', helper::baseUrl(false,false) ]);

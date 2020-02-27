@@ -352,7 +352,8 @@ class blog extends common {
 							$to,
 							'Nouveau commentaire',
 							'Bonjour' . ' <strong>' . $user['firstname'] . ' ' . $user['lastname'] . '</strong>,<br><br>' .
-							'Nouveau commentaire déposé sur la page "' . $this->getData(['page', $this->getUrl(0), 'title']) . '" :<br><br>'
+							'Nouveau commentaire déposé sur la page "' . $this->getData(['page', $this->getUrl(0), 'title']) . '" :<br><br>',
+							''
 						);
 						// Valeurs en sortie
 						$this->addOutput([

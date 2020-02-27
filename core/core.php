@@ -33,7 +33,7 @@ class common {
 	const TEMP_DIR = 'site/tmp/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '10.0.037.dev';
+	const ZWII_VERSION = '10.0.038.dev';
 	const ZWII_UPDATE_CHANNEL = "v10";
 
 	public static $actions = [];
@@ -771,7 +771,7 @@ class common {
 	 * @param string $content Contenu
 	 * @return bool
 	 */
-	public function sendMail($to, $subject, $content) {
+	public function sendMail($to, $subject, $content, $replyTo = '') {
 		// Utilisation de PHPMailer version 6.0.6
 		//require_once "core/vendor/phpmailer/phpmailer.php";
 		//require_once "core/vendor/phpmailer/exception.php";
@@ -786,7 +786,11 @@ class common {
 			$mail->CharSet = 'UTF-8';
 			$host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
 			$mail->setFrom('no-reply@' . $host, $this->getData(['config', 'title']));
-			$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
+			if (empty($replyTo)) {
+				$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
+			} else {
+				$mail->addReplyTo($replyTo);
+			}			
 			if(is_array($to)) {
 					foreach($to as $userMail) {
 							$mail->addAddress($userMail);
