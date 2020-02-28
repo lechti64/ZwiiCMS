@@ -992,7 +992,8 @@ class common {
 	 * @param string $content Contenu
 	 * @return bool
 	 */
-	public function sendMail($to, $subject, $content, $replyTo = '') {
+	public function sendMail($to, $subject, $content, $replyTo = null) {
+
 		// Layout
 		ob_start();
 		include 'core/layout/mail.php';
@@ -1003,7 +1004,7 @@ class common {
 			$mail->CharSet = 'UTF-8';
 			$host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
 			$mail->setFrom('no-reply@' . $host, $this->getData(['config', 'title']));
-			if (empty($replyTo)) {
+			if (is_null($replyTo)) {
 				$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
 			} else {
 				$mail->addReplyTo($replyTo);
