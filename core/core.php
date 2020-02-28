@@ -738,7 +738,7 @@ class common {
 	 * @param string $content Contenu
 	 * @return bool
 	 */
-	public function sendMail($to, $subject, $content, $replyTo = '') {
+	public function sendMail($to, $subject, $content, $replyTo = null) {
 		// Utilisation de PHPMailer version 6.0.6
 		require_once "core/vendor/phpmailer/phpmailer.php";
 		require_once "core/vendor/phpmailer/exception.php";

@@ -121,7 +121,7 @@
 					</div>
 					<div class="row">
 						<div class="col6 offset1">
-							<?php echo template::checkbox('formConfigMailReplyTo', true, 'Répondre au message de l\'expéditeur par email', [
+						<?php echo template::checkbox('formConfigMailReplyTo', true, 'Répondre à l\'expéditeur depuis le mail de notification', [
 									'checked' => (bool) $this->getData(['module', $this->getUrl(0), 'config', 'replyto']),
 									'help' => 'Cette option permet de réponse drectement à l\'expéditeur du message si celui-ci a indiqué un email valide.'
 								]); ?>		
