@@ -23,8 +23,8 @@ class gallery extends common {
 	];
 
 	public static $sort = [
-		'asc' => 'Tri alphabétique naturel',
-		'dsc' => 'Tri alphabétique naturel inverse',
+		'asc' => 'Alphabétique naturel',
+		'dsc' => 'Alphabétique naturel inverse',
 		'none' => 'Aucun tri',
 	];
 

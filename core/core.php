@@ -992,7 +992,7 @@ class common {
 	 * @param string $content Contenu
 	 * @return bool
 	 */
-	public function sendMail($to, $subject, $content) {
+	public function sendMail($to, $subject, $content, $replyTo = '') {
 		// Layout
 		ob_start();
 		include 'core/layout/mail.php';
@@ -1002,8 +1002,12 @@ class common {
 			$mail = new PHPMailer\PHPMailer\PHPMailer;
 			$mail->CharSet = 'UTF-8';
 			$host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-			$mail->setFrom('no-reply@' . $host, $this->getData(['page', 'title']));
-			$mail->addReplyTo('no-reply@' . $host, $this->getData(['page', 'title']));
+			$mail->setFrom('no-reply@' . $host, $this->getData(['config', 'title']));
+			if (empty($replyTo)) {
+				$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
+			} else {
+				$mail->addReplyTo($replyTo);
+			}			
 			if(is_array($to)) {
 					foreach($to as $userMail) {
 							$mail->addAddress($userMail);

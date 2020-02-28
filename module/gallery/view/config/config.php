@@ -14,12 +14,12 @@
 			<div class="block">
 				<h4>Nouvelle galerie</h4>
 				<div class="row">
-					<div class="col6">
+					<div class="col4">
 						<?php echo template::text('galleryConfigName', [
 							'label' => 'Nom'
 						]); ?>
 					</div>
-					<div class="col5">
+					<div class="col4">
 						<?php echo template::hidden('galleryConfigDirectoryOld', [
 							'noDirty' => true // Désactivé à cause des modifications en ajax
 						]); ?>
@@ -28,19 +28,17 @@
 							'noDirty' => true // Désactivé à cause des modifications en ajax
 						]); ?>
 					</div>
+					<div class="col3">
+						<?php echo template::select('galleryConfigSort', $module::$sort, [
+							'label' => 'Tri des images',
+							'help' => 'Les images sont triées par nom de fichier grâce à la méthode naturelle qui donne de meilleurs résultats lorsque les images sont numérotées.'
+						]); ?>	
+					</div>
 					<div class="col1 verticalAlignBottom">
 						<?php echo template::submit('galleryConfigSubmit', [
 							'ico' => '',
 							'value' => template::ico('plus')
 						]); ?>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col6">
-						<?php echo template::select('galleryConfigSort', $module::$sort, [
-							'label' => 'Tri des images',
-							'help' => 'Les images sont triées par nom de fichier grâce à la méthode naturelle qui donne de meilleurs résultats lorsque les images sont numérotées.'
-						]); ?>	
 					</div>
 				</div>
 			</div>
