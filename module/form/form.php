@@ -296,7 +296,7 @@ class form extends common {
 			// Préparation le contenu du mail
 			$data = [];
 			$content = '';
-			$replyTo = '';
+			$replyTo = null;
 			foreach($this->getData(['module', $this->getUrl(0), 'input']) as $index => $input) {
 				// Filtre la valeur
 				switch($input['type']) {
@@ -309,15 +309,17 @@ class form extends common {
 					case self::TYPE_DATETIME: 
 						$filter = helper::FILTER_STRING_SHORT; // Mettre TYPE_DATETIME pour récupérer un TIMESTAMP
 						break;
-					CASE self::TYPE_CHECKBOX: 
+					case self::TYPE_CHECKBOX: 
 						$filter = helper::FILTER_BOOLEAN;
 						break;
 					default:
 						$filter = helper::FILTER_STRING_SHORT;
 				}
 				$value = $this->getInput('formInput[' . $index . ']', $filter, $input['required']) === true ? 'X' : $this->getInput('formInput[' . $index . ']', $filter, $input['required']);
-				//  Champ reply ajouté au mail
-				if ($this->getData(['module', $this->getUrl(0), 'config', 'replyto']) === true && $filter === helper::FILTER_MAIL) {
+				//  premier chalmp email ajouté au mail en reply si option active
+				if ($this->getData(['module', $this->getUrl(0), 'config', 'replyto']) === true && 
+					$input['type'] === 'mail' && 
+					$replyTo !== null) {
 					$replyTo = $value;
 				}
 				// Préparation des données pour la création dans la base
