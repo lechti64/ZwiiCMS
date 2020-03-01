@@ -174,13 +174,13 @@
 						<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
 							'checked' => $this->getData(['config', 'maintenance'])
 						]); ?>	
-						<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
+						<?php echo template::checkbox('configAutoUpdate', true, 'Rechercher les mises à jour en ligne', [
 							'checked' => $this->getData(['config', 'autoUpdate']),
 							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par semaine.'
 						]); ?>						
-						<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique', [
+						<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatisée', [
 							'checked' => $this->getData(['config', 'autoBackup']),
-							'help' => 'Le fichier de données est copié quotidiennement dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.'
+							'help' => 'Une archive des fichiers de données est générée quotidiennement dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.'
 						]); ?>
 					</div>
 				</div>
@@ -188,13 +188,13 @@
 					<div class="col6">
 						<?php echo template::button('configExport', [
 							'href' => helper::baseUrl() . 'config/backup',
-							'value' => 'Exporter une copie intégrale',
+							'value' => 'Exporter une copie intégrale du site et des fichiers du gestionnaire',
 						]); ?>
 					</div>
 					<div  class="col6">
 						<?php echo template::button('configUpdateOnline', [
 									'href' => helper::baseUrl() . 'config/updateOnline',
-									'value' => 'Mise à jour en ligne'
+									'value' => 'Rechercher une mise à jour en ligne'
 						]); ?>
 					</div>
 				</div>
