@@ -321,7 +321,7 @@ class form extends common {
 					$input['type'] === 'mail' && 
 					$replyTo !== null) {
 					$replyTo = $value;
-				}
+                }
 				// Préparation des données pour la création dans la base
 				$data[$this->getData(['module', $this->getUrl(0), 'input', $index, 'name'])] = $value;
 				// Préparation des données pour le mail
