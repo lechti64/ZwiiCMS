@@ -366,6 +366,12 @@ class config extends common {
 	public function index() {
 		// Soumission du formulaire
 		if($this->isPost()) {
+			// Basculement en mise à jour auto
+			// Remise à 0 du compteur
+			if ($this->getData(['config','autoUpdate']) === false &&
+				$this->getInput('configAutoUpdate', helper::FILTER_BOOLEAN) === true) {
+					$this->setData(['core','lastAutoUpdate',0]);
+				}
 			$this->setData([
 				'config',
 				[
