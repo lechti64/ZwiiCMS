@@ -178,9 +178,10 @@
 							'checked' => $this->getData(['config', 'autoUpdate']),
 							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par semaine.'
 						]); ?>						
-						<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatisée', [
+					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatisée quotidienne partielle', [
 							'checked' => $this->getData(['config', 'autoBackup']),
-							'help' => 'Une archive des fichiers de données est générée quotidiennement dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.'
+							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Le contenu du gestionnaire de fichiers n\'est pas sauvegardé.</p>'
+					]); ?>	
 						]); ?>
 					</div>
 				</div>
