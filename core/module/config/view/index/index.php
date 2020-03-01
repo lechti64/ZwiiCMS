@@ -182,51 +182,55 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col6">
+	<div class="col12">
 		<div class="block">
 			<h4>Gestion et sauvegarde</h4>	
 			<div class="row">
-				<div class="col12">
+				<div class="col8">
 					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatisée quotidienne partielle', [
 							'checked' => $this->getData(['config', 'autoBackup']),
 							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Le contenu du gestionnaire de fichiers n\'est pas sauvegardé.</p>'
 					]); ?>						
 				</div>
-				<div class="col12">
-					<?php echo template::checkbox('configAutoUpdate', true, 'Rechercher les mises à jour en ligne', [
+				<div class="col2">
+					<?php echo template::button('configManageButton', [
+						'href' => helper::baseUrl() . 'config/backup',
+						'value' => 'Sauvegarde'
+					]); ?>
+				</div>	
+				<div class="col2">
+					<?php echo template::button('configManageButton', [
+						'href' => helper::baseUrl() . 'config/restore',
+						'value' => 'Restauration'
+					]); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col8">
+					<?php echo template::checkbox('configAutoUpdate', true, 'Recherche automatisée des mises à jour en ligne', [
 							'checked' => $this->getData(['config', 'autoUpdate']),
 							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par semaine.'
 						]); ?>
-				</div>				
+				</div>	
+				<div class="col4">
+					<?php echo template::button('configUpdateOnline', [
+						'href' => helper::baseUrl() . 'config/updateOnline',
+						'value' => 'Version de la mise à jour en ligne'
+					]); ?>
+				</div>			
+			</div>
+			<div class="row">
 				<div class="col12">				
 					<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
 						'checked' => $this->getData(['config', 'maintenance'])
 					]); ?>	
-				</div>										
-			</div>
-			<div class="row">
-				<div class="col5 offset1">
-					<?php echo template::button('configManageButton', [
-						'href' => helper::baseUrl() . 'config/backup',
-						'value' => 'Sauvegarder'
-					]); ?>
-				</div>	
-				<div class="col5">
-					<?php echo template::button('configManageButton', [
-						'href' => helper::baseUrl() . 'config/restore',
-						'value' => 'Restaurer'
-					]); ?>
-				</div>	
-				<div class="col10 offset1">
-					<?php echo template::button('configUpdateOnline', [
-						'href' => helper::baseUrl() . 'config/updateOnline',
-						'value' => 'Vérifier la version de la mise à jour en ligne'
-					]); ?>
-				</div>
+				</div>			
 			</div>		
 		</div>
 	</div>
-	<div class="col6">
+</div>
+<div class="row">
+	<div class="col12">
 		<div class="block">
 			<h4>Référencement</h4>
 			<div class="row">
