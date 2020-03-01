@@ -39,7 +39,7 @@ Modifications :
     - Galerie : position du champ de tri des images.
     - Mise à jour en ligne :
         - Délais entre deux vérification porté à une semaine.
-        - Réinitialisation du compte de vérification lors de l'activation de l'option.        
+        - Réinitialisation du décompte de vérification lors de l'activation de l'option.        
 
 ## version 9.2.22
 - Modifications :
