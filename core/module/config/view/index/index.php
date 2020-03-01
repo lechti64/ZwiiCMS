@@ -193,9 +193,9 @@
 					]); ?>						
 				</div>
 				<div class="col12">
-					<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
+					<?php echo template::checkbox('configAutoUpdate', true, 'Rechercher les mises à jour en ligne', [
 							'checked' => $this->getData(['config', 'autoUpdate']),
-							'help' => 'Vérification quotidienne des mises à jour.'
+							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par semaine.'
 						]); ?>
 				</div>				
 				<div class="col12">				
