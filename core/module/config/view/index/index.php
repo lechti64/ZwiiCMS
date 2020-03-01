@@ -275,7 +275,7 @@
 		</div>	
 	</div>
 </div>
-</div class="row">
+<div class="row">
 	<div class="col12">
 		<?php 							
 		// Lire le contenu des fichiers de script

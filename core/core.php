@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '11.0.150.dev';
+	const ZWII_VERSION = '11.0.151.dev';
 	const ZWII_UPDATE_CHANNEL = "v11";
 
 	public static $actions = [];
@@ -2128,15 +2128,13 @@ class layout extends common {
 			echo '<link rel="shortcut icon" media="(prefers-color-scheme:light)"  href="' . helper::baseUrl(false) . 'core/vendor/zwiico/ico/favicon.ico">';
 		}
 		// Dark scheme
-		$faviconDark = $this->getData(['config', 'faviconDark']);		
-		if($faviconDark &&
+		$faviconDark = $this->getData(['config', 'faviconDark']);	
+		if(!empty($faviconDark) &&
 		file_exists(self::FILE_DIR.'source/' . $faviconDark)
 		) {
 			echo '<link rel="shortcut icon" media="(prefers-color-scheme:dark)" href="' . helper::baseUrl(false) . self::FILE_DIR.'source/' . $faviconDark . '">';
 			echo '<script src="https://unpkg.com/favicon-switcher@1.2.0/dist/index.js" crossorigin="anonymous" type="application/javascript"></script>';
-		}  else {
-			echo '<link rel="shortcut icon" media="(prefers-color-scheme:dark)"  href="' . helper::baseUrl(false) . 'core/vendor/zwiico/ico/faviconDark.ico">';
-		}		
+		}  	
 	}
 
 
