@@ -9,6 +9,9 @@ Modifications :
     - Module Form : Opion permettant d'ajouter le premier mail dans le formulaire au message de notification (Reply To) afin de répondre directement au message.
     - Configuration du site : bouton affichant le numéro de la version en ligne.
     - Galerie : position du champ de tri des images.
+    - Mise à jour en ligne :
+        - Délais entre deux vérification porté à une semaine.
+        - Réinitialisation du compte de vérification lors de l'activation de l'option.        
 
 ## version 9.2.22
 - Modifications :
