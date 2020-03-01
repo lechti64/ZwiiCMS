@@ -236,7 +236,7 @@
 			<div class="row">
 				<div class="col6">
 					<div class="row">
-						<div class="col12">
+						<div class="col10 offset1">
 							<?php echo template::button('configMetaImage', [
 								'href' => helper::baseUrl() . 'config/configMetaImage',
 								'value' => 'Rafraîchir la capture d\'écran Open Graph'
@@ -244,7 +244,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col12">
+						<div class="col10 offset1">
 							<?php echo template::button('configSiteMap', [
 								'href' => helper::baseUrl() . 'config/generateFiles',
 								'value' => 'Rafraîchir sitemap.xml et robots.txt'
