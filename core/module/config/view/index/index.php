@@ -53,7 +53,7 @@
 					]); ?>
 				</div>
 				<div class="col6">
-					<?php echo template::select('itemsperPage', $module::$ItemsList, [
+					<?php echo template::select('configItemsperPage', $module::$ItemsList, [
 					'label' => 'Articles par page',
 					'selected' => $this->getData(['config', 'itemsperPage']),
 					'help' => 'Modules Blog et News'
@@ -285,6 +285,35 @@
 		</div>
 	</div>		
 </div>
+<div class="row">
+	<div class="col12">
+		<div class="block">
+			<h4>Paramètres réseaux</h4>
+			<div class="row">	
+				<div class="col2">
+				<?php echo template::select('configProxyType', $module::$proxyType, [
+					'label' => 'Type de proxy',
+					'selected' => $this->getData(['config', 'proxyType'])
+					]); ?>
+				</div>	
+				<div  class="col6">
+					<?php echo template::text('configProxyUrl', [
+						'label' => 'Adresse du proxy',
+						'placeholder' => 'cache.proxy.fr',
+						'value' => $this->getData(['config', 'proxyUrl'])
+					]); ?>
+				</div>
+				<div  class="col2">
+					<?php echo template::text('configProxyPort', [
+						'label' => 'Port du proxy',
+						'placeholder' => '6060',
+						'value' => $this->getData(['config', 'proxyPort'])
+					]); ?>	
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>		
 <div class="row">
 	<div class="col12">
 		<div class="block">

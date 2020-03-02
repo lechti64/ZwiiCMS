@@ -21,12 +21,16 @@ class install extends common {
 			'timezone' => 'Europe/Paris',
 			'title' => 'Zwii, votre site en quelques clics !',
 			'itemsperPage' => 10,
-			'legalPageId' => 'mentions-legales'
+			'legalPageId' => 'mentions-legales',
+			'proxyUrl' => "",
+			'proxyPort' => "",
+			'proxyType' => "tcp://"
 		],
 		'core' => [
 			'dataVersion' => 0,
 			'lastBackup' => 0,
 			'lastClearTmp' => 0,
+			'lastAutoUpdate' => 0,
 			'baseUrl' => ''
 		],
 		'page' => [

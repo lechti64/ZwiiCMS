@@ -1,6 +1,8 @@
 # Changelog
 
 ## version 9.2.23
+- Nouveauté : 
+    - Configuration du réseau : proxy http ou tcp sans authentification
 - Corrections : 
     - Fonction magic_quotes dépréciée supprimée.
     - Mise à jour en ligne :
