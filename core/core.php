@@ -1060,7 +1060,6 @@ class common {
 				}
 			}			
 			$this->setData(['core', 'dataVersion', 9210]);
-			//$this->SaveData();
 		}
 		// Version 9.2.11
 		if($this->getData(['core', 'dataVersion']) < 9211) {
@@ -1068,7 +1067,6 @@ class common {
 			$this->setData(['core', 'lastAutoUpdate', $autoUpdate]);
 			$this->setData(['config','autoUpdate', true]);
 			$this->setData(['core', 'dataVersion', 9211]);
-			//$this->SaveData();
 		}
 		// Version 9.2.12
 		if($this->getData(['core', 'dataVersion']) < 9212) {
@@ -1106,13 +1104,11 @@ class common {
 			$this->setData(['config', 'proxyPort', '' ]);
 			$this->setData(['config', 'proxyType', 'tcp://' ]);
 			$this->setData(['core', 'dataVersion', 9223]);
-			$this->saveData();
 		}	
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
 			$this->setData(['config', 'faviconDark','faviconDark.ico']);
 			$this->setData(['core', 'dataVersion', 10000]);	
-			$this->saveData();
 		}		
 	}
 }
