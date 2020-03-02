@@ -40,7 +40,7 @@
 	</div>		
 </div>
 <div class="row">
-	<div class="col6">
+	<div class="col12">
 		<div class="block">
 			<h4>Réglages</h4>
 			<div class="row">
@@ -93,10 +93,11 @@
 					]); ?>
 				</div>
 			</div>	
-
 		</div>							
 	</div>
-	<div class="col6">
+</div>
+<div class="row">
+	<div class="col12">
 		<div class="block">
 			<h4>Réseaux sociaux</h4>
 			<div class="row">
@@ -143,8 +144,7 @@
 						'label' => 'Pinterest',
 						'value' => $this->getData(['config', 'social', 'pinterestId'])
 					]); ?>
-				</div>					
-									
+				</div>									
 			</div>
 			<div class="row">			
 				<div class="col4 offset2">
@@ -193,7 +193,7 @@
 				<div class="col3">
 					<?php echo template::button('configUpdateOnline', [
 						'href' => helper::baseUrl() . 'config/updateOnline',
-						'value' => 'Mise à jour en ligne'
+						'value' => 'Version en ligne'
 					]); ?>
 				</div>			
 				<div class="col3">
