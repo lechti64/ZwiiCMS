@@ -89,7 +89,8 @@ class form extends common {
 					'user' =>  self::$listUsers [$this->getInput('formConfigUser', helper::FILTER_INT)],
 					'mail' => $this->getInput('formConfigMail') ,
 					'pageId' => $pageId,
-					'subject' => $this->getInput('formConfigSubject')
+					'subject' => $this->getInput('formConfigSubject'),
+					'replyto' => $this->getInput('formConfigMailReplyTo', helper::FILTER_BOOLEAN)
 				]
 			]);
 			// Génération des données vides
@@ -296,7 +297,7 @@ class form extends common {
 			// Préparation le contenu du mail
 			$data = [];
 			$content = '';
-			$sent = false;
+			$replyTo = null;
 			foreach($this->getData(['module', $this->getUrl(0), 'input']) as $index => $input) {
 				// Filtre la valeur
 				switch($input['type']) {
@@ -309,13 +310,19 @@ class form extends common {
 					case self::TYPE_DATETIME: 
 						$filter = helper::FILTER_STRING_SHORT; // Mettre TYPE_DATETIME pour récupérer un TIMESTAMP
 						break;
-					CASE self::TYPE_CHECKBOX: 
+					case self::TYPE_CHECKBOX: 
 						$filter = helper::FILTER_BOOLEAN;
 						break;
 					default:
 						$filter = helper::FILTER_STRING_SHORT;
 				}
 				$value = $this->getInput('formInput[' . $index . ']', $filter, $input['required']) === true ? 'X' : $this->getInput('formInput[' . $index . ']', $filter, $input['required']);
+				//  premier chalmp email ajouté au mail en reply si option active
+				if ($this->getData(['module', $this->getUrl(0), 'config', 'replyto']) === true && 
+					$input['type'] === 'mail' && 
+					$replyTo !== null) {
+					$replyTo = $value;
+                }
 				// Préparation des données pour la création dans la base
 				$data[$this->getData(['module', $this->getUrl(0), 'input', $index, 'name'])] = $value;
 				// Préparation des données pour le mail
@@ -370,6 +377,14 @@ class form extends common {
 							$content
 						);
 					}
+					// Envoi le mail
+					$sent = $this->sendMail(
+						$to,
+						$subject,
+						'Nouveau message en provenance de la page "' . $this->getData(['page', $this->getUrl(0), 'title']) . '" :<br><br>' .
+						$content,
+						$replyTo
+					);
 				}
 			}
 			// Redirection

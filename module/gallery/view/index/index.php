@@ -4,12 +4,18 @@
 	<?php foreach($module::$galleries as $galleryId => $gallery): ?>
 		<?php if($i % 2 === 1): ?>
 			<div class="row">
-		<?php endif; ?>
+		<?php endif; ?>		
 			<div class="col6">
 				<a
 					href="<?php echo helper::baseUrl() . $this->getUrl(0); ?>/<?php echo $galleryId; ?>"
 					class="galleryPicture"
-					style="background-image:url('<?php echo helper::baseUrl(false) . $module::$firstPictures[$galleryId]; ?>')"
+					style="background-image:url('<?php 					
+					if ($this->getData(['module', $this->getUrl(0), $galleryId, 'config', 'homePicture']) === null ) {
+						echo helper::baseUrl(false) . $module::$firstPictures[$galleryId];						
+					} else {
+						echo helper::baseUrl(false) . $this->getData(['module', $this->getUrl(0), $galleryId, 'config', 'directory']) . '/' . $this->getData(['module', $this->getUrl(0), $galleryId, 'config', 'homePicture']); 
+					}					
+					?>')"
 				>
 					<div class="galleryName"><?php echo $gallery['config']['name']; ?></div>
 				</a>

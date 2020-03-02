@@ -83,7 +83,7 @@
 										!empty($this->getData(['module', $this->getUrl(0), 'config', 'mail'])),
 					'help' => 'Sélectionnez au moins un groupe, un utilisateur ou saississez un email. Votre serveur doit autoriser les envois de mail.'
 				]); ?>						
-				<div id="formConfigMailOptions" class="displayNone">
+				<div id="formConfigMailOptions" class="displayNone">					
 					<div class="row">
 						<div class="col11 offset1">
 							<?php echo template::text('formConfigSubject', [
@@ -119,6 +119,14 @@
 							]); ?>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col6 offset1">
+							<?php echo template::checkbox('formConfigMailReplyTo', true, 'Répondre à l\'expéditeur depuis le mail de notification', [
+									'checked' => (bool) $this->getData(['module', $this->getUrl(0), 'config', 'replyto']),
+									'help' => 'Cette option permet de réponse drectement à l\'expéditeur du message si celui-ci a indiqué un email valide.'
+								]); ?>		
+						</div>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col6">
@@ -133,7 +141,7 @@
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'pageId'])
 						]); ?>
 					</div>
-				</div>
+				</div>	
 				<?php echo template::checkbox('formConfigCapcha', true, 'Valider un capcha afin de soumettre le formulaire.', [
 					'checked' => $this->getData(['module', $this->getUrl(0), 'config', 'capcha'])
 				]); ?>

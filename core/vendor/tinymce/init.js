@@ -20,7 +20,7 @@ tinymce.init({
 	// Plugins
 	plugins: "advlist anchor autolink autoresize autosave codemirror codesample colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor visualblocks",
 	// Contenu de la barre d'outils
-	toolbar: "restoredraft | undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | insert | code visualblocks fullscreen",
+	toolbar: "restoredraft | undo redo | styleselect | bold italic underline strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | insert | code visualblocks fullscreen",
 	// CodeMirror
 	codemirror: {
 		indentOnInit: true, // Whether or not to indent code on init.
@@ -32,10 +32,7 @@ tinymce.init({
 			lineNumbers: true
 		},
 		width: 800,         // Default value is 800
-		height: 500,       // Default value is 550
-		cssFiles: [
-			'theme/3024-day.css'
-		 ]
+		height: 500       // Default value is 550
 	}, 
 	// Cibles de la target
 	target_list: [
@@ -45,8 +42,8 @@ tinymce.init({
 	// Target pour lightbox
 	rel_list: [
 		{title: 'None', value: ''},
-		{title: 'Popup intégrée (Lity)', value: 'data-lity'},
-		{title: 'Diaporama d\'images (SimpleLightbox)', value: 'gallery'}
+		{title: 'Une popup (Lity)', value: 'data-lity'},
+		{title: 'Une galerie d\'images (SimpleLightbox)', value: 'gallery'}
 	],	
 	// Titre des image
 	image_title: true,

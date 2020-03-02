@@ -198,68 +198,84 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col6">
+	<div class="col12">
 		<div class="block">
 			<h4>Gestion et sauvegarde</h4>	
 			<div class="row">
-				<div class="col12">
-					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatique quotidienne partielle', [
+				<div class="col8">
+					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatisée quotidienne partielle', [
 							'checked' => $this->getData(['config', 'autoBackup']),
 							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Le contenu du gestionnaire de fichiers n\'est pas sauvegardé.</p>'
 					]); ?>						
 				</div>
-				<div class="col12">
-					<?php echo template::checkbox('configAutoUpdate', true, 'Mise à jour automatique', [
+				<div class="col2">
+					<?php echo template::button('configManageButton', [
+						'href' => helper::baseUrl() . 'config/backup',
+						'value' => 'Sauvegarde'
+					]); ?>
+				</div>	
+				<div class="col2">
+					<?php echo template::button('configManageButton', [
+						'href' => helper::baseUrl() . 'config/restore',
+						'value' => 'Restauration'
+					]); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col8">
+					<?php echo template::checkbox('configAutoUpdate', true, 'Recherche automatisée des mises à jour en ligne', [
 							'checked' => $this->getData(['config', 'autoUpdate']),
-							'help' => 'Vérification quotidienne des mises à jour.'
+							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par jour.'
 						]); ?>
-				</div>				
+				</div>	
+				<div class="col4">
+					<?php echo template::button('configUpdateOnline', [
+						'href' => helper::baseUrl() . 'config/updateOnline',
+						'value' => 'Version de la mise à jour en ligne'
+					]); ?>
+				</div>			
+			</div>
+			<div class="row">
 				<div class="col12">				
 					<?php echo template::checkbox('configMaintenance', true, 'Site en maintenance', [
 						'checked' => $this->getData(['config', 'maintenance'])
 					]); ?>	
-				</div>										
-			</div>
-			<div class="row">
-				<div class="col5 offset1">
-					<?php echo template::button('configManageButton', [
-						'href' => helper::baseUrl() . 'config/backup',
-						'value' => 'Sauvegarder'
-					]); ?>
-				</div>	
-				<div class="col5">
-					<?php echo template::button('configManageButton', [
-						'href' => helper::baseUrl() . 'config/restore',
-						'value' => 'Restaurer'
-					]); ?>
-				</div>	
-			</div>
+				</div>			
+			</div>		
 		</div>
 	</div>
-	<div class="col6">
+</div>
+<div class="row">
+	<div class="col12">
 		<div class="block">
 			<h4>Référencement</h4>
 			<div class="row">
-				<div class="col5 offset1">	
-					<?php echo template::button('configMetaImage', [
-					'href' => helper::baseUrl() . 'config/configMetaImage',
-					'value' => 'Rafraîchir la capture d\'écran Open Graph'
-					]); ?>
+				<div class="col6">
+					<div class="row">
+						<div class="col10 offset1">
+							<?php echo template::button('configMetaImage', [
+								'href' => helper::baseUrl() . 'config/configMetaImage',
+								'value' => 'Rafraîchir la capture d\'écran Open Graph'
+							]); ?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col10 offset1">
+							<?php echo template::button('configSiteMap', [
+								'href' => helper::baseUrl() . 'config/generateFiles',
+								'value' => 'Rafraîchir sitemap.xml et robots.txt'
+							]); ?>
+						</div>
+					</div>
 				</div>
-				<div class="col5">
-					<?php echo template::button('configSiteMap', [
-						'href' => helper::baseUrl() . 'config/generateFiles',
-						'value' => 'Rafraîchir sitemap.xml et robots.txt'
-					]); ?>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col12 textAlignCenter">
+				<div class="col6 textAlignCenter">
 					<img id="metaImage" src="<?php echo helper::baseUrl(false) . self::FILE_DIR.'source/screenshot.png';?>" data-tippy-content="Cette capture d'écran est nécessaire aux partages sur les réseaux sociaux. Elle est régénérée lorsque le fichier 'screenshot.png' est effacé du gestionnaire de fichiers." />
 				</div>
 			</div>
 		</div>	
 	</div>
+</div>
+<div class="row">
 	<div class="col12">
 		<?php 							
 		// Lire le contenu des fichiers de script

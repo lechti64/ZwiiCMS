@@ -39,7 +39,7 @@ class blog extends common {
 
 	public static $users = [];
 
-	const BLOG_VERSION = '1.8';
+	const BLOG_VERSION = '1.9';
 
 	/**
 	 * Édition
@@ -354,7 +354,8 @@ class blog extends common {
 							$to,
 							'Nouveau commentaire',
 							'Bonjour' . ' <strong>' . $user['firstname'] . ' ' . $user['lastname'] . '</strong>,<br><br>' .
-							'Nouveau commentaire déposé sur la page "' . $this->getData(['page', $this->getUrl(0), 'title']) . '" :<br><br>'
+							'Nouveau commentaire déposé sur la page "' . $this->getData(['page', $this->getUrl(0), 'title']) . '" :<br><br>',
+							''
 						);
 						// Valeurs en sortie
 						$this->addOutput([

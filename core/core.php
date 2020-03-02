@@ -33,6 +33,7 @@ class common {
 
 	// Numéro de version 
 	const ZWII_VERSION = '11.0.149.dev';
+	const ZWII_UPDATE_CHANNEL = "v11";
 
 	public static $actions = [];
 	public static $coreModuleIds = [
@@ -991,7 +992,8 @@ class common {
 	 * @param string $content Contenu
 	 * @return bool
 	 */
-	public function sendMail($to, $subject, $content) {
+	public function sendMail($to, $subject, $content, $replyTo = null) {
+
 		// Layout
 		ob_start();
 		include 'core/layout/mail.php';
@@ -1001,8 +1003,12 @@ class common {
 			$mail = new PHPMailer\PHPMailer\PHPMailer;
 			$mail->CharSet = 'UTF-8';
 			$host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-			$mail->setFrom('no-reply@' . $host, $this->getData(['page', 'title']));
-			$mail->addReplyTo('no-reply@' . $host, $this->getData(['page', 'title']));
+			$mail->setFrom('no-reply@' . $host, $this->getData(['config', 'title']));
+			if (is_null($replyTo)) {
+				$mail->addReplyTo('no-reply@' . $host, $this->getData(['config', 'title']));
+			} else {
+				$mail->addReplyTo($replyTo);
+			}			
 			if(is_array($to)) {
 					foreach($to as $userMail) {
 							$mail->addAddress($userMail);
@@ -2122,15 +2128,13 @@ class layout extends common {
 			echo '<link rel="shortcut icon" media="(prefers-color-scheme:light)"  href="' . helper::baseUrl(false) . 'core/vendor/zwiico/ico/favicon.ico">';
 		}
 		// Dark scheme
-		$faviconDark = $this->getData(['config', 'faviconDark']);		
-		if($faviconDark &&
+		$faviconDark = $this->getData(['config', 'faviconDark']);	
+		if(!empty($faviconDark) &&
 		file_exists(self::FILE_DIR.'source/' . $faviconDark)
 		) {
 			echo '<link rel="shortcut icon" media="(prefers-color-scheme:dark)" href="' . helper::baseUrl(false) . self::FILE_DIR.'source/' . $faviconDark . '">';
 			echo '<script src="https://unpkg.com/favicon-switcher@1.2.0/dist/index.js" crossorigin="anonymous" type="application/javascript"></script>';
-		}  else {
-			echo '<link rel="shortcut icon" media="(prefers-color-scheme:dark)"  href="' . helper::baseUrl(false) . 'core/vendor/zwiico/ico/faviconDark.ico">';
-		}		
+		}  	
 	}
 
 
@@ -2551,10 +2555,10 @@ class layout extends common {
 				}	
 				$rightItems .= '<li><a href="' . helper::baseUrl() . 'config" data-tippy-content="Gérer le site">' . template::ico('cog-alt') . '</a></li>';
 				// Mise à jour automatique
-				$lastAutoUpdate = mktime(0, 0, 0); 
-				if( $this->getData(['config','autoUpdate']) &&
-					$lastAutoUpdate > $this->getData(['core','lastAutoUpdate']) + 86400 ) {
-					$this->setData(['core','lastAutoUpdate',$lastAutoUpdate]);
+				$lastAutoUpdate = mktime(0, 0, 0);			
+				if( $this->getData(['config','autoUpdate']) === true &&
+					$lastAutoUpdate > $this->getData(['core','lastAutoUpdate']) + 86400 ) {	
+						$this->setData(['core','lastAutoUpdate',$lastAutoUpdate]);
 				    if ( helper::checkNewVersion(common::ZWII_UPDATE_CHANNEL)  ) {
 						$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion(common::ZWII_UPDATE_CHANNEL) .'">' . template::ico('update colorRed') . '</a></li>';
 					}

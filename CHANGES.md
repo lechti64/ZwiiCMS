@@ -28,10 +28,28 @@
 - Modification :
     - Chargement paresseux des images.
     
+## version 9.2.23
+- Corrections : 
+    - Fonction magic_quotes dépréciée supprimée.
+    - Mise à jour en ligne :
+        - problème lors du stockage de décompte
+        - réinitialisation du décompte de vérification lors de l'activation de l'option
+Modifications : 
+    - TinyMCE : libellé des fonctions  "Afficher dans"
+    - TinyMCE : boutons souligné et barré dans la barre d'outils.
+    - Module Form : Opion permettant d'ajouter le premier mail dans le formulaire au message de notification (Reply To) afin de répondre directement au message.
+    - Configuration du site : bouton affichant le numéro de la version en ligne.
+    - Galerie : position du champ de tri des images.    
+
 ## version 9.2.22
 - Modifications :
     - Aperçu de la police dans les sélecteurs.
     - Gestion du canal de mise à jour selon la version installée
+    - Module Blog : position des boutons d'édition de l'article au-dessus des commentaires.
+    - Module Gallery : 
+        - choix de la vignette d'album
+        - Ordres de tri des images d'une galerie, ascendant, descendant ou sans 
+        - Tri, ordre naturel de la galerie et des images de la galerie
 - Mises à jour :
     - Configurations Code Mirror pour TinyMCE et standalone
 
@@ -517,7 +535,21 @@ Mise à jour :
 	- Normalize.css version 8.0.1
 	- Tippy version 3.3.0
 
-     
+## Version 8.5.9
+* Correction :
+    - Module Form : faille CSRF gestion data
+    - Problème empêchant la suppression d'une galerie
+* Modification : 
+    - Module Form : Bouton tout effacer
+ 
+## Version 8.5.8
+* Correction :
+    - Erreur dans la procédure d'update suite à un ancien numéro de versions sur 4 digits
+
+## Version 8.5.7
+* Correction : 
+    - Message d'erreur ecran modification du compte
+
 ## Version 8.5.6
 * Correction : 
     - Destruction de la session au logout
