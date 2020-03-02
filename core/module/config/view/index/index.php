@@ -209,7 +209,7 @@
 				<div class="col8">
 					<?php echo template::checkbox('configAutoUpdate', true, 'Recherche automatisée des mises à jour en ligne', [
 							'checked' => $this->getData(['config', 'autoUpdate']),
-							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par semaine.'
+							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par jour.'
 						]); ?>
 				</div>	
 				<div class="col4">

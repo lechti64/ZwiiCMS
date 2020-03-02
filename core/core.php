@@ -2244,7 +2244,7 @@ class layout extends common {
 				// Mise à jour automatique
 				$lastAutoUpdate = mktime(0, 0, 0);			
 				if( $this->getData(['config','autoUpdate']) === true &&
-					$lastAutoUpdate > $this->getData(['core','lastAutoUpdate']) + 604800 ) {	
+					$lastAutoUpdate > $this->getData(['core','lastAutoUpdate']) + 86400 ) {	
 						$this->setData(['core','lastAutoUpdate',$lastAutoUpdate]);
 				    if ( helper::checkNewVersion(common::ZWII_UPDATE_CHANNEL)  ) {
 						$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion(common::ZWII_UPDATE_CHANNEL) .'">' . template::ico('update colorRed') . '</a></li>';
