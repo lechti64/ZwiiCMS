@@ -148,6 +148,11 @@ class config extends common {
 		15 => '15 articles',
 		20 => '20  articles'		
 	];
+	// Type de proxy
+	public static $proxyType = [
+		'tcp://' => 'TCP',
+		'http://' => 'HTTP'
+	];
 
 
 	public function generateFiles() {
@@ -371,6 +376,9 @@ class config extends common {
 				$this->getInput('configAutoUpdate', helper::FILTER_BOOLEAN) === true) {
 					$this->setData(['core','lastAutoUpdate',0]);
 				}
+			// Vérification du proxy
+			$proxy = $this->getData(['config','proxyType']) . $this->getData(['config','proxyUrl']) . ':' . $this->getData(['config','proxyPort']);
+				
 			$this->setData([
 				'config',
 				[
@@ -392,11 +400,14 @@ class config extends common {
 						'githubId' => $this->getInput('configSocialGithubId')
 					],
 					'timezone' => $this->getInput('configTimezone', helper::FILTER_STRING_SHORT, true),
-					'itemsperPage' => $this->getInput('itemsperPage', helper::FILTER_INT,true),
+					'itemsperPage' => $this->getInput('ConfigItemsperPage', helper::FILTER_INT,true),
 					'legalPageId' => $this->getInput('configLegalPageId'),
 					'metaDescription' => $this->getInput('configMetaDescription', helper::FILTER_STRING_LONG, true),					
 					'title' => $this->getInput('configTitle', helper::FILTER_STRING_SHORT, true),
-					'autoUpdate' => $this->getInput('configAutoUpdate', helper::FILTER_BOOLEAN)
+					'autoUpdate' => $this->getInput('configAutoUpdate', helper::FILTER_BOOLEAN),
+					'proxyType' => $this->getInput('configProxyType'),
+					'proxyUrl' => $this->getInput('configProxyUrl'),
+					'proxyPort' => $this->getInput('configProxyPort',helper::FILTER_INT)	
 				]
 			]);
 							

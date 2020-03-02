@@ -234,6 +234,25 @@ class common {
 
 		// Mise à jour des données core
 		$this->update();
+
+		// Données de proxy
+		$proxy = $this->getData(['config','proxyType']) . $this->getData(['config','proxyUrl']) . ':' . $this->getData(['config','proxyPort']);
+		if (!empty($this->getData(['config','proxyUrl'])) &&
+			!empty($this->getData(['config','proxyPort'])) )  {
+			$context = array(
+				'http' => array(
+					'proxy' => $proxy,
+					'request_fulluri' => true,
+					'verify_peer'      => false,
+					'verify_peer_name' => false,
+				),
+				"ssl"=>array(
+				"verify_peer"=>false,
+				"verify_peer_name"=>false
+				)
+			);
+			stream_context_set_default($context);
+		} 
 	}
 
 	/**
@@ -1078,12 +1097,23 @@ class common {
 			$this->setData(['theme', 'body', 'toTopbackgroundColor', 'rgba(33, 34, 35, .8)' ]);
 			$this->setData(['theme', 'body', 'toTopColor', 'rgba(255, 255, 255, 1)' ]);
 			$this->setData(['core', 'dataVersion', 9221]);
-		}			
+		}		
+		// Version 9.2.23
+		if($this->getData(['core', 'dataVersion']) < 9223) {
+			// Utile pour l'installation d'un backup sur un autre serveur
+			// mais avec la réécriture d'URM
+			$this->setData(['config', 'proxyUrl', '' ]);
+			$this->setData(['config', 'proxyPort', '' ]);
+			$this->setData(['config', 'proxyType', 'tcp://' ]);
+			$this->setData(['core', 'dataVersion', 9223]);
+			$this->saveData();
+		}	
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
 			$this->setData(['config', 'faviconDark','faviconDark.ico']);
 			$this->setData(['core', 'dataVersion', 10000]);	
-		}
+			$this->saveData();
+		}		
 	}
 }
 

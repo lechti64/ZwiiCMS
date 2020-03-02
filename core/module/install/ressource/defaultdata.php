@@ -22,11 +22,15 @@ class init extends common {
 			'legalPageId' => 'mentions-legales',
 			'metaDescription' => 'Zwii est un CMS sans base de données qui permet de créer et gérer facilement un site web sans aucune connaissance en programmation.',
 			'title' => 'Votre site en quelques clics !'
+			'proxyUrl' => "",
+			'proxyPort' => "",
+			'proxyType' => "tcp://"
 		],
 		'core' => [
 			'dataVersion' => 10000,
 			'lastBackup' => 0,
 			'lastClearTmp' => 0,
+			'lastAutoUpdate' => 0,
 			'baseUrl' => ''
 		],
 		'page' => [	
