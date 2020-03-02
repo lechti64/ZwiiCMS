@@ -16,6 +16,7 @@ class config extends common {
 
 	public static $actions = [
 		'backup' => self::GROUP_ADMIN,
+		'restore' => self::GROUP_ADMIN,
 		'configMetaImage' => self::GROUP_ADMIN,
 		'generateFiles' => self::GROUP_ADMIN,
 		'updateRobots' => self::GROUP_ADMIN,

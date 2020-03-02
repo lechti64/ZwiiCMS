@@ -193,13 +193,13 @@
 					]); ?>						
 				</div>
 				<div class="col3">
-					<?php echo template::button('configManageButton', [
+					<?php echo template::button('configManageButtonBackup', [
 						'href' => helper::baseUrl() . 'config/backup',
 						'value' => 'Sauvegarde'
 					]); ?>
 				</div>	
 				<div class="col3">
-					<?php echo template::button('configManageButton', [
+					<?php echo template::button('configManageButtonRestore', [
 						'href' => helper::baseUrl() . 'config/restore',
 						'value' => 'Restauration'
 					]); ?>
@@ -207,7 +207,7 @@
 			</div>
 			<div class="row">
 				<div class="col6">
-					<?php echo template::checkbox('configAutoUpdate', true, 'Recherche automatisée des mises à jour en ligne', [
+					<?php echo template::checkbox('configAutoUpdate', true, 'Recherche de mise à jour automatisée ', [
 							'checked' => $this->getData(['config', 'autoUpdate']),
 							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par jour.'
 						]); ?>
