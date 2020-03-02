@@ -37,8 +37,10 @@
 Modifications : 
     - TinyMCE : libellé des fonctions  "Afficher dans"
     - TinyMCE : boutons souligné et barré dans la barre d'outils.
-    - Module Form : Opion permettant d'ajouter le premier mail dans le formulaire au message de notification (Reply To) afin de répondre directement au message.
-    - Configuration du site : bouton affichant le numéro de la version en ligne.
+    - Module Form : option permettant d'ajouter le premier mail dans le formulaire au message de notification (Reply To) afin de répondre directement au message.
+    - Configuration du site : 
+        - bouton affichant le numéro de la version en ligne.
+        - uniformisation de la position des champs de saisie avec les versions suivantes.
     - Galerie : position du champ de tri des images.    
 
 ## version 9.2.22

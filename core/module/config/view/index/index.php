@@ -202,38 +202,44 @@
 		<div class="block">
 			<h4>Gestion et sauvegarde</h4>	
 			<div class="row">
-				<div class="col8">
+				<div class="col6">
 					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatisée quotidienne partielle', [
 							'checked' => $this->getData(['config', 'autoBackup']),
 							'help' => '<p>Une archive contenant le dossier /site/data est copiée dans le dossier \'site/backup\'. La sauvegarde est conservée pendant 30 jours.</p><p>Le contenu du gestionnaire de fichiers n\'est pas sauvegardé.</p>'
 					]); ?>						
 				</div>
-				<div class="col2">
-					<?php echo template::button('configManageButton', [
+				<div class="col3">
+					<?php echo template::button('configManageButtonBackup', [
 						'href' => helper::baseUrl() . 'config/backup',
 						'value' => 'Sauvegarde'
 					]); ?>
 				</div>	
-				<div class="col2">
-					<?php echo template::button('configManageButton', [
+				<div class="col3">
+					<?php echo template::button('configManageButtonRestore', [
 						'href' => helper::baseUrl() . 'config/restore',
 						'value' => 'Restauration'
 					]); ?>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col8">
-					<?php echo template::checkbox('configAutoUpdate', true, 'Recherche automatisée des mises à jour en ligne', [
+				<div class="col6">
+					<?php echo template::checkbox('configAutoUpdate', true, 'Recherche de mise à jour automatisée ', [
 							'checked' => $this->getData(['config', 'autoUpdate']),
 							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par jour.'
 						]); ?>
 				</div>	
-				<div class="col4">
+				<div class="col3">
 					<?php echo template::button('configUpdateOnline', [
 						'href' => helper::baseUrl() . 'config/updateOnline',
-						'value' => 'Version de la mise à jour en ligne'
+						'value' => 'Version en ligne'
 					]); ?>
 				</div>			
+				<div class="col3">
+					<?php echo template::button('configUpdateForced', [
+						'href' => helper::baseUrl() . 'install/update',
+						'value' => 'Mise à jour forçée'
+					]); ?>
+				</div>		
 			</div>
 			<div class="row">
 				<div class="col12">				
