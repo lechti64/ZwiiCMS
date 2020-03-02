@@ -28,11 +28,16 @@ class init extends common {
 					'autoTranslate' => true
 				]
 			]
+			'title' => 'Votre site en quelques clics !'
+			'proxyUrl' => "",
+			'proxyPort' => "",
+			'proxyType' => "tcp://"
 		],
 		'core' => [
 			'dataVersion' => 10000,
 			'lastBackup' => 0,
 			'lastClearTmp' => 0,
+			'lastAutoUpdate' => 0,
 			'baseUrl' => ''
 		],
 		'page' => [	
