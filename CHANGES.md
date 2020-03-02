@@ -1,17 +1,17 @@
 # Changelog
 
 ## version 9.2.23
-- Correction : 
+- Corrections : 
     - Fonction magic_quotes dépréciée supprimée.
+    - Mise à jour en ligne :
+        - problème lors du stockage de décompte
+        - réinitialisation du décompte de vérification lors de l'activation de l'option
 Modifications : 
     - TinyMCE : libellé des fonctions  "Afficher dans"
     - TinyMCE : boutons souligné et barré dans la barre d'outils.
     - Module Form : Opion permettant d'ajouter le premier mail dans le formulaire au message de notification (Reply To) afin de répondre directement au message.
     - Configuration du site : bouton affichant le numéro de la version en ligne.
-    - Galerie : position du champ de tri des images.
-    - Mise à jour en ligne :
-        - Délais entre deux vérification porté à une semaine.
-        - Réinitialisation du décompte de vérification lors de l'activation de l'option.        
+    - Galerie : position du champ de tri des images.    
 
 ## version 9.2.22
 - Modifications :

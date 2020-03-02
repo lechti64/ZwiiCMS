@@ -176,7 +176,7 @@
 						]); ?>	
 						<?php echo template::checkbox('configAutoUpdate', true, 'Rechercher les mises à jour en ligne', [
 							'checked' => $this->getData(['config', 'autoUpdate']),
-							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par semaine.'
+							'help' => 'Vérification de l\'existence d\'une mise à jour en ligne une fois par jour.'
 						]); ?>						
 					<?php echo template::checkbox('configAutoBackup', true, 'Sauvegarde automatisée quotidienne partielle', [
 							'checked' => $this->getData(['config', 'autoBackup']),
