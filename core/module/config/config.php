@@ -15,7 +15,7 @@
 class config extends common {
 
 	public static $actions = [
-		'backup' => self::GROUP_ADMIN,
+		'export' => self::GROUP_ADMIN,
 		'configMetaImage' => self::GROUP_ADMIN,
 		'generateFiles' => self::GROUP_ADMIN,
 		'updateRobots' => self::GROUP_ADMIN,
@@ -206,7 +206,7 @@ class config extends common {
 	/**
 	 * Sauvegarde des données
 	 */
-	public function backup() {
+	public function export() {
 		// Creation du ZIP
 		$fileName = str_replace('/','',helper::baseUrl(false,false)) . '-'. date('Y-m-d-h-i-s', time()) . '.zip';
 		$zip = new ZipArchive();

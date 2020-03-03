@@ -178,7 +178,7 @@
 				</div>
 				<div class="col4 offset1">
 					<?php echo template::button('configExport', [
-							'href' => helper::baseUrl() . 'config/backup',
+							'href' => helper::baseUrl() . 'config/export',
 							'value' => 'Exporter une copie intégrale du site',
 						]); ?>
 				</div>
