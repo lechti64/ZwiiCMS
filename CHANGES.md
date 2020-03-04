@@ -8,7 +8,7 @@
     - Mise à jour en ligne :
         - problème lors du stockage de décompte
         - réinitialisation du décompte de vérification lors de l'activation de l'option
-Modifications : 
+- Modifications : 
     - TinyMCE : libellé des fonctions  "Afficher dans"
     - TinyMCE : boutons souligné et barré dans la barre d'outils.
     - Module Form : option permettant d'ajouter le premier mail dans le formulaire au message de notification (Reply To) afin de répondre directement au message.
@@ -16,6 +16,8 @@ Modifications :
         - bouton affichant le numéro de la version en ligne.
         - uniformisation de la position des champs de saisie avec les versions suivantes.
     - Galerie : position du champ de tri des images.    
+- Mise à jour : 
+    - SimpleLightBox passe en version 2.1.0
 
 ## version 9.2.22
 - Modifications :
