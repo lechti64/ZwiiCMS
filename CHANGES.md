@@ -17,7 +17,7 @@
         - uniformisation de la position des champs de saisie avec les versions suivantes.
     - Galerie : position du champ de tri des images.    
 - Mise à jour : 
-    - SimpleLightBox passe en version 2.1.0
+    - SimpleLightBox passe en version 2.1.2
 
 ## version 9.2.22
 - Modifications :
