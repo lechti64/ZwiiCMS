@@ -18,9 +18,9 @@ tinymce.init({
 	// Langue
 	language: "fr_FR",
 	// Plugins
-	plugins: "advlist anchor autolink autoresize autosave codemirror codesample colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor visualblocks",
+	plugins: "advlist anchor autolink autoresize autosave codemirror colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor visualblocks",
 	// Contenu de la barre d'outils
-	toolbar: "restoredraft | undo redo | styleselect | bold italic underline strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | insert | code visualblocks fullscreen",
+	toolbar: "restoredraft | undo redo | styleselect | bold italic underline strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | image media link anchor  inserttable  hr template  code visualblocks fullscreen",
 	// CodeMirror
 	codemirror: {
 		indentOnInit: true, // Whether or not to indent code on init.
@@ -94,7 +94,7 @@ tinymce.init({
 	//	toolbar: [ 'undo', 'bold', 'italic', 'styleselect' ]
 	//},
 	// Contenu du bouton insérer
-	insert_button_items: "image link media template codesample inserttable | hr | anchor",
+	insert_button_items: "anchor hr ",
 	// Contenu du bouton formats
 	style_formats: [
 		{title: "Headers", items: [

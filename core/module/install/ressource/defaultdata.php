@@ -27,8 +27,8 @@ class init extends common {
 					'flagFolder' 	=> "core/vendor/i18n/png/",
 					'autoTranslate' => true
 				]
-			]
-			'title' => 'Votre site en quelques clics !'
+			],
+			'title' => 'Votre site en quelques clics !',
 			'proxyUrl' => "",
 			'proxyPort' => "",
 			'proxyType' => "tcp://"
