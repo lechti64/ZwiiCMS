@@ -2,19 +2,20 @@
 
 ## version 9.2.23
 - Nouveauté : 
-    - Configuration du réseau : proxy http ou tcp sans authentification
+    - Configuration du réseau : proxy http ou tcp sans authentification.
+    - Menu burger rempalcé pour une croix quand ouvert.
 - Corrections : 
     - Fonction magic_quotes dépréciée supprimée.
     - Mise à jour en ligne :
-        - problème lors du stockage de décompte
-        - réinitialisation du décompte de vérification lors de l'activation de l'option
+        - problème lors du stockage de décompte de la date de dernière vérification.
+        - réinitialisation du décompte de vérification lors de l'activation de l'option.
 - Modifications : 
     - TinyMCE : libellé des fonctions  "Afficher dans"
     - TinyMCE : nouvelle organisation de la barre d'outils.
     - Module Form : option permettant d'ajouter le premier mail dans le formulaire au message de notification (Reply To) afin de répondre directement au message.
     - Configuration du site : 
         - bouton affichant le numéro de la version en ligne.
-        - uniformisation de la position des champs de saisie avec les versions suivantes.
+        - uniformisation de la position des champs de saisie.
     - Galerie : position du champ de tri des images.    
 - Mise à jour : 
     - SimpleLightBox passe en version 2.1.2
