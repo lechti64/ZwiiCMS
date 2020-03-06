@@ -442,4 +442,17 @@ $(document).ready(function(){
 			}
 		});
 	});
+
+	/**
+	 * Icône du Menu Burger 
+	 */
+	$("#toggle").click(function() {	
+		var changeIcon = $('#toggle').children("span");
+		if ( $(changeIcon).hasClass('zwiico-menu') ) {
+			$(changeIcon).removeClass('zwiico-menu').addClass('zwiico-cancel');
+		}
+		else {							
+			$(changeIcon).addClass('zwiico-menu');
+		};
+	});
 });
