@@ -3,7 +3,7 @@
 ## version 9.2.23
 - Nouveauté : 
     - Configuration du réseau : proxy http ou tcp sans authentification.
-    - Menu burger rempalcé pour une croix quand ouvert.
+    - Menu burger remplacé pour une croix quand ouvert.
 - Corrections : 
     - Fonction magic_quotes dépréciée supprimée.
     - Mise à jour en ligne :
