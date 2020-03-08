@@ -45,7 +45,7 @@
 		</div>
 	</div>
 	<?php if($module::$galleries): ?>
-	<?php echo template::table([4, 6,1, 1, 1], $module::$galleries, ['Nom', 'Dossier cible', 'Ordre', '', '']); ?>
+	<?php echo template::table([4, 6,1, 1, 1], $module::$galleries, ['Nom', 'Dossier cible', 'Ordre', '', ''], ['id' => 'galleryTable']); ?>
 	<?php else: ?>
 		<?php echo template::speech('Aucune galerie.'); ?>
 	<?php endif; ?>

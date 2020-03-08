@@ -17,7 +17,7 @@
 			<div class="block">
 				<h4>Informations générales</h4>
 				<div class="row">
-					<div class="col4">
+					<div class="col5">
 						<?php echo template::text('galleryEditName', [
 							'label' => 'Nom',
 							'value' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'config', 'name'])
@@ -33,13 +33,13 @@
 							'noDirty' => true // Désactivé à cause des modifications en ajax
 						]); ?>
 					</div>
-					<div class="col4">
+					<div class="col3">
 						<?php echo template::select('galleryEditSort', $module::$sort, [
 							'selected' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'config', 'sort']),
 							'label' => 'Tri des images',
 							'help' => 'Les images sont triées par nom de fichier grâce à la méthode naturelle qui donne de meilleurs résultats lorsque les images sont numérotées.'
 						]); ?>	
-					</div>
+					</div>				
 				</div>
 			</div>
 		</div>

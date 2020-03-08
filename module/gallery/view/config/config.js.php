@@ -6,6 +6,8 @@
  *
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2020, Frédéric Tempez
  * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
@@ -62,11 +64,18 @@ directoryDOM.on("change", function() {
 
 
 /**
- * Tri de la galerie
+ * Tri dynamique de la galerie
  */
-
 $( document ).ready(function() {
-	$('tbody > tr').sort(function (a, b) {
-		return +$('td#pos3', b).text() > +$('td#pos3', a).text();
-	}).appendTo('tbody');	
+	var $tbody = $('#galleryTable tbody');
+	$tbody.find('tr').sort(function (a, b) {
+		var tda = $(a).find('td.pos3:eq(0)').text();
+		var tdb = $(b).find('td.pos3:eq(0)').text();
+		// if a < b return 1
+		return tda > tdb ? 1
+			   // else if a > b return -1
+			   : tda < tdb ? -1
+			   // else they are equal - return 0    
+			   : 0;
+	}).appendTo($tbody);
 });
