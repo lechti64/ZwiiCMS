@@ -80,11 +80,13 @@ class gallery extends common {
 				self::$galleries[] = [						
 					$gallery['config']['name'],
 					$gallery['config']['directory'],
+					$gallery['config']['order'],
+					/*
 					template::select('galleryConfigOrder', $galeryOrder , [
 						'selected' => $gallery['config']['order'],
 						'class' => 'configOrder'
 
-					]),
+					]),*/
 					template::button('galleryConfigEdit' . $galleryId , [
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $galleryId  . '/' . $_SESSION['csrf'],
 						'value' => template::ico('pencil')
