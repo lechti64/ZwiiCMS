@@ -59,3 +59,14 @@ setInterval(function() {
 directoryDOM.on("change", function() {
 	directoryOldDOM.val($(this).val());
 });
+
+
+/**
+ * Tri de la galerie
+ */
+
+$( document ).ready(function() {
+	$('tbody > tr').sort(function (a, b) {
+		return +$('td#pos3', b).text() > +$('td#pos3', a).text();
+	}).appendTo('tbody');	
+});

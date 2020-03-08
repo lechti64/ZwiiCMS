@@ -3332,7 +3332,7 @@ class template {
 			$html .= '<tr>';
 			$i = 0;
 			foreach($tr as $td) {
-				$html .= '<td class="col' . $cols[$i++] . '">' . $td . '</td>';
+				$html .= '<td id="pos' . ($i+1) . '" class="col' . $cols[$i++] . '">' . $td . '</td>';
 			}
 			$html .= '</tr>';
 		}
