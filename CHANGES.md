@@ -30,6 +30,10 @@
     - Mise à jour en ligne :
         - problème lors du stockage de décompte de la date de dernière vérification.
         - réinitialisation du décompte de vérification lors de l'activation de l'option.
+    - Thème, Menu : 
+        - Problème avec le menu fixe en-dehors du site et la barre d'outils de TinyMCE sous le menu. Solution, en édition de page l'option de menu fixe est temporairement désactivée.
+        - Alignement avec le contenu du menu dans le site incorrecte.
+        - Disparition de la position et de l'alignement du menu.
 - Modifications : 
     - TinyMCE : libellé des fonctions  "Afficher dans"
     - TinyMCE : nouvelle organisation de la barre d'outils.
