@@ -26,6 +26,12 @@ $("#pageEditDelete").on("click", function() {
 * Paramètres par défaut au chargement
 */ 
 $( document ).ready(function() {
+	
+	/*
+	* Enleve le menu fixe en édition de page
+	*/
+	$("nav").removeAttr('id');
+
 	/**
 	* Bloque/Débloque le bouton de configuration au changement de module
 	* Affiche ou masque la position du module selon le call_user_func
