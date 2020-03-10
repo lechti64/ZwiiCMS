@@ -10,6 +10,30 @@
  * @link http://zwiicms.com/
  */
 
+$(document).ready(function(){
+	// Menu fixe à afficher
+	if($("#themeMenuPosition").val() === 'top') {
+		$("#themeMenuPositionFixed").slideDown();	
+	}
+	else {
+		$("#themeMenuPositionFixed").slideUp(function() {
+			$("#themeMenuFixed").prop("checked", false).trigger("change");
+		});
+	}
+
+	// Option de menu à afficher
+	if($("#themeMenuPosition").val() === 'site-first' || $(this).val() === 'site-second') {
+		$("#themeMenuPositionOptions").slideDown();	
+	}
+	else {
+		$("#themeMenuPositionOptions").slideUp(function() {
+			$("#themeMenuMargin").prop("checked", false).trigger("change");
+		});
+	}
+
+});
+
+
 /**
  * Aperçu en direct
  */
@@ -41,14 +65,14 @@ $("input, select").on("change", function() {
 			<?php echo json_encode($this->getData(['theme', 'menu', 'position']) === 'site-first'); ?>
 			|| <?php echo json_encode($this->getData(['theme', 'header', 'position']) === 'body'); ?>
 		) {
-			css += 'nav{padding:20px 20px 0 20px}';
+			css += 'nav{padding: 10px 10px 0 10px}';
 		}
 		else {
-			css += 'nav{padding:0 20px}';
+			css += 'nav{padding:0 10px;}';
 		}
 	}
 	else {
-		css += 'nav{margin:0}';
+		css += 'nav{margin:0;}';
 	}
 	// Ajout du css au DOM
 	$("#themePreview").remove();
@@ -77,7 +101,7 @@ $("input, select").on("change", function() {
 		case 'body-first':
 			$("nav").show().insertAfter("#bar");
 			$("#menu").removeClass('container-large');
-			$("nav").removeClass('#navfixedconnected');
+			$("nav").removeAttr('id');
 			$("#menu").addClass('container');
 			break;			
 		case 'body-second':
@@ -87,13 +111,13 @@ $("input, select").on("change", function() {
 			else {
 				$("nav").show().insertAfter("#bar");
 			}
-			$("nav").removeClass('#navfixedconnected');
+			$("nav").removeAttr('id');
 			break;
 		case 'top':
 			$("nav").show().insertAfter("#bar");
 			$("#menu").removeClass('container');
 			$("#menu").addClass('container-large');
-			$("nav").addClass('#navfixedconnected');
+			$("nav").attr('id','#navfixedconnected');
 			break;
 		case 'site':
 			$("nav").show().prependTo("#site");
@@ -113,6 +137,7 @@ $("#themeMenuLoginLink").on("change", function() {
 
 // Affiche / Cache les options de la position
 $("#themeMenuPosition").on("change", function() {
+	console.log($("#themeMenuPosition").val());
 	if($(this).val() === 'site-first' || $(this).val() === 'site-second') {
 		$("#themeMenuPositionOptions").slideDown();	
 	}
@@ -136,7 +161,6 @@ $("#themeMenuPosition").on("change", function() {
 }).trigger("change");
 
 // Affiche la sélection de couleur auto
-
 $("#themeMenuActiveColorAuto").on("change", function() {
 	if ($(this).is(':checked') ) {
 		$("#themeMenuActiveColorWrapper").slideUp();

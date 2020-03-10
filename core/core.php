@@ -1488,11 +1488,13 @@ class core extends common {
 					$this->getData(['theme', 'menu', 'position']) === 'site-first'
 					OR $this->getData(['theme', 'menu', 'position']) === 'site-second'
 				) {
-					$css .= 'nav{margin:20px 20px 0 20px}';
+					$css .= 'nav{padding:10px 10px 0 10px;}';
 				}
 				else {
-					$css .= 'nav{margin:0 20px 0}';
-				}
+					$css .= 'nav{padding:0 10px}';
+				}				
+			} else {
+				$css .= 'nav{margin:0}';
 			}
 			$css .= '#i18nBar {padding:' . $this->getData(['theme', 'menu', 'height']) . '; float:' . $this->getData(['theme', 'menu', 'i18nPosition']) . ';}';
 			$css .= '.flag  {height:'  . $this->getData(['theme', 'menu', 'fontSize']) .  ';}';
