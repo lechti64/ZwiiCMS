@@ -560,14 +560,13 @@ nav a:hover {
 	/* Taille du menu hamburger */
 	nav .zwiico-menu {
 		font-size:1.5em;
-	}	
-	nav .flag {
-		margin: 20px 10px 20px 10px;
-		font-size: calc(100% * 2);
-		}	
-	}	
+	}		
 	nav .zwiico-cancel {
 		font-size:1.5em;
+	}
+	nav .flag {
+		margin: 20px 10px 20px 10px;
+		font-size: calc(100% * 2);		
 	}
 }
 
