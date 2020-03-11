@@ -283,9 +283,10 @@ class gallery extends common {
 					$this->addOutput([
 						'showBarEditButton' => true,
 						'title' => $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'config', 'name']),
+						/* Désactivé car SLB est actif pour tout le site
 						'vendor' => [
 							'simplelightbox'
-						],
+						],*/
 						'view' => 'gallery'
 					]);
 				}

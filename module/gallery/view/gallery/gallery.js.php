@@ -12,16 +12,12 @@
 
 /**
  * Galerie d'image
- */
+ * SLB est activé pour tout le site
+ *
 $(".galleryGalleryPicture").simpleLightbox({
 	captionSelector: "self",
 	captionType: "data",
 	captionsData: "caption",
 	closeText: "&times;"
 });
-
-// Traduite les légendes
-$(".galleryGalleryPicture").on("click", function() {
-	$('body').removeClass("notranslate");
-});
-
+*/
