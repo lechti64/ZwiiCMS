@@ -7,7 +7,14 @@
 		);
 
 		// Démarrer le script
-		// var a = $('.gallery').simpleLightbox({closeText:"&times;",captionsData:'alt'});
-
-
+		var a = new SimpleLightbox('.gallery', { 
+			closeText:"&times;",
+			captionsData:'alt' 
+		});
+		var b = new SimpleLightbox('.galleryGalleryPicture', { 
+			captionSelector: "self",
+			captionType: "data",
+			captionsData: "caption",
+			closeText: "&times;"
+		});
 	});
