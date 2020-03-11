@@ -1,7 +1,7 @@
 # Changelog
 
 ## version 9.2.23
-- Nouveauté : 
+- Nouveautés : 
     - Configuration du réseau : proxy http ou tcp sans authentification.
     - Menu burger remplacé pour une croix quand ouvert.
 - Corrections : 
