@@ -1,5 +1,9 @@
 # Changelog
 
+## version 9.2.25
+- Modification : 
+    - Optimisation configuration simpleLightBox
+    
 ## version 9.2.24
 - Corrections : 
     - Mauvaise configuration de SimpleLightBox
