@@ -21,3 +21,9 @@ $(".galleryGalleryPicture").simpleLightbox({
 	closeText: "&times;"
 });
 */
+var b = new SimpleLightbox('.galleryGalleryPicture', { 
+	captionSelector: "self",
+	captionType: "data",
+	captionsData: "caption",
+	closeText: "&times;"
+});
