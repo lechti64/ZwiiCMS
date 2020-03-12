@@ -1244,7 +1244,12 @@ class core extends common {
 			} else {
 				$css .= 'nav{margin:0}';
 			}
-			
+			if(
+				$this->getData(['theme', 'menu', 'position']) === 'top'
+				) {
+					$css .= 'nav{padding:0 10px;}';
+			}
+
 			$css .= '#toggle span,#menu a{padding:' . $this->getData(['theme', 'menu', 'height']) .';font-family:"' . str_replace('+', ' ', $this->getData(['theme', 'menu', 'font'])) . '",sans-serif;font-weight:' . $this->getData(['theme', 'menu', 'fontWeight']) . ';font-size:' . $this->getData(['theme', 'menu', 'fontSize']) . ';text-transform:' . $this->getData(['theme', 'menu', 'textTransform']) . '}';			
 			// Pied de page
 			$colors = helper::colorVariants($this->getData(['theme', 'footer', 'backgroundColor']));
