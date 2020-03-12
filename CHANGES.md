@@ -1,5 +1,9 @@
 # Changelog
 
+## version 9.2.24
+- Correction : 
+    - Mauvaise configuration de SimpleLightBox
+
 ## version 9.2.23
 - Nouveautés : 
     - Configuration du réseau : proxy http ou tcp sans authentification.
