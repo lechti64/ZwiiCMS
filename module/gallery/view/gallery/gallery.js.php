@@ -13,14 +13,7 @@
 /**
  * Galerie d'image
  * SLB est activé pour tout le site
- *
-$(".galleryGalleryPicture").simpleLightbox({
-	captionSelector: "self",
-	captionType: "data",
-	captionsData: "caption",
-	closeText: "&times;"
-});
-*/
+ */
 var b = new SimpleLightbox('.galleryGalleryPicture', { 
 	captionSelector: "self",
 	captionType: "data",
