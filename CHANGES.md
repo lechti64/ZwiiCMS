@@ -29,8 +29,9 @@
     - Chargement paresseux des images.
     
 ## version 9.2.24
-- Correction : 
+- Corrections : 
     - Mauvaise configuration de SimpleLightBox
+    - Thème : marges du menu en position en-dehors du site
 
 ## version 9.2.23
 - Nouveautés : 

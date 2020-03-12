@@ -63,7 +63,7 @@ $("input, select").on("change", function() {
 	if($("#themeMenuMargin").is(":checked")) {
 		if(
 			<?php echo json_encode($this->getData(['theme', 'menu', 'position']) === 'site-first'); ?>
-			|| <?php echo json_encode($this->getData(['theme', 'header', 'position']) === 'body'); ?>
+			|| <?php echo json_encode($this->getData(['theme', 'menu', 'position']) === 'site-second'); ?>
 		) {
 			css += 'nav{padding: 10px 10px 0 10px}';
 		}
@@ -74,6 +74,12 @@ $("input, select").on("change", function() {
 	else {
 		css += 'nav{margin:0;}';
 	}
+    if(
+		<?php echo json_encode($this->getData(['theme', 'menu', 'position']) === 'top'); ?>
+	) {
+		css += 'nav{padding:0 10px;}';
+	}
+
 	// Ajout du css au DOM
 	$("#themePreview").remove();
 	$("<style>")
