@@ -1,8 +1,9 @@
 # Changelog
 
 ## version 9.2.25
-- Modification : 
+- Modifications : 
     - Optimisation configuration simpleLightBox
+    - Syntaxe colorée dans TinyMCE Simplelightbox
     
 ## version 9.2.24
 - Corrections : 
