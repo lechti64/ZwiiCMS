@@ -26,13 +26,60 @@ tinymce.init({
 		indentOnInit: true, // Whether or not to indent code on init.
 		fullscreen: false,   // Default setting is false
 		path: 'codemirror', // Path to CodeMirror distribution
-		saveCursorPosition: true,    // Insert caret marker
+		saveCursorPosition: false,    // Insert caret marker
 		config: {           // CodeMirror config object
 			mode: 'application/x-httpd-php',
-			lineNumbers: true
+			indentUnit: 4,
+			lineNumbers: true,
+			mode: "htmlmixed",
+			matchBrackets: true,
+			autoCloseBrackets: true,
+			autoCloseTags: true,
+			matchTags: {bothTags: true},
+			indentOnInit: true, // Whether or not to indent code on init.
+			smartIndent: true,
+			indentWithTabs: true,
+			lineWrapping: true,
+			paletteHints: true,
+			lint: false,
+			lintOnChange: true,
+			showHint: true,
+			CSSHint: true,
+			JSHint: true,
+			getAnnotations: true,
+			gutters: ['CodeMirror-lint-markers', 'CodeMirror-linenumbers', 'CodeMirror-foldgutter']
 		},
-		width: 800,         // Default value is 800
-		height: 500       // Default value is 550
+		jsFiles: [
+			'mode/php/php.js',
+			'mode/css/css.js',
+			'mode/htmlmixed/htmlmixed.js',
+			'mode/htmlembedded/htmlembedded.js',
+			'mode/javascript/javascript.js',
+			'mode/xml/xml.js',
+			'addon/dialog/dialog.js',
+			'addon/search/searchcursor.js',
+			'addon/search/search.js',
+			'addon/hint/show-hint.js',
+			'addon/hint/anyword-hint.js',
+			'addon/hint/html-hint.js',
+			'addon/hint/css-hint.js',
+			'addon/hint/xml-hint.js',
+			'addon/hint/javascript-hint.js',
+			'addon/lint/lint.js',
+			'addon/lint/javascript-lint.js',
+			'addon/lint/json-lint.js',
+			'addon/lint/css-lint.js',
+			'addon/lint/html-lint.js',
+			'addon/fold/foldgutter.js'
+		],
+		cssFiles: [
+			'addon/dialog/dialog.css',
+			'addon/hint/show-hint.css',
+			'addon/lint/lint.css',
+			'addon/fold/foldgutter.css'
+		],		
+		width: 1000,         // Default value is 800
+		height: 600       // Default value is 550
 	}, 
 	// Cibles de la target
 	target_list: [
