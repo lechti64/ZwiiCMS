@@ -3,7 +3,7 @@
 ## version 9.2.25
 - Modifications : 
     - Optimisation configuration simpleLightBox
-    - Syntaxe colorée dans TinyMCE Simplelightbox
+    - Syntaxe colorée dans TinyMCE Codemirror
     
 ## version 9.2.24
 - Corrections : 
