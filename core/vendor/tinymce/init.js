@@ -28,6 +28,7 @@ tinymce.init({
 		path: 'codemirror', // Path to CodeMirror distribution
 		saveCursorPosition: false,    // Insert caret marker
 		config: {           // CodeMirror config object
+			/*theme: 'ambiance',*/
 			mode: 'application/x-httpd-php',
 			indentUnit: 4,
 			lineNumbers: true,
@@ -73,6 +74,7 @@ tinymce.init({
 			'addon/fold/foldgutter.js'
 		],
 		cssFiles: [
+			/*'theme/ambiance.css',*/
 			'addon/dialog/dialog.css',
 			'addon/hint/show-hint.css',
 			'addon/lint/lint.css',
