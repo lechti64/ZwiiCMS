@@ -24,31 +24,23 @@ tinymce.init({
 	// CodeMirror
 	codemirror: {
 		indentOnInit: true, // Whether or not to indent code on init.
-		fullscreen: false,   // Default setting is false
 		path: 'codemirror', // Path to CodeMirror distribution
 		saveCursorPosition: false,    // Insert caret marker
 		config: {           // CodeMirror config object
 			/*theme: 'ambiance',*/
-			mode: 'application/x-httpd-php',
+			fullscreen: true,	
+			/*mode: 'application/x-httpd-php',*/
 			indentUnit: 4,
 			lineNumbers: true,
 			mode: "htmlmixed",
-			matchBrackets: true,
-			autoCloseBrackets: true,
-			autoCloseTags: true,
-			matchTags: {bothTags: true},
-			indentOnInit: true, // Whether or not to indent code on init.
-			smartIndent: true,
-			indentWithTabs: true,
-			lineWrapping: true,
-			paletteHints: true,
-			lint: false,
-			lintOnChange: true,
-			showHint: true,
-			CSSHint: true,
-			JSHint: true,
-			getAnnotations: true,
-			gutters: ['CodeMirror-lint-markers', 'CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+		},
+		extraKeys: {
+			"F11": function(cm) {
+			  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+			},
+			"Esc": function(cm) {
+			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+			}
 		},
 		jsFiles: [
 			'mode/php/php.js',
@@ -57,30 +49,14 @@ tinymce.init({
 			'mode/htmlembedded/htmlembedded.js',
 			'mode/javascript/javascript.js',
 			'mode/xml/xml.js',
-			'addon/dialog/dialog.js',
 			'addon/search/searchcursor.js',
 			'addon/search/search.js',
-			'addon/hint/show-hint.js',
-			'addon/hint/anyword-hint.js',
-			'addon/hint/html-hint.js',
-			'addon/hint/css-hint.js',
-			'addon/hint/xml-hint.js',
-			'addon/hint/javascript-hint.js',
-			'addon/lint/lint.js',
-			'addon/lint/javascript-lint.js',
-			'addon/lint/json-lint.js',
-			'addon/lint/css-lint.js',
-			'addon/lint/html-lint.js',
-			'addon/fold/foldgutter.js'
 		],
 		cssFiles: [
 			/*'theme/ambiance.css',*/
-			'addon/hint/show-hint.css',
-			'addon/lint/lint.css',
-			'addon/fold/foldgutter.css'
 		],		
 		width: 1000,         // Default value is 800
-		height: 600       // Default value is 550
+		height: 600       // Default value is 550		
 	}, 
 	// Cibles de la target
 	target_list: [
