@@ -75,7 +75,6 @@ tinymce.init({
 		],
 		cssFiles: [
 			/*'theme/ambiance.css',*/
-			'addon/dialog/dialog.css',
 			'addon/hint/show-hint.css',
 			'addon/lint/lint.css',
 			'addon/fold/foldgutter.css'
