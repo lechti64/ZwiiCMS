@@ -18,9 +18,9 @@ tinymce.init({
 	// Langue
 	language: "fr_FR",
 	// Plugins
-	plugins: "advlist anchor autolink autoresize autosave codemirror colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor visualblocks",
+	plugins: "advlist anchor autolink autoresize autosave codemirror colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor codesample",
 	// Contenu de la barre d'outils
-	toolbar: "restoredraft | undo redo | styleselect | bold italic underline strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | image media link anchor  inserttable  hr template  code visualblocks fullscreen",
+	toolbar: "restoredraft | undo redo | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | template | image media link | fullscreen",
 	// CodeMirror
 	codemirror: {
 		indentOnInit: true, // Whether or not to indent code on init.
@@ -33,14 +33,6 @@ tinymce.init({
 			indentUnit: 4,
 			lineNumbers: true,
 			mode: "htmlmixed",
-		},
-		extraKeys: {
-			"F11": function(cm) {
-			  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-			},
-			"Esc": function(cm) {
-			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
-			}
 		},
 		jsFiles: [
 			'mode/php/php.js',
@@ -74,7 +66,7 @@ tinymce.init({
 	// Pages internes
 	link_list: baseUrl + "core/vendor/tinymce/links.php",
 	// Contenu du menu contextuel
-	contextmenu: "cut copy paste pastetext | selectall searchreplace | link image inserttable | cell row column deletetable",
+	contextmenu: "selectall searchreplace | hr  | media image  link anchor  | inserttable  cell row column deletetable",
 	// Fichiers CSS à intégrer à l'éditeur
 	content_css: [
 		baseUrl + "core/layout/common.css",
@@ -85,7 +77,7 @@ tinymce.init({
 // Classe à ajouter à la balise body dans l'iframe
 	body_class: "editorWysiwyg",
 	// Cache les menus
-	menubar: false,
+	menubar: true,
 	// URL menu contextuel
 	link_context_toolbar: true,	
 	// Cache la barre de statut
@@ -118,7 +110,7 @@ tinymce.init({
 	//	toolbar: [ 'undo', 'bold', 'italic', 'styleselect' ]
 	//},
 	// Contenu du bouton insérer
-	insert_button_items: "anchor hr ",
+	insert_button_items: "anchor hr table",
 	// Contenu du bouton formats
 	style_formats: [
 		{title: "Headers", items: [
