@@ -18,37 +18,21 @@ tinymce.init({
 	// Langue
 	language: "fr_FR",
 	// Plugins
-	plugins: "advlist anchor autolink autoresize autosave codemirror colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor  codesample",
+	plugins: "advlist anchor autolink autoresize autosave codemirror colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor codesample",
 	// Contenu de la barre d'outils
-	toolbar: "restoredraft | undo redo | styleselect | bold italic underline strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | image media link anchor  inserttable  hr template  code codesample  fullscreen",
+	toolbar: "restoredraft | undo redo | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | template | image media link | fullscreen",
 	// CodeMirror
 	codemirror: {
 		indentOnInit: true, // Whether or not to indent code on init.
-		fullscreen: false,   // Default setting is false
 		path: 'codemirror', // Path to CodeMirror distribution
 		saveCursorPosition: false,    // Insert caret marker
 		config: {           // CodeMirror config object
 			/*theme: 'ambiance',*/
-			mode: 'application/x-httpd-php',
+			fullscreen: true,	
+			/*mode: 'application/x-httpd-php',*/
 			indentUnit: 4,
 			lineNumbers: true,
 			mode: "htmlmixed",
-			matchBrackets: true,
-			autoCloseBrackets: true,
-			autoCloseTags: true,
-			matchTags: {bothTags: true},
-			indentOnInit: true, // Whether or not to indent code on init.
-			smartIndent: true,
-			indentWithTabs: true,
-			lineWrapping: true,
-			paletteHints: true,
-			lint: false,
-			lintOnChange: true,
-			showHint: true,
-			CSSHint: true,
-			JSHint: true,
-			getAnnotations: true,
-			gutters: ['CodeMirror-lint-markers', 'CodeMirror-linenumbers', 'CodeMirror-foldgutter']
 		},
 		jsFiles: [
 			'mode/php/php.js',
@@ -57,31 +41,14 @@ tinymce.init({
 			'mode/htmlembedded/htmlembedded.js',
 			'mode/javascript/javascript.js',
 			'mode/xml/xml.js',
-			'addon/dialog/dialog.js',
 			'addon/search/searchcursor.js',
 			'addon/search/search.js',
-			'addon/hint/show-hint.js',
-			'addon/hint/anyword-hint.js',
-			'addon/hint/html-hint.js',
-			'addon/hint/css-hint.js',
-			'addon/hint/xml-hint.js',
-			'addon/hint/javascript-hint.js',
-			'addon/lint/lint.js',
-			'addon/lint/javascript-lint.js',
-			'addon/lint/json-lint.js',
-			'addon/lint/css-lint.js',
-			'addon/lint/html-lint.js',
-			'addon/fold/foldgutter.js'
 		],
 		cssFiles: [
 			/*'theme/ambiance.css',*/
-			'addon/dialog/dialog.css',
-			'addon/hint/show-hint.css',
-			'addon/lint/lint.css',
-			'addon/fold/foldgutter.css'
 		],		
 		width: 1000,         // Default value is 800
-		height: 600       // Default value is 550
+		height: 600       // Default value is 550		
 	}, 
 	// Cibles de la target
 	target_list: [
@@ -99,7 +66,7 @@ tinymce.init({
 	// Pages internes
 	link_list: baseUrl + "core/vendor/tinymce/links.php",
 	// Contenu du menu contextuel
-	contextmenu: "cut copy paste pastetext | selectall searchreplace | link image inserttable | cell row column deletetable",
+	contextmenu: "selectall searchreplace | hr  | media image  link anchor  | inserttable  cell row column deletetable",
 	// Fichiers CSS à intégrer à l'éditeur
 	content_css: [
 		baseUrl + "core/layout/common.css",
@@ -110,7 +77,7 @@ tinymce.init({
 // Classe à ajouter à la balise body dans l'iframe
 	body_class: "editorWysiwyg",
 	// Cache les menus
-	menubar: false,
+	menubar: true,
 	// URL menu contextuel
 	link_context_toolbar: true,	
 	// Cache la barre de statut
@@ -143,7 +110,7 @@ tinymce.init({
 	//	toolbar: [ 'undo', 'bold', 'italic', 'styleselect' ]
 	//},
 	// Contenu du bouton insérer
-	insert_button_items: "anchor hr ",
+	insert_button_items: "anchor hr table",
 	// Contenu du bouton formats
 	style_formats: [
 		{title: "Headers", items: [

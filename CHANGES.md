@@ -22,9 +22,12 @@
     - Chargement paresseux des images.
     
 ## version 9.2.25
+- Correction : 
+    - Décalage du site dans SimpleLightbox.
 - Modifications : 
-    - Optimisation configuration simpleLightBox
-    - Syntaxe colorée dans TinyMCE Codemirror
+    - Optimisation configuration simpleLightBox.
+    - Syntaxe colorée dans TinyMCE Codemirror.
+    - Configuration barre d'outils et menu.
     
 ## version 9.2.24
 - Corrections : 
