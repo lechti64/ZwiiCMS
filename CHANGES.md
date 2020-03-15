@@ -8,6 +8,7 @@
     - Optimisation configuration simpleLightBox.
     - Syntaxe colorée dans TinyMCE Codemirror.
     - Configuration barre d'outils et menu.
+    - Module news : déplacement des styles dans common.css
     
 ## version 9.2.24
 - Corrections : 
