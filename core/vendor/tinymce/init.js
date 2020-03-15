@@ -20,7 +20,7 @@ tinymce.init({
 	// Plugins
 	plugins: "advlist anchor autolink autoresize autosave codemirror colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor codesample",
 	// Contenu de la barre d'outils
-	toolbar: "restoredraft | undo redo | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | template | image media link | fullscreen",
+	toolbar: "restoredraft | undo redo | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | template code | image media link | fullscreen",
 	// CodeMirror
 	codemirror: {
 		indentOnInit: true, // Whether or not to indent code on init.
