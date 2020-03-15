@@ -1,8 +1,9 @@
 # Changelog
 
 ## version 9.2.25
-- Correction : 
+- Corrections : 
     - Décalage du site dans SimpleLightbox.
+    - Zindex du pied de page en position fixe, sous la barre de consentement aux cookies.
 - Modifications : 
     - Optimisation configuration simpleLightBox.
     - Syntaxe colorée dans TinyMCE Codemirror.
