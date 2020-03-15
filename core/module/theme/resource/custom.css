@@ -167,13 +167,16 @@ textarea:hover {
 }
 
 .newsTitle {
+    /*background-color: grey;*/
 }
 
 .newsContent {
 }
 
 .newsDate {
+    color:	#404040;
 }
 
 .newsSignature {
+    color: 	#404040;
 }
