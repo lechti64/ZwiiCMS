@@ -65,7 +65,7 @@
 						</div>
 					</div>
 					<div class="col4 preview">
-						<h1 class="preview">Aperçu</h1>
+						<h1>Aperçu</h1>
 						<div class="row">
 							<div class="col8">
 								<h3 class="preview">Titre 3 </h3>
