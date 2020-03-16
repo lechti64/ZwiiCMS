@@ -54,3 +54,24 @@ nav li ul {
 #themeOverlayBody {
 	position: fixed; /* Sinon l'overlay s'arrête à la hauteur de la fenêtre et non de la page*/
 }
+
+/* Contrastes */
+
+
+#site {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+body, 
+.block h4, 
+input[type="email"], 
+input[type="text"], 
+input[type="password"], 
+.inputFile, 
+select,
+textarea, 
+.inputFile, 
+.button.buttonGrey, 
+.button.buttonGrey:hover {
+    color: rgba(33, 34, 35, 1);
+}
