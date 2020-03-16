@@ -19,13 +19,16 @@ $( document ).ready(function() {
 	// Import des polices de caractères
 	var titleFont = $("#themeTitleFont").val();
 	var textFont = $("#themeTextFont").val();
+	
 	var css = "@import url('https://fonts.googleapis.com/css?family=" + titleFont + "|" + textFont + "');";
 	var colors = core.colorVariants($("#themeButtonBackgroundColor").val());
-	
-	
+		
+	// Texte
+	css += "p.preview{color:" + $("#themeTextTextColor").val() + ";font-family:'" + textFont.replace(/\+/g, " ") + "',sans-serif}";
+	// Titres
 	css += "h1.preview,h3.preview{color:" + $("#themeTitleTextColor").val() + ";font-family:'" + titleFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeTitleFontWeight").val() + ";text-transform:" + $("#themeTitleTextTransform").val() + "}";
-	css += "p.preview{color:" + $("#themeTextTextColor").val() + "}";
-	css += "div.preview{background-color:" + $("#themeSiteBackgroundColor").val() + ";}";
+	// Fond
+	css += "div.preview{background-color:" + $("#themeSiteBackgroundColor").val() + ";}";	
 
 	// Couleurs des liens
 	colors = core.colorVariants($("#themeLinkTextColor").val());
@@ -73,9 +76,11 @@ $("input, select").on("change", function() {
 	//css += "h1,h2,h3,h4,h5,h6{color:" + $("#themeTitleTextColor").val() + ";font-family:'" + titleFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeTitleFontWeight").val() + ";text-transform:" + $("#themeTitleTextTransform").val() + "}";
 	css += "h1.preview,h3.preview{color:" + $("#themeTitleTextColor").val() + ";font-family:'" + titleFont.replace(/\+/g, " ") + "',sans-serif;font-weight:" + $("#themeTitleFontWeight").val() + ";text-transform:" + $("#themeTitleTextTransform").val() + "}";
 	// Police de caractères
-	css += "body{font-family:'" + textFont.replace(/\+/g, " ") + "',sans-serif}";
+	//css += "body{font-family:'" + textFont.replace(/\+/g, " ") + "',sans-serif}";
+	// Police + couleur
+	css += "p.preview{color:" + $("#themeTextTextColor").val() + ";font-family:'" + textFont.replace(/\+/g, " ") + "',sans-serif}";
 	// Taille du texte
-	css += "body,.row > div{font-size:" + $("#themeTextFontSize").val() + "}";
+	//css += "body,.row > div{font-size:" + $("#themeTextFontSize").val() + "}";
 	// Couleur du texte
 	//css += "body,.block h4,input[type='email'],input[type='text'],input[type='password'],.inputFile,select,textarea,.inputFile,.button.buttonGrey,.button.buttonGrey:hover{color:" + $("#themeTextTextColor").val() + "}";
 	css += "p.preview{color:" + $("#themeTextTextColor").val() + "}";
