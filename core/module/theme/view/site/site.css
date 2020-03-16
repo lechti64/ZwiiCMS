@@ -1,19 +1,16 @@
 /**
- * This file is part of Zwii. *
+ * This file is part of Zwii.
+ *
  * For full copyright and license information, please see the LICENSE
  * file that was distributed with this source code.
  *
  * @author Rémi Jean <remi.jean@outlook.com>
  * @copyright Copyright (C) 2008-2018, Rémi Jean
- * @license GNU General Public License, version 3
  * @author Frédéric Tempez <frederic.tempez@outlook.com>
  * @copyright Copyright (C) 2018-2020, Frédéric Tempez
+ * @license GNU General Public License, version 3
  * @link http://zwiicms.com/
  */
-
-#backToTop {
-    display: block;
-}
 
 
 #site {
@@ -32,4 +29,11 @@ textarea,
 .button.buttonGrey, 
 .button.buttonGrey:hover {
     color: rgba(33, 34, 35, 1);
+}
+
+div.preview {
+    border-radius: 2%;
+    -webkit-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.75);
 }

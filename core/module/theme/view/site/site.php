@@ -17,47 +17,67 @@
 			<div class="block">
 				<h4>Couleurs</h4>
 				<div class="row">
-					<div class="col4">
-						<?php echo template::text('themeSiteBackgroundColor', [
-							'class' => 'colorPicker',
-							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
-							'label' => 'Fond',
-							'value' => $this->getData(['theme', 'site', 'backgroundColor'])
-						]); ?>
+					<div class="col8">
+						<div class="row">
+							<div class="col6">
+								<?php echo template::text('themeSiteBackgroundColor', [
+									'class' => 'colorPicker',
+									'help' => 'Le curseur horizontal règle le niveau de transparence.',							
+									'label' => 'Fond',
+									'value' => $this->getData(['theme', 'site', 'backgroundColor'])
+								]); ?>
+							</div>
+							<div class="col6">
+								<?php echo template::text('themeTextTextColor', [
+									'class' => 'colorPicker',
+									'help' => 'Le curseur horizontal règle le niveau de transparence.',							
+									'label' => 'Texte',
+									'value' => $this->getData(['theme', 'text', 'textColor'])
+								]); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col6">
+								<?php echo template::text('themeTitleTextColor', [
+									'class' => 'colorPicker',
+									'help' => 'Le curseur horizontal règle le niveau de transparence.',							
+									'label' => 'Titres',
+									'value' => $this->getData(['theme', 'title', 'textColor'])
+								]); ?>
+							</div>							
+							<div class="col6">
+								<?php echo template::text('themeLinkTextColor', [
+									'class' => 'colorPicker',
+									'help' => 'Le curseur horizontal règle le niveau de transparence.',							
+									'label' => 'Liens',
+									'value' => $this->getData(['theme', 'link', 'textColor'])
+								]); ?>
+							</div>					
+						</div>
+						<div class="col6 offset3">
+							<?php echo template::text('themeButtonBackgroundColor', [
+								'class' => 'colorPicker',
+								'help' => 'Le curseur horizontal règle le niveau de transparence.',							
+								'label' => 'Boutons',
+								'value' => $this->getData(['theme', 'button', 'backgroundColor'])
+							]); ?>
+						</div>
 					</div>
-					<div class="col4">
-						<?php echo template::text('themeTextTextColor', [
-							'class' => 'colorPicker',
-							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
-							'label' => 'Texte',
-							'value' => $this->getData(['theme', 'text', 'textColor'])
-						]); ?>
-					</div>
-					<div class="col4">
-						<?php echo template::text('themeLinkTextColor', [
-							'class' => 'colorPicker',
-							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
-							'label' => 'Liens',
-							'value' => $this->getData(['theme', 'link', 'textColor'])
-						]); ?>
-					</div>					
-				</div>
-				<div class="row">
-					<div class="col4">
-						<?php echo template::text('themeTitleTextColor', [
-							'class' => 'colorPicker',
-							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
-							'label' => 'Titres',
-							'value' => $this->getData(['theme', 'title', 'textColor'])
-						]); ?>
-					</div>
-					<div class="col4 offset4">
-						<?php echo template::text('themeButtonBackgroundColor', [
-							'class' => 'colorPicker',
-							'help' => 'Le curseur horizontal règle le niveau de transparence.',							
-							'label' => 'Boutons',
-							'value' => $this->getData(['theme', 'button', 'backgroundColor'])
-						]); ?>
+					<div class="col4 preview">
+						<h1 class="preview">Aperçu</h1>
+						<div class="row">
+							<div class="col8">
+								<h3 class="preview">Titre 3 </h3>
+								<p class="preview">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							</div>
+							<div class="col4">
+								<p><a href="#" class="preview">Hyperlien</a></p>
+								<?php echo template::button('themeSiteTest', [
+									'class' => 'buttonPreview',						
+									'value' => 'Test'
+								]); ?>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
