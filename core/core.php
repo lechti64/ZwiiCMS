@@ -3223,7 +3223,7 @@ class template {
         // Liste des polices à intégrer
         if ($attributes['fonts'] === true) {
             foreach ($options as $fontId) {
-                echo "<link href='http://fonts.googleapis.com/css?family=".str_replace(" ", "+", $fontId)."' rel='stylesheet' type='text/css'>\n";
+                echo "<link href='https://fonts.googleapis.com/css?family=".str_replace(" ", "+", $fontId)."' rel='stylesheet' type='text/css'>\n";
             }
         }
         // Début du wrapper
