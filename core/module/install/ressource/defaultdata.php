@@ -109,7 +109,7 @@ class init extends common {
 				'fontSize' => '2em',
 				'fontWeight' => 'normal',
 				'height' => '150px',
-				'image' => 'banner/banner960.jpg',
+				'image' => 'banniere/banner960.jpg',
 				'imagePosition' => 'center center',
 				'imageRepeat' => 'no-repeat',
 				'margin' => false,
