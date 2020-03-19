@@ -26,10 +26,11 @@
     - Décalage du site dans SimpleLightbox.
     - Zindex du pied de page en position fixe, sous la barre de consentement aux cookies.
 - Modifications : 
+    - Désactivation de l'application du thème dans les pages d'administration. Création d'un aperçu dans Thème Site.
     - Optimisation configuration simpleLightBox.
     - Syntaxe colorée dans TinyMCE Codemirror.
     - Configuration barre d'outils et menu.
-    - Module news : déplacement des styles dans common.css. Couleur de police de la signature dans custom.css
+    - Module news : déplacement des styles dans common.css. Couleur de police de la signature dans custom.css- 
     
 ## version 9.2.24
 - Corrections : 
