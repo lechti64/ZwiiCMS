@@ -17,8 +17,8 @@
     background-color: rgba(255, 255, 255, 1);
 }
 
-body, 
-.block h4, 
+body:not(.editorWysiwyg), 
+.block h4,
 input[type="email"], 
 input[type="text"], 
 input[type="password"], 
