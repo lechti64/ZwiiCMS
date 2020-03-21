@@ -55,27 +55,31 @@
 								]); ?>
 							</div>					
 						</div>
-						<div class="col6 offset3">
-							<?php echo template::text('themeButtonBackgroundColor', [
-								'class' => 'colorPicker',
-								'help' => 'Le curseur horizontal règle le niveau de transparence.',							
-								'label' => 'Boutons',
-								'value' => $this->getData(['theme', 'button', 'backgroundColor'])
-							]); ?>
+						<div class="row">
+							<div class="col6 offset3">
+								<?php echo template::text('themeButtonBackgroundColor', [
+									'class' => 'colorPicker',
+									'help' => 'Le curseur horizontal règle le niveau de transparence.',							
+									'label' => 'Boutons',
+									'value' => $this->getData(['theme', 'button', 'backgroundColor'])
+								]); ?>
+							</div>							
 						</div>
 					</div>
-					<div class="col4 preview">
-						<h1>Aperçu</h1>
+					<div class="col4 bgPreview">
 						<div class="row">
-							<div class="col8">
-								<h3 class="preview">Titre 3 </h3>
-								<p class="preview">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<div class="col12">
+								<h1 class="headerPreview">Titre </h1>
+								<h3 class="headerPreview">Sous-Titre </h3>
+								<p class="textPreview">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+								<p><a href="#" class="urlPreview">Lorem ipsum dolor sit amet.</a></p>
 							</div>
-							<div class="col4">
-								<p><a href="#" class="preview">Hyperlien</a></p>
-								<?php echo template::button('themeSiteTest', [
-									'class' => 'buttonPreview',						
-									'value' => 'Test'
+						</div>
+						<div class="row">
+							<div class="col4 offset8">
+								<?php echo template::button('themeSiteSubmitButtonPreview', [
+									'class' => 'buttonSubmitPreview',						
+									'value' => 'Valider'
 								]); ?>
 							</div>
 						</div>

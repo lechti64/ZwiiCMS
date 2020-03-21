@@ -196,13 +196,6 @@ tinymce.init({
 	]
 });
 
-/**
-  * Suppression du back ground TinyMCE
-  * 
-  */
- $(body).removeAttr("background-image");
-
-
 tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
 	editor.on('init', function() {
 	  setSticky();
