@@ -13,20 +13,5 @@
  */
 
 
-#site {
-    background-color: rgba(255, 255, 255, 1);
-}
 
-body, 
-.block h4, 
-input[type="email"], 
-input[type="text"], 
-input[type="password"], 
-.inputFile, 
-select,
-textarea, 
-.inputFile, 
-.button.buttonGrey, 
-.button.buttonGrey:hover {
-    color: rgba(33, 34, 35, 1);
-}
+ @import url("core/layout/admin.css");
