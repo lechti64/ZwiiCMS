@@ -28,6 +28,11 @@
 - Modification :
     - Chargement paresseux des images.
     
+## version 9.2.26
+- Corrections :
+    - Amélioration de la gestion du thème administration.
+    - Arrière-plan TinymCE n'affiche plus l'arrière-plan du site mais la couleur du fond de la page.
+
 ## version 9.2.25
 - Corrections : 
     - Décalage du site dans SimpleLightbox.
