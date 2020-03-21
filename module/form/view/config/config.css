@@ -1,27 +1,4 @@
-#site {
-    background-color: rgba(255, 255, 255, 1);
-}
-
-body:not(.editorWysiwyg), 
-.block h4, 
-input[type="email"], 
-input[type="text"], 
-input[type="password"], 
-.inputFile, 
-select,
-textarea, 
-.inputFile, 
-.button.buttonGrey, 
-.button.buttonGrey:hover {
-    color: rgba(33, 34, 35, 1);
-}
-body {
-    font-family: "Open+Sans";
-}
-body h1, h2, h3, h4, h5, h6 {
-    font-family: "Oswald";
-    color: rgba(74, 105, 189, 1);
-}
+ @import url("core/layout/admin.css");
 
 /*
 .formConfigInput {

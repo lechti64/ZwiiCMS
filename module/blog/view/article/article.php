@@ -19,7 +19,6 @@
 <div class="row">
     <div class="col3">
 		<?php echo template::button('blogBack', [
-					'class' => 'buttonGrey',
 					'href' => helper::baseUrl() . $this->getUrl(0),
 					'ico' => 'left',
 					'value' => 'Retour'
@@ -27,7 +26,6 @@
     </div>
     <div class="col3 offset6">
  		<?php echo template::button('blogEdit', [
-					'class' => 'buttonBlue',
 					'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $this->getUrl(1) . '/' . $_SESSION['csrf'],
 					'value' => 'Editer'
 		]); ?>

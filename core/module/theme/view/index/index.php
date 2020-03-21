@@ -15,6 +15,7 @@
 		</div>
 		<div class="col2">
 			<?php echo template::button('themeManage', [				
+				'class' => 'buttonBlue',
 				'ico' => 'upload',
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/manage',
 				'value' => 'Thèmes'
@@ -22,13 +23,15 @@
 		</div>	
 		<div class="col2">
 			<?php echo template::button('themeAdvanced', [
+				'class' => 'buttonBlue',
+				'ico' => 'code',
 				'href' => helper::baseUrl() . $this->getUrl(0) . '/advanced',
-				'value' => 'Éditeur CSS',
-				'ico' => 'code'
+				'value' => 'Éditeur CSS'
 			]); ?>
 		</div>
 		<div class="col2">
 			<?php echo template::button('themeShowAll', [
+				'class' => 'buttonBlue',
 				'ico' => 'eye',
 				'value' => 'Zones cachées'
 			]); ?>
