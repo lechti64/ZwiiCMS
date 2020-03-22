@@ -20,7 +20,7 @@ tinymce.init({
 	// Plugins
 	plugins: "advlist anchor autolink autoresize autosave codemirror colorpicker contextmenu fullscreen hr image imagetools link lists media paste searchreplace stickytoolbar tabfocus table template textcolor codesample",
 	// Contenu de la barre d'outils
-	toolbar: "restoredraft | undo redo | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | template code | image media link | fullscreen",
+	toolbar: "restoredraft | undo redo |  formatselect bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | table template code | image media link | fullscreen",
 	// CodeMirror
 	codemirror: {
 		indentOnInit: true, // Whether or not to indent code on init.
@@ -66,7 +66,7 @@ tinymce.init({
 	// Pages internes
 	link_list: baseUrl + "core/vendor/tinymce/links.php",
 	// Contenu du menu contextuel
-	contextmenu: "selectall searchreplace | hr  | media image  link anchor  | inserttable  cell row column deletetable",
+	contextmenu: "selectall searchreplace | hr | media image  link anchor  | insertable  cell row column deletetable",
 	// Fichiers CSS à intégrer à l'éditeur
 	content_css: [
 		baseUrl + "core/layout/common.css",
@@ -204,10 +204,11 @@ tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
 	  var container = editor.editorContainer;
 	  var toolbars = $(container).find('.mce-toolbar-grp');
 	  var statusbar = $(container).find('.mce-statusbar');
+	  var menubar = $(container).find('.mce-menubar');
 	  
 	  if (isSticky()) {
 		$(container).css({
-		  paddingTop: toolbars.outerHeight()
+		  paddingTop: menubar.outerHeight()
 		});
 		
 		if (isAtBottom()) {
@@ -219,13 +220,21 @@ tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
 			borderBottom: 'none'
 		  }); 
 		} else {
-		  toolbars.css({
-			top: 45,
-			bottom: 'auto',
-			position: 'fixed',
-			width: $(container).width(),
-			borderBottom: '1px solid rgba(0,0,0,0.2)'
-		  });       
+			menubar.css({
+				top: 45,
+				bottom: 'auto',
+				position: 'fixed',
+				width: $(container).width(),
+				borderBottom: '1px solid rgba(0,0,0,0.2)',
+				background: '#fff'
+			}); 			
+		  	toolbars.css({
+				top: 78,
+				bottom: 'auto',
+				position: 'fixed',
+				width: $(container).width(),
+				borderBottom: '1px solid rgba(0,0,0,0.2)'
+		  	}); 
 		}
 	  } else {
 		$(container).css({
@@ -238,6 +247,12 @@ tinymce.PluginManager.add('stickytoolbar', function(editor, url) {
 		  width: 'auto',
 		  borderBottom: 'none'
 		});
+		menubar.css({
+			top:0,
+			position: 'relative',
+			width: 'auto',
+			borderBottom: 'none'
+		  });		
 	  }
 	}
 	
