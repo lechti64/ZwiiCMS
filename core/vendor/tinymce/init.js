@@ -47,8 +47,8 @@ tinymce.init({
 		cssFiles: [
 			/*'theme/ambiance.css',*/
 		],		
-		width: 1000,         // Default value is 800
-		height: 600       // Default value is 550		
+		width: 800,         // Default value is 800
+		height: 500       // Default value is 550		
 	}, 
 	// Cibles de la target
 	target_list: [
