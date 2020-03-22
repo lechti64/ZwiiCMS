@@ -39,6 +39,8 @@ function updateDOM() {
 		var colors = core.colorVariants($("#themeButtonBackgroundColor").val());
 		css += ".button.buttonSubmitPreview{background-color:" + colors.normal + ";}";
 		css += ".button.buttonSubmitPreview:hover{background-color:" + colors.darken + "}";
+		css += ".button.buttonSubmitPreview{color:" + colors.text + ";}";
+
 		// Couleurs des liens
 		colors = core.colorVariants($("#themeLinkTextColor").val());
 		css += "a.urlPreview{color:" + colors.normal + "}";
@@ -53,7 +55,7 @@ function updateDOM() {
 
 		// Taille du texte
 		// Couleur du texte
-		css += "p.preview,.buttonSubmitPreview{color:" + $("#themeTextTextColor").val() + "}";
+		css += "p.preview{color:" + $("#themeTextTextColor").val() + "}";
 
 		/**
 		 * Aperçu réel
