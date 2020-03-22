@@ -43,9 +43,6 @@ button[type=submit]:hover {
     background-color: rgba(17,44,67,1);
 }
 
-
-
-
 .speechBubble::before {
     border-color:  rgba(32, 59, 82, 1) transparent transparent transparent;
 }
