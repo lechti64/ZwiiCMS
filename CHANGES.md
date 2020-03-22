@@ -3,7 +3,8 @@
 ## version 9.2.26
 - Corrections :
     - Amélioration de la gestion du thème administration.
-    - Arrière-plan TinymCE n'affiche plus l'arrière-plan du site mais la couleur du fond de la page.
+    - TinymCE : n'affiche plus l'arrière-plan du site mais la couleur du fond de la page.
+    - TinymCE : Menu sticky + options de barre d'outils
 
 ## version 9.2.25
 - Corrections : 
