@@ -22,3 +22,14 @@
 	color: #FFF;
 	text-align: center;
 }
+/* Ajout de régles css ---------------------------- */
+.galleryRow {
+	 display: flex;
+    	flex-wrap: wrap;
+    	justify-content: center;
+}
+.col3 {
+	width : 16em;
+	max-width: 50%;
+  }
+/* ----------------------------------------------*/
