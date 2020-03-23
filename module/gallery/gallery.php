@@ -65,7 +65,7 @@ class gallery extends common {
 				self::$galleries[] = [						
 					$gallery['config']['name'],
 					$gallery['config']['directory'],
-					$gallery['config']['order'],
+					//$gallery['config']['order'],
 					/*
 					template::select('galleryConfigOrder', $galeryOrder , [
 						'selected' => $gallery['config']['order'],
