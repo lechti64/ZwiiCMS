@@ -23,8 +23,8 @@ class gallery extends common {
 	];
 
 	public static $sort = [
-		'asc' => 'Alphabétique naturel',
-		'dsc' => 'Alphabétique naturel inverse',
+		'SORT_ASC' => 'Alphabétique naturel',
+		'SORT_DSC' => 'Alphabétique naturel inverse',
 		'none' => 'Aucun tri',
 	];
 
@@ -44,8 +44,9 @@ class gallery extends common {
 	public function config() {
 		// Liste des galeries
 		$galleries = $this->getData(['module', $this->getUrl(0)]);
+		$countGalleries = count($this->getData(['module',$this->getUrl(0)]));
+
 		if($galleries) {	
-			ksort($galleries,SORT_NATURAL);
 			foreach($galleries as $galleryId => $gallery) {
 				// Erreur dossier vide
 				if(is_dir($gallery['config']['directory'])) {
@@ -57,10 +58,20 @@ class gallery extends common {
 				else {
 					$gallery['config']['directory'] = '<span class="galleryConfigError">' . $gallery['config']['directory'] . ' (dossier introuvable)</span>';
 				}
+				// Ordre des galeries
+				// Element 0 chaine vide
+				$galeryOrder  = range(1,count($this->getData(['module',$this->getUrl(0)])));
 				// Met en forme le tableau
 				self::$galleries[] = [						
 					$gallery['config']['name'],
 					$gallery['config']['directory'],
+					$gallery['config']['order'],
+					/*
+					template::select('galleryConfigOrder', $galeryOrder , [
+						'selected' => $gallery['config']['order'],
+						'class' => 'configOrder'
+
+					]),*/
 					template::button('galleryConfigEdit' . $galleryId , [
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $galleryId  . '/' . $_SESSION['csrf'],
 						'value' => template::ico('pencil')
@@ -80,7 +91,8 @@ class gallery extends common {
 				'config' => [
 					'name' => $this->getInput('galleryConfigName'),
 					'directory' => $this->getInput('galleryConfigDirectory', helper::FILTER_STRING_SHORT, true),
-					'sort' => $this->getInput('galleryConfigSort')
+					'sort' => $this->getInput('galleryConfigSort'),
+					'order' => count($this->getData(['module',$this->getUrl(0)])) + 1
 				],
 				'legend' => []
 			]]);
@@ -223,10 +235,10 @@ class gallery extends common {
 				switch ($this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'config', 'sort'])) {
 					case 'none':
 						break;
-					case 'dsc':
+					case 'SORT_DSC':
 						krsort(self::$pictures,SORT_NATURAL);
 						break;													
-					case 'asc':
+					case 'SORT_ASC':
 					default:
 						ksort(self::$pictures,SORT_NATURAL);
 						break;
@@ -268,10 +280,10 @@ class gallery extends common {
 					switch ($this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'config', 'sort'])) {
 						case 'none':
 							break;
-						case 'dsc':
+						case 'SORT_DSC':
 							krsort(self::$pictures,SORT_NATURAL);
 							break;													
-						case 'asc':
+						case 'SORT_ASC':
 						default:
 							ksort(self::$pictures,SORT_NATURAL);
 							break;
