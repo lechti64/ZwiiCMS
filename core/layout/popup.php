@@ -12,11 +12,11 @@
 		<?php $layout->showVendor(); ?>
 		<?php $layout->showAnalytics(); ?>	
 		<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>core/layout/common.css">
-		<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/theme.css?<?php echo md5_file(self::DATA_DIR.'theme.css'); ?>">
-		<link rel="stylesheet" href="<?php echo helper::baseUrl(false); ?>site/data/custom.css?<?php echo md5_file(self::DATA_DIR.'custom.css'); ?>">
+		<link rel="stylesheet" href="<?php echo helper::baseUrl(false) . self::DATA_DIR; ?>data/theme.css?<?php echo md5_file(self::DATA_DIR.'theme.css'); ?>">
+		<link rel="stylesheet" href="<?php echo helper::baseUrl(false) . self::DATA_DIR; ?>custom.css?<?php echo md5_file(self::DATA_DIR.'custom.css'); ?>">
 		<?php $layout->showStyle(); ?>
-		<?php if (file_exists('site/data/head.inc.html')) {
-			include('site/data/head.inc.html'); 
+		<?php if (file_exists(self::DATA_DIR . 'head.inc.html')) {
+			include( self::DATA_DIR . 'head.inc.html'); 
 		}?>
 	</head>
 	<body>		
@@ -53,8 +53,8 @@
 			in_array($this->getUrl(1),$pattern)  )
 			) { // Pleine page en mode configuration
 				$layout->showContent();
-				if (file_exists('site/data/body.inc.html')) {
-					include('site/data/body.inc.html'); 
+				if (file_exists(self::DATA_DIR . 'body.inc.html')) {
+					include(self::DATA_DIR . 'body.inc.html'); 
 				}				
 		} else {
 		?>
@@ -64,8 +64,8 @@
 				<div class="<?php echo $blockleft; ?>" id="contentLeft"><?php 	$layout->showBarContentLeft(); ?></div> 
 				<?php endif; ?>
 				<div class="<?php echo $content; ?>" id="contentSite"><?php $layout->showContent();
-					if (file_exists('site/data/body.inc.html')) {
-						include('site/data/body.inc.html'); 
+					if (file_exists(self::DATA_DIR . 'body.inc.html')) {
+						include(self::DATA_DIR . 'body.inc.html'); 
 					}
 				?>
 				</div>
