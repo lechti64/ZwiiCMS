@@ -45,21 +45,6 @@ class gallery extends common {
 		// Liste des galeries
 		$galleries = $this->getData(['module', $this->getUrl(0)]);
 		$countGalleries = count($this->getData(['module',$this->getUrl(0)]));
-		// Tri des éléments de la galerie
-		/*
-		echo "<pre>";	
-		if($galleries) {	
-			foreach($galleries as $galleryId => $gallery) {
-				echo $galleryId;
-				echo "|";
-				echo $gallery['config']['order'] ;
-				echo '<p>';
-			}
-		}
-		
-		
-		echo "</pre>";
-		*/
 
 		if($galleries) {	
 			foreach($galleries as $galleryId => $gallery) {
