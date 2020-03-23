@@ -2653,7 +2653,7 @@ class layout extends common {
 	 */
 	public function showStyle() {
 		if($this->core->output['style']) {
-			echo '<style>' . helper::minifyCss($this->core->output['style']) . '</style>';
+			echo '<style type="text/css">' . helper::minifyCss($this->core->output['style']) . '</style>';
 		}
 	}
 
