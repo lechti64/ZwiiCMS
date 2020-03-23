@@ -407,7 +407,11 @@ class theme extends common {
 				'textAlign' => $this->getData(['theme', 'menu', 'textAlign']),
 				'textColor' => $this->getData(['theme', 'menu', 'textColor']),
 				'textTransform' => $this->getData(['theme','menu','textTransform']),
-				'fixed' => $this->getData(['theme','menu','fixed'])	
+				'fixed' => $this->getData(['theme','menu','fixed']),
+				'activeColorAuto' => $this->getData(['theme','menu','activeColorAuto']),
+				'activeColor' => $this->getData(['theme','menu','activeColor']),
+				'radius' => $this->getData(['theme','menu','radius']),
+				'burgerTitle' => $this->getData(['theme','menu','burgerTitle'])
 			]]);
 			// Valeurs en sortie
 			$this->addOutput([
