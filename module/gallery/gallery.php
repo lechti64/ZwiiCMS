@@ -16,9 +16,10 @@ class gallery extends common {
 
 	public static $actions = [
 		'config' => self::GROUP_MODERATOR,
+		'filter' =>self::GROUP_MODERATOR,		
 		'delete' => self::GROUP_MODERATOR,
 		'dirs' => self::GROUP_MODERATOR,
-		'edit' => self::GROUP_MODERATOR,
+		'edit' => self::GROUP_MODERATOR,		
 		'index' => self::GROUP_VISITOR
 	];
 
@@ -44,8 +45,6 @@ class gallery extends common {
 	public function config() {
 		// Liste des galeries
 		$galleries = $this->getData(['module', $this->getUrl(0)]);
-		$countGalleries = count($this->getData(['module',$this->getUrl(0)]));
-
 		if($galleries) {	
 			foreach($galleries as $galleryId => $gallery) {
 				// Erreur dossier vide
@@ -58,9 +57,6 @@ class gallery extends common {
 				else {
 					$gallery['config']['directory'] = '<span class="galleryConfigError">' . $gallery['config']['directory'] . ' (dossier introuvable)</span>';
 				}
-				// Ordre des galeries
-				// Element 0 chaine vide
-				$galeryOrder  = range(1,count($this->getData(['module',$this->getUrl(0)])));
 				// Met en forme le tableau
 				self::$galleries[] = [						
 					$gallery['config']['name'],
@@ -99,8 +95,23 @@ class gallery extends common {
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Configuration du module',
-			'view' => 'config'
+			'view' => 'config',
+			'vendor' => [
+				'tablednd'
+			]
 		]);
+	}
+
+	/**
+	 * Fonction AJAX tri des galeries
+	 */
+	public function filter() {
+		
+		$data = $_POST['data'];
+		var_dump(json_decode($data));
+		var_dump($_POST);
+		die();
+		
 	}
 
 	/**

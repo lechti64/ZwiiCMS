@@ -3327,7 +3327,7 @@ class template {
 		if($head) {
 			// Début des entêtes
 			$html .= '<thead>';
-			$html .= '<tr>';
+			$html .= '<tr class="nodrag">';
 			$i = 0;
 			foreach($head as $th) {
 				$html .= '<th class="col' . $cols[$i++] . '">' . $th . '</th>';
@@ -3337,12 +3337,12 @@ class template {
 			$html .= '</thead>';
 		}
 		// Début contenu
-		$html .= '<tbody>';
-		foreach($body as $tr) {
-			$html .= '<tr>';
+		$j = 1;
+		foreach($body as $tr) {			
+			$html .= '<tr id="item' . ($j++) . '">';
 			$i = 0;
 			foreach($tr as $td) {
-				$html .= '<td " class="pos' . ($i+1) . ' col' . $cols[$i++] . '">' . $td . '</td>';
+				$html .= '<td class="col' . $cols[$i++] . '">' . $td . '</td>';
 			}
 			$html .= '</tr>';
 		}

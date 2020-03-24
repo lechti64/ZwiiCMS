@@ -67,15 +67,25 @@ directoryDOM.on("change", function() {
  * Tri dynamique de la galerie
  */
 $( document ).ready(function() {
-	var $tbody = $('#galleryTable tbody');
-	$tbody.find('tr').sort(function (a, b) {
-		var tda = $(a).find('td.pos3:eq(0)').text();
-		var tdb = $(b).find('td.pos3:eq(0)').text();
-		// if a < b return 1
-		return tda > tdb ? 1
-			   // else if a > b return -1
-			   : tda < tdb ? -1
-			   // else they are equal - return 0    
-			   : 0;
-	}).appendTo($tbody);
+	$("#galleryTable").tableDnD({
+		onDrop: function(table, row) {
+			console.log($.tableDnD.serialize());
+			var url= <?php echo json_encode(helper::baseUrl() . $this->getUrl(0) . '/filter'); ?>;
+			/*url = "http://localhost/ZwiiCMS/?galeries/filter";	*/
+			$.ajax({
+				url: url,
+				data: $.tableDnD.serialize(),
+				type: "POST",
+				success: function (data) {
+					// Je charge les données dans box
+					alert("ok");
+				},
+				// La fonction à appeler si la requête n'a pas abouti
+				error: function() {
+					// J'affiche un message d'erreur
+					alert("Désolé, aucun résultat trouvé.");
+				}
+			});
+		}
+	});
 });
