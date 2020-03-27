@@ -3312,7 +3312,7 @@ class template {
 	 * @param array $attributes Attributs ($key => $value)
 	 * @return string
 	 */
-	public static function table(array $cols = [], array $body = [], array $head = [], array $attributes = []) {
+	public static function table(array $cols = [], array $body = [], array $head = [], array $attributes = [], array $rowsId = []) {
 		// Attributs par défaut
 		$attributes = array_merge([
 			'class' => '',
@@ -3337,9 +3337,11 @@ class template {
 			$html .= '</thead>';
 		}
 		// Début contenu
-		$j = 1;
-		foreach($body as $tr) {			
-			$html .= '<tr id="item' . ($j++) . '">';
+		$j = 0;
+		foreach($body as $tr) {	
+			// Id de ligne pour les tableaux drag and drop		
+			$html .= '<tr id="' . $rowsId[$j] . '">';
+			$j++;
 			$i = 0;
 			foreach($tr as $td) {
 				$html .= '<td class="col' . $cols[$i++] . '">' . $td . '</td>';
