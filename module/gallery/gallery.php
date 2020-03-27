@@ -125,11 +125,12 @@ class gallery extends common {
 	public function add() {
 		// Soumission du formulaire
 		if($this->isPost()) {
+			$success = false;
 			if (!empty($this->getInput('galleryAddName')) ) {				
 				$galleryId = helper::increment($this->getInput('galleryAddName', helper::FILTER_ID, true), (array) $this->getData(['module', $this->getUrl(0)]));
 				$this->setData(['module', $this->getUrl(0), $galleryId, [
 					'config' => [
-						'name' => $this->getInput('galleryAddName',helper::FILTER_STRING_SHORT,true),
+						'name' => $this->getInput('galleryAddName',helper::FILTER_STRING_SHORT, true),
 						'directory' => $this->getInput('galleryAddDirectory', helper::FILTER_STRING_SHORT, true),
 						'sort' => $this->getInput('galleryAddSort'),
 						'order' => count($this->getData(['module',$this->getUrl(0)])) + 1
@@ -137,14 +138,12 @@ class gallery extends common {
 					'legend' => []
 				]]);
 				$success = true; 
-			} else {
-				$success = false;
 			}
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => $success === true ? helper::baseUrl() . $this->getUrl()  . '/config' : helper::baseUrl() . $this->getUrl() . '/add',
-				'notification' => $success === true ? 'Modifications enregistrées' : 'Le nom de la galerie est obligatoire',
-				'state' => $success
+				'redirect' =>  $success ? helper::baseUrl() . $this->getUrl(0)  . '/config' : helper::baseUrl() . $this->getUrl(0)  . '/add',
+				'notification' => $success ? 'Modifications enregistrées' : 'Le nom de la galerie est obligatoire',
+				'state' => $success  
 			]);
 		} else {
 			// valeurs en sortie

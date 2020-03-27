@@ -20,7 +20,7 @@
 				<div class="row">
 					<div class="col4">
 						<?php echo template::text('galleryAddName', [
-							'label' => 'Nom'
+							'label' => 'Nom de la galerie'
 						]); ?>
 					</div>
 					<div class="col4">

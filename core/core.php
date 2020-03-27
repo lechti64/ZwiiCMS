@@ -474,7 +474,7 @@ class common {
 		// La clef est une chaine
 		else {
 			foreach($this->input as $type => $values) {
-				// Champ obligatoire
+				// Champ obligatoire				
 				if($required) {
 					$this->addRequiredInputNotices($key);
 				}
