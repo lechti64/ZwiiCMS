@@ -1,5 +1,11 @@
 # Changelog
 
+## version 9.3.00
+- Modification : 
+    - Tri des galeries module version 2.0
+- Correction :
+    - Couleur du texte des boutons gris.
+
 ## version 9.2.26
 - Corrections :
     - Amélioration de la gestion du thème administration.
