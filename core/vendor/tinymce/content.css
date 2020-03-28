@@ -4,7 +4,7 @@
 
 /* Fix les problèmes de couleurs et de taille de police */
 .editorWysiwyg {	
-	font-size: 14px !important;
+	/*font-size: 14px !important;*/
 	background-image: none;
 }
 
@@ -84,4 +84,8 @@
 .mce-preview-object > * {
 	width: auto !important;
 	height: auto !important;
+}
+.mce-content-body {
+	padding-left: 5px !important;
+	padding-right: 5px !important;
 }

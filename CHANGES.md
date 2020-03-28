@@ -3,8 +3,13 @@
 ## version 9.3.00
 - Modification : 
     - Tri des galeries module version 2.0
-- Correction :
-    - Couleur du texte des boutons gris.
+- Corrections :
+    - Pages d'administration, thème spécifique
+        - Thème inactif lorsque la réécriture est activée.
+        - Couleur du texte des boutons gris.
+    - TinyMCE : 
+        - La taille de la police et la couleur sont celles définies dans le thème du site.
+        - Zone d'édition, padding de 5 px à gauche et à droite.
 
 ## version 9.2.26
 - Corrections :
