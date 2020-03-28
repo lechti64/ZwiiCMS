@@ -27,7 +27,7 @@
 - Corrections :
     - Pages d'administration, thème spécifique
         - Thème inactif lorsque la réécriture est activée.
-        - Couleur du texte des boutons gris.
+        - Couleur du texte des boutons gris dans l'interface d'administration.
     - TinyMCE : 
         - La taille de la police et la couleur sont celles définies dans le thème du site.
         - Zone d'édition, padding de 5 px à gauche et à droite.

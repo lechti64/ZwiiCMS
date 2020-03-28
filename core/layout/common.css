@@ -985,15 +985,6 @@ label {
 	background: #F6F7F8 !important;
 	color: #94A5B0 !important;
 }
-.button.buttonGrey {
-	background: #ECEFF1;
-}
-.button.buttonGrey:hover {
-	background: #E2E7EA;
-}
-.button.buttonGrey:active {
-	background: #D8DFE3;
-}
 .button.buttonRed {
 	background: #E74C3C;
 	color: #FFF;
