@@ -10,6 +10,7 @@
     - TinyMCE : 
         - La taille de la police et la couleur sont celles définies dans le thème du site.
         - Zone d'édition, padding de 5 px à gauche et à droite.
+    - Barre, sélecteur de page : couleur et taille fixe de la police.
 
 ## version 9.2.26
 - Corrections :
