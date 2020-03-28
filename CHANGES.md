@@ -21,6 +21,18 @@
 - Modification :
     - Chargement paresseux des images.
     
+## version 9.3.00
+- Modification : 
+    - Tri des galeries module version 2.0
+- Corrections :
+    - Pages d'administration, thème spécifique
+        - Thème inactif lorsque la réécriture est activée.
+        - Couleur du texte des boutons gris.
+    - TinyMCE : 
+        - La taille de la police et la couleur sont celles définies dans le thème du site.
+        - Zone d'édition, padding de 5 px à gauche et à droite.
+    - Barre, sélecteur de page : couleur et taille fixe de la police.
+
 ## version 9.2.26
 - Corrections :
     - Amélioration de la gestion du thème administration.
