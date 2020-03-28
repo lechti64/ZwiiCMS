@@ -57,4 +57,14 @@ body h1, h2, h3, h4, h5, h6 {
     color: rgba(74, 105, 189, 1);
 }
 
+.button.buttonGrey {
+	background: #ECEFF1;
+}
+.button.buttonGrey:hover {
+	background: #E2E7EA;
+}
+.button.buttonGrey:active {
+	background: #D8DFE3;
+}
+
 
