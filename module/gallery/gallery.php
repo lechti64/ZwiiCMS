@@ -44,8 +44,6 @@ class gallery extends common {
 	public function config() {
 		// Liste des galeries
 		$galleries = $this->getData(['module', $this->getUrl(0)]);
-		$countGalleries = count($this->getData(['module',$this->getUrl(0)]));
-
 		if($galleries) {	
 			foreach($galleries as $galleryId => $gallery) {
 				// Erreur dossier vide
