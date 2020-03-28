@@ -56,9 +56,6 @@ class gallery extends common {
 				else {
 					$gallery['config']['directory'] = '<span class="galleryConfigError">' . $gallery['config']['directory'] . ' (dossier introuvable)</span>';
 				}
-				// Ordre des galeries
-				// Element 0 chaine vide
-				$galeryOrder  = range(1,count($this->getData(['module',$this->getUrl(0)])));
 				// Met en forme le tableau
 				self::$galleries[] = [						
 					$gallery['config']['name'],
