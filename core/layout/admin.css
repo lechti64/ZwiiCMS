@@ -24,9 +24,10 @@ input[type=text],
 input[type=password], 
 .inputFile, 
 select,
-textarea, 
+textarea:not(.editorWysiwyg), 
 .inputFile,
-span .zwiico-help {
+span .zwiico-help,
+.button.buttonGrey {
     color: rgba(33, 34, 35, 1);    
 }
 

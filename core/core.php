@@ -32,7 +32,7 @@ class common {
 	const I18N_DIR = 'site/i18n/';
 
 	// Numéro de version 
-	const ZWII_VERSION = '11.0.156.dev';
+	const ZWII_VERSION = '11.0.157.dev';
 	const ZWII_UPDATE_CHANNEL = "v11";
 
 	public static $actions = [];
@@ -1432,7 +1432,8 @@ class core extends common {
 			$css .= 'a:hover{color:' . $colors['darken'] . '}';
 			$css .= 'body,.row > div{font-size:' . $this->getData(['theme', 'text', 'fontSize']) . '}';
 			$css .= 'body,.block h4,input[type=\'email\'],input[type=\'text\'],input[type=\'password\'],.inputFile,select,textarea,.inputFile{color:' . $this->getData(['theme', 'text', 'textColor']) . '}';
-			$css .= '.button.buttonGrey,.button.buttonGrey:hover{color:' . $this->getData(['theme', 'text', 'textColor']) . '}';
+			// Couleur fixée dans admin.css
+			//$css .= '.button.buttonGrey,.button.buttonGrey:hover{color:' . $this->getData(['theme', 'text', 'textColor']) . '}';
 			$css .= '.container{max-width:' . $this->getData(['theme', 'site', 'width']) . '}';
 			$css .= $this->getData(['theme', 'site', 'width']) === '100%' ? '#site{margin:0 auto !important;} body{margin:0 auto !important;}  #bar{margin:0 auto !important;} body > header{margin:0 auto !important;} body > nav {margin: 0 auto !important;} body > footer {margin:0 auto !important;}': '';
 			$css .= $this->getData(['theme', 'site', 'width']) === '750px' ? '.button, button{font-size:0.8em;}' : '';
@@ -2623,6 +2624,7 @@ class layout extends common {
 	 */
 	public function showStyle() {
 		if($this->core->output['style']) {
+			echo '<base href="' . helper::baseUrl(true) .'">';
 			echo '<style type="text/css">' . helper::minifyCss($this->core->output['style']) . '</style>';
 		}
 	}

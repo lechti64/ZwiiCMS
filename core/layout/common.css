@@ -368,6 +368,8 @@ td > .col12 {
 }
 #bar select{
 	border: 0;
+	color: #111112;	
+	font-size: 12px;
 }
 #bar #barSelectPage {
 	width: 180px;
@@ -383,7 +385,7 @@ td > .col12 {
 	}	
 	#bar #barRight {
 		float: right;
-		font-size: .8em;
+		font-size: 12px;
 	}
 }
 
