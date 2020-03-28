@@ -90,6 +90,14 @@ a:hover {
 	text-decoration: underline;
 }
 
+/* Supprimer les pointillés lors d'un clic Firefox */
+a:focus {
+	outline: none;
+}
+a:active {
+	outline: none;
+}
+
 /* Titres */
 h1 {
 	font-size: 1.8em;
