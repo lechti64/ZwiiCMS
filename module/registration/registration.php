@@ -20,6 +20,14 @@ class registration extends common {
 		'validate' => self::GROUP_VISITOR
 		];
 
+	public static $timeLimit = [
+		'1' => '1 minute',
+		'2' => '2 minutes',
+		'3' => '3 minutes',
+		'4' => '5 minutes',
+		'5' => '5 minutes'
+		];
+
 	public static $users = [];
 
 
@@ -42,7 +50,7 @@ class registration extends common {
 				$check = false;
 			}
 			// Le mail existe déjà
-			foreach($this->getData(['user']) as $userId => $user) {
+			foreach($this->getData(['user']) as $usersId => $user) {
 				if($user['mail'] ===  $this->getInput('registrationAddMail', helper::FILTER_MAIL, true) ) {
 					self::$inputNotices['registrationAddMail'] = 'Mail déjà utilisé';
 					$check = false;
@@ -61,19 +69,18 @@ class registration extends common {
 				empty($this->getInput('registrationAddConfirmPassword', helper::FILTER_STRING_SHORT, true))) {
 				$check=false;
 			}
-			// Si tout est ok création effective temporaire
+			// Si tout est ok création effective temporaire		
 			if ($check === true) {
 				$this->setData([
 					'user',
 					$userId,
 					[
 						'firstname' => $userFirstname,
-						'forgot' => 0,
-						'group' =>  NULL,
 						'lastname' => $userLastname,
 						'mail' => $userMail,
 						'password' => $this->getInput('registrationAddPassword', helper::FILTER_PASSWORD, true),
-						// Timer
+						'group' =>  self::GROUP_BANNED, 
+						'forgot' => 0,
 						'timer' => $userTimer
 					]
 				]);
@@ -115,7 +122,7 @@ class registration extends common {
 			// Valeurs en sortie
 			$this->addOutput([
 				'redirect' => $validateLink,
-				//'redirect' => $this->getUrl(0),
+				//'redirect' => helper::baseUrl(),
 				'notification' => $sentMailtoUser  ? 'Inscription en cours de validation' : '',
 				'state' => $sentMailtoUser ? true : null
 			]);
@@ -147,14 +154,14 @@ class registration extends common {
 				$userId,
 				[
 					'firstname' => $this->getData(['user',$userId,'firstname']),
-					'forgot' => 0,
-					'group' =>  self::GROUP_VISITOR,
 					'lastname' => $this->getData(['user',$userId,'lastname']),
 					'mail' => $this->getData(['user',$userId,'mail']),
-					'password' => $this->getData(['user',$userId,'password'])
+					'password' => $this->getData(['user',$userId,'password']),
+					'group' =>  self::GROUP_VISITOR,
+					'forgot' => 0
 				]
 			]);	
-			$this->saveData();		
+			$this->savedata();
 		}
 		// Valeurs en sortie
 		$this->addOutput([
@@ -170,6 +177,18 @@ class registration extends common {
 		// Soumission du formulaire
 		if($this->isPost()) {
 			// Lire les options et les enregistrer
+			$this->setData(['user','config', [
+				'timeOut' => $this->getInput('registrationConfigTimeOut'),
+				'pageSuccess' => $this->getInput('registrationConfigSuccess'),
+				'pageTimeOut' => $this->getInput('registrationConfigError'),
+				'state' => $this->getInput('registrationConfigState')
+			]]);
+			
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(),
+				'notification' => 'Modifications enregistrées',
+				'state' => true
+			]);
 		}
 		// Valeurs en sortie
 		$this->addOutput([
