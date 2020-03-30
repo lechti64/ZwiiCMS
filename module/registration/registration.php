@@ -31,6 +31,9 @@ class registration extends common {
 	public static $users = [];
 
 
+	const REGISTRATION_VERSION = '0.1';
+
+
 	/**
 	 * Ajout
 	 */
@@ -40,7 +43,7 @@ class registration extends common {
 			$check=true;
 			// L'identifiant d'utilisateur est indisponible
 			$userId = $this->getInput('registrationAddId', helper::FILTER_ID, true);
-			if($this->getData(['registration', $userId])) {
+			if($this->getData(['module','registration', $userId])) {
 				self::$inputNotices['registrationAddId'] = 'Identifiant déjà utilisé';
 				$check=false;
 			}
@@ -103,7 +106,6 @@ class registration extends common {
 					'Compte créé sur ' . $this->getData(['config', 'title']),
 					'Bonjour <strong>'.
 					'<strong>Identifiant du compte :</strong> ' . $this->getInput('registrationAddId') . '<br>' .
-					'<strong>Mot de passe du compte :</strong> ' . $this->getInput('registrationAddPassword') . '<br><br>' .
 					'<small>Nous ne conservons pas les mots de passe, par conséquence nous vous conseillons de garder ce mail tant que vous ne vous êtes pas connecté. Vous pourrez modifier votre mot de passe après votre première connexion.</small>'
 				);
 			}
@@ -115,7 +117,7 @@ class registration extends common {
 				$sentMailtoUser = $this->sendMail(
 					$userMail,
 					'Confirmation d\'inscription',
-					'Bonjour,<p>Pour confirmer votre inscription, cliquez sur le lien ci-dessous</p>' . 
+					$this->getdata(['module','registration',$this->getUrl(0),'config','mailContent']),
 					'<a href="' . $validateLink . '">' . $validateLink . '</a>'
 				);
 			}
@@ -129,8 +131,10 @@ class registration extends common {
 		}		
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => ucfirst($this->getUrl(0)) ,
-			'view' => 'index'
+			'title' => 'Configuration',
+			'view' => 'index',
+			'showBarEditButton' => true,
+			'showPageContent' => true
 		]);
 	}
 
@@ -138,13 +142,14 @@ class registration extends common {
 	 * Vérification de l'email
 	 */
 	public function validate() {
+		
 		// Vérifie la session + l'id + le timer + 5 minutes
 		$check= false;
 		$csrf = $this->getUrl(3);
 		$userId = $this->getUrl(2);		
-		// 5 minutes + clé d'authentification
+		
 		if ( 
-			( time() - $this->getData(['user',$userId,'timer']) < 300 ) &&
+			( time() - $this->getData(['user',$userId,'timer']) <= (60 * $this->getdata(['module','registration',$this->getUrl(0),'config','pageTimeOut'])) ) &&
 			( $_SESSION['csrf'] == $csrf) )	{					
 				$check=true;
 		}
@@ -157,7 +162,7 @@ class registration extends common {
 					'lastname' => $this->getData(['user',$userId,'lastname']),
 					'mail' => $this->getData(['user',$userId,'mail']),
 					'password' => $this->getData(['user',$userId,'password']),
-					'group' =>  self::GROUP_VISITOR,
+					'group' =>  $this->getdata(['module','registration',$this->getUrl(0),'config','registrationConfigState']) ? self::GROUP_BANNED : self::GROUP_VISITOR,
 					'forgot' => 0
 				]
 			]);	
@@ -165,9 +170,9 @@ class registration extends common {
 		}
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => ucfirst($this->getUrl(0)),
-			'view' => 'validate'
-			]);	
+			'redirect' => $check ? helper::baseUr() .  $this->getdata(['module','registration',$this->getUrl(0),'config','pageSuccess']) : helper::baseUr() . $this->getdata(['module','registration',$this->getUrl(0),'config','pageError']) , 
+			'state' => $check
+		]);
 	}
 
 	/**
@@ -177,13 +182,13 @@ class registration extends common {
 		// Soumission du formulaire
 		if($this->isPost()) {
 			// Lire les options et les enregistrer
-			$this->setData(['user','config', [
-				'timeOut' => $this->getInput('registrationConfigTimeOut'),
+			$this->setData(['module','registration',$this->getUrl(0),'config', [
+				'timeOut' => $this->getInput('registrationConfigTimeOut',helper::FILTER_INT),
 				'pageSuccess' => $this->getInput('registrationConfigSuccess'),
-				'pageTimeOut' => $this->getInput('registrationConfigError'),
-				'state' => $this->getInput('registrationConfigState')
+				'pageError' => $this->getInput('registrationConfigError'),
+				'state' => $this->getInput('registrationConfigState',helper::FILTER_BOOLEAN),
+				'mailContent' => $this->getInput('registrationconfigMailContent', helper::FILTER_STRING_LONG, true)
 			]]);
-			
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . $this->getUrl(),
 				'notification' => 'Modifications enregistrées',
@@ -193,7 +198,8 @@ class registration extends common {
 		// Valeurs en sortie
 		$this->addOutput([
 			'title' => 'Configuration',
-			'view' => 'config'
+			'view' => 'config',
+			'vendor' => ['tinymce']
 		]);
 	}
 }
