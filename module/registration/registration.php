@@ -72,8 +72,9 @@ class registration extends common {
 				empty($this->getInput('registrationAddConfirmPassword', helper::FILTER_STRING_SHORT, true))) {
 				$check=false;
 			}
-			// Si tout est ok création effective temporaire		
+			// Si tout est ok
 			if ($check === true) {
+				//  création effective temporaire		
 				$this->setData([
 					'user',
 					$userId,
@@ -82,51 +83,53 @@ class registration extends common {
 						'lastname' => $userLastname,
 						'mail' => $userMail,
 						'password' => $this->getInput('registrationAddPassword', helper::FILTER_PASSWORD, true),
-						'group' =>  self::GROUP_BANNED, 
+						// pas de groupe afin de le différencier dans la liste des users
+						'group' =>  null, 
 						'forgot' => 0,
 						'timer' => $userTimer
 					]
 				]);
-			}
-
-			// Mail d'avertissement aux administrateurs
-			// Utilisateurs dans le groupe admin
-			$to = [];
-			foreach($this->getData(['user']) as $userId => $user) {
-				if($user['group'] == self::GROUP_ADMIN) {
-					$to[] = $user['mail'];
+				// Mail d'avertissement aux administrateurs
+				// Utilisateurs dans le groupe admin
+				$to = [];
+				foreach($this->getData(['user']) as $userId => $user) {
+					if($user['group'] == self::GROUP_ADMIN) {
+						$to[] = $user['mail'];
+					}
 				}
-			}
-			// Envoi du mail
-			if($to) {
-				$sentMailAdmin = false;
-				// Envoi le mail
-				$sentMailAdmin = $this->sendMail(
-					$to,
-					'Compte créé sur ' . $this->getData(['config', 'title']),
-					'Bonjour <strong>'.
-					'<strong>Identifiant du compte :</strong> ' . $this->getInput('registrationAddId') . '<br>' .
-					'<small>Nous ne conservons pas les mots de passe, par conséquence nous vous conseillons de garder ce mail tant que vous ne vous êtes pas connecté. Vous pourrez modifier votre mot de passe après votre première connexion.</small>'
-				);
-			}
-			// forger le lien de vérification 
-			$validateLink = helper::baseUrl(true) . $this->getUrl() . '/validate/' . $userId . '/' . $_SESSION['csrf'];
-			// Mail de confirmation à l'utilisateur
-			$sentMailtoUser = false;
-			if($check === true) {
-				$sentMailtoUser = $this->sendMail(
-					$userMail,
-					'Confirmation d\'inscription',
-					$this->getdata(['module','registration',$this->getUrl(0),'config','mailContent']),
-					'<a href="' . $validateLink . '">' . $validateLink . '</a>'
-				);
+				// Envoi du mail
+				if($to) {
+					// Envoi le mail
+					$this->sendMail(
+						$to,
+						'Auto inscription en cours sur le site ' . $this->getData(['config', 'title']),
+						'Bonjour,'.
+						'<p>Une demande d\'inscription a été enregistrée </p>' .
+						'<p><strong>Identifiant du compte :</strong> ' . $userIf .' (' . $userFirstname . ' ' . $userLastname . ') <br>' .
+						'<strong>Email  :</strong> ' . $userMail . ') </p>' .
+						'<p>La validation du comppte est réglée sur : ' . $this->getdata(['module','registration',$this->getUrl(0),'config','registrationConfigState']) . '</p>'
+					);
+				}
+
+				// Mail de confirmation à l'utilisateur
+				// forger le lien de vérification 
+				$validateLink = helper::baseUrl(true) . $this->getUrl() . '/validate/' . $userId . '/' . $_SESSION['csrf'];
+				// Envoi
+				$sentMailtoUser = false;
+				if($check === true) {
+					$sentMailtoUser = $this->sendMail(
+						$userMail,
+						'Confirmation d\'inscription',
+						$this->getdata(['module','registration',$this->getUrl(0),'config','mailContent']).
+						'<a href="' . $validateLink . '">' . $validateLink . '</a>'
+					);
+				}
 			}
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => $validateLink,
-				//'redirect' => helper::baseUrl(),
-				'notification' => $sentMailtoUser  ? 'Inscription en cours de validation' : '',
-				'state' => $sentMailtoUser ? true : null
+				'redirect' => helper::baseUrl(),
+				'notification' => $sentMailtoUser  ? 'Inscription en cours de validation' : 'Quelque chose n\'a pas fonctionné !',
+				'state' => $sentMailtoUser ? true : false
 			]);
 		}		
 		// Valeurs en sortie
@@ -143,17 +146,16 @@ class registration extends common {
 	 */
 	public function validate() {
 		
-		// Vérifie la session + l'id + le timer + 5 minutes
+		// Vérifie la session + l'id + le timer 
 		$check= false;
 		$csrf = $this->getUrl(3);
 		$userId = $this->getUrl(2);		
-		
 		if ( 
 			( time() - $this->getData(['user',$userId,'timer']) <= (60 * $this->getdata(['module','registration',$this->getUrl(0),'config','pageTimeOut'])) ) &&
 			( $_SESSION['csrf'] == $csrf) )	{					
-				$check=true;
+				$check = true;
 		}
-		if ($check === true) {
+		if ($check) {
 			$this->setData([
 				'user',
 				$userId,

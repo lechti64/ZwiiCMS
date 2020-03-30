@@ -13,6 +13,7 @@
 			'ico' => 'plus',
 			'value' => 'Utilisateur'
 		]); ?>
+		<?php echo self::GROUP_MEMBER;?>
 	</div>
 </div>
 <?php echo template::table([3, 4, 3, 1, 1], $module::$users, ['Identifiant', 'Nom', 'Groupe', '', '']); ?>
