@@ -86,7 +86,8 @@ class registration extends common {
 						// pas de groupe afin de le différencier dans la liste des users
 						'group' =>  null, 
 						'forgot' => 0,
-						'timer' => $userTimer
+						'timer' => $userTimer,
+						'auth' => $_SESSION['csrf'] 
 					]
 				]);
 				// Mail d'avertissement aux administrateurs
@@ -105,9 +106,8 @@ class registration extends common {
 						'Auto inscription en cours sur le site ' . $this->getData(['config', 'title']),
 						'Bonjour,'.
 						'<p>Une demande d\'inscription a été enregistrée </p>' .
-						'<p><strong>Identifiant du compte :</strong> ' . $userIf .' (' . $userFirstname . ' ' . $userLastname . ') <br>' .
-						'<strong>Email  :</strong> ' . $userMail . ') </p>' .
-						'<p>La validation du comppte est réglée sur : ' . $this->getdata(['module','registration',$this->getUrl(0),'config','registrationConfigState']) . '</p>'
+						'<p><strong>Identifiant du compte :</strong> ' . $userId .' (' . $userFirstname . ' ' . $userLastname . ') <br>' .
+						'<strong>Email  :</strong> ' . $userMail . ') </p>'
 					);
 				}
 
@@ -123,11 +123,12 @@ class registration extends common {
 						$this->getdata(['module','registration',$this->getUrl(0),'config','mailContent']).
 						'<a href="' . $validateLink . '">' . $validateLink . '</a>'
 					);
-				}
+				}			
 			}
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => helper::baseUrl(),
+				'redirect' => helper::baseUrl(),				
+				//'redirect' => $validateLink,
 				'notification' => $sentMailtoUser  ? 'Inscription en cours de validation' : 'Quelque chose n\'a pas fonctionné !',
 				'state' => $sentMailtoUser ? true : false
 			]);
@@ -147,13 +148,17 @@ class registration extends common {
 	public function validate() {
 		
 		// Vérifie la session + l'id + le timer 
-		$check= false;
+		$check= true;
+		$notification = 'Bienvenue sur le site ' . $this->getData(['config', 'title']) ;
 		$csrf = $this->getUrl(3);
 		$userId = $this->getUrl(2);		
-		if ( 
-			( time() - $this->getData(['user',$userId,'timer']) <= (60 * $this->getdata(['module','registration',$this->getUrl(0),'config','pageTimeOut'])) ) &&
-			( $_SESSION['csrf'] == $csrf) )	{					
-				$check = true;
+		if (  time() - $this->getData(['user',$userId,'timer']) <= (60 * $this->getdata(['module','registration',$this->getUrl(0),'config','pageTimeOut'])) ) {
+			$check = false;
+			$notidication = 'Le lien n\'est plus valide';
+		}		
+		if (( $csrf === $this->getData(['user',$userId,'auth']) ) )	{					
+			$check = true;
+			$notification = 'Aucun compte ne correspond';
 		}
 		if ($check) {
 			$this->setData([
@@ -172,7 +177,8 @@ class registration extends common {
 		}
 		// Valeurs en sortie
 		$this->addOutput([
-			'redirect' => $check ? helper::baseUr() .  $this->getdata(['module','registration',$this->getUrl(0),'config','pageSuccess']) : helper::baseUr() . $this->getdata(['module','registration',$this->getUrl(0),'config','pageError']) , 
+			'redirect' => $check ? helper::baseUrl() .  $this->getdata(['module','registration',$this->getUrl(0),'config','pageSuccess']) : helper::baseUrl() . $this->getdata(['module','registration',$this->getUrl(0),'config','pageError']) , 
+			'notification' => $notification,
 			'state' => $check
 		]);
 	}
