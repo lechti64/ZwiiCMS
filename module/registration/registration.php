@@ -169,7 +169,7 @@ class registration extends common {
 					'lastname' => $this->getData(['user',$userId,'lastname']),
 					'mail' => $this->getData(['user',$userId,'mail']),
 					'password' => $this->getData(['user',$userId,'password']),
-					'group' =>  $this->getdata(['module','registration',$this->getUrl(0),'config','registrationConfigState']) ? self::GROUP_BANNED : self::GROUP_VISITOR,
+					'group' =>  $this->getdata(['module','registration',$this->getUrl(0),'config','state'])  === true ? null : self::GROUP_VISITOR,
 					'forgot' => 0
 				]
 			]);	
