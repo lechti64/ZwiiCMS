@@ -24,7 +24,7 @@ class registration extends common {
 		'1' => '1 minute',
 		'2' => '2 minutes',
 		'3' => '3 minutes',
-		'4' => '5 minutes',
+		'4' => '4 minutes',
 		'5' => '5 minutes'
 		];
 
@@ -187,7 +187,7 @@ class registration extends common {
 				'pageSuccess' => $this->getInput('registrationConfigSuccess'),
 				'pageError' => $this->getInput('registrationConfigError'),
 				'state' => $this->getInput('registrationConfigState',helper::FILTER_BOOLEAN),
-				'mailContent' => $this->getInput('registrationconfigMailContent', helper::FILTER_STRING_LONG, true)
+				'mailContent' => $this->getInput('registrationconfigMailContent',null , true)
 			]]);
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . $this->getUrl(),
