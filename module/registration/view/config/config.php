@@ -1,3 +1,4 @@
+
 <?php echo template::formOpen('registrationConfig'); ?>
     <div class="row">
         <div class="col2">
@@ -18,9 +19,9 @@
             <h4>Paramètres d'envoi</h4>
             <div class="row">                
                 <div class="col6 verticalAlignMiddle">
-                    <?php echo template::checkbox('registrationConfigState', true, 'Un administrateur doit valider l\'inscription', [
+                    <?php echo template::checkbox('registrationConfigState', true, 'Validation préalable', [
                         'checked' => $this->getData(['module','registration',$this->getUrl(0),'config','state']),
-                        'help' => 'Les comptes sont bannis avant validation par un administrateur.'
+                        'help' => 'Les comptes sont inactifs tant que les inscriptions ne sont pas validées.'
                     ]); ?>
                 </div>
 
@@ -28,10 +29,10 @@
             <div class="row">  
                 <div class="col12">
                     <?php echo template::textarea('registrationconfigMailContent', [
-                            'label' => 'Message dans le mail',
+                            'label' => 'Mail de confirmation',
                             'value' => $this->getData(['module','registration',$this->getUrl(0),'config','mailContent']),
                             'class' => 'editorWysiwyg',
-                            'help' => 'L\'URL de confirmation est insérée après ce texte.'
+                            'help' => 'Un lien sera inséré après ces explications.'
                         ]); ?>
                 </div>
             </div>
@@ -40,7 +41,7 @@
     <div class="row">
         <div class="col12">
             <div class="block">
-            <h4>Paramètres du lien de validation</h4>
+            <h4>Paramètres du lien de confirmation</h4>
             <div class="row">
                 <div class="col6">
                     <?php echo template::select('registrationConfigTimeOut',  $module::$timeLimit , [
@@ -52,15 +53,15 @@
             <div class="row">
                 <div class="col6">
                     <?php echo template::select('registrationConfigSuccess', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
-                        'label' => 'Redirection confirmation d\'inscription',
+                        'label' => 'Redirection après confirmation',
                         'selected' => $this->getData(['module','registration',$this->getUrl(0),'config','pageSuccess'])
                     ]); ?>
                 </div>             
                 <div class="col6">
                     <?php echo template::select('registrationConfigError', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
-                        'label' => 'Redirection Erreur',
+                        'label' => 'Redirection après erreur',
                         'selected' => $this->getData(['module','registration',$this->getUrl(0),'config','pageError']),
-                        'help' =>  'Temps dépassé ou erreur de la clé de contrôle'
+                        'help' =>  'Dépassement du délai ou erreur de la clé de contrôle'
                     ]); ?>
                 </div>
             </div>

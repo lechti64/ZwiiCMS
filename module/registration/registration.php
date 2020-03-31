@@ -103,11 +103,10 @@ class registration extends common {
 					// Envoi le mail
 					$this->sendMail(
 						$to,
-						'Auto inscription en cours sur le site ' . $this->getData(['config', 'title']),
-						'Bonjour,'.
-						'<p>Une demande d\'inscription a été enregistrée </p>' .
-						'<p><strong>Identifiant du compte :</strong> ' . $userId .' (' . $userFirstname . ' ' . $userLastname . ') <br>' .
-						'<strong>Email  :</strong> ' . $userMail . ') </p>'
+						'Auto-inscription sur le site ' . $this->getData(['config', 'title']),
+						'<p>Une demande d\'inscription a été enregistrée.</p>' .
+						'<p><strong>Identifiant du compte :</strong> ' . $userId .' (' . $userFirstname . ' ' . $userLastname . ')<br>' .
+						'<strong>Email  :</strong> ' . $userMail . '</p>'
 					);
 				}
 
@@ -120,8 +119,7 @@ class registration extends common {
 					$sentMailtoUser = $this->sendMail(
 						$userMail,
 						'Confirmation d\'inscription',
-						$this->getdata(['module','registration',$this->getUrl(0),'config','mailContent']).
-						'<a href="' . $validateLink . '">' . $validateLink . '</a>'
+						'<p>' . $this->getdata(['module','registration',$this->getUrl(0),'config','mailContent']) . '<a href="' . $validateLink . '">' . $validateLink . '</a></p>'	
 					);
 				}			
 			}
@@ -129,13 +127,13 @@ class registration extends common {
 			$this->addOutput([
 				'redirect' => helper::baseUrl(),				
 				//'redirect' => $validateLink,
-				'notification' => $sentMailtoUser  ? 'Inscription en cours de validation' : 'Quelque chose n\'a pas fonctionné !',
+				'notification' => $sentMailtoUser  ? 'Inscription en attente de validation' : 'Quelque chose n\'a pas fonctionné !',
 				'state' => $sentMailtoUser ? true : false
 			]);
 		}		
 		// Valeurs en sortie
 		$this->addOutput([
-			'title' => 'Configuration',
+			'title' => 'Inscription',
 			'view' => 'index',
 			'showBarEditButton' => true,
 			'showPageContent' => true
