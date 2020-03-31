@@ -6,10 +6,10 @@
  * For full copyright and license information, please see the LICENSE
  * file that was distributed with this source code.
  *
- * @author Rémi Jean <remi.jean@outlook.com>
- * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @author  Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2020, Frédéric Tempez
  * @license GNU General Public License, version 3
- * @link http://zwiicms.com/
+ * @link http://zwiicms.com/  
  */
 
 class registration extends common {
@@ -56,11 +56,11 @@ class registration extends common {
 					$userFirstname . ' ' . $this->getData(['user', $userId, 'lastname']),
 					self::$statusGroups[$this->getData(['user', $userId, 'group'])] ,
 					utf8_encode( date('Y-m-d G:i', $this->getData(['user', $userId, 'timer']))),
-					template::button('registrateUserEdit' . $userId, [
+					template::button('registrationUserEdit' . $userId, [
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $userId . '/' . $_SESSION['csrf'],
 						'value' => template::ico('pencil')
 					]),
-					template::button('registrateUserDelete' . $userId, [
+					template::button('registrationUserDelete' . $userId, [
 						'class' => 'userDelete buttonRed',
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $userId . '/' . $_SESSION['csrf'],
 						'value' => template::ico('cancel')
@@ -119,7 +119,7 @@ class registration extends common {
 					[
 						'firstname' => $this->getData(['user',$this->getUrl(2),'firtsname']),
 						'forgot' => 0,
-						'group' => $this->getInput('registrateUserEditGroup'),						
+						'group' => $this->getInput('registrationUserEditGroup'),						
 						'lastname' => $this->getData(['user',$this->getUrl(2),'lastname']),
 						'mail' => $this->getData(['user',$this->getUrl(2),'mail']),
 						'password' => $this->getData(['user',$this->getUrl(2),'password'])
@@ -273,15 +273,15 @@ class registration extends common {
 				if($check === true) {
 					$sentMailtoUser = $this->sendMail(
 						$userMail,
-						'Confirmation d\'inscription',
-						'<p>' . $this->getdata(['module','registration',$this->getUrl(0),'config','mailContent']) . '<a href="' . $validateLink . '">' . $validateLink . '</a></p>'	
+						'Validation de l\'inscription',
+						'<p>' . $this->getdata(['module','registration',$this->getUrl(0),'config','mailRegisterContent']) . '<a href="' . $validateLink . '">' . $validateLink . '</a></p>'	
 					);
 				}			
 			}
 			// Valeurs en sortie
 			$this->addOutput([
-				//'redirect' => helper::baseUrl(),				
-				 'redirect' => $validateLink,
+				'redirect' => helper::baseUrl(),				
+				//'redirect' => $validateLink,
 				'notification' => $sentMailtoUser  ? 'Inscription en attente de validation' : 'Quelque chose n\'a pas fonctionné !',
 				'state' => $sentMailtoUser ? true : false
 			]);
@@ -328,6 +328,11 @@ class registration extends common {
 				]
 			]);	
 			$this->savedata();
+			$this->sendMail(
+				$userMail,
+				'Confirmation de l\'inscription',
+				'<p>' . $this->getdata(['module','registration',$this->getUrl(0),'config','mailValidateContent']) . '</p>'	
+			);
 		}
 		// Valeurs en sortie
 		$this->addOutput([
@@ -349,7 +354,8 @@ class registration extends common {
 				'pageSuccess' => $this->getInput('registrationConfigSuccess'),
 				'pageError' => $this->getInput('registrationConfigError'),
 				'state' => $this->getInput('registrationConfigState',helper::FILTER_BOOLEAN),
-				'mailContent' => $this->getInput('registrationconfigMailContent',null , true)
+				'mailRegisterContent' => $this->getInput('registrationconfigMailRegisterContent'),
+				'mailValidateContent' => $this->getInput('registrationconfigMailValidateContent', null, true),
 			]]);
 			$this->addOutput([
 				'redirect' => helper::baseUrl() . $this->getUrl(),

@@ -25,7 +25,7 @@
             <h4>Paramètres d'envoi</h4>
             <div class="row">                
                 <div class="col6 verticalAlignMiddle">
-                    <?php echo template::checkbox('registrationConfigState', true, 'Validation préalable', [
+                    <?php echo template::checkbox('registrationConfigState', true, 'Validation préalable par un administrateur', [
                         'checked' => $this->getData(['module','registration',$this->getUrl(0),'config','state']),
                         'help' => 'Les comptes sont inactifs tant que les inscriptions ne sont pas validées.'
                     ]); ?>
@@ -34,14 +34,24 @@
             </div>            
             <div class="row">  
                 <div class="col12">
-                    <?php echo template::textarea('registrationconfigMailContent', [
-                            'label' => 'Mail de confirmation',
-                            'value' => $this->getData(['module','registration',$this->getUrl(0),'config','mailContent']),
+                    <?php echo template::textarea('registrationconfigMailRegisterContent', [
+                            'label' => 'Contenu du mail de validation de l\'inscription',
+                            'value' => $this->getData(['module','registration',$this->getUrl(0),'config','mailRegisterContent']),
                             'class' => 'editorWysiwyg',
                             'help' => 'Un lien sera inséré après ces explications.'
                         ]); ?>
                 </div>
             </div>
+            <div class="row">  
+                <div class="col12">
+                    <?php echo template::textarea('registrationconfigMailValidateContent', [
+                            'label' => 'Contenu du mail de confirmation d\'inscription',
+                            'value' => $this->getData(['module','registration',$this->getUrl(0),'config','mailValidateContent']),
+                            'class' => 'editorWysiwyg',
+                            'help' => 'Mail envoué une fois l\inscirption validée'
+                        ]); ?>
+                </div>
+            </div>            
         </div>
     </div>
     <div class="row">
