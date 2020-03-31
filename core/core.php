@@ -1431,7 +1431,8 @@ class core extends common {
 			$css .= 'a{color:' . $colors['normal'] . '}';
 			$css .= 'a:hover{color:' . $colors['darken'] . '}';
 			$css .= 'body,.row > div{font-size:' . $this->getData(['theme', 'text', 'fontSize']) . '}';
-			$css .= 'body,.block h4,input[type=\'email\'],input[type=\'text\'],input[type=\'password\'],.inputFile,select,textarea,.inputFile{color:' . $this->getData(['theme', 'text', 'textColor']) . '}';
+			$css .= 'body,.block h4{color:' . $this->getData(['theme', 'text', 'textColor']) . '}';
+			$css .= 'select,input[type=\'email\'],input[type=\'text\'],textarea{color:' . $this->getData(['theme', 'text', 'backgroundColor']) . '}';
 			// Couleur fixée dans admin.css
 			//$css .= '.button.buttonGrey,.button.buttonGrey:hover{color:' . $this->getData(['theme', 'text', 'textColor']) . '}';
 			$css .= '.container{max-width:' . $this->getData(['theme', 'site', 'width']) . '}';
