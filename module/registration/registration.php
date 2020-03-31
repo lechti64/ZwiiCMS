@@ -21,11 +21,9 @@ class registration extends common {
 		];
 
 	public static $timeLimit = [
-		'1' => '1 minute',
 		'2' => '2 minutes',
-		'3' => '3 minutes',
-		'4' => '4 minutes',
-		'5' => '5 minutes'
+		'5' => '4 minutes',
+		'10' => '8 minutes'
 		];
 
 	public static $users = [];
@@ -97,14 +95,15 @@ class registration extends common {
 					if($user['group'] == self::GROUP_ADMIN) {
 						$to[] = $user['mail'];
 					}
-				}
+				}			
+				$message = $this->getdata(['module','registration',$this->getUrl(0),'config','state']) ? 'Une demande d\'inscription attend que vous la validiez.' : 'Un nouveau membre s\'est inscrit.';
 				// Envoi du mail
 				if($to) {
 					// Envoi le mail
 					$this->sendMail(
 						$to,
 						'Auto-inscription sur le site ' . $this->getData(['config', 'title']),
-						'<p>Une demande d\'inscription a été enregistrée.</p>' .
+						'<p>' . $message. '</p>' .
 						'<p><strong>Identifiant du compte :</strong> ' . $userId .' (' . $userFirstname . ' ' . $userLastname . ')<br>' .
 						'<strong>Email  :</strong> ' . $userMail . '</p>'
 					);
@@ -112,7 +111,7 @@ class registration extends common {
 
 				// Mail de confirmation à l'utilisateur
 				// forger le lien de vérification 
-				$validateLink = helper::baseUrl(true) . $this->getUrl() . '/validate/' . $userId . '/' . $_SESSION['csrf'];
+				$validateLink = helper::baseUrl(true) . $this->getUrl() . '/validate/' . $userId . '/' . $_SESSION['csrf'];			
 				// Envoi
 				$sentMailtoUser = false;
 				if($check === true) {
@@ -167,7 +166,7 @@ class registration extends common {
 					'lastname' => $this->getData(['user',$userId,'lastname']),
 					'mail' => $this->getData(['user',$userId,'mail']),
 					'password' => $this->getData(['user',$userId,'password']),
-					'group' =>  $this->getdata(['module','registration',$this->getUrl(0),'config','state'])  === true ? null : self::GROUP_VISITOR,
+					'group' =>  $this->getdata(['module','registration',$this->getUrl(0),'config','state'])  === true ? null : self::GROUP_MEMBER,
 					'forgot' => 0
 				]
 			]);	
