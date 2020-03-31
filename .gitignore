@@ -23,7 +23,6 @@ site/file/thumb/*
 .idea/
 
 # Trucs
-.gitignore
 core/vendor/tinymce/link_list.json
 site/tmp/.htaccess
 .vscode/*
