@@ -1105,11 +1105,19 @@ class common {
 			$this->setData(['config', 'proxyType', 'tcp://' ]);
 			$this->setData(['core', 'dataVersion', 9223]);
 		}	
+		// Version 9.3.00
+		if($this->getData(['core', 'dataVersion']) < 9300) {
+			// Forcer la régénération du thème
+			if (file_exists(self::DATA_DIR.'theme.css') === false) {
+				unlink (self::DATA_DIR.'theme.css');
+			}
+			$this->setData(['core', 'dataVersion', 9300]);
+		}			
 		// Version 10.0.00
 		if($this->getData(['core', 'dataVersion']) < 10000) {
 			$this->setData(['config', 'faviconDark','faviconDark.ico']);
 			$this->setData(['core', 'dataVersion', 10000]);	
-		}		
+		}	
 	}
 }
 
