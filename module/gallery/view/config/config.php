@@ -50,6 +50,5 @@
 		<?php echo template::speech('Aucune galerie.'); ?>
 	<?php endif; ?>
 <?php echo template::formClose(); ?>
-<div class="moduleVersion">Version n°
-	<?php echo $module::GALLERY_VERSION; ?>
+<div class="moduleVersion">Version n°<?php echo $module::GALLERY_VERSION; ?>
 </div>

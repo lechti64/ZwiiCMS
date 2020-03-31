@@ -65,8 +65,10 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col2 offset10">
-			<?php echo template::submit('registrationAddSubmit'); ?>
+		<div class="col2 offset7">
+			<?php echo template::submit('registrationAddSubmit', [
+				'value' => 'valider'
+			]); ?>
 		</div>
 	</div>
 <?php echo template::formClose(); ?>

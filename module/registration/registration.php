@@ -14,22 +14,177 @@
 
 class registration extends common {
 
+	const STATUS_AWAITING = NULL; // En attente de validation du mail
+	const STATUS_VALIDATED = -2;   // Mail validé
+
 	public static $actions = [
 		'index' => self::GROUP_VISITOR,
+		'validate' => self::GROUP_VISITOR,
 		'config' => self::GROUP_ADMIN,
-		'validate' => self::GROUP_VISITOR
-		];
+		'user' => self::GROUP_ADMIN,
+		'delete' => self::GROUP_ADMIN,
+		'edit' => self::GROUP_ADMIN
+	];
+
+	public static $statusGroups = [
+		self::STATUS_AWAITING => 'En attente',
+		self::STATUS_VALIDATED => 'Email validé',
+	];
 
 	public static $timeLimit = [
-		'2' => '2 minutes',
-		'4' => '4 minutes',
-		'6' => '6 minutes'
-		];
+		2 => '2 minutes',
+		4 => '4 minutes',
+		6 => '6 minutes'
+	];
 
 	public static $users = [];
 
 
-	const REGISTRATION_VERSION = '0.1';
+	const REGISTRATION_VERSION = '0.3';
+
+	/**
+	 * Liste des utilisateurs en attente
+	 */
+	public function user() {
+		$userIdsFirstnames = helper::arrayCollumn($this->getData(['user']), 'firstname');
+		ksort($userIdsFirstnames);
+		foreach($userIdsFirstnames as $userId => $userFirstname) {
+			if ( 	$this->getData(['user',$userId,'group']) === self::STATUS_AWAITING || 
+					$this->getData(['user',$userId,'group']) === self::STATUS_VALIDATED	) {
+				self::$users[] = [
+					$userId,
+					$userFirstname . ' ' . $this->getData(['user', $userId, 'lastname']),
+					self::$statusGroups[$this->getData(['user', $userId, 'group'])] ,
+					utf8_encode( date('Y-m-d G:i', $this->getData(['user', $userId, 'timer']))),
+					template::button('registrateUserEdit' . $userId, [
+						'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $userId . '/' . $_SESSION['csrf'],
+						'value' => template::ico('pencil')
+					]),
+					template::button('registrateUserDelete' . $userId, [
+						'class' => 'userDelete buttonRed',
+						'href' => helper::baseUrl() . $this->getUrl(0) . '/delete/' . $userId . '/' . $_SESSION['csrf'],
+						'value' => template::ico('cancel')
+					])
+				];
+			}
+		}
+		// Valeurs en sortie
+		$this->addOutput([
+			'title' => 'Demandes d\'inscription',
+			'view' => 'user'
+		]);
+	}
+
+
+	/**
+	 * Édition
+	 */
+	public function edit() {
+		if ($this->getUrl(3) !== $_SESSION['csrf'] &&
+			$this->getUrl(4) !== $_SESSION['csrf']) {			
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . 'user',
+				'notification' => 'Action  non autorisée'
+			]);
+		}	
+		// Accès refusé
+		if(
+			// L'utilisateur n'existe pas
+			$this->getData(['user', $this->getUrl(2)]) === null
+			// Droit d'édition
+			AND (
+				// Impossible de s'auto-éditer
+				(
+					$this->getUser('id') === $this->getUrl(2)
+					AND $this->getUrl('group') <= self::GROUP_VISITOR
+				)
+				// Impossible d'éditer un autre utilisateur
+				OR ($this->getUrl('group') < self::GROUP_MODERATOR)
+			)
+		) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'access' => false
+			]);
+		}
+		// Accès autorisé
+		else {
+			// Soumission du formulaire
+			if($this->isPost()) {
+				// Modification du groupe
+				$this->setData([
+					'user',
+					$this->getUrl(2),
+					[
+						'firstname' => $this->getData(['user',$this->getUrl(2),'firtsname']),
+						'forgot' => 0,
+						'group' => $this->getInput('registrateUserEditGroup'),						
+						'lastname' => $this->getData(['user',$this->getUrl(2),'lastname']),
+						'mail' => $this->getData(['user',$this->getUrl(2),'mail']),
+						'password' => $this->getData(['user',$this->getUrl(2),'password'])
+					]
+				]);
+				$redirect = helper::baseUrl() . $this->getUrl(0) . '/user';
+				// Valeurs en sortie
+				$this->addOutput([
+					'redirect' => $redirect,
+					'notification' => 'Modifications enregistrées',
+					'state' => true
+				]);
+			}
+			// Valeurs en sortie
+			$this->addOutput([
+				'title' => $this->getData(['user', $this->getUrl(2), 'firstname']) . ' ' . $this->getData(['user', $this->getUrl(2), 'lastname']),
+				'view' => 'edit'
+			]);
+		}
+	}
+
+
+	/**
+	 * Suppression
+	 */
+	public function delete() {
+		// Accès refusé
+		if(
+			// L'utilisateur n'existe pas
+			$this->getData(['user', $this->getUrl(2)]) === null
+			// Groupe insuffisant
+			AND ($this->getUrl('group') < self::GROUP_MODERATOR)
+		) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'access' => false
+			]);
+		}
+		// Jeton incorrect
+		elseif ($this->getUrl(3) !== $_SESSION['csrf']) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/user',
+				'notification' => 'Action non autorisée'
+			]);
+		}		
+		// Bloque la suppression de son propre compte
+		elseif($this->getUser('id') === $this->getUrl(2)) {
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/user',
+				'notification' => 'Impossible de supprimer votre propre compte'
+			]);
+		}
+		// Suppression
+		else {
+			$this->deleteData(['user', $this->getUrl(2)]);
+			// Valeurs en sortie
+			$this->addOutput([
+				'redirect' => helper::baseUrl() . $this->getUrl(0) . '/user',
+				'notification' => 'Utilisateur supprimé',
+				'state' => true
+			]);
+		}
+	}
 
 
 	/**
@@ -85,7 +240,8 @@ class registration extends common {
 						'group' =>  null, 
 						'forgot' => 0,
 						'timer' => $userTimer,
-						'auth' => $_SESSION['csrf'] 
+						'auth' => $_SESSION['csrf'],
+						'status' => self::STATUS_AWAITING
 					]
 				]);
 				// Mail d'avertissement aux administrateurs
@@ -124,8 +280,8 @@ class registration extends common {
 			}
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => helper::baseUrl(),				
-				//'redirect' => $validateLink,
+				//'redirect' => helper::baseUrl(),				
+				 'redirect' => $validateLink,
 				'notification' => $sentMailtoUser  ? 'Inscription en attente de validation' : 'Quelque chose n\'a pas fonctionné !',
 				'state' => $sentMailtoUser ? true : false
 			]);
@@ -146,16 +302,16 @@ class registration extends common {
 		
 		// Vérifie la session + l'id + le timer 
 		$check= true;
-		$notification = 'Bienvenue sur le site ' . $this->getData(['config', 'title']) ;
+		$notification = 'Bienvenue sur le site' . $this->getData(['config', 'title']) ;
 		$csrf = $this->getUrl(3);
 		$userId = $this->getUrl(2);		
 		if (  time() - $this->getData(['user',$userId,'timer']) <= (60 * $this->getdata(['module','registration',$this->getUrl(0),'config','pageTimeOut'])) ) {
 			$check = false;
 			$notidication = 'Le lien n\'est plus valide';
 		}		
-		if (( $csrf === $this->getData(['user',$userId,'auth']) ) )	{					
-			$check = true;
-			$notification = 'Aucun compte ne correspond';
+		if (( $csrf !== $this->getData(['user',$userId,'auth']) ) )	{					
+			$check = false;
+			$notification = 'La validation n\'a pas abouti !';
 		}
 		if ($check) {
 			$this->setData([
@@ -166,8 +322,9 @@ class registration extends common {
 					'lastname' => $this->getData(['user',$userId,'lastname']),
 					'mail' => $this->getData(['user',$userId,'mail']),
 					'password' => $this->getData(['user',$userId,'password']),
-					'group' =>  $this->getdata(['module','registration',$this->getUrl(0),'config','state'])  === true ? null : self::GROUP_MEMBER,
-					'forgot' => 0
+					'group' =>  $this->getdata(['module','registration',$this->getUrl(0),'config','state'])  === true ? self::STATUS_VALIDATED : self::GROUP_MEMBER,
+					'forgot' => 0,
+					'timer' => $this->getData(['user',$userId,'timer'])
 				]
 			]);	
 			$this->savedata();
