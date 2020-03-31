@@ -1092,6 +1092,12 @@ class common {
 		}
 		// Version 9.3.00
 		if($this->getData(['core', 'dataVersion']) < 9300) {
+
+			// Forcer la régénération du thème
+			if (file_exists(self::DATA_DIR.'theme.css') === false) {
+				unlink (self::DATA_DIR.'theme.css');
+			}
+
 			// Numérotation des galeries
 			// Lire toutes les pages et trouver celle avec le module gallery
 			// Parcourir les galeries du modules
