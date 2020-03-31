@@ -22,8 +22,8 @@ class registration extends common {
 
 	public static $timeLimit = [
 		'2' => '2 minutes',
-		'5' => '4 minutes',
-		'10' => '8 minutes'
+		'4' => '4 minutes',
+		'6' => '6 minutes'
 		];
 
 	public static $users = [];
