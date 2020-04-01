@@ -252,14 +252,15 @@ class registration extends common {
 						$to[] = $user['mail'];
 					}
 				}			
-				$message = $this->getdata(['module','registration',$this->getUrl(0),'config','state']) ? 'Une demande d\'inscription attend que vous la validiez.' : 'Un nouveau membre s\'est inscrit.';
 				// Envoi du mail
 				if($to) {
 					// Envoi le mail
 					$this->sendMail(
 						$to,
 						'Auto-inscription sur le site ' . $this->getData(['config', 'title']),
-						'<p>' . $message. '</p>' .
+						'<p>' .
+						$this->getdata(['module','registration',$this->getUrl(0),'config','state']) ? 'Une demande d\'inscription attend que vous la validiez.' : 'Un nouveau membre s\'est inscrit.' .
+						'</p>' .
 						'<p><strong>Identifiant du compte :</strong> ' . $userId .' (' . $userFirstname . ' ' . $userLastname . ')<br>' .
 						'<strong>Email  :</strong> ' . $userMail . '</p>'
 					);
@@ -275,15 +276,15 @@ class registration extends common {
 						$userMail,
 						'Confirmation de votre inscription',
 						'<p>' . $this->getdata(['module','registration',$this->getUrl(0),'config','mailRegisterContent']) . '</p>' .
-						'<center>' . registrationTemplate::mailButton($validateLink) . '<center'
+						registrationTemplate::mailButton($validateLink)
 					);
 				}			
 			}
 			// Valeurs en sortie
 			$this->addOutput([
-				//'redirect' => helper::baseUrl(),				
-				'redirect' => $validateLink,
-				'notification' => $sentMailtoUser  ? 'Inscription en attente d`approbation' : 'Quelque chose n\'a pas fonctionné !',
+				'redirect' => helper::baseUrl(),				
+				//'redirect' => $validateLink,
+				'notification' => $sentMailtoUser  ? "Un mail vous a été envoyé" : 'Quelque chose n\'a pas fonctionné !',
 				'state' => $sentMailtoUser ? true : false
 			]);
 		}		
@@ -299,8 +300,7 @@ class registration extends common {
 	/**
 	 * Vérification de l'email
 	 */
-	public function validate() {
-		
+	public function validate() {		
 		// Vérifie la session + l'id + le timer 
 		$check= true;
 		$notification = 'Bienvenue sur le site' . $this->getData(['config', 'title']) ;
@@ -374,7 +374,7 @@ class registration extends common {
 }
 
 
-class registration_template extends template {
+class registrationTemplate extends template {
 	public static function mailButton($link) {
 		return ('<table width="100%" cellspacing="0" cellpadding="0">
 					<tr>
@@ -383,7 +383,7 @@ class registration_template extends template {
 								<tr>
 									<td style="border-radius: 2px;" bgcolor="#ED2939">
 										<a href="' . $link . '" target="_blank" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
-											Click             
+											Activation du compte             
 										</a>
 									</td>
 								</tr>
