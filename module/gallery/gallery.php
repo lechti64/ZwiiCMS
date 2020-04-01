@@ -346,8 +346,16 @@ class gallery extends common {
 
 		}
 		// Liste des galeries
-		else {		
-			foreach((array) $this->getData(['module', $this->getUrl(0)]) as $galleryId => $gallery) {
+		else {
+			// Tri des galeries 
+			$g = $this->getData(['module', $this->getUrl(0)]);
+			$p = helper::arrayCollumn(helper::arrayCollumn($g,'config'),'position');
+			asort($p,SORT_NUMERIC);		
+			$galleries = [];
+			foreach ($p as $positionId => $item) {
+				$galleries [$positionId] = $g[$positionId];			
+			}		
+			foreach((array) $galleries as $galleryId => $gallery) {
 				if(is_dir($gallery['config']['directory'])) {
 					$iterator = new DirectoryIterator($gallery['config']['directory']);
 					foreach($iterator as $fileInfos) {
