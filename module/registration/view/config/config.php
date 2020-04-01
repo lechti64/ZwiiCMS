@@ -22,46 +22,11 @@
     <div class="row">
         <div class="col12">
             <div class="block">
-            <h4>Paramètres d'envoi</h4>
-            <div class="row">                
-                <div class="col6 verticalAlignMiddle">
-                    <?php echo template::checkbox('registrationConfigState', true, 'Validation préalable par un administrateur', [
-                        'checked' => $this->getData(['module','registration',$this->getUrl(0),'config','state']),
-                        'help' => 'Les comptes sont inactifs tant que les inscriptions ne sont pas validées.'
-                    ]); ?>
-                </div>
-
-            </div>            
-            <div class="row">  
-                <div class="col12">
-                    <?php echo template::textarea('registrationconfigMailRegisterContent', [
-                            'label' => 'Contenu du mail de validation de l\'inscription',
-                            'value' => $this->getData(['module','registration',$this->getUrl(0),'config','mailRegisterContent']),
-                            'class' => 'editorWysiwyg',
-                            'help' => 'Un lien sera inséré après ces explications.'
-                        ]); ?>
-                </div>
-            </div>
-            <div class="row">  
-                <div class="col12">
-                    <?php echo template::textarea('registrationconfigMailValidateContent', [
-                            'label' => 'Contenu du mail de confirmation d\'inscription',
-                            'value' => $this->getData(['module','registration',$this->getUrl(0),'config','mailValidateContent']),
-                            'class' => 'editorWysiwyg',
-                            'help' => 'Mail envoué une fois l\inscirption validée'
-                        ]); ?>
-                </div>
-            </div>            
-        </div>
-    </div>
-    <div class="row">
-        <div class="col12">
-            <div class="block">
-            <h4>Paramètres du lien de confirmation</h4>
+            <h4>Validation de l'adresse mail</h4>
             <div class="row">
                 <div class="col6">
                     <?php echo template::select('registrationConfigTimeOut',  $module::$timeLimit , [
-                        'label' => 'Durée de validité',
+                        'label' => 'Durée de validité du lien',
                         'selected' => $this->getData(['module','registration',$this->getUrl(0),'config','timeOut'])
                     ]); ?>
                 </div>
@@ -76,11 +41,44 @@
                 <div class="col6">
                     <?php echo template::select('registrationConfigError', helper::arrayCollumn($this->getData(['page']), 'title', 'SORT_ASC'), [
                         'label' => 'Redirection après erreur',
-                        'selected' => $this->getData(['module','registration',$this->getUrl(0),'config','pageError']),
-                        'help' =>  'Dépassement du délai ou erreur de la clé de contrôle'
+                        'selected' => $this->getData(['module','registration',$this->getUrl(0),'config','pageError'])
                     ]); ?>
                 </div>
             </div>
+            <div class="row">  
+                <div class="col12">
+                    <?php echo template::textarea('registrationconfigMailRegisterContent', [
+                            'label' => 'Contenu du mail',
+                            'value' => $this->getData(['module','registration',$this->getUrl(0),'config','mailRegisterContent']),
+                            'class' => 'editorWysiwyg',
+                            'help' => 'Un lien sera inséré après ces explications.'
+                        ]); ?>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col12">
+            <div class="block">
+            <h4>Paramètres de l'inscription après validation de l'adresse mail</h4>
+            <div class="row">                
+                <div class="col6 verticalAlignMiddle">
+                    <?php echo template::checkbox('registrationConfigState', true, 'Validation préalable par un administrateur', [
+                        'checked' => $this->getData(['module','registration',$this->getUrl(0),'config','state']),
+                        'help' => 'Les comptes sont inactifs tant que les inscriptions ne sont pas validées.'
+                    ]); ?>
+                </div>
+
+            </div>            
+            <div class="row">  
+                <div class="col12">
+                    <?php echo template::textarea('registrationconfigMailValidateContent', [
+                            'label' => 'Contenu du mail de confirmation d\'inscription',
+                            'value' => $this->getData(['module','registration',$this->getUrl(0),'config','mailValidateContent']),
+                            'class' => 'editorWysiwyg'
+                        ]); ?>
+                </div>
+            </div>            
         </div>
     </div>
             

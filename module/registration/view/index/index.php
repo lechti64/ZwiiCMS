@@ -67,7 +67,7 @@
 	<div class="row">
 		<div class="col2 offset7">
 			<?php echo template::submit('registrationAddSubmit', [
-				'value' => 'valider'
+				'value' => 'Envoyer'
 			]); ?>
 		</div>
 	</div>

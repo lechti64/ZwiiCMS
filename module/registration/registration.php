@@ -15,7 +15,7 @@
 class registration extends common {
 
 	const STATUS_AWAITING = NULL; // En attente de validation du mail
-	const STATUS_VALIDATED = -2;   // Mail validé
+	const STATUS_VALIDATED = -2;   // Mail validé en attente d'un admin
 
 	public static $actions = [
 		'index' => self::GROUP_VISITOR,
@@ -33,8 +33,8 @@ class registration extends common {
 
 	public static $timeLimit = [
 		2 => '2 minutes',
-		4 => '4 minutes',
-		6 => '6 minutes'
+		5 => '5 minutes',
+		10 => '10 minutes'
 	];
 
 	public static $users = [];
@@ -273,16 +273,17 @@ class registration extends common {
 				if($check === true) {
 					$sentMailtoUser = $this->sendMail(
 						$userMail,
-						'Validation de l\'inscription',
-						'<p>' . $this->getdata(['module','registration',$this->getUrl(0),'config','mailRegisterContent']) . '<a href="' . $validateLink . '">' . $validateLink . '</a></p>'	
+						'Confirmation de votre inscription',
+						'<p>' . $this->getdata(['module','registration',$this->getUrl(0),'config','mailRegisterContent']) . '</p>' .
+						'<center>' . registrationTemplate::mailButton($validateLink) . '<center'
 					);
 				}			
 			}
 			// Valeurs en sortie
 			$this->addOutput([
-				'redirect' => helper::baseUrl(),				
-				//'redirect' => $validateLink,
-				'notification' => $sentMailtoUser  ? 'Inscription en attente de validation' : 'Quelque chose n\'a pas fonctionné !',
+				//'redirect' => helper::baseUrl(),				
+				'redirect' => $validateLink,
+				'notification' => $sentMailtoUser  ? 'Inscription en attente d`approbation' : 'Quelque chose n\'a pas fonctionné !',
 				'state' => $sentMailtoUser ? true : false
 			]);
 		}		
@@ -354,7 +355,7 @@ class registration extends common {
 				'pageSuccess' => $this->getInput('registrationConfigSuccess'),
 				'pageError' => $this->getInput('registrationConfigError'),
 				'state' => $this->getInput('registrationConfigState',helper::FILTER_BOOLEAN),
-				'mailRegisterContent' => $this->getInput('registrationconfigMailRegisterContent'),
+				'mailRegisterContent' => $this->getInput('registrationconfigMailRegisterContent', null, true),
 				'mailValidateContent' => $this->getInput('registrationconfigMailValidateContent', null, true),
 			]]);
 			$this->addOutput([
@@ -369,5 +370,26 @@ class registration extends common {
 			'view' => 'config',
 			'vendor' => ['tinymce']
 		]);
+	}
+}
+
+
+class registration_template extends template {
+	public static function mailButton($link) {
+		return ('<table width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td>
+							<table cellspacing="0" cellpadding="0">
+								<tr>
+									<td style="border-radius: 2px;" bgcolor="#ED2939">
+										<a href="' . $link . '" target="_blank" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
+											Click             
+										</a>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>');
 	}
 }

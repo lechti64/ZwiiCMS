@@ -42,6 +42,7 @@ $("#registrationAddId").on("change keydown keyup", function(event) {
 $("#registrationAddGroup").on("change", function() {
 	$(".registrationAddGroupDescription").hide();
 	$("#registrationAddGroupDescription" + $(this).val()).show();
+	console.log ($(this).val());
 }).trigger("change");
 
 
