@@ -254,15 +254,16 @@ class registration extends common {
 				}			
 				// Envoi du mail
 				if($to) {
+					$messageAdmin = $this->getdata(['module','registration',$this->getUrl(0),'config','state']) ? 'Une demande d\'inscription attend l`approbation d\'un administrateur.' : 'Un nouveau membre s\'est inscrit.';
+					$validateLink = helper::baseUrl(true) . $this->getUrl() . '/user';			
 					// Envoi le mail
 					$this->sendMail(
 						$to,
 						'Auto-inscription sur le site ' . $this->getData(['config', 'title']),
-						'<p>' .
-						$this->getdata(['module','registration',$this->getUrl(0),'config','state']) ? 'Une demande d\'inscription attend que vous la validiez.' : 'Un nouveau membre s\'est inscrit.' .
-						'</p>' .
+						'<p>' . $messageAdmin . '</p>' .
 						'<p><strong>Identifiant du compte :</strong> ' . $userId .' (' . $userFirstname . ' ' . $userLastname . ')<br>' .
-						'<strong>Email  :</strong> ' . $userMail . '</p>'
+						'<strong>Email  :</strong> ' . $userMail . '</p>' .
+						'<p><a href="' . $validateLink . '">Vérifier et activer le compte</a></p>'
 					);
 				}
 
@@ -276,7 +277,7 @@ class registration extends common {
 						$userMail,
 						'Confirmation de votre inscription',
 						'<p>' . $this->getdata(['module','registration',$this->getUrl(0),'config','mailRegisterContent']) . '</p>' .
-						registrationTemplate::mailButton($validateLink)
+						'<a href="'. $validateLink . '"> Activation de votre compte.<a/>'
 					);
 				}			
 			}
@@ -373,23 +374,3 @@ class registration extends common {
 	}
 }
 
-
-class registrationTemplate extends template {
-	public static function mailButton($link) {
-		return ('<table width="100%" cellspacing="0" cellpadding="0">
-					<tr>
-						<td>
-							<table cellspacing="0" cellpadding="0">
-								<tr>
-									<td style="border-radius: 2px;" bgcolor="#ED2939">
-										<a href="' . $link . '" target="_blank" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
-											Activation du compte             
-										</a>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>');
-	}
-}
