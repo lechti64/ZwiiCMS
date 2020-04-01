@@ -47,7 +47,7 @@
 <?php echo template::formClose(); ?>	
 <?php echo template::formOpen('galleryConfigFilterForm'); ?>
 	<?php if($module::$galleries): ?>
-	<?php echo template::table([1,4, 6, 1, 1], $module::$galleries, ['','Nom', 'Dossier cible', '', ''], ['id' => 'galleryTable'],$module::$galleriesId); ?>
+	<?php echo template::table([1, 4, 5, 1, 1], $module::$galleries, ['','Nom', 'Dossier cible', '', ''], ['id' => 'galleryTable'],$module::$galleriesId); ?>
 	<?php echo template::hidden('galleryConfigFilterResponse'); ?>
 	<?php echo template::hidden('galleryConfigFilterSubmit',[
 				'value' => false
