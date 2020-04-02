@@ -475,7 +475,7 @@ class common {
 		// La clef est une chaine
 		else {
 			foreach($this->input as $type => $values) {
-				// Champ obligatoire
+				// Champ obligatoire				
 				if($required) {
 					$this->addRequiredInputNotices($key);
 				}
@@ -1111,6 +1111,36 @@ class common {
 			if (file_exists(self::DATA_DIR.'theme.css') === false) {
 				unlink (self::DATA_DIR.'theme.css');
 			}
+			// Numérotation des galeries
+			// Lire toutes les pages et trouver celle avec le module gallery
+			// Parcourir les galeries du modules
+			// Verifier la présence des champs : sort et postion
+
+			// Tableau avec les pages
+			$pageList = array();
+			foreach ($this->getHierarchy(null,null,null) as $parentKey=>$parentValue) {
+				$pageList [] = $parentKey;
+				foreach ($parentValue as $childKey) {
+					$pageList [] = $childKey;
+				}
+			}			
+			// Parcourir toutes les pages
+			foreach ($pageList as $parentKey => $parent) {
+				//La page a une galerie
+				if ($this->getData(['page',$parent,'moduleId']) === 'gallery' ) {
+					// Parcourir les dossiers de la galerie
+					$tempData =  $this->getData(['module', $parent]);	
+					$i = 1;
+					foreach ($tempData as $galleryKey => $galleryItem) {
+						if ( $this->getdata(['module',$parent,$galleryKey,'config','sort']) === NULL)  {
+							$this->setdata(['module',$parent,$galleryKey,'config','sort','SORT_ASC']);
+						}
+						if ( $this->getdata(['module',$parent,$galleryKey,'config','position']) === NULL) {
+							$this->setdata(['module',$parent,$galleryKey,'config','position',$i++]);
+						}						
+					}					
+				}
+			}			
 			$this->setData(['core', 'dataVersion', 9227]);
 		}			
 		// Version 10.0.00
@@ -1118,6 +1148,7 @@ class common {
 			$this->setData(['config', 'faviconDark','faviconDark.ico']);
 			$this->setData(['core', 'dataVersion', 10000]);	
 		}	
+
 	}
 }
 
