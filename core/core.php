@@ -1090,9 +1090,8 @@ class common {
 			$this->setData(['core', 'dataVersion', 9223]);
 			$this->saveData();
 		}
-		// Version 9.3.00
-		if($this->getData(['core', 'dataVersion']) < 9300) {
-
+		// Version 9.2.27
+		if($this->getData(['core', 'dataVersion']) < 9227) {
 			// Forcer la régénération du thème
 			if (file_exists(self::DATA_DIR.'theme.css') === false) {
 				unlink (self::DATA_DIR.'theme.css');
@@ -1129,7 +1128,7 @@ class common {
 				}
 			}
 
-			$this->setData(['core', 'dataVersion', 9300]);
+			$this->setData(['core', 'dataVersion', 9227]);
 			$this->saveData();
 		}
 
