@@ -2669,11 +2669,11 @@ class layout extends common {
 				$lastAutoUpdate = mktime(0, 0, 0);			
 				if( $this->getData(['config','autoUpdate']) === true &&
 					$lastAutoUpdate > $this->getData(['core','lastAutoUpdate']) + 86400 ) {	
-						$this->setData(['core','lastAutoUpdate',$lastAutoUpdate]);
-						$this->saveData();
+						$this->setData(['core','lastAutoUpdate',$lastAutoUpdate]);						
 				    if ( helper::checkNewVersion(common::ZWII_UPDATE_CHANNEL)  ) {
 						$rightItems .= '<li><a id="barUpdate" href="' . helper::baseUrl() . 'install/update" data-tippy-content="Mettre à jour Zwii '. common::ZWII_VERSION .' vers '. helper::getOnlineVersion(common::ZWII_UPDATE_CHANNEL) .'">' . template::ico('update colorRed') . '</a></li>';
 					}
+					$this->saveData();
 				}	
 			}
 			$rightItems .= '<li><a href="' . helper::baseUrl() . 'user/edit/' . $this->getUser('id'). '/' . $_SESSION['csrf'] . '" data-tippy-content="Configurer mon compte">' . template::ico('user', 'right') . '<span id="displayUsername">' .  $this->getUser('firstname') . ' ' . $this->getUser('lastname') . '</span></a></li>';
