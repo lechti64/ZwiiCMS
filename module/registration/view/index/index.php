@@ -1,6 +1,26 @@
 <?php echo template::formOpen('registrationAddForm'); ?>
+	<?php if ($this->getUser('group') === self::GROUP_ADMIN): ?>		
 	<div class="row">
-		<div class="col6 offset3">
+		<div class="col2 offset8">
+			<?php
+			if (array_search($module::STATUS_AWAITING,helper::arrayCollumn($this->getData(['user']), 'group')) !== false ||
+				array_search($module::STATUS_VALIDATED,helper::arrayCollumn($this->getData(['user']), 'group')) !== false ): ?>
+					<?php echo template::button ('registrateButtonUser', [
+							'href' => helper::baseUrl() . $this->getUrl() . '/user',
+							'value' => 'Inscriptions'
+						]); ?>
+			<?php endif; ?>
+		</div>
+		<div class="col2">
+			<?php echo template::button ('registrateButtonConfig', [
+					'href' => helper::baseUrl() . $this->getUrl() .  '/config',
+					'value' => 'Configurer'
+				]); ?>
+		</div>
+	</div>
+	<?php endif; ?>
+	<div class="row">
+		<div class="col8 offset2">
 			<div class="row">
 				<div class="col6">
 					<?php echo template::text('registrationAddFirstname', [
@@ -65,7 +85,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col2 offset7">
+		<div class="col2 offset8">
 			<?php echo template::submit('registrationAddSubmit', [
 				'value' => 'Envoyer'
 			]); ?>
