@@ -40,7 +40,7 @@ class registration extends common {
 	public static $users = [];
 
 
-	const REGISTRATION_VERSION = '0.3';
+	const REGISTRATION_VERSION = '0.4';
 
 	/**
 	 * Liste des utilisateurs en attente
@@ -313,7 +313,7 @@ class registration extends common {
 		}		
 		if (( $csrf !== $this->getData(['user',$userId,'auth']) ) )	{					
 			$check = false;
-			$notification = 'La validation n\'a pas abouti !';
+			$notification = 'Identifiant ou mot de passe inconnu';
 		}
 		if ($check) {
 			$this->setData([
@@ -339,8 +339,8 @@ class registration extends common {
 		// Valeurs en sortie
 		$this->addOutput([
 			'redirect' => $check ? helper::baseUrl() .  $this->getdata(['module','registration',$this->getUrl(0),'config','pageSuccess']) : helper::baseUrl() . $this->getdata(['module','registration',$this->getUrl(0),'config','pageError']) , 
-			'notification' => $notification,
-			'state' => $check
+			/*'notification' => $notification,
+			'state' => $check*/
 		]);
 	}
 
