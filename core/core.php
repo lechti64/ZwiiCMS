@@ -1108,22 +1108,22 @@ class common {
 		// Version 9.2.27
 		if($this->getData(['core', 'dataVersion']) < 9227) {
 			// Forcer la régénération du thème
-			if (file_exists(self::DATA_DIR.'theme.css') === false) {
+			if (file_exists(self::DATA_DIR.'theme.css')) {
 				unlink (self::DATA_DIR.'theme.css');
-			}
+			}		
+			$this->setData(['core', 'dataVersion', 9227]);
+		}			
+		// Version 10.0.00
+		if($this->getData(['core', 'dataVersion']) < 10000) {
+			$this->setData(['config', 'faviconDark','faviconDark.ico']);
 			// Numérotation des galeries
-			// Lire toutes les pages et trouver celle avec le module gallery
-			// Parcourir les galeries du modules
-			// Verifier la présence des champs : sort et postion
-
-			// Tableau avec les pages
 			$pageList = array();
 			foreach ($this->getHierarchy(null,null,null) as $parentKey=>$parentValue) {
 				$pageList [] = $parentKey;
 				foreach ($parentValue as $childKey) {
 					$pageList [] = $childKey;
 				}
-			}			
+			}	
 			// Parcourir toutes les pages
 			foreach ($pageList as $parentKey => $parent) {
 				//La page a une galerie
@@ -1140,12 +1140,7 @@ class common {
 						}						
 					}					
 				}
-			}			
-			$this->setData(['core', 'dataVersion', 9227]);
-		}			
-		// Version 10.0.00
-		if($this->getData(['core', 'dataVersion']) < 10000) {
-			$this->setData(['config', 'faviconDark','faviconDark.ico']);
+			}	
 			$this->setData(['core', 'dataVersion', 10000]);	
 		}	
 

@@ -95,13 +95,6 @@ class gallery extends common {
 					template::ico('sort'),				
 					$gallery['config']['name'],
 					$gallery['config']['directory'],
-					//$gallery['config']['order'],
-					/*
-					template::select('galleryConfigOrder', $galeryOrder , [
-						'selected' => $gallery['config']['order'],
-						'class' => 'configOrder'
-
-					]),*/
 					template::button('galleryConfigEdit' . $galleryId , [
 						'href' => helper::baseUrl() . $this->getUrl(0) . '/edit/' . $galleryId  . '/' . $_SESSION['csrf'],
 						'value' => template::ico('pencil')
@@ -127,8 +120,9 @@ class gallery extends common {
 					'config' => [
 						'name' => $this->getInput('galleryConfigName'),
 						'directory' => $this->getInput('galleryConfigDirectory', helper::FILTER_STRING_SHORT, true),
+						'homePicture' => '',
 						'sort' => $this->getInput('galleryConfigSort'),
-						'order' => count($this->getData(['module',$this->getUrl(0)])) + 1
+						'position' => count($this->getData(['module',$this->getUrl(0)])) + 1
 					],
 					'legend' => []
 				]]);
