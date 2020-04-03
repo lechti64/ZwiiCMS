@@ -27,7 +27,7 @@ class init extends common {
 			'proxyType' => "tcp://"
 		],
 		'core' => [
-			'dataVersion' => 0,
+			'dataVersion' => 10000,
 			'lastBackup' => 0,
 			'lastClearTmp' => 0,
 			'lastAutoUpdate' => 0,
