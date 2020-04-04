@@ -602,6 +602,7 @@ class template {
 	 * @param array $cols Cols des colonnes (format: [col colonne1, col colonne2, etc])
 	 * @param array $body Contenu (format: [[contenu1, contenu2, etc], [contenu1, contenu2, etc]])
 	 * @param array $head Entêtes (format : [[titre colonne1, titre colonne2, etc])
+     * @param array $rowsId Id pour la numérotation des rows (format : [id colonne1, id colonne2, etc])
 	 * @param array $attributes Attributs ($key => $value)
 	 * @return string
 	 */
