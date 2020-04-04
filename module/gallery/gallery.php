@@ -24,8 +24,8 @@ class gallery extends common {
 	];
 
 	public static $sort = [
-		'SORT_ASC' => 'Alphabétique naturel',
-		'SORT_DSC' => 'Alphabétique naturel inverse',
+		'SORT_ASC' => 'Alphabétique ',
+		'SORT_DSC' => 'Alphabétique inversé',
 		'none' => 'Aucun tri',
 	];
 

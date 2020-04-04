@@ -638,8 +638,7 @@ class template {
 		$j = 0;
 		foreach($body as $tr) {	
 			// Id de ligne pour les tableaux drag and drop		
-			$html .= '<tr id="' . $rowsId[$j] . '">';
-			$j++;
+			$html .= '<tr id="' . $rowsId[$j++] . '">';
 			$i = 0;
 			foreach($tr as $td) {
 				$html .= '<td class="col' . $cols[$i++] . '">' . $td . '</td>';
