@@ -475,7 +475,7 @@ class common {
 		// La clef est une chaine
 		else {
 			foreach($this->input as $type => $values) {
-				// Champ obligatoire
+				// Champ obligatoire				
 				if($required) {
 					$this->addRequiredInputNotices($key);
 				}
@@ -1110,7 +1110,7 @@ class common {
 			// Forcer la régénération du thème
 			if (file_exists(self::DATA_DIR.'theme.css')) {
 				unlink (self::DATA_DIR.'theme.css');
-			}
+			}		
 			$this->setData(['core', 'dataVersion', 9227]);
 		}			
 		// Version 10.0.00
@@ -1143,6 +1143,7 @@ class common {
 			}	
 			$this->setData(['core', 'dataVersion', 10000]);	
 		}	
+
 	}
 }
 
