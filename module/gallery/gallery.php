@@ -235,7 +235,8 @@ class gallery extends common {
 						'name' => $this->getInput('galleryEditName', helper::FILTER_STRING_SHORT, true),
 						'directory' => $this->getInput('galleryEditDirectory', helper::FILTER_STRING_SHORT, true),
 						'homePicture' => $homePictures[$file],
-						'sort' => $this->getInput('galleryEditSort')
+						'sort' => $this->getInput('galleryEditSort'),
+						'position' => count($this->getData(['module',$this->getUrl(0)])) + 1
 					],
 					'legend' => $legends
 				]]);

@@ -628,7 +628,9 @@ class template {
 			// Fin des entêtes
 			$html .= '</tr>';
 			$html .= '</thead>';
-		}
+        }
+        // Pas de tableau d'Id transmis, générer une numérotation
+        $rowsId = range(0,count($body));
 		// Début contenu
 		$j = 0;
 		foreach($body as $tr) {	
