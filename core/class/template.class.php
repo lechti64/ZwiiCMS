@@ -630,7 +630,9 @@ class template {
 			$html .= '</thead>';
         }
         // Pas de tableau d'Id transmis, générer une numérotation
-        $rowsId = range(0,count($body));
+        if (empty($rowsId)) {
+            $rowsId = range(0,count($body));
+        }
 		// Début contenu
 		$j = 0;
 		foreach($body as $tr) {	
