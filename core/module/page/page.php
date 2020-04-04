@@ -28,7 +28,14 @@ class page extends common {
 		'' => 'Aucune'
 	];	
 	public static $moduleIds = [];
-
+	// Nom des modules
+	public static $moduleNames = [
+		'news'			=> 'Nouvelles',
+		'blog' 			=> 'Blog',
+		'form' 			=> 'Formulaire',
+		'gallery' 		=> 'Galerie',
+		'redirection' 	=> 'Redirection'
+	];
 	public static $typeMenu = [
 		'text' => 'Texte',
 		'icon' => 'Icône',
@@ -316,10 +323,15 @@ class page extends common {
 			$iterator = new DirectoryIterator('module/');
 			foreach($iterator as $fileInfos) {
 				if(is_file($fileInfos->getPathname() . '/' . $fileInfos->getFilename() . '.php')) {
-					$moduleIds[$fileInfos->getBasename()] = ucfirst($fileInfos->getBasename());
-				}
-			}
-			self::$moduleIds = $moduleIds;
+					if (array_key_exists($fileInfos->getBasename(),self::$moduleNames)) {
+						$moduleIds[$fileInfos->getBasename()] = self::$moduleNames[$fileInfos->getBasename()];
+					} else {
+						$moduleIds[$fileInfos->getBasename()] = ucfirst($fileInfos->getBasename());
+					}
+				}				
+			}			
+			self::$moduleIds = 	$moduleIds;
+			asort(self::$moduleIds);
 			// Pages sans parent
 			foreach($this->getHierarchy() as $parentPageId => $childrenPageIds) {
 				if($parentPageId !== $this->getUrl(2)) {
