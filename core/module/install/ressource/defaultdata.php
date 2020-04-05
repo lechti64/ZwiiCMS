@@ -538,6 +538,7 @@ class init extends common {
 					'config' => [
 						'name' => 'Beaux paysages',
 						'directory' => self::FILE_DIR.'source/galerie/landscape',
+						'homePicture' => 'iceberg.jpg',
 						'sort' => 'SORT_ASC',
 						'position' => 1
 					],
@@ -551,6 +552,7 @@ class init extends common {
 					'config' => [
 						'name' => 'Espace',
 						'directory' => self::FILE_DIR.'source/galerie/space',
+						'homePicture' => 'nebula.jpg',
 						'sort' => 'SORT_ASC',
 						'position' => 2
 					],
