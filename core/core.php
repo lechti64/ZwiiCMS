@@ -2301,8 +2301,8 @@ class layout extends common {
 					OR $this->getUrl(0) === ''
 				) {
 					$leftItems .= '<li><a href="' . helper::baseUrl() . 'page/edit/' . $this->getUrl(0) . '" data-tippy-content="Modifier la page">' . template::ico('pencil') . '</a></li>';
-					if ($this->getData(['page', $this->getUrl(),'moduleId'])) {
-						$leftItems .= '<li><a href="' . helper::baseUrl() . $this->getUrl() . '/config' . '" data-tippy-content="Configurer le module">' . template::ico('gear') . '</a></li>';					
+					if ($this->getData(['page', $this->getUrl(0),'moduleId'])) {
+						$leftItems .= '<li><a href="' . helper::baseUrl() . $this->getUrl(0) . '/config' . '" data-tippy-content="Configurer le module">' . template::ico('gear') . '</a></li>';					
 					}
 					$leftItems .= '<li><a id="pageDelete" href="' . helper::baseUrl() . 'page/delete/' . $this->getUrl(0) . '&csrf=' . $_SESSION['csrf'] . '" data-tippy-content="Effacer la page">' . template::ico('trash') . '</a></li>';					
 				}
