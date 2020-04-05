@@ -1138,10 +1138,10 @@ class common {
 						if ( $this->getdata(['module',$parent,$galleryKey,'config','position']) === NULL) {
 							$this->setdata(['module',$parent,$galleryKey,'config','position',$i++]);
 						}						
-					}	
-					// Image de couverture
-					if ( $this->getdata(['module',$parent,$galleryKey,'config','homePicture']) === NULL)  {
-						$this->setdata(['module',$parent,$galleryKey,'config','homePicture','']);
+						// Image de couverture
+						if ( $this->getdata(['module',$parent,$galleryKey,'config','homePicture']) === NULL)  {
+							$this->setdata(['module',$parent,$galleryKey,'config','homePicture','']);
+							}	
 					}			
 				}
 			}	
