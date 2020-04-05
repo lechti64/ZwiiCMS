@@ -39,8 +39,11 @@ class gallery extends common {
 
 	public static $pictures = [];
 
-	const GALLERY_VERSION = '2.0';	
+	public static $thumbs = [];
 
+	const THUMBS_SEPARATOR = 'mini_';
+
+	const GALLERY_VERSION = '2.0';	
 
 
 	public function filter() {
@@ -116,11 +119,24 @@ class gallery extends common {
 				self::filter();
 			} else {
 				$galleryId = helper::increment($this->getInput('galleryConfigName', helper::FILTER_ID, true), (array) $this->getData(['module', $this->getUrl(0)]));
+				// La première image est celle de la couverture de l'album
+				$directory = $this->getInput('galleryConfigDirectory', helper::FILTER_STRING_SHORT, true);
+				$iterator = new DirectoryIterator($directory);				
+				foreach($iterator as $fileInfos) {
+					if($fileInfos->isDot() === false AND $fileInfos->isFile() AND @getimagesize($fileInfos->getPathname())) {						
+						// Miniatures 
+						$homePicture = file_exists( str_replace('source','thumb',$directory) . '/' . self::THUMBS_SEPARATOR  . strtolower($fileInfos->getFilename())) 
+							?  self::THUMBS_SEPARATOR .  strtolower($fileInfos->getFilename())
+							:  strtolower($fileInfos->getFilename());
+					break;
+					}
+				}
+
 				$this->setData(['module', $this->getUrl(0), $galleryId, [
 					'config' => [
 						'name' => $this->getInput('galleryConfigName'),
 						'directory' => $this->getInput('galleryConfigDirectory', helper::FILTER_STRING_SHORT, true),
-						'homePicture' => '',
+						'homePicture' => $homePicture,
 						'sort' => $this->getInput('galleryConfigSort'),
 						'position' => count($this->getData(['module',$this->getUrl(0)])) + 1
 					],
@@ -225,16 +241,13 @@ class gallery extends common {
 					$legends[$file] = helper::filter($legend, helper::FILTER_STRING_SHORT);
 				}
 				// Photo de la page de garde de l'album
-				$homePictures = [];
-				foreach((array) $this->getInput('homePicture', null) as $file => $homePicture) {
-					// null : pas de variable définie (compatibilité) ou choix non effectif
-					$homePictures[$file] = $file === 0 ? null : helper::filter($file, helper::FILTER_STRING_SHORT) ;
-				}
+				$homePicture = array_keys($this->getInput('homePicture', null));
+				// Sauvegarder
 				$this->setData(['module', $this->getUrl(0), $galleryId, [
 					'config' => [
 						'name' => $this->getInput('galleryEditName', helper::FILTER_STRING_SHORT, true),
 						'directory' => $this->getInput('galleryEditDirectory', helper::FILTER_STRING_SHORT, true),
-						'homePicture' => $homePictures[$file],
+						'homePicture' => $homePicture[0],
 						'sort' => $this->getInput('galleryEditSort'),
 						'position' => count($this->getData(['module',$this->getUrl(0)])) + 1
 					],
@@ -309,6 +322,10 @@ class gallery extends common {
 					foreach($iterator as $fileInfos) {
 						if($fileInfos->isDot() === false AND $fileInfos->isFile() AND @getimagesize($fileInfos->getPathname())) {
 							self::$pictures[$directory . '/' . $fileInfos->getFilename()] = $this->getData(['module', $this->getUrl(0), $this->getUrl(1), 'legend', str_replace('.','',$fileInfos->getFilename())]);
+							// Miniatures 
+							self::$thumbs[$directory . '/' . $fileInfos->getFilename()] = file_exists( str_replace('source','thumb',$directory) . '/' . self::THUMBS_SEPARATOR  . strtolower($fileInfos->getFilename())) 
+								? str_replace('source','thumb',$directory) . '/' . self::THUMBS_SEPARATOR .  strtolower($fileInfos->getFilename())
+								: str_replace('source','thumb',$directory) . '/' .  strtolower($fileInfos->getFilename());
 						}
 					}
 					// Tri des images par ordre alphabétique
@@ -363,7 +380,9 @@ class gallery extends common {
 					foreach($iterator as $fileInfos) {
 						if($fileInfos->isDot() === false AND $fileInfos->isFile() AND @getimagesize($fileInfos->getPathname())) {
 							self::$galleries[$galleryId] = $gallery;
-							self::$firstPictures[$galleryId] = $gallery['config']['directory'] . '/' . $fileInfos->getFilename();
+							self::$firstPictures[$galleryId] = file_exists( str_replace('source','thumb',$gallery['config']['directory']) . '/' . self::THUMBS_SEPARATOR  . strtolower($gallery['config']['homePicture'])) 
+								? str_replace('source','thumb',$gallery['config']['directory']) . '/' . self::THUMBS_SEPARATOR .  strtolower($gallery['config']['homePicture'])
+								: str_replace('source','thumb',$gallery['config']['directory']) . '/' .  strtolower($gallery['config']['homePicture']);
 							continue(2);
 						}
 					}
