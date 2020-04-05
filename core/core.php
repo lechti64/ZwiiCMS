@@ -1140,8 +1140,14 @@ class common {
 						}						
 						// Image de couverture
 						if ( $this->getdata(['module',$parent,$galleryKey,'config','homePicture']) === NULL)  {
-							$this->setdata(['module',$parent,$galleryKey,'config','homePicture','']);
-							}	
+							$iterator = new DirectoryIterator($this->getdata(['module',$parent,$galleryKey,'config','directory']));
+							foreach($iterator as $fileInfos) {
+								if($fileInfos->isDot() === false AND $fileInfos->isFile() AND @getimagesize($fileInfos->getPathname())) {
+									$this->setdata(['module',$parent,$galleryKey,'config','homePicture',$fileInfos->getFilename()]);
+									break;
+								}
+							}
+						}	
 					}			
 				}
 			}	
