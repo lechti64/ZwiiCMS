@@ -275,7 +275,9 @@ class gallery extends common {
 							]),	
 							template::text('legend[' . $fileInfos->getFilename() . ']', [
 								'value' => $this->getData(['module', $this->getUrl(0), $this->getUrl(2), 'legend', str_replace('.','',$fileInfos->getFilename())])
-							])
+							]),
+							'<img src="'. str_replace('source','thumb',$directory) . '/' . $fileInfos->getFilename() .  '">'
+
 						];
 					}
 				}
@@ -366,14 +368,15 @@ class gallery extends common {
 		}
 		// Liste des galeries
 		else {
-			// Tri des galeries 
+			// Tri des galeries suivant l'ordre défini
 			$g = $this->getData(['module', $this->getUrl(0)]);
 			$p = helper::arrayCollumn(helper::arrayCollumn($g,'config'),'position');
 			asort($p,SORT_NUMERIC);		
 			$galleries = [];
 			foreach ($p as $positionId => $item) {
 				$galleries [$positionId] = $g[$positionId];			
-			}		
+			}
+			// Construire le tableau
 			foreach((array) $galleries as $galleryId => $gallery) {
 				if(is_dir($gallery['config']['directory'])) {
 					$iterator = new DirectoryIterator($gallery['config']['directory']);
